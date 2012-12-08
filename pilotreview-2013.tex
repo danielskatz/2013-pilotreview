@@ -1,0 +1,200 @@
+\documentclass{sig-alternate}
+%\documentclass[conference]{IEEEtran}
+%\documentclass[conference,final]{IEEEtran}
+
+\input{head}
+\input{include}
+
+\usepackage{listings}
+
+\lstnewenvironment{code}[1][]%
+{
+\noindent
+%\minipage{0.98 \linewidth} 
+\minipage{1.0 \linewidth} 
+\vspace{0.5\baselineskip}
+\lstset{
+    language=Python,
+%    numbers=left,
+%    numbersep=4pt,
+    frame=single,
+    captionpos=b,
+    stringstyle=\ttfamily,
+    basicstyle=\scriptsize\ttfamily,
+    showstringspaces=false,#1}
+}
+{\endminipage}
+
+\begin{document}
+\conferenceinfo{HPDC'13}{2013, New York, USA}
+% \conferenceinfo{ECMLS'11,} {June 8, 2011, San Jose, California, USA.}
+% \CopyrightYear{2011}
+% \crdata{978-1-4503-0702-4/11/06}
+% \clubpenalty=10000
+% \widowpenalty = 10000
+
+\title{Pilot-Jobs Redux: The Untold Saga of Pilot-Jobs. \\ OR \\  A RADICAL
+  Perspective on Pilot-Jobs}
+
+% \alignauthor
+% Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
+%        \affaddr{Institute for Clarity in Documentation}\\
+%        \affaddr{1932 Wallamaloo Lane}\\
+%        \affaddr{Wallamaloo, New Zealand}\\
+%        \email{trovato@corporation.com}
+% % 2nd. author
+% \alignauthor
+% G.K.M. Tobin\titlenote{The secretary disavows
+% any knowledge of this author's actions.}\\
+%        \affaddr{Institute for Clarity in Documentation}\\
+%        \affaddr{P.O. Box 1212}\\
+%        \affaddr{Dublin, Ohio 43017-6221}\\
+%        \email{webmaster@marysville-ohio.com}
+% % 3rd. author
+% \alignauthor Lars Th{\o}rv{\"a}ld\titlenote{This author is the
+% one who did all the really hard work.}\\
+%        \affaddr{The Th{\o}rv{\"a}ld Group}\\
+%        \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
+%        \affaddr{Hekla, Iceland}\\
+%        \email{larst@affiliation.org}
+% \and  % use '\and' if you need 'another row' of author names
+% % 4th. author
+% \alignauthor Lawrence P. Leipuner\\
+%        \affaddr{Brookhaven Laboratories}\\
+%        \affaddr{Brookhaven National Lab}\\
+%        \affaddr{P.O. Box 5000}\\
+%        \email{lleipuner@researchlabs.org}
+% % 5th. author
+% \alignauthor Sean Fogarty\\
+%        \affaddr{NASA Ames Research Center}\\
+%        \affaddr{Moffett Field}\\
+%        \affaddr{California 94035}\\
+%        \email{fogartys@amesres.org}
+% % 6th. author
+% \alignauthor Charles Palmer\\
+%        \affaddr{Palmer Research Laboratories}\\
+%        \affaddr{8600 Datapoint Drive}\\
+%        \affaddr{San Antonio, Texas 78229}\\
+%        \email{cpalmer@prl.com}
+% }
+
+\date{}
+\maketitle
+
+\begin{abstract} 
+ The aim of this paper is to provide a simple survey of \pilotjobs,
+  or as we will see capabilities that have are claimed to be
+  \pilotjobs.  In the pursuit of developing interoperable, extensible
+  and general-purpose \pilotjobs we realized that there was no agreed
+  upon definition or conceptual framewor of \pilotjobs. That led to
+  the \pstar model. The aim of this work is not to discuss the \pstar
+  conceptual framework, but to catalogue existing \pilotjobs,
+  different aspects of \pilotjobs and illustrate how \pilotjobs have
+  been used.  Interestingly we find that \pilotjobs have been used
+  even before they were named as such!
+
+\end{abstract}
+
+\section{Introduction} 
+
+\section{A  Quick Survey of Existing Pilot-Jobs Systems}
+
+The aim here is to develop both an understanding of what \pilotjobs
+are and a listing of the different \pilotjobs.
+
+\subsection{Historical Context}
+
+\subsection{What have Pilot-Jobs been used For?}
+
+\jhanote{This should provide a functional approach to pilot-jobs. Will
+  make the job of explaining easier.}
+
+\section{Understanding the Landscape: Developing a Vocabulary}
+
+\jhanote{Having surveyed now let us develop the vocabulary.}
+
+\subsection{Different components of the Landscape}
+
+\jhanote{Something akin to Matteo's diagram}
+
+\subsection{Common Terms and Definitions}
+
+\section{Pilot-Job Systems Revisited}
+
+\subsection{Understanding Pilot-Jobs}
+
+\jhanote{Having developed the vocabulary let us now talk about the
+  different \pilotjobs}
+
+\section{Conclusion and Discussion}
+
+\subsection{The need for a common minimum model}
+
+\subsection{Lessons for Workflow System}
+
+\section{Related Work}
+
+\subsection{Scientific Data Management}
+
+\subsection{Prior Work}
+
+\jhanote{The below is legacy from pilotdata paper.. to be refined}
+
+Whereas we will discuss in greater detail some of the concepts upon
+which this paper is built, for completeness we briefly outline them
+here.
+
+The seamless uptake of distributed infrastructures by scientific
+applications has been limited by the lack of pervasive and
+simple-to-use abstractions at multiple levels – at the development,
+deployment and execution stages. Of all the abstractions proposed to
+support effective distributed resource utilization, a survey of actual
+usage suggested that \pilotjobs were arguably one of the most
+widely-used distributed computing abstractions – as measured by the
+number and types of applications that use them, as well as the number
+of production distributed cyberinfrastructures that support them.  Our
+initial investigation~\cite{Luckow:2008la} into \pilot-Abstractions
+was motivated by the desire to provide a single conceptual framework
+--- referred to as the P* Model, that would be used to understand and
+reason the plethora and myriad \pilotjob implementations that exist.
+
+A specific implementation of the P* model that both unified
+conceptually as well as was interoperable across myriad grid
+middleware, led to BigJob~\cite{saga_bigjob_condor_cloud} -- a
+SAGA-based \pilotjob, which was used to support a range of
+applications, ranging from uncoupled ensembles of molecular dynamics
+(MD) simulations~\cite{saga_bigjob_condor_cloud}, to Ensemble-Kalman
+filter based applications~\cite{gmac09} with global synchronization to
+loosely-coupled MD simulations with pair-wise
+synchronization~\cite{async_repex11}.  Although BigJob provided the
+syntactical uniformity, i.e., a common API and framework for different
+grids, our experience led us to understand that different \pilotjobs
+had different semantics and capabilities, and made vast if not
+inconsistent assumptions of applications/users. This motivated our
+efforts in search of a common minimally complete model of \pilotjobs,
+and resulted in the \pstar model~\cite{pstar12}.
+
+Once a common and uniform conceptual model was available, the notion
+of \pilotdata was conceived using the power of symmetry, i.e., the
+notion of \pilotdata was as fundamental to dynamic data placement and
+scheduling as \pilotjobs was to computational tasks. As a measure of
+validity, the \pstar model was amenable and easily extensible to
+\pilotdata.  The consistent and symmetrical treatment of data and
+compute in the model led to the generalization of the model as the
+{\it P* Model of Pilot Abstractions}.
+
+\section*{Acknowledgements}
+
+This work is funded in part by NSF CHE-1125332 (Cyber-enabled
+Discovery and Innovation), NSF-ExTENCI (OCI-1007115) and
+``Collaborative Research: Standards-Based Cyberinfrastructure for
+Hydrometeorologic Modeling: US-European Research Partnership''
+(OCI-1235085).
+
+% \bibliographystyle{IEEEtran}
+\bibliographystyle{abbrv}
+\bibliography{literatur,saga,saga-related,local}
+
+
+\end{document}
+
