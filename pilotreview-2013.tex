@@ -99,7 +99,33 @@
 
 Why have \pilotjobs have successful? At least in part, due to the
 decoupling between task/workload specification and task management.
-\jhanote{Needs more careful discussion/elaboration}
+
+\jhanote{Needs more careful discussion/elaboration} The fundamental
+reason for the success of the \pilotjob abstraction is that \pilotjob
+liberate applications/users from the challenging requirement of
+mapping specific tasks onto explicit heterogeneous and dynamic
+resource pools. \pilotjobs also thus shields application from having
+to load-balance tasks across such resources.  The \pilotjob
+abstraction is also a promising route to address specific requirements
+of distributed scientific applications, such as coupled-execution and
+application-level
+scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+
+
+A variety of PJ frameworks have emerged: Condor-G/
+Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
+DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
+PanDA~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
+Nimrod/G~\cite{10.1109/HPC.2000.846563}, Falkon~\cite{1362680} and
+MyCluster~\cite{1652061} to name a few. Although they are all, for the
+most parts, functionally equivalent -- they support the decoupling of
+workload submission from resource assignment -- it is often impossible
+to use them interoperably or even just to compare them functionally or
+qualitatively.  The situation is reminiscent of the proliferation of
+functionally similar yet incompatible workflow systems, where in spite
+of significant a posteriori effort on workflow system extensibility
+and interoperability (thus providing post-facto justification of its
+needs), these objectives remains difficult if not infeasible.
 
 \section{A  Quick Survey of Existing Pilot-Jobs Systems}
 
@@ -135,6 +161,9 @@ modularity and/or coupling to environment.
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
 
+\jhanote{I think the main framework + concepts from P* can be used
+  here? Any reason not to? What else can be used?}
+
 \subsection{Different components of the Landscape}
 
 \jhanote{Something akin to Matteo's diagram}
@@ -153,6 +182,34 @@ modularity and/or coupling to environment.
 \subsection{The need for a common minimum model}
 
 \subsection{Lessons for Workflow System}
+
+The current state of workflow (WF) systems~\cite{nsf-workflow,1196459}
+provides a motivating example for the P* Model and the Pilot-API: even
+though many WF systems exist (with significant duplicated effort),
+they provide limited means for extensibility and interoperability.  We
+are not naive enough to suggest a single reason, but assert that one
+important contributing fact is the lack of the right interface
+abstractions upon which to construct workflow systems; had those been
+available, many/most WF engines would have likely utilized them (or
+parts thereof), instead of proprietary solutions.
+
+% That would not immediately allow WF implementations to interoperate,
+% but would make semantic mapping between them significantly simpler,
+% thus supporting the very notion of interoperation.
+
+Significant effort has been invested towards WF interoperability at
+different levels -- if nothing else, providing post-facto
+justification of its importance. The impact of missing interface
+abstractions on the WF world can be seen through the consequences of
+their absence: WF interoperability remains difficult if not
+infeasible. The Pilot-API in conjunction with the P* Model aims to
+prevent similar situation for \pilotjobs.
+
+%\footnote{To be fair: we are not sure if a generic model and/or a
+%  generic WF API are achievable {\it on a useful level} -- we think,
+%  nevertherless, that our discussion is valid.}
+
+
 
 \section{Related Work}
 
