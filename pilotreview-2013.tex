@@ -82,25 +82,47 @@
 \maketitle
 
 \begin{abstract} 
- The aim of this paper is to provide a simple survey of \pilotjobs,
-  or as we will see capabilities that have are claimed to be
-  \pilotjobs.  In the pursuit of developing interoperable, extensible
-  and general-purpose \pilotjobs we realized that there was no agreed
-  upon definition or conceptual framewor of \pilotjobs. That led to
-  the \pstar model. The aim of this work is not to discuss the \pstar
-  conceptual framework, but to catalogue existing \pilotjobs,
-  different aspects of \pilotjobs and illustrate how \pilotjobs have
-  been used.  Interestingly we find that \pilotjobs have been used
-  even before they were named as such!
+ The aim of this paper is to provide a simple survey of \pilotjobs, or
+ as we will see capabilities that have are claimed to be \pilotjobs.
+ In the pursuit of developing interoperable, extensible and
+ general-purpose \pilotjobs we realized that there was no agreed upon
+ definition or conceptual framewor of \pilotjobs. That led to the
+ \pstar model. The aim of this work is not to discuss the \pstar
+ conceptual framework, but to catalogue existing \pilotjobs, different
+ aspects of \pilotjobs and illustrate how \pilotjobs have been used.
+ Interestingly we find that \pilotjobs have been used even before they
+ were named as such!
 
 \end{abstract}
 
 \section{Introduction} 
 
+Why have \pilotjobs have successful? At least in part, due to the
+decoupling between task/workload specification and task management.
+\jhanote{Needs more careful discussion/elaboration}
+
 \section{A  Quick Survey of Existing Pilot-Jobs Systems}
 
 The aim here is to develop both an understanding of what \pilotjobs
-are and a listing of the different \pilotjobs.
+are and a listing of the different \pilotjobs, e.g. Swift, Condor
+Glide-in, DIANE, DIRAC.
+
+\jhanote{How do we choose which ones to survey or include in our
+  survey, which ones do we not include?}
+
+%thereby it is required by necessity to be general.
+
+\jhanote{We need a structure to our survey of existing
+  \pilotjobs. What might this be?}
+
+There is an axes with a sliding scale of dependence/coupling to
+infrastructure.  It is difficult to assign a single point of coupling,
+betweeen \pilotjobs and the environment for like most other tools they
+are often used in a variety of ways.  We will simply use ``general
+purpose'' as a reference to the variety of (i) application types
+(static versus dynamic, DAG versus) (ii) existence/requirement of
+special purpose infrastructure (iii) functional extensibility and/or
+modularity and/or coupling to environment.
 
 \subsection{Historical Context}
 
