@@ -100,6 +100,16 @@
 Why have \pilotjobs have successful? At least in part, due to the
 decoupling between task/workload specification and task management.
 
+The seamless uptake of distributed infrastructures by scientific
+applications has been limited by the lack of pervasive and
+simple-to-use abstractions at multiple levels – at the development,
+deployment and execution stages. Of all the abstractions proposed to
+support effective distributed resource utilization, a survey of actual
+usage suggested that \pilotjobs were arguably one of the most
+widely-used distributed computing abstractions – as measured by the
+number and types of applications that use them, as well as the number
+of production distributed cyberinfrastructures that support them.  
+
 \jhanote{Needs more careful discussion/elaboration} The fundamental
 reason for the success of the \pilotjob abstraction is that \pilotjob
 liberate applications/users from the challenging requirement of
@@ -110,7 +120,6 @@ abstraction is also a promising route to address specific requirements
 of distributed scientific applications, such as coupled-execution and
 application-level
 scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
-
 
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
@@ -127,6 +136,19 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remains difficult if not infeasible.
 
+
+
+\subsection{Prior Work}
+
+Our initial investigation~\cite{Luckow:2008la} into
+\pilot-Abstractions was motivated by the desire to provide a single
+conceptual framework --- referred to as the P* Model, that would be
+used to understand and reason the plethora and myriad \pilotjob
+implementations that exist.
+
+\jhanote{The below is legacy from pilotdata paper.. to be refined}
+
+
 \section{A  Quick Survey of Existing Pilot-Jobs Systems}
 
 The aim here is to develop both an understanding of what \pilotjobs
@@ -135,6 +157,23 @@ Glide-in, DIANE, DIRAC.
 
 \jhanote{How do we choose which ones to survey or include in our
   survey, which ones do we not include?}
+
+A specific implementation of the P* model that both unified
+conceptually as well as was interoperable across myriad grid
+middleware, led to BigJob~\cite{saga_bigjob_condor_cloud} -- a
+SAGA-based \pilotjob, which was used to support a range of
+applications, ranging from uncoupled ensembles of molecular dynamics
+(MD) simulations~\cite{saga_bigjob_condor_cloud}, to Ensemble-Kalman
+filter based applications~\cite{gmac09} with global synchronization to
+loosely-coupled MD simulations with pair-wise
+synchronization~\cite{async_repex11}.  Although BigJob provided the
+syntactical uniformity, i.e., a common API and framework for different
+grids, our experience led us to understand that different \pilotjobs
+had different semantics and capabilities, and made vast if not
+inconsistent assumptions of applications/users. This motivated our
+efforts in search of a common minimally complete model of \pilotjobs,
+and resulted in the \pstar model~\cite{pstar12}. 
+
 
 %thereby it is required by necessity to be general.
 
@@ -168,6 +207,7 @@ modularity and/or coupling to environment.
 
 \jhanote{Something akin to Matteo's diagram}
 
+
 \subsection{Common Terms and Definitions}
 
 \section{Pilot-Job Systems Revisited}
@@ -180,6 +220,20 @@ modularity and/or coupling to environment.
 \section{Conclusion and Discussion}
 
 \subsection{The need for a common minimum model}
+
+%Whereas we will discuss in greater detail some of the concepts upon
+%which this paper is built, for completeness we briefly outline them
+%here.
+
+Once a common and uniform conceptual model was available, the notion
+of \pilotdata was conceived using the power of symmetry, i.e., the
+notion of \pilotdata was as fundamental to dynamic data placement and
+scheduling as \pilotjobs was to computational tasks. As a measure of
+validity, the \pstar model was amenable and easily extensible to
+\pilotdata.  The consistent and symmetrical treatment of data and
+compute in the model led to the generalization of the model as the
+{\it P* Model of Pilot Abstractions}.
+
 
 \subsection{Lessons for Workflow System}
 
@@ -213,57 +267,12 @@ prevent similar situation for \pilotjobs.
 
 \section{Related Work}
 
+
 \subsection{Scientific Data Management}
 
-\subsection{Prior Work}
 
-\jhanote{The below is legacy from pilotdata paper.. to be refined}
-
-Whereas we will discuss in greater detail some of the concepts upon
-which this paper is built, for completeness we briefly outline them
-here.
-
-The seamless uptake of distributed infrastructures by scientific
-applications has been limited by the lack of pervasive and
-simple-to-use abstractions at multiple levels – at the development,
-deployment and execution stages. Of all the abstractions proposed to
-support effective distributed resource utilization, a survey of actual
-usage suggested that \pilotjobs were arguably one of the most
-widely-used distributed computing abstractions – as measured by the
-number and types of applications that use them, as well as the number
-of production distributed cyberinfrastructures that support them.  Our
-initial investigation~\cite{Luckow:2008la} into \pilot-Abstractions
-was motivated by the desire to provide a single conceptual framework
---- referred to as the P* Model, that would be used to understand and
-reason the plethora and myriad \pilotjob implementations that exist.
-
-A specific implementation of the P* model that both unified
-conceptually as well as was interoperable across myriad grid
-middleware, led to BigJob~\cite{saga_bigjob_condor_cloud} -- a
-SAGA-based \pilotjob, which was used to support a range of
-applications, ranging from uncoupled ensembles of molecular dynamics
-(MD) simulations~\cite{saga_bigjob_condor_cloud}, to Ensemble-Kalman
-filter based applications~\cite{gmac09} with global synchronization to
-loosely-coupled MD simulations with pair-wise
-synchronization~\cite{async_repex11}.  Although BigJob provided the
-syntactical uniformity, i.e., a common API and framework for different
-grids, our experience led us to understand that different \pilotjobs
-had different semantics and capabilities, and made vast if not
-inconsistent assumptions of applications/users. This motivated our
-efforts in search of a common minimally complete model of \pilotjobs,
-and resulted in the \pstar model~\cite{pstar12}.
-
-Once a common and uniform conceptual model was available, the notion
-of \pilotdata was conceived using the power of symmetry, i.e., the
-notion of \pilotdata was as fundamental to dynamic data placement and
-scheduling as \pilotjobs was to computational tasks. As a measure of
-validity, the \pstar model was amenable and easily extensible to
-\pilotdata.  The consistent and symmetrical treatment of data and
-compute in the model led to the generalization of the model as the
-{\it P* Model of Pilot Abstractions}.
 
 \section*{Acknowledgements}
-
 This work is funded by NSF CHE-1125332 (Cyber-enabled Discovery and
 Innovation), NSF-ExTENCI (OCI-1007115) and ``Collaborative Research:
 Standards-Based Cyberinfrastructure for Hydrometeorologic Modeling:
