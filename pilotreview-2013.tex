@@ -201,6 +201,59 @@ modularity and/or coupling to environment.
 
 \subsection{informal description of pilotjob systems}
 
+\pilotjobs have existed on grid infrastructures for some time. 
+Efficient load balancing and resource utilization
+across the existing grid hardware drove the desire for 
+user-level control of tasks and ease of use of job descriptions for
+data driven applications.  \pilotjobs provide the ability to 
+distribute workload across multiple systems and
+provide an easy way to schedule many jobs at one time. This in turn
+improves the utilization of resources, reduces the net wait time of a
+collection of tasks, and also prevents saturation of resource batch
+queuing systems from high-throughput simulations where many jobs
+need to be run at one time.
+
+One popular implementation of a \pilotjob is Condor Glide-in~\cite{glidein}. Glide-in is a mechanism by which user can add remote grid resources to the local condor pool and run their jobs on the added resource the same way that all condor jobs are submitted. The resources added are available only for the user who added the resource to the pool, thus giving complete control over the resources for managing jobs without any queue waiting time. Glide-in installs and executes necessary Condor daemons and configuration on the remote resource, such that the resource reports to and joins the local Condor pool. Glide-in is limited in that the daemons must be running on a given resource, meaning that this process must be approved by resource owners or system administrators. 
+
+Given the interest and uptake of clouds, it is natural that the resource
+balancing approaches of \pilotjobs would be employed for clouds too.
+\pilotjobs were used at CERN on grid infrastructure to process experiments 
+performed with the Large Hadron Collider~\cite{copilot-tr}. 
+A desire to utilize a wider variety of computing resources, including enterprise and private clouds, to analyze such experiments drove the creation 
+of  Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
+grid/batch systems to allow job submission to clouds such as Amazon
+EC2 or Scientific Clouds. CoPilot uses XMPP messaging to communicate between
+the VMs and the grid infrastructure. Co-Pilot is based more on the actual
+submission of jobs and is limited in its user-level controllability and 
+allowance of application-level programming.
+
+The Coaster system~\cite{coasters} is another \pilotjob implementation
+which has been shown to work in both cloud and grid
+environments. Using the Coaster service, one executes a Coaster Master
+on a head node, and the Coaster workers run on compute nodes to
+execute jobs. Coasters offers a zero-install feature in which it
+deploys itself and installs itself from the head node and onto the
+virtual machines without needing any prior installation on the
+machine. In cloud mode, Coasters does require initial installation to
+a head node. Coasters uses the CoG kit abstraction library for gram,
+ssh, Condor, PBS, SGE middleware connections.
+ 
+Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like
+capability on Microsoft Azure clouds called a Generic Worker. The
+Generic Worker creates a layer of abstraction above the inner workings
+of the cloud.  The idea behind the Generic Worker is to allow
+scientists to do their science without requiring knowledge of backend
+HPC systems by offering e-Science as a service. Venus-C has not been
+shown to work with grids, because its main objective is to motivate
+scientists to use cloud infrastructures.  While the notion of moving
+to the cloud for data-driven science is an important one, many
+existing cyberinfrastructures still have powerful grid computers that
+can also be leveraged to assist with the data-driven computations.
+
+Co-Pilot, Coasters, and the Venus-C Generic Worker vary greatly in
+their implementation details, but are all focused on extending
+\pilotjob-like capabilities from grids to clouds.
+
 \section{Understanding the Landscape: Developing a Vocabulary}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
