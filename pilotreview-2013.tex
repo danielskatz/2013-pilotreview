@@ -327,30 +327,137 @@ their implementation details, but are all focused on extending
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
+Despite the apparent diversity in existing Pilot-Jobs, via the P*
+model they can be reduced to a set of common functionality and
+discussed as such.  This reduction has implications
+for the interoperability of existing and future Pilot-Jobs, and
+lends insight into application design to enhance job/data(?)
+mobility, management, and potential run-time responsiveness via
+late-binding/etc.
 \subsection{Understanding Pilot-Jobs}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
   different \pilotjobs}
 \mrnote{I don't like calling it understanding pilot jobs. I think by
 now in the paper one should understand}
-
+\aznote{Here are some suggestions from me: ``Pilot-Jobs in context'',
+``Understanding Pilot-Jobs via the P* Model'', ``Existing
+Pilot-Jobs in light of the P* model'', ``Classifying and 
+Comparing Pilot-Jobs''...  none of these are perfect I think, but I
+think I like no.2 best}
 \aznote{Revisit previous pilot-jobs using the vocabulary from the
 previous section, pointing out the commonalities and overlap.}
 
-\aznote{Example: Diane's RunMaster covers the role of the Pilot-Manager, and
-the Pilot-Job is handled by Diane's worker agent.  This is similar to the 
-BigJob and Swift-Coaster Pilot-Job implementations.  Condor-G may appear
-different because of X, but in actuality...}
+%\aznote{Example: Diane's RunMaster covers the role of the Pilot-Manager, and
+%the Pilot-Job is handled by Diane's worker agent.  This is similar to the 
+%BigJob and Swift-Coaster Pilot-Job implementations.  Condor-G may appear
+%different because of X, but in actuality...}
 
-\aznote{Much of what I was thinking of doing is similar to the 2011 IPDPS paper
-in the 2012-PStar directory.  Is this along the right lines?}
+\subsection{DIANE}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+P* vocabulary}
+% Coordination and Communication
+DIANE~\cite{Moscicki:908910} is a task coordination framework, which
+was originally designed for implementing master/worker applications,
+but also provides PJ functionality for job-style executions. DIANE
+utilizes a single hierarchy of worker agents as well as a PJ manager
+referred to as \texttt{RunMaster}.
+%Further, there is ongoing work on a multi-master extension.
+For the spawning of PJs a separate script, the so-called submitter script, is
+required. For the access to the physical resources the GANGA
+framework~\cite{Moscicki20092303} can be used.
+%GANGA provides a
+%unified interface for job submissions to various resource types, e.\,g.\ EGI
+%resources or TG resources via a SAGA backend.
+Once the worker agents are started they register themselves at the RunMaster.
+In contrast to TROY-BigJob, a worker agent generally manages only a single
+core and thus, by default is not able to run parallel applications (e.\,g.\
+based on MPI). BJ utilizes the BJ-Agent that is able manage a set of local
+resources (e.\,g.\ a certain number of nodes and cores) and thus, is capable
+of running parallel applications. For communication between the RunMaster and
+worker agents point-to-point messaging based on CORBA~\cite{OMG-CORBA303:2004}
+is used. CORBA is also used for file staging, which is not fully supported by
+BJ, yet.
 
-\aznote{A bit confused about how to tie this into conclusion and discussion:
-``The need for a common minimum model'' in particular.  I am guessing that
-I should help to ``set up'' that section by providing plenty of material showing
-that the pilot job systems are very similar at their core.  How far should I
-go with this, however, to avoid hitting the ``conclusion'' material in this section?
-}
+% Binding 
+DIANE is primarily designed with respect to HTC environments (such as
+EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
+size of 1 core. BJ in contrast is designed for HPC systems such as TG,
+where a job usually allocates multiple nodes and cores. To address this issue
+a so-called multinode submitter script can be used: the scripts starts a
+defined number of worker agents on a certain resource. However, WUs will be
+constrained to the specific number of cores managed by a worker agent. A
+flexible allocation of resource chunks as with BJ is not possible. By
+default a WU is mapped to a SU; application can however implement smarter
+allocation schemes, e.\,g.\ the clustering of multiple WUs into a SU.
+
+%Scheduling
+DIANE includes a simple capability matcher and FIFO-based task scheduler.
+Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
+application, exist or are under development. The framework is extensible:
+applications can implement a custom application-level scheduler.
+
+
+%Other impl. related issues: FT and security
+DIANE is, just like BJ, a single-user PJ, i.\,e.\ each PJ is executed with the
+privileges of the respective user. Also, only WUs of this respective user can be
+executed by DIANE. DIANE supports various middleware security mechanisms
+(e.\,g.\ GSI, X509 authentication). For this purpose it relies on GANGA. The
+implementation of GSI on TCP-level is possible, but currently not yet
+implemented. Further, DIANE supports fault tolerance: basic error detection and
+propagation mechanisms are in place. Further, an automatic re-execution of WUs
+is possible.
+
+%\upp
+\subsection{Condor-G}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+P* vocabulary}
+Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
+actually a complete Condor pool that is started using the Globus
+service of a resource. This mechanism is referred to as Condor
+Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
+using the standard Condor tools and APIs. Condor utilizes a
+master/worker coordination model. The PJ manager is referred to as the
+Condor Central Manager. The functionality of the Central Manager is
+provided by several daemons: the condor\_master that is generally
+responsible for managing all daemons on a machine, the
+condor\_collector which collects resource information, the
+condor\_negotiator that does the matchmaking and the condor\_schedd
+that is responsible for managing the binding and scheduling
+process. Condor generally does not differentiate between workload,
+i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
+referred to as job. However, it supports late binding, i.\,e.\
+resources a job is submitted to must generally not be available at
+submission time. The scheduler matches the capabilities required by a
+WU to the available resources. This process is referred to as
+matchmaking. Further, a priority-based scheduler is used. For
+communication between the identified elements Condor utilizes
+point-to-point messaging using a binary protocol on top of TCP.
+
+Different fault tolerance mechanisms, such as automatic retries, are
+supported.  Further, Condor supports different security mechanisms:
+for authentication it integrates both with local account management
+systems (such as Kerberos) as well as grid authentication systems such
+as GIS. Communication traffic can be encrypted.
+
+
+% \upp
+% \subsection{SWIFT-Coaster\upp\upp}
+% 
+% SWIFT~\cite{Wilde2011} is a scripting language designed for expressing abstract
+% rest of this cut, but making a note of this in case we want
+% to bring swift into the discussion later that i can find more info in 2011 paper
+%\aznote{Much of what I was thinking of doing is similar to the 2011 IPDPS paper
+%in the 2012-PStar directory.  Is this along the right lines?}
+
+%\aznote{A bit confused about how to tie this into conclusion and discussion:
+%``The need for a common minimum model'' in particular.  I am guessing that
+%I should help to ``set up'' that section by providing plenty of material showing
+%that the pilot job systems are very similar at their core.  How far should I
+%go with this, however, to avoid hitting the ``conclusion'' material in this section?
+%}
 
 \section{Conclusion and Discussion}
 
