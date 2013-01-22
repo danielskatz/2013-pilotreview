@@ -97,7 +97,7 @@
 
 \section{Introduction} 
 
-Why have \pilotjobs have successful? At least in part, due to the
+Why have \pilotjobs been successful? At least in part, due to the
 decoupling between task/workload specification and task management.
 
 The seamless uptake of distributed infrastructures by scientific
@@ -157,6 +157,7 @@ Glide-in, DIANE, DIRAC.
 
 \jhanote{How do we choose which ones to survey or include in our
   survey, which ones do we not include?}
+\mtnote{Within a historical frame where the first pilot-like implementation/abstraction is presented followed by its evolutions/reinterpretation, we would review those abstractions/implementations that signed evolutionary steps. For completeness we could just mention those that did not offer a tangible progress.}
 \mrnote{Recommend we be careful of the word 'survey' if we 
 don't plan on being comprehensive}
 
@@ -281,28 +282,48 @@ their implementation details, but are all focused on extending
 \pilotjob-like capabilities from grids to clouds.
 
 \section{Understanding the Landscape: Developing a Vocabulary}
+\mtnote{Matteo's section}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
-
 \jhanote{I think the main framework + concepts from P* can be used
   here? Any reason not to? What else can be used?}
+
+\begin{itemize}
+	\item Distinction between PJ implementation and abstractions;
+        \item lack of a unifying model for PJ abstractions;
+        \item P* fills the gap;
+        \item P* description.
+\end{itemize}
 
 \subsection{Different components of the Landscape}
 
 \jhanote{Something akin to Matteo's diagram}
 
+\begin{itemize}
+        \item PJ abstractions are not defined in a void;
+	\item use cases, scientific practice and distributed applications;
+        \item heterogeneous DIs: grid, cloud and hybrids;
+	\item jobs and services;
+        \item LoAs implied by the PJ abstractions;
+	\item diagram.
+\end{itemize}
 
 \subsection{Common Terms and Definitions}
 
-pilot
-pilot system
-pilot framework
-host system
-application
-agent
-scheduler
-workload
-work unit (compute unit)
+\begin{itemize}
+	\item application
+	\item workflow
+        \item pilot
+        \item pilot framework
+        \item agent
+	\item manager
+        \item scheduler
+	\item job
+        \item workload
+	\item ensamble
+        \item work unit (compute unit)
+	\item platform
+\end{itemize}
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
