@@ -335,33 +335,33 @@ their implementation details, but are all focused on extending
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
-Despite the apparent diversity in existing Pilot-Jobs, via the P*
-model they can be reduced to a set of common functionality and
+Despite the apparent diversity in existing Pilot-Jobs,
+they can be reduced to a set of common functionality and
 discussed as such.  This reduction has implications
 for the interoperability of existing and future Pilot-Jobs, and
 lends insight into application design to enhance job/data(?)
 mobility, management, and potential run-time responsiveness via
 late-binding/etc.
-\subsection{Understanding Pilot-Jobs}
+\subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
   different \pilotjobs}
-\mrnote{I don't like calling it understanding pilot jobs. I think by
-now in the paper one should understand}
-\aznote{Here are some suggestions from me: ``Pilot-Jobs in context'',
-``Understanding Pilot-Jobs via the P* Model'', ``Existing
-Pilot-Jobs in light of the P* model'', ``Classifying and 
-Comparing Pilot-Jobs''...  none of these are perfect I think, but I
-think I like no.2 best}
-\aznote{Revisit previous pilot-jobs using the vocabulary from the
-previous section, pointing out the commonalities and overlap.}
+%\mrnote{I don't like calling it understanding pilot jobs. I think by
+%now in the paper one should understand}
+%\aznote{Here are some suggestions from me: ``Pilot-Jobs in context'',
+%``Understanding Pilot-Jobs via the P* Model'', ``Existing
+%Pilot-Jobs in light of the P* model'', ``Classifying and 
+%Comparing Pilot-Jobs''...  none of these are perfect I think, but I
+%think I like no.2 best}
+%\aznote{Revisit previous pilot-jobs using the vocabulary from the
+%previous section, pointing out the commonalities and overlap.}
 
 %\aznote{Example: Diane's RunMaster covers the role of the Pilot-Manager, and
 %the Pilot-Job is handled by Diane's worker agent.  This is similar to the 
 %BigJob and Swift-Coaster Pilot-Job implementations.  Condor-G may appear
 %different because of X, but in actuality...}
 
-\subsection{DIANE}
+\subsubsection{DIANE}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
 P* vocabulary}
@@ -418,7 +418,7 @@ propagation mechanisms are in place. Further, an automatic re-execution of WUs
 is possible.
 
 %\upp
-\subsection{Condor-G}
+\subsubsection{Condor-G}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
 P* vocabulary}
@@ -450,6 +450,8 @@ for authentication it integrates both with local account management
 systems (such as Kerberos) as well as grid authentication systems such
 as GIS. Communication traffic can be encrypted.
 
+\subsubsection{Swift}
+\aznote{Material on Swift goes here}
 
 % \upp
 % \subsection{SWIFT-Coaster\upp\upp}
