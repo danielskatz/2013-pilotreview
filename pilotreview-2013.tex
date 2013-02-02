@@ -219,23 +219,6 @@ For:
 \subsection{Informal Description of Pilot-Job Systems}
 \alnote{AL/MS}
 
-\alnote{define criteria}
-
-\begin{itemize}
-	\item What use cases? What applications types are supported? MPI, ensembles, workflows?
-	\item What low-level infrastructures/middleware are supported? How interoperable is the framework?
-	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; agent-based; number of supported pilots...)
-	\item Deployment Model: service versus tool/library, application vs. system-level
-    \item Abstraction: CLI, Scripting (SWIFT), API, Web service
-	\item Performance and Scalability (Task Throughput)
-	\item Fault Tolerance
-	\item Integration with higher-level tools (e.g. workflow systems)
-	\item Scheduling: supported algorithms, support for application-level 
-	scheduling, data-compute scheduling
-	\item Support for Data
-	\item Security (Single vs. Multi-User)
-\end{itemize}
-
 \pilotjobs have existed on grid infrastructures for some time. 
 Efficient load balancing and resource utilization
 across the existing grid hardware drove the desire for 
@@ -248,14 +231,103 @@ collection of tasks, and also prevents saturation of resource batch
 queuing systems from high-throughput simulations where many jobs
 need to be run at one time.
 
-One popular implementation of a \pilotjob is Condor Glide-in~\cite{glidein}. Glide-in is a mechanism by which user can add remote grid resources to the local condor pool and run their jobs on the added resource the same way that all condor jobs are submitted. The resources added are available only for the user who added the resource to the pool, thus giving complete control over the resources for managing jobs without any queue waiting time. Glide-in installs and executes necessary Condor daemons and configuration on the remote resource, such that the resource reports to and joins the local Condor pool. Glide-in is limited in that the daemons must be running on a given resource, meaning that this process must be approved by resource owners or system administrators. 
+\subsubsection*{Criteria and Classifications}
+
+We assess the \pilotjob-Systems according to the following criteria:
+\begin{itemize}
+	\item What use cases? What applications types are supported? MPI, ensembles, workflows?
+	\item What low-level infrastructures/middleware are supported? How interoperable is the framework?
+	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
+	\item Deployment Model: service versus tool/library, application vs. system-level
+    \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
+	\item Performance and Scalability (Task Throughput)
+	\item Fault Tolerance
+	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
+	\item Scheduling: supported algorithms, support for application-level 
+	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
+	\item Support for Data
+	\item Security (Single vs. Multi-User)
+	\item Deployment Model: centrally hosted vs. application-level library
+\end{itemize}
+
+As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
+different levels of the distributed computing stack: (i) PJ systems that
+solely provide the \pilot capability, (ii) systems that provide resource
+management capabilities based on \pilots and (iii) applications, tools and
+services that utilize \pilots. Higher-level applications and tools either 
+provide a highly-integrated vertical framework, which deeply integrates the PJ 
+system (e.\,g.\ Swift/Coaster), or rely on a third-party 
+\pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
+
+\begin{figure}[t]
+	\centering
+		\includegraphics[width=0.45\textwidth]{figures/classification.pdf}
+	\caption{Pilot-Job Classification: 	Different PJ systems focus on 
+	different parts of the distributed computing stack: (i) PJ systems that 
+	solely provide the \pilot capability, (ii) systems that offer resource 
+	management capabilities based on \pilots and (iii) applications, tools and 
+	services that utilize \pilots for resource management.}
+	\label{fig:figures_classification}
+\end{figure}
+
+
+\subsubsection*{Pilot-Job Systems Overview}
+
+PJ to survey (pilots can fall potentially in on or more categories):
+\begin{itemize}
+	\item Pilot-Job Systems:
+	\begin{itemize}
+		\item Condor-G/Glide-In
+		\item GWPilot
+		\item MyCluster (supports both Condor and SGE clusters)
+		\item ToPoS 
+	\end{itemize}
+	\item Pilot-based Resource Management Systems
+	\begin{itemize}
+		\item GlideinWMS
+		\item GWPilot??
+		\item Dirac?
+        \item PanDA  
+	\end{itemize}
+	\item Higher-Level Application Frameworks (with PJ capabilities):
+	\begin{itemize}
+		\item Workflow
+		\begin{itemize}
+			\item Swift/Coaster
+			\item Pegasus
+		\end{itemize}
+		\item Task Farming
+		\begin{itemize}
+			\item Nimrod/G 
+			\item DIANE
+			\item Falkon 
+		\end{itemize}
+		\item Data Analytics \& Visualization
+		\begin{itemize}
+			\item Bosco
+			\item iPython
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+One popular implementation of a \pilotjob is Condor Glide-in~\cite{condor-g}.
+Glide-in is a mechanism by which user can add remote grid resources to the
+local condor pool and run their jobs on the added resource the same way that
+all condor jobs are submitted. The resources added are available only for the
+user who added the resource to the pool, thus giving complete control over the
+resources for managing jobs without any queue waiting time. Glide-in installs
+and executes necessary Condor daemons and configuration on the remote
+resource, such that the resource reports to and joins the local Condor pool.
+Glide-in is limited in that the daemons must be running on a given resource,
+meaning that this process must be approved by resource owners or system
+administrators.
 
 Given the interest and uptake of clouds, it is natural that the resource
 balancing approaches of \pilotjobs would be employed for clouds too.
 \pilotjobs were used at CERN on grid infrastructure to process experiments 
 performed with the Large Hadron Collider~\cite{copilot-tr}. 
 A desire to utilize a wider variety of computing resources, including enterprise and private clouds, to analyze such experiments drove the creation 
-of  Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
+of Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
 grid/batch systems to allow job submission to clouds such as Amazon
 EC2 or Scientific Clouds. CoPilot uses XMPP messaging to communicate between
 the VMs and the grid infrastructure. Co-Pilot is based more on the actual
@@ -318,18 +390,20 @@ their implementation details, but are all focused on extending
 
 \subsection{Common Terms and Definitions}
 
+\alnote{What to do with the term many-task computing}
+
 \begin{itemize}
 	\item application
 	\item workflow
         \item pilot
         \item pilot framework
-        \item agent
+        \item agent, executor
 	\item manager
         \item scheduler
 	\item job
         \item workload
-	\item ensamble
-        \item work unit (compute unit)
+	\item ensemble
+    \item compute unit
 	\item platform
 \end{itemize}
 
