@@ -281,13 +281,15 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item MyCluster (supports both Condor and SGE clusters)
 		\item ToPoS 
 		\item Co-Pilot
+		\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
 	\end{itemize}
-	\item Pilot-based Resource Management Systems
+	\item Pilot-based Scheduling/Multi-Level Scheduling
 	\begin{itemize}
-		\item GlideinWMS
+		\item GlideinWMS~\cite{1742-6596-119-6-062044}
 		\item GWPilot??
 		\item Dirac?
         \item PanDA  
+		\item AppLeS
 	\end{itemize}
 	\item Higher-Level Application Frameworks (with PJ capabilities):
 	\begin{itemize}
@@ -296,7 +298,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 			\item Swift/Coaster
 			\item Pegasus
 		\end{itemize}
-		\item Task Farming
+		\item Task Farming/Master-Worker
 		\begin{itemize}
 			\item Nimrod/G 
 			\item DIANE
@@ -305,46 +307,44 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item Data Analytics \& Visualization
 		\begin{itemize}
 			\item Bosco
-			\item iPython
+			\item iPython (SGE, PBS)
+			\item NetSolve~\cite{Casanova:1995:NNS:898848}
 		\end{itemize}
 	\end{itemize}
 \end{itemize}
 
-One popular implementation of a \pilotjob is Condor Glide-in~\cite{condor-g}.
-Glide-in is a mechanism by which user can add remote grid resources to the
-local condor pool and run their jobs on the added resource the same way that
-all condor jobs are submitted. The resources added are available only for the
-user who added the resource to the pool, thus giving complete control over the
-resources for managing jobs without any queue waiting time. Glide-in installs
-and executes necessary Condor daemons and configuration on the remote
+\subsubsection{Core Pilot-Job Systems}
+Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
+concept. Glide-in is a mechanism by which user can add remote grid resources
+to the local condor pool and run their jobs on the added resource the same way
+that all condor jobs are submitted. The resources added are available only for
+the user who added the resource to the pool, thus giving complete control over
+the resources for managing jobs without any queue waiting time. Glide-in
+installs and executes necessary Condor daemons and configuration on the remote
 resource, such that the resource reports to and joins the local Condor pool.
 Glide-in is limited in that the daemons must be running on a given resource,
 meaning that this process must be approved by resource owners or system
 administrators.
 
-Given the interest and uptake of clouds, it is natural that the resource
-balancing approaches of \pilotjobs would be employed for clouds too.
-\pilotjobs were used at CERN on grid infrastructure to process experiments 
-performed with the Large Hadron Collider~\cite{copilot-tr}. 
-A desire to utilize a wider variety of computing resources, including enterprise and private clouds, to analyze such experiments drove the creation 
-of Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
-grid/batch systems to allow job submission to clouds such as Amazon
-EC2 or Scientific Clouds. CoPilot uses XMPP messaging to communicate between
-the VMs and the grid infrastructure. Co-Pilot is based more on the actual
-submission of jobs and is limited in its user-level controllability and 
-allowance of application-level programming.
-
 The Coaster system~\cite{coasters} is another \pilotjob implementation
 which has been shown to work in both cloud and grid
-environments. Using the Coaster service, one executes a Coaster Master
+environments. Coaster has been designed to support Swift-based applications. Using the Coaster service, one executes a Coaster Master
 on a head node, and the Coaster workers run on compute nodes to
 execute jobs. Coasters offers a zero-install feature in which it
 deploys itself and installs itself from the head node and onto the
 virtual machines without needing any prior installation on the
-machine. In cloud mode, Coasters does require initial installation to
-a head node. Coasters uses the CoG kit abstraction library for gram,
-ssh, Condor, PBS, SGE middleware connections.
- 
+machine. 
+
+\pilotjobs were used at CERN on grid infrastructure to process experiments 
+performed with the Large Hadron Collider~\cite{copilot-tr}. 
+A desire to utilize a wider variety of computing resources, including 
+enterprise and private clouds, to analyze such experiments drove the creation 
+of Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
+grid/batch systems to allow job submission to clouds and grid infrastr. CoPilot uses XMPP messaging to communicate between
+the VMs and the grid infrastructure. Co-Pilot is based more on the actual
+submission of jobs and is limited in its user-level controllability and 
+allowance of application-level programming.
+
 Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like
 capability on Microsoft Azure clouds called a Generic Worker. The
 Generic Worker creates a layer of abstraction above the inner workings
@@ -357,9 +357,29 @@ to the cloud for data-driven science is an important one, many
 existing cyberinfrastructures still have powerful grid computers that
 can also be leveraged to assist with the data-driven computations.
 
-Co-Pilot, Coasters, and the Venus-C Generic Worker vary greatly in
-their implementation details, but are all focused on extending
-\pilotjob-like capabilities from grids to clouds.
+
+%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Pilot-based Scheduling}
+AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
+application-level scheduling. For this purpose, AppLeS provides an agent that 
+can be embedded into an application enabling the application to acquire 
+resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks 
+onto these. Further, AppLeS provides different application templates,
+e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
+
+
+GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
+system that is based on the \pilot capabilities of Condor-G/Glide-in. The
+system can based on the current and expected number of jobs in the pool,
+automatically increase or decrease the number of active Glide-ins (\pilots)
+available to the pool. In contrast to Condor-G/Glide-In, the \pilot
+capabilities are not directly exposed to the end-user. GlideinWMS is currently
+deployed in production on OSG and is the recommended mode for accessing OSG
+resources.
+
+
+\subsubsection{Higher-Level Frameworks}
+
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \mtnote{MT/AZ}
