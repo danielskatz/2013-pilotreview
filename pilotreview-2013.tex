@@ -286,6 +286,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 	\item Pilot-based Scheduling/Multi-Level Scheduling
 	\begin{itemize}
 		\item GlideinWMS~\cite{1742-6596-119-6-062044}
+		\item CorralWMS
 		\item GWPilot??
 		\item Dirac?
         \item PanDA  
@@ -372,10 +373,15 @@ GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
 system can based on the current and expected number of jobs in the pool,
 automatically increase or decrease the number of active Glide-ins (\pilots)
-available to the pool. In contrast to Condor-G/Glide-In, the \pilot
-capabilities are not directly exposed to the end-user. GlideinWMS is currently
-deployed in production on OSG and is the recommended mode for accessing OSG
-resources.
+available to the pool. GlideinWMS is a multi-user \pilotjob system commonly
+deployed as a hosted service. In contrast to low-level \pilotjob systems,
+GlideinWMS attempts to hide rather than expose the \pilot capabilities from
+the user. GlideinWMS is currently deployed in production on OSG and is the
+recommended mode for accessing OSG resources. 
+Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend 
+which provides more explicit control over the placement and start of \pilots 
+to the end-user. Higher-level frameworks, such as Pegasus, can utilize Corral 
+to optimize the placements of \pilots with respect to their workload.
 
 
 \subsubsection{Higher-Level Frameworks}
