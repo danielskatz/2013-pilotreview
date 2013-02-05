@@ -446,6 +446,47 @@ for the interoperability of existing and future Pilot-Jobs, and
 lends insight into application design to enhance job/data(?)
 mobility, management, and potential run-time responsiveness via
 late-binding/etc.
+\begin{table*}[t]
+  \footnotesize{
+ \up
+ \centering
+ %\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+ \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \textbf{Pilot Element}
+  &\textbf{BigJob} &\textbf{DIANE} &\textbf{Condor-G/Glide-in} &\textbf{Swift/Coaster} &\textbf{Bosco} &\textbf{GWPilot}\\
+  \hline
+  Pilot-Manager &BigJob Manager & RunMaster & condor\_master, condor\_collector, condor\_negotiator, condor\_schedd &Coaster Service & Condor & Gridway\aznote{fill in}\\ 
+  \hline
+  \pilot &BigJob Agent  & Worker Agent &condor\_master, condor\_startd &Coaster Worker & condor\_master, condor\_startd& GWpilot\aznote{(?) check} \\
+  \hline
+  \computeunit  \ (CU) &Task &Task &Job &Application Interface Function (Swift Script) & Job & Task\\
+  \hline
+  \su \ (SU) &Sub-Job &Task &Job &Job & Job & Task \\
+  \hline
+  Data support & BigData& & & & &\\
+  \hline
+  Deployment (centrally hosted vs application)  & Application & & & &Runs locally, requires remote cluster install & Centrally hosted \aznote{Req. gridway install}\\
+  \hline
+  Interoperable & via SAGA & & & &Yes, via Condor & Yes, via BLAHPD\\
+  \hline
+  Abstraction(?) & & & & & &\\
+  \hline
+  Coordination(?) &Advert & & & & &\\
+
+% \hline
+% Dynamic Resources &no/yes &yes (AgentFactories)\\
+ \hline
+ \end{tabular}
+ \caption{\textbf{Comparing PJ Systems} 
+   Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
+     Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
+ \up
+ } 
+ \label{table:bigjob-saga-diane}
+}
+\end{table*}
+
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
@@ -555,18 +596,73 @@ systems (such as Kerberos) as well as grid authentication systems such
 as GIS. Communication traffic can be encrypted.
 
 \subsubsection{Swift}
-\aznote{Material on Swift goes here}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+P* vocabulary}
+Swift~\cite{Wilde2011} is a scripting language designed for expressing
+abstract workflows and computations. The language provides, amongst many other
+things, capabilities for executing external applications, as well as the
+implicit management of data flows between application tasks. 
+% For this
+% purpose, Swift formalizes the way that applications can define
+% data-dependencies. Using so called mappers, these dependencies can be
+% easily extended to files or groups of files. 
+The runtime environment handles the allocation of resources and the spawning of 
+the compute tasks. 
+% Both data- and execution management capabilities are provided
+% via abstract interfaces. 
+Swift supports e.\,g.\ Globus, Condor and PBS resources. 
+% The pool of resources
+% that is used for an application is statically defined in a configuration file.
+% While this configuration file can refer to highly dynamic resources (such as OSG
+% resources), there is no possibility to manage this resource pool
+% programmatically. 
+By default, Swift uses a 1:1 mapping for \cus and \sus. However,
+Swift supports the grouping of SUs as well as PJs. For the PJ functionality, Swift uses the
+Coaster~\cite{coasters} framework. Coaster relies on a master/worker
+coordination model; communication is implemented using GSI-secured TCP sockets.
+Swift and Coaster support various scheduling mechanisms, e.\,g.\ a FIFO and a
+load-aware scheduler. Additionally, Swift can be used in conjunction with 
+Falkon~\cite{1362680}, which also provides \pilot-like functionality.
+
+% Falkon
+% refers to \pilots as the so called provisioner, which are created using the
+% Globus GRAM service. The provisioner spawns a set of executor processes on the
+% allocated resources, which are then responsible for managing the execution of
+% SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
+% Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
+% query the dispatcher for new SUs. Web services are used for communication.
 
 \subsubsection{GWPilot}
 %\begin{lstlisting}[breaklines]
 \url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
 \\
 \url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
+\begin{itemize}
+\item Integrates with GridWay metascheduler
+\item Pilots advertise to GridWay, GridWay scheduler schedules pilots
+\item Pilots pull tasks from scheduler
+\item Installation as a GridWay driver -- written in Python
+\item Interoperability managed by GridWay drivers (DRMAA, JDSL, BES, more?)
+\item Using GWPilot requires only adding a single line to their GridWay task
+\item ``Lightweight and scalable''
+\end{itemize}
 %\end{lstlisting}
 
 \subsubsection{Bosco}
 \url{http://iopscience.iop.org/1742-6596/396/3/032116/pdf/1742-6596_396_3_032116.pdf}
+\\
+\begin{itemize}
+\item Condor used as batch system/user interface
+\item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
+\item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs, 
+  enforces submission policies
+\item Bosco = ``BLAHPD Over SSH Condor Overlay''
+\item Workstation-based (run Bosco client locally)
+\item Multi-user (Bosco workstation install can be used by multiple researchers)
+\item Supports multiple cluster submission (but what about coordination...)
 
+\end{itemize}
 % \upp
 % \subsection{SWIFT-Coaster\upp\upp}
 % 
