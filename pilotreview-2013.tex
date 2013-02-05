@@ -82,7 +82,7 @@
 \maketitle
 
 \begin{abstract} 
- The aim of this paper is to provide a simple survey of \pilotjobs, or
+ The aim of this paper is to provide a simple \mtnote{expand so to eliminate simple} survey of \pilotjobs, or
  as we will see capabilities that have are claimed to be \pilotjobs.
  In the pursuit of developing interoperable, extensible and
  general-purpose \pilotjobs we realized that there was no agreed upon
@@ -295,7 +295,7 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 
 PJ to survey (pilots can fall potentially in on or more categories):
 \begin{itemize}
-	\item Simple Pilot-Job Systems:
+	\item Simple Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
 		\item Condor-G/Glide-In
 		\item MyCluster (supports both Condor and SGE clusters)
@@ -422,8 +422,6 @@ to optimize the placements of \pilots with respect to their workload.
 \begin{itemize}
 	\item Distinction between PJ implementation and abstractions;
         \item lack of a unifying model for PJ abstractions;
-        \item P* fills the gap;
-        \item P* description.
 \end{itemize}
 
 \subsection{Different components of the Landscape}
@@ -442,6 +440,29 @@ to optimize the placements of \pilots with respect to their workload.
 \subsection{Common Terms and Definitions}
 
 \alnote{What to do with the term many-task computing}
+
+The terminology used to describe the implementations of pilot-job reviewed in
+section 2 varies depending not only on the type of implementation considered --
+simple/core, pilot-based scheduling and higher-level application framework --
+but also on the application domain where they are deployed and leveraged.
+Nonetheless, some common concepts can be identified so that a common vocabulary
+can be developed. The goal is to leverage such a vocabulary to ...
+\mtnote{what exactly do we want to achieve with Section 4?}.
+
+'Late-binding' is one of the concepts that persist unchanged across all the
+pilot-job implementations. 
+\begin{itemize}
+        \item Late-binding: 
+\end{itemize}
+
+The very same nature of pilot-job is that of enabling a late-binding of
+resources to jobs. This is what allows for a pilot-job to offer 'load
+balancing', 'scheduling' and to some extent 'domain distribution'. Late-binding
+is also directly related to the possibility for a pilot-job system to fulfil
+the qualitative requirements related to the efficiency with which jobs are
+distributed, scheduled and executed by the user on one or more distributed
+infrastructure. \mtnote{shall we assume these definitions? I think so but I
+want to be sure.}
 
 \begin{itemize}
 	\item application
