@@ -82,7 +82,7 @@
 \maketitle
 
 \begin{abstract} 
- The aim of this paper is to provide a simple survey of \pilotjobs, or
+ The aim of this paper is to provide a simple \mtnote{expand so to eliminate simple} survey of \pilotjobs, or
  as we will see capabilities that have are claimed to be \pilotjobs.
  In the pursuit of developing interoperable, extensible and
  general-purpose \pilotjobs we realized that there was no agreed upon
@@ -110,16 +110,26 @@ widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
 of production distributed cyberinfrastructures that support them.  
 
-\jhanote{Needs more careful discussion/elaboration} The fundamental
-reason for the success of the \pilotjob abstraction is that \pilotjob
-liberate applications/users from the challenging requirement of
-mapping specific tasks onto explicit heterogeneous and dynamic
-resource pools. \pilotjobs also thus shields application from having
-to load-balance tasks across such resources.  The \pilotjob
-abstraction is also a promising route to address specific requirements
-of distributed scientific applications, such as coupled-execution and
-application-level
-scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+\jhanote{Needs more careful discussion/elaboration} 
+
+The fundamental reason for the success of the \pilotjob abstraction is that
+\pilotjob liberate applications/users from the challenging requirement of
+mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
+
+\onote{I think the most important reasons why Pilot Jobs being so  popular (and
+re-invented over and over again) is that they allow the  execution of small
+(i.e., singe / few-core) tasks efficiently on HPC infrastrucutre by massively
+reducing queueing time. HPC sites (from schedulers to policies) have always been
+(and still are) discrimatory against this type of workload in favor of the 
+large, tightly-coupled ones. Pilot-Jobs try to counteract. While this is 
+certainly not the main story that we want to tell, this should IMHO still be
+mentioned. }
+
+\pilotjobs also thus shields application from having to load-balance tasks
+across such resources.  The \pilotjob abstraction is also a promising route to
+address specific requirements of distributed scientific applications, such as
+coupled-execution and application-level scheduling~\cite{ko-
+efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
@@ -149,7 +159,14 @@ implementations that exist.
 \jhanote{The below is legacy from pilotdata paper.. to be refined}
 
 
-\section{A  Quick Survey of Existing Pilot-Jobs Systems}
+\section{A Quick Survey of Existing Pilot-Jobs Systems}
+\onote{OLE's SECTION}
+\onote{I'm not sure if I like how we split up betwee this section
+and section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead
+to a lot of redundancy and a confusing read. Wouldn't it be better
+to develop the landscape and vocabulary first and then use that 
+to have a comprehensive discussion on Pilot Jobs? }
+
 
 The aim here is to develop both an understanding of what \pilotjobs
 are and a listing of the different \pilotjobs, e.g. Swift, Condor
@@ -195,12 +212,15 @@ modularity and/or coupling to environment.
 
 \subsection{Historical Context}
 \mrnote{Melissa's Section}
+\onote{My comment in the introduction probably fits here.}
 
 \begin{itemize}
 \item What motivated the creation of Pilot-Jobs?
 \item Reference Kuba's thesis
 \item Efficient load balancing and resource utilization across the existing grid hardware drove the desire for user-level control of tasks and ease of use of job descriptions for data driven applications. - Can we provide citation for this other than Shantenu's distributed data papers?
 \end{itemize}
+
+As the uptake of grids grew, the need for job submission management via batch queuing systems and middleware access also grew. Many machines implemented their own batch queuing systems, and oftentimes these systems varied from machine to machine. Many scientific communities began running into the same problems: (i) heterogenous resources, (ii) workload management, and (iii) support of various applications~\cite{cern-slides}. There was a need to be able to harness the power of these heterogeneous resources to run jobs. User-level, rather than resource-level, control of workloads were also necessary to facilitate the running of many jobs with potentially long runtimes. Efficient load balancing and resource utilization across the existing grid hardware drove the desire for user-level control of tasks and ease of use of job descriptions for data driven applications.
 
 \subsection{What have Pilot-Jobs been used For?}
 \mrnote{Melissa's Section}
@@ -275,7 +295,7 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 
 PJ to survey (pilots can fall potentially in on or more categories):
 \begin{itemize}
-	\item Simple Pilot-Job Systems:
+	\item Simple Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
 		\item Condor-G/Glide-In
 		\item MyCluster (supports both Condor and SGE clusters)
@@ -318,6 +338,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 \end{itemize}
 
 \subsubsection{Core Pilot-Job Systems}
+\onote{what is a 'core' PJ system}
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
 to the local condor pool and run their jobs on the added resource the same way
@@ -401,8 +422,6 @@ to optimize the placements of \pilots with respect to their workload.
 \begin{itemize}
 	\item Distinction between PJ implementation and abstractions;
         \item lack of a unifying model for PJ abstractions;
-        \item P* fills the gap;
-        \item P* description.
 \end{itemize}
 
 \subsection{Different components of the Landscape}
@@ -421,6 +440,29 @@ to optimize the placements of \pilots with respect to their workload.
 \subsection{Common Terms and Definitions}
 
 \alnote{What to do with the term many-task computing}
+
+The terminology used to describe the implementations of pilot-job reviewed in
+section 2 varies depending not only on the type of implementation considered --
+simple/core, pilot-based scheduling and higher-level application framework --
+but also on the application domain where they are deployed and leveraged.
+Nonetheless, some common concepts can be identified so that a common vocabulary
+can be developed. The goal is to leverage such a vocabulary to ...
+\mtnote{what exactly do we want to achieve with Section 4?}.
+
+'Late-binding' is one of the concepts that persist unchanged across all the
+pilot-job implementations. 
+\begin{itemize}
+        \item Late-binding: 
+\end{itemize}
+
+The very same nature of pilot-job is that of enabling a late-binding of
+resources to jobs. This is what allows for a pilot-job to offer 'load
+balancing', 'scheduling' and to some extent 'domain distribution'. Late-binding
+is also directly related to the possibility for a pilot-job system to fulfil
+the qualitative requirements related to the efficiency with which jobs are
+distributed, scheduled and executed by the user on one or more distributed
+infrastructure. \mtnote{shall we assume these definitions? I think so but I
+want to be sure.}
 
 \begin{itemize}
 	\item application
@@ -446,6 +488,47 @@ for the interoperability of existing and future Pilot-Jobs, and
 lends insight into application design to enhance job/data(?)
 mobility, management, and potential run-time responsiveness via
 late-binding/etc.
+\begin{table*}[t]
+  \footnotesize{
+ \up
+ \centering
+ %\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+ \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \textbf{Pilot Element}
+  &\textbf{BigJob} &\textbf{DIANE} &\textbf{Condor-G/Glide-in} &\textbf{Swift/Coaster} &\textbf{Bosco} &\textbf{GWPilot}\\
+  \hline
+  Pilot-Manager &BigJob Manager & RunMaster & condor\_master, condor\_collector, condor\_negotiator, condor\_schedd &Coaster Service & Condor & Gridway\aznote{fill in}\\ 
+  \hline
+  \pilot &BigJob Agent  & Worker Agent &condor\_master, condor\_startd &Coaster Worker & condor\_master, condor\_startd& GWpilot\aznote{(?) check} \\
+  \hline
+  \computeunit  \ (CU) &Task &Task &Job &Application Interface Function (Swift Script) & Job & Task\\
+  \hline
+  \su \ (SU) &Sub-Job &Task &Job &Job & Job & Task \\
+  \hline
+  Data support & BigData& & & & &\\
+  \hline
+  Deployment (centrally hosted vs application)  & Application & & & &Runs locally, requires remote cluster install & Centrally hosted \aznote{Req. gridway install}\\
+  \hline
+  Interoperable & via SAGA & & & &Yes, via Condor & Yes, via BLAHPD\\
+  \hline
+  Abstraction(?) & & & & & &\\
+  \hline
+  Coordination(?) &Advert & & & & &\\
+
+% \hline
+% Dynamic Resources &no/yes &yes (AgentFactories)\\
+ \hline
+ \end{tabular}
+ \caption{\textbf{Comparing PJ Systems} 
+   Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
+     Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
+ \up
+ } 
+ \label{table:bigjob-saga-diane}
+}
+\end{table*}
+
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
@@ -555,18 +638,73 @@ systems (such as Kerberos) as well as grid authentication systems such
 as GIS. Communication traffic can be encrypted.
 
 \subsubsection{Swift}
-\aznote{Material on Swift goes here}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+P* vocabulary}
+Swift~\cite{Wilde2011} is a scripting language designed for expressing
+abstract workflows and computations. The language provides, amongst many other
+things, capabilities for executing external applications, as well as the
+implicit management of data flows between application tasks. 
+% For this
+% purpose, Swift formalizes the way that applications can define
+% data-dependencies. Using so called mappers, these dependencies can be
+% easily extended to files or groups of files. 
+The runtime environment handles the allocation of resources and the spawning of 
+the compute tasks. 
+% Both data- and execution management capabilities are provided
+% via abstract interfaces. 
+Swift supports e.\,g.\ Globus, Condor and PBS resources. 
+% The pool of resources
+% that is used for an application is statically defined in a configuration file.
+% While this configuration file can refer to highly dynamic resources (such as OSG
+% resources), there is no possibility to manage this resource pool
+% programmatically. 
+By default, Swift uses a 1:1 mapping for \cus and \sus. However,
+Swift supports the grouping of SUs as well as PJs. For the PJ functionality, Swift uses the
+Coaster~\cite{coasters} framework. Coaster relies on a master/worker
+coordination model; communication is implemented using GSI-secured TCP sockets.
+Swift and Coaster support various scheduling mechanisms, e.\,g.\ a FIFO and a
+load-aware scheduler. Additionally, Swift can be used in conjunction with 
+Falkon~\cite{1362680}, which also provides \pilot-like functionality.
+
+% Falkon
+% refers to \pilots as the so called provisioner, which are created using the
+% Globus GRAM service. The provisioner spawns a set of executor processes on the
+% allocated resources, which are then responsible for managing the execution of
+% SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
+% Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
+% query the dispatcher for new SUs. Web services are used for communication.
 
 \subsubsection{GWPilot}
 %\begin{lstlisting}[breaklines]
 \url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
 \\
 \url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
+\begin{itemize}
+\item Integrates with GridWay metascheduler
+\item Pilots advertise to GridWay, GridWay scheduler schedules pilots
+\item Pilots pull tasks from scheduler
+\item Installation as a GridWay driver -- written in Python
+\item Interoperability managed by GridWay drivers (DRMAA, JDSL, BES, more?)
+\item Using GWPilot requires only adding a single line to their GridWay task
+\item ``Lightweight and scalable''
+\end{itemize}
 %\end{lstlisting}
 
 \subsubsection{Bosco}
 \url{http://iopscience.iop.org/1742-6596/396/3/032116/pdf/1742-6596_396_3_032116.pdf}
+\\
+\begin{itemize}
+\item Condor used as batch system/user interface
+\item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
+\item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs, 
+  enforces submission policies
+\item Bosco = ``BLAHPD Over SSH Condor Overlay''
+\item Workstation-based (run Bosco client locally)
+\item Multi-user (Bosco workstation install can be used by multiple researchers)
+\item Supports multiple cluster submission (but what about coordination...)
 
+\end{itemize}
 % \upp
 % \subsection{SWIFT-Coaster\upp\upp}
 % 
