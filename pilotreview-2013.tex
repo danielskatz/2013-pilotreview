@@ -110,16 +110,26 @@ widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
 of production distributed cyberinfrastructures that support them.  
 
-\jhanote{Needs more careful discussion/elaboration} The fundamental
-reason for the success of the \pilotjob abstraction is that \pilotjob
-liberate applications/users from the challenging requirement of
-mapping specific tasks onto explicit heterogeneous and dynamic
-resource pools. \pilotjobs also thus shields application from having
-to load-balance tasks across such resources.  The \pilotjob
-abstraction is also a promising route to address specific requirements
-of distributed scientific applications, such as coupled-execution and
-application-level
-scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+\jhanote{Needs more careful discussion/elaboration} 
+
+The fundamental reason for the success of the \pilotjob abstraction is that
+\pilotjob liberate applications/users from the challenging requirement of
+mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
+
+\onote{I think the most important reasons why Pilot Jobs being so  popular (and
+re-invented over and over again) is that they allow the  execution of small
+(i.e., singe / few-core) tasks efficiently on HPC infrastrucutre by massively
+reducing queueing time. HPC sites (from schedulers to policies) have always been
+(and still are) discrimatory against this type of workload in favor of the 
+large, tightly-coupled ones. Pilot-Jobs try to counteract. While this is 
+certainly not the main story that we want to tell, this should IMHO still be
+mentioned. }
+
+\pilotjobs also thus shields application from having to load-balance tasks
+across such resources.  The \pilotjob abstraction is also a promising route to
+address specific requirements of distributed scientific applications, such as
+coupled-execution and application-level scheduling~\cite{ko-
+efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
