@@ -358,11 +358,14 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.45\textwidth]{figures/classification.pdf}
-	\caption{Pilot-Job Classification: 	Different PJ systems focus on 
-	different parts of the distributed computing stack: (i) PJ systems that 
-	solely provide the \pilot capability, (ii) systems that offer resource 
-	management capabilities based on \pilots and (iii) applications, tools and 
-	services that utilize \pilots for resource management.}
+	\caption{Pilot-Job Classification: Different PJ systems focus
+          on different parts of the distributed computing stack: (i)
+          PJ systems that solely provide the \pilot capability, (ii)
+          systems that offer resource management capabilities based on
+          \pilots and (iii) applications, tools and services that
+          utilize \pilots for resource management. \jhanote{we should
+            change the ``higher-level pilot-based frameworks'' to
+            ``higher-level frameworks that can use pilot-jobs''.}}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -470,6 +473,8 @@ resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks
 onto these. Further, AppLeS provides different application templates,
 e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
+\jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
+  capabilities?}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -488,13 +493,11 @@ to optimize the placements of \pilots with respect to their workload.
 
 \subsubsection{Higher-Level Frameworks}
 
-
+\newpage
 \section{Understanding the Landscape: Developing a Vocabulary}
 \mtnote{MT/AZ}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
-\jhanote{I think the main framework + concepts from P* can be used
-  here? Any reason not to? What else can be used?}
 
 \begin{itemize}
 	\item Distinction between PJ implementation and abstractions;
@@ -556,6 +559,7 @@ want to be sure.}
 	\item platform
 \end{itemize}
 
+\newpage
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
 Despite the apparent diversity in existing Pilot-Jobs,
