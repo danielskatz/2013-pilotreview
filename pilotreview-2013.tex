@@ -4,6 +4,7 @@
 
 \input{head}
 \input{include}
+\usepackage{lscape}
 
 \usepackage{listings}
 
@@ -529,6 +530,38 @@ late-binding/etc.
  \label{table:bigjob-saga-diane}
 }
 \end{table*}
+
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{|p{3.0cm}|p{3.5cm}|p{2.3cm}|p{1.9cm}|p{3.7cm}|p{2.5cm}|}
+\hline {\bf BigJob}
+& {\bf Diane}
+& {\bf Condor/Glide-in}
+& {\bf Swift}
+& {\bf Bosco}
+& {\bf GWPilot}
+\\
+\hline
+
+Montage
+& Multiple sequential and parallel executables
+& Files
+& Dataflow (DAG)
+& Dynamic process creation, workflow execution, file transfer
+& test
+\\
+\hline
+
+\end{tabular}
+\end{footnotesize}
+\caption{\label{Tab:AppChars} }
+\end{center}
+\end{table}
+\end{landscape}
+
 
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
