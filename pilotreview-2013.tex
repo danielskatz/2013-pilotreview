@@ -84,55 +84,54 @@
 \maketitle
 
 \begin{abstract} 
-  There is no agreed upon definition of \pilotjobs; however some
-  functional attributes of \pilotjobs that are agreed upon are that
-  they are tools or services that support multi-level and/or
-  application-level scheduling by providing a scheduling overlay over
-  the system-provided scheduler. Everything else is either specific to
-  an implementation, open to interpretation or not agreed upon: for
+  There is no agreed upon definition of \pilotjobs; however a
+  functional attribute of \pilotjobs that is generally agreed upon is
+  they are tools/services that support multi-level and/or
+  application-level scheduling by providing a scheduling overlay the
+  system-provided scheduler. Nearly everything else is either specific
+  to an implementation, open to interpretation or not agreed upon. For
   example, are \pilotjobs part of the application space, or part of
   the services provided by an infrastructue? We will see that
-  close-formed answers to questions to whether \pilotjobs are
+  close-formed answers to questions such as whether \pilotjobs are
   system-level or application-level capabilities are likely to be
-  elusive. Therefore not surprisingly, this paper does not attempt to
-  provide such close-formed answers, but to provide appropriate
-  context, insight and analysis of a large number of \pilotjobs, and
-  thereby bring about a hitherto missing consilience in the
-  community's appreciation of \pilotjobs.  Specifically this paper
-  aims to provide a comprehensive survey of \pilotjobs, or more
-  generically of \pilotjob like capabilities. A primary motivation for
-  this work stems from our experience when looking for an
-  interoperable, extensible and general-purpose \pilotjobs; in the
-  process, we realized that such a capability did not exist. The
-  situation was however even more unsatisfactory: in fact there was no
-  agreed upon definition or conceptual framework of \pilotjobs.  To
-  substantiate these points of view, we begin by sampling (as opposed
-  to a comprehensive survey) some existing \pilotjobs and the
-  different aspects of these \pilotjobs, such as the applications
-  scenarios that they have been used and how they have been used. The
-  limited but sufficient sampling highlights the variation, and also
-  provides both a motivation and the basis for developing an
-  implementation agnostic terminology and vocabulary to understand
-  \pilotjobs; Section \S3 attempts to survey the landscape/eco-system
-  of \pilotjobs.  With an agreed common framework/vocabulary to
-  discuss and describe \pilotjobs, we proceed to analyze the most
-  commonly utilized \pilotjobs and in the process provide a
-  comprehensive survey of \pilotjobs, insight into their
-  implementations, the infrastructure that they work on, the
-  applications and application execution modes they support, and a
-  frank assesment of their strengths and limitations.  An inconvenient
-  but important question -- both technically and from a sustainability
-  perspective that must be asked: why are there so many similar
-  seeming, but partial and slightly differing implementations of
-  \pilotjobs, yet with very limited interoperabilty amongst them?
-  Examining the reasons for this state-of-affairs provides a simple
-  yet illustrative case-study to understand the state of the art and
-  science of tools, services and middlware development.  Beyond the
-  motivation to understand the current landscape of \pilotjobs from
-  both a technical and a historical perspecitve, we believe a survey
-  of \pilotjobs is a useful and timely undertaking as it provides
-  interesting insight into understanding issues of software
-  sustainabilty.
+  elusive and neither does this paper attempt to provide such
+  close-formed answers, but aims to provide appropriate context,
+  insight and analysis of a large number of \pilotjobs, and thereby
+  bring about a hitherto missing consilience in the community's
+  appreciation of \pilotjobs.  Specifically this paper aims to provide
+  a comprehensive survey of \pilotjobs, or more generically of
+  \pilotjob like capabilities. A primary motivation for this work
+  stems from our experience when looking for an interoperable,
+  extensible and general-purpose \pilotjobs; in the process, we
+  realized that such a capability did not exist. The situation was
+  however even more unsatisfactory: in fact there was no agreed upon
+  definition or conceptual framework of \pilotjobs.  To substantiate
+  these points of view, we begin by sampling (as opposed to a
+  comprehensive survey) some existing \pilotjobs and the different
+  aspects of these \pilotjobs, such as the applications scenarios that
+  they have been used and how they have been used. The limited but
+  sufficient sampling highlights the variation, and also provides both
+  a motivation and the basis for developing an implementation agnostic
+  terminology and vocabulary to understand \pilotjobs; Section \S3
+  attempts to survey the landscape/eco-system of \pilotjobs.  With an
+  agreed common framework/vocabulary to discuss and describe
+  \pilotjobs, we proceed to analyze the most commonly utilized
+  \pilotjobs and in the process provide a comprehensive survey of
+  \pilotjobs, insight into their implementations, the infrastructure
+  that they work on, the applications and application execution modes
+  they support, and a frank assesment of their strengths and
+  limitations.  An inconvenient but important question -- both
+  technically and from a sustainability perspective that must be
+  asked: why are there so many similar seeming, but partial and
+  slightly differing implementations of \pilotjobs, yet with very
+  limited interoperabilty amongst them?  Examining the reasons for
+  this state-of-affairs provides a simple yet illustrative case-study
+  to understand the state of the art and science of tools, services
+  and middlware development.  Beyond the motivation to understand the
+  current landscape of \pilotjobs from both a technical and a
+  historical perspecitve, we believe a survey of \pilotjobs is a
+  useful and timely undertaking as it provides interesting insight
+  into understanding issues of software sustainabilty.
   % believe that a survey of \pilotjobs provides and appreciation for
   % the richness of the \pilotjobs landscape.  is
   % not to discuss the \pstar conceptual framework, but That led to
@@ -265,13 +264,35 @@ modularity and/or coupling to environment.
 \mrnote{Melissa's Section}
 \onote{My comment in the introduction probably fits here.}
 
+\jhanote{Melissa, how does introducing terminology like
+  first-generation \pilotjobs, second-generation \pilotjobs sound?}
+
+
 \begin{itemize}
 \item What motivated the creation of Pilot-Jobs?
 \item Reference Kuba's thesis
 \item Efficient load balancing and resource utilization across the existing grid hardware drove the desire for user-level control of tasks and ease of use of job descriptions for data driven applications. - Can we provide citation for this other than Shantenu's distributed data papers?
 \end{itemize}
 
-As the uptake of grids grew, the need for job submission management via batch queuing systems and middleware access also grew. Many machines implemented their own batch queuing systems, and oftentimes these systems varied from machine to machine. Many scientific communities began running into the same problems: (i) heterogenous resources, (ii) workload management, and (iii) support of various applications~\cite{cern-slides}. There was a need to be able to harness the power of these heterogeneous resources to run jobs. User-level, rather than resource-level, control of workloads were also necessary to facilitate the running of many jobs with potentially long runtimes. Efficient load balancing and resource utilization across the existing grid hardware drove the desire for user-level control of tasks and ease of use of job descriptions for data driven applications.
+As the uptake of grids grew, the need for job submission management
+via batch queuing systems and middleware access also grew. Many
+machines implemented their own batch queuing systems, and oftentimes
+these systems varied from machine to machine. Many scientific
+communities began running into the same problems: (i) heterogenous
+resources, (ii) workload management, and (iii) support of various
+applications~\cite{cern-slides}. There was a need to be able to
+harness the power of these heterogeneous resources to run
+jobs. User-level, rather than resource-level, control of workloads
+were also necessary to facilitate the running of many jobs with
+potentially long runtimes. \jhanote{Lots of terms/concepts introduced
+  in previous sentence. Needs slower and careful decompression..}
+Efficient load balancing and resource utilization across the existing
+grid hardware \jhanote{I think grid is a model of resource federation
+  and management, so if anything software and services, definitely not
+  hardware} drove the desire for user-level control of tasks and ease
+of use of job descriptions for data driven
+applications. \jhanote{again lots of terms and concepts which need
+  elaboration}
 
 \subsection{What have Pilot-Jobs been used For?}
 \mrnote{Melissa's Section}
@@ -286,6 +307,9 @@ For:
 \item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
 \item Other - To Be Identified
 \end{itemize}
+
+\jhanote{Melissa - please start converting into full text for this and
+  previous sub-section}
 
 \subsection{Informal Description of Pilot-Job Systems}
 \alnote{AL/MS}
@@ -392,7 +416,6 @@ PJ to survey (pilots can fall potentially in on or more categories):
 \end{itemize}
 
 \subsubsection{Basic Pilot-Job Systems}
-\onote{what is a 'core' PJ system}
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
 to the local condor pool and run their jobs on the added resource the same way
