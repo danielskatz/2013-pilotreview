@@ -35,7 +35,8 @@
 % \widowpenalty = 10000
 
 \title{Pilot-Jobs Redux: The Untold Saga of Pilot-Jobs. \\ OR \\  A RADICAL
-  Perspective on Pilot-Jobs}
+  Perspective on Pilot-Jobs \\ OR \\ Pilot-Jobs Redux: Towards a
+  Radical Overview of Pilot-Jobs}
 
 % \alignauthor
 % Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
@@ -83,20 +84,65 @@
 \maketitle
 
 \begin{abstract} 
- The aim of this paper is to provide a simple \mtnote{expand so to eliminate simple} survey of \pilotjobs, or
- as we will see capabilities that have are claimed to be \pilotjobs.
- In the pursuit of developing interoperable, extensible and
- general-purpose \pilotjobs we realized that there was no agreed upon
- definition or conceptual framework of \pilotjobs. That led to the
- \pstar model. The aim of this work is not to discuss the \pstar
- conceptual framework, but to catalogue existing \pilotjobs, different
- aspects of \pilotjobs and illustrate how \pilotjobs have been used.
- Interestingly we find that \pilotjobs have been used even before they
- were named as such!
-
+  There is no agreed upon definition of \pilotjobs; however some
+  functional attributes of \pilotjobs that are agreed upon are that
+  they are tools or services that support multi-level and/or
+  application-level scheduling by providing a scheduling overlay over
+  the system-provided scheduler. Everything else is either specific to
+  an implementation, open to interpretation or not agreed upon: for
+  example, are \pilotjobs part of the application space, or part of
+  the services provided by an infrastructue? We will see that
+  close-formed answers to questions to whether \pilotjobs are
+  system-level or application-level capabilities are likely to be
+  elusive. Therefore not surprisingly, this paper does not attempt to
+  provide such close-formed answers, but to provide appropriate
+  context, insight and analysis of a large number of \pilotjobs, and
+  thereby bring about a hitherto missing consilience in the
+  community's appreciation of \pilotjobs.  Specifically this paper
+  aims to provide a comprehensive survey of \pilotjobs, or more
+  generically of \pilotjob like capabilities. A primary motivation for
+  this work stems from our experience when looking for an
+  interoperable, extensible and general-purpose \pilotjobs; in the
+  process, we realized that such a capability did not exist. The
+  situation was however even more unsatisfactory: in fact there was no
+  agreed upon definition or conceptual framework of \pilotjobs.  To
+  substantiate these points of view, we begin by sampling (as opposed
+  to a comprehensive survey) some existing \pilotjobs and the
+  different aspects of these \pilotjobs, such as the applications
+  scenarios that they have been used and how they have been used. The
+  limited but sufficient sampling highlights the variation, and also
+  provides both a motivation and the basis for developing an
+  implementation agnostic terminology and vocabulary to understand
+  \pilotjobs; Section \S3 attempts to survey the landscape/eco-system
+  of \pilotjobs.  With an agreed common framework/vocabulary to
+  discuss and describe \pilotjobs, we proceed to analyze the most
+  commonly utilized \pilotjobs and in the process provide a
+  comprehensive survey of \pilotjobs, insight into their
+  implementations, the infrastructure that they work on, the
+  applications and application execution modes they support, and a
+  frank assesment of their strengths and limitations.  An inconvenient
+  but important question -- both technically and from a sustainability
+  perspective that must be asked: why are there so many similar
+  seeming, but partial and slightly differing implementations of
+  \pilotjobs, yet with very limited interoperabilty amongst them?
+  Examining the reasons for this state-of-affairs provides a simple
+  yet illustrative case-study to understand the state of the art and
+  science of tools, services and middlware development.  Beyond the
+  motivation to understand the current landscape of \pilotjobs from
+  both a technical and a historical perspecitve, we believe a survey
+  of \pilotjobs is a useful and timely undertaking as it provides
+  interesting insight into understanding issues of software
+  sustainabilty.
+  % believe that a survey of \pilotjobs provides and appreciation for
+  % the richness of the \pilotjobs landscape.  is
+  % not to discuss the \pstar conceptual framework, but That led to
+  % the \pstar model.
 \end{abstract}
 
 \section{Introduction} 
+
+\jhanote{Interestingly we find that \pilotjobs have been used even
+  before they were named as such!}
 
 Why have \pilotjobs been successful? At least in part, due to the
 decoupling between task/workload specification and task management.
