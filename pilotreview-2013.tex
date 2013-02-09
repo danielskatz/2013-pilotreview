@@ -141,12 +141,9 @@
 
 \section{Introduction} 
 
-\jhanote{Interestingly we find that \pilotjobs have been used even
-  before they were named as such!}
-
-Why have \pilotjobs been successful? At least in part, due to the
-decoupling between task/workload specification and task management.
-
+\jhanote{this paragraph states the importance of \pilotjobs for
+  distributed infrastructure}
+  
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
 simple-to-use abstractions at multiple levels – at the development,
@@ -155,29 +152,40 @@ support effective distributed resource utilization, a survey of actual
 usage suggested that \pilotjobs were arguably one of the most
 widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
-of production distributed cyberinfrastructures that support them.  
+of production distributed cyberinfrastructures that support them.
+\jhanote{Interestingly we find that \pilotjobs have been used even
+  before they were named as such!}
 
-\jhanote{Needs more careful discussion/elaboration} 
+\jhanote{Now develop the following paragraph along the lines of: Why
+  have \pilotjobs been successful?}
 
-The fundamental reason for the success of the \pilotjob abstraction is that
-\pilotjob liberate applications/users from the challenging requirement of
-mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
+The fundamental reason for the success of the \pilotjob abstraction is
+that \pilotjob liberate applications/users from the challenging
+requirement of mapping specific tasks onto explicit heterogeneous and
+dynamic resource pools.  In other words, at least in part, due to the
+decoupling between task/workload specification and task management.
+\pilotjobs also thus shields application from having to load-balance
+tasks across such resources.  The \pilotjob abstraction is also a
+promising route to address specific requirements of distributed
+scientific applications, such as coupled-execution and
+application-level scheduling~\cite{ko-
+  efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
-\onote{I think the most important reasons why Pilot Jobs being so  popular (and
-re-invented over and over again) is that they allow the  execution of small
-(i.e., singe / few-core) tasks efficiently on HPC infrastrucutre by massively
-reducing queueing time. HPC sites (from schedulers to policies) have always been
-(and still are) discrimatory against this type of workload in favor of the 
-large, tightly-coupled ones. Pilot-Jobs try to counteract. While this is 
-certainly not the main story that we want to tell, this should IMHO still be
-mentioned. }
+  \onote{I think the most important reasons why Pilot Jobs being so
+    popular (and re-invented over and over again) is that they allow
+    the execution of small (i.e., singe / few-core) tasks efficiently
+    on HPC infrastrucutre by massively reducing queueing time. HPC
+    sites (from schedulers to policies) have always been (and still
+    are) discrimatory against this type of workload in favor of the
+    large, tightly-coupled ones. Pilot-Jobs try to counteract. While
+    this is certainly not the main story that we want to tell, this
+    should IMHO still be mentioned. } \jhanote{This is definitely one
+    of the main reasons, but as Melissa pointed out it during RADICAL
+    call, it is by no means the only reason. Need to get the different
+    reasons down here.. then find a nice balance and description}
 
-\pilotjobs also thus shields application from having to load-balance tasks
-across such resources.  The \pilotjob abstraction is also a promising route to
-address specific requirements of distributed scientific applications, such as
-coupled-execution and application-level scheduling~\cite{ko-
-efficient,DBLP:conf/hpdc/KimHMAJ10}.
-
+\jhanote{Although pilotjobs have solved/addressed many problems, now
+    develop the problem with \pilotjobs themselves..}
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
 DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
@@ -193,27 +201,23 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remains difficult if not infeasible.
 
-
-
-\subsection{Prior Work}
-
-Our initial investigation~\cite{Luckow:2008la} into
-\pilot-Abstractions was motivated by the desire to provide a single
-conceptual framework --- referred to as the P* Model, that would be
-used to understand and reason the plethora and myriad \pilotjob
-implementations that exist.
+% \subsection{Prior Work}
 
 \jhanote{The below is legacy from pilotdata paper.. to be refined}
 
 
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
-\onote{OLE's SECTION}
-\onote{I'm not sure if I like how we split up betwee this section
-and section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead
-to a lot of redundancy and a confusing read. Wouldn't it be better
-to develop the landscape and vocabulary first and then use that 
-to have a comprehensive discussion on Pilot Jobs? }
-
+\onote{OLE's SECTION}\jhanote{Ole, several people are already working
+  in this section. You need to coordinate with existing authors here}
+\onote{I'm not sure if I like how we split up betwee this section and
+  section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead to a
+  lot of redundancy and a confusing read. Wouldn't it be better to
+  develop the landscape and vocabulary first and then use that to have
+  a comprehensive discussion on Pilot Jobs? }\jhanote{We have had this
+  discussion several times already! This is a limited sampling... in
+  from the perspective of the developers etc.. before we provide a
+  unifying descriptiong and then revisit a larger sample of
+  \pilotjobs}
 
 The aim here is to develop both an understanding of what \pilotjobs
 are and a listing of the different \pilotjobs, e.g. Swift, Condor
@@ -801,6 +805,8 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %go with this, however, to avoid hitting the ``conclusion'' material in this section?
 %}
 
+
+
 \section{Conclusion and Discussion}
 
 \subsection{The need for a common minimum model}
@@ -809,6 +815,13 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %which this paper is built, for completeness we briefly outline them
 %here.
 
+Our initial investigation~\cite{Luckow:2008la} into
+\pilot-Abstractions was motivated by the desire to provide a single
+conceptual framework --- referred to as the P* Model, that would be
+used to understand and reason the plethora and myriad \pilotjob
+implementations that exist.
+
+ 
 Once a common and uniform conceptual model was available, the notion
 of \pilotdata was conceived using the power of symmetry, i.e., the
 notion of \pilotdata was as fundamental to dynamic data placement and
