@@ -91,7 +91,7 @@
   system-provided scheduler. Nearly everything else is either specific
   to an implementation, open to interpretation or not agreed upon. For
   example, are \pilotjobs part of the application space, or part of
-  the services provided by an infrastructue? We will see that
+  the services provided by an infrastructure? We will see that
   close-formed answers to questions such as whether \pilotjobs are
   system-level or application-level capabilities are likely to be
   elusive and neither does this paper attempt to provide such
@@ -119,19 +119,19 @@
   \pilotjobs and in the process provide a comprehensive survey of
   \pilotjobs, insight into their implementations, the infrastructure
   that they work on, the applications and application execution modes
-  they support, and a frank assesment of their strengths and
+  they support, and a frank assessment of their strengths and
   limitations.  An inconvenient but important question -- both
   technically and from a sustainability perspective that must be
   asked: why are there so many similar seeming, but partial and
   slightly differing implementations of \pilotjobs, yet with very
-  limited interoperabilty amongst them?  Examining the reasons for
+  limited interoperability amongst them?  Examining the reasons for
   this state-of-affairs provides a simple yet illustrative case-study
   to understand the state of the art and science of tools, services
-  and middlware development.  Beyond the motivation to understand the
+  and middleware development.  Beyond the motivation to understand the
   current landscape of \pilotjobs from both a technical and a
-  historical perspecitve, we believe a survey of \pilotjobs is a
+  historical perspective, we believe a survey of \pilotjobs is a
   useful and timely undertaking as it provides interesting insight
-  into understanding issues of software sustainabilty.
+  into understanding issues of software sustainability.
   % believe that a survey of \pilotjobs provides and appreciation for
   % the richness of the \pilotjobs landscape.  is
   % not to discuss the \pstar conceptual framework, but That led to
@@ -208,14 +208,14 @@ needs), these objectives remains difficult if not infeasible.
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
 \onote{OLE's SECTION}\jhanote{Ole, several people are already working
   in this section. You need to coordinate with existing authors here}
-\onote{I'm not sure if I like how we split up betwee this section and
+\onote{I'm not sure if I like how we split up between this section and
   section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead to a
   lot of redundancy and a confusing read. Wouldn't it be better to
   develop the landscape and vocabulary first and then use that to have
   a comprehensive discussion on Pilot Jobs? }\jhanote{We have had this
   discussion several times already! This is a limited sampling... in
   from the perspective of the developers etc.. before we provide a
-  unifying descriptiong and then revisit a larger sample of
+  unifying description and then revisit a larger sample of
   \pilotjobs}
 
 The aim here is to develop both an understanding of what \pilotjobs
@@ -273,8 +273,25 @@ modularity and/or coupling to environment.
     support dynamic scheduling in heterogeneous, dynamic grid environments 
     mostly via directly interaction with the respective resource.
     \item First generation: Extension of pre-\pilot systems to support dynamic 
-    scheduling on top of a \pilot mechanism.
+    scheduling on top of a \pilot mechanism, i.\,e.\ a placeholder job.
     \item Second generation: complex workload management systems based on \pilots.
+\end{itemize}
+
+\alnote{Another interesting point to cover is: how the invention of \pilots 
+and application-level scheduling compare to the invention of traditional local 
+batch queuing system (that were also invented to make resource sharing and 
+utilization efficient)}
+Methodologies for distributed resource management:
+\begin{itemize}
+    \item local resource manager (batch queueing):
+    \begin{itemize}
+        \item centralized: Torque
+        \item decentralized (w/ fewer central components): Condor
+    \end{itemize} 
+    \item meta scheduling
+    \item advance reservations
+    \item class ads
+    \item \pilots
 \end{itemize}
 
 Further points to cover:
@@ -348,6 +365,7 @@ We assess the \pilotjob-Systems according to the following criteria:
     \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
 	\item Performance and Scalability (Task Throughput)
 	\item Fault Tolerance
+	\item Interoperability (vertically, horizontally)
 	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
 	\item Scheduling: supported algorithms, support for application-level 
 	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
@@ -388,6 +406,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 	\begin{itemize}
 		\item AppLeS
 		\item Grid Harvesting Service
+		\item Boinc (@Home)
 	\end{itemize}
 	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
@@ -399,6 +418,8 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item LGI
 		\item Wisdom
 		\item EDGeS
+		\item Trellis
+		\item Personal Cluster
 	\end{itemize}
 	\item Pilot-based Scheduling/Multi-Level Scheduling
 	\begin{itemize}
@@ -523,7 +544,7 @@ vertically integrates with a custom \pilotjob implementation or (ii) it
 re-uses a general purpose PJ system. In case (i), the PJ system is often
 re-factored to also serve a multi-purpose PJ system.
 
-\newpage
+
 \section{Understanding the Landscape: Developing a Vocabulary}
 \mtnote{MT/AZ}
 
@@ -549,7 +570,10 @@ re-factored to also serve a multi-purpose PJ system.
 
 \subsection{Common Terms and Definitions}
 
-\alnote{What to do with the term many-task computing}
+\alnote{What to do with the terms, such as many-task computing, meta 
+computing, grid computing, etc.? It might make sense to couple the evolution 
+of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
+in history section.}
 
 The terminology used to describe the implementations of pilot-job reviewed in
 section 2 varies depending not only on the type of implementation considered --
@@ -574,18 +598,18 @@ distributed, scheduled and executed by the user on one or more distributed
 infrastructure. \mtnote{shall we assume these definitions? I think so but I
 want to be sure.}
 
+\alnote{Can we start of with the P* elements so that we have something?}
 \begin{itemize}
 	\item application
 	\item workflow
-        \item pilot
-        \item pilot framework
-        \item agent, executor
+    \item pilot framework
 	\item manager
-        \item scheduler
+    \item pilot, agent, executor, butler process, placeholder
+    \item scheduler
 	\item job
-        \item workload
+    \item workload
 	\item ensemble
-    \item compute unit
+    \item \computeunit
 	\item platform
 \end{itemize}
 
