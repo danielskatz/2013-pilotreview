@@ -394,6 +394,7 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
           utilize \pilots for resource management. \jhanote{we should
             change the ``higher-level pilot-based frameworks'' to
             ``higher-level frameworks that can use pilot-jobs''.}}
+            \alnote{mention that these layers are not cleanly separated: Pegasus is constraint to a single PJ system (Corral)}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -534,6 +535,10 @@ provides more explicit control over the placement and start of \pilots to the
 end-user. Higher-level frameworks, such as Pegasus, can utilize Corral to
 optimize the placements of \pilots with respect to their workload.
 
+Another workload management systems that is based on Condor-G/Glidein is
+PanDA~\cite{1742-6596-331-7-072069}. In contrast, a Condor-G only approach,
+PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
+internal queue.
 
 \subsubsection{Higher-Level Frameworks}
 
