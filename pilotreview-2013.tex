@@ -267,7 +267,17 @@ modularity and/or coupling to environment.
 \jhanote{Melissa, how does introducing terminology like
   first-generation \pilotjobs, second-generation \pilotjobs sound?}
 
+\pilotjob-System Evolution:
+\begin{itemize}
+    \item Pre-\pilotjob Systems: Master/Worker systems (e.\,g.\ AppLeS) that 
+    support dynamic scheduling in heterogeneous, dynamic grid environments 
+    mostly via directly interaction with the respective resource.
+    \item First generation: Extension of pre-\pilot systems to support dynamic 
+    scheduling on top of a \pilot mechanism.
+    \item Second generation: complex workload management systems based on \pilots.
+\end{itemize}
 
+Further points to cover:
 \begin{itemize}
 \item What motivated the creation of Pilot-Jobs?
 \item Reference Kuba's thesis
@@ -330,7 +340,7 @@ need to be run at one time.
 
 We assess the \pilotjob-Systems according to the following criteria:
 \begin{itemize}
-	\item What use cases? What applications types are supported? MPI, ensembles, workflows?
+	\item What use cases? What applications types are supported? MPI, ensembles, workflows? Single vs. multi-purpose?
 	\item What low-level infrastructures/middleware are supported? How interoperable is the framework?
 	\item Scale of distribution
 	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
@@ -374,6 +384,11 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 
 PJ to survey (pilots can fall potentially in on or more categories):
 \begin{itemize}
+	\item First-Generation PJ-Systems / Master/Worker frameworks:
+	\begin{itemize}
+		\item AppLeS
+		\item Grid Harvesting Service
+	\end{itemize}
 	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
 		\item Condor-G/Glide-In
@@ -414,7 +429,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 			\item Bosco
 			\item iPython (SGE, PBS)
 			\item NetSolve~\cite{Casanova:1995:NNS:898848}
-		\end{itemize}
+		\end{itemize}		
 	\end{itemize}
 \end{itemize}
 
@@ -474,7 +489,15 @@ onto these. Further, AppLeS provides different application templates,
 e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
 \jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
-  capabilities?}
+  capabilities?} \alnote{The question is: when is a \pilot a \pilot? When the 
+  use the term \pilot and when \pilot-like? Apples has a component -- the 
+  Actuator (Quote from paper: "... handles task launching, polling, and 
+  cancellation ..."), which 
+  is quite similar to a \pilot. But maybe AppLeS is something for 
+  the history section or a separate category for Master/Worker frameworks... 
+  PJ evolved from the need to map master/worker style computations to 
+  heterogeneous, dynamic distributed grid environments. Added a pre-\pilot 
+  category to the history sub-section.}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -484,14 +507,21 @@ available to the pool. GlideinWMS is a multi-user \pilotjob system commonly
 deployed as a hosted service. In contrast to low-level \pilotjob systems,
 GlideinWMS attempts to hide rather than expose the \pilot capabilities from
 the user. GlideinWMS is currently deployed in production on OSG and is the
-recommended mode for accessing OSG resources. 
-Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend 
-which provides more explicit control over the placement and start of \pilots 
-to the end-user. Higher-level frameworks, such as Pegasus, can utilize Corral 
-to optimize the placements of \pilots with respect to their workload.
+recommended mode for accessing OSG resources.
+Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend which
+provides more explicit control over the placement and start of \pilots to the
+end-user. Higher-level frameworks, such as Pegasus, can utilize Corral to
+optimize the placements of \pilots with respect to their workload.
 
 
 \subsubsection{Higher-Level Frameworks}
+
+Many higher-level tools and frameworks, such as workflow, visualization or
+data analytics systems, utilize \pilotjob systems to manage their
+computational workload. In general, two approaches exist: (i) the framework
+vertically integrates with a custom \pilotjob implementation or (ii) it
+re-uses a general purpose PJ system. In case (i), the PJ system is often
+re-factored to also serve a multi-purpose PJ system.
 
 \newpage
 \section{Understanding the Landscape: Developing a Vocabulary}
@@ -500,8 +530,8 @@ to optimize the placements of \pilots with respect to their workload.
 \jhanote{Having surveyed now let us develop the vocabulary.}
 
 \begin{itemize}
-	\item Distinction between PJ implementation and abstractions;
-        \item lack of a unifying model for PJ abstractions;
+    \item Distinction between PJ implementation and abstractions;
+    \item lack of a unifying model for PJ abstractions;
 \end{itemize}
 
 \subsection{Different components of the Landscape}
