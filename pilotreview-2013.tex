@@ -4,6 +4,7 @@
 
 \input{head}
 \input{include}
+\usepackage{lscape}
 
 \usepackage{listings}
 
@@ -34,7 +35,8 @@
 % \widowpenalty = 10000
 
 \title{Pilot-Jobs Redux: The Untold Saga of Pilot-Jobs. \\ OR \\  A RADICAL
-  Perspective on Pilot-Jobs}
+  Perspective on Pilot-Jobs \\ OR \\ Pilot-Jobs Redux: Towards a
+  Radical Overview of Pilot-Jobs}
 
 % \alignauthor
 % Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
@@ -82,24 +84,65 @@
 \maketitle
 
 \begin{abstract} 
- The aim of this paper is to provide a simple \mtnote{expand so to eliminate simple} survey of \pilotjobs, or
- as we will see capabilities that have are claimed to be \pilotjobs.
- In the pursuit of developing interoperable, extensible and
- general-purpose \pilotjobs we realized that there was no agreed upon
- definition or conceptual framework of \pilotjobs. That led to the
- \pstar model. The aim of this work is not to discuss the \pstar
- conceptual framework, but to catalogue existing \pilotjobs, different
- aspects of \pilotjobs and illustrate how \pilotjobs have been used.
- Interestingly we find that \pilotjobs have been used even before they
- were named as such!
-
+  There is no agreed upon definition of \pilotjobs; however a
+  functional attribute of \pilotjobs that is generally agreed upon is
+  they are tools/services that support multi-level and/or
+  application-level scheduling by providing a scheduling overlay on top of the
+  system-provided schedulers. Nearly everything else is either specific
+  to an implementation, open to interpretation or not agreed upon. For
+  example, are \pilotjobs part of the application space, or part of
+  the services provided by an infrastructure? We will see that
+  close-formed answers to questions such as whether \pilotjobs are
+  system-level or application-level capabilities are likely to be
+  elusive. Hence, this paper does not make an attempt to provide
+  close-formed answers, but aims to provide appropriate context,
+  insight and analysis of a large number of \pilotjobs, and thereby
+  bring about a hitherto missing consilience in the community's
+  appreciation of \pilotjobs.  Specifically this paper aims to provide
+  a comprehensive survey of \pilotjobs, or more generically of
+  \pilotjob like capabilities. A primary motivation for this work
+  stems from our experience when looking for an interoperable,
+  extensible and general-purpose \pilotjobs; in the process, we
+  realized that such a capability did not exist. The situation was
+  however even more unsatisfactory: in fact there was no agreed upon
+  definition or conceptual framework of \pilotjobs.  To substantiate
+  these points of view, we begin by sampling (as opposed to a
+  comprehensive survey)~\onote{a few lines above we say that we're doing a comprehensive survey!} some existing \pilotjobs and the different
+  aspects of these \pilotjobs, such as the applications scenarios that
+  they have been used and how they have been used. The limited but
+  sufficient sampling highlights the variation, and also provides both
+  a motivation and the basis for developing an implementation agnostic
+  terminology and vocabulary to understand \pilotjobs; Section \S3
+  attempts to survey the landscape/eco-system of \pilotjobs.  With an
+  agreed common framework/vocabulary to discuss and describe
+  \pilotjobs, we proceed to analyze the most commonly utilized
+  \pilotjobs and in the process provide a comprehensive survey of
+  \pilotjobs, insight into their implementations, the infrastructure
+  that they work on, the applications and application execution modes
+  they support, and a frank assessment of their strengths and
+  limitations.  An inconvenient but important question -- both
+  technically and from a sustainability perspective that must be
+  asked: why are there so many similar seeming, but partial and
+  slightly differing implementations of \pilotjobs, yet with very
+  limited interoperability amongst them?  Examining the reasons for
+  this state-of-affairs provides a simple yet illustrative case-study
+  to understand the state of the art and science of tools, services
+  and middleware development.  Beyond the motivation to understand the
+  current landscape of \pilotjobs from both a technical and a
+  historical perspective, we believe a survey of \pilotjobs is a
+  useful and timely undertaking as it provides interesting insight
+  into understanding issues of software sustainability.
+  % believe that a survey of \pilotjobs provides and appreciation for
+  % the richness of the \pilotjobs landscape.  is
+  % not to discuss the \pstar conceptual framework, but That led to
+  % the \pstar model.
 \end{abstract}
 
 \section{Introduction} 
 
-Why have \pilotjobs been successful? At least in part, due to the
-decoupling between task/workload specification and task management.
-
+\jhanote{this paragraph states the importance of \pilotjobs for
+  distributed infrastructure}
+  
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
 simple-to-use abstractions at multiple levels – at the development,
@@ -108,29 +151,40 @@ support effective distributed resource utilization, a survey of actual
 usage suggested that \pilotjobs were arguably one of the most
 widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
-of production distributed cyberinfrastructures that support them.  
+of production distributed cyberinfrastructures that support them.
+\jhanote{Interestingly we find that \pilotjobs have been used even
+  before they were named as such!}
 
-\jhanote{Needs more careful discussion/elaboration} 
+\jhanote{Now develop the following paragraph along the lines of: Why
+  have \pilotjobs been successful?}
 
-The fundamental reason for the success of the \pilotjob abstraction is that
-\pilotjob liberate applications/users from the challenging requirement of
-mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
+The fundamental reason for the success of the \pilotjob abstraction is
+that \pilotjob liberate applications/users from the challenging
+requirement of mapping specific tasks onto explicit heterogeneous and
+dynamic resource pools.  In other words, at least in part, due to the
+decoupling between task/workload specification and task management.
+\pilotjobs also thus shields application from having to load-balance
+tasks across such resources.  The \pilotjob abstraction is also a
+promising route to address specific requirements of distributed
+scientific applications, such as coupled-execution and
+application-level scheduling~\cite{ko-
+  efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
-\onote{I think the most important reasons why Pilot Jobs being so  popular (and
-re-invented over and over again) is that they allow the  execution of small
-(i.e., singe / few-core) tasks efficiently on HPC infrastrucutre by massively
-reducing queueing time. HPC sites (from schedulers to policies) have always been
-(and still are) discrimatory against this type of workload in favor of the 
-large, tightly-coupled ones. Pilot-Jobs try to counteract. While this is 
-certainly not the main story that we want to tell, this should IMHO still be
-mentioned. }
+  \onote{I think the most important reasons why Pilot Jobs being so
+    popular (and re-invented over and over again) is that they allow
+    the execution of small (i.e., singe / few-core) tasks efficiently
+    on HPC infrastrucutre by massively reducing queueing time. HPC
+    sites (from schedulers to policies) have always been (and still
+    are) discrimatory against this type of workload in favor of the
+    large, tightly-coupled ones. Pilot-Jobs try to counteract. While
+    this is certainly not the main story that we want to tell, this
+    should IMHO still be mentioned. } \jhanote{This is definitely one
+    of the main reasons, but as Melissa pointed out it during RADICAL
+    call, it is by no means the only reason. Need to get the different
+    reasons down here.. then find a nice balance and description}
 
-\pilotjobs also thus shields application from having to load-balance tasks
-across such resources.  The \pilotjob abstraction is also a promising route to
-address specific requirements of distributed scientific applications, such as
-coupled-execution and application-level scheduling~\cite{ko-
-efficient,DBLP:conf/hpdc/KimHMAJ10}.
-
+\jhanote{Although pilotjobs have solved/addressed many problems, now
+    develop the problem with \pilotjobs themselves..}
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
 DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
@@ -146,27 +200,23 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remains difficult if not infeasible.
 
-
-
-\subsection{Prior Work}
-
-Our initial investigation~\cite{Luckow:2008la} into
-\pilot-Abstractions was motivated by the desire to provide a single
-conceptual framework --- referred to as the P* Model, that would be
-used to understand and reason the plethora and myriad \pilotjob
-implementations that exist.
+% \subsection{Prior Work}
 
 \jhanote{The below is legacy from pilotdata paper.. to be refined}
 
 
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
-\onote{OLE's SECTION}
-\onote{I'm not sure if I like how we split up betwee this section
-and section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead
-to a lot of redundancy and a confusing read. Wouldn't it be better
-to develop the landscape and vocabulary first and then use that 
-to have a comprehensive discussion on Pilot Jobs? }
-
+\onote{OLE's SECTION}\jhanote{Ole, several people are already working
+  in this section. You need to coordinate with existing authors here}
+\onote{I'm not sure if I like how we split up between this section and
+  section 'PILOT-JOB SYSTEMS REVISITED'. This will probably lead to a
+  lot of redundancy and a confusing read. Wouldn't it be better to
+  develop the landscape and vocabulary first and then use that to have
+  a comprehensive discussion on Pilot Jobs? }\jhanote{We have had this
+  discussion several times already! This is a limited sampling... in
+  from the perspective of the developers etc.. before we provide a
+  unifying description and then revisit a larger sample of
+  \pilotjobs}
 
 The aim here is to develop both an understanding of what \pilotjobs
 are and a listing of the different \pilotjobs, e.g. Swift, Condor
@@ -214,12 +264,61 @@ modularity and/or coupling to environment.
 \mrnote{Melissa's Section}
 \onote{My comment in the introduction probably fits here.}
 
+\jhanote{Melissa, how does introducing terminology like
+  first-generation \pilotjobs, second-generation \pilotjobs sound?}
+
+\pilotjob-System Evolution:
+\begin{itemize}
+    \item Pre-\pilotjob Systems: Master/Worker systems (e.\,g.\ AppLeS) that 
+    support dynamic scheduling in heterogeneous, dynamic grid environments 
+    mostly via directly interaction with the respective resource.
+    \item First generation: Extension of pre-\pilot systems to support dynamic 
+    scheduling on top of a \pilot mechanism, i.\,e.\ a placeholder job.
+    \item Second generation: complex workload management systems based on \pilots.
+\end{itemize}
+
+\alnote{Another interesting point to cover is: how the invention of \pilots 
+and application-level scheduling compare to the invention of traditional local 
+batch queuing system (that were also invented to make resource sharing and 
+utilization efficient)}
+Methodologies for distributed resource management:
+\begin{itemize}
+    \item local resource manager (batch queueing):
+    \begin{itemize}
+        \item centralized: Torque
+        \item decentralized (w/ fewer central components): Condor
+    \end{itemize} 
+    \item meta scheduling
+    \item advance reservations
+    \item class ads
+    \item \pilots
+\end{itemize}
+
+Further points to cover:
 \begin{itemize}
 \item What motivated the creation of Pilot-Jobs?
 \item Reference Kuba's thesis
 \end{itemize}
 
-As the uptake of grids grew, the need for job submission management via batch queuing systems and middleware access also grew. Many machines implemented their own batch queuing systems, and oftentimes these systems varied from machine to machine. Many scientific communities began running into the same problems: (i) heterogenous resources, (ii) workload management, and (iii) support of various applications~\cite{cern-slides}. There was a need to be able to harness the power of these heterogeneous resources to run jobs. User-level, rather than resource-level, control of workloads were also necessary to facilitate the running of many jobs with potentially long runtimes. Efficient load balancing and resource utilization across the existing grid hardware drove the desire for user-level control of tasks and ease of use of job descriptions for data driven applications.
+As the uptake of grids grew, the need for job submission management
+via batch queuing systems and middleware access also grew. Many
+machines implemented their own batch queuing systems, and oftentimes
+these systems varied from machine to machine. Many scientific
+communities began running into the same problems: (i) heterogenous
+resources, (ii) workload management, and (iii) support of various
+applications~\cite{cern-slides}. There was a need to be able to
+harness the power of these heterogeneous resources to run
+jobs. User-level, rather than resource-level, control of workloads
+were also necessary to facilitate the running of many jobs with
+potentially long runtimes. \jhanote{Lots of terms/concepts introduced
+  in previous sentence. Needs slower and careful decompression..}
+Efficient load balancing and resource utilization across the existing
+grid hardware \jhanote{I think grid is a model of resource federation
+  and management, so if anything software and services, definitely not
+  hardware} drove the desire for user-level control of tasks and ease
+of use of job descriptions for data driven
+applications. \jhanote{again lots of terms and concepts which need
+  elaboration}
 
 \subsection{What have Pilot-Jobs been used For?}
 \mrnote{Melissa's Section}
@@ -234,6 +333,9 @@ For:
 \item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
 \item Other - To Be Identified
 \end{itemize}
+
+\jhanote{Melissa - please start converting into full text for this and
+  previous sub-section}
 
 \subsection{Informal Description of Pilot-Job Systems}
 \alnote{AL/MS}
@@ -254,13 +356,15 @@ need to be run at one time.
 
 We assess the \pilotjob-Systems according to the following criteria:
 \begin{itemize}
-	\item What use cases? What applications types are supported? MPI, ensembles, workflows?
+	\item What use cases? What applications types are supported? MPI, ensembles, workflows? Single vs. multi-purpose?
 	\item What low-level infrastructures/middleware are supported? How interoperable is the framework?
+	\item Scale of distribution
 	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
 	\item Deployment Model: service versus tool/library, application vs. system-level
     \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
 	\item Performance and Scalability (Task Throughput)
 	\item Fault Tolerance
+	\item Interoperability (vertically, horizontally)
 	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
 	\item Scheduling: supported algorithms, support for application-level 
 	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
@@ -281,11 +385,15 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=0.45\textwidth]{figures/classification.pdf}
-	\caption{Pilot-Job Classification: 	Different PJ systems focus on 
-	different parts of the distributed computing stack: (i) PJ systems that 
-	solely provide the \pilot capability, (ii) systems that offer resource 
-	management capabilities based on \pilots and (iii) applications, tools and 
-	services that utilize \pilots for resource management.}
+	\caption{Pilot-Job Classification: Different PJ systems focus
+          on different parts of the distributed computing stack: (i)
+          PJ systems that solely provide the \pilot capability, (ii)
+          systems that offer resource management capabilities based on
+          \pilots and (iii) applications, tools and services that
+          utilize \pilots for resource management. \jhanote{we should
+            change the ``higher-level pilot-based frameworks'' to
+            ``higher-level frameworks that can use pilot-jobs''.}}
+            \alnote{mention that these layers are not cleanly separated: Pegasus is constraint to a single PJ system (Corral)}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -294,7 +402,13 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 
 PJ to survey (pilots can fall potentially in on or more categories):
 \begin{itemize}
-	\item Simple Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
+	\item First-Generation PJ-Systems / Master/Worker frameworks:
+	\begin{itemize}
+		\item AppLeS
+		\item Grid Harvesting Service
+		\item Boinc (@Home)
+	\end{itemize}
+	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
 		\item Condor-G/Glide-In
 		\item MyCluster (supports both Condor and SGE clusters)
@@ -303,6 +417,9 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
 		\item LGI
 		\item Wisdom
+		\item EDGeS
+		\item Trellis
+		\item Personal Cluster
 	\end{itemize}
 	\item Pilot-based Scheduling/Multi-Level Scheduling
 	\begin{itemize}
@@ -310,7 +427,8 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item CorralWMS
 		\item GWPilot??
 		\item Dirac?
-        \item PanDA  
+        \item ALIEN
+		\item PanDA  
 		\item AppLeS
 	\end{itemize}
 	\item Higher-Level Application Frameworks (with PJ capabilities):
@@ -325,19 +443,18 @@ PJ to survey (pilots can fall potentially in on or more categories):
 			\item Nimrod/G 
 			\item DIANE
 			\item Falkon 
-                         \item Work Q (\url{http://www3.nd.edu/~ccl/software/workqueue/})(note: this does not have PJ capability directly but builds into glide-in)
+            \item Work Q (\url{http://www3.nd.edu/~ccl/software/workqueue/})(note: this does not have PJ capability directly but builds into glide-in)
 		\end{itemize}
 		\item Data Analytics \& Visualization
 		\begin{itemize}
 			\item Bosco
 			\item iPython (SGE, PBS)
 			\item NetSolve~\cite{Casanova:1995:NNS:898848}
-		\end{itemize}
+		\end{itemize}		
 	\end{itemize}
 \end{itemize}
 
-\subsubsection{Core Pilot-Job Systems}
-\onote{what is a 'core' PJ system}
+\subsubsection{Basic Pilot-Job Systems}
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
 to the local condor pool and run their jobs on the added resource the same way
@@ -392,6 +509,16 @@ resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks
 onto these. Further, AppLeS provides different application templates,
 e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
+\jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
+  capabilities?} \alnote{The question is: when is a \pilot a \pilot? When the 
+  use the term \pilot and when \pilot-like? Apples has a component -- the 
+  Actuator (Quote from paper: "... handles task launching, polling, and 
+  cancellation ..."), which 
+  is quite similar to a \pilot. But maybe AppLeS is something for 
+  the history section or a separate category for Master/Worker frameworks... 
+  PJ evolved from the need to map master/worker style computations to 
+  heterogeneous, dynamic distributed grid environments. Added a pre-\pilot 
+  category to the history sub-section.}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -401,31 +528,80 @@ available to the pool. GlideinWMS is a multi-user \pilotjob system commonly
 deployed as a hosted service. In contrast to low-level \pilotjob systems,
 GlideinWMS attempts to hide rather than expose the \pilot capabilities from
 the user. GlideinWMS is currently deployed in production on OSG and is the
-recommended mode for accessing OSG resources. 
-Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend 
-which provides more explicit control over the placement and start of \pilots 
-to the end-user. Higher-level frameworks, such as Pegasus, can utilize Corral 
-to optimize the placements of \pilots with respect to their workload.
+recommended mode for accessing OSG resources.
+Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend which
+provides more explicit control over the placement and start of \pilots to the
+end-user. Higher-level frameworks, such as Pegasus, can utilize Corral to
+optimize the placements of \pilots with respect to their workload.
 
+Another workload management systems that is based on Condor-G/Glidein is
+PanDA~\cite{1742-6596-331-7-072069}. In contrast, a Condor-G only approach,
+PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
+internal queue.
 
 \subsubsection{Higher-Level Frameworks}
+
+Many higher-level tools and frameworks, such as workflow, visualization or
+data analytics systems, utilize \pilotjob systems to manage their
+computational workload. In general, two approaches exist: (i) the framework
+vertically integrates with a custom \pilotjob implementation or (ii) it
+re-uses a general purpose PJ system. In case (i), the PJ system is often
+re-factored to also serve a multi-purpose PJ system.
 
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \mtnote{MT/AZ}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
-\jhanote{I think the main framework + concepts from P* can be used
-  here? Any reason not to? What else can be used?}
 
 \begin{itemize}
-	\item Distinction between PJ implementation and abstractions;
-        \item lack of a unifying model for PJ abstractions;
+    \item Distinction between PJ implementation and abstractions;
+    \item lack of a unifying model for PJ abstractions;
 \end{itemize}
 
 \subsection{Different components of the Landscape}
 
+\begin{itemize}
+    \item Resource Types
+        \begin{itemize}
+            \item HTC Grids
+            \item HPC Grids
+            \item Virtualized Environments (Clouds)
+            \item Hybrids, Cloud-bursting, etc.
+        \end{itemize}
+
+    \item Organizational Structures
+        \begin{itemize}
+            \item Virtual Organizations
+            \item "The XSEDE Model"
+        \end{itemize}
+
+    \item Software and Services
+        \begin{itemize}
+            \item Single-site, local workload mgmt. systems (HPC schedulers)
+            \item Single-site endpoint serivces (e.g., GRAM, CREAM)
+            \item Multi-site workload mgmt. systems (meta-scheduler)
+            \item File transfer serivces
+            \item Metadata services
+        \end{itemize}
+
+    \item Access Mechanisms
+        \begin{itemize}
+            \item API 
+            \item CMD Line tools
+            \item Gateways (web)
+        \end{itemize}
+
+    \item Applications and Use-Cases
+        \begin{itemize}
+            \item X
+        \end{itemize}
+
+
+\end{itemize}
+
 \jhanote{Something akin to Matteo's diagram}
+
 
 \begin{itemize}
         \item PJ abstractions are not defined in a void;
@@ -438,7 +614,10 @@ to optimize the placements of \pilots with respect to their workload.
 
 \subsection{Common Terms and Definitions}
 
-\alnote{What to do with the term many-task computing}
+\alnote{What to do with the terms, such as many-task computing, meta 
+computing, grid computing, etc.? It might make sense to couple the evolution 
+of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
+in history section.}
 
 The terminology used to describe the implementations of pilot-job reviewed in
 section 2 varies depending not only on the type of implementation considered --
@@ -463,30 +642,23 @@ distributed, scheduled and executed by the user on one or more distributed
 infrastructure. \mtnote{shall we assume these definitions? I think so but I
 want to be sure.}
 
+\alnote{Can we start of with the P* elements so that we have something?}
 \begin{itemize}
 	\item application
 	\item workflow
-        \item pilot
-        \item pilot framework
-        \item agent, executor
+    \item pilot framework
 	\item manager
-        \item scheduler
+    \item pilot, agent, executor, butler process, placeholder
+    \item scheduler
 	\item job
-        \item workload
+    \item workload
 	\item ensemble
-    \item compute unit
+    \item \computeunit
 	\item platform
 \end{itemize}
 
-\section{Pilot-Job Systems Revisited}
-\aznote{Ashley's section}
-Despite the apparent diversity in existing Pilot-Jobs,
-they can be reduced to a set of common functionality and
-discussed as such.  This reduction has implications
-for the interoperability of existing and future Pilot-Jobs, and
-lends insight into application design to enhance job/data(?)
-mobility, management, and potential run-time responsiveness via
-late-binding/etc.
+\newpage
+
 \begin{table*}[t]
   \footnotesize{
  \up
@@ -528,6 +700,46 @@ late-binding/etc.
 }
 \end{table*}
 
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+\begin{footnotesize}
+\begin{tabular}{|p{3.0cm}|p{3.5cm}|p{2.3cm}|p{1.9cm}|p{3.7cm}|p{2.5cm}|}
+\hline {\bf BigJob}
+& {\bf Diane}
+& {\bf Condor/Glide-in}
+& {\bf Swift}
+& {\bf Bosco}
+& {\bf GWPilot}
+\\
+\hline
+
+Montage
+& Multiple sequential and parallel executables
+& Files
+& Dataflow (DAG)
+& Dynamic process creation, workflow execution, file transfer
+& test
+\\
+\hline
+
+\end{tabular}
+\end{footnotesize}
+\caption{\label{Tab:AppChars} }
+\end{center}
+\end{table}
+\end{landscape}
+
+\section{Pilot-Job Systems Revisited}
+\aznote{Ashley's section}
+Despite the apparent diversity in existing Pilot-Jobs,
+they can be reduced to a set of common functionality and
+discussed as such.  This reduction has implications
+for the interoperability of existing and future Pilot-Jobs, and
+lends insight into application design to enhance job/data(?)
+mobility, management, and potential run-time responsiveness via
+late-binding/etc.
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
@@ -720,7 +932,17 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %go with this, however, to avoid hitting the ``conclusion'' material in this section?
 %}
 
+
+
 \section{Conclusion and Discussion}
+
+\jhanote{Main message is: (i) \pilotjobs have potential, but it is not
+  being realized due to ad hoc nature of theory and practise, (ii) we
+  provide first comprehensive historical and technical analysis, (iii)
+  set the stage for a common conceptual model and implementation
+  framework, and (iv) provide insight and lessons for other tools and
+  higher-level frameworks, such as Workflow systems possibly}
+
 
 \subsection{The need for a common minimum model}
 
@@ -728,6 +950,13 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %which this paper is built, for completeness we briefly outline them
 %here.
 
+Our initial investigation~\cite{Luckow:2008la} into
+\pilot-Abstractions was motivated by the desire to provide a single
+conceptual framework --- referred to as the P* Model, that would be
+used to understand and reason the plethora and myriad \pilotjob
+implementations that exist.
+
+ 
 Once a common and uniform conceptual model was available, the notion
 of \pilotdata was conceived using the power of symmetry, i.e., the
 notion of \pilotdata was as fundamental to dynamic data placement and
@@ -768,26 +997,24 @@ prevent similar situation for \pilotjobs.
 
 
 
-\section{Related Work}
+%\mrnote{We have a survey of related \pilotjobs systems, a 'history'
+%of \pilotjobs, and a related work section? Not sure if we should
+%condense in some way. PS Why is this after conclusion?}
 
-\mrnote{We have a survey of related \pilotjobs systems, a 
-'history' of \pilotjobs, and a related work section? Not sure
-if we should condense in some way. PS Why is this after conclusion?}
-
-\subsection{Scientific Data Management}
-
+%\subsection{Scientific Data Management}
 
 
 \section*{Acknowledgements}
-This work is funded by NSF CHE-1125332 (Cyber-enabled Discovery and
-Innovation), NSF-ExTENCI (OCI-1007115) and ``Collaborative Research:
-Standards-Based Cyberinfrastructure for Hydrometeorologic Modeling:
-US-European Research Partnership'' (OCI-1235085) and Department of
-Energy Award (ASCR) DE-FG02-12ER26115.  This work has also been made
-possible thanks to computer resources provided by TeraGrid TRAC award
-TG-MCB090174 and BiG Grid.  This document was developed with support
-from the US NSF under Grant No. 0910812 to Indiana University for
-``FutureGrid: An Experimental, High-Performance Grid Test-bed''.
+\footnotesize{This work is funded by NSF CHE-1125332 (Cyber-enabled
+  Discovery and Innovation), NSF-ExTENCI (OCI-1007115) and
+  ``Collaborative Research: Standards-Based Cyberinfrastructure for
+  Hydrometeorologic Modeling: US-European Research Partnership''
+  (OCI-1235085) and Department of Energy Award (ASCR)
+  DE-FG02-12ER26115.  This work has also been made possible thanks to
+  computer resources provided by TeraGrid TRAC award TG-MCB090174 and
+  BiG Grid.  This document was developed with support from the US NSF
+  under Grant No. 0910812 to Indiana University for ``FutureGrid: An
+  Experimental, High-Performance Grid Test-bed''.}
 
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{abbrv}
