@@ -206,6 +206,7 @@ needs), these objectives remains difficult if not infeasible.
 
 
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
+\label{sec:survey}
 \onote{OLE's SECTION}\jhanote{Ole, several people are already working
   in this section. You need to coordinate with existing authors here}
 \onote{I'm not sure if I like how we split up between this section and
@@ -426,7 +427,8 @@ PJ to survey (pilots can fall potentially in on or more categories):
 	\begin{itemize}
 		\item GlideinWMS~\cite{1742-6596-119-6-062044}
 		\item CorralWMS
-		\item GWPilot??
+		\item GWPilot??~\cite{gridway} \aznote{Implemented as a GridWay
+                  plugin}
 		\item Dirac?
         \item ALIEN
 		\item PanDA  
@@ -551,6 +553,7 @@ re-factored to also serve a multi-purpose PJ system.
 
 
 \section{Understanding the Landscape: Developing a Vocabulary}
+\label{sec:vocab}
 \mtnote{MT/AZ}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
@@ -681,6 +684,9 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
  \caption{\textbf{Comparing PJ Systems} 
    Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
      Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
+   \aznote{Not sure of relevance of an ``all-encompassing table'' if we are
+     going to be focusing on ``landmark'' Pilot-Job systems...
+     put this on the back-burner for the time being..}
  \up
  } 
  \label{table:bigjob-saga-diane}
@@ -726,30 +732,85 @@ discussed as such.  This reduction has implications
 for the interoperability of existing and future Pilot-Jobs, and
 lends insight into application design to enhance job/data(?)
 mobility, management, and potential run-time responsiveness via
-late-binding/etc.
+late-binding/etc.  We will see that throughout the evolution
+of the Pilot-Job concept, several core concepts have remained stable
+while new additions enhance cross-platform interoperability,
+ease of usage and deployment, and add the ability to
+schedule data as well as jobs. \aznote{Check this
+sentence later to make sure it is not overreaching}
+
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
   different \pilotjobs}
-%\mrnote{I don't like calling it understanding pilot jobs. I think by
-%now in the paper one should understand}
-%\aznote{Here are some suggestions from me: ``Pilot-Jobs in context'',
-%``Understanding Pilot-Jobs via the P* Model'', ``Existing
-%Pilot-Jobs in light of the P* model'', ``Classifying and 
-%Comparing Pilot-Jobs''...  none of these are perfect I think, but I
-%think I like no.2 best}
-%\aznote{Revisit previous pilot-jobs using the vocabulary from the
-%previous section, pointing out the commonalities and overlap.}
 
-%\aznote{Example: Diane's RunMaster covers the role of the Pilot-Manager, and
-%the Pilot-Job is handled by Diane's worker agent.  This is similar to the 
-%BigJob and Swift-Coaster Pilot-Job implementations.  Condor-G may appear
-%different because of X, but in actuality...}
+In light of the common vocabulary discussion in 
+Section~\ref{sec:vocab}, a representative set of Pilot-Jobs
+has been chosen for further analysis.  
+
+\aznote{Two approaches here:  this is the first}
+Each Pilot-Job is from
+a respective categorization from Section~\ref{sec:survey}.
+Examining each of these Pilot-Jobs via a common vocabulary
+exposes their core similarities, and allows a detailed analysis
+of their differences. 
+
+\aznote{And the second potential approach}
+Representative Pilot-Jobs from each Pilot-Job category
+in Section~\ref{sec:survey} are chosen and compared within
+the bounds of that category, illustrating the core similarities
+between the Pilot-Jobs in a given category.
+
+\aznote{Either approach requires the best ``representative PJs''
+  to be chosen.  This is more important if we pick just one of
+  each, of course...}
+
+Finally, we perform
+a cross-cutting analysis, demonstrating that across the categorical
+distinctions all approaches remain true ``Pilot-Jobs'' with regard
+to their base functionality.  The segmentation between categories
+is exposed to reveal why Pilot-Jobs have evolved to have
+differing capabilities, with the end-goal being a
+complete understanding of the Pilot-Job ecosystem via a common
+vocabulary.
+
+\subsubsection{Condor-G}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+vocabulary presented in this paper}
+Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
+actually a complete Condor pool that is started using the Globus
+service of a resource. This mechanism is referred to as Condor
+Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
+using the standard Condor tools and APIs. Condor utilizes a
+master/worker coordination model. The PJ manager is referred to as the
+Condor Central Manager. The functionality of the Central Manager is
+provided by several daemons: the condor\_master that is generally
+responsible for managing all daemons on a machine, the
+condor\_collector which collects resource information, the
+condor\_negotiator that does the matchmaking and the condor\_schedd
+that is responsible for managing the binding and scheduling
+process. Condor generally does not differentiate between workload,
+i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
+referred to as job. However, it supports late binding, i.\,e.\
+resources a job is submitted to must generally not be available at
+submission time. The scheduler matches the capabilities required by a
+WU to the available resources. This process is referred to as
+matchmaking. Further, a priority-based scheduler is used. For
+communication between the identified elements Condor utilizes
+point-to-point messaging using a binary protocol on top of TCP.
+
+Different fault tolerance mechanisms, such as automatic retries, are
+supported.  Further, Condor supports different security mechanisms:
+for authentication it integrates both with local account management
+systems (such as Kerberos) as well as grid authentication systems such
+as GIS. Communication traffic can be encrypted.
+
 
 \subsubsection{DIANE}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
-P* vocabulary}
+vocabulary presented in this paper}
 % Coordination and Communication
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which
 was originally designed for implementing master/worker applications,
@@ -802,43 +863,10 @@ implemented. Further, DIANE supports fault tolerance: basic error detection and
 propagation mechanisms are in place. Further, an automatic re-execution of WUs
 is possible.
 
-%\upp
-\subsubsection{Condor-G}
-\aznote{Section copied and pasted from IPDPS paper for now -- plan
-to use this general sort of information + reword using our spiffy 
-P* vocabulary}
-Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
-actually a complete Condor pool that is started using the Globus
-service of a resource. This mechanism is referred to as Condor
-Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
-using the standard Condor tools and APIs. Condor utilizes a
-master/worker coordination model. The PJ manager is referred to as the
-Condor Central Manager. The functionality of the Central Manager is
-provided by several daemons: the condor\_master that is generally
-responsible for managing all daemons on a machine, the
-condor\_collector which collects resource information, the
-condor\_negotiator that does the matchmaking and the condor\_schedd
-that is responsible for managing the binding and scheduling
-process. Condor generally does not differentiate between workload,
-i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
-referred to as job. However, it supports late binding, i.\,e.\
-resources a job is submitted to must generally not be available at
-submission time. The scheduler matches the capabilities required by a
-WU to the available resources. This process is referred to as
-matchmaking. Further, a priority-based scheduler is used. For
-communication between the identified elements Condor utilizes
-point-to-point messaging using a binary protocol on top of TCP.
-
-Different fault tolerance mechanisms, such as automatic retries, are
-supported.  Further, Condor supports different security mechanisms:
-for authentication it integrates both with local account management
-systems (such as Kerberos) as well as grid authentication systems such
-as GIS. Communication traffic can be encrypted.
-
 \subsubsection{Swift}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
-P* vocabulary}
+vocabulary presented in this paper}
 Swift~\cite{Wilde2011} is a scripting language designed for expressing
 abstract workflows and computations. The language provides, amongst many other
 things, capabilities for executing external applications, as well as the
@@ -874,10 +902,11 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 % query the dispatcher for new SUs. Web services are used for communication.
 
 \subsubsection{GWPilot}
+\aznote{Considering the new direction of the paper, I am not sure whether GW}
+GWPilot \cite{gwpilot}.
 %\begin{lstlisting}[breaklines]
-\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
-\\
-\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
+%\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
+%\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
 \begin{itemize}
 \item Integrates with GridWay metascheduler
 \item Pilots advertise to GridWay, GridWay scheduler schedules pilots
@@ -890,7 +919,12 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %\end{lstlisting}
 
 \subsubsection{Bosco}
-\url{http://iopscience.iop.org/1742-6596/396/3/032116/pdf/1742-6596_396_3_032116.pdf}
+\aznote{Given the modified direction we are taking the paper (``landmark''
+pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
+the inclusion of Bosco in this section as Bosco appears
+to be mostly making strides with regards to user-accessibility
+of pilots.}
+\cite{bosco}
 \\
 \begin{itemize}
 \item Condor used as batch system/user interface
