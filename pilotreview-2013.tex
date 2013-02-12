@@ -88,7 +88,16 @@
   functional attribute of \pilotjobs that is generally agreed upon is
   they are tools/services that support multi-level and/or
   application-level scheduling by providing a scheduling overlay the
-  system-provided scheduler. Nearly everything else is either specific
+  system-provided scheduler.
+  \aznote{Not sure it is good to open our abstract stating the confusion/uncertainity
+    inherent in defining Pilot-Jobs...  perhaps first state our motivation for this
+    work (``aim(ing) to provide appropriate context, insight, and analysis of
+    a \pilotjobs, and thereby bring about a hitherto missing consilience...'')
+    and then state that it's somewhat controversial?  I see where it could
+    be eye-catching to outright state that there IS controversy/uncertainity
+    though, and that we are aiming to quash it.  Making this note to
+    try and figure this out :)}
+  Nearly everything else is either specific
   to an implementation, open to interpretation or not agreed upon. For
   example, are \pilotjobs part of the application space, or part of
   the services provided by an infrastructure? We will see that
@@ -100,7 +109,9 @@
   bring about a hitherto missing consilience in the community's
   appreciation of \pilotjobs.  Specifically this paper aims to provide
   a comprehensive survey of \pilotjobs, or more generically of
-  \pilotjob like capabilities. A primary motivation for this work
+  \pilotjob like capabilities.
+  \aznote{Is a ``comprehensive survey'' still true given last week's discussion of focusing on ``landmark'' pilotjobs?}
+  A primary motivation for this work
   stems from our experience when looking for an interoperable,
   extensible and general-purpose \pilotjobs; in the process, we
   realized that such a capability did not exist. The situation was
@@ -902,8 +913,9 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 % query the dispatcher for new SUs. Web services are used for communication.
 
 \subsubsection{GWPilot}
-\aznote{Considering the new direction of the paper, I am not sure whether GW}
-GWPilot \cite{gwpilot}.
+\aznote{Considering the new direction of the paper, I am not sure whether
+GWPilot~\cite{gwpilot} requires its own section for analysis...}
+
 %\begin{lstlisting}[breaklines]
 %\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
 %\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
@@ -921,10 +933,9 @@ GWPilot \cite{gwpilot}.
 \subsubsection{Bosco}
 \aznote{Given the modified direction we are taking the paper (``landmark''
 pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
-the inclusion of Bosco in this section as Bosco appears
+the inclusion of Bosco~\cite{bosco} in this section as Bosco appears
 to be mostly making strides with regards to user-accessibility
 of pilots.}
-\cite{bosco}
 \\
 \begin{itemize}
 \item Condor used as batch system/user interface
