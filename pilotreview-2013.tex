@@ -87,27 +87,38 @@
   There is no agreed upon definition of \pilotjobs; however a
   functional attribute of \pilotjobs that is generally agreed upon is
   they are tools/services that support multi-level and/or
-  application-level scheduling by providing a scheduling overlay on top of the
-  system-provided schedulers. Nearly everything else is either specific
+  application-level scheduling by providing a scheduling overlay the
+  system-provided scheduler.
+  \aznote{Not sure it is good to open our abstract stating the confusion/uncertainity
+    inherent in defining Pilot-Jobs...  perhaps first state our motivation for this
+    work (``aim(ing) to provide appropriate context, insight, and analysis of
+    a \pilotjobs, and thereby bring about a hitherto missing consilience...'')
+    and then state that it's somewhat controversial?  I see where it could
+    be eye-catching to outright state that there IS controversy/uncertainity
+    though, and that we are aiming to quash it.  Making this note to
+    try and figure this out :)}
+  Nearly everything else is either specific
   to an implementation, open to interpretation or not agreed upon. For
   example, are \pilotjobs part of the application space, or part of
   the services provided by an infrastructure? We will see that
   close-formed answers to questions such as whether \pilotjobs are
   system-level or application-level capabilities are likely to be
-  elusive. Hence, this paper does not make an attempt to provide
+  elusive and neither does this paper attempt to provide such
   close-formed answers, but aims to provide appropriate context,
   insight and analysis of a large number of \pilotjobs, and thereby
   bring about a hitherto missing consilience in the community's
   appreciation of \pilotjobs.  Specifically this paper aims to provide
   a comprehensive survey of \pilotjobs, or more generically of
-  \pilotjob like capabilities. A primary motivation for this work
+  \pilotjob like capabilities.
+  \aznote{Is a ``comprehensive survey'' still true given last week's discussion of focusing on ``landmark'' pilotjobs?}
+  A primary motivation for this work
   stems from our experience when looking for an interoperable,
   extensible and general-purpose \pilotjobs; in the process, we
   realized that such a capability did not exist. The situation was
   however even more unsatisfactory: in fact there was no agreed upon
   definition or conceptual framework of \pilotjobs.  To substantiate
   these points of view, we begin by sampling (as opposed to a
-  comprehensive survey)~\onote{a few lines above we say that we're doing a comprehensive survey!} some existing \pilotjobs and the different
+  comprehensive survey) some existing \pilotjobs and the different
   aspects of these \pilotjobs, such as the applications scenarios that
   they have been used and how they have been used. The limited but
   sufficient sampling highlights the variation, and also provides both
@@ -206,6 +217,7 @@ needs), these objectives remains difficult if not infeasible.
 
 
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
+\label{sec:survey}
 \onote{OLE's SECTION}\jhanote{Ole, several people are already working
   in this section. You need to coordinate with existing authors here}
 \onote{I'm not sure if I like how we split up between this section and
@@ -425,7 +437,8 @@ PJ to survey (pilots can fall potentially in on or more categories):
 	\begin{itemize}
 		\item GlideinWMS~\cite{1742-6596-119-6-062044}
 		\item CorralWMS
-		\item GWPilot??
+		\item GWPilot??~\cite{gridway} \aznote{Implemented as a GridWay
+                  plugin}
 		\item Dirac?
         \item ALIEN
 		\item PanDA  
@@ -550,112 +563,99 @@ re-factored to also serve a multi-purpose PJ system.
 
 
 \section{Understanding the Landscape: Developing a Vocabulary}
+\label{sec:vocab}
 \mtnote{MT/AZ}
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
 
-\begin{itemize}
-    \item Distinction between PJ implementation and abstractions;
-    \item lack of a unifying model for PJ abstractions;
-\end{itemize}
+\mtnote{why we need a common vocabulary what we do with it.} \\
+The nature of the vocabulary used to describe different implementations of  \pilotjobs is heterogeneous. In order to compare and analyze these implementations, a common vocabulary must be defined so that consistent terminology can be used for all the concepts involved. Particularly important is for such a common vocabulary to clarify when a specific concept is named differently by each implementation or when, on the contrary, the same term is used to described different concepts. 
+
+\mtnote{How we define the common vocabulary.} \\
+Initially, the concepts used by the implementations of \pilotjob sampled in \S2 are isolated. Moving from the general to the particular, both common and distinctive concepts are first described and then explicitly defined. Each concept so defined is then related to the given \pilotjob implementations. As expected, a kernel of general concepts is shared across all the implementations while less general concepts are specific to one implementation or another. This is a confirmation that each sampled implementation should be considered as a particular case of \pilotjob but also that their differences justify a comparative analysis.
+
+%\begin{itemize}
+%    \item Distinction between PJ implementation and abstractions;
+%    \item lack of a unifying model for PJ abstractions;
+%\end{itemize}
 
 \subsection{Different components of the Landscape}
 
-\begin{itemize}
-    \item Resource Types
-        \begin{itemize}
-            \item HTC Grids
-            \item HPC Grids
-            \item Virtualized Environments (Clouds)
-            \item Hybrids, Cloud-bursting, etc.
-        \end{itemize}
-
-    \item Organizational Structures
-        \begin{itemize}
-            \item Virtual Organizations
-            \item "The XSEDE Model"
-        \end{itemize}
-
-    \item Software and Services
-        \begin{itemize}
-            \item Single-site, local workload mgmt. systems (HPC schedulers)
-            \item Single-site endpoint serivces (e.g., GRAM, CREAM)
-            \item Multi-site workload mgmt. systems (meta-scheduler)
-            \item File transfer serivces
-            \item Metadata services
-        \end{itemize}
-
-    \item Access Mechanisms
-        \begin{itemize}
-            \item API 
-            \item CMD Line tools
-            \item Gateways (web)
-        \end{itemize}
-
-    \item Applications and Use-Cases
-        \begin{itemize}
-            \item X
-        \end{itemize}
-
-
-\end{itemize}
-
 \jhanote{Something akin to Matteo's diagram}
-
-
-\begin{itemize}
-        \item PJ abstractions are not defined in a void;
-	\item use cases, scientific practice and distributed applications;
-        \item heterogeneous DIs: grid, cloud and hybrids;
-	\item jobs and services;
-        \item LoAs implied by the PJ abstractions;
-	\item diagram.
-\end{itemize}
-
-\subsection{Common Terms and Definitions}
-
-\alnote{What to do with the terms, such as many-task computing, meta 
-computing, grid computing, etc.? It might make sense to couple the evolution 
-of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
-in history section.}
-
-The terminology used to describe the implementations of pilot-job reviewed in
-section 2 varies depending not only on the type of implementation considered --
-simple/core, pilot-based scheduling and higher-level application framework --
-but also on the application domain where they are deployed and leveraged.
-Nonetheless, some common concepts can be identified so that a common vocabulary
-can be developed. The goal is to leverage such a vocabulary to ...
-\mtnote{what exactly do we want to achieve with Section 4?}.
-
-'Late-binding' is one of the concepts that persist unchanged across all the
-pilot-job implementations. 
-\begin{itemize}
-        \item Late-binding: 
-\end{itemize}
-
-The very same nature of pilot-job is that of enabling a late-binding of
-resources to jobs. This is what allows for a pilot-job to offer 'load
-balancing', 'scheduling' and to some extent 'domain distribution'. Late-binding
-is also directly related to the possibility for a pilot-job system to fulfil
-the qualitative requirements related to the efficiency with which jobs are
-distributed, scheduled and executed by the user on one or more distributed
-infrastructure. \mtnote{shall we assume these definitions? I think so but I
-want to be sure.}
 
 \alnote{Can we start of with the P* elements so that we have something?}
 \begin{itemize}
 	\item application
 	\item workflow
-    \item pilot framework
+	\item pilot framework
 	\item manager
-    \item pilot, agent, executor, butler process, placeholder
-    \item scheduler
+	\item pilot, agent, executor, butler process, placeholder
+	\item scheduler
 	\item job
-    \item workload
+	\item workload
 	\item ensemble
-    \item \computeunit
+	\item \computeunit
 	\item platform
 \end{itemize}
+
+\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
+\begin{itemize}
+	\item Common concepts
+		\begin{itemize}
+			\item Placeholder
+			\item $\langle$Late binding/placement$\rangle$
+			\item $\langle$Master/worker$\rangle$
+			\item Workload
+			\item Job
+			\item \computeunit
+		\end{itemize}
+	\item Distinctive concepts
+		\begin{itemize}
+			\item $\langle$High-level framework$\rangle$
+			\item Workflow
+			\item Scheduler
+			\item Ensemble?
+		\end{itemize}
+\end{itemize}
+
+%\begin{itemize}
+%        \item PJ abstractions are not defined in a void;
+%	\item use cases, scientific practice and distributed applications;
+%        \item heterogeneous DIs: grid, cloud and hybrids;
+%	\item jobs and services;
+%        \item LoAs implied by the PJ abstractions;
+%	\item diagram.
+%\end{itemize}
+%
+%\subsection{Common Terms and Definitions}
+%
+%\alnote{What to do with the terms, such as many-task computing, meta 
+%computing, grid computing, etc.? It might make sense to couple the evolution 
+%of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
+%in history section.}
+%
+%The terminology used to describe the implementations of pilot-job reviewed in
+%section 2 varies depending not only on the type of implementation considered --
+%simple/core, pilot-based scheduling and higher-level application framework --
+%but also on the application domain where they are deployed and leveraged.
+%Nonetheless, some common concepts can be identified so that a common vocabulary
+%can be developed. The goal is to leverage such a vocabulary to ...
+%\mtnote{what exactly do we want to achieve with Section 4?}.
+%
+%'Late-binding' is one of the concepts that persist unchanged across all the
+%pilot-job implementations. 
+%\begin{itemize}
+%        \item Late-binding: 
+%\end{itemize}
+%
+%The very same nature of pilot-job is that of enabling a late-binding of
+%resources to jobs. This is what allows for a pilot-job to offer 'load
+%balancing', 'scheduling' and to some extent 'domain distribution'. Late-binding
+%is also directly related to the possibility for a pilot-job system to fulfil
+%the qualitative requirements related to the efficiency with which jobs are
+%distributed, scheduled and executed by the user on one or more distributed
+%infrastructure. \mtnote{shall we assume these definitions? I think so but I
+%want to be sure.}
 
 \newpage
 
@@ -694,6 +694,9 @@ want to be sure.}
  \caption{\textbf{Comparing PJ Systems} 
    Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
      Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
+   \aznote{Not sure of relevance of an ``all-encompassing table'' if we are
+     going to be focusing on ``landmark'' Pilot-Job systems...
+     put this on the back-burner for the time being..}
  \up
  } 
  \label{table:bigjob-saga-diane}
@@ -739,30 +742,85 @@ discussed as such.  This reduction has implications
 for the interoperability of existing and future Pilot-Jobs, and
 lends insight into application design to enhance job/data(?)
 mobility, management, and potential run-time responsiveness via
-late-binding/etc.
+late-binding/etc.  We will see that throughout the evolution
+of the Pilot-Job concept, several core concepts have remained stable
+while new additions enhance cross-platform interoperability,
+ease of usage and deployment, and add the ability to
+schedule data as well as jobs. \aznote{Check this
+sentence later to make sure it is not overreaching}
+
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
 \jhanote{Having developed the vocabulary let us now talk about the
   different \pilotjobs}
-%\mrnote{I don't like calling it understanding pilot jobs. I think by
-%now in the paper one should understand}
-%\aznote{Here are some suggestions from me: ``Pilot-Jobs in context'',
-%``Understanding Pilot-Jobs via the P* Model'', ``Existing
-%Pilot-Jobs in light of the P* model'', ``Classifying and 
-%Comparing Pilot-Jobs''...  none of these are perfect I think, but I
-%think I like no.2 best}
-%\aznote{Revisit previous pilot-jobs using the vocabulary from the
-%previous section, pointing out the commonalities and overlap.}
 
-%\aznote{Example: Diane's RunMaster covers the role of the Pilot-Manager, and
-%the Pilot-Job is handled by Diane's worker agent.  This is similar to the 
-%BigJob and Swift-Coaster Pilot-Job implementations.  Condor-G may appear
-%different because of X, but in actuality...}
+In light of the common vocabulary discussion in 
+Section~\ref{sec:vocab}, a representative set of Pilot-Jobs
+has been chosen for further analysis.  
+
+\aznote{Two approaches here:  this is the first}
+Each Pilot-Job is from
+a respective categorization from Section~\ref{sec:survey}.
+Examining each of these Pilot-Jobs via a common vocabulary
+exposes their core similarities, and allows a detailed analysis
+of their differences. 
+
+\aznote{And the second potential approach}
+Representative Pilot-Jobs from each Pilot-Job category
+in Section~\ref{sec:survey} are chosen and compared within
+the bounds of that category, illustrating the core similarities
+between the Pilot-Jobs in a given category.
+
+\aznote{Either approach requires the best ``representative PJs''
+  to be chosen.  This is more important if we pick just one of
+  each, of course...}
+
+Finally, we perform
+a cross-cutting analysis, demonstrating that across the categorical
+distinctions all approaches remain true ``Pilot-Jobs'' with regard
+to their base functionality.  The segmentation between categories
+is exposed to reveal why Pilot-Jobs have evolved to have
+differing capabilities, with the end-goal being a
+complete understanding of the Pilot-Job ecosystem via a common
+vocabulary.
+
+\subsubsection{Condor-G}
+\aznote{Section copied and pasted from IPDPS paper for now -- plan
+to use this general sort of information + reword using our spiffy 
+vocabulary presented in this paper}
+Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
+actually a complete Condor pool that is started using the Globus
+service of a resource. This mechanism is referred to as Condor
+Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
+using the standard Condor tools and APIs. Condor utilizes a
+master/worker coordination model. The PJ manager is referred to as the
+Condor Central Manager. The functionality of the Central Manager is
+provided by several daemons: the condor\_master that is generally
+responsible for managing all daemons on a machine, the
+condor\_collector which collects resource information, the
+condor\_negotiator that does the matchmaking and the condor\_schedd
+that is responsible for managing the binding and scheduling
+process. Condor generally does not differentiate between workload,
+i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
+referred to as job. However, it supports late binding, i.\,e.\
+resources a job is submitted to must generally not be available at
+submission time. The scheduler matches the capabilities required by a
+WU to the available resources. This process is referred to as
+matchmaking. Further, a priority-based scheduler is used. For
+communication between the identified elements Condor utilizes
+point-to-point messaging using a binary protocol on top of TCP.
+
+Different fault tolerance mechanisms, such as automatic retries, are
+supported.  Further, Condor supports different security mechanisms:
+for authentication it integrates both with local account management
+systems (such as Kerberos) as well as grid authentication systems such
+as GIS. Communication traffic can be encrypted.
+
 
 \subsubsection{DIANE}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
-P* vocabulary}
+vocabulary presented in this paper}
 % Coordination and Communication
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which
 was originally designed for implementing master/worker applications,
@@ -815,43 +873,10 @@ implemented. Further, DIANE supports fault tolerance: basic error detection and
 propagation mechanisms are in place. Further, an automatic re-execution of WUs
 is possible.
 
-%\upp
-\subsubsection{Condor-G}
-\aznote{Section copied and pasted from IPDPS paper for now -- plan
-to use this general sort of information + reword using our spiffy 
-P* vocabulary}
-Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
-actually a complete Condor pool that is started using the Globus
-service of a resource. This mechanism is referred to as Condor
-Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
-using the standard Condor tools and APIs. Condor utilizes a
-master/worker coordination model. The PJ manager is referred to as the
-Condor Central Manager. The functionality of the Central Manager is
-provided by several daemons: the condor\_master that is generally
-responsible for managing all daemons on a machine, the
-condor\_collector which collects resource information, the
-condor\_negotiator that does the matchmaking and the condor\_schedd
-that is responsible for managing the binding and scheduling
-process. Condor generally does not differentiate between workload,
-i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
-referred to as job. However, it supports late binding, i.\,e.\
-resources a job is submitted to must generally not be available at
-submission time. The scheduler matches the capabilities required by a
-WU to the available resources. This process is referred to as
-matchmaking. Further, a priority-based scheduler is used. For
-communication between the identified elements Condor utilizes
-point-to-point messaging using a binary protocol on top of TCP.
-
-Different fault tolerance mechanisms, such as automatic retries, are
-supported.  Further, Condor supports different security mechanisms:
-for authentication it integrates both with local account management
-systems (such as Kerberos) as well as grid authentication systems such
-as GIS. Communication traffic can be encrypted.
-
 \subsubsection{Swift}
 \aznote{Section copied and pasted from IPDPS paper for now -- plan
 to use this general sort of information + reword using our spiffy 
-P* vocabulary}
+vocabulary presented in this paper}
 Swift~\cite{Wilde2011} is a scripting language designed for expressing
 abstract workflows and computations. The language provides, amongst many other
 things, capabilities for executing external applications, as well as the
@@ -887,10 +912,12 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 % query the dispatcher for new SUs. Web services are used for communication.
 
 \subsubsection{GWPilot}
+\aznote{Considering the new direction of the paper, I am not sure whether
+GWPilot~\cite{gwpilot} requires its own section for analysis...}
+
 %\begin{lstlisting}[breaklines]
-\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
-\\
-\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
+%\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
+%\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
 \begin{itemize}
 \item Integrates with GridWay metascheduler
 \item Pilots advertise to GridWay, GridWay scheduler schedules pilots
@@ -903,7 +930,11 @@ Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 %\end{lstlisting}
 
 \subsubsection{Bosco}
-\url{http://iopscience.iop.org/1742-6596/396/3/032116/pdf/1742-6596_396_3_032116.pdf}
+\aznote{Given the modified direction we are taking the paper (``landmark''
+pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
+the inclusion of Bosco~\cite{bosco} in this section as Bosco appears
+to be mostly making strides with regards to user-accessibility
+of pilots.}
 \\
 \begin{itemize}
 \item Condor used as batch system/user interface
