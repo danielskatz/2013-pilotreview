@@ -628,41 +628,6 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 
 \jhanote{Something akin to Matteo's diagram}
 
-\alnote{Can we start of with the P* elements so that we have something?}
-\begin{itemize}
-	\item application
-	\item workflow
-	\item pilot framework
-	\item manager
-	\item pilot, agent, executor, butler process, placeholder
-	\item scheduler
-	\item job
-	\item workload
-	\item ensemble
-	\item \computeunit
-	\item platform
-\end{itemize}
-
-\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
-\begin{itemize}
-	\item Common concepts
-		\begin{itemize}
-			\item Placeholder
-			\item $\langle$Late binding/placement$\rangle$
-			\item $\langle$Master/worker$\rangle$
-			\item Workload
-			\item Job
-			\item \computeunit
-		\end{itemize}
-	\item Distinctive concepts
-		\begin{itemize}
-			\item $\langle$High-level framework$\rangle$
-			\item Workflow
-			\item Scheduler
-			\item Ensemble?
-		\end{itemize}
-\end{itemize}
-
 %\begin{itemize}
 %        \item PJ abstractions are not defined in a void;
 %	\item use cases, scientific practice and distributed applications;
@@ -672,13 +637,48 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 %	\item diagram.
 %\end{itemize}
 %
-%\subsection{Common Terms and Definitions}
+\subsection{Common Terms and Definitions}
 %
-%\alnote{What to do with the terms, such as many-task computing, meta 
-%computing, grid computing, etc.? It might make sense to couple the evolution 
-%of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
-%in history section.}
-%
+\alnote{What to do with the terms, such as many-task computing, meta 
+computing, grid computing, etc.? It might make sense to couple the evolution 
+of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
+in history section.}
+
+\alnote{Can we start of with the P* elements so that we have something?}
+\begin{itemize}
+    \item application
+    \item workflow
+    \item pilot framework
+    \item manager
+    \item pilot, agent, executor, butler process, placeholder
+    \item scheduler
+    \item job
+    \item workload
+    \item ensemble
+    \item \computeunit
+    \item platform
+\end{itemize}
+
+\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
+\begin{itemize}
+    \item Common concepts
+        \begin{itemize}
+             \item Placeholder
+             \item $\langle$Late binding/placement$\rangle$
+             \item $\langle$Master/worker$\rangle$
+             \item Workload
+             \item Job
+             \item \computeunit
+        \end{itemize}
+    \item Distinctive concepts
+        \begin{itemize}
+             \item $\langle$High-level framework$\rangle$
+             \item Workflow
+             \item Scheduler
+             \item Ensemble?
+        \end{itemize}
+\end{itemize}
+
 %The terminology used to describe the implementations of pilot-job reviewed in
 %section 2 varies depending not only on the type of implementation considered --
 %simple/core, pilot-based scheduling and higher-level application framework --
@@ -686,7 +686,7 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 %Nonetheless, some common concepts can be identified so that a common vocabulary
 %can be developed. The goal is to leverage such a vocabulary to ...
 %\mtnote{what exactly do we want to achieve with Section 4?}.
-%
+
 %'Late-binding' is one of the concepts that persist unchanged across all the
 %pilot-job implementations. 
 %\begin{itemize}
