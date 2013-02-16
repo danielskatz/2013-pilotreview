@@ -86,9 +86,9 @@
 \begin{abstract} 
   There is no agreed upon definition of \pilotjobs; however a
   functional attribute of \pilotjobs that is generally agreed upon is
-  they are tools/services that support multi-level and/or
-  application-level scheduling by providing a scheduling overlay the
-  system-provided scheduler.
+  they are tools/services that support multi-level and/or application-level 
+  scheduling by providing a scheduling overlay on top of the system-provided 
+  schedulers.
   \aznote{Not sure it is good to open our abstract stating the confusion/uncertainity
     inherent in defining Pilot-Jobs...  perhaps first state our motivation for this
     work (``aim(ing) to provide appropriate context, insight, and analysis of
@@ -103,7 +103,7 @@
   the services provided by an infrastructure? We will see that
   close-formed answers to questions such as whether \pilotjobs are
   system-level or application-level capabilities are likely to be
-  elusive and neither does this paper attempt to provide such
+  elusive. Hence, this paper does not make an attempt to provide
   close-formed answers, but aims to provide appropriate context,
   insight and analysis of a large number of \pilotjobs, and thereby
   bring about a hitherto missing consilience in the community's
@@ -118,7 +118,7 @@
   however even more unsatisfactory: in fact there was no agreed upon
   definition or conceptual framework of \pilotjobs.  To substantiate
   these points of view, we begin by sampling (as opposed to a
-  comprehensive survey) some existing \pilotjobs and the different
+  comprehensive survey) ~\onote{a few lines above we say that we're doing a comprehensive survey!} some existing \pilotjobs and the different
   aspects of these \pilotjobs, such as the applications scenarios that
   they have been used and how they have been used. The limited but
   sufficient sampling highlights the variation, and also provides both
@@ -583,42 +583,51 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 
 \subsection{Different components of the Landscape}
 
+\begin{itemize}
+
+    \item Resource Types
+
+        \begin{itemize}
+            \item HTC Grids
+            \item HPC Grids
+            \item Virtualized Environments (Clouds)
+            \item Hybrids, Cloud-bursting, etc.
+        \end{itemize}
+
+    \item Organizational Structures
+
+        \begin{itemize}
+            \item Virtual Organizations
+            \item "The XSEDE Model"
+        \end{itemize}
+
+    \item Software and Services
+
+        \begin{itemize}
+            \item Single-site, local workload mgmt. systems (HPC schedulers)
+            \item Single-site endpoint serivces (e.g., GRAM, CREAM)
+            \item Multi-site workload mgmt. systems (meta-scheduler)
+            \item File transfer serivces
+            \item Metadata services
+        \end{itemize}
+
+    \item Access Mechanisms
+
+        \begin{itemize}
+    	    \item API 
+            \item CMD Line tools
+            \item Gateways (web)
+        \end{itemize}
+
+    \item Applications and Use-Cases
+
+        \begin{itemize}
+            \item X
+        \end{itemize}
+
+\end{itemize}
+
 \jhanote{Something akin to Matteo's diagram}
-
-\alnote{Can we start of with the P* elements so that we have something?}
-\begin{itemize}
-	\item application
-	\item workflow
-	\item pilot framework
-	\item manager
-	\item pilot, agent, executor, butler process, placeholder
-	\item scheduler
-	\item job
-	\item workload
-	\item ensemble
-	\item \computeunit
-	\item platform
-\end{itemize}
-
-\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
-\begin{itemize}
-	\item Common concepts
-		\begin{itemize}
-			\item Placeholder
-			\item $\langle$Late binding/placement$\rangle$
-			\item $\langle$Master/worker$\rangle$
-			\item Workload
-			\item Job
-			\item \computeunit
-		\end{itemize}
-	\item Distinctive concepts
-		\begin{itemize}
-			\item $\langle$High-level framework$\rangle$
-			\item Workflow
-			\item Scheduler
-			\item Ensemble?
-		\end{itemize}
-\end{itemize}
 
 %\begin{itemize}
 %        \item PJ abstractions are not defined in a void;
@@ -629,13 +638,48 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 %	\item diagram.
 %\end{itemize}
 %
-%\subsection{Common Terms and Definitions}
+\subsection{Common Terms and Definitions}
 %
-%\alnote{What to do with the terms, such as many-task computing, meta 
-%computing, grid computing, etc.? It might make sense to couple the evolution 
-%of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
-%in history section.}
-%
+\alnote{What to do with the terms, such as many-task computing, meta 
+computing, grid computing, etc.? It might make sense to couple the evolution 
+of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
+in history section.}
+
+\alnote{Can we start of with the P* elements so that we have something?}
+\begin{itemize}
+    \item application
+    \item workflow
+    \item pilot framework
+    \item manager
+    \item pilot, agent, executor, butler process, placeholder
+    \item scheduler
+    \item job
+    \item workload
+    \item ensemble
+    \item \computeunit
+    \item platform
+\end{itemize}
+
+\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
+\begin{itemize}
+    \item Common concepts
+        \begin{itemize}
+             \item Placeholder
+             \item $\langle$Late binding/placement$\rangle$
+             \item $\langle$Master/worker$\rangle$
+             \item Workload
+             \item Job
+             \item \computeunit
+        \end{itemize}
+    \item Distinctive concepts
+        \begin{itemize}
+             \item $\langle$High-level framework$\rangle$
+             \item Workflow
+             \item Scheduler
+             \item Ensemble?
+        \end{itemize}
+\end{itemize}
+
 %The terminology used to describe the implementations of pilot-job reviewed in
 %section 2 varies depending not only on the type of implementation considered --
 %simple/core, pilot-based scheduling and higher-level application framework --
@@ -643,7 +687,7 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 %Nonetheless, some common concepts can be identified so that a common vocabulary
 %can be developed. The goal is to leverage such a vocabulary to ...
 %\mtnote{what exactly do we want to achieve with Section 4?}.
-%
+
 %'Late-binding' is one of the concepts that persist unchanged across all the
 %pilot-job implementations. 
 %\begin{itemize}
