@@ -280,10 +280,11 @@ modularity and/or coupling to environment.
   first-generation \pilotjobs, second-generation \pilotjobs sound?}
 
 \pilotjob-System Evolution:
+
+We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker schemes through advanced workload management systems.
+
 \begin{itemize}
-    \item Pre-\pilotjob Systems: Master/Worker systems (e.\,g.\ AppLeS) that 
-    support dynamic scheduling in heterogeneous, dynamic grid environments 
-    mostly via directly interaction with the respective resource.
+    \item Pre-\pilotjob Systems:
 
 As the uptake of grids grew, the need for job submission management
 via batch queuing systems and middleware access also grew. Many
@@ -329,39 +330,44 @@ The idea of a placeholder scheduling proved to be an efficient model for waiting
 and application-level scheduling compare to the invention of traditional local 
 batch queuing system (that were also invented to make resource sharing and 
 utilization efficient)}
-Methodologies for distributed resource management:
-\begin{itemize}
-    \item local resource manager (batch queueing):
-    \begin{itemize}
-        \item centralized: Torque
-        \item decentralized (w/ fewer central components): Condor
-    \end{itemize} 
-    \item meta scheduling
-    \item advance reservations
-    \item class ads
-    \item \pilots
-\end{itemize}
+\mrnote{Would like to discuss this and develop for next week}
+%Methodologies for distributed resource management:
+%\begin{itemize}
+%    \item local resource manager (batch queueing):
+%    \begin{itemize}
+%        \item centralized: Torque
+%        \item decentralized (w/ fewer central components): Condor
+%    \end{itemize} 
+%    \item meta scheduling
+%    \item advance reservations
+%    \item class ads
+%    \item \pilots
+%\end{itemize}
 
 \subsection{What have Pilot-Jobs been used For?}
 \mrnote{Melissa's Section}
 \jhanote{This should provide a functional approach to pilot-jobs. Will
   make the job of explaining easier.}
 
-How are and were Pilot-Jobs used?
+This section explains how \pilotjobs have historically been used, in no particular order.
 
-Pilot jobs are most commonly used for the execution of many tasks through the use of a container job. Pilot jobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, pilot-jobs are used to acheive high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. Pilot jobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
+\pilotjobs are most commonly used for the execution of many tasks through the use of a container job. \pilotjobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, \pilotjobs are used to acheive high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. \pilotjobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
 
-Some simulations require varying number of tasks to complete -- that is, 10 tasks may start a program but the results of these tasks may spawn more tasks to complete. Pilot-jobs can be utilized for these types of dynamic simulations, because once they are active, the agents have an available slot for executing tasks on a given number of cores. As more tasks are added to the system, the Pilot can continue to execute new tasks until the job is considered complete. %Find a citation for this dynamic type of simulation
+Multi-scale simulations have also benefited from the use of \pilotjobs. A \pilotjob load balancing algorithm was proposed for coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which more processors were assigned to jobs with longer runtimes, so as to make the simulation take the same amount of wall-clock time between points when they need to communicate with one another (via MPI).
+% Efficient Runtime Environment for Coupled Multi-Physics Simulations: Dynamic Resource Allocation and Load-Balancing
 
+Some simulations require varying number of tasks to complete -- that is, 10 tasks may start a program but the results of these tasks may spawn more tasks to complete. \pilotjobs can be utilized for these types of dynamic simulations, because once they are active, the agents have an available slot for executing tasks on a given number of cores. As more tasks are added to the system, the \pilot can continue to execute new tasks until the job is considered complete. %Find a citation for this dynamic type of simulation
 
+\pilotjobs have also been used to avoid queue wait times for many jobs as well as harness and utilize different resources (with different batch queueing systems) to do \textit{scale-across} simulations. 
 
-For:
-\begin{itemize}
-\item High-Throughput Simulations
-\item Dynamic Simulations
-\item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
-\item Other - To Be Identified
-\end{itemize}
+%For:
+%\begin{itemize}
+%\item High-Throughput Simulations
+%\item Dynamic Simulations
+%\item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
+%\item Avoiding Queue wait times for many jobs
+%\item Harness and utilize different resources (with different batch queuing systems) to do runs across all of them
+%\end{itemize}
 
 \jhanote{Melissa - please start converting into full text for this and
   previous sub-section}
