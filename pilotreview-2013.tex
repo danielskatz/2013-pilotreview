@@ -280,10 +280,11 @@ modularity and/or coupling to environment.
   first-generation \pilotjobs, second-generation \pilotjobs sound?}
 
 \pilotjob-System Evolution:
+
+We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker schemes through advanced workload management systems.
+
 \begin{itemize}
-    \item Pre-\pilotjob Systems: Master/Worker systems (e.\,g.\ AppLeS) that 
-    support dynamic scheduling in heterogeneous, dynamic grid environments 
-    mostly via directly interaction with the respective resource.
+    \item Pre-\pilotjob Systems:
 
 As the uptake of grids grew, the need for job submission management
 via batch queuing systems and middleware access also grew. Many
@@ -329,39 +330,44 @@ The idea of a placeholder scheduling proved to be an efficient model for waiting
 and application-level scheduling compare to the invention of traditional local 
 batch queuing system (that were also invented to make resource sharing and 
 utilization efficient)}
-Methodologies for distributed resource management:
-\begin{itemize}
-    \item local resource manager (batch queueing):
-    \begin{itemize}
-        \item centralized: Torque
-        \item decentralized (w/ fewer central components): Condor
-    \end{itemize} 
-    \item meta scheduling
-    \item advance reservations
-    \item class ads
-    \item \pilots
-\end{itemize}
+\mrnote{Would like to discuss this and develop for next week}
+%Methodologies for distributed resource management:
+%\begin{itemize}
+%    \item local resource manager (batch queueing):
+%    \begin{itemize}
+%        \item centralized: Torque
+%        \item decentralized (w/ fewer central components): Condor
+%    \end{itemize} 
+%    \item meta scheduling
+%    \item advance reservations
+%    \item class ads
+%    \item \pilots
+%\end{itemize}
 
 \subsection{What have Pilot-Jobs been used For?}
 \mrnote{Melissa's Section}
 \jhanote{This should provide a functional approach to pilot-jobs. Will
   make the job of explaining easier.}
 
-How are and were Pilot-Jobs used?
+This section explains how \pilotjobs have historically been used, in no particular order.
 
-Pilot jobs are most commonly used for the execution of many tasks through the use of a container job. Pilot jobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, pilot-jobs are used to acheive high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. Pilot jobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
+\pilotjobs are most commonly used for the execution of many tasks through the use of a container job. \pilotjobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, \pilotjobs are used to acheive high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. \pilotjobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
 
-Some simulations require varying number of tasks to complete -- that is, 10 tasks may start a program but the results of these tasks may spawn more tasks to complete. Pilot-jobs can be utilized for these types of dynamic simulations, because once they are active, the agents have an available slot for executing tasks on a given number of cores. As more tasks are added to the system, the Pilot can continue to execute new tasks until the job is considered complete. %Find a citation for this dynamic type of simulation
+Multi-scale simulations have also benefited from the use of \pilotjobs. A \pilotjob load balancing algorithm was proposed for coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which more processors were assigned to jobs with longer runtimes, so as to make the simulation take the same amount of wall-clock time between points when they need to communicate with one another (via MPI).
+% Efficient Runtime Environment for Coupled Multi-Physics Simulations: Dynamic Resource Allocation and Load-Balancing
 
+Some simulations require varying number of tasks to complete -- that is, 10 tasks may start a program but the results of these tasks may spawn more tasks to complete. \pilotjobs can be utilized for these types of dynamic simulations, because once they are active, the agents have an available slot for executing tasks on a given number of cores. As more tasks are added to the system, the \pilot can continue to execute new tasks until the job is considered complete. %Find a citation for this dynamic type of simulation
 
+\pilotjobs have also been used to avoid queue wait times for many jobs as well as harness and utilize different resources (with different batch queueing systems) to do \textit{scale-across} simulations. 
 
-For:
-\begin{itemize}
-\item High-Throughput Simulations
-\item Dynamic Simulations
-\item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
-\item Other - To Be Identified
-\end{itemize}
+%For:
+%\begin{itemize}
+%\item High-Throughput Simulations
+%\item Dynamic Simulations
+%\item Other - Multi-scale simulations \mrnote{Dynamic load balancing for MPI jobs} 
+%\item Avoiding Queue wait times for many jobs
+%\item Harness and utilize different resources (with different batch queuing systems) to do runs across all of them
+%\end{itemize}
 
 \jhanote{Melissa - please start converting into full text for this and
   previous sub-section}
@@ -719,82 +725,82 @@ in history section.}
 %infrastructure. \mtnote{shall we assume these definitions? I think so but I
 %want to be sure.}
 
-\newpage
+%% \newpage
 
-\begin{table*}[t]
-  \footnotesize{
- \up
- \centering
- %\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
- \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-  \hline
-  \textbf{Pilot Element}
-  &\textbf{BigJob} &\textbf{DIANE} &\textbf{Condor-G/Glide-in} &\textbf{Swift/Coaster} &\textbf{Bosco} &\textbf{GWPilot}\\
-  \hline
-  Pilot-Manager &BigJob Manager & RunMaster & condor\_master, condor\_collector, condor\_negotiator, condor\_schedd &Coaster Service & Condor & Gridway\aznote{fill in}\\ 
-  \hline
-  \pilot &BigJob Agent  & Worker Agent &condor\_master, condor\_startd &Coaster Worker & condor\_master, condor\_startd& GWpilot\aznote{(?) check} \\
-  \hline
-  \computeunit  \ (CU) &Task &Task &Job &Application Interface Function (Swift Script) & Job & Task\\
-  \hline
-  \su \ (SU) &Sub-Job &Task &Job &Job & Job & Task \\
-  \hline
-  Data support & BigData& & & & &\\
-  \hline
-  Deployment (centrally hosted vs application)  & Application & & & &Runs locally, requires remote cluster install & Centrally hosted \aznote{Req. gridway install}\\
-  \hline
-  Interoperable & via SAGA & & & &Yes, via Condor & Yes, via BLAHPD\\
-  \hline
-  Abstraction(?) & & & & & &\\
-  \hline
-  Coordination(?) &Advert & & & & &\\
+%% \begin{table*}[t]
+%%   \footnotesize{
+%%  \up
+%%  \centering
+%%  %\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+%%  \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+%%   \hline
+%%   \textbf{Pilot Element}
+%%   &\textbf{BigJob} &\textbf{DIANE} &\textbf{Condor-G/Glide-in} &\textbf{Swift/Coaster} &\textbf{Bosco} &\textbf{GWPilot}\\
+%%   \hline
+%%   Pilot-Manager &BigJob Manager & RunMaster & condor\_master, condor\_collector, condor\_negotiator, condor\_schedd &Coaster Service & Condor & Gridway\aznote{fill in}\\ 
+%%   \hline
+%%   \pilot &BigJob Agent  & Worker Agent &condor\_master, condor\_startd &Coaster Worker & condor\_master, condor\_startd& GWpilot\aznote{(?) check} \\
+%%   \hline
+%%   \computeunit  \ (CU) &Task &Task &Job &Application Interface Function (Swift Script) & Job & Task\\
+%%   \hline
+%%   \su \ (SU) &Sub-Job &Task &Job &Job & Job & Task \\
+%%   \hline
+%%   Data support & BigData& & & & &\\
+%%   \hline
+%%   Deployment (centrally hosted vs application)  & Application & & & &Runs locally, requires remote cluster install & Centrally hosted \aznote{Req. gridway install}\\
+%%   \hline
+%%   Interoperable & via SAGA & & & &Yes, via Condor & Yes, via BLAHPD\\
+%%   \hline
+%%   Abstraction(?) & & & & & &\\
+%%   \hline
+%%   Coordination(?) &Advert & & & & &\\
 
-% \hline
-% Dynamic Resources &no/yes &yes (AgentFactories)\\
- \hline
- \end{tabular}
- \caption{\textbf{Comparing PJ Systems} 
-   Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
-     Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
-   \aznote{Not sure of relevance of an ``all-encompassing table'' if we are
-     going to be focusing on ``landmark'' Pilot-Job systems...
-     put this on the back-burner for the time being..}
- \up
- } 
- \label{table:bigjob-saga-diane}
-}
-\end{table*}
+%% % \hline
+%% % Dynamic Resources &no/yes &yes (AgentFactories)\\
+%%  \hline
+%%  \end{tabular}
+%%  \caption{\textbf{Comparing PJ Systems} 
+%%    Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
+%%      Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
+%%    \aznote{Not sure of relevance of an ``all-encompassing table'' if we are
+%%      going to be focusing on ``landmark'' Pilot-Job systems...
+%%      put this on the back-burner for the time being..}
+%%  \up
+%%  } 
+%%  \label{table:bigjob-saga-diane}
+%% }
+%% \end{table*}
 
 
-\begin{landscape}
-\begin{table}
-\begin{center}
-\begin{footnotesize}
-\begin{tabular}{|p{3.0cm}|p{3.5cm}|p{2.3cm}|p{1.9cm}|p{3.7cm}|p{2.5cm}|}
-\hline {\bf BigJob}
-& {\bf Diane}
-& {\bf Condor/Glide-in}
-& {\bf Swift}
-& {\bf Bosco}
-& {\bf GWPilot}
-\\
-\hline
+%% \begin{landscape}
+%% \begin{table}
+%% \begin{center}
+%% \begin{footnotesize}
+%% \begin{tabular}{|p{3.0cm}|p{3.5cm}|p{2.3cm}|p{1.9cm}|p{3.7cm}|p{2.5cm}|}
+%% \hline {\bf BigJob}
+%% & {\bf Diane}
+%% & {\bf Condor/Glide-in}
+%% & {\bf Swift}
+%% & {\bf Bosco}
+%% & {\bf GWPilot}
+%% \\
+%% \hline
 
-Montage
-& Multiple sequential and parallel executables
-& Files
-& Dataflow (DAG)
-& Dynamic process creation, workflow execution, file transfer
-& test
-\\
-\hline
+%% Montage
+%% & Multiple sequential and parallel executables
+%% & Files
+%% & Dataflow (DAG)
+%% & Dynamic process creation, workflow execution, file transfer
+%% & test
+%% \\
+%% \hline
 
-\end{tabular}
-\end{footnotesize}
-\caption{\label{Tab:AppChars} }
-\end{center}
-\end{table}
-\end{landscape}
+%% \end{tabular}
+%% \end{footnotesize}
+%% \caption{\label{Tab:AppChars} }
+%% \end{center}
+%% \end{table}
+%% \end{landscape}
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
@@ -846,169 +852,217 @@ differing capabilities, with the end-goal being a
 complete understanding of the Pilot-Job ecosystem via a common
 vocabulary.
 
-\subsubsection{Condor-G}
-\aznote{Section copied and pasted from IPDPS paper for now -- plan
-to use this general sort of information + reword using our spiffy 
-vocabulary presented in this paper}
-Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
-actually a complete Condor pool that is started using the Globus
-service of a resource. This mechanism is referred to as Condor
-Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
-using the standard Condor tools and APIs. Condor utilizes a
-master/worker coordination model. The PJ manager is referred to as the
-Condor Central Manager. The functionality of the Central Manager is
-provided by several daemons: the condor\_master that is generally
-responsible for managing all daemons on a machine, the
-condor\_collector which collects resource information, the
-condor\_negotiator that does the matchmaking and the condor\_schedd
-that is responsible for managing the binding and scheduling
-process. Condor generally does not differentiate between workload,
-i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
-referred to as job. However, it supports late binding, i.\,e.\
-resources a job is submitted to must generally not be available at
-submission time. The scheduler matches the capabilities required by a
-WU to the available resources. This process is referred to as
-matchmaking. Further, a priority-based scheduler is used. For
-communication between the identified elements Condor utilizes
-point-to-point messaging using a binary protocol on top of TCP.
-
-Different fault tolerance mechanisms, such as automatic retries, are
-supported.  Further, Condor supports different security mechanisms:
-for authentication it integrates both with local account management
-systems (such as Kerberos) as well as grid authentication systems such
-as GIS. Communication traffic can be encrypted.
 
 
-\subsubsection{DIANE}
-\aznote{Section copied and pasted from IPDPS paper for now -- plan
-to use this general sort of information + reword using our spiffy 
-vocabulary presented in this paper}
-% Coordination and Communication
-DIANE~\cite{Moscicki:908910} is a task coordination framework, which
-was originally designed for implementing master/worker applications,
-but also provides PJ functionality for job-style executions. DIANE
-utilizes a single hierarchy of worker agents as well as a PJ manager
-referred to as \texttt{RunMaster}.
-%Further, there is ongoing work on a multi-master extension.
-For the spawning of PJs a separate script, the so-called submitter script, is
-required. For the access to the physical resources the GANGA
-framework~\cite{Moscicki20092303} can be used.
-%GANGA provides a
-%unified interface for job submissions to various resource types, e.\,g.\ EGI
-%resources or TG resources via a SAGA backend.
-Once the worker agents are started they register themselves at the RunMaster.
-In contrast to TROY-BigJob, a worker agent generally manages only a single
-core and thus, by default is not able to run parallel applications (e.\,g.\
-based on MPI). BJ utilizes the BJ-Agent that is able manage a set of local
-resources (e.\,g.\ a certain number of nodes and cores) and thus, is capable
-of running parallel applications. For communication between the RunMaster and
-worker agents point-to-point messaging based on CORBA~\cite{OMG-CORBA303:2004}
-is used. CORBA is also used for file staging, which is not fully supported by
-BJ, yet.
+%\subsubsection{Condor-G}
+%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
+%% to use this general sort of information + reword using our spiffy 
+%% vocabulary presented in this paper}
+%% Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
+%% actually a complete Condor pool that is started using the Globus
+%% service of a resource. This mechanism is referred to as Condor
+%% Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
+%% using the standard Condor tools and APIs. Condor utilizes a
+%% master/worker coordination model. The PJ manager is referred to as the
+%% Condor Central Manager. The functionality of the Central Manager is
+%% provided by several daemons: the condor\_master that is generally
+%% responsible for managing all daemons on a machine, the
+%% condor\_collector which collects resource information, the
+%% condor\_negotiator that does the matchmaking and the condor\_schedd
+%% that is responsible for managing the binding and scheduling
+%% process. Condor generally does not differentiate between workload,
+%% i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
+%% referred to as job. However, it supports late binding, i.\,e.\
+%% resources a job is submitted to must generally not be available at
+%% submission time. The scheduler matches the capabilities required by a
+%% WU to the available resources. This process is referred to as
+%% matchmaking. Further, a priority-based scheduler is used. For
+%% communication between the identified elements Condor utilizes
+%% point-to-point messaging using a binary protocol on top of TCP.
 
-% Binding 
-DIANE is primarily designed with respect to HTC environments (such as
-EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
-size of 1 core. BJ in contrast is designed for HPC systems such as TG,
-where a job usually allocates multiple nodes and cores. To address this issue
-a so-called multinode submitter script can be used: the scripts starts a
-defined number of worker agents on a certain resource. However, WUs will be
-constrained to the specific number of cores managed by a worker agent. A
-flexible allocation of resource chunks as with BJ is not possible. By
-default a WU is mapped to a SU; application can however implement smarter
-allocation schemes, e.\,g.\ the clustering of multiple WUs into a SU.
+%% Different fault tolerance mechanisms, such as automatic retries, are
+%% supported.  Further, Condor supports different security mechanisms:
+%% for authentication it integrates both with local account management
+%% systems (such as Kerberos) as well as grid authentication systems such
+%% as GIS. Communication traffic can be encrypted.
+\subsubsection{AppLeS - First-Generation PJ-Systems / Master/Worker frameworks}
+\aznote{Resource discovery a special feature, as well as performance-modelling
+for resource selection}
 
-%Scheduling
-DIANE includes a simple capability matcher and FIFO-based task scheduler.
-Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
-application, exist or are under development. The framework is extensible:
-applications can implement a custom application-level scheduler.
+Scheduling/resource-selection is handled by a per-application AppleS agent.
+\aznote{Not seeing where a placeholder/pilot reservation is...  it appears
+that the schedule is executed directly on target hardware without Pilots?}
+
+Although many features from more advanced pilot systems are missing, the core
+\pilotjob functionality such as late-binding and 
+application-level scheduling are present in AppLeS.
+\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
+The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
+\subsubsection{MyCluster - Basic Pilot-Job Systems}
+\aznote{Didn't pick Condor-G/Glide-in, as GlideinWMS uses Condor as well..}
+
+\subsubsection{GlideinWMS - Pilot-based Scheduling/Multi-Level Scheduling}
+\textit{Collectors} are the managers, with one collector per
+GlideinWMS system.
+\textit{Glidein factory daemon}s are responsible for
+submitting pilot jobs to grid pools\aznote{Use diff vocab for grid pool?}.
+\textit{VO frontend daemons} are the schedulers, which map jobs
+to pilots.  GlideinWMS takes advantage of late-binding, as
+jobs are not selected for resources until the pilots start.\aznote{This
+should be true of all systems described in this section -- do we
+need to explicitly say so for each pilot system?}
+
+\subsubsection{Swift - Higher-Level Application Frameworks (Workflow)}
+
+\subsubsection{DIANE - Higher-Level Application Frameworks 
+  (Task Farming/Master-Worker)}
+\aznote{Do we want to define single-user vs multi-user? 
+  Communication methods?  Output aggregrator?}
+DIANE operates on the master-worker computing model.
+
+The manager for DIANE is called the \textit{Master}, and contains
+the scheduler for DIANE, which is known as the \textit{Planner}.
+The manager creates placeholders called \textit{Workers}, which
+register with and receive jobs from the manager.
+
+The workflow is then such that a user submits a parallel job to
+the grid using a DIANE client.  The client then creates the Pilot manager
+and remains in contact with it to control its \pilotjobs.  Results
+are aggregated through use means of the DIANE \textit{Integrator}.
+\aznote{No mapping vocab for the integrator as of now.}
+
+\subsubsection{Bosco - Higher-Level Application Frameworks 
+  (Data Analytics and Visualization)}
+
+%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
+%% to use this general sort of information + reword using our spiffy 
+%% vocabulary presented in this paper}
+%% % Coordination and Communication
+%% DIANE~\cite{Moscicki:908910} is a task coordination framework, which
+%% was originally designed for implementing master/worker applications,
+%% but also provides PJ functionality for job-style executions. DIANE
+%% utilizes a single hierarchy of worker agents as well as a PJ manager
+%% referred to as \texttt{RunMaster}.
+%% %Further, there is ongoing work on a multi-master extension.
+%% For the spawning of PJs a separate script, the so-called submitter script, is
+%% required. For the access to the physical resources the GANGA
+%% framework~\cite{Moscicki20092303} can be used.
+%% %GANGA provides a
+%% %unified interface for job submissions to various resource types, e.\,g.\ EGI
+%% %resources or TG resources via a SAGA backend.
+%% Once the worker agents are started they register themselves at the RunMaster.
+%% In contrast to TROY-BigJob, a worker agent generally manages only a single
+%% core and thus, by default is not able to run parallel applications (e.\,g.\
+%% based on MPI). BJ utilizes the BJ-Agent that is able manage a set of local
+%% resources (e.\,g.\ a certain number of nodes and cores) and thus, is capable
+%% of running parallel applications. For communication between the RunMaster and
+%% worker agents point-to-point messaging based on CORBA~\cite{OMG-CORBA303:2004}
+%% is used. CORBA is also used for file staging, which is not fully supported by
+%% BJ, yet.
+
+%% % Binding 
+%% DIANE is primarily designed with respect to HTC environments (such as
+%% EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
+%% size of 1 core. BJ in contrast is designed for HPC systems such as TG,
+%% where a job usually allocates multiple nodes and cores. To address this issue
+%% a so-called multinode submitter script can be used: the scripts starts a
+%% defined number of worker agents on a certain resource. However, WUs will be
+%% constrained to the specific number of cores managed by a worker agent. A
+%% flexible allocation of resource chunks as with BJ is not possible. By
+%% default a WU is mapped to a SU; application can however implement smarter
+%% allocation schemes, e.\,g.\ the clustering of multiple WUs into a SU.
+
+%% %Scheduling
+%% DIANE includes a simple capability matcher and FIFO-based task scheduler.
+%% Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
+%% application, exist or are under development. The framework is extensible:
+%% applications can implement a custom application-level scheduler.
 
 
-%Other impl. related issues: FT and security
-DIANE is, just like BJ, a single-user PJ, i.\,e.\ each PJ is executed with the
-privileges of the respective user. Also, only WUs of this respective user can be
-executed by DIANE. DIANE supports various middleware security mechanisms
-(e.\,g.\ GSI, X509 authentication). For this purpose it relies on GANGA. The
-implementation of GSI on TCP-level is possible, but currently not yet
-implemented. Further, DIANE supports fault tolerance: basic error detection and
-propagation mechanisms are in place. Further, an automatic re-execution of WUs
-is possible.
+%% %Other impl. related issues: FT and security
+%% DIANE is, just like BJ, a single-user PJ, i.\,e.\ each PJ is executed with the
+%% privileges of the respective user. Also, only WUs of this respective user can be
+%% executed by DIANE. DIANE supports various middleware security mechanisms
+%% (e.\,g.\ GSI, X509 authentication). For this purpose it relies on GANGA. The
+%% implementation of GSI on TCP-level is possible, but currently not yet
+%% implemented. Further, DIANE supports fault tolerance: basic error detection and
+%% propagation mechanisms are in place. Further, an automatic re-execution of WUs
+%% is possible.
 
-\subsubsection{Swift}
-\aznote{Section copied and pasted from IPDPS paper for now -- plan
-to use this general sort of information + reword using our spiffy 
-vocabulary presented in this paper}
-Swift~\cite{Wilde2011} is a scripting language designed for expressing
-abstract workflows and computations. The language provides, amongst many other
-things, capabilities for executing external applications, as well as the
-implicit management of data flows between application tasks. 
-% For this
-% purpose, Swift formalizes the way that applications can define
-% data-dependencies. Using so called mappers, these dependencies can be
-% easily extended to files or groups of files. 
-The runtime environment handles the allocation of resources and the spawning of 
-the compute tasks. 
-% Both data- and execution management capabilities are provided
-% via abstract interfaces. 
-Swift supports e.\,g.\ Globus, Condor and PBS resources. 
-% The pool of resources
-% that is used for an application is statically defined in a configuration file.
-% While this configuration file can refer to highly dynamic resources (such as OSG
-% resources), there is no possibility to manage this resource pool
-% programmatically. 
-By default, Swift uses a 1:1 mapping for \cus and \sus. However,
-Swift supports the grouping of SUs as well as PJs. For the PJ functionality, Swift uses the
-Coaster~\cite{coasters} framework. Coaster relies on a master/worker
-coordination model; communication is implemented using GSI-secured TCP sockets.
-Swift and Coaster support various scheduling mechanisms, e.\,g.\ a FIFO and a
-load-aware scheduler. Additionally, Swift can be used in conjunction with 
-Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 
-% Falkon
-% refers to \pilots as the so called provisioner, which are created using the
-% Globus GRAM service. The provisioner spawns a set of executor processes on the
-% allocated resources, which are then responsible for managing the execution of
-% SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
-% Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
-% query the dispatcher for new SUs. Web services are used for communication.
+%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
+%% to use this general sort of information + reword using our spiffy 
+%% vocabulary presented in this paper}
+%% Swift~\cite{Wilde2011} is a scripting language designed for expressing
+%% abstract workflows and computations. The language provides, amongst many other
+%% things, capabilities for executing external applications, as well as the
+%% implicit management of data flows between application tasks. 
+%% % For this
+%% % purpose, Swift formalizes the way that applications can define
+%% % data-dependencies. Using so called mappers, these dependencies can be
+%% % easily extended to files or groups of files. 
+%% The runtime environment handles the allocation of resources and the spawning of 
+%% the compute tasks. 
+%% % Both data- and execution management capabilities are provided
+%% % via abstract interfaces. 
+%% Swift supports e.\,g.\ Globus, Condor and PBS resources. 
+%% % The pool of resources
+%% % that is used for an application is statically defined in a configuration file.
+%% % While this configuration file can refer to highly dynamic resources (such as OSG
+%% % resources), there is no possibility to manage this resource pool
+%% % programmatically. 
+%% By default, Swift uses a 1:1 mapping for \cus and \sus. However,
+%% Swift supports the grouping of SUs as well as PJs. For the PJ functionality, Swift uses the
+%% Coaster~\cite{coasters} framework. Coaster relies on a master/worker
+%% coordination model; communication is implemented using GSI-secured TCP sockets.
+%% Swift and Coaster support various scheduling mechanisms, e.\,g.\ a FIFO and a
+%% load-aware scheduler. Additionally, Swift can be used in conjunction with 
+%% Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 
-\subsubsection{GWPilot}
-\aznote{Considering the new direction of the paper, I am not sure whether
-GWPilot~\cite{gwpilot} requires its own section for analysis...}
+%% % Falkon
+%% % refers to \pilots as the so called provisioner, which are created using the
+%% % Globus GRAM service. The provisioner spawns a set of executor processes on the
+%% % allocated resources, which are then responsible for managing the execution of
+%% % SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
+%% % Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
+%% % query the dispatcher for new SUs. Web services are used for communication.
 
-%\begin{lstlisting}[breaklines]
-%\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
-%\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
-\begin{itemize}
-\item Integrates with GridWay metascheduler
-\item Pilots advertise to GridWay, GridWay scheduler schedules pilots
-\item Pilots pull tasks from scheduler
-\item Installation as a GridWay driver -- written in Python
-\item Interoperability managed by GridWay drivers (DRMAA, JDSL, BES, more?)
-\item Using GWPilot requires only adding a single line to their GridWay task
-\item ``Lightweight and scalable''
-\end{itemize}
-%\end{lstlisting}
+%\subsubsection{GWPilot}
+%% \aznote{Considering the new direction of the paper, I am not sure whether
+%% GWPilot~\cite{gwpilot} requires its own section for analysis...}
 
-\subsubsection{Bosco}
-\aznote{Given the modified direction we are taking the paper (``landmark''
-pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
-the inclusion of Bosco~\cite{bosco} in this section as Bosco appears
-to be mostly making strides with regards to user-accessibility
-of pilots.}
-\\
-\begin{itemize}
-\item Condor used as batch system/user interface
-\item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
-\item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs, 
-  enforces submission policies
-\item Bosco = ``BLAHPD Over SSH Condor Overlay''
-\item Workstation-based (run Bosco client locally)
-\item Multi-user (Bosco workstation install can be used by multiple researchers)
-\item Supports multiple cluster submission (but what about coordination...)
+%% %\begin{lstlisting}[breaklines]
+%% %\url{https://indico.egi.eu/indico/materialDisplay.py?contribId=18&sessionId=46&materialId=slides&confId=1019}
+%% %\url{http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=6266981}
+%% \begin{itemize}
+%% \item Integrates with GridWay metascheduler
+%% \item Pilots advertise to GridWay, GridWay scheduler schedules pilots
+%% \item Pilots pull tasks from scheduler
+%% \item Installation as a GridWay driver -- written in Python
+%% \item Interoperability managed by GridWay drivers (DRMAA, JDSL, BES, more?)
+%% \item Using GWPilot requires only adding a single line to their GridWay task
+%% \item ``Lightweight and scalable''
+%% \end{itemize}
+%% %\end{lstlisting}
 
-\end{itemize}
+%\subsubsection{Bosco}
+%% \aznote{Given the modified direction we are taking the paper (``landmark''
+%% pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
+%% the inclusion of Bosco~\cite{bosco} in this section as Bosco appears
+%% to be mostly making strides with regards to user-accessibility
+%% of pilots.}
+%% \\
+%% \begin{itemize}
+%% \item Condor used as batch system/user interface
+%% \item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
+%% \item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs, 
+%%   enforces submission policies
+%% \item Bosco = ``BLAHPD Over SSH Condor Overlay''
+%% \item Workstation-based (run Bosco client locally)
+%% \item Multi-user (Bosco workstation install can be used by multiple researchers)
+%% \item Supports multiple cluster submission (but what about coordination...)
+
+%% \end{itemize}
 % \upp
 % \subsection{SWIFT-Coaster\upp\upp}
 % 
