@@ -283,6 +283,7 @@ modularity and/or coupling to environment.
 
 We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker schemes through advanced workload management systems.
 
+\alnote{The list format is not very readable in my opinion}
 \begin{itemize}
     \item Pre-\pilotjob Systems:
 
@@ -314,7 +315,7 @@ e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
     \item First generation: Extension of pre-\pilot systems to support dynamic 
     scheduling on top of a \pilot mechanism, i.\,e.\ a placeholder job.
 	
-Although pre-pilot systems, such as AppLeS, gave user-level control of scheduling, queue reservation time still was an issue. This brought about the idea of placeholder scheduling. A placeholder was a \pilot-like mechanism in that it was an abstraction layer above the various batch queuing systems available on different resources. It held a \textit{place} in the regular batch queue, and when it became active, it could pull tasks to execute. Placeholder scheduling was advantageous in that it did not require any special superuser priveleges on the machines, which was something most grid users did not have access to. It also provided a means of load balancing across the different resources. As placeholder scheduling evolved, it came to include dynamic monitoring and throttling of the different placeholders based on the queue times on the machines.
+Although pre-pilot systems, such as AppLeS, gave user-level control of scheduling, queue reservation time still was an issue. This brought about the idea of placeholder scheduling. A placeholder was a \pilot-like mechanism in that it was an abstraction layer above the various batch queuing systems available on different resources. It held a \textit{place} in the regular batch queue, and when it became active, it could pull tasks to execute. Placeholder scheduling was advantageous in that it did not require any special superuser privileges on the machines, which was something most grid users did not have access to. It also provided a means of load balancing across the different resources. As placeholder scheduling evolved, it came to include dynamic monitoring and throttling of the different placeholders based on the queue times on the machines.
 
 % Paper: Practical Heterogeneous Placeholder Scheduling in Overlay Metacomputers: Early Experiences
 
@@ -351,7 +352,7 @@ utilization efficient)}
 
 This section explains how \pilotjobs have historically been used, in no particular order.
 
-\pilotjobs are most commonly used for the execution of many tasks through the use of a container job. \pilotjobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, \pilotjobs are used to acheive high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. \pilotjobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
+\pilotjobs are most commonly used for the execution of many tasks through the use of a container job. \pilotjobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, \pilotjobs are used to achieve high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. \pilotjobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
 
 Multi-scale simulations have also benefited from the use of \pilotjobs. A \pilotjob load balancing algorithm was proposed for coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which more processors were assigned to jobs with longer runtimes, so as to make the simulation take the same amount of wall-clock time between points when they need to communicate with one another (via MPI).
 % Efficient Runtime Environment for Coupled Multi-Physics Simulations: Dynamic Resource Allocation and Load-Balancing
@@ -392,14 +393,13 @@ need to be run at one time.
 We assess the \pilotjob-Systems according to the following criteria:
 \begin{itemize}
 	\item What use cases? What applications types are supported? MPI, ensembles, workflows? Single vs. multi-purpose?
-	\item What low-level infrastructures/middleware are supported? How interoperable is the framework?
+	\item What low-level infrastructures/middleware are supported? How interoperable is the framework (vertically, horizontally)?
 	\item Scale of distribution
 	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
 	\item Deployment Model: service versus tool/library, application vs. system-level
     \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
 	\item Performance and Scalability (Task Throughput)
 	\item Fault Tolerance
-	\item Interoperability (vertically, horizontally)
 	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
 	\item Scheduling: supported algorithms, support for application-level 
 	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
@@ -505,7 +505,8 @@ administrators.
 
 The Coaster system~\cite{coasters} is another \pilotjob implementation
 which has been shown to work in both cloud and grid
-environments. Coaster has been designed to support Swift-based applications. Using the Coaster service, one executes a Coaster Master
+environments. Coaster has been designed to support Swift-based applications. 
+Using the Coaster service, one executes a Coaster Master
 on a head node, and the Coaster workers run on compute nodes to
 execute jobs. Coasters offers a zero-install feature in which it
 deploys itself and installs itself from the head node and onto the
@@ -626,9 +627,9 @@ Initially, the concepts used by the implementations of \pilotjob sampled in \S2 
 
         \begin{itemize}
             \item Single-site, local workload mgmt. systems (HPC schedulers)
-            \item Single-site endpoint serivces (e.g., GRAM, CREAM)
+            \item Single-site endpoint services (e.g., GRAM, CREAM)
             \item Multi-site workload mgmt. systems (meta-scheduler)
-            \item File transfer serivces
+            \item File transfer services
             \item Metadata services
         \end{itemize}
 
