@@ -151,9 +151,6 @@
 
 \section{Introduction} 
 
-\jhanote{this paragraph states the importance of \pilotjobs for
-  distributed infrastructure}
-  
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
 simple-to-use abstractions at multiple levels – at the development,
@@ -181,18 +178,18 @@ scientific applications, such as coupled-execution and
 application-level scheduling~\cite{ko-
   efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
-  \onote{I think the most important reasons why Pilot Jobs being so
-    popular (and re-invented over and over again) is that they allow
-    the execution of small (i.e., singe / few-core) tasks efficiently
-    on HPC infrastrucutre by massively reducing queueing time. HPC
-    sites (from schedulers to policies) have always been (and still
-    are) discrimatory against this type of workload in favor of the
-    large, tightly-coupled ones. Pilot-Jobs try to counteract. While
-    this is certainly not the main story that we want to tell, this
-    should IMHO still be mentioned. } \jhanote{This is definitely one
-    of the main reasons, but as Melissa pointed out it during RADICAL
-    call, it is by no means the only reason. Need to get the different
-    reasons down here.. then find a nice balance and description}
+%   \onote{I think the most important reasons why Pilot Jobs being so
+%     popular (and re-invented over and over again) is that they allow
+%     the execution of small (i.e., singe / few-core) tasks efficiently
+%     on HPC infrastrucutre by massively reducing queueing time. HPC
+%     sites (from schedulers to policies) have always been (and still
+%     are) discrimatory against this type of workload in favor of the
+%     large, tightly-coupled ones. Pilot-Jobs try to counteract. While
+%     this is certainly not the main story that we want to tell, this
+%     should IMHO still be mentioned. } \jhanote{This is definitely one
+%     of the main reasons, but as Melissa pointed out it during RADICAL
+%     call, it is by no means the only reason. Need to get the different
+%     reasons down here.. then find a nice balance and description}
 
 \jhanote{Although pilotjobs have solved/addressed many problems, now
     develop the problem with \pilotjobs themselves..}
@@ -213,9 +210,6 @@ needs), these objectives remains difficult if not infeasible.
 
 % \subsection{Prior Work}
 
-\jhanote{The below is legacy from pilotdata paper.. to be refined}
-
-
 \section{A Quick Survey of Existing Pilot-Jobs Systems}
 \label{sec:survey}
 \onote{OLE's SECTION}\jhanote{Ole, several people are already working
@@ -235,10 +229,13 @@ are and a listing of the different \pilotjobs, e.g. Swift, Condor
 Glide-in, DIANE, DIRAC.
 
 \jhanote{How do we choose which ones to survey or include in our
-  survey, which ones do we not include?}
-\mtnote{Within a historical frame where the first pilot-like implementation/abstraction is presented followed by its evolutions/reinterpretation, we would review those abstractions/implementations that signed evolutionary steps. For completeness we could just mention those that did not offer a tangible progress.}
-\mrnote{Recommend we be careful of the word 'survey' if we 
-don't plan on being comprehensive}
+  survey, which ones do we not include?}  \mtnote{Within a historical
+  frame where the first pilot-like implementation/abstraction is
+  presented followed by its evolutions/reinterpretation, we would
+  review those abstractions/implementations that signed evolutionary
+  steps. For completeness we could just mention those that did not
+  offer a tangible progress.}  \mrnote{Recommend we be careful of the
+  word 'survey' if we don't plan on being comprehensive}
 
 A specific implementation of the P* model that both unified
 conceptually as well as was interoperable across myriad grid
@@ -259,9 +256,6 @@ and resulted in the \pstar model~\cite{pstar12}.
 
 
 %thereby it is required by necessity to be general.
-
-\jhanote{We need a structure to our survey of existing
-  \pilotjobs. What might this be?}
 
 There is an axes with a sliding scale of dependence/coupling to
 infrastructure.  It is difficult to assign a single point of coupling,
@@ -350,16 +344,38 @@ utilization efficient)}
 \jhanote{This should provide a functional approach to pilot-jobs. Will
   make the job of explaining easier.}
 
-This section explains how \pilotjobs have historically been used, in no particular order.
+This section explains how \pilotjobs have historically been used, in
+no particular order.
 
-\pilotjobs are most commonly used for the execution of many tasks through the use of a container job. \pilotjobs are often measured by their throughput, that is, the number of tasks that they can complete per second (tps). As such, \pilotjobs are used to achieve high-throughput, for example, when using genome sequencing techniques or ensemble-based applications. \pilotjobs have also been used for parameter sweeps, chained tasks, and loosely-coupled but distinct tasks. %note to self: cite these with papers
+\pilotjobs are most commonly used for the execution of many tasks
+through the use of a container job. \pilotjobs are often measured by
+their throughput, that is, the number of tasks that they can complete
+per second (tps). As such, \pilotjobs are used to achieve
+high-throughput, for example, when using genome sequencing techniques
+or ensemble-based applications. \pilotjobs have also been used for
+parameter sweeps, chained tasks, and loosely-coupled but distinct
+tasks. %note to self: cite these with papers
 
-Multi-scale simulations have also benefited from the use of \pilotjobs. A \pilotjob load balancing algorithm was proposed for coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which more processors were assigned to jobs with longer runtimes, so as to make the simulation take the same amount of wall-clock time between points when they need to communicate with one another (via MPI).
+Multi-scale simulations have also benefited from the use of
+\pilotjobs. A \pilotjob load balancing algorithm was proposed for
+coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which
+more processors were assigned to jobs with longer runtimes, so as to
+make the simulation take the same amount of wall-clock time between
+points when they need to communicate with one another (via MPI).
 % Efficient Runtime Environment for Coupled Multi-Physics Simulations: Dynamic Resource Allocation and Load-Balancing
 
-Some simulations require varying number of tasks to complete -- that is, 10 tasks may start a program but the results of these tasks may spawn more tasks to complete. \pilotjobs can be utilized for these types of dynamic simulations, because once they are active, the agents have an available slot for executing tasks on a given number of cores. As more tasks are added to the system, the \pilot can continue to execute new tasks until the job is considered complete. %Find a citation for this dynamic type of simulation
+Some simulations require varying number of tasks to complete -- that
+is, 10 tasks may start a program but the results of these tasks may
+spawn more tasks to complete. \pilotjobs can be utilized for these
+types of dynamic simulations, because once they are active, the agents
+have an available slot for executing tasks on a given number of
+cores. As more tasks are added to the system, the \pilot can continue
+to execute new tasks until the job is considered
+complete. %Find a citation for this dynamic type of simulation
 
-\pilotjobs have also been used to avoid queue wait times for many jobs as well as harness and utilize different resources (with different batch queueing systems) to do \textit{scale-across} simulations. 
+\pilotjobs have also been used to avoid queue wait times for many jobs
+as well as harness and utilize different resources (with different
+batch queueing systems) to do \textit{scale-across} simulations.
 
 %For:
 %\begin{itemize}
@@ -428,7 +444,8 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
           utilize \pilots for resource management. \jhanote{we should
             change the ``higher-level pilot-based frameworks'' to
             ``higher-level frameworks that can use pilot-jobs''.}}
-            \alnote{mention that these layers are not cleanly separated: Pegasus is constraint to a single PJ system (Corral)}
+        \alnote{mention that these layers are not cleanly separated:
+          Pegasus is constraint to a single PJ system (Corral)}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -548,15 +565,15 @@ can also be leveraged to assist with the data-driven computations.
 %e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
 \jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
-  capabilities?} \alnote{The question is: when is a \pilot a \pilot? When the 
-  use the term \pilot and when \pilot-like? Apples has a component -- the 
-  Actuator (Quote from paper: "... handles task launching, polling, and 
-  cancellation ..."), which 
-  is quite similar to a \pilot. But maybe AppLeS is something for 
-  the history section or a separate category for Master/Worker frameworks... 
-  PJ evolved from the need to map master/worker style computations to 
-  heterogeneous, dynamic distributed grid environments. Added a pre-\pilot 
-  category to the history sub-section.}
+  capabilities?} \alnote{The question is: when is a \pilot a \pilot?
+  When the use the term \pilot and when \pilot-like? Apples has a
+  component -- the Actuator (Quote from paper: "... handles task
+  launching, polling, and cancellation ..."), which is quite similar
+  to a \pilot. But maybe AppLeS is something for the history section
+  or a separate category for Master/Worker frameworks...  PJ evolved
+  from the need to map master/worker style computations to
+  heterogeneous, dynamic distributed grid environments. Added a
+  pre-\pilot category to the history sub-section.}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -590,8 +607,6 @@ re-factored to also serve a multi-purpose PJ system.
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 \mtnote{MT/AZ}
-
-\jhanote{Having surveyed now let us develop the vocabulary.}
 
 \mtnote{why we need a common vocabulary what we do with it.} \\
 The nature of the vocabulary used to describe different implementations of  \pilotjobs is heterogeneous. In order to compare and analyze these implementations, a common vocabulary must be defined so that consistent terminology can be used for all the concepts involved. Particularly important is for such a common vocabulary to clarify when a specific concept is named differently by each implementation or when, on the contrary, the same term is used to described different concepts. 
@@ -820,8 +835,6 @@ sentence later to make sure it is not overreaching}
 
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
-\jhanote{Having developed the vocabulary let us now talk about the
-  different \pilotjobs}
 
 In light of the common vocabulary discussion in 
 Section~\ref{sec:vocab}, a representative set of Pilot-Jobs
