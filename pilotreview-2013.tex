@@ -593,11 +593,63 @@ re-factored to also serve a multi-purpose PJ system.
 
 \jhanote{Having surveyed now let us develop the vocabulary.}
 
-\mtnote{why we need a common vocabulary what we do with it.} \\
-The nature of the vocabulary used to describe different implementations of  \pilotjobs is heterogeneous. In order to compare and analyze these implementations, a common vocabulary must be defined so that consistent terminology can be used for all the concepts involved. Particularly important is for such a common vocabulary to clarify when a specific concept is named differently by each implementation or when, on the contrary, the same term is used to described different concepts. 
+\mtnote{why we need a common vocabulary what we do with it.}
 
-\mtnote{How we define the common vocabulary.} \\
-Initially, the concepts used by the implementations of \pilotjob sampled in \S2 are isolated. Moving from the general to the particular, both common and distinctive concepts are first described and then explicitly defined. Each concept so defined is then related to the given \pilotjob implementations. As expected, a kernel of general concepts is shared across all the implementations while less general concepts are specific to one implementation or another. This is a confirmation that each sampled implementation should be considered as a particular case of \pilotjob but also that their differences justify a comparative analysis.
+The vocabulary adopted by different implementations of \pilotjob is
+heterogeneous. Features and capabilities are named inconsistently, with
+the same term referring to multiple concepts or the same concept named
+in different ways. In this Section, a common vocabulary is offered so to
+overcome such inconsistencies and to offer a shared ground for the
+comparative analysis presented in the next Section.
+
+\mtnote{How we define the common vocabulary.} 
+
+Initially, the concepts used by the implementations of \pilotjob sampled
+in \S2 are isolated.  Moving from the general to the particular, both
+common and distinctive concepts are first described and then explicitly
+defined. As expected, a kernel of general concepts is shared across all
+the implementations while less general concepts are specific to one
+implementation or another. This is a confirmation that each sampled
+implementation should be considered as a particular case of \pilotjob
+but also that their differences justify a comparative analysis.
+
+\mtnote{Vocabulary: job}
+
+The terms 'pilot' and 'job' are probably the first two concepts that
+need to be defined when looking for a unified vocabulary consistent with
+different implementations of \pilotjob. The term 'job' is well
+understood and refers to a program that is executed on some computing
+resources (refs). No assumptions are made about the type of program or
+the type of resources that are consumed.
+
+\mtnote{Vocabulary: queue, scheduler}
+
+In an environment with multiple units of physical or virtualized
+resources - e.g. clusters, grids or other distributed infrastructures -
+the concept of a job is usually associated to those of queue and
+scheduler. A job is submitted to a queueing system and when some
+conditions are met, a scheduler takes care of binding some resources to
+a job so that it can be executed. 
+
+\mtnote{Vocabulary: binding}
+
+The concept of binding resources to a job is necessary to understand the
+meaning of the term pilot in \pilotjob. A common way to bind resources
+to a job (refs) involves defining the amount of resources needed to
+execute the job before its submission. Once submitted, the job gets
+allocated the requested resources, executes its program and
+return its output. In such a situation there is a one to one
+correspondence between the job and the executed program. Clearly, such a
+correspondence depends upon the nature of the program. If the submitted
+program is capable of partitioning the resources it got allocated and
+then 'pilot' the execution of other programs with those resources, the
+binding of resources so obtained can happen dynamically, i.e. at run time.
+The former type of binding is called early-binding while the latter
+late-binding and when a job is capable of supporting late-binding, it is
+called a 'pilot'.
+
+\mtnote{Vocabulary: placeholder}
+
 
 %\begin{itemize}
 %    \item Distinction between PJ implementation and abstractions;
