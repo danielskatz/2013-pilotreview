@@ -281,7 +281,7 @@ modularity and/or coupling to environment.
 
 \pilotjob-System Evolution:
 
-We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker schemes through advanced workload management systems.
+We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker applications through advanced workload management systems.
 
 \begin{itemize}
     \item Pre-\pilotjob Systems:
@@ -296,9 +296,7 @@ applications~\cite{cern-slides}. There was a need to be able to
 harness the power of these heterogeneous resources to run
 jobs.
 
-The Master-Worker scheme was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification. 
-% Cite: Adaptive Scheduling for Master-Worker Applications on the Computational Grid
-% Cite: Condor MW
+The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker}~\cite{Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
 
 As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
 application-level scheduling. For this purpose, AppLeS provides an agent that 
