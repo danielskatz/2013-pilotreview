@@ -266,20 +266,10 @@ purpose'' as a reference to the variety of (i) application types
 special purpose infrastructure (iii) functional extensibility and/or
 modularity and/or coupling to environment.
 
-\subsection{Historical Context}
+\subsection{Pilot-Job Usage Modes}
 \mrnote{Melissa's Section}
-\onote{My comment in the introduction probably fits here.}
-
-\jhanote{Melissa, how does introducing terminology like
-  first-generation \pilotjobs, second-generation \pilotjobs sound?}
-
-\pilotjob-System Evolution:
-
-We first present a brief chronological order of the evolution of Pilot Job systems, beginning with simple Master-Worker applications through advanced workload management systems.
-
-\alnote{The list format is not very readable in my opinion}
-\begin{itemize}
-    \item Pre-\pilotjob Systems:
+\jhanote{This should provide a functional approach to pilot-jobs. Will
+  make the job of explaining easier.}
 
 As the uptake of grids grew, the need for job submission management
 via batch queuing systems and middleware access also grew. Many
@@ -287,66 +277,14 @@ machines implemented their own batch queuing systems, and oftentimes
 these systems varied from machine to machine. Many scientific
 communities began running into the same problems: (i) heterogenous
 resources, (ii) workload management, and (iii) support of various
-applications~\cite{cern-slides}. There was a need to be able to
+applications. There was a need to be able to
 harness the power of these heterogeneous resources to run
-jobs.
-
-The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker}~\cite{Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
-
-As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
-application-level scheduling. For this purpose, AppLeS provides an agent that 
-can be embedded into an application enabling the application to acquire 
-resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks 
-onto these. Further, AppLeS provides different application templates,
-e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
-
-
-% The development of Condor-G
-% Paper: Creating Personal Adaptive Clusters for Managing Scientific Jobs in a Distributed Computing Environment
-
-    \item First generation: Extension of pre-\pilot systems to support dynamic 
-    scheduling on top of a \pilot mechanism, i.\,e.\ a placeholder job.
-	
-Although pre-pilot systems, such as AppLeS, gave user-level control of scheduling, queue reservation time still was an issue. This brought about the idea of placeholder scheduling. A placeholder was a \pilot-like mechanism in that it was an abstraction layer above the various batch queuing systems available on different resources. It held a \textit{place} in the regular batch queue, and when it became active, it could pull tasks to execute. Placeholder scheduling was advantageous in that it did not require any special superuser privileges on the machines, which was something most grid users did not have access to. It also provided a means of load balancing across the different resources. As placeholder scheduling evolved, it came to include dynamic monitoring and throttling of the different placeholders based on the queue times on the machines.
-
-% Paper: Practical Heterogeneous Placeholder Scheduling in Overlay Metacomputers: Early Experiences
-
-    \item Second generation: complex workload management systems based on \pilots.
-
-The idea of a placeholder scheduling proved to be an efficient model for waiting in the resource batch queue only once, but executing many tasks once the placeholder job became available via a pull model. As applications began to utilize distributed cyberinfrastructure, the workloads grew from small sets of short running jobs to many jobs with either short or potentially long runtimes. There was a need for more complex management of these workloads and additional capabilities for user-level control of the tasks that would be executed within the placeholder job. This drove the creation of the modern idea of \pilots. A \pilotjob system would have to be capable of handling various types of applications across the heterogeneous resources.
-
-% Cite: Work Queue: http://www3.nd.edu/~ccl/research/papers/wq-python-pyhpc2011.pdf 
-% Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
-\end{itemize}
-
-\alnote{Another interesting point to cover is: how the invention of \pilots 
-and application-level scheduling compare to the invention of traditional local 
-batch queuing system (that were also invented to make resource sharing and 
-utilization efficient)}
-\mrnote{Would like to discuss this and develop for next week}
-%Methodologies for distributed resource management:
-%\begin{itemize}
-%    \item local resource manager (batch queueing):
-%    \begin{itemize}
-%        \item centralized: Torque
-%        \item decentralized (w/ fewer central components): Condor
-%    \end{itemize} 
-%    \item meta scheduling
-%    \item advance reservations
-%    \item class ads
-%    \item \pilots
-%\end{itemize}
-
-\subsection{What have Pilot-Jobs been used For?}
-\mrnote{Melissa's Section}
-\jhanote{This should provide a functional approach to pilot-jobs. Will
-  make the job of explaining easier.}
-
-This section explains how \pilotjobs have historically been used, in
-no particular order.
+jobs. \pilotjobs have historically been used as a means of solving
+this problem. We briefly discuss some of the specific uses of pilot 
+jobs below.
 
 \pilotjobs are most commonly used for the execution of many tasks
-through the use of a container job. \pilotjobs are often measured by
+through the use of a container job. They are often measured by
 their throughput, that is, the number of tasks that they can complete
 per second (tps). As such, \pilotjobs are used to achieve
 high-throughput, for example, when using genome sequencing techniques
@@ -370,10 +308,69 @@ have an available slot for executing tasks on a given number of
 cores. As more tasks are added to the system, the \pilot can continue
 to execute new tasks until the job is considered
 complete. %Find a citation for this dynamic type of simulation
+%cite replica exchange work
 
 \pilotjobs have also been used to avoid queue wait times for many jobs
 as well as harness and utilize different resources (with different
 batch queueing systems) to do \textit{scale-across} simulations.
+
+
+\jhanote{Melissa, how does introducing terminology like
+  first-generation \pilotjobs, second-generation \pilotjobs sound?}
+
+\section{Historical Context}
+\subsubsection*{The Evolution of \pilotjobs}
+
+In order to appreciate \pilotjobs, we outline the evolution of \pilot-like capabilities through the creation of an actual \pilotjob. We present a brief chronological order of \pilotjob-like systems, beginning with simple Master-Worker applications through advanced workload management systems.
+
+\alnote{The list format is not very readable in my opinion}
+\textbf{Pre-\pilotjob Systems:}
+
+The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker}~\cite{Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
+
+As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
+application-level scheduling. For this purpose, AppLeS provides an agent that 
+can be embedded into an application enabling the application to acquire 
+resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks 
+onto these. Further, AppLeS provides different application templates,
+e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
+
+
+% The development of Condor-G
+% Paper: Creating Personal Adaptive Clusters for Managing Scientific Jobs in a Distributed Computing Environment
+
+\textbf{First Generation Systems:} 
+
+The first generation of systems was an extension of pre-\pilot systems to support dynamic scheduling on top of a \pilot mechanism.
+Although pre-pilot systems, such as AppLeS, gave user-level control of scheduling, queue reservation time still was an issue. This brought about the idea of placeholder scheduling. A placeholder was a \pilot-like mechanism in that it was an abstraction layer above the various batch queuing systems available on different resources. It held a \textit{place} in the regular batch queue, and when it became active, it could pull tasks to execute. Placeholder scheduling was advantageous in that it did not require any special superuser privileges on the machines, which was something most grid users did not have access to. It also provided a means of load balancing across the different resources. As placeholder scheduling evolved, it came to include dynamic monitoring and throttling of the different placeholders based on the queue times on the machines.
+
+% Paper: Practical Heterogeneous Placeholder Scheduling in Overlay Metacomputers: Early Experiences
+
+\textbf{Second Generation Systems:}
+
+ Second generation systems encompass complex workload management systems based on \pilots. The idea of a placeholder scheduling proved to be an efficient model for waiting in the resource batch queue only once, but executing many tasks once the placeholder job became available via a pull model. As applications began to utilize distributed cyberinfrastructure, the workloads grew from small sets of short running jobs to many jobs with either short or potentially long runtimes. There was a need for more complex management of these workloads and additional capabilities for user-level control of the tasks that would be executed within the placeholder job. This drove the creation of the modern idea of \pilots. A \pilotjob system would have to be capable of handling various types of applications across the heterogeneous resources.
+
+% Cite: Work Queue: http://www3.nd.edu/~ccl/research/papers/wq-python-pyhpc2011.pdf 
+% Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
+
+\alnote{Another interesting point to cover is: how the invention of \pilots 
+and application-level scheduling compare to the invention of traditional local 
+batch queuing system (that were also invented to make resource sharing and 
+utilization efficient)}
+\mrnote{Would like to discuss this and develop for next week}
+%Methodologies for distributed resource management:
+%\begin{itemize}
+%    \item local resource manager (batch queueing):
+%    \begin{itemize}
+%        \item centralized: Torque
+%        \item decentralized (w/ fewer central components): Condor
+%    \end{itemize} 
+%    \item meta scheduling
+%    \item advance reservations
+%    \item class ads
+%    \item \pilots
+%\end{itemize}
+
 
 %For:
 %\begin{itemize}
@@ -394,11 +391,7 @@ batch queueing systems) to do \textit{scale-across} simulations.
 low-level infrastructure, no incentive to use multiple infrastructures? External vs. 
 internal perspective?}
 
-\pilotjobs have existed on grid infrastructures for some time. 
-Efficient load balancing and resource utilization
-across the existing grid hardware drove the desire for 
-user-level control of tasks and ease of use of job descriptions for
-data driven applications.  \pilotjobs provide the ability to 
+As stated above, \pilotjobs provide the ability to 
 distribute workload across multiple systems and
 provide an easy way to schedule many jobs at one time. This in turn
 improves the utilization of resources, reduces the net wait time of a
