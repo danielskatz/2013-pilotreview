@@ -866,8 +866,6 @@ differing capabilities, with the end-goal being a
 complete understanding of the Pilot-Job ecosystem via a common
 vocabulary.
 
-
-
 %\subsubsection{Condor-G}
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
 %% to use this general sort of information + reword using our spiffy 
@@ -907,27 +905,77 @@ Scheduling/resource-selection is handled by a per-application AppleS agent.
 \aznote{Not seeing where a placeholder/pilot reservation is...  it appears
 that the schedule is executed directly on target hardware without Pilots?}
 
-Although many features from more advanced pilot systems are missing, the core
-\pilotjob functionality such as late-binding and 
+Although many features from more advanced pilot systems are missing, a subset
+of \pilotjob functionality such as late-binding and 
 application-level scheduling are present in AppLeS.
 \aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
+
 \aznote{Talk about how what AppLeS is missing to be a true PJ system}
 
 \subsubsection{MyCluster - Basic Pilot-Job Systems}
 MyCluster~\cite{1652061}...
-\aznote{Didn't pick Condor-G/Glide-in, as GlideinWMS uses Condor as well..}
+\aznote{Didn't pick Condor-G/Glide-in, as GlideinWMS uses Condor as well and did not
+want to have two Condor-based pilots...  but maybe that would make things look nicer
+and show a natural evolution?}
 
 \subsubsection{GlideinWMS - Pilot-based Scheduling/Multi-Level Scheduling}
 \textit{Collectors} are the managers, with one collector per
 GlideinWMS system.
 \textit{Glidein factory daemon}s are responsible for
 submitting pilot jobs to grid pools\aznote{Use diff vocab for grid pool?}.
+They therefore correspond to pilot managers.
 \textit{VO frontend daemons} are the schedulers, which map jobs
 to pilots.  GlideinWMS takes advantage of late-binding, as
 jobs are not selected for resources until the pilots start.\aznote{This
 should be true of all systems described in this section -- do we
 need to explicitly say so for each pilot system?}
+\textit{WMS collector machine} manages communication between the glidein
+factory daemons(pilot managers) and VO frontend daemons(schedulers)
+and so corresponds to \aznote{We don't have anything for this.  This
+sounds like what REDIS/etc do for BJ though.  Should we incorporate this
+into our vocabulary?}
+\textit{User jobs} correspond to compute units \aznote{Right?}
+
+\begin{itemize}
+Unlisted things \\
+\item Workflow (doesn't seem to be explicit support)
+\item Workload (is this just a list of user jobs that are queued up)
+\item Placeholder (isn't this the same kind of deal as a Pilot-Job/PJ
+waiting in a queue?)
+\item Pilot framework (The entire GlideinWMS qualifies as a ``pilot
+framework'', correct?)
+\item Ensemble \aznote{How to tie this in}
+\item Platform \aznote{Ditto}
+\item Master-Worker \aznote{Likewise, we could say that the
+VO factory daemons are the masters with the pilots the workers,
+but this seems overly pedantic?}
+\end{itemize}
+
+\subsubsection{Corral - 2nd Pilot-based Scheduling/Multi-Level Scheduling}
+\aznote{SJ asked for an investigation of Corral -- not sure that this
+deserves a full analysis at this point on a technical level despite
+being commonly used, open to suggestions}
+
+Corral is designed to allow hybrid HTC/HPC execution, in which
+many small jobs may be executed in conjunction with larger runs. 
+\cite{Rynge:2011:EUG:2116259.2116599}
+\aznote{Back this up w/ paper refs -- paper is somewhat dated,
+verify this is still true today}.  Corral operates as a Glidein
+WMS frontend\aznote{main reason that I think we shouldn't include
+Corral in its own section...}, where GlideinWMS manages the size
+of Condor glide-in pools.
+\begin{itemize}
+\item Workflow - handled by Pegasus workflow management system
+  \aznote{True in the paper I am using, but not handled by Corral itself, so should we include this?}
+\item Placeholder - handled by multislot requests 
+  \aznote{multislot request requests a single large
+    GRAM job, and then starts glideins within this container}
+\item Job
+\item Compute unit
+\item Workload 
+\item Will fill this in later...
+\end{itemize}
 
 \subsubsection{Swift - Higher-Level Application Frameworks (Workflow)}
 
