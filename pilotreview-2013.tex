@@ -630,11 +630,11 @@ that their differences justify a comparative analysis.
 \mtnote{Vocabulary: job}
 
 The name '\pilotjob' indicates the primary role played by the concepts
-of 'pilot' and 'job' in this type of system. These two well-known
-[cit]concepts are complex, meaning that they have logical constituents
-that need first to be clarified in order for them to be properly
-understood. Starting from the concept of 'job', its most relevant
-constituents are task, resource, infrastructure and scheduling.
+of 'pilot' and 'job' in this type of system. These two well-known [cit]
+concepts are complex, meaning that they have logical constituents that
+need first to be clarified in order for them to be properly understood.
+Starting from the concept of 'job', its most relevant constituents are
+'task', 'resource', 'infrastructure' and 'scheduling'.
 
 \mtnote{Vocabulary: task}
 
@@ -645,16 +645,16 @@ achieve a given goal.
 
 \mtnote{Vocabulary: resource}
 
-The concept of operation entails that of resources, namely limited,
-typed and physical quantities that are consumed by executing the
-operations that describe a task. Resources are grouped into so called
-'infrastructures', often geographically separated by the users
-interested in performing their task. 
+The concept of operation entails that of resources, namely finite, typed
+and physical quantities that are consumed by executing the operations of
+a task. Resources are physically and logically organized into so called
+'infrastructures', agglomerates often geographically separated from the
+users interested in performing their tasks. 
 
-The operations of a task associated to a \pilotjob are usually
-computational but in principle they might also operate on data or
-networks, depending on the resources made available by an infrastructure
-to the users.
+The operations of a task permed by means of a \pilotjob implementation
+are usually computational in nature but, in principle, they might also
+operate on other types of resources such as data or networks, depending
+on the resources made available by an infrastructure to the users.
 
 \mtnote{Vocabulary: scheduling}
 
@@ -669,43 +669,46 @@ algorithms.
 
 It is now possible to define the concept of 'job' by utilizing all its
 logical constituents. A 'job' is a collection of tasks that a user
-submit to a scheduler on an infrastructure that offers the required
-amount and type of resources. Jobs may be described in a variety of
-formal languages indicating, among other properties, not only the amount
-and type of resources needed to perform its tasks but also the amount of
-time that the tasks belonging to that job should take to complete. 
+submits to a scheduler of an infrastructure that offers the required
+amount and type of resources over an appropriate extent of time.
+Therefore, jobs need to be described in a suitable formal language
+indicating, among other properties, not only the amount and type of
+resources needed to perform its tasks but also the amount of time that
+those tasks should take to complete and the relevant properties of their
+execution environment.
 
 \mtnote{Vocabulary: pilot intro}
 
 The concept of 'pilot' builds on some of the constituents of 'job' but
-includes also those of task pool, manager and agent. 
+includes also those of 'task pool', 'manager' and 'agent'. 
 
 \mtnote{Vocabulary: task pool}
 
 Functionally, a pilot is a system very similar to those deployed within
 an infrastructure in order to offer scheduling capabilities. As shown in
 Figure x, users submit tasks to a 'task pool', a store where tasks are
-collected and made available to the manager. 
+collected and made available to a manager. 
 
 \mtnote{Vocabulary: manager}
 
-The manager is responsible for pulling tasks from the task pool and
-scheduling them into one or more agents. Managers can offer a vast array
-of capabilities and they differer greatly among \pilotjob
+In this context, a manager is responsible for pulling tasks from a task
+pool and scheduling them into one or more agents. Managers can offer a
+vast array of capabilities and they greatly differ among \pilotjob
 implementations. Scheduling algorithms but also mechanisms to allocate
 dynamically resources to each task depending on availability and
 performance considerations are typical examples of capabilities already
-offered or potentially implementable in pilot managers.
+offered, or potentially implementable, in managers.
 
 \mtnote{Vocabulary: agent}
 
-Agents run the tasks pushed to them by the manager. Clearly, an agent
-must have the right amount and type of resources in order to run its
-tasks and it is this requirement that brings together pilots and jobs.
+Agents run the tasks pushed by or pulled from one or more managers.
+Clearly, an agent must have the right amount and type of resources for
+an appropriate extent of time in order to run its tasks and it is this
+requirement that brings together pilots and jobs.
 
 \mtnote{Vocabulary: Pilot Job}
 
-A pilot job is a system that combines all the conceptual constituents of
+A \pilotjob is a system that combines all the conceptual constituents of
 both 'pilot' and 'job' but also add the three distinctive concepts of
 'placeholder', 'early binding' and 'late binding'.
 
