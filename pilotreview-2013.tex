@@ -315,6 +315,8 @@ advanced workload management systems.
 
 The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker}~\cite{Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
 
+Another application that pre-dates pilot jobs is the BOINC middleware system. BOINC plays a significant role in distributed computing acting as a Client/Server-based platform which utilizes unused computer cycles on the client-side in order to execute tasks given from the server-side. Applications can be built on top of BOINC for their own scientific endeavors; it was originally built for the SETI@Home project, which uses Internet-connected computers to download and analyze radio telescope data. Most often, these computers are based around the world -- users merely have to download the client program, and it runs in the background on their computer. The data is then aggregated back on the server-side and analyzed. The idea of farming out tasks in a distributed environment including personal computers was the first wide-use of the Client/Server model for distributed computing.
+
 As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
 application-level scheduling. For this purpose, AppLeS provides an agent that 
 can be embedded into an application enabling the application to acquire 
@@ -423,7 +425,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 	\begin{itemize}
 		\item AppLeS
 		\item Grid Harvesting Service
-		\item Boinc (@Home)
+		\item Boinc (@Home) 
 	\end{itemize}
 	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
