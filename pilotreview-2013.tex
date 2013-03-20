@@ -176,8 +176,7 @@ decoupling between task/workload specification and task management.
 tasks across such resources.  The \pilotjob abstraction is also a
 promising route to address specific requirements of distributed
 scientific applications, such as coupled-execution and
-application-level scheduling~\cite{ko-
-  efficient,DBLP:conf/hpdc/KimHMAJ10}.
+application-level scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -229,18 +228,7 @@ The aim here is to develop both an understanding of what \pilotjobs
 are and a listing of the different \pilotjobs, e.g. Swift, Condor
 Glide-in, DIANE, DIRAC.
 
-\jhanote{How do we choose which ones to survey or include in our
-  survey, which ones do we not include?}  \mtnote{Within a historical
-  frame where the first pilot-like implementation/abstraction is
-  presented followed by its evolutions/reinterpretation, we would
-  review those abstractions/implementations that signed evolutionary
-  steps. For completeness we could just mention those that did not
-  offer a tangible progress.}  \mrnote{Recommend we be careful of the
-  word 'survey' if we don't plan on being comprehensive}
-
-A specific implementation of the P* model that both unified
-conceptually as well as was interoperable across myriad grid
-middleware \mrnote{needs language smoothing}, led to 
+A specific implementation of the P* model that worked across a variety of middleware and conceptually unified Pilot-Abstractions, led to 
 BigJob~\cite{saga_bigjob_condor_cloud} -- a
 SAGA-based \pilotjob, which was used to support a range of
 applications, ranging from uncoupled ensembles of molecular dynamics
@@ -256,8 +244,6 @@ efforts in search of a common minimally complete model of \pilotjobs,
 and resulted in the \pstar model~\cite{pstar12}. 
 
 
-%thereby it is required by necessity to be general.
-
 There is an axes with a sliding scale of dependence/coupling to
 infrastructure.  It is difficult to assign a single point of coupling,
 between \pilotjobs and the environment for like most other tools they
@@ -267,10 +253,7 @@ purpose'' as a reference to the variety of (i) application types
 special purpose infrastructure (iii) functional extensibility and/or
 modularity and/or coupling to environment.
 
-\subsection{Pilot-Job Usage Modes}
-\mrnote{Melissa's Section}
-\jhanote{This should provide a functional approach to pilot-jobs. Will
-  make the job of explaining easier.}
+\subsection{A Functional Approach to Pilot-Jobs}
 
 As the uptake of grids grew, the need for job submission management
 via batch queuing systems and middleware access also grew. Many
@@ -308,16 +291,16 @@ types of dynamic simulations, because once they are active, the agents
 have an available slot for executing tasks on a given number of
 cores. As more tasks are added to the system, the \pilot can continue
 to execute new tasks until the job is considered
-complete. %Find a citation for this dynamic type of simulation
+complete. Without \pilotjobs, these simulations would have to be
+resubmitted to the job queue and wait for their time to become active again~\cite{luckow2009adaptive}. %Find a citation for this dynamic type of simulation
 %cite replica exchange work
 
 \pilotjobs have also been used to avoid queue wait times for many jobs
 as well as harness and utilize different resources (with different
 batch queueing systems) to do \textit{scale-across} simulations.
-
-
-\jhanote{Melissa, how does introducing terminology like
-  first-generation \pilotjobs, second-generation \pilotjobs sound?}
+As a fault tolerant mechanism, many \pilotjob systems monitor
+failed jobs and have the ability to restart them within the given 
+time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-g,nilsson2011atlas}. 
 
 \subsection{Historical Context}
 \subsubsection*{The Evolution of \pilotjobs}
@@ -358,24 +341,6 @@ Although pre-pilot systems, such as AppLeS, gave user-level control of schedulin
 % Cite: Work Queue: http://www3.nd.edu/~ccl/research/papers/wq-python-pyhpc2011.pdf 
 % Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
 
-\alnote{Another interesting point to cover is: how the invention of \pilots 
-and application-level scheduling compare to the invention of traditional local 
-batch queuing system (that were also invented to make resource sharing and 
-utilization efficient)}
-\mrnote{Would like to discuss this and develop for next week}
-%Methodologies for distributed resource management:
-%\begin{itemize}
-%    \item local resource manager (batch queueing):
-%    \begin{itemize}
-%        \item centralized: Torque
-%        \item decentralized (w/ fewer central components): Condor
-%    \end{itemize} 
-%    \item meta scheduling
-%    \item advance reservations
-%    \item class ads
-%    \item \pilots
-%\end{itemize}
-
 
 %For:
 %\begin{itemize}
@@ -385,9 +350,6 @@ utilization efficient)}
 %\item Avoiding Queue wait times for many jobs
 %\item Harness and utilize different resources (with different batch queuing systems) to do runs across all of them
 %\end{itemize}
-
-\jhanote{Melissa - please start converting into full text for this and
-  previous sub-section}
 
 \subsection{Informal Description of Pilot-Job Systems}
 \alnote{AL/MS}
