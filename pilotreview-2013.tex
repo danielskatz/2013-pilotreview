@@ -1139,29 +1139,34 @@ have cited}
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which
 was originally designed for implementing master/worker applications,
 but also provides PJ functionality for job-style executions.
-DIANE utilizes a single hierarchy of worker agents as well as a PJ manager
-referred to as \texttt{RunMaster}. 
-For the spawning of PJs a separate script, the so-called submitter script, is
-required. For the access to the physical resources the GANGA
-framework~\cite{Moscicki20092303} can be used.
-A worker agent generally manages only a single
-core and thus, by default is not able to run parallel applications.
- Once the worker agents are started they register themselves at the RunMaster.
+DIANE utilizes a single hierarchy of worker agents as well as a PJ \textit{manager}
+referred to as \texttt{RunMaster}.  The manager creates
+placeholders called \texttt{Workers}, which register with and receive jobs from the manager.
+%For the spawning of PJs a separate script, the so-called submitter script, is
+%required. 
+The \textit{scheduler} for DIANE is known as the \texttt{Planner}.
+%For the access to the physical resources the GANGA
+%framework~\cite{Moscicki20092303} can be used.
+%A worker agent generally manages only a single
+%core and thus, by default is not able to run parallel applications.
+% Once the worker agents are started they register themselves at the RunMaster.
 % GANGA provides a
 % unified interface for job submissions to various resource types, e.\,g.\ EGI
 % resources or TG resources via a SAGA backend.
 %DIANE operates on the master-worker computing model.
 
-The manager for DIANE is called the \texttt{Master}, and contains
-the scheduler for DIANE, which is known as the \texttt{Planner}.
-The manager creates placeholders called \texttt{Workers}, which
-register with and receive jobs from the manager.
+%The \textit{manager} for DIANE is called the \texttt{Master}, and contains
+%the \textit{scheduler} for DIANE, which is known as the \texttt{Planner}.
+%The manager creates placeholders called \texttt{Workers}, which
+%register with and receive jobs from the manager.
 
 The workflow is then such that a user submits a parallel job to
 the grid using a DIANE client.  The client then creates the Pilot manager
 and remains in contact with it to control its \pilotjobs.  Results
-are aggregated through use means of the DIANE \texttt{Integrator}.
-DIANE includes a simple capability matcher and FIFO-based task scheduler.
+are aggregated through use means of the DIANE
+\texttt{Integrator}.\aznote{No mapping vocab for the integrator as of now.}
+DIANE includes a simple capability matcher and FIFO-based task scheduler
+to help facilitate the execution of jobs.
 Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
 application, exist or are under development. The framework is extensible:
 applications can implement a custom application-level scheduler.
@@ -1178,7 +1183,6 @@ implemented. Further, DIANE supports fault tolerance: basic error detection and
 propagation mechanisms are in place. Further, an automatic re-execution of WUs
 is possible.
 
-\aznote{No mapping vocab for the integrator as of now.}
 DIANE is primarily designed with respect to HTC environments (such as
 EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
 size of 1 core.
