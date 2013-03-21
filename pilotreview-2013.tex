@@ -571,7 +571,7 @@ re-factored to also serve a multi-purpose PJ system.
 The vocabulary adopted by different implementations of \pilotjob is
 heterogeneous. Features and capabilities are named inconsistently, with
 the same term referring to multiple concepts or the same concept named
-in different ways. In this Section, a common vocabulary is offered so to
+in different ways. In this section, a common vocabulary is offered so to
 overcome such inconsistencies and to offer a shared ground for the
 comparative analysis presented in \S 4.
 
@@ -657,7 +657,8 @@ but includes also those of `pool', `manager' and `agent'.
 	\includegraphics[width=0.45\textwidth]{figures/pilot_section3_1}
 	\caption{(a) Components and transitions of a generic pilot
 		system; (b) Pilot systems may be composed of multiple
-	instances of the same components.}
+	instances of the same components. \aznote{Bottom of figure
+        is slightly cut off}}
 	\label{fig:s3_pilot_diagram}
 \end{figure}
 
@@ -1131,18 +1132,57 @@ of Condor glide-in pools.
   (Task Farming/Master-Worker)}
 \aznote{Do we want to define single-user vs multi-user? 
   Communication methods?  Output aggregrator?}
-DIANE operates on the master-worker computing model.
 
-The manager for DIANE is called the \textit{Master}, and contains
-the scheduler for DIANE, which is known as the \textit{Planner}.
-The manager creates placeholders called \textit{Workers}, which
+\aznote{DIANE runmaster/etc not included in current paper we
+have cited}
+
+DIANE~\cite{Moscicki:908910} is a task coordination framework, which
+was originally designed for implementing master/worker applications,
+but also provides PJ functionality for job-style executions.
+DIANE utilizes a single hierarchy of worker agents as well as a PJ manager
+referred to as \texttt{RunMaster}. 
+For the spawning of PJs a separate script, the so-called submitter script, is
+required. For the access to the physical resources the GANGA
+framework~\cite{Moscicki20092303} can be used.
+A worker agent generally manages only a single
+core and thus, by default is not able to run parallel applications.
+ Once the worker agents are started they register themselves at the RunMaster.
+% GANGA provides a
+% unified interface for job submissions to various resource types, e.\,g.\ EGI
+% resources or TG resources via a SAGA backend.
+%DIANE operates on the master-worker computing model.
+
+The manager for DIANE is called the \texttt{Master}, and contains
+the scheduler for DIANE, which is known as the \texttt{Planner}.
+The manager creates placeholders called \texttt{Workers}, which
 register with and receive jobs from the manager.
 
 The workflow is then such that a user submits a parallel job to
 the grid using a DIANE client.  The client then creates the Pilot manager
 and remains in contact with it to control its \pilotjobs.  Results
-are aggregated through use means of the DIANE \textit{Integrator}.
+are aggregated through use means of the DIANE \texttt{Integrator}.
+DIANE includes a simple capability matcher and FIFO-based task scheduler.
+Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
+application, exist or are under development. The framework is extensible:
+applications can implement a custom application-level scheduler.
+
+For communication between the RunMaster and
+worker agents point-to-point messaging based on CORBA~\cite{OMG-CORBA303:2004}
+is used. CORBA is also used for file staging.
+DIANE is a single-user PJ, i.\,e.\ each PJ is executed with the
+privileges of the respective user. Also, only WUs of this respective user can be
+executed by DIANE. DIANE supports various middleware security mechanisms
+(e.\,g.\ GSI, X509 authentication). For this purpose it relies on GANGA. The
+implementation of GSI on TCP-level is possible, but currently not yet
+implemented. Further, DIANE supports fault tolerance: basic error detection and
+propagation mechanisms are in place. Further, an automatic re-execution of WUs
+is possible.
+
 \aznote{No mapping vocab for the integrator as of now.}
+DIANE is primarily designed with respect to HTC environments (such as
+EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
+size of 1 core.
+
 
 \subsubsection{Bosco - Higher-Level Application Frameworks 
   (Data Analytics and Visualization)}
