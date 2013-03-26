@@ -665,6 +665,8 @@ Late binding requires specific capabilities. Manager(s) and agent(s) must be abl
 
 \subsection{Different components of the Landscape}
 
+\mtnote{The idea is to focus this subsection on the relationship between \pilotjob and the environment - re infrastructure - where its agents are scheduled and executed. The analysis should focus on the set of capabilities that pertain exclusively - at least in theory - to each domain. This would outline functionally and qualitatively the `landscape' of \pilotjob and offer a base for the critical analysis of the \pilotjobs implementations in \S 4. The idea would be to show how implementations choose ad hoc solutions depending on the specific characteristic of their landscape, both in terms of compensating for their limitations or exploiting their peculiarities. }
+
 \begin{itemize}
 
     \item Resource Types
@@ -683,7 +685,7 @@ Late binding requires specific capabilities. Manager(s) and agent(s) must be abl
             \item "The XSEDE Model"
         \end{itemize}
 
-    \item Software and Services
+    \item Software and Services \mtnote{this subsection would focus specifically on this item}
 
         \begin{itemize}
             \item Single-site, local workload mgmt. systems (HPC schedulers)
@@ -721,8 +723,10 @@ Late binding requires specific capabilities. Manager(s) and agent(s) must be abl
 %\end{itemize}
 %
 \subsection{Common Terms and Definitions}
-%
+
 \alnote{What to do with the terms, such as many-task computing, meta computing, grid computing, etc.? It might make sense to couple the evolution of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe in history section.}
+
+\mtnote{I think subsection 3.0 addresses this comment. If we all agree on todays call, I will comment out the entire subsection.}
 
 \alnote{Can we start of with the P* elements so that we have something?}
 \begin{itemize}
@@ -739,25 +743,25 @@ Late binding requires specific capabilities. Manager(s) and agent(s) must be abl
     \item platform
 \end{itemize}
 
-\mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
-\begin{itemize}
-    \item Common concepts
-        \begin{itemize}
-             \item Placeholder
-             \item $\langle$Late binding/placement$\rangle$
-             \item $\langle$Master/worker$\rangle$
-             \item Workload
-             \item Job
-             \item \computeunit
-        \end{itemize}
-    \item Distinctive concepts
-        \begin{itemize}
-             \item $\langle$High-level framework$\rangle$
-             \item Workflow
-             \item Scheduler
-             \item Ensemble?
-        \end{itemize}
-\end{itemize}
+% \mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
+% \begin{itemize}
+%     \item Common concepts
+%         \begin{itemize}
+%              \item Placeholder
+%              \item $\langle$Late binding/placement$\rangle$
+%              \item $\langle$Master/worker$\rangle$
+%              \item Workload
+%              \item Job
+%              \item \computeunit
+%         \end{itemize}
+%     \item Distinctive concepts
+%         \begin{itemize}
+%              \item $\langle$High-level framework$\rangle$
+%              \item Workflow
+%              \item Scheduler
+%              \item Ensemble?
+%         \end{itemize}
+% \end{itemize}
 
 %The terminology used to describe the implementations of pilot-job reviewed in
 %section 2 varies depending not only on the type of implementation considered --
