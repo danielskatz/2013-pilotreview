@@ -947,14 +947,15 @@ vocabulary.
 \subsubsection{AppLeS - Pre-PJ-Systems / Master/Worker frameworks}
 \aznote{Resource discovery a special feature, as well as performance-modelling
 for resource selection}
-
 Scheduling/resource-selection is handled by a per-application AppleS agent.
-\aznote{Not seeing where a placeholder/pilot reservation is...  it appears
-that the schedule is executed directly on target hardware without Pilots?}
-
 Although many features from more advanced pilot systems are missing, a subset
 of \pilotjob functionality such as late-binding and 
 application-level scheduling are present in AppLeS.
+However, the lack of a placeholder job limits the functionality 
+of late-binding and application-level scheduling, as tasks
+must wait in unpredictable queues before being executed,
+undermining the level of contol.
+
 \aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
