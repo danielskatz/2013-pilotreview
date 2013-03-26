@@ -222,6 +222,8 @@ needs), these objectives remains difficult if not infeasible.
 %   unifying description and then revisit a larger sample of
 %   \pilotjobs}
 
+\mrnote{I don't feel like anything in the next three paragraphs should be here or makes sense. I don't know who wrote it, but can someone please justify their text here?}
+
 The aim here is to develop both an understanding of what \pilotjobs
 are and a listing of the different \pilotjobs, e.g. Swift, Condor
 Glide-in, DIANE, DIRAC.
@@ -281,7 +283,6 @@ coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which
 more processors were assigned to jobs with longer runtimes, so as to
 make the simulation take the same amount of wall-clock time between
 points when they need to communicate with one another (via MPI).
-% Efficient Runtime Environment for Coupled Multi-Physics Simulations: Dynamic Resource Allocation and Load-Balancing
 
 Some simulations require varying number of tasks to complete -- that
 is, 10 tasks may start a program but the results of these tasks may
@@ -291,8 +292,7 @@ have an available slot for executing tasks on a given number of
 cores. As more tasks are added to the system, the \pilot can continue
 to execute new tasks until the job is considered
 complete. Without \pilotjobs, these simulations would have to be
-resubmitted to the job queue and wait for their time to become active again~\cite{luckow2009adaptive}. %Find a citation for this dynamic type of simulation
-%cite replica exchange work
+resubmitted to the job queue and wait for their time to become active again~\cite{luckow2009adaptive}. 
 
 \pilotjobs have also been used to avoid queue wait times for many jobs
 as well as harness and utilize different resources (with different
@@ -305,16 +305,16 @@ time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-
 \subsubsection*{The Evolution of \pilotjobs}
 
 In order to appreciate \pilotjobs, we outline the evolution of
-\pilot-like capabilities through the creation of an actual
+\pilot-like capabilities ultimately leading to the creation of an actual
 \pilotjob. We present a brief chronological order of \pilotjob-like
 systems, beginning with simple Master-Worker applications through
 advanced workload management systems.
 \\ \\
 \noindent \textbf{Pre-\pilotjob Systems:}
 
-The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker}~\cite{Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
+The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
 
-Another application that pre-dates pilot jobs is the BOINC middleware system~cite{Anderson:2004:BSP:1032646.1033223}. BOINC plays a significant role in distributed computing acting as a Client/Server-based platform which utilizes unused computer cycles on the client-side in order to execute tasks given from the server-side. Applications can be built on top of BOINC for their own scientific endeavors; it was originally built for the SETI@Home project, which uses Internet-connected computers to download and analyze radio telescope data. Most often, these computers are based around the world -- users merely have to download the client program, and it runs in the background on their computer. The data is then aggregated back on the server-side and analyzed. The idea of farming out tasks in a distributed environment including personal computers was the first wide-use of the Client/Server model that essentially made a grid out of many less powerful machines.
+Another application that pre-dates pilot jobs is the BOINC middleware system~\cite{Anderson:2004:BSP:1032646.1033223}. BOINC plays a significant role in distributed computing acting as a Client/Server-based platform which utilizes unused computer cycles on the client-side in order to execute tasks given from the server-side. Applications can be built on top of BOINC for their own scientific endeavors; it was originally built for the SETI@Home project, which uses Internet-connected computers to download and analyze radio telescope data. Most often, these computers are based around the world -- users merely have to download the client program, and it runs in the background on their computer. The data is then aggregated back on the server-side and analyzed. The idea of farming out tasks in a distributed environment including personal computers was the first wide-use of the Client/Server model that essentially made a grid out of many less powerful machines.
 
 As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
 application-level scheduling. For this purpose, AppLeS provides an agent that 
@@ -323,11 +323,12 @@ resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks
 onto these. Further, AppLeS provides different application templates,
 e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
-The first generation of systems was an extension of pre-\pilot systems to support dynamic scheduling on top of a \pilot mechanism.
+The rise of application-level scheduling, as in AppLeS, opened new possibilities to Grid environments. The concept of application-level scheduling was extended to include long-term performance prediction in heterogenous Grid environments via the Grid Harvest Service (GHS) system~\cite{ghs}. GHS provides a prediction model that was derived by probability analysis and simulation and useful for large-scale applications in shared environments. Its prediction models and task scheduling algorithms are utilized in the placement of tasks across Grid resources. GHS supports three classes of task scheduling: (i) single task, (ii) parallel processing, and (iii) meta-task. The performance evaluation and modeling in conjunction with task-specific management (such as placement, scheduling, and execution) allows the utilization of many heterogenous resources in an efficient manner.
+
 Although pre-pilot systems, such as AppLeS, gave user-level control of scheduling, queue reservation time still was an issue. This brought about the idea of placeholder scheduling~\cite{Pinchak02practicalheterogeneous, Singh:2008:WTC:1341811.1341822}. A placeholder was a \pilot-like mechanism in that it was an abstraction layer above the various batch queuing systems available on different resources. It held a \textit{place} in the regular batch queue, and when it became active, it could pull tasks to execute. Placeholder scheduling was advantageous in that it did not require any special superuser privileges on the machines, which was something most grid users did not have access to. It also provided a means of load balancing across the different resources. As placeholder scheduling evolved, it came to include dynamic monitoring and throttling of the different placeholders based on the queue times on the machines.
 
- Second generation systems encompass complex workload management systems based on \pilots. The idea of a placeholder scheduling proved to be an efficient model for waiting in the resource batch queue only once, but executing many tasks once the placeholder job became available via a pull model. As applications began to utilize distributed cyberinfrastructure, the workloads grew from small sets of short running jobs to many jobs with either short or potentially long runtimes. There was a need for more complex management of these workloads and additional capabilities for user-level control of the tasks that would be executed within the placeholder job. This drove the creation of the modern idea of \pilots. A \pilotjob system would have to be capable of handling various types of applications across the heterogeneous resources.
-
+Second generation systems, which will be talked about in depth in Section \ref{sec:pj} encompass complex workload management systems based on \pilots. The idea of a placeholder scheduling proved to be an efficient model for waiting in the resource batch queue only once, but executing many tasks once the placeholder job became available via a pull model. As applications began to utilize distributed cyberinfrastructure, the workloads grew from small sets of short running jobs to many jobs with either short or potentially long runtimes. There was a need for more complex management of these workloads and additional capabilities for user-level control of the tasks that would be executed within the placeholder job. This drove the creation of the modern idea of \pilots. 
+ 
 % Cite: Work Queue: http://www3.nd.edu/~ccl/research/papers/wq-python-pyhpc2011.pdf 
 % Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
 
@@ -342,6 +343,7 @@ Although pre-pilot systems, such as AppLeS, gave user-level control of schedulin
 %\end{itemize}
 
 \subsection{Informal Description of Pilot-Job Systems}
+\label{sec:pj}
 \alnote{AL/MS}
 
 \note{talk about tool development, unregulated cottage industry - Why
@@ -410,13 +412,6 @@ system (e.\,g.\ Swift/Coaster), or rely on a third-party
 
 PJ to survey (pilots can fall potentially in on or more categories):
 \begin{itemize}
-	\item Pre-pilot Systems / Master/Worker frameworks:
-%First-Generation PJ-Systems
-	\begin{itemize}
-		\item AppLeS
-		\item Grid Harvesting Service
-		\item Boinc (@Home) 
-	\end{itemize}
 	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
 	\begin{itemize}
 		\item Condor-G/Glide-In
