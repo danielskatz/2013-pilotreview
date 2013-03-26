@@ -966,6 +966,27 @@ MyCluster~\cite{1652061}...
 \aznote{Didn't pick Condor-G/Glide-in, as GlideinWMS uses Condor as well and did not
 want to have two Condor-based pilots...  but maybe that would make things look nicer
 and show a natural evolution?}
+\begin{itemize}
+\item Master Node Manager = Manager \aznote{Master Node
+Manager process within a GNU Screen session that then
+starts the Condor/SGE master daemons in user space if
+needed.}
+\item Agent Manager \aznote{ The
+agent manager remotely executes a Proxy Manager process at
+each participating site using Globus GRAM}
+\item Submission Agent
+\item Proxy Manager
+\item Task Manager = pilot
+\item Slave-node managers = compute units (?) 
+  \aznote{The slave node managers are responsible for starting the
+    Condor or SGE job-starter daemons. These daemons connect
+    back to the master processes on the client workstation, or to a
+    pre-existing departmental cluster, depending on the virtual
+    login configuration.
+  }
+\item Job proxy (?)
+\end{itemize}
+
 
 \subsubsection{GlideinWMS - Pilot-based Scheduling/Multi-Level Scheduling}
 \textit{Collectors} are the managers, with one collector per
