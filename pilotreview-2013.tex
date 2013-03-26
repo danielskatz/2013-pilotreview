@@ -562,66 +562,38 @@ re-factored to also serve a multi-purpose PJ system.
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
-\mtnote{MT/AZ}
+\mtnote{MT/AZ/OW}
 
 \mtnote{why we need a common vocabulary and what we do with it.}
 
-The vocabulary adopted by different implementations of \pilotjob is
-heterogeneous. Features and capabilities are named inconsistently, with
-the same term referring to multiple concepts or the same concept named
-in different ways. In this section, a common vocabulary is offered so to
-overcome such inconsistencies and to offer a shared ground for the
-comparative analysis presented in \S 4.
+The vocabulary adopted by different implementations of \pilotjob is heterogeneous. Features and capabilities are named inconsistently, with the same term referring to multiple concepts or the same concept named in different ways. In this section, a common vocabulary is offered so to overcome such inconsistencies and to ground the comparative analysis presented in \S 4.
 
 \mtnote{How we define the common vocabulary.}
 \mtnote{Similarities/peculiarities among BJ implementations: potential
 topic to be discussed in Section 4?}
 
-Initially, the concepts used by the implementations of \pilotjob
-outlined in \S 2 are isolated. Moving from the general to the
-particular, both common and distinctive concepts are described and
-explicitly defined. As expected, the \pilotjob implementations share a
-minimal set of similarities but still present peculiarities depending on
-their specific design and deployment environment. This is a confirmation
-that the implementations of \pilotjob sampled in this paper should be
-considered as particular cases of a general \pilotjob system but also
-that their differences justify a comparative analysis.
+Initially, the concepts used by the implementations of \pilotjob outlined in \S 2 are isolated. Moving from the general to the particular, both common and distinctive concepts are described and explicitly defined. As expected, \pilotjob implementations share a minimal set of similarities but still present peculiarities depending on their specific design and deployment environment. This is a confirmation that the implementations of \pilotjob sampled in this paper should be considered as particular cases of a general \pilotjob system but also that their differences justify a comparative analysis.
 
 \mtnote{Vocabulary: job}
 
-The name `\pilotjob' indicates the primary role played by the concepts
-of `pilot' and `job' in this type of system. These two well-known
-[cit] concepts are complex, meaning that they have logical constituents
-that need first to be clarified in order for them to be properly
-understood. Starting from the concept of `job', its most relevant
-constituents are `task', `resource', `infrastructure' and
-`scheduling'.
+The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. These two concepts are complex, meaning that they have logical constituents that need first to be clarified in order for them to be properly understood. Starting from the concept of `job', its most relevant constituents are `task', `resource', `infrastructure' and `scheduling'. These are well-known concepts in themselves [cit, cit] but it is worth here to recall briefly their definitions as a contribute towards a coherent terminology across \pilotjobs implementations. 
 
 \mtnote{Vocabulary: task}
 
-Users use \pilotjobs to perform one or more tasks. In this context, a
-task is described by a partially ordered set of operations encoded into
-one or more applications that, once executed, allow for a user to
-achieve a given goal. 
+Users use \pilotjobs to perform one or more tasks. In this context, a task is described by a set of operations encoded into one or more applications that, once executed, allow for a user to achieve a given goal.
 
 \mtnote{Vocabulary: resource}
 
-The concept of operation entails that of resources, namely finite, typed
-and physical quantities that are consumed by executing the operations of
-a task. Compute cores, memory, storage space,  interconnects are all
-examples of resources consumed by tasks. Resources are physically and
-logically organized into so called `infrastructures', agglomerates
-often geographically and sometimes institutionally separated from the
-users interested in performing their tasks [cit, cit]. 
+The concept of operation entails that of resources, namely finite, typed and physical quantities that are consumed by executing the operations of a task. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources consumed by tasks. 
+
+\mtnote{Vocabulary: infrastructure}
+
+Resources are physically and logically organized into so called `infrastructures', agglomerates possibly geographically and institutionally separated from the users interested in performing their tasks [cit, cit].
 
 \mtnote{Multiple type of pilots: potential topic to discuss in Section
 4?}
 
-The operations of a task performed by means of a \pilotjob
-implementation are usually computational in nature but, in principle,
-they might also operate on other types of resources such as data or
-networks, depending on the resources made available by an infrastructure
-to its users.
+The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data or networks, depending on the resources made available by an infrastructure to its users.
 
 \mtnote{Vocabulary: scheduling}
 
@@ -633,15 +605,7 @@ that performs scheduling by means of dedicated algorithms.
 
 \mtnote{Vocabulary: back to job}
 
-It is now possible to define the concept of `job' by utilizing all its
-logical constituents. A `job' is a collection of tasks that a user
-submits to a scheduler of an infrastructure that offers the required
-amount and type of resources over an appropriate extent of time. As a
-consequence, jobs need to be described in  a machine-readable language
-indicating, among other properties, not only the amount and type of
-resources needed to perform its tasks but also the amount of time that
-those tasks should take to complete and the relevant properties of their
-execution environment.
+It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
 
 \mtnote{Vocabulary: pilot intro}
 
@@ -653,119 +617,56 @@ but includes also those of `pool', `manager' and `agent'.
 \begin{figure} [t]
 	\centering
 	\includegraphics[width=0.45\textwidth]{figures/pilot_section3_1}
-	\caption{(a) Components and transitions of a generic pilot
+	\caption{(a) Components and transitions of a generalized pilot
 		system; (b) Pilot systems may be composed of multiple
-	instances of the same components. \aznote{Bottom of figure
+	  instances of the same components. \aznote{Bottom of figure
         is slightly cut off}}
 	\label{fig:s3_pilot_diagram}
 \end{figure}
 
-\mtnote{Different pool implementations, ways to make tasks available to
-the manager: potential topics to discuss in Section 4?}
+\mtnote{Different pool implementations, ways to make tasks available to the manager: potential topics to discuss in Section 4?}
 
-Functionally, a pilot is a system that allows for a user to gain
-exclusive - i.e. not shared - control over the scheduling and execution
-of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit
-tasks to a `pool', a store where tasks are collected and made
-available to a manager. The implementation of a pool varies among
-\pilotjobs with the pool being a stand-alone component or a subsystem of
-a master, while storing only task states or having also a dedicated set
-of capabilities.
+Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. The implementation of a pool varies among \pilotjobs with the pool being a stand-alone component or a subsystem of a master, and storing only the state of tasks or having also a dedicated set of capabilities.
 
 \mtnote{Vocabulary: manager}
-\mtnote{Capabilities across different manager implementations: potential
-topic to discuss in Section 4?}
+\mtnote{Capabilities across different manager implementations: potential topic to discuss in Section 4?}
 
-Within a pilot system, a manager is responsible for getting tasks from
-one or more pools and scheduling them into possibly multiple agents
-(Figure~\ref{fig:s3_pilot_diagram}). Managers can offer a vast array of
-capabilities and they greatly differ among \pilotjob implementations.
-Scheduling algorithms but also mechanisms to allocate dynamically
-resources to each task depending on availability and performance
-evaluations are typical examples of capabilities already offered, or
-potentially implementable, in this type of managers.
+Within a pilot system, a manager is responsible for getting tasks from one or more pools and scheduling them into possibly multiple agents (Figure~\ref{fig:s3_pilot_diagram}). Managers can offer a vast array of capabilities and they greatly differ among \pilotjob implementations. Scheduling algorithms but also mechanisms to allocate dynamically resources to each task depending on availability and performance evaluations are typical examples of capabilities already offered, or potentially implementable, in this type of managers.
 
 \mtnote{Vocabulary: agent}
 
-Agents run the tasks pushed by or pulled from one or more managers
-(Figure~\ref{fig:s3_pilot_diagram}). Clearly, an agent must have the right
-amount and type of resources for an appropriate extent of time in order
-to run its tasks and it is this requirement that brings together pilots
-and jobs.
+Agents executes the tasks pushed by or pulled from one or more managers (Figure~\ref{fig:s3_pilot_diagram}). Clearly, an agent must have the right amount and type of resources for an appropriate extent of time in order to execute its tasks. As such, this requirement brings together pilots and jobs.
 
 \mtnote{Vocabulary: Pilot Job}
 
-A \pilotjob is a system that combines the conceptual constituents
-defined for both `pilot' and `job' but also add the three distinctive
-concepts of `placeholder', `early binding' and `late
-binding'. \jhanote{we should consider a diagram to help distinguish
-  late and early binding}
+A \pilotjob is a system that combines the conceptual constituents defined for both `pilot' and `job' but also add the distinctive concepts of `placeholder', `early binding' and `late binding' and `multi-level scheduling'. \jhanote{we should consider a diagram to help distinguish late and early binding}
 
 \mtnote{Vocabulary: Placeholder}
 
-In order to get resources, each agent - or group of agents - of a pilot
-system is scheduled by a user as a job within a given infrastructure.
-These jobs are eventually granted the requested amount of resources for
-the indicated period of time and their agents are executed. At this
-point, an agent becomes a placeholder for the set of resources that have
-been specified by and assigned to its job. 
+In order to get resources, each agent - or group of agents - of a pilot system is scheduled by a user as a job within a given infrastructure. These jobs are eventually granted the requested amount of resources for the indicated period of time and their agents are executed. At this point, an agent becomes a placeholder for the set of resources that have been specified by and assigned to its job.
 
-\mtnote{How different \pilotjob implementations deal with the
-	peculiarities of the job submission system of different
-	infrastructures; whether \pilotjobs implementations offer
-	job-submission interoperability among different infrastructures:
-potential topics to discuss in Section 4?}
+\mtnote{How different \pilotjob implementations deal with the peculiarities of the job submission system of different infrastructures; whether \pilotjobs implementations offer job-submission interoperability among different infrastructures: potential topics to discuss in Section 4?}
 
-The submission process of agents depends on the capabilities exposed by
-the infrastructure submission system. For example, users may or may not
-explicitly indicate a destination for where these jobs need to be
-scheduled, may have to use dedicated queues and may have to deal with
-limitations on what processes can be executed on the given
-infrastructure. Particularly important in this context are networking
-capabilities as, without connectivity, agents would not be able to
-communicate with their managers and, ultimately, with the end users.
+The submission process of agents depends on the capabilities exposed by the submission system of the targeted infrastructure. For example, users may or may not explicitly indicate a destination for where these jobs need to be scheduled, may have to use dedicated queues and may have to deal with limitations on what processes can be executed on a specific infrastructure. Particularly important in this context are networking capabilities as, without connectivity, agents would not be able to communicate with their managers and, ultimately, with the end users.
+
+Once one or more placeholders become available on the given infrastructures, users can start to use a \pilotjob system to execute their tasks. Users own the placeholders and can run their tasks by means of the corresponding agents without having to deal with the job submission system of the infrastructure. 
+
+mtnote{Vocabulary: multi-level scheduling}
+\mtnote{Different ways to implement task scheduling: potential topics to discuss in Section 4?}
+
+Tasks are scheduled on the available placeholders by means of a dedicated scheduler, the pilot master or directly by the users depending on the \pilotjobs implementations. As two level of scheduling are involved - the one used to schedule the placeholders and the other used to schedule tasks on the placeholder - \pilotjobs are said to implement `multi-level scheduling' [ref] by means of scheduling overlay [cit].
+
+\mtnote{Vocabulary: binding}
+\mtnote{Binding capabilities; execution model: potential topics to discuss in Section 4?}
+
+The act of assigning resources to tasks is called `binding'. Users partition the resources managed by means of a placeholder, including its time allocation, so to execute multiple tasks in parallel or sequentially. As the tasks require less time to complete than the total walltime assigned to the placeholder, users never incur in the overheads imposed by the job submission system of a given infrastructure. The resources of multiple placeholders may also be used at the same time so to achieve elaborated execution patterns. As usual, the flexibility of a \pilotjob execution model depends on the details of its implementation.
 
 \mtnote{Vocabulary: early/late binding}
-\mtnote{Binding capabilities; execution model; late-binding
-capabilities: potential topics to discuss in Section 4?}
+\mtnote{Late-binding capabilities: potential topics to discuss in Section 4?}
 
-Once one or more placeholders become available on the given
-infrastructures, users can start to use a \pilotjob system to execute
-their tasks. Users own the placeholders and can run their tasks by means
-of the corresponding agents without having to deal with the job
-submission system of the infrastructure. The act of assigning tasks to
-an agent is called `binding'. Users partition both the resources and
-the time allocated to a placeholder so to bind multiple tasks in
-parallel or sequentially. As the tasks executed by the agents require
-less time to complete than the total walltime assigned to the
-placeholder, users never incur in the overheads imposed by the job
-submission system of a given infrastructure. The resources of multiple
-placeholders may also be used at the same time so to achieve elaborated
-execution patterns. As usual, the flexibility of a \pilotjob execution
-model depends on the details of its implementation.
+The control exercised by the users on their placeholders depends on the amount of information they include when submitting their tasks to a pool. Users may fully specify how and where a task should be executed or may leave the manager and agents to evaluate those parameters for them. The former is called `early binding' as users decide in advance how and where to execute their tasks, the latter is called `late binding' because, at submission time, how and where a task will be executed is unspecified.
 
-The control exercised by the users on their placeholders depends on the
-amount of information they include when submitting their tasks to a
-pool. Users may fully specify how and where a task should be executed or
-may leave the manager and agents to evaluate those parameters for them.
-The former is called `early binding' as users decide in advance how
-and where to execute their tasks, the latter is called `late binding'
-because, at submission time, how and where a task will be executed is
-unknown.
-
-Late binding requires specific capabilities. Manager(s) and agent(s)
-must be able to evaluate the requirements of the submitted tasks and
-maximize the efficiency of their binding depending on the peculiar
-properties, configuration and state of the resources made available
-through the placeholder(s). As such, in a late binding scenario,
-managers and agents may decide the amount of placeholders to use, the
-granularity of their partitions, the amount and type of the resources to
-allocate to the tasks and where such tasks should be executed. In an
-ideal late binding situation, users would be free only to specify
-high-level, resource-independent parameters for their tasks as, for
-example, the amount of time or money that should be spent for their
-execution.
-
+Late binding requires specific capabilities. Manager(s) and agent(s) must be able to evaluate the requirements of the submitted tasks and maximize the efficiency of their binding depending on the peculiar properties, configuration and state of the resources made available through the placeholder(s). As such, in a late binding scenario, managers and agents may decide the amount of placeholders to use, the granularity of their partitions, the amount and type of the resources to allocate to the tasks and where such tasks should be executed. In an ideal late binding situation, users would be free only to specify high-level, resource-independent parameters for their tasks as, for example, the amount of time or money that should be spent for their execution.
 
 \subsection{Different components of the Landscape}
 
@@ -826,10 +727,7 @@ execution.
 %
 \subsection{Common Terms and Definitions}
 %
-\alnote{What to do with the terms, such as many-task computing, meta 
-computing, grid computing, etc.? It might make sense to couple the evolution 
-of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe 
-in history section.}
+\alnote{What to do with the terms, such as many-task computing, meta computing, grid computing, etc.? It might make sense to couple the evolution of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe in history section.}
 
 \alnote{Can we start of with the P* elements so that we have something?}
 \begin{itemize}
