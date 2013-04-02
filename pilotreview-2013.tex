@@ -362,20 +362,37 @@ need to be run at one time.
 \alnote{refine structure: function/non-functional, internal/external}
 We assess the \pilotjob-Systems according to the following criteria:
 \begin{itemize}
-	\item What use cases? What applications types are supported? MPI, ensembles, workflows? Single vs. multi-purpose?
-	\item What low-level infrastructures/middleware are supported? How interoperable is the framework (vertically, horizontally)?
-	\item Scale of distribution
-	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
-	\item Deployment Model: service versus tool/library, application vs. system-level
-    \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
-	\item Performance and Scalability (Task Throughput)
-	\item Fault Tolerance
-	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
-	\item Scheduling: supported algorithms, support for application-level 
-	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
-	\item Support for Data
-	\item Security (Single vs. Multi-User)
-	\item Deployment Model: centrally hosted vs. application-level library
+	\item Functional Features:
+	\begin{itemize}
+		\item What use cases? What applications types are supported? MPI, 
+		ensembles, workflows? Single vs. multi-purpose?
+		\item What low-level infrastructures/middleware are supported? How 
+		interoperable is the framework (vertically, horizontally)?
+		\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
+		service
+		\item Supported scales of distribution
+		\item Integration with/support for higher-level tools (e.g. workflow 
+		systems, data analysis systems)		
+		\item Support for Data
+	\end{itemize}
+	\item Non-Functional Features:
+	\begin{itemize}
+		\item Performance 
+		\item Scalability (task throughput, number resources/slots)
+		\item Fault Tolerance
+		\item Security (Single vs. Multi-User)
+	\end{itemize}
+    \item Internal Architecture:
+	\begin{itemize}
+		\item Internal Architecture (communication \& coordination, central 
+		vs. decentral architectures; push vs. pull model, agent-based; number 
+		of supported pilots/resources; vertical/horizontal integration...)
+		\item Deployment Model: hosted service versus tool/library, 
+		application vs. system-level
+		\item Scheduling: supported algorithms, support for application-level 
+		scheduling, data-compute scheduling, resource acquisition/release 
+		policies, dispatch policies, number of scheduling levels		
+	\end{itemize}		
 \end{itemize}
 
 As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
