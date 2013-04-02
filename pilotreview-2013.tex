@@ -309,10 +309,8 @@ In order to appreciate \pilotjobs, we outline the evolution of
 \pilotjob. We present a brief chronological order of \pilotjob-like
 systems, beginning with simple Master-Worker applications through
 advanced workload management systems.
-\\ \\
-\noindent \textbf{Pre-\pilotjob Systems:}
 
-The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
+We first discuss pre-\pilotjob systems, which were the earliest uses of grid technologies. The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
 
 Another application that pre-dates pilot jobs is the BOINC middleware system~\cite{Anderson:2004:BSP:1032646.1033223}. BOINC plays a significant role in distributed computing acting as a Client/Server-based platform which utilizes unused computer cycles on the client-side in order to execute tasks given from the server-side. Applications can be built on top of BOINC for their own scientific endeavors; it was originally built for the SETI@Home project, which uses Internet-connected computers to download and analyze radio telescope data. Most often, these computers are based around the world -- users merely have to download the client program, and it runs in the background on their computer. The data is then aggregated back on the server-side and analyzed. The idea of farming out tasks in a distributed environment including personal computers was the first wide-use of the Client/Server model that essentially made a grid out of many less powerful machines.
 
@@ -362,20 +360,37 @@ need to be run at one time.
 \alnote{refine structure: function/non-functional, internal/external}
 We assess the \pilotjob-Systems according to the following criteria:
 \begin{itemize}
-	\item What use cases? What applications types are supported? MPI, ensembles, workflows? Single vs. multi-purpose?
-	\item What low-level infrastructures/middleware are supported? How interoperable is the framework (vertically, horizontally)?
-	\item Scale of distribution
-	\item Internal Architecture (communication \& coordination, central vs. decentral architectures; push vs. pull model, agent-based; number of supported pilots/resources; vertical/horizontal integration...)
-	\item Deployment Model: service versus tool/library, application vs. system-level
-    \item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web service
-	\item Performance and Scalability (Task Throughput)
-	\item Fault Tolerance
-	\item Integration with higher-level tools (e.g. workflow systems, data analysis systems)
-	\item Scheduling: supported algorithms, support for application-level 
-	scheduling, data-compute scheduling, resource acquisition/release policies, dispatch policies, number of scheduling levels
-	\item Support for Data
-	\item Security (Single vs. Multi-User)
-	\item Deployment Model: centrally hosted vs. application-level library
+	\item Functional Features:
+	\begin{itemize}
+		\item What use cases? What applications types are supported? MPI, 
+		ensembles, workflows? Single vs. multi-purpose?
+		\item What low-level infrastructures/middleware are supported? How 
+		interoperable is the framework (vertically, horizontally)?
+		\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
+		service
+		\item Supported scales of distribution
+		\item Integration with/support for higher-level tools (e.g. workflow 
+		systems, data analysis systems)		
+		\item Support for Data
+	\end{itemize}
+	\item Non-Functional Features:
+	\begin{itemize}
+		\item Performance 
+		\item Scalability (task throughput, number resources/slots)
+		\item Fault Tolerance
+		\item Security (Single vs. Multi-User)
+	\end{itemize}
+    \item Internal Architecture:
+	\begin{itemize}
+		\item Internal Architecture (communication \& coordination, central 
+		vs. decentral architectures; push vs. pull model, agent-based; number 
+		of supported pilots/resources; vertical/horizontal integration...)
+		\item Deployment Model: hosted service versus tool/library, 
+		application vs. system-level
+		\item Scheduling: supported algorithms, support for application-level 
+		scheduling, data-compute scheduling, resource acquisition/release 
+		policies, dispatch policies, number of scheduling levels		
+	\end{itemize}		
 \end{itemize}
 
 As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
@@ -1013,14 +1028,14 @@ each participating site using Globus GRAM}
   active jobs, brokerage -- matches jobs  with sites/pilots and manages
   data placement, job dispatcher -- receives requests from pilots and sends
   jobs payloads, data service -- dispatch and retrieval from sites)
-\item PanDA DB
-\item PanDA client
-\item Pilot
+\item PanDA DB (general DB = advert?)
+\item PanDA client (user client for submission/etc)
+\item Pilot (execution environment)
 \item AutoPilot (pilot submission, management, monitoring), submits
   pilots to remote sites and tracks site status via database
 \item SchedConfig (configuration database)
 \item Monitor (Web-based monitoring)
-\item Logger
+\item Logger (logs incidents w/ Python logging)
 \item Bamboo (interface w/ ATLAS database)
 \item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
   and monitors pilot status, basically enables use of glideins with PanDA (?)
