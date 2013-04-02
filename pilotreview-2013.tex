@@ -363,9 +363,7 @@ We assess the \pilotjob-Systems according to the following criteria:
 	\item Functional Features:
 	\begin{itemize}
 		\item What use cases? What applications types are supported? MPI, 
-		ensembles, workflows? Single vs. multi-purpose?
-		\item What low-level infrastructures/middleware are supported? How 
-		interoperable is the framework (vertically, horizontally)?
+		ensembles, workflows? Single vs. multi-purpose? Usage modes?
 		\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
 		service
 		\item Supported scales of distribution
@@ -378,6 +376,7 @@ We assess the \pilotjob-Systems according to the following criteria:
 		\item Performance 
 		\item Scalability (task throughput, number resources/slots)
 		\item Fault Tolerance
+		\item Interoperability
 		\item Security (Single vs. Multi-User)
 	\end{itemize}
     \item Internal Architecture:
@@ -385,11 +384,14 @@ We assess the \pilotjob-Systems according to the following criteria:
 		\item Internal Architecture (communication \& coordination, central 
 		vs. decentral architectures; push vs. pull model, agent-based; number 
 		of supported pilots/resources; vertical/horizontal integration...)
+		\item What low-level infrastructures/middleware are supported? How 
+		interoperable is the framework (vertically, horizontally)?
 		\item Deployment Model: hosted service versus tool/library, 
 		application vs. system-level
 		\item Scheduling: supported algorithms, support for application-level 
 		scheduling, data-compute scheduling, resource acquisition/release 
-		policies, dispatch policies, number of scheduling levels		
+		policies, dispatch policies, number of scheduling levels	
+		\item Dependencies, re-use of other components/services	
 	\end{itemize}		
 \end{itemize}
 
