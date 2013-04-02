@@ -1028,14 +1028,14 @@ each participating site using Globus GRAM}
   active jobs, brokerage -- matches jobs  with sites/pilots and manages
   data placement, job dispatcher -- receives requests from pilots and sends
   jobs payloads, data service -- dispatch and retrieval from sites)
-\item PanDA DB
-\item PanDA client
-\item Pilot
+\item PanDA DB (general DB = advert?)
+\item PanDA client (user client for submission/etc)
+\item Pilot (execution environment)
 \item AutoPilot (pilot submission, management, monitoring), submits
   pilots to remote sites and tracks site status via database
 \item SchedConfig (configuration database)
 \item Monitor (Web-based monitoring)
-\item Logger
+\item Logger (logs incidents w/ Python logging)
 \item Bamboo (interface w/ ATLAS database)
 \item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
   and monitors pilot status, basically enables use of glideins with PanDA (?)
