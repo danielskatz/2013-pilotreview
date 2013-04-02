@@ -1026,6 +1026,9 @@ but this seems overly pedantic?}
 \end{itemize}
 
 \subsubsection{Corral - 2nd Pilot-based Scheduling/Multi-Level Scheduling}
+\onote{Corral seems to be a component in the glidein-WMS landscape and 
+not an independent pilot-job implementation. I don't think that we should 
+dedicate an extra section to it.}
 \aznote{SJ asked for an investigation of Corral -- not sure that this
 deserves a full analysis at this point on a technical level despite
 being commonly used, open to suggestions}
@@ -1114,6 +1117,7 @@ size of 1 core.
 
 \subsubsection{Bosco - Higher-Level Application Frameworks 
   (Data Analytics and Visualization)}
+\onote{OLE'S SECTION}
 
 \onote{It seems that BOSCO is some sort of a user-space version of Condor. 
 It can interface with single clusters as well as complex HTC grids (GlideinWMS).
@@ -1122,7 +1126,8 @@ holds the user jobs. Bosco uses Condor glidein (-agents) internally as a
 resource overlay. The glideins pull data from the bosco-submit node. The
 main difference between BOSCO and Condor (even though both expose the same
 user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
-complex setup. This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
+complex setup. In that regard, BOSCO is somehwat similar to BigJob. 
+This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
 
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
 %% to use this general sort of information + reword using our spiffy 
