@@ -222,37 +222,7 @@ needs), these objectives remains difficult if not infeasible.
 %   unifying description and then revisit a larger sample of
 %   \pilotjobs}
 
-\mrnote{I don't feel like anything in the next three paragraphs should be here or makes sense. I don't know who wrote it, but can someone please justify their text here?}
-
-The aim here is to develop both an understanding of what \pilotjobs
-are and a listing of the different \pilotjobs, e.g. Coasters, Condor
-Glide-in, DIANE, DIRAC.
-
-A specific implementation of the P* model that worked across a variety of middleware and conceptually unified Pilot-Abstractions, led to 
-BigJob~\cite{saga_bigjob_condor_cloud} -- a
-SAGA-based \pilotjob, which was used to support a range of
-applications, ranging from uncoupled ensembles of molecular dynamics
-(MD) simulations~\cite{saga_bigjob_condor_cloud}, to Ensemble-Kalman
-filter based applications~\cite{gmac09} with global synchronization to
-loosely-coupled MD simulations with pair-wise
-synchronization~\cite{async_repex11}.  Although BigJob provided the
-syntactical uniformity, i.e., a common API and framework for different
-grids, our experience led us to understand that different \pilotjobs
-had different semantics and capabilities, and made vast if not
-inconsistent assumptions of applications/users. This motivated our
-efforts in search of a common minimally complete model of \pilotjobs,
-and resulted in the \pstar model~\cite{pstar12}. 
-
-
-There is an axes with a sliding scale of dependence/coupling to
-infrastructure.  It is difficult to assign a single point of coupling,
-between \pilotjobs and the environment for like most other tools they
-are often used in a variety of ways.  We will simply use ``general
-purpose'' as a reference to the variety of (i) application types
-(static versus dynamic, DAG versus \aznote{DAG vs... ?}) 
-(ii) existence/requirement of
-special purpose infrastructure (iii) functional extensibility and/or
-modularity and/or coupling to environment.
+\mrnote{Add linky text between introduction and function PJ sections - overview section 2}
 
 \subsection{A Functional Approach to Pilot-Jobs}
 
