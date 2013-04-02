@@ -991,7 +991,40 @@ each participating site using Globus GRAM}
 \item Job proxy (?)
 \end{itemize}
 
+\subsubsection{PanDA - Pilot-based Scheduling/Multi-Level Scheduling}
+\begin{itemize}
+\item Based upon Condor-G/Glidein, uses multiple queues
+\item Jobs submitted via Condor-G
+\item Jobs run with wrappers, on worker nodes they download/execute PanDA pilot code
+\item Pilot then asks for job that worker node can handle
+\item Stages in input files; executes and monitors progress of job; stages out output;
+  cleans up environment
+\item ``Special Features''
+  \begin{itemize}
+  \item Job/disk monitoring
+  \item Job recovery (leaves output files resident for another 
+    process to resume from)
+  \item Multi-job processing (submit batch of jobs to a single pilot)
+  \item Certificate/token-based security
+  \item gLExec security (user's identity used instead of Pilot credentials)
+  \end{itemize}
 
+\item PanDA server (task buffer -- job queue manager keeps track of
+  active jobs, brokerage -- matches jobs  with sites/pilots and manages
+  data placement, job dispatcher -- receives requests from pilots and sends
+  jobs payloads, data service -- dispatch and retrieval from sites)
+\item PanDA DB
+\item PanDA client
+\item Pilot
+\item AutoPilot (pilot submission, management, monitoring), submits
+  pilots to remote sites and tracks site status via database
+\item SchedConfig (configuration database)
+\item Monitor (Web-based monitoring)
+\item Logger
+\item Bamboo (interface w/ ATLAS database)
+\item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
+  and monitors pilot status, basically enables use of glideins with PanDA (?)
+\end{itemize}
 \subsubsection{GlideinWMS - Pilot-based Scheduling/Multi-Level Scheduling}
 \textit{Collectors} are the managers, with one collector per
 GlideinWMS system.
