@@ -1115,6 +1115,15 @@ size of 1 core.
 \subsubsection{Bosco - Higher-Level Application Frameworks 
   (Data Analytics and Visualization)}
 
+\onote{It seems that BOSCO is some sort of a user-space version of Condor. 
+It can interface with single clusters as well as complex HTC grids (GlideinWMS).
+Multiple resource-scanrios are possible. There is a bosco-submit node which 
+holds the user jobs. Bosco uses Condor glidein (-agents) internally as a 
+resource overlay. The glideins pull data from the bosco-submit node. The
+main difference between BOSCO and Condor (even though both expose the same
+user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
+complex setup. This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
+
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
 %% to use this general sort of information + reword using our spiffy 
 %% vocabulary presented in this paper}
