@@ -608,6 +608,20 @@ AMGA.
 \label{sec:vocab}
 \mtnote{MT/AZ/OW}
 
+\onote{This section tries to define everything from concepts (e.g., multi-level-
+scheduling) to specific architectural components (agents, manager). It's hard to
+parse and  I doubt that it will be particularly useful to the reader. I think it
+would make sense  to have a stricter distinction (e.g., by using sub-sections)
+between concepts (late-binding, early-binding, multi-level) and architectural
+building blocks that are common to  all PJ-Systems. On that note: why are we
+trying to come up with this arbitrary vocabulary (on the 'building block' side),
+consisting of 'agents' and 'managers' at all? After all, PJs are 'just' an
+instance of  Master-Worker with specific properties, capabilities and operating
+in a specific environment. I think shooting from that angle (at least making an
+attempt to) might help to introduce more clarity. I think this would be more
+intuitive from a reader's perspective. And after all, it's about unlearning P*,
+isn't it?}
+
 \mtnote{why we need a common vocabulary and what we do with it.}
 
 The vocabulary adopted by different implementations of \pilotjob is heterogeneous. Features and capabilities are named inconsistently, with the same term referring to multiple concepts or the same concept named in different ways. In this section, a common vocabulary is offered so to overcome such inconsistencies and to ground the comparative analysis presented in \S 4.
@@ -619,7 +633,7 @@ topic to be discussed in Section 4?}
 Initially, the concepts used by the implementations of \pilotjob outlined in \S 2 are isolated. Moving from the general to the particular, both common and distinctive concepts are described and explicitly defined. As expected, \pilotjob implementations share a minimal set of similarities but still present peculiarities depending on their specific design and deployment environment. This is a confirmation that the implementations of \pilotjob sampled in this paper should be considered as particular cases of a general \pilotjob system but also that their differences justify a comparative analysis.
 
 \mtnote{Vocabulary: job}
-
+\onote{'data' is not mentioned at all in the context of Jobs. Why? }
 The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. These two concepts are complex, meaning that they have logical constituents that need first to be clarified in order for them to be properly understood. Starting from the concept of `job', its most relevant constituents are `task', `resource', `infrastructure' and `scheduling'. These are well-known concepts in themselves [cit, cit] but it is worth here to recall briefly their definitions as a contribute towards a coherent terminology across \pilotjobs implementations. 
 
 \mtnote{Vocabulary: task}
@@ -637,7 +651,7 @@ Resources are physically and logically organized into so called `infrastructures
 \mtnote{Multiple type of pilots: potential topic to discuss in Section
 4?}
 
-The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data or networks, depending on the resources made available by an infrastructure to its users.
+The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data \onote{you introduce data as 'resource'. why?} or networks, depending on the resources made available by an infrastructure to its users.
 
 \mtnote{Vocabulary: scheduling}
 
@@ -649,7 +663,10 @@ that performs scheduling by means of dedicated algorithms.
 
 \mtnote{Vocabulary: back to job}
 
-It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
+It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. 
+\onote{I do not agree with this definition. 'Jobs' can IMHO be run on a resource directly, without involving a scheduler. Also, I don't understand why a scheduler  
+is coupled to an 'infrastructure' in this case.}
+As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
 
 \mtnote{Vocabulary: pilot intro}
 
@@ -670,7 +687,11 @@ but includes also those of `pool', `manager' and `agent'.
 
 \mtnote{Different pool implementations, ways to make tasks available to the manager: potential topics to discuss in Section 4?}
 
-Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. The implementation of a pool varies among \pilotjobs with the pool being a stand-alone component or a subsystem of a master, and storing only the state of tasks or having also a dedicated set of capabilities.
+Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. 
+\onote{the more I think about it, the less I am convinced that we need the notion of a pool here. It's an implementation detail that might not
+even be part of every PJ implementation. It is not important when describing a PJ.}
+The implementation of a pool varies among \pilotjobs\onote{-Systems} with the pool being a stand-alone component or a subsystem of a master
+\onote{what is 'master'?}, and storing only the state of tasks or having also a dedicated set of capabilities.
 
 \mtnote{Vocabulary: manager}
 \mtnote{Capabilities across different manager implementations: potential topic to discuss in Section 4?}
@@ -687,7 +708,8 @@ A \pilotjob is a system that combines the conceptual constituents defined for bo
 
 \mtnote{Vocabulary: Placeholder}
 
-In order to get resources, each agent - or group of agents - of a pilot system is scheduled by a user as a job within a given infrastructure. These jobs are eventually granted the requested amount of resources for the indicated period of time and their agents are executed. At this point, an agent becomes a placeholder for the set of resources that have been specified by and assigned to its job.
+In order to get resources, each agent - or group of agents - of a pilot system is scheduled by a user \onote{false. In the glideinWMS this is not done by the user} as a job within a given infrastructure. These jobs are eventually granted the requested amount of resources for the indicated period of time and their agents are executed. At this point, an agent becomes a placeholder for the set of resources that have been specified by and assigned to its job.
+\onote{not convinced that we need a formal definition of 'placeholder'.}
 
 \mtnote{How different \pilotjob implementations deal with the peculiarities of the job submission system of different infrastructures; whether \pilotjobs implementations offer job-submission interoperability among different infrastructures: potential topics to discuss in Section 4?}
 
