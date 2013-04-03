@@ -340,11 +340,12 @@ architecture of each \pilotjob system.
 	\item What use cases? What applications types are supported? MPI, 
 	ensembles, workflows? Single vs. multi-purpose? Usage modes?
 	\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
-	service
+	service, portal
 	\item Supported scales of distribution
 	\item Integration with/support for higher-level tools (e.g. workflow 
 	systems, data analysis systems)		
 	\item Support for Data
+	\item Supported infrastructures (HTC, HPC, cloud)
 \end{itemize}
 \emph{Non-Functional Features}
 \begin{itemize}
@@ -366,6 +367,7 @@ architecture of each \pilotjob system.
 	\item Scheduling: supported algorithms, support for application-level 
 	scheduling, data-compute scheduling, resource acquisition/release 
 	policies, dispatch policies, number of scheduling levels	
+	\item Dynamic provisioning
 	\item Dependencies, re-use of other components/services	
 \end{itemize}		
 
@@ -397,43 +399,41 @@ management capabilities based on \pilots and (iii) applications, tools and
 services that utilize \pilots. 
 
 
-
 \subsubsection*{Core Pilot-Job Systems}
 
 \begin{itemize}
-	\item Condor-G/Glide-In
 	\item MyCluster (supports both Condor and SGE clusters)
 	\item ToPoS 
-	\item Co-Pilot
 	\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
 	\item LGI
-	\item Wisdom
 	\item EDGeS
 	\item Trellis
 	\item Personal Cluster
 \end{itemize}
 
+As discussed earlier, the notion of a placeholder job that is used to execute
+tasks was introduced by different Master-Worker systems, e.\,g.\
+Nimrod-G~\cite{10.1109/HPC.2000.846563}, DIANE~\cite{diane-thesis} and Work
+Queue~\cite{workqueue-pyhpc2011}. For example, Nimrod-G utilizes a Job Wrapper
+that is responsible for pulling a task and its associated data and then
+manages the execution of this task. While modern \pilotjobs often acquire
+resources opportunistically and then distribute tasks to resources they were
+able to acquire, Nimrod-G utilizes a central, cost-based scheduler.
+
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
 to the local condor pool and run their jobs on the added resource the same way
-that all condor jobs are submitted. The resources added are available only for
-the user who added the resource to the pool, thus giving complete control over
-the resources for managing jobs without any queue waiting time. Glide-in
-installs and executes necessary Condor daemons and configuration on the remote
+that all condor jobs are submitted. A Glide-in is submitted using the Condor-G
+grid universe. On the remote resource a set of Condor daemons (e.\,g.\ the
+startd daemon) is started, which then registers the available job slots with
+the central Condor pool. The resources added are available only for the user
+who added the resource to the pool, thus giving complete control over the
+resources for managing jobs without any queue waiting time. Glide-in installs
+and executes necessary Condor daemons and configuration on the remote
 resource, such that the resource reports to and joins the local Condor pool.
 Glide-in is limited in that the daemons must be running on a given resource,
 meaning that this process must be approved by resource owners or system
 administrators.
-
-The Coaster system~\cite{coasters} is another \pilotjob implementation
-which has been shown to work in both cloud and grid
-environments. Coaster has been designed to support Swift-based applications. 
-Using the Coaster service, one executes a Coaster Master
-on a head node, and the Coaster workers run on compute nodes to
-execute jobs. Coasters offers a zero-install feature in which it
-deploys itself and installs itself from the head node and onto the
-virtual machines without needing any prior installation on the
-machine. 
 
 \pilotjobs were used at CERN on grid infrastructure to process experiments 
 performed with the Large Hadron Collider~\cite{copilot-tr}. 
@@ -482,11 +482,12 @@ can also be leveraged to assist with the data-driven computations.
 While core PJ systems mainly focus on providing simple \pilot capabilities 
 commonly in application space, many of these systems evolved towards more 
 \pilot-based workload managers, which are often centrally hosted moving 
-critical functionality from the client to the server. Several of these have 
+critical functionality from the client to the server. These systems usually 
+deploy \pilot factories that automatically start new \pilots on demand and 
+integrate security mechanisms to support multiple users. Several of these have 
 been developed in the context of the LHC experiment at CERN, e.\,g.\ 
 GlideInWMS, Dirac~\cite{1742-6596-219-6-062049}, 
-PanDa~\cite{1742-6596-331-7-072069} and ALIEN~\cite{1742-6596-119-6-062012}.
-
+PanDa~\cite{1742-6596-331-7-072069} and AliEn~\cite{1742-6596-119-6-062012}.
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -497,11 +498,6 @@ deployed as a hosted service. In contrast to low-level \pilotjob systems,
 GlideinWMS attempts to hide rather than expose the \pilot capabilities from
 the user. GlideinWMS is currently deployed in production on OSG and is the
 recommended mode for accessing OSG resources.
-Corral~\cite{Rynge:2011:EUG:2116259.2116599} is a GlideinWMS frontend which
-provides more explicit control over the placement and start of \pilots to the
-end-user. Higher-level frameworks, such as Pegasus, can utilize Corral to
-optimize the placements of \pilots with respect to their workload.
-
 
 The PanDA~\cite{1742-6596-331-7-072069} workload management systems is also 
 based on Condor-G/Glidein. In contrast, a Condor-G only approach,
@@ -509,7 +505,17 @@ PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
 internal queue. PanDA also provides the ability to manage data associated the 
 jobs managed by the PanDA workload manager.
 
-In addition to the \pilotjob systems developed around the LHC experiment, 
+AliEn~\cite{1742-6596-119-6-062012} also provides the ability to tightly 
+integrate storage and compute resources and is also able to manage file 
+replicas. While all data can be accessed from anywhere, the scheduler is aware 
+of data localities and attempts to schedule compute close to the data.
+
+Dirac~\cite{1742-6596-219-6-062049} is another comprehensive workload
+management system built on top of \pilots. As PanDA and AliEn it supports the
+management of data, which can be placed in different kinds of storage elements
+(e.\,g.\ based on SRM).
+
+In addition to these \pilotjob systems developed around the LHC experiment, 
 several other systems emerged. GWPilot~\cite{gwpilot} is a \pilot systems that 
 is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its 
 multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
@@ -525,20 +531,59 @@ Swift/Coaster) or (ii) it re-uses a general purpose PJ system (e.\,g\
 Pegasus/Condor-G). In case (i), the PJ system is often re-factored to also
 serve a multi-purpose PJ system.
 
-Generally \pj systems
+In the context of scientific workflows, \pilotjob systems have been proven as
+effective tool for managing the workload. In the context of the Pegasus
+project the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
+as a frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides more
+explicit control over the placement and start of \pilots to the end-user. In
+contrast to GlideinWMS these Glide-Ins are run using the credential of the
+user and not a VO credential. Corral has been developed to support the
+requirements of the Pegasus workflow system in particular to optimize the
+placements of \pilots with respect to their workload.
+
+SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
+abstract workflows and computations. The language provides among many things
+capabilities for executing external application as well as the implicit
+management of data flows between application tasks. For this purpose, SWIFT
+formalizes the way that applications can define data-dependencies. Using so
+called mappers, these dependencies can be easily extended to files or groups
+of files. The runtime environment handles the allocation of resources and the
+spawning of the compute tasks. Both data- and execution management
+capabilities are provided via abstract interfaces. The Coaster
+system~\cite{coasters} has been developed to address to the workload
+management requirements of Swift supporting various infrastructures, such as
+both cloud and grid. Using the Coaster service, one executes a Coaster Master
+on a head node, and the Coaster workers run on compute nodes to execute jobs.
+Coasters offers a zero-install feature in which it deploys itself and installs
+itself from the head node and onto the virtual machines without needing any
+prior installation on the machine. Coaster relies on a master/worker
+coordination model; communication is implemented using GSI-secured TCP
+sockets. SWIFT supports various scheduling mechanisms on top of Coaster, 
+e.\,g.\ a FIFO and a load-aware scheduler.
+
+Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
+Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
+which are created using the Globus GRAM service. The provisioner spawns a set
+of executor processes on the allocated resources, which are then responsible
+for managing the execution of task. Tasks are submitted via a so called
+dispatcher service. Falkon also utilizes a master-work coordination
+model, i.\,e.\ the executors periodically query the dispatcher for new SUs.
+Web services are used for communication.
+
+\alnote{Should we discuss MOTEUR?}
+
+
+%%%%%%%%%%%%%%%%%%
+% Higher-Level Apps
+
+WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an application-centric
+environment for supporting drug discovery. The architecture utilizes an agent
+run as a Grid job to pull tasks from a central metadata service referred to as
+AMGA.
+
+
+
 \begin{itemize}
-	\item Workflow
-	\begin{itemize}
-		\item Swift/Coasters
-		\item Pegasus
-	\end{itemize}
-	\item Task Farming/Master-Worker
-	\begin{itemize}
-		\item Nimrod/G 
-		\item DIANE
-		\item Falkon 
-        \item Work Q (\url{http://www3.nd.edu/~ccl/software/workqueue/})(note: this does not have PJ capability directly but builds into glide-in)
-	\end{itemize}
 	\item Data Analytics \& Visualization
 	\begin{itemize}
 		\item Bosco
@@ -546,6 +591,7 @@ Generally \pj systems
 		\item NetSolve~\cite{Casanova:1995:NNS:898848}
 	\end{itemize}		
 \end{itemize}
+
 
 
 
