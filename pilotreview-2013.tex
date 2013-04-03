@@ -353,7 +353,11 @@ architecture of each \pilotjob system.
 	\item Scalability (task throughput, number resources/slots)
 	\item Fault Tolerance
 	\item Interoperability
-	\item Security (Single vs. Multi-User)
+	\item \emph{Security} describes the security mechanisms used by the 
+	framework, e.\,g.\ for authentication of the user, for securing the 
+	communication protocol and for sandboxing the application. Further, some 
+	\pilotjobs solely support single users, while more complex \pilot-based 
+	workload managers commonly support multiple users (e.\,g.\ using glexec).
 \end{itemize}
 \emph{Internal}
 \begin{itemize}
@@ -398,27 +402,25 @@ solely provide a simple \pilot capability, (ii) systems that provide resource
 management capabilities based on \pilots and (iii) applications, tools and
 services that utilize \pilots. 
 
-
 \subsubsection*{Core Pilot-Job Systems}
 
-\begin{itemize}
-	\item MyCluster (supports both Condor and SGE clusters)
-	\item ToPoS 
-	\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
-	\item LGI
-	\item EDGeS
-	\item Trellis
-	\item Personal Cluster
-\end{itemize}
+Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
+provisioning of the placeholder job capability. Various Master-Worker systems
+that provide such a mechanism (e.\,g.\
+Nimrod-G~\cite{10.1109/HPC.2000.846563}). Condor-G/Glide-In is the most
+well-known \pilotjob system. Further examples for lightweight \pilotjob
+systems are: ToPos~\cite{topos},
+MyCluster~\cite{Walker:2007:PAC:1285840.1285848},
+GridBot~\cite{Silberstein:2009:GEB:1654059.1654071} and LGI~\cite{lgi}.
 
-As discussed earlier, the notion of a placeholder job that is used to execute
-tasks was introduced by different Master-Worker systems, e.\,g.\
 Nimrod-G~\cite{10.1109/HPC.2000.846563}, DIANE~\cite{diane-thesis} and Work
-Queue~\cite{workqueue-pyhpc2011}. For example, Nimrod-G utilizes a Job Wrapper
-that is responsible for pulling a task and its associated data and then
-manages the execution of this task. While modern \pilotjobs often acquire
-resources opportunistically and then distribute tasks to resources they were
-able to acquire, Nimrod-G utilizes a central, cost-based scheduler.
+Queue~\cite{workqueue-pyhpc2011} are examples of Master-Worker systems that
+utilize a placeholder agent that dispatches and manages tasks. For example,
+Nimrod-G utilizes a Job Wrapper that is responsible for pulling a task and its
+associated data and then manages the execution of this task. While modern
+\pilotjobs often acquire resources opportunistically and then distribute tasks
+to resources they were able to acquire, Nimrod-G utilizes a central,
+cost-based scheduler.
 
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
@@ -438,28 +440,20 @@ Condor-G/Glide-in have been developed, e.\,g.\ Bosco~\cite{bosco} and
 GlideinWMS. Bosco e.\,g.\ simplifies the process of spawning a Glide-in 
 significantly.
 
-\pilotjobs were used at CERN on grid infrastructure to process experiments 
-performed with the Large Hadron Collider~\cite{copilot-tr}. 
-A desire to utilize a wider variety of computing resources, including 
-enterprise and private clouds, to analyze such experiments drove the creation 
-of Co-Pilot~\cite{copilot-tr}, which acts as a layer on top of existing
-grid/batch systems to allow job submission to clouds and grid infrastructures. 
-CoPilot uses XMPP messaging to communicate between the VMs and the grid 
-infrastructure. Co-Pilot is based more on the actual
-submission of jobs and is limited in its user-level controllability and 
-allowance of application-level programming.
 
-Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like
-capability on Microsoft Azure clouds called a Generic Worker. The
-Generic Worker creates a layer of abstraction above the inner workings
-of the cloud.  The idea behind the Generic Worker is to allow
-scientists to do their science without requiring knowledge of backend
-HPC systems by offering e-Science as a service. Venus-C has not been
-shown to work with grids, because its main objective is to motivate
-scientists to use cloud infrastructures.  While the notion of moving
-to the cloud for data-driven science is an important one, many
-existing cyberinfrastructures still have powerful grid computers that
-can also be leveraged to assist with the data-driven computations.
+
+% Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like
+% capability on Microsoft Azure clouds called a Generic Worker. The
+% Generic Worker creates a layer of abstraction above the inner workings
+% of the cloud.  The idea behind the Generic Worker is to allow
+% scientists to do their science without requiring knowledge of backend
+% HPC systems by offering e-Science as a service. Venus-C has not been
+% shown to work with grids, because its main objective is to motivate
+% scientists to use cloud infrastructures.  While the notion of moving
+% to the cloud for data-driven science is an important one, many
+% existing cyberinfrastructures still have powerful grid computers that
+% can also be leveraged to assist with the data-driven computations.
+
 
 
 %%%%%%%%%%%%%%%%%%%%
@@ -490,7 +484,9 @@ deploy \pilot factories that automatically start new \pilots on demand and
 integrate security mechanisms to support multiple users. Several of these have 
 been developed in the context of the LHC experiment at CERN, e.\,g.\ 
 GlideInWMS, Dirac~\cite{1742-6596-219-6-062049}, 
-PanDa~\cite{1742-6596-331-7-072069} and AliEn~\cite{1742-6596-119-6-062012}.
+PanDa~\cite{1742-6596-331-7-072069}, AliEn~\cite{1742-6596-119-6-062012} and 
+Co-Pilot~\cite{copilot-tr}. Each of these \pilots serves a particular user 
+community and experiment.
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -518,7 +514,15 @@ management system built on top of \pilots. As PanDA and AliEn it supports the
 management of data, which can be placed in different kinds of storage elements
 (e.\,g.\ based on SRM).
 
-In addition to these \pilotjob systems developed around the LHC experiment, 
+Another interesting \pilot that is used in the LHC context is
+Co-Pilot~\cite{copilot-tr}. Co-Pilot serves as integration point between
+different grid \pilotjob systems (such as AliEn and PanDA) and clouds.
+Co-Pilot uses XMPP messaging to communicate between the VMs and the grid
+infrastructure. Co-Pilot is based more on the actual submission of jobs and is
+limited in its user-level controllability and allowance of application-level
+programming.
+
+In addition to the \pilotjob systems developed around the LHC experiment, 
 several other systems emerged. GWPilot~\cite{gwpilot} is a \pilot systems that 
 is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its 
 multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
