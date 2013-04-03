@@ -93,7 +93,7 @@
     analysis of a \pilotjobs, and thereby bring about a hitherto
     missing consilience...'')  and then state that it's somewhat
     controversial?  I see where it could be eye-catching to outright
-    state that there IS controversy/uncertainity though, and that we
+    state that there IS controversy/uncertainty though, and that we
     are aiming to quash it.  Making this note to try and figure this
     out :)} Nearly everything else is either specific to an
   implementation, open to interpretation or not agreed upon. For
@@ -165,16 +165,18 @@ of production distributed cyberinfrastructures that support them.
 \jhanote{Now develop the following paragraph along the lines of: Why
   have \pilotjobs been successful?}
 
-The fundamental reason for the success of the \pilotjob abstraction is
-that \pilotjob liberate applications/users from the challenging
-requirement of mapping specific tasks onto explicit heterogeneous and
-dynamic resource pools.  In other words, at least in part, due to the
-decoupling between task/workload specification and task management.
-\pilotjobs also thus shields application from having to load-balance
-tasks across such resources.  The \pilotjob abstraction is also a
-promising route to address specific requirements of distributed
-scientific applications, such as coupled-execution and
-application-level scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+The fundamental reason for the success of the \pilotjob abstraction is that
+\pilotjob liberate applications/users from the challenging requirement of
+mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
+In other words, at least in part, due to the decoupling between task/workload
+specification and task management. \pilotjobs also improve the efficiency of
+task assignment and shield applications from having to load-balance tasks
+across such resources. Another concern often addressed by \pilotjobs is fault
+tolerance which commonly refers the ability of the \pilotjob system to verify
+the execution environment before executing jobs. The \pilotjob abstraction is
+also a promising route to address specific requirements of distributed
+scientific applications, such as coupled-execution and application-level
+scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -326,53 +328,50 @@ collection of tasks, and also prevents saturation of resource batch
 queuing systems from high-throughput simulations where many jobs
 need to be run at one time.
 
-\subsubsection*{Criteria and Classifications}
-\alnote{refine structure: function/non-functional, internal/external}
-We assess the \pilotjob-Systems according to the following criteria:
-\begin{itemize}
-	\item Functional Features:
-	\begin{itemize}
-		\item What use cases? What applications types are supported? MPI, 
-		ensembles, workflows? Single vs. multi-purpose? Usage modes?
-		\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
-		service
-		\item Supported scales of distribution
-		\item Integration with/support for higher-level tools (e.g. workflow 
-		systems, data analysis systems)		
-		\item Support for Data
-	\end{itemize}
-	\item Non-Functional Features:
-	\begin{itemize}
-		\item Performance 
-		\item Scalability (task throughput, number resources/slots)
-		\item Fault Tolerance
-		\item Interoperability
-		\item Security (Single vs. Multi-User)
-	\end{itemize}
-    \item Internal Architecture:
-	\begin{itemize}
-		\item Internal Architecture (communication \& coordination, central 
-		vs. decentral architectures; push vs. pull model, agent-based; number 
-		of supported pilots/resources; vertical/horizontal integration...)
-		\item What low-level infrastructures/middleware are supported? How 
-		interoperable is the framework (vertically, horizontally)?
-		\item Deployment Model: hosted service versus tool/library, 
-		application vs. system-level
-		\item Scheduling: supported algorithms, support for application-level 
-		scheduling, data-compute scheduling, resource acquisition/release 
-		policies, dispatch policies, number of scheduling levels	
-		\item Dependencies, re-use of other components/services	
-	\end{itemize}		
-\end{itemize}
+\subsubsection{Criteria and Classifications}
 
-As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
-different levels of the distributed computing stack: (i) PJ systems that
-solely provide a simple \pilot capability, (ii) systems that provide resource
-management capabilities based on \pilots and (iii) applications, tools and
-services that utilize \pilots. Higher-level applications and tools either 
-provide a highly-integrated vertical framework, which deeply integrates the PJ 
-system (e.\,g.\ Swift/Coasters), or rely on a third-party 
-\pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
+We assess the \pilotjob systems according to the according to different 
+functional and non-functional criteria. Further we analyze the internal 
+architecture of each \pilotjob system.
+
+\noindent
+\emph{Functional Features}
+\begin{itemize}
+	\item What use cases? What applications types are supported? MPI, 
+	ensembles, workflows? Single vs. multi-purpose? Usage modes?
+	\item Abstraction/Programming Model: CLI, Scripting (SWIFT), API, Web 
+	service
+	\item Supported scales of distribution
+	\item Integration with/support for higher-level tools (e.g. workflow 
+	systems, data analysis systems)		
+	\item Support for Data
+\end{itemize}
+\emph{Non-Functional Features}
+\begin{itemize}
+	\item Performance 
+	\item Scalability (task throughput, number resources/slots)
+	\item Fault Tolerance
+	\item Interoperability
+	\item Security (Single vs. Multi-User)
+\end{itemize}
+\emph{Internal}
+\begin{itemize}
+	\item Internal Architecture (communication \& coordination, central 
+	vs. decentral architectures; push vs. pull model, agent-based; number 
+	of supported pilots/resources; vertical/horizontal integration...)
+	\item What low-level infrastructures/middleware are supported? How 
+	interoperable is the framework (vertically, horizontally)?
+	\item Deployment Model: hosted service versus tool/library, 
+	application vs. system-level
+	\item Scheduling: supported algorithms, support for application-level 
+	scheduling, data-compute scheduling, resource acquisition/release 
+	policies, dispatch policies, number of scheduling levels	
+	\item Dependencies, re-use of other components/services	
+\end{itemize}		
+
+
+
+\subsubsection{Pilot-Job Systems Overview}
 
 \begin{figure}[t]
 	\centering
@@ -391,62 +390,29 @@ system (e.\,g.\ Swift/Coasters), or rely on a third-party
 \end{figure}
 
 
-\subsubsection*{Pilot-Job Systems Overview}
+As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
+different levels of the distributed computing stack: (i) Core PJ systems that
+solely provide a simple \pilot capability, (ii) systems that provide resource
+management capabilities based on \pilots and (iii) applications, tools and
+services that utilize \pilots. 
 
-\alnote{add pre-pilot; introduce categories before going into details.}
 
-\alnote{fix numbering}
 
-PJ to survey (pilots can fall potentially in on or more categories):
+\subsubsection*{Core Pilot-Job Systems}
+
 \begin{itemize}
-	\item Basic Pilot-Job Systems: \mtnote{I think I understand what simple means here but I think we need to find a better term. See also Ole's comment on using core instead of simple.}
-	\begin{itemize}
-		\item Condor-G/Glide-In
-		\item MyCluster (supports both Condor and SGE clusters)
-		\item ToPoS 
-		\item Co-Pilot
-		\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
-		\item LGI
-		\item Wisdom
-		\item EDGeS
-		\item Trellis
-		\item Personal Cluster
-	\end{itemize}
-	\item Pilot-based Scheduling/Multi-Level Scheduling
-	\begin{itemize}
-		\item GlideinWMS~\cite{1742-6596-119-6-062044}
-		\item CorralWMS
-		\item GWPilot??~\cite{gridway} \aznote{Implemented as a GridWay
-                  plugin}
-		\item Dirac
-        \item ALIEN
-		\item PanDA  
-		\item AppLeS
-	\end{itemize}
-	\item Higher-Level Application Frameworks (with PJ capabilities):
-	\begin{itemize}
-		\item Workflow
-		\begin{itemize}
-			\item Swift/Coasters
-			\item Pegasus
-		\end{itemize}
-		\item Task Farming/Master-Worker
-		\begin{itemize}
-			\item Nimrod/G 
-			\item DIANE
-			\item Falkon 
-            \item Work Q (\url{http://www3.nd.edu/~ccl/software/workqueue/})(note: this does not have PJ capability directly but builds into glide-in)
-		\end{itemize}
-		\item Data Analytics \& Visualization
-		\begin{itemize}
-			\item Bosco
-			\item iPython (SGE, PBS)
-			\item NetSolve~\cite{Casanova:1995:NNS:898848}
-		\end{itemize}		
-	\end{itemize}
+	\item Condor-G/Glide-In
+	\item MyCluster (supports both Condor and SGE clusters)
+	\item ToPoS 
+	\item Co-Pilot
+	\item GridBot~\cite{Silberstein:2009:GEB:1654059.1654071}
+	\item LGI
+	\item Wisdom
+	\item EDGeS
+	\item Trellis
+	\item Personal Cluster
 \end{itemize}
 
-\subsubsection{Basic Pilot-Job Systems}
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept. Glide-in is a mechanism by which user can add remote grid resources
 to the local condor pool and run their jobs on the added resource the same way
@@ -494,7 +460,7 @@ can also be leveraged to assist with the data-driven computations.
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection{Advanced Pilot-Job Systems/Multi-Level Scheduling}
+\subsubsection*{Advanced Pilot-Job Systems/Multi-Level Scheduling}
 %AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
 %application-level scheduling. For this purpose, AppLeS provides an agent that 
 %can be embedded into an application enabling the application to acquire 
@@ -513,10 +479,14 @@ can also be leveraged to assist with the data-driven computations.
   heterogeneous, dynamic distributed grid environments. Added a
   pre-\pilot category to the history sub-section.}
 
-While basic PJ systems mainly focus on providing simple \pilot capabilities 
+While core PJ systems mainly focus on providing simple \pilot capabilities 
 commonly in application space, many of these systems evolved towards more 
 \pilot-based workload managers, which are often centrally hosted moving 
-critical functionality from the client to the server.
+critical functionality from the client to the server. Several of these have 
+been developed in the context of the LHC experiment at CERN, e.\,g.\ 
+GlideInWMS, Dirac~\cite{1742-6596-219-6-062049}, 
+PanDa~\cite{1742-6596-331-7-072069} and ALIEN~\cite{1742-6596-119-6-062012}.
+
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
@@ -532,20 +502,57 @@ provides more explicit control over the placement and start of \pilots to the
 end-user. Higher-level frameworks, such as Pegasus, can utilize Corral to
 optimize the placements of \pilots with respect to their workload.
 
-Another workload management systems that is based on Condor-G/Glidein is
-PanDA~\cite{1742-6596-331-7-072069}. In contrast, a Condor-G only approach,
+
+The PanDA~\cite{1742-6596-331-7-072069} workload management systems is also 
+based on Condor-G/Glidein. In contrast, a Condor-G only approach,
 PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
 internal queue. PanDA also provides the ability to manage data associated the 
 jobs managed by the PanDA workload manager.
 
-\subsubsection{Higher-Level Frameworks}
+In addition to the \pilotjob systems developed around the LHC experiment, 
+several other systems emerged. GWPilot~\cite{gwpilot} is a \pilot systems that 
+is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its 
+multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
+JSDL.
+
+\subsubsection*{Higher-Level Frameworks}
 
 Many higher-level tools and frameworks, such as workflow, visualization or
 data analytics systems, utilize \pilotjob systems to manage their
 computational workload. In general, two approaches exist: (i) the framework
-vertically integrates with a custom \pilotjob implementation or (ii) it
-re-uses a general purpose PJ system. In case (i), the PJ system is often
-re-factored to also serve a multi-purpose PJ system.
+vertically integrates with a custom \pilotjob implementation (e.\,g.\
+Swift/Coaster) or (ii) it re-uses a general purpose PJ system (e.\,g\
+Pegasus/Condor-G). In case (i), the PJ system is often re-factored to also
+serve a multi-purpose PJ system.
+
+Generally \pj systems
+\begin{itemize}
+	\item Workflow
+	\begin{itemize}
+		\item Swift/Coasters
+		\item Pegasus
+	\end{itemize}
+	\item Task Farming/Master-Worker
+	\begin{itemize}
+		\item Nimrod/G 
+		\item DIANE
+		\item Falkon 
+        \item Work Q (\url{http://www3.nd.edu/~ccl/software/workqueue/})(note: this does not have PJ capability directly but builds into glide-in)
+	\end{itemize}
+	\item Data Analytics \& Visualization
+	\begin{itemize}
+		\item Bosco
+		\item iPython (SGE, PBS)
+		\item NetSolve~\cite{Casanova:1995:NNS:898848}
+	\end{itemize}		
+\end{itemize}
+
+
+
+% Higher-level applications and tools either 
+% provide a highly-integrated vertical framework, which deeply integrates the PJ 
+% system (e.\,g.\ Swift/Coasters), or rely on a third-party 
+% \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
 
 \section{Understanding the Landscape: Developing a Vocabulary}
