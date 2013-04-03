@@ -418,7 +418,7 @@ PJ to survey (pilots can fall potentially in on or more categories):
 		\item CorralWMS
 		\item GWPilot??~\cite{gridway} \aznote{Implemented as a GridWay
                   plugin}
-		\item Dirac?
+		\item Dirac
         \item ALIEN
 		\item PanDA  
 		\item AppLeS
@@ -494,7 +494,7 @@ can also be leveraged to assist with the data-driven computations.
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection{Pilot-based Scheduling}
+\subsubsection{Advanced Pilot-Job Systems/Multi-Level Scheduling}
 %AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
 %application-level scheduling. For this purpose, AppLeS provides an agent that 
 %can be embedded into an application enabling the application to acquire 
@@ -513,6 +513,11 @@ can also be leveraged to assist with the data-driven computations.
   heterogeneous, dynamic distributed grid environments. Added a
   pre-\pilot category to the history sub-section.}
 
+While basic PJ systems mainly focus on providing simple \pilot capabilities 
+commonly in application space, many of these systems evolved towards more 
+\pilot-based workload managers, which are often centrally hosted moving 
+critical functionality from the client to the server.
+
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in. The
 system can based on the current and expected number of jobs in the pool,
@@ -530,7 +535,8 @@ optimize the placements of \pilots with respect to their workload.
 Another workload management systems that is based on Condor-G/Glidein is
 PanDA~\cite{1742-6596-331-7-072069}. In contrast, a Condor-G only approach,
 PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
-internal queue.
+internal queue. PanDA also provides the ability to manage data associated the 
+jobs managed by the PanDA workload manager.
 
 \subsubsection{Higher-Level Frameworks}
 
