@@ -433,7 +433,10 @@ and executes necessary Condor daemons and configuration on the remote
 resource, such that the resource reports to and joins the local Condor pool.
 Glide-in is limited in that the daemons must be running on a given resource,
 meaning that this process must be approved by resource owners or system
-administrators.
+administrators. Various systems that built on the \pilot capabilities of 
+Condor-G/Glide-in have been developed, e.\,g.\ Bosco~\cite{bosco} and 
+GlideinWMS. Bosco e.\,g.\ simplifies the process of spawning a Glide-in 
+significantly.
 
 \pilotjobs were used at CERN on grid infrastructure to process experiments 
 performed with the Large Hadron Collider~\cite{copilot-tr}. 
@@ -460,7 +463,7 @@ can also be leveraged to assist with the data-driven computations.
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Advanced Pilot-Job Systems/Multi-Level Scheduling}
+\subsubsection*{Advanced Pilot-Job Systems: \pilot-based Workload Manager, Systems for Multi-Level Scheduling}
 %AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
 %application-level scheduling. For this purpose, AppLeS provides an agent that 
 %can be embedded into an application enabling the application to acquire 
