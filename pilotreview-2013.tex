@@ -150,6 +150,9 @@
 
 \section{Introduction} 
 
+\jhanote{consistency between PJ sytems and \pilot systems and
+  \pilotjob systems please}
+
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
 simple-to-use abstractions at multiple levels – at the development,
@@ -234,11 +237,12 @@ machines implemented their own batch queuing systems, and oftentimes
 these systems varied from machine to machine. Many scientific
 communities began running into the same problems: (i) heterogenous
 resources, (ii) workload management, and (iii) support of various
-applications. There was a need to be able to
-harness the power of these heterogeneous resources to run
-jobs. \pilotjobs have historically been used as a means of solving
-this problem. We briefly discuss some of the specific uses of pilot 
-jobs below.
+applications. \jhanote{something not clear: why are 2 and 3 problems?
+  maybe ``need'' for workload management and support of various applications?}
+There was a need to be able to harness the power of these
+heterogeneous resources to run jobs. \pilotjobs have historically been
+used as a means of solving this problem. We briefly discuss some of
+the specific uses of pilot jobs below.
 
 \pilotjobs are most commonly used for the execution of many tasks
 through the use of a container job. They are often measured by
@@ -277,21 +281,54 @@ time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-
 \subsubsection*{The Evolution of \pilotjobs}
 
 In order to appreciate \pilotjobs, we outline the evolution of
-\pilot-like capabilities ultimately leading to the creation of an actual
-\pilotjob. We present a brief chronological order of \pilotjob-like
-systems, beginning with simple Master-Worker applications through
-advanced workload management systems.
+\pilot-like capabilities ultimately leading to the creation of the
+first actual \pilotjob. We present a brief chronological order of
+\pilotjob-like systems, beginning with simple Master-Worker
+applications through advanced workload management systems.
 
-We first discuss pre-\pilotjob systems, which were the earliest uses of grid technologies. The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
+We first discuss pre-\pilotjob systems, which were the earliest uses
+of grid technologies. The Master-Worker application was adapted to
+grids as a means of farming tasks from a master to a various number of
+workers, and could easily be adapted to run in a platform-independent
+way across the potentially heterogeneous resources~\cite{masterworker,
+  Goux00anenabling}. In the grid computing context, Master-Worker
+schemes could respond to the dynamically changing resources by
+adapting the number of workers to match the resource
+availability. Although Master-Worker schemes were important, they
+required application modification. \jhanote{last statement is unclear}
 
-Another application that pre-dates pilot jobs is the BOINC middleware system~\cite{Anderson:2004:BSP:1032646.1033223}. BOINC plays a significant role in distributed computing acting as a Client/Server-based platform which utilizes unused computer cycles on the client-side in order to execute tasks given from the server-side. Applications can be built on top of BOINC for their own scientific endeavors; it was originally built for the SETI@Home project, which uses Internet-connected computers to download and analyze radio telescope data. Most often, these computers are based around the world -- users merely have to download the client program, and it runs in the background on their computer. The data is then aggregated back on the server-side and analyzed. The idea of farming out tasks in a distributed environment including personal computers was the first wide-use of the Client/Server model that essentially made a grid out of many less powerful machines.
+Another application that pre-dates pilot jobs \jhanote{please use the
+  macro for \pilotjobs!!} is the BOINC middleware
+system~\cite{Anderson:2004:BSP:1032646.1033223}. \jhanote{previous
+  sentence is sloppy: application, \pilotjobs and middleware are all
+  interchangably used in the same sentence!} BOINC plays a significant
+role in distributed computing acting as a Client/Server-based platform
+which utilizes unused computer cycles on the client-side in order to
+execute tasks given from the server-side. Applications can be built on
+top of BOINC for their own scientific endeavors; it was originally
+built for the SETI@Home project, which uses Internet-connected
+computers to download and analyze radio telescope data. Most often,
+these computers are based around the world -- users merely have to
+download the client program, and it runs in the background on their
+computer. The data is then aggregated back on the server-side and
+analyzed. The idea of farming out tasks in a distributed environment
+including personal computers was the first wide-use of the
+Client/Server model that essentially made a grid out of many less
+powerful machines.
 
-As the resources in the grid adopted more and more batch queuing systems, users were forced to submit their jobs individually to a scheduler. Oftentimes, the type of scheduler on a certain machine was different than that of another machine. There was a need for managing the heterogenous, dynamic grid environments, especially in terms of dynamic scheduling. This drove the creation of AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for 
-application-level scheduling. For this purpose, AppLeS provides an agent that 
-can be embedded into an application enabling the application to acquire 
-resources (e.\,g.\ via Globus, SSH or Legion) and efficiently schedule tasks 
-onto these. Further, AppLeS provides different application templates,
-e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
+As the resources in the grid adopted more and more batch queuing
+systems, users were forced to submit their jobs individually to a
+scheduler. Oftentimes, the type of scheduler on a certain machine was
+different than that of another machine. There was a need for managing
+the heterogenous, dynamic grid environments, especially in terms of
+dynamic scheduling. This drove the creation of
+AppLeS~\cite{Berman:2003:ACG:766629.766632}, a framework for
+application-level scheduling. For this purpose, AppLeS provides an
+agent that can be embedded into an application enabling the
+application to acquire resources (e.\,g.\ via Globus, SSH or Legion)
+and efficiently schedule tasks onto these. Further, AppLeS provides
+different application templates, e.\,g.\ for parameter sweep,
+master-worker and moldable parallel applications.
 
 The rise of application-level scheduling, as in AppLeS, opened new possibilities to Grid environments. The concept of application-level scheduling was extended to include long-term performance prediction in heterogenous Grid environments via the Grid Harvest Service (GHS) system~\cite{ghs}. GHS provides a prediction model that was derived by probability analysis and simulation and useful for large-scale applications in shared environments. Its prediction models and task scheduling algorithms are utilized in the placement of tasks across Grid resources. GHS supports three classes of task scheduling: (i) single task, (ii) parallel processing, and (iii) meta-task. The performance evaluation and modeling in conjunction with task-specific management (such as placement, scheduling, and execution) allows the utilization of many heterogenous resources in an efficient manner.
 
@@ -396,11 +433,14 @@ architecture of each \pilotjob system.
 \end{figure}
 
 
-As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
-different levels of the distributed computing stack: (i) Core PJ systems that
-solely provide a simple \pilot capability, (ii) systems that provide resource
-management capabilities based on \pilots and (iii) applications, tools and
-services that utilize \pilots. 
+As shown Figure~\ref{fig:figures_classification}, PJ systems operate
+on different levels of the distributed computing stack: (i) Core PJ
+systems that solely provide a simple \pilot capability, (ii) systems
+that provide resource management capabilities based on \pilots and
+(iii) applications, tools and services that utilize
+\pilots. \jhanote{the mapping of the above to the different levels in
+  the diagram is implied, but the text above does not guide/make it
+  explicit. Please refine}
 
 \subsubsection*{Core Pilot-Job Systems}
 
@@ -458,6 +498,9 @@ significantly.
 
 %%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Advanced Pilot-Job Systems}
+%  \pilot-based Workload Manager, Systems for Multi-Level Scheduling}
+
+
 %AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
 %application-level scheduling. For this purpose, AppLeS provides an agent that 
 %can be embedded into an application enabling the application to acquire 
@@ -528,45 +571,49 @@ is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its
 multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
 JSDL.
 
-\subsubsection*{Higher-Level Frameworks}
+\subsubsection*{Higher-Level \pilot-based Frameworks}
 
-Many higher-level tools and frameworks, such as workflow, visualization or
-data analytics systems, utilize \pilotjob systems to manage their
-computational workload. In general, two approaches exist: (i) the framework
-vertically integrates with a custom \pilotjob implementation (e.\,g.\
-Swift/Coaster) or (ii) it re-uses a general purpose PJ system (e.\,g\
-Pegasus/Condor-G). In case (i), the PJ system is often re-factored to also
-serve a multi-purpose PJ system.
+Many higher-level tools and frameworks, such as workflow,
+visualization or data analytics systems, utilize \pilotjob systems to
+manage their computational workload. In general, two approaches exist:
+(i) the framework vertically integrates with a custom \pilotjob
+implementation (e.\,g.\ Swift/Coaster) or (ii) it re-uses a general
+purpose PJ system (e.\,g\ Pegasus/Condor-G). In case (i), the PJ
+system is often re-factored to also serve as a multi-purpose PJ
+system. \jhanote{last sentence needs refinement}
 
-In the context of scientific workflows, \pilotjob systems have been proven as
-effective tool for managing the workload. In the context of the Pegasus
-project the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
-as a frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides more
-explicit control over the placement and start of \pilots to the end-user. In
-contrast to GlideinWMS these Glide-Ins are run using the credential of the
-user and not a VO credential. Corral has been developed to support the
-requirements of the Pegasus workflow system in particular to optimize the
-placements of \pilots with respect to their workload.
+In the context of scientific workflows, \pilotjob systems have been
+proven as effective tool for managing the workload. In the context of
+the Pegasus project the Corral
+system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a
+frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides
+more explicit control over the placement and start of \pilots to the
+end-user. In contrast to GlideinWMS these Glide-Ins\jhanote{substitute
+  with Corral Glide-Ins?} are run using the credential of the user and
+not a VO credential. Corral has been developed to support the
+requirements of the Pegasus workflow system in particular to optimize
+the placements of \pilots with respect to their workload.
 
 SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
-abstract workflows and computations. The language provides among many things
-capabilities for executing external application as well as the implicit
-management of data flows between application tasks. For this purpose, SWIFT
-formalizes the way that applications can define data-dependencies. Using so
-called mappers, these dependencies can be easily extended to files or groups
-of files. The runtime environment handles the allocation of resources and the
-spawning of the compute tasks. Both data- and execution management
-capabilities are provided via abstract interfaces. The Coaster
-system~\cite{coasters} has been developed to address to the workload
-management requirements of Swift supporting various infrastructures, such as
-both cloud and grid. Using the Coaster service, one executes a Coaster Master
-on a head node, and the Coaster workers run on compute nodes to execute jobs.
-Coasters offers a zero-install feature in which it deploys itself and installs
-itself from the head node and onto the virtual machines without needing any
-prior installation on the machine. Coaster relies on a master/worker
-coordination model; communication is implemented using GSI-secured TCP
-sockets. SWIFT supports various scheduling mechanisms on top of Coaster, 
-e.\,g.\ a FIFO and a load-aware scheduler.
+abstract workflows and computations. The language provides among many
+things capabilities for executing external application as well as the
+implicit management of data flows between application tasks. For this
+purpose, SWIFT formalizes the way that applications can define
+data-dependencies. Using so called mappers, these dependencies can be
+easily extended to files or groups of files. The runtime environment
+handles the allocation of resources and the spawning of the compute
+tasks. Both data- and execution management capabilities are provided
+via abstract interfaces. The Coaster system~\cite{coasters} has been
+developed to address the workload management requirements of Swift
+supporting various infrastructures, such as both cloud and grid. Using
+the Coaster service, one executes a Coaster Master on a head node, and
+the Coaster workers run on compute nodes to execute jobs.  Coasters
+offers a zero-install feature in which it deploys itself and installs
+itself from the head node and onto the virtual machines without
+needing any prior installation on the machine. Coaster relies on a
+master/worker coordination model; communication is implemented using
+GSI-secured TCP sockets. SWIFT supports various scheduling mechanisms
+on top of Coaster, e.\,g.\ a FIFO and a load-aware scheduler.
 
 Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
 Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
@@ -607,6 +654,10 @@ AMGA.
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party 
 % \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
+\jhanote{these subsections read well. One major suggestion: after we
+  have described specific systems and how they fall into categories
+  (basic, advanced, higher-level \pilot-based frameworks, we need to
+  close out by describing/discussing the categories again}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
@@ -689,7 +740,23 @@ but includes also those of `pool', `manager' and `agent'.
 	\label{fig:s3_pilot_diagram}
 \end{figure}
 
-\mtnote{Different pool implementations, ways to make tasks available to the manager: potential topics to discuss in Section 4?}
+\jhanote{The question is what are the fundamental ``concepts''. It is
+  not necessary that the concepts have a specific implementation or
+  map to a component in \pilotjob system. As we know there are
+  different ways in which tasks get committed to the \pilotjob
+  system. One possible primary concept is that of logical grouping;
+  all tasks are committed to a logical grouping -- where the grouping
+  is such that all entities in this group will be executed
+  (disregrarding details of how this grouping will happen, or who will
+  perform the execution).  It appears that the concept of logical
+  grouping of tasks is a fundamental one, and avoids a requirement of
+  any further specification of of details of who/where/when; if so,
+  then the notion of a pool can be dispensed with, which will have the
+  advantage of liberating us from the requirement of imposing on the
+  the manager the need to push/pulling tasks from a pool.}
+
+\mtnote{Different pool implementations, ways to make tasks available
+  to the manager: potential topics to discuss in Section 4?}
 
 Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. 
 \onote{the more I think about it, the less I am convinced that we need the notion of a pool here. It's an implementation detail that might not
@@ -700,7 +767,14 @@ The implementation of a pool varies among \pilotjobs\onote{-Systems} with the po
 \mtnote{Vocabulary: manager}
 \mtnote{Capabilities across different manager implementations: potential topic to discuss in Section 4?}
 
-Within a pilot system, a manager is responsible for getting tasks from one or more pools and scheduling them into possibly multiple agents (Figure~\ref{fig:s3_pilot_diagram}). Managers can offer a vast array of capabilities and they greatly differ among \pilotjob implementations. Scheduling algorithms but also mechanisms to allocate dynamically resources to each task depending on availability and performance evaluations are typical examples of capabilities already offered, or potentially implementable, in this type of managers.
+Within a pilot system, a manager is responsible for getting tasks from
+one or more pools and scheduling them into possibly multiple agents
+(Figure~\ref{fig:s3_pilot_diagram}). Managers can offer a vast array
+of capabilities and they greatly differ among \pilotjob
+implementations. Scheduling algorithms but also mechanisms to allocate
+dynamically resources to each task depending on availability and
+performance evaluations are typical examples of capabilities already
+offered, or potentially implementable, in this type of managers.
 
 \mtnote{Vocabulary: agent}
 
@@ -708,35 +782,108 @@ Agents executes the tasks pushed by or pulled from one or more managers (Figure~
 
 \mtnote{Vocabulary: Pilot Job}
 
-A \pilotjob is a system that combines the conceptual constituents defined for both `pilot' and `job' but also add the distinctive concepts of `placeholder', `early binding' and `late binding' and `multi-level scheduling'. \jhanote{we should consider a diagram to help distinguish late and early binding}
+A \pilotjob is a system that combines the conceptual constituents
+defined for both `pilot' and `job' but also add the distinctive
+concepts of `placeholder', `early binding' and `late binding' and
+`multi-level scheduling'. \jhanote{we should consider a diagram to
+  help distinguish late and early binding}
 
 \mtnote{Vocabulary: Placeholder}
 
-In order to get resources, each agent - or group of agents - of a pilot system is scheduled by a user \onote{false. In the glideinWMS this is not done by the user} as a job within a given infrastructure. These jobs are eventually granted the requested amount of resources for the indicated period of time and their agents are executed. At this point, an agent becomes a placeholder for the set of resources that have been specified by and assigned to its job.
-\onote{not convinced that we need a formal definition of 'placeholder'.}
+In order to get resources, each agent - or group of agents - of a
+pilot system is scheduled by a user \onote{false. In the glideinWMS
+  this is not done by the user} as a job within a given
+infrastructure. These jobs are eventually granted the requested amount
+of resources for the indicated period of time and their agents are
+executed. At this point, an agent becomes a placeholder for the set of
+resources that have been specified by and assigned to its job.
+\onote{not convinced that we need a formal definition of
+  'placeholder'.}
 
-\mtnote{How different \pilotjob implementations deal with the peculiarities of the job submission system of different infrastructures; whether \pilotjobs implementations offer job-submission interoperability among different infrastructures: potential topics to discuss in Section 4?}
+\mtnote{How different \pilotjob implementations deal with the
+  peculiarities of the job submission system of different
+  infrastructures; whether \pilotjobs implementations offer
+  job-submission interoperability among different infrastructures:
+  potential topics to discuss in Section 4?}
 
-The submission process of agents depends on the capabilities exposed by the submission system of the targeted infrastructure. For example, users may or may not explicitly indicate a destination for where these jobs need to be scheduled, may have to use dedicated queues and may have to deal with limitations on what processes can be executed on a specific infrastructure. Particularly important in this context are networking capabilities as, without connectivity, agents would not be able to communicate with their managers and, ultimately, with the end users.
+The submission process of agents depends on the capabilities exposed
+by the submission system of the targeted infrastructure. For example,
+users may or may not explicitly indicate a destination for where these
+jobs need to be scheduled, may have to use dedicated queues and may
+have to deal with limitations on what processes can be executed on a
+specific infrastructure. Particularly important in this context are
+networking capabilities as, without connectivity, agents would not be
+able to communicate with their managers and, ultimately, with the end
+users.
 
-Once one or more placeholders become available on the given infrastructures, users can start to use a \pilotjob system to execute their tasks. Users own the placeholders and can run their tasks by means of the corresponding agents without having to deal with the job submission system of the infrastructure. 
+Once one or more placeholders become available on the given
+infrastructures, users can start to use a \pilotjob system to execute
+their tasks. Users own the placeholders and can run their tasks by
+means of the corresponding agents without having to deal with the job
+submission system of the infrastructure. \jhanote{Is is necessary that
+  users ``own'' the agents. can the manager not own the placeholder?}
 
 \mtnote{Vocabulary: multi-level scheduling}
 \mtnote{Different ways to implement task scheduling: potential topics to discuss in Section 4?}
 
-Tasks are scheduled on the available placeholders by means of a dedicated scheduler, the pilot master or directly by the users depending on the \pilotjobs implementations. As two level of scheduling are involved - the one used to schedule the placeholders and the other used to schedule tasks on the placeholder - \pilotjobs are said to implement `multi-level scheduling' [ref] by means of scheduling overlay [cit].
+Tasks are scheduled on the available placeholders by means of a
+dedicated scheduler, the pilot master or directly by the users
+depending on the \pilotjobs implementations. As at least two level of
+scheduling are involved - the one used to schedule the placeholders
+and the other used to schedule tasks on the placeholder - \pilotjobs
+are said to implement `multi-level scheduling' [ref] by means of
+scheduling overlay [cit].
 
-\mtnote{Vocabulary: binding}
-\mtnote{Binding capabilities; execution model: potential topics to discuss in Section 4?}
+\mtnote{Vocabulary: binding} 
 
-The act of assigning resources to tasks is called `binding'. Users partition the resources managed by means of a placeholder, including its time allocation, so to execute multiple tasks in parallel or sequentially. As the tasks require less time to complete than the total walltime assigned to the placeholder, users never incur in the overheads imposed by the job submission system of a given infrastructure. The resources of multiple placeholders may also be used at the same time so to achieve elaborated execution patterns. As usual, the flexibility of a \pilotjob execution model depends on the details of its implementation.
+\mtnote{Binding capabilities; execution model: potential topics to
+  discuss in Section 4?}
+
+\jhanote{what is the general concept in the following? It is very
+  focussed on specifics if not implementation details..}
+Users partition the resources managed by means of a placeholder,
+including its time allocation, so to execute multiple tasks in
+parallel or sequentially. As the tasks require less time to complete
+than the total walltime assigned to the placeholder, users never incur
+in the overheads imposed by the job submission system of a given
+infrastructure. The resources of multiple placeholders may also be
+used at the same time so to achieve elaborated execution patterns. As
+usual, the flexibility of a \pilotjob execution model depends on the
+details of its implementation.
+
 
 \mtnote{Vocabulary: early/late binding}
 \mtnote{Late-binding capabilities: potential topics to discuss in Section 4?}
 
-The control exercised by the users on their placeholders depends on the amount of information they include when submitting their tasks to a pool. Users may fully specify how and where a task should be executed or may leave the manager and agents to evaluate those parameters for them. The former is called `early binding' as users decide in advance how and where to execute their tasks, the latter is called `late binding' because, at submission time, how and where a task will be executed is unspecified.
+\jhanote{For ease of readability, we should make explicit the
+  difference between binding and scheduling here.}  The act of
+assigning resources to tasks is called `binding'. Note how 'binding'
+is defined in contrast to scheduling.  \jhanote{I have brought the
+  above sentence down here. I think for ease of readability, once we
+  start discussing binding we should continue onto early and late
+  binding. ALso in the definition of early and late binding, we should
+  IMHO explicitly use the concept of ``when'' a task is bound to a
+  resource in order for it to be concrete.}  The control exercised by
+the users on their placeholders depends on the amount of information
+they include when submitting their tasks to a pool. Users may fully
+specify how and where a task should be executed or may leave the
+manager and agents to evaluate those parameters for them. The former
+is called `early binding' as users decide in advance how and where to
+execute their tasks, the latter is called `late binding' because, at
+submission time, how and where a task will be executed is unspecified.
 
-Late binding requires specific capabilities. Manager(s) and agent(s) must be able to evaluate the requirements of the submitted tasks and maximize the efficiency of their binding depending on the peculiar properties, configuration and state of the resources made available through the placeholder(s). As such, in a late binding scenario, managers and agents may decide the amount of placeholders to use, the granularity of their partitions, the amount and type of the resources to allocate to the tasks and where such tasks should be executed. In an ideal late binding situation, users would be free only to specify high-level, resource-independent parameters for their tasks as, for example, the amount of time or money that should be spent for their execution.
+Late binding requires specific capabilities. Manager(s) and agent(s)
+must be able to evaluate the requirements of the submitted tasks and
+maximize the efficiency of their binding depending on the peculiar
+properties, configuration and state of the resources made available
+through the placeholder(s). As such, in a late binding scenario,
+managers and agents may decide the amount of placeholders to use, the
+granularity of their partitions, the amount and type of the resources
+to allocate to the tasks and where such tasks should be executed. In
+an ideal late binding situation, users would be free only to specify
+high-level, resource-independent parameters for their tasks as, for
+example, the amount of time or money that should be spent for their
+execution. 
 
 \subsection{Different components of the Landscape}
 
