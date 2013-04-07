@@ -150,6 +150,9 @@
 
 \section{Introduction} 
 
+\jhanote{consistency between PJ sytems and \pilot systems and
+  \pilotjob systems please}
+
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
 simple-to-use abstractions at multiple levels – at the development,
@@ -234,11 +237,12 @@ machines implemented their own batch queuing systems, and oftentimes
 these systems varied from machine to machine. Many scientific
 communities began running into the same problems: (i) heterogenous
 resources, (ii) workload management, and (iii) support of various
-applications. There was a need to be able to
-harness the power of these heterogeneous resources to run
-jobs. \pilotjobs have historically been used as a means of solving
-this problem. We briefly discuss some of the specific uses of pilot 
-jobs below.
+applications. \jhanote{something not clear: why are 2 and 3 problems?
+  maybe ``need'' for workload management and support of various applications?}
+There was a need to be able to harness the power of these
+heterogeneous resources to run jobs. \pilotjobs have historically been
+used as a means of solving this problem. We briefly discuss some of
+the specific uses of pilot jobs below.
 
 \pilotjobs are most commonly used for the execution of many tasks
 through the use of a container job. They are often measured by
@@ -277,28 +281,40 @@ time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-
 \subsubsection*{The Evolution of \pilotjobs}
 
 In order to appreciate \pilotjobs, we outline the evolution of
-\pilot-like capabilities ultimately leading to the creation of an actual
-\pilotjob. We present a brief chronological order of \pilotjob-like
-systems, beginning with simple Master-Worker applications through
-advanced workload management systems.
+\pilot-like capabilities ultimately leading to the creation of the
+first actual \pilotjob. We present a brief chronological order of
+\pilotjob-like systems, beginning with simple Master-Worker
+applications through advanced workload management systems.
 
-We first discuss pre-\pilotjob systems, which were the earliest uses of grid technologies. The Master-Worker application was adapted to grids as a means of farming tasks from a master to a various number of workers, and could easily be adapted to run in a platform-independent way across the potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}. In the grid computing context, Master-Worker schemes could respond to the dynamically changing resources by adapting the number of workers to match the resource availability. Although Master-Worker schemes were important, they required application modification.
+We first discuss pre-\pilotjob systems, which were the earliest uses
+of grid technologies. The Master-Worker application was adapted to
+grids as a means of farming tasks from a master to a various number of
+workers, and could easily be adapted to run in a platform-independent
+way across the potentially heterogeneous resources~\cite{masterworker,
+  Goux00anenabling}. In the grid computing context, Master-Worker
+schemes could respond to the dynamically changing resources by
+adapting the number of workers to match the resource
+availability. Although Master-Worker schemes were important, they
+required application modification. \jhanote{last statement is unclear}
 
-Another application that pre-dates pilot jobs is the BOINC middleware
-system~\cite{Anderson:2004:BSP:1032646.1033223}. BOINC plays a
-significant role in distributed computing acting as a
-Client/Server-based platform which utilizes unused computer cycles on
-the client-side in order to execute tasks given from the
-server-side. Applications can be built on top of BOINC for their own
-scientific endeavors; it was originally built for the SETI@Home
-project, which uses Internet-connected computers to download and
-analyze radio telescope data. Most often, these computers are based
-around the world -- users merely have to download the client program,
-and it runs in the background on their computer. The data is then
-aggregated back on the server-side and analyzed. The idea of farming
-out tasks in a distributed environment including personal computers
-was the first wide-use of the Client/Server model that essentially
-made a grid out of many less powerful machines.
+Another application that pre-dates pilot jobs \jhanote{please use the
+  macro for \pilotjobs!!} is the BOINC middleware
+system~\cite{Anderson:2004:BSP:1032646.1033223}. \jhanote{previous
+  sentence is sloppy: application, \pilotjobs and middleware are all
+  interchangably used in the same sentence!} BOINC plays a significant
+role in distributed computing acting as a Client/Server-based platform
+which utilizes unused computer cycles on the client-side in order to
+execute tasks given from the server-side. Applications can be built on
+top of BOINC for their own scientific endeavors; it was originally
+built for the SETI@Home project, which uses Internet-connected
+computers to download and analyze radio telescope data. Most often,
+these computers are based around the world -- users merely have to
+download the client program, and it runs in the background on their
+computer. The data is then aggregated back on the server-side and
+analyzed. The idea of farming out tasks in a distributed environment
+including personal computers was the first wide-use of the
+Client/Server model that essentially made a grid out of many less
+powerful machines.
 
 As the resources in the grid adopted more and more batch queuing
 systems, users were forced to submit their jobs individually to a
@@ -417,11 +433,14 @@ architecture of each \pilotjob system.
 \end{figure}
 
 
-As shown Figure~\ref{fig:figures_classification}, PJ systems operate on
-different levels of the distributed computing stack: (i) Core PJ systems that
-solely provide a simple \pilot capability, (ii) systems that provide resource
-management capabilities based on \pilots and (iii) applications, tools and
-services that utilize \pilots. 
+As shown Figure~\ref{fig:figures_classification}, PJ systems operate
+on different levels of the distributed computing stack: (i) Core PJ
+systems that solely provide a simple \pilot capability, (ii) systems
+that provide resource management capabilities based on \pilots and
+(iii) applications, tools and services that utilize
+\pilots. \jhanote{the mapping of the above to the different levels in
+  the diagram is implied, but the text above does not guide/make it
+  explicit. Please refine}
 
 \subsubsection*{Core Pilot-Job Systems}
 
@@ -478,7 +497,10 @@ significantly.
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Advanced Pilot-Job Systems: \pilot-based Workload Manager, Systems for Multi-Level Scheduling}
+\subsubsection*{Advanced Pilot-Job Systems}
+
+%  \pilot-based Workload Manager, Systems for Multi-Level Scheduling}
+
 %AppLeS~\cite{Berman:2003:ACG:766629.766632} is a framework for 
 %application-level scheduling. For this purpose, AppLeS provides an agent that 
 %can be embedded into an application enabling the application to acquire 
@@ -549,45 +571,49 @@ is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its
 multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
 JSDL.
 
-\subsubsection*{Higher-Level Frameworks}
+\subsubsection*{Higher-Level \pilot-based Frameworks}
 
-Many higher-level tools and frameworks, such as workflow, visualization or
-data analytics systems, utilize \pilotjob systems to manage their
-computational workload. In general, two approaches exist: (i) the framework
-vertically integrates with a custom \pilotjob implementation (e.\,g.\
-Swift/Coaster) or (ii) it re-uses a general purpose PJ system (e.\,g\
-Pegasus/Condor-G). In case (i), the PJ system is often re-factored to also
-serve a multi-purpose PJ system.
+Many higher-level tools and frameworks, such as workflow,
+visualization or data analytics systems, utilize \pilotjob systems to
+manage their computational workload. In general, two approaches exist:
+(i) the framework vertically integrates with a custom \pilotjob
+implementation (e.\,g.\ Swift/Coaster) or (ii) it re-uses a general
+purpose PJ system (e.\,g\ Pegasus/Condor-G). In case (i), the PJ
+system is often re-factored to also serve as a multi-purpose PJ
+system. \jhanote{last sentence needs refinement}
 
-In the context of scientific workflows, \pilotjob systems have been proven as
-effective tool for managing the workload. In the context of the Pegasus
-project the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
-as a frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides more
-explicit control over the placement and start of \pilots to the end-user. In
-contrast to GlideinWMS these Glide-Ins are run using the credential of the
-user and not a VO credential. Corral has been developed to support the
-requirements of the Pegasus workflow system in particular to optimize the
-placements of \pilots with respect to their workload.
+In the context of scientific workflows, \pilotjob systems have been
+proven as effective tool for managing the workload. In the context of
+the Pegasus project the Corral
+system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a
+frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides
+more explicit control over the placement and start of \pilots to the
+end-user. In contrast to GlideinWMS these Glide-Ins\jhanote{substitute
+  with Corral Glide-Ins?} are run using the credential of the user and
+not a VO credential. Corral has been developed to support the
+requirements of the Pegasus workflow system in particular to optimize
+the placements of \pilots with respect to their workload.
 
 SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
-abstract workflows and computations. The language provides among many things
-capabilities for executing external application as well as the implicit
-management of data flows between application tasks. For this purpose, SWIFT
-formalizes the way that applications can define data-dependencies. Using so
-called mappers, these dependencies can be easily extended to files or groups
-of files. The runtime environment handles the allocation of resources and the
-spawning of the compute tasks. Both data- and execution management
-capabilities are provided via abstract interfaces. The Coaster
-system~\cite{coasters} has been developed to address to the workload
-management requirements of Swift supporting various infrastructures, such as
-both cloud and grid. Using the Coaster service, one executes a Coaster Master
-on a head node, and the Coaster workers run on compute nodes to execute jobs.
-Coasters offers a zero-install feature in which it deploys itself and installs
-itself from the head node and onto the virtual machines without needing any
-prior installation on the machine. Coaster relies on a master/worker
-coordination model; communication is implemented using GSI-secured TCP
-sockets. SWIFT supports various scheduling mechanisms on top of Coaster, 
-e.\,g.\ a FIFO and a load-aware scheduler.
+abstract workflows and computations. The language provides among many
+things capabilities for executing external application as well as the
+implicit management of data flows between application tasks. For this
+purpose, SWIFT formalizes the way that applications can define
+data-dependencies. Using so called mappers, these dependencies can be
+easily extended to files or groups of files. The runtime environment
+handles the allocation of resources and the spawning of the compute
+tasks. Both data- and execution management capabilities are provided
+via abstract interfaces. The Coaster system~\cite{coasters} has been
+developed to address the workload management requirements of Swift
+supporting various infrastructures, such as both cloud and grid. Using
+the Coaster service, one executes a Coaster Master on a head node, and
+the Coaster workers run on compute nodes to execute jobs.  Coasters
+offers a zero-install feature in which it deploys itself and installs
+itself from the head node and onto the virtual machines without
+needing any prior installation on the machine. Coaster relies on a
+master/worker coordination model; communication is implemented using
+GSI-secured TCP sockets. SWIFT supports various scheduling mechanisms
+on top of Coaster, e.\,g.\ a FIFO and a load-aware scheduler.
 
 Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
 Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
@@ -628,6 +654,10 @@ AMGA.
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party 
 % \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
+\jhanote{these subsections read well. One major suggestion: after we
+  have described specific systems and how they fall into categories
+  (basic, advanced, higher-level \pilot-based frameworks, we need to
+  close out by describing/discussing the categories again}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
