@@ -1181,17 +1181,36 @@ vocabulary.
 \subsubsection{AppLeS - Pre-PJ-Systems / Master/Worker frameworks}
 \aznote{Resource discovery a special feature, as well as performance-modelling
 for resource selection}
-Scheduling/resource-selection is handled by a per-application AppleS agent.
-Although many features from more advanced pilot systems are missing, a subset
-of \pilotjob functionality such as late-binding and 
-application-level scheduling are present in AppLeS.
+With AppLes, scheduling and resource-selection is handled by a
+per-application AppleS agent.  In addition, a subset of \pilotjob functionality
+such as application-scheduling are present in AppLeS.
+%Although many features from more advanced pilot systems are missing, a subset
+%of \pilotjob functionality such as late-binding and 
+%application-level scheduling are present in AppLeS.
+AppleS also contains features not fundamental to the Pilot-Job paradigm, such
+as resource discovery via Grid resource discovery services and peformance
+modelling for resource selection.  The entire package thereby reduces the
+complexity of assigning tasks to resources from the user's point of view
+and enables applications to run in a more adaptive fashion.
 However, the lack of a placeholder job limits the functionality 
-of late-binding and application-level scheduling, as tasks
+of application-level scheduling, as tasks
 must wait in unpredictable queues before being executed,
-undermining the level of contol.
+undermining the level of control.  For this reason, AppLeS
+is not a ``true'' \pilotjob system, as a placeholder
+is required to enable fundamental \pilotjob functionality such as
+multi-level scheduling and late-binding.  Such enhancements
+are made in the ``true'' \pilotjob systems which succeed it,
+offering additional adaptibility and user-control over that
+made possible by AppLeS.
+\aznote{Early vs. late binding here -- I am not sure.  AppLeS generates
+a task-resource mapping early before jobs are even running + then sticks 
+to it making it ``early binding'' in my mind,
+even though it does so after profiling the application.  However, according
+to the vocab, if the manager/agents choose which resources will be used
+it's ``late binding''.}
 
-\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
-The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
+%\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
+%The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
 \aznote{Talk about how what AppLeS is missing to be a true PJ system}
 
