@@ -1108,11 +1108,12 @@ ease of usage and deployment, and add the ability to
 schedule data as well as jobs. \aznote{Check this
 sentence later to make sure it is not overreaching}
 
-
 \jhanote{Ashley to ``finish'': AppLeS, MyCluster and PANDA: Ole to
   finish Glide-in, Corral and Bosco: Mark to finish DIANE,
   Swift/falkon, DIRAC(?)}
 
+\aznote{Should we organize this section in order of when the PJ-systems
+were released?}
 
 \subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
 \aznote{Ashley's section}
@@ -1213,10 +1214,34 @@ it's ``late binding''.}
 %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
-\aznote{Talk about how what AppLeS is missing to be a true PJ system}
-
 \subsubsection{MyCluster - Basic Pilot-Job Systems}
+\aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
+``Our system delegates the responsibility of submitting the
+job proxies to a single semi-autonomous agent spawned,
+through Globus, at each TeraGrid site during a virtual login
+session. This agent translates the job proxy submission to the
+local batch submission syntax, maintains some number of job
+proxies throughout the lifetime of a login session, and may
+negotiate migration of job proxies between sites based on
+prevailing job load conditions across sites.''
+Rather, it looks like MyCluster provides some method of 
+submitting jobs to resources in a unified manner, much like
+AppLeS.  When it comes time for the job to run, however,
+it must wait in the local queuing system...?  In short,
+looks like abstraction across multiple resources with some
+functionality to handle everything from a single unified
+access point including data handling, but
+there is no concept of a placeholder/agent.
+}
 MyCluster~\cite{1652061}...
+
+MyCluster is a \textit{Basic Pilot Job system} which is a direct
+abstraction of cluster-based distributed computing systems.
+
+%\textit{Manager} functionality is handled by MyCluster's 
+%\texttt{Master Node Manager}.
+
+Shortcomings include ...  (lack of heterogenous support?)
 
 
 \begin{itemize}
@@ -1228,9 +1253,11 @@ needed.}
 agent manager remotely executes a Proxy Manager process at
 each participating site using Globus GRAM}
 \item Submission Agent
-\item Proxy Manager
-\item Task Manager = pilot
-\item Slave-node managers = compute units (?) 
+\item Proxy Manager = one at each site, reports back to central
+  agent manager w/ heartbeat to keep awareness of resource state
+\item Task Manager = \textit{agent}
+\item Slave-node managers = compute units (?) (probably not,
+  barely mentioned in the paper)
   \aznote{The slave node managers are responsible for starting the
     Condor or SGE job-starter daemons. These daemons connect
     back to the master processes on the client workstation, or to a
