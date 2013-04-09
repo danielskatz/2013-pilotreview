@@ -1192,6 +1192,7 @@ as resource discovery via Grid resource discovery services and peformance
 modelling for resource selection.  The entire package thereby reduces the
 complexity of assigning tasks to resources from the user's point of view
 and enables applications to run in a more adaptive fashion.
+
 However, the lack of a placeholder job limits the functionality 
 of application-level scheduling, as tasks
 must wait in unpredictable queues before being executed,
@@ -1216,9 +1217,8 @@ it's ``late binding''.}
 
 \subsubsection{MyCluster - Basic Pilot-Job Systems}
 MyCluster~\cite{1652061}...
-\aznote{Didn't pick Condor-G/Glide-in, as GlideinWMS uses Condor as well and did not
-want to have two Condor-based pilots...  but maybe that would make things look nicer
-and show a natural evolution?}
+
+
 \begin{itemize}
 \item Master Node Manager = Manager \aznote{Master Node
 Manager process within a GNU Screen session that then
@@ -1241,12 +1241,24 @@ each participating site using Globus GRAM}
 \end{itemize}
 
 \subsubsection{PanDA - Pilot-based Scheduling/Multi-Level Scheduling}
-PanDA's \textit{manager} is \texttt{PanDA server}.  PanDA's \textit{pilot}
-is called, appropriately enough, a \texttt{pilot}.
+\aznote{Some of this is limited to the PanDA Pilot Factory paper -- 
+unsure as to where we should draw the line over what is included as part
+of PanDA ``proper'', and what is part of extensions...}
+PanDA contains all of the baseline capabilities required for a \pilotjob.
+PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
+jobs with pilots in addition to handling data management.  PanDA's \textit{pilot}
+is called, appropriately enough, a \texttt{pilot}, and handles the execution
+environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
+which also monitors the status of pilots.
 
-\textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
-  agent, Pilot-Job, placeholder, multi-level scheduling, binding, early/late
-  binding}
+PanDA contains some additional backend features such as \texttt{AutoPilot}, which
+tracks site statuses via a database, and \texttt{Bamboo} which adds
+ATLAS database interfacing.  Enhancements to the userspace include 
+\texttt{Monitor}, for web-based monitoring, and the \texttt{PanDA client}.
+
+%% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
+%%   agent, Pilot-Job, placeholder, multi-level scheduling, binding, early/late
+%%   binding}
 
 \begin{itemize}
 \item Based upon Condor-G/Glidein, uses multiple queues
