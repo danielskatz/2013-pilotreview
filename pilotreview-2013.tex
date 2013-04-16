@@ -1364,19 +1364,49 @@ EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
 size of 1 core.
 
 
-\subsubsection{Bosco - Higher-Level Application Frameworks 
-  (Data Analytics and Visualization)}
-\onote{OLE'S SECTION}
+\subsubsection{BoSCO - Light(er)-Weight User-Level Condor}
 
-\onote{It seems that BOSCO is some sort of a user-space version of Condor. 
-It can interface with single clusters as well as complex HTC grids (GlideinWMS).
-Multiple resource-scanrios are possible. There is a bosco-submit node which 
-holds the user jobs. Bosco uses Condor glidein (-agents) internally as a 
-resource overlay. The glideins pull data from the bosco-submit node. The
-main difference between BOSCO and Condor (even though both expose the same
-user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
-complex setup. In that regard, BOSCO is somehwat similar to BigJob. 
-This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
+BoSCO is a user-space job submission system based on Condor. BoSCO was designed
+to allow individual users / researchers to utilize heterogeneous HPC and grid
+computing resources through a uniform interface. Supported backends include PBS,
+LSF and GridEngine clusters as well as other  grid resource pools managed by
+Condor. BoSCO supports both, a pilot-based (\textit{glidein}) and a native job
+execution mode through one single user-interface.
+
+BoSCO exposes the same ClassAd-based user-interface as Condor, however, the
+backend service implementation is more lightweight than that of Condor which
+allows  for ad hoc user-space deployment. This way BoSCO can provide a Condor-
+like job submission system with similar capabilities that does not require the
+user to have access to a centrally-administered Condor campus grid or  Condor-
+based national cyberinfrastructure, like OSG.
+
+Not surprisingly, the architecture of BoSCO is very similar to that of Condor.
+It even re-uses some if Condor's key components. The  \textit{BoSCO submit-node}
+(analogous to Condor \texttt{schedd}) provides the job  submission service and
+manages the job queue. \textit{BoSCO resources} (HPC clusters, other Condor
+pools) can be dynamically added and removed to a \textit{BoSCO submit-node}
+by the user. The client-side tools to submit, control and monitor BoSCO jobs
+are the same as in Condor (\texttt{condor\_submit}, \texttt{condor\_q}, etc).
+
+(the system that runs the job manager service, this 
+can often be the user's laptop). similar to schedd
+
+
+
+- supports fault tolerance (re-submission)
+- throttling 
+
+%\onote{OLE'S SECTION}
+
+%\onote{It seems that BOSCO is some sort of a user-space version of Condor. 
+%It can interface with single clusters as well as complex HTC grids (GlideinWMS).
+%Multiple resource-scanrios are possible. There is a bosco-submit node which 
+%holds the user jobs. Bosco uses Condor glidein (-agents) internally as a 
+%resource overlay. The glideins pull data from the bosco-submit node. The
+%main difference between BOSCO and Condor (even though both expose the same
+%user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
+%complex setup. In that regard, BOSCO is somehwat similar to BigJob. 
+%This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
 
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
 %% to use this general sort of information + reword using our spiffy 
