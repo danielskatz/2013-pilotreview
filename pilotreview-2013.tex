@@ -1177,15 +1177,16 @@ vocabulary.
  \label{table:bigjob-saga-diane}
 \end{table*}
 
-\subsubsection{AppLeS - Pre-PJ-Systems / Master/Worker frameworks}
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{AppLeS}
 \aznote{Resource discovery a special feature, as well as performance-modelling
 for resource selection}
 With AppLes, scheduling and resource-selection is handled by a
 per-application AppleS agent.  In addition, a subset of \pilotjob functionality
 such as application-scheduling are present in AppLeS.
-%Although many features from more advanced pilot systems are missing, a subset
-%of \pilotjob functionality such as late-binding and 
-%application-level scheduling are present in AppLeS.
+
 AppleS also contains features not fundamental to the Pilot-Job paradigm, such
 as resource discovery via Grid resource discovery services and peformance
 modelling for resource selection.  The entire package thereby reduces the
@@ -1212,7 +1213,10 @@ it's ``late binding''.}
 %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
-\subsubsection{MyCluster - Basic Pilot-Job Systems}
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{MyCluster}
 \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 ``Our system delegates the responsibility of submitting the
 job proxies to a single semi-autonomous agent spawned,
@@ -1265,7 +1269,10 @@ each participating site using Globus GRAM}
 \item Job proxy (?)
 \end{itemize}
 
-\subsubsection{PanDA - Pilot-based Scheduling/Multi-Level Scheduling}
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{PanDA}
 \aznote{Some of this is limited to the PanDA Pilot Factory paper -- 
 unsure as to where we should draw the line over what is included as part
 of PanDA ``proper'', and what is part of extensions...}
@@ -1318,7 +1325,12 @@ ATLAS database interfacing.  Enhancements to the userspace include
 \item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
   and monitors pilot status, basically enables use of glideins with PanDA (?)
 \end{itemize}
-\subsubsection{GlideinWMS - Pilot-based Scheduling/Multi-Level Scheduling}
+
+
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{HTCondor and GlideinWMS}
 \onote{TO DISCUSS: Shouldn't we rahter talk about Condor itself? The WMS aspect of 
 glideinWMS is automatic pilot submission via factories and is not a 
 'core' Pilot Job functionlaity. }
@@ -1355,7 +1367,14 @@ VO factory daemons are the masters with the pilots the workers,
 but this seems overly pedantic?}
 \end{itemize}
 
-\subsubsection{Corral - 2nd Pilot-based Scheduling/Multi-Level Scheduling}
+\textbf{CorralWMS:} CorralWMS is an alternative front-end for GlideinWMS-based  
+infrastructures. It replaces and / or complements the standard 
+GlideinWMS-front-end. Corral was 
+
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{Corral}
 \onote{Corral seems to be a component in the glidein-WMS landscape and 
 not an independent pilot-job implementation. I don't think that we should 
 dedicate an extra section to it.}
@@ -1383,10 +1402,13 @@ of Condor glide-in pools.
 \item Will fill this in later...
 \end{itemize}
 
-\subsubsection{The Coaster System - Higher-Level Application Frameworks (Workflow)}
+
+% -----------------------------------------------------------------------------
+%
+\subsubsection{Coasters}
 \msnote{Main coasters ref: http://www.ci.uchicago.edu/swift/papers/UCC-coasters.pdf}
 
-The Coaster System (colloquially "Coasters") is a Java CoG based Pilot-Job system
+The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
 created for the needs of the Swift parallel scripting language.
 
 Coasters was designed to both usability and performance goals.
@@ -1399,9 +1421,9 @@ Coasters was designed to both usability and performance goals.
 
 
 
-
-\subsubsection{DIANE - Higher-Level Application Frameworks 
-  (Task Farming/Master-Worker)}
+% -----------------------------------------------------------------------------
+%
+\subsubsection{DIANE}
 \aznote{Do we want to define single-user vs multi-user? 
   Communication methods?  Output aggregrator?}
 
@@ -1459,8 +1481,9 @@ DIANE is primarily designed with respect to HTC environments (such as
 EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
 size of 1 core.
 
-
-\subsubsection{BoSCO - Light(er)-Weight User-Level Condor}
+% -----------------------------------------------------------------------------
+%
+\subsubsection{BoSCO}
 
 BoSCO is a user-space job submission system based on Condor. BoSCO was designed
 to allow individual users / researchers to utilize heterogeneous HPC and grid
@@ -1484,13 +1507,6 @@ pools) can be dynamically added and removed to a \textit{BoSCO submit-node}
 by the user. The client-side tools to submit, control and monitor BoSCO jobs
 are the same as in Condor (\texttt{condor\_submit}, \texttt{condor\_q}, etc).
 
-(the system that runs the job manager service, this 
-can often be the user's laptop). similar to schedd
-
-
-
-- supports fault tolerance (re-submission)
-- throttling 
 
 %\onote{OLE'S SECTION}
 
