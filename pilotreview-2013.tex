@@ -1367,40 +1367,57 @@ VO factory daemons are the masters with the pilots the workers,
 but this seems overly pedantic?}
 \end{itemize}
 
-\textbf{CorralWMS:} CorralWMS is an alternative front-end for GlideinWMS-based  
-infrastructures. It replaces and / or complements the standard 
-GlideinWMS-front-end. Corral was 
+\textbf{CorralWMS:} CorralWMS is an alternative front-end for GlideinWMS-based
+infrastructures. It replaces or complements the regular  GlideinWMS-front- end
+with an alternative API which is targeted towards workflow execution. Corral was
+initially designed as a standalone pilot (glidein) provisioning system for
+the Pegasus workflow system where user  workflows often produced workloads
+consisting of many short-running jobs as well as mixed workloads consisting of
+HTC and HPC jobs.
+
+Over time, Corral has been integrated into the GlideinWMS stack as CorralWMS.
+While CorralWMS still provides the same user-interface as the initial, stand-
+alone version of Corral, the underlying pilot (glidein) provisioning is
+now handled entirely by the GlideinWMS factory.
+
+The main differences between the GlideinWMS and the CorralWMS front-ends lie in
+identity management and resource sharing. While GlideinWMS pilots (glidins) are
+provisioned on a per-VO base and shared / re-used amongst members of that VO,
+CorralWMS pilots (glideins) are bound to one specific user via personal 
+X.509 certificates. This enables resource provisioning in non-VO centric 
+environment, which includes many of the HPC clusters that are part of U.S.
+national cyberinfrastructure (e.g., XSEDE).
 
 
 % -----------------------------------------------------------------------------
 %
-\subsubsection{Corral}
-\onote{Corral seems to be a component in the glidein-WMS landscape and 
-not an independent pilot-job implementation. I don't think that we should 
-dedicate an extra section to it.}
-\aznote{SJ asked for an investigation of Corral -- not sure that this
-deserves a full analysis at this point on a technical level despite
-being commonly used, open to suggestions}
+%\subsubsection{Corral}
+%\onote{Corral seems to be a component in the glidein-WMS landscape and 
+%not an independent pilot-job implementation. I don't think that we should 
+%dedicate an extra section to it.}
+%\aznote{SJ asked for an investigation of Corral -- not sure that this
+%deserves a full analysis at this point on a technical level despite
+%being commonly used, open to suggestions}
 
-Corral is designed to allow hybrid HTC/HPC execution, in which
-many small jobs may be executed in conjunction with larger runs. 
-\cite{Rynge:2011:EUG:2116259.2116599}
-\aznote{Back this up w/ paper refs -- paper is somewhat dated,
-verify this is still true today}.  Corral operates as a Glidein
-WMS frontend\aznote{main reason that I think we shouldn't include
-Corral in its own section...}, where GlideinWMS manages the size
-of Condor glide-in pools.
-\begin{itemize}
-\item Workflow - handled by Pegasus workflow management system
-  \aznote{True in the paper I am using, but not handled by Corral itself, so should we include this?}
-\item Placeholder - handled by multislot requests 
-  \aznote{multislot request requests a single large
-    GRAM job, and then starts glideins within this container}
-\item Job
-\item Compute unit
-\item Workload 
-\item Will fill this in later...
-\end{itemize}
+%Corral is designed to allow hybrid HTC/HPC execution, in which
+%many small jobs may be executed in conjunction with larger runs. 
+%\cite{Rynge:2011:EUG:2116259.2116599}
+%\aznote{Back this up w/ paper refs -- paper is somewhat dated,
+%verify this is still true today}.  Corral operates as a Glidein
+%WMS frontend\aznote{main reason that I think we shouldn't include
+%Corral in its own section...}, where GlideinWMS manages the size
+%of Condor glide-in pools.
+%\begin{itemize}
+%\item Workflow - handled by Pegasus workflow management system
+%  \aznote{True in the paper I am using, but not handled by Corral itself, so should we include this?}
+%\item Placeholder - handled by multislot requests 
+%  \aznote{multislot request requests a single large
+%    GRAM job, and then starts glideins within this container}
+%\item Job
+%\item Compute unit
+%\item Workload 
+%\item Will fill this in later...
+%\end{itemize}
 
 
 % -----------------------------------------------------------------------------
