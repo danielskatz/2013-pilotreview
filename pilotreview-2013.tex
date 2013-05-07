@@ -1185,10 +1185,10 @@ vocabulary.
 \subsubsection{AppLeS}
 AppLeS is a framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection.
-With AppLeS, scheduling and resource selection is handled by a
-per-application AppleS agent.  In addition, an incomplete subset of
-\pilotjob functionality such as application-scheduling is present in AppLeS.
-
+With AppLeS, application-level scheduling and resource selection is handled by a
+per-application AppleS agent.
+%.  In addition, an incomplete subset of
+%\pilotjob functionality such as application-scheduling is present in AppLeS.
 AppleS also contains features not fundamental to the Pilot-Job paradigm, such
 as resource discovery via Grid resource discovery services and peformance
 modelling for resource selection.  The entire package thereby reduces the
@@ -1197,7 +1197,7 @@ and enables applications to run in a more adaptive fashion.
 
 However, the lack of a placeholder job limits the functionality 
 of application-level scheduling, as tasks
-must wait in unpredictable queues before being executed,
+must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
 is not a ``true'' \pilotjob system, as a placeholder
 is required to enable fundamental \pilotjob functionality such as
@@ -1218,7 +1218,6 @@ it's ``late binding''.}
 
 %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
-
 
 % -----------------------------------------------------------------------------
 %
