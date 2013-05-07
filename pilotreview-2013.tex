@@ -1219,6 +1219,9 @@ it's ``late binding''.}
 %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
+\aznote{Not sure if we should term the AppLeS agent a ``manager'', since we have
+defined manager with full Pilot-Job syntax}
+
 % -----------------------------------------------------------------------------
 %
 \subsubsection{MyCluster}
@@ -1240,6 +1243,13 @@ functionality to handle everything from a single unified
 access point including data handling, but
 there is no concept of a placeholder/agent.
 }
+
+\aznote{I still agree with my above statements after additional reading --
+it looks like this is kind of a ``virtualization'' system for grids
+where you can submit/monitor jobs via a centralized interface and lacking
+in what we consider vital to be a full-fledged Pilot-Job system.  Would
+welcome discussion here.}
+
 MyCluster~\cite{1652061}...
 
 MyCluster is a \textit{Basic Pilot Job system} which is a direct
@@ -1259,7 +1269,9 @@ needed.}
 \item Agent Manager \aznote{ The
 agent manager remotely executes a Proxy Manager process at
 each participating site using Globus GRAM}
-\item Submission Agent
+\item Submission Agent -- \aznote{Wrapper for GridShell, wraps
+  multiple grid resources to a single ``virtual'' cluster
+\url{https://www.opensciencegrid.org/bin/view/Interoperability/GridShellEvaluation}}
 \item Proxy Manager = one at each site, reports back to central
   agent manager w/ heartbeat to keep awareness of resource state
 \item Task Manager = \textit{agent}
