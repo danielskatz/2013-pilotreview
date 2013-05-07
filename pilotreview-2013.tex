@@ -668,6 +668,11 @@ Initially, the concepts used by the implementations of \pilotjob outlined in \S 
 
 \mtnote{Vocabulary: job}
 \onote{'data' is not mentioned at all in the context of Jobs. Why? }
+\aznote{``data'' is not mentioned, but ``resource'' is.  If we do mention
+  data explicitly, we will have to define it as well, just as ``resource''
+  and other ``job constituents'' are.  We can't bundle it into ``resource''
+  because resource implies something more consumable/limited as per the definition, correct?}
+
 The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. These two concepts are complex, meaning that they have logical constituents that need first to be clarified in order for them to be properly understood. Starting from the concept of `job', its most relevant constituents are `task', `resource', `infrastructure' and `scheduling'. These are well-known concepts in themselves [cit, cit] but it is worth here to recall briefly their definitions as a contribute towards a coherent terminology across \pilotjobs implementations. 
 
 \mtnote{Vocabulary: task}
@@ -685,7 +690,7 @@ Resources are physically and logically organized into so called `infrastructures
 \mtnote{Multiple type of pilots: potential topic to discuss in Section
 4?}
 
-The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data \onote{you introduce data as 'resource'. why?} or networks, depending on the resources made available by an infrastructure to its users.
+The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data \onote{you introduce data as 'resource'. why?} \aznote{agreed, this is incorrect given our definition of resources as consumables?} or networks, depending on the resources made available by an infrastructure to its users.
 
 \mtnote{Vocabulary: scheduling}
 
@@ -699,7 +704,7 @@ that performs scheduling by means of dedicated algorithms.
 
 It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. 
 \onote{I do not agree with this definition. 'Jobs' can IMHO be run on a resource directly, without involving a scheduler. Also, I don't understand why a scheduler  
-is coupled to an 'infrastructure' in this case.}
+is coupled to an 'infrastructure' in this case.} \aznote{Agreed}
 As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
 
 \mtnote{Vocabulary: pilot intro}
@@ -742,6 +747,16 @@ Functionally, a pilot is a system that allows for a user to gain exclusive - i.e
 even be part of every PJ implementation. It is not important when describing a PJ.}
 The implementation of a pool varies among \pilotjobs\onote{-Systems} with the pool being a stand-alone component or a subsystem of a master
 \onote{what is 'master'?}, and storing only the state of tasks or having also a dedicated set of capabilities.
+\aznote{Throwing my two cents in re: pool/''logical grouping'' -- I personally think that the notion is
+  very useful to visualize/understand the concept of PJs and how they work in real-world situations,
+  but understand why we want to minimize the
+  amount of vocabulary we are responsible for introducing.  ``Logical grouping'' works fine for me,
+  but I do not see how we are free from describing pulling/pushing to the PJ-system with logical grouping.
+  Perhaps if we drop both pools/logical grouping we are free to discuss task execution in the abstract/in such
+  a way that assumes that PJs are always available to begin execution immediately, and throw in something about
+  ``additions to the base PJ-concept may be made such as logical grouping/task pools/(other sundries), but are not
+  vital/necessary components like the aforementioned concepts...'' at the end of the section as a way of tying
+  up potential loose ends reviewers may be thinking?}
 
 \mtnote{Vocabulary: manager}
 \mtnote{Capabilities across different manager implementations: potential topic to discuss in Section 4?}
@@ -758,6 +773,10 @@ offered, or potentially implementable, in this type of managers.
 \mtnote{Vocabulary: agent}
 
 Agents executes the tasks pushed by or pulled from one or more managers (Figure~\ref{fig:s3_pilot_diagram}). Clearly, an agent must have the right amount and type of resources for an appropriate extent of time in order to execute its tasks. As such, this requirement brings together pilots and jobs.
+/aznote{Unclear how resource requirements brings ``pilots'' and ``jobs'' together; do we mean to say that we are producing
+a potential mapping of sorts between tasks and the jobs (or jobs and pilots) they are capable of running as a part of?  In
+other words, we are discussing tasks relating to agents, and then implicitly asserting that this shows a pilot and job relation
+-- I think that we will have to explain this a bit more.}
 
 \mtnote{Vocabulary: Pilot Job}
 
@@ -777,7 +796,13 @@ of resources for the indicated period of time and their agents are
 executed. At this point, an agent becomes a placeholder for the set of
 resources that have been specified by and assigned to its job.
 \onote{not convinced that we need a formal definition of
-  'placeholder'.}
+  'placeholder'.}\aznote{I think a definition of ``placeholder''
+helps emphasize the concept of a job that is actively holding resources
+but may not be actively executed; to just describe this as a ``job'' 
+may be confusing to readers who equate ``resources taken with a job''
+with ``task execution is active and ongoing''.  It also helps detail
+why some ``non-\pilotjob systems'' like AppLeS are NOT true \pilotjobs
+despite being able to submit/manage jobs...}
 
 \mtnote{How different \pilotjob implementations deal with the
   peculiarities of the job submission system of different
@@ -793,7 +818,12 @@ have to deal with limitations on what processes can be executed on a
 specific infrastructure. Particularly important in this context are
 networking capabilities as, without connectivity, agents would not be
 able to communicate with their managers and, ultimately, with the end
-users.
+users.  \aznote{I get the importance of networking capabilities, but
+it reads kind of off as it is (i.e., why would a user even consider
+the idea of submitting to a non-network connected machine?)  Consider
+listing it as ``bidirectional networking'' (i.e. some compute nodes
+do not allow external communication).  Or, are we thinking about reliability
+with regards to network connectivity?}
 
 Once one or more placeholders become available on the given
 infrastructures, users can start to use a \pilotjob system to execute
@@ -801,6 +831,9 @@ their tasks. Users own the placeholders and can run their tasks by
 means of the corresponding agents without having to deal with the job
 submission system of the infrastructure. \jhanote{Is is necessary that
   users ``own'' the agents. can the manager not own the placeholder?}
+\aznote{The idea of ``owning'' them emphasizes user control IMO; perhaps
+a less ambiguous way would be ``Placeholders are user-controllable, allowing
+users to run their tasks by means of...''}
 
 \mtnote{Vocabulary: multi-level scheduling}
 \mtnote{Different ways to implement task scheduling: potential topics to discuss in Section 4?}
