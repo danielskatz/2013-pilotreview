@@ -1260,11 +1260,11 @@ vocabulary.
   \hline
   \textbf{Pilot-Job System} &\textbf{Pilot (Resource) Provisioning}    &\textbf{Job-to-Resource (Pilot) Binding}  &\textbf{Single-/Multi-User Pilots} &\textbf{Classifier IV}  \\
   \hline
-          AppLeS            & --                                       & --                                 & --                     & --                     \\ 
+          AppLeS            & --                                       & Automatic (algorithmic/profiling)  & Single (?) & --                     \\ 
   \hline
           MyCluster         & Manual, Explicitly User-controllable     & Manual                             & Single (?)                  & --                     \\ 
   \hline
-          PanDA             & Automatic, Not user-controllable         & --                                 & --                          & --                     \\ 
+          PanDA             & Automatic, Not user-controllable         & Manual(?)                          & Single (?)  \aznote{\url{http://indico.cern.ch/getFile.py/access?contribId=2&sessionId=6&resId=0&materialId=slides&confId=45473} says otherwise, but I don't think so...}    & --                     \\ 
   \hline
           GlideinWMS        & Automatic, Not user-controllable         & Manual (rule-driven) / Automatic   & Multi / Single (via Corral) & --                     \\ 
   \hline
@@ -1289,7 +1289,12 @@ vocabulary.
 AppLeS is a framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection.
 With AppLeS, application-level scheduling and resource selection is handled by a
-per-application AppleS agent.
+per-application \texttt{AppleS agent}.
+\aznote{AppLeS agent covers resource discovery, resource selection,
+  schedule generation, schedule selection, application execution,
+  and schedule adaptation}
+An \texttt{AppLeS agent} roughly handles \pilotjob functionality contained in
+\textit{\pilotjob agents} and \textit{managers}.
 %.  In addition, an incomplete subset of
 %\pilotjob functionality such as application-scheduling is present in AppLeS.
 AppleS also contains features not fundamental to the Pilot-Job paradigm, such
@@ -1298,13 +1303,14 @@ modelling for resource selection.  The entire package thereby reduces the
 complexity of assigning tasks to resources from the user's point of view
 and enables applications to run in a more adaptive fashion.
 
-However, the lack of a placeholder job limits the functionality 
+However, the lack of a \textit{placeholder job} limits the functionality 
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
 is not a ``true'' \pilotjob system, as a placeholder
 is required to enable fundamental \pilotjob functionality such as
-multi-level scheduling.  \aznote{Lack of multi-level scheduling asserted because even
+\textit{multi-level scheduling.}
+\aznote{Lack of multi-level scheduling asserted because even
 though AppLeS allows for application-level scheduling,
 it is still submitted to usual resource manager queues, not an internal
 ``pilot'' queue}
@@ -1370,7 +1376,10 @@ and
 
 The end result is a complete \textit{basic \pilotjob system}, despite the
 authors of the system being constructed not having used the word ``pilot''
-once!~\cite{1652061}
+once!~\cite{1652061}  The authors describing their system
+as a ``personal cluster'' with the goal of achieving on-demand,
+user-schedulable computational resources aligning closely with what is
+provided with our more formal definition of \pilotjobs.
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
@@ -1424,6 +1433,9 @@ ATLAS database interfacing.  Enhancements to the userspace include
 allows for additional, automatic data
 management by replicating popular input data to underutilized resources
 for later computations.
+
+\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
+work for this, or is this out-of scope?}
 
 
 %% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
