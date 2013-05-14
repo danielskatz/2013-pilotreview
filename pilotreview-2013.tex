@@ -398,6 +398,19 @@ We assess the \pilotjob systems according to the according to different
 functional and non-functional criteria. Further we analyze the internal 
 architecture of each \pilotjob system.
 
+\jhanote{I don't think we should say we ``assess'' according to these
+  different criteria, but we should say that a brief survey of the
+  \pilotjob literatures shows that many different and often
+  inconsistent criteria have been used. then we need to add some
+  criteria of our own stating that based upon our
+  literature/understanding we think it will be useful to develop
+  further criteria... Also, it is important to note that not all
+  criteria are used for every \pilotjob system}
+
+\jhanote{Andre L: these need elaboration and explaination. A possible
+  consideration might be whether to remove bullet points and use
+  regular prose}
+
 \noindent
 \emph{Functional Features}
 \begin{itemize}
@@ -615,11 +628,11 @@ the Pegasus project the Corral
 system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a
 frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides
 more explicit control over the placement and start of \pilots to the
-end-user. In contrast to GlideinWMS these Glide-Ins\jhanote{substitute
-  with Corral Glide-Ins?} are run using the credential of the user and
-not a VO credential. Corral has been developed to support the
-requirements of the Pegasus workflow system in particular to optimize
-the placements of \pilots with respect to their workload.
+end-user. In contrast to GlideinWMS, Corral-Glide-Ins are run using
+the credential of the user and not a VO credential. Corral has been
+developed to support the requirements of the Pegasus workflow system
+in particular to optimize the placements of \pilots with respect to
+their workload.
 
 SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
 abstract workflows and computations. The language provides among many
@@ -642,16 +655,20 @@ master/worker coordination model; communication is implemented using
 GSI-secured TCP sockets. SWIFT supports various scheduling mechanisms
 on top of Coaster, e.\,g.\ a FIFO and a load-aware scheduler.
 
-Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
-Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
-which are created using the Globus GRAM service. The provisioner spawns a set
-of executor processes on the allocated resources, which are then responsible
-for managing the execution of task. Tasks are submitted via a so called
-dispatcher service. Falkon also utilizes a master-work coordination
-model, i.\,e.\ the executors periodically query the dispatcher for new SUs.
+Further, SWIFT can be used in conjunction with other PJ systems,
+e.\,g.\ Falkon~\cite{1362680}. Falkon refers to pilots as the so
+called provisioner, which are created using the Globus GRAM
+service. The provisioner spawns a set of executor processes on the
+allocated resources, which are then responsible for managing the
+execution of task. Tasks are submitted via a so called dispatcher
+service. Falkon also utilizes a master-work coordination model,
+i.\,e.\ the executors periodically query the dispatcher for new SUs.
 Web services are used for communication.
 
-\alnote{Should we discuss MOTEUR?}
+\alnote{Should we discuss MOTEUR?}\jhanote{Yes it might make sense to
+  briefly discuss MOTEUR if it explictly uses a \pilotjob system. If
+  not, is could find mention as a representative workflow engine that
+  could be used in Section 5}
 
 
 %%%%%%%%%%%%%%%%%%
@@ -681,10 +698,10 @@ AMGA.
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party 
 % \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
-\jhanote{these subsections read well. One major suggestion: after we
-  have described specific systems and how they fall into categories
-  (basic, advanced, higher-level \pilot-based frameworks, we need to
-  close out by describing/discussing the categories again}
+% \jhanote{these subsections read well. One major suggestion: after we
+%   have described specific systems and how they fall into categories
+%   (basic, advanced, higher-level \pilot-based frameworks, we need to
+%   close out by describing/discussing the categories again}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
@@ -707,11 +724,11 @@ The functionalities of each \pilotjob framework can be broadly divided into two 
 
 \pilotjobs leverage a Master-Worker paradigm [ref] for the execution of workloads. In such a paradigm, every given workload is reduced into tasks and each task, alongside the data needed for its execution, is bound by a master to one or more workers. Once the tasks have been executed, each worker makes available the results of the computation to the master. 
 
-Task and data binding alongside data retrieval are the distinguishing capabilities of a Master-Worker execution paradigm but each \pilotjob implementation can extend such a paradigm with specific functionalities. For example, \pilotjob frameworks can offer one or more strategy to aggregate the output of each task, interdependent tasks may be performed tanks to workers capable of direct communication, and tasks can be staged into pools so to improve efficiency and overall throughput.
+Task and data binding alongside data retrieval are the distinguishing capabilities of a Master-Worker execution paradigm but each \pilotjob implementation can extend such a paradigm with specific functionalities. For example, \pilotjob frameworks can offer one or more strategy to aggregate the output of each task; interdependent tasks may be performed thanks to workers capable of direct communication; and tasks can be staged into pools so to improve efficiency and overall throughput.
 
-\pilotjob frameworks implement the Master-Worker paradigm. These frameworks are typically deployed within Distributed Computing Infrastructures (DCIs) like, for example, Grids, Clouds or HPC facilities. Implementation and configuration details varies considerably but each deployment of a \pilotjob framework depends at least on: (i) The provisioning of the workers on the resources of the targeted DCI, and (ii) the establishing of one or more communication channels between a Master and its workers.
+\pilotjob frameworks implement the Master-Worker and are typically deployed within Distributed Computing Infrastructures (DCIs) like, for example, Grids, Clouds or HPC facilities. Implementation and configuration details varies considerably but each deployment of a \pilotjob framework depends at least on: (i) The provisioning of the workers on the resources of the targeted DCI, and (ii) the establishing of one or more communication channels between a Master and its workers.
 
-Also in this case, many capabilities are implementation and context dependent. For example, the worker provisioning depends on the capabilities exposed by the targeted DCI while one or more master can be deployed on a dedicated infrastructure, on the workstation of the user or directly on the DCI resources.
+Also in this case, many capabilities are implementation and context dependent. For example, the provisioning or workers depends on the capabilities exposed by the targeted DCI while one or more master can be deployed on a dedicated infrastructure, on the workstation of the user or directly on the DCI resources.
 
 Task and data binding, data retrieval from the workers, workers provisioning and master/worker communication are the defining capabilities of each \pilotjob framework. In the following two subsections, a minimal set of terms related to these capabilities is defined. The terms are sorted depending on the category of capability to which they belong. The end result is a coherent vocabulary that can be effectively adopted across multiple \pilotjob implementations. 
 
@@ -736,43 +753,40 @@ Here a summary of the terms defined in the following subsections and the categor
   \end{itemize}
 \end{itemize}
 
-
 \subsection{Terms and Definitions}
-
-\onote{'data' is not mentioned at all in the context of Jobs. Why? }
 
 The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. The definition of both concepts is context-dependent and several other terms needs to be clarified in order to offer a coherent terminology.
 
 Both `job' and `pilot' needs to be understood in the context of DCIs,  the infrastructures where \pilotjobs frameworks are deployed. DCIs offer compute, data and network resources and \pilotjobs allow for the users to consume those resources via a Master-Worker execution paradigm.
 
 \begin{description}
-  \item[Resource] Finite, typed and physical quantity that is consumed by executing one or more workload. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources exposed by different types of DCIs. [cit, cit]
-  \item[Infrastructure] Structured agglomerate of resources, possibly geographically and institutionally separated from the users consuming those resources to execute one or more workload. [cit, cit]
+  \item[Resource.] Finite, typed and physical quantity that is consumed by executing one or more workload. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources exposed by different types of DCIs. [cit, cit]
+  \item[Infrastructure.] Structured agglomerate of resources, possibly geographically and institutionally separated from the users consuming those resources to execute one or more workload. [cit, cit]
 \end{description}
 
 \subsubsection{Deployment of the pilot machinery}
 
-In order for a \pilotjob framework to implement a Master-Worker execution paradigm, workers needs to be implemented and provisioned on the targeted DCI(s). This is done through the capabilities exposed by each DCI in order to access and consume its resources. As seen in \S 2, most of the DCIs where \pilotjobs frameworks are deployed adopt an execution model based on `jobs', `schedulers' and `batch systems'. In such DCIs, jobs are scheduled by a user to be executed by a batch system on the DCI resources.
+In order for a \pilotjob framework to implement a Master-Worker execution paradigm, workers needs to be provisioned on the targeted DCI(s). This is done through the capabilities that a DCI exposes to allow for accessing and consuming its resources. As seen in \S 2, most of the DCIs where \pilotjobs frameworks are deployed adopt an execution model based on `jobs', `schedulers' and `batch systems'. In such DCIs, jobs are scheduled and then executed by a batch system.
 
 \begin{description}
-  \item[Job] One or more programs that are executed on a given set of computing resources either directly by a user or indirectly by batch processing.
+  \item[Job.] One or more program executed on a given set of computing resources either directly by a user or indirectly by batch system.
 \end{description}
 
 When executed by a batch system, a job needs to include also a job description specifying the configuration and execution parameters for the job's programs. Such a description has to be coded into a formal language that can be parsed by the batch system deployed within the targeted DCI.
 
-The DCIs where \pilotjobs framework are usually deployed, utilize a scheduler to manage the submission of jobs by multiple users. The scheduler introduced temporal and spatial constraints on the execution of each job in order to maximize resource utilization, performance and fairness. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and a limit on the amount of resources that it can use.
+The DCIs where \pilotjobs framework are deployed, often utilize a scheduler to manage job submitted by multiple users. The scheduler introduces temporal and spatial constraints on the execution of each job so to maximize the overall resource utilization, performance and allocation. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use.
 
-Finally, many of the DCIs where \pilotjob frameworks are deployed leverage also a queuing system that allows for jobs to be submitted  when not enough resources are immediately available for their execution.
+Finally, many of the DCIs where \pilotjob frameworks are commonly deployed leverage also a queuing system that allows for jobs to be submitted  when not enough resources are immediately available for their execution.
 
-All these features and capabilities are relevant when considering the deployment of \pilotjob frameworks because, in the context of these DCIs, every worker of the framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes a non-interactive deployment of the workers. 
+Schedulers, batch processing and queuing are relevant because they determine how a \pilotjob framework is deployed on a DCI. Specifically, in the type of DCIs just described, every worker of the \pilotjob framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces execution delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes to deploy all the workers non interactively. 
 
 \begin{description}
-  \item[Provisioning] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.
+  \item[Provisioning.] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.
 \end{description}
 
-Cloud-based DCIs introduce notable exceptions and differences in the way in which the workers of a \pilotjob framework can be deployed.[cit, cit] In a IaaS [cit] context, Virtual Machines (VMs) and not jobs are used to deploy one or more workers. VMs can often be instantiated directly, without waiting into a queue, and are not necessarily subjected to walltime limitations. Clearly, overheads are introduced by having to deal with VMs and not `simple' jobs and with the model adopted within a IaaS-based DCI to assign resources to each VM.[cit] It should be noted that a Platform as a Service (PaaS) [cit] approach to cloud computing is in principle compatible with a Master-Worker execution paradigm and, as such, a dedicated \pilotjob framework could be implemented to leverage the benefits offered by PaaS.[cit]
+Cloud-based DCIs introduce notable exceptions and differences in the way in which the workers of a \pilotjob framework can be deployed.[cit, cit] Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used to deploy workers. VMs can often be instantiated without waiting into a queue, and limitations on the execution time of a VM can be virtually absent. Clearly, overheads are introduced by having to deal with VMs and not simple jobs and the model adopted within a IaaS-based DCI to assign resources to each VM can affect the flexibility of the whole \pilotjob framework.[cit] A similar assessment could be done for a DCI deploying a PaaS model of cloud computing.[cit]
 
-Showing that the deployment modalities of a \pilotjob framework depend on the capabilities exposed by the targeted DCI illustrates the limits of choosing the term `job' to identify a worker. The use of the term `job' is due to an historical contingency, the targeting of a specific class of DCIs in which the term `job' is meaningful. With the development of new types of DCI, the term `job' has become too restrictive, a situation that can trigger confusion and the use of synonyms like `agent' or `pilot'.
+Showing that the deployment modalities of a \pilotjob framework depend on the capabilities exposed by the targeted DCI illustrates the limits of choosing the term `job' to identify a worker. The use of the term `job' is due to an historical contingency, the targeting of a specific class of DCIs in which the term `job' was and still is meaningful. Nonetheless, with the development of new types of DCI, the term `job' has become too restrictive, a situation that can lead to terminological and conceptual confusion, and to the use of synonyms for a worker like `agent' or even `pilot'.
 
 \subsubsection{Execution of workloads}
 
@@ -1286,6 +1300,26 @@ vocabulary.
 % -----------------------------------------------------------------------------
 %
 \subsubsection{AppLeS}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 AppLeS is a framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection.
 With AppLeS, application-level scheduling and resource selection is handled by a
@@ -1328,6 +1362,26 @@ defined manager with full Pilot-Job syntax}
 % -----------------------------------------------------------------------------
 %
 \subsubsection{MyCluster}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% ``Our system delegates the responsibility of submitting the
 %% job proxies to a single semi-autonomous agent spawned,
@@ -1405,6 +1459,26 @@ once!~\cite{1652061}
 % -----------------------------------------------------------------------------
 %
 \subsubsection{PanDA}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
 jobs with \pilots in addition to handling data management.
 PanDA's \textit{\pilot}
@@ -1468,7 +1542,26 @@ for later computations.
 
 % -----------------------------------------------------------------------------
 %
-\subsubsection{HTCondor / GlideinWMS}
+\subsubsection{HTCondor GlideinWMS}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
 
 \textit{Collectors} are the managers, with one collector per
 GlideinWMS system.
@@ -1558,6 +1651,26 @@ national cyberinfrastructure (e.g., XSEDE).
 % -----------------------------------------------------------------------------
 %
 \subsubsection{Coasters}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 \msnote{Main coasters ref: http://www.ci.uchicago.edu/swift/papers/UCC-coasters.pdf}
 
 The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
@@ -1577,6 +1690,25 @@ Coasters was designed to both usability and performance goals.
 %
 \subsubsection{BigJob}
 
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 BigJob is a Pilot-based framework which provides a higher-level, unifying interface to heterogeneous and/or distributed data and compute resources. The framework is accessed via the Pilot-API, which provides two key abstractions: Pilot-Job and Pilot-Data. BigJob eliminates the need to interact with different kinds of compute resources, for example, batch-style HPC\/HTC as well as cloud resources. In order to communicate with these resources, BigJob uses the Simple API for Grid Applications to submit a Pilot-Job to a variety of different backends -- including PBS, SGE, Condor, and SLURM.
 
 \textit{Pilot Manager} orchestrates a set of Pilots running on the submission machine. This is the central coordinator of the framework.
@@ -1585,6 +1717,26 @@ BigJob is a Pilot-based framework which provides a higher-level, unifying interf
 
 
 \subsubsection{DIANE}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 \aznote{Do we want to define single-user vs multi-user? 
   Communication methods?  Output aggregrator?}
 
@@ -1645,6 +1797,25 @@ size of 1 core.
 % -----------------------------------------------------------------------------
 %
 \subsubsection{BoSCO}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
 
 BoSCO is a user-space job submission system based on HTCondor. BoSCO was
 designed to allow individual users to utilize heterogeneous HPC and grid
