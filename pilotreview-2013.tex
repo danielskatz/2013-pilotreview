@@ -628,11 +628,11 @@ the Pegasus project the Corral
 system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a
 frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides
 more explicit control over the placement and start of \pilots to the
-end-user. In contrast to GlideinWMS these Glide-Ins\jhanote{substitute
-  with Corral Glide-Ins?} are run using the credential of the user and
-not a VO credential. Corral has been developed to support the
-requirements of the Pegasus workflow system in particular to optimize
-the placements of \pilots with respect to their workload.
+end-user. In contrast to GlideinWMS, Corral-Glide-Ins are run using
+the credential of the user and not a VO credential. Corral has been
+developed to support the requirements of the Pegasus workflow system
+in particular to optimize the placements of \pilots with respect to
+their workload.
 
 SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
 abstract workflows and computations. The language provides among many
@@ -655,16 +655,20 @@ master/worker coordination model; communication is implemented using
 GSI-secured TCP sockets. SWIFT supports various scheduling mechanisms
 on top of Coaster, e.\,g.\ a FIFO and a load-aware scheduler.
 
-Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
-Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
-which are created using the Globus GRAM service. The provisioner spawns a set
-of executor processes on the allocated resources, which are then responsible
-for managing the execution of task. Tasks are submitted via a so called
-dispatcher service. Falkon also utilizes a master-work coordination
-model, i.\,e.\ the executors periodically query the dispatcher for new SUs.
+Further, SWIFT can be used in conjunction with other PJ systems,
+e.\,g.\ Falkon~\cite{1362680}. Falkon refers to pilots as the so
+called provisioner, which are created using the Globus GRAM
+service. The provisioner spawns a set of executor processes on the
+allocated resources, which are then responsible for managing the
+execution of task. Tasks are submitted via a so called dispatcher
+service. Falkon also utilizes a master-work coordination model,
+i.\,e.\ the executors periodically query the dispatcher for new SUs.
 Web services are used for communication.
 
-\alnote{Should we discuss MOTEUR?}
+\alnote{Should we discuss MOTEUR?}\jhanote{Yes it might make sense to
+  briefly discuss MOTEUR if it explictly uses a \pilotjob system. If
+  not, is could find mention as a representative workflow engine that
+  could be used in Section 5}
 
 
 %%%%%%%%%%%%%%%%%%
@@ -694,10 +698,10 @@ AMGA.
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party 
 % \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
-\jhanote{these subsections read well. One major suggestion: after we
-  have described specific systems and how they fall into categories
-  (basic, advanced, higher-level \pilot-based frameworks, we need to
-  close out by describing/discussing the categories again}
+% \jhanote{these subsections read well. One major suggestion: after we
+%   have described specific systems and how they fall into categories
+%   (basic, advanced, higher-level \pilot-based frameworks, we need to
+%   close out by describing/discussing the categories again}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
