@@ -1190,19 +1190,19 @@ vocabulary.
  \centering
  \begin{tabular}{|p{3cm}|p{3.2cm}|p{3cm}|p{3cm}|p{3cm}|}
   \hline
-  \textbf{Pilot-Job System} &\textbf{Pilot Provisioning} &\textbf{Classifier II} &\textbf{Classifier III} &\textbf{Classifier IV}  \\
+  \textbf{Pilot-Job System} &\textbf{Pilot (Agent) Provisioning}       &\textbf{Job-to-Resource Binding}    &\textbf{Single-/Multi-User Pilots} &\textbf{Classifier IV}  \\
   \hline
-          AppLeS            & --                   & --                    & --                     & --                     \\ 
+          AppLeS            & --                                       & --                                 & --                     & --                     \\ 
   \hline
-          MyCluster         & --                   & --                    & --                     & --                     \\ 
+          MyCluster         & Manual, Explicitly User-controllable     & Manual                             & --                     & --                     \\ 
   \hline
-          PanDA             & Not user-controllable                   & --                    & --                     & --                     \\ 
+          PanDA             & Automatic, Not user-controllable         & --                                 & --                          & --                     \\ 
   \hline
-          GlideinWMS        & Service, Not user-controllable                    & --                    & --                     & --                     \\ 
+          GlideinWMS        & Automatic, Not user-controllable         & Manual (rule-driven) / Automatic   & Multi / Single (via Corral) & --                     \\ 
   \hline
-          SWIFT/Coaster     & --                   & --                    & --                     & --                     \\ 
+          SWIFT/Coaster     & --                                       & --                                 & --                          & --                     \\ 
  \hline
-          BoSCO             & User-controllable                   & --                    & --                     & --                     \\ 
+          BoSCO             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\ 
  \hline
  \end{tabular}
  \caption{\textbf{Different pilot-job systems and their key. 
@@ -1549,27 +1549,34 @@ size of 1 core.
 %
 \subsubsection{BoSCO}
 
-BoSCO is a user-space job submission system based on Condor. BoSCO was designed
-to allow individual users / researchers to utilize heterogeneous HPC and grid
+BoSCO is a user-space job submission system based on HTCondor. BoSCO was
+designed to allow individual users to utilize heterogeneous HPC and grid
 computing resources through a uniform interface. Supported backends include PBS,
 LSF and GridEngine clusters as well as other  grid resource pools managed by
-Condor. BoSCO supports both, a pilot-based (\textit{glidein}) and a native job
-execution mode through one single user-interface.
+HTCondor. BoSCO supports both, an agent-based (\textit{glidein} / worker) and
+a native job execution mode through a single user-interface.
 
-BoSCO exposes the same ClassAd-based user-interface as Condor, however, the
-backend service implementation is more lightweight than that of Condor which
-allows  for ad hoc user-space deployment. This way BoSCO can provide a Condor-
-like job submission system with similar capabilities that does not require the
-user to have access to a centrally-administered Condor campus grid or  Condor-
-based national cyberinfrastructure, like OSG.
+BoSCO exposes the same \textit{ClassAd}-based user-interface as HTCondor,
+however, the backend implementation for job management and resource provisioning
+is significantly more lightweight than in HTCondor and explicitly allows for ad
+hoc user-space deployment. BoSCO provides a \pilotjob-based system that does not
+require the user to have access to a centrally-administered HTCondor campus grid
+or  resource pool. The user has direct control over \pilotjob agent provisioning
+(via the \texttt{bosco\_cluster} command) and job-to-resource binding via
+\textit{ClassAd} requirements. 
 
-Not surprisingly, the architecture of BoSCO is very similar to that of Condor.
-It even re-uses some if Condor's key components. The  \textit{BoSCO submit-node}
-(analogous to Condor \texttt{schedd}) provides the job  submission service and
-manages the job queue. \textit{BoSCO resources} (HPC clusters, other Condor
-pools) can be dynamically added and removed to a \textit{BoSCO submit-node}
-by the user. The client-side tools to submit, control and monitor BoSCO jobs
-are the same as in Condor (\texttt{condor\_submit}, \texttt{condor\_q}, etc).
+The overall architecture of BoSCO is very similar to that of HTCondor. The
+\textit{BoSCO submit-node} (analogous to Condor \texttt{schedd}) provides the
+central job submission service and manages the job queue as well as the worker
+agent pool. Worker agents communicate with the \textit{BoSCO submit-node} via
+pull-requests (TCP). They can be dynamically added and removed to a
+\textit{BoSCO submit-node} by the user. BoSCO can be installed in user-space as
+well as in system space. In the former case, worker agents are exclusively
+available to a single user, while in the latter case, worker agents can be
+shared among multiple users. The client-side tools to submit, control and
+monitor BoSCO jobs are the same as in Condor (\texttt{condor\_submit},
+\texttt{condor\_q}, etc).
+
 
 
 %\onote{OLE'S SECTION}
