@@ -398,6 +398,19 @@ We assess the \pilotjob systems according to the according to different
 functional and non-functional criteria. Further we analyze the internal 
 architecture of each \pilotjob system.
 
+\jhanote{I don't think we should say we ``assess'' according to these
+  different criteria, but we should say that a brief survey of the
+  \pilotjob literatures shows that many different and often
+  inconsistent criteria have been used. then we need to add some
+  criteria of our own stating that based upon our
+  literature/understanding we think it will be useful to develop
+  further criteria... Also, it is important to note that not all
+  criteria are used for every \pilotjob system}
+
+\jhanote{Andre L: these need elaboration and explaination. A possible
+  consideration might be whether to remove bullet points and use
+  regular prose}
+
 \noindent
 \emph{Functional Features}
 \begin{itemize}
@@ -615,11 +628,11 @@ the Pegasus project the Corral
 system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a
 frontend to GlideinWMS. In contrast to GlideinWMS, Corral provides
 more explicit control over the placement and start of \pilots to the
-end-user. In contrast to GlideinWMS these Glide-Ins\jhanote{substitute
-  with Corral Glide-Ins?} are run using the credential of the user and
-not a VO credential. Corral has been developed to support the
-requirements of the Pegasus workflow system in particular to optimize
-the placements of \pilots with respect to their workload.
+end-user. In contrast to GlideinWMS, Corral-Glide-Ins are run using
+the credential of the user and not a VO credential. Corral has been
+developed to support the requirements of the Pegasus workflow system
+in particular to optimize the placements of \pilots with respect to
+their workload.
 
 SWIFT~\cite{Wilde2011} is a scripting language designed for expressing
 abstract workflows and computations. The language provides among many
@@ -642,16 +655,20 @@ master/worker coordination model; communication is implemented using
 GSI-secured TCP sockets. SWIFT supports various scheduling mechanisms
 on top of Coaster, e.\,g.\ a FIFO and a load-aware scheduler.
 
-Further, SWIFT can be used in conjunction with other PJ systems, e.\,g.\
-Falkon~\cite{1362680}. Falkon refers to pilots as the so called provisioner,
-which are created using the Globus GRAM service. The provisioner spawns a set
-of executor processes on the allocated resources, which are then responsible
-for managing the execution of task. Tasks are submitted via a so called
-dispatcher service. Falkon also utilizes a master-work coordination
-model, i.\,e.\ the executors periodically query the dispatcher for new SUs.
+Further, SWIFT can be used in conjunction with other PJ systems,
+e.\,g.\ Falkon~\cite{1362680}. Falkon refers to pilots as the so
+called provisioner, which are created using the Globus GRAM
+service. The provisioner spawns a set of executor processes on the
+allocated resources, which are then responsible for managing the
+execution of task. Tasks are submitted via a so called dispatcher
+service. Falkon also utilizes a master-work coordination model,
+i.\,e.\ the executors periodically query the dispatcher for new SUs.
 Web services are used for communication.
 
-\alnote{Should we discuss MOTEUR?}
+\alnote{Should we discuss MOTEUR?}\jhanote{Yes it might make sense to
+  briefly discuss MOTEUR if it explictly uses a \pilotjob system. If
+  not, is could find mention as a representative workflow engine that
+  could be used in Section 5}
 
 
 %%%%%%%%%%%%%%%%%%
@@ -681,10 +698,10 @@ AMGA.
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party 
 % \pilotjob framework, e.\,g.\ Pegasus which re-uses on Condor-G for piloting.
 
-\jhanote{these subsections read well. One major suggestion: after we
-  have described specific systems and how they fall into categories
-  (basic, advanced, higher-level \pilot-based frameworks, we need to
-  close out by describing/discussing the categories again}
+% \jhanote{these subsections read well. One major suggestion: after we
+%   have described specific systems and how they fall into categories
+%   (basic, advanced, higher-level \pilot-based frameworks, we need to
+%   close out by describing/discussing the categories again}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
@@ -1283,6 +1300,26 @@ vocabulary.
 % -----------------------------------------------------------------------------
 %
 \subsubsection{AppLeS}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 AppLeS is a framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection.
 With AppLeS, application-level scheduling and resource selection is handled by a
@@ -1325,6 +1362,26 @@ defined manager with full Pilot-Job syntax}
 % -----------------------------------------------------------------------------
 %
 \subsubsection{MyCluster}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% ``Our system delegates the responsibility of submitting the
 %% job proxies to a single semi-autonomous agent spawned,
@@ -1350,8 +1407,7 @@ defined manager with full Pilot-Job syntax}
 %% in what we consider vital to be a full-fledged Pilot-Job system.  Would
 %% welcome discussion here.}
 
-MyCluster~\cite{1652061}...
-MyCluster is a \textit{Basic \pilotjob system} which is a direct
+MyCluster is a \textit{basic \pilotjob system} which is a direct
 abstraction of cluster-based distributed computing systems.
 The stated goal of the project is to 
 ``build personal [...] clusters on demand''
@@ -1361,8 +1417,14 @@ its aims..
 
 MyCluster implements several \pilotjob analogues:
 the \texttt{Master Node Manager}, which acts as a \textit{\pilotjob Manager},
-the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, and 
-\texttt{???}, which are the equivalent of \textit{\pilotjob \cus}.
+the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, 
+\texttt{Job Proxies}, which act as \textit{\pilotjobs},
+and 
+\texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob \cus}.
+
+The end result is a complete \textit{basic \pilotjob system}, despite the
+authors of the system being constructed not having used the word ``pilot''
+once!~\cite{1652061}
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
@@ -1397,13 +1459,37 @@ the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, and
 % -----------------------------------------------------------------------------
 %
 \subsubsection{PanDA}
-PanDA contains all of the baseline capabilities required for a \pilotjob.
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
-jobs with pilots in addition to handling data management.  PanDA's \textit{pilot}
+jobs with \pilots in addition to handling data management.
+PanDA's \textit{\pilot}
 is called, appropriately enough, a \texttt{pilot}, and handles the execution
 environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
 which also monitors the status of pilots.
+This basic functionality (pilot creation and management) provides 
+PanDA with all of the baseline capabilities required for a \pilotjob.  
 
+As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
+beyond that of a \textit{Basic \pilotjob}.
 PanDA contains some additional backend features such as \texttt{AutoPilot}, which
 tracks site statuses via a database, and \texttt{Bamboo} which adds
 ATLAS database interfacing.  Enhancements to the userspace include 
@@ -1456,7 +1542,26 @@ for later computations.
 
 % -----------------------------------------------------------------------------
 %
-\subsubsection{HTCondor / GlideinWMS}
+\subsubsection{HTCondor GlideinWMS}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
 
 \textit{Collectors} are the managers, with one collector per
 GlideinWMS system.
@@ -1546,6 +1651,26 @@ national cyberinfrastructure (e.g., XSEDE).
 % -----------------------------------------------------------------------------
 %
 \subsubsection{Coasters}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 \msnote{Main coasters ref: http://www.ci.uchicago.edu/swift/papers/UCC-coasters.pdf}
 
 The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
@@ -1565,6 +1690,25 @@ Coasters was designed to both usability and performance goals.
 %
 \subsubsection{BigJob}
 
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 BigJob is a Pilot-based framework which provides a higher-level, unifying interface to heterogeneous and/or distributed data and compute resources. The framework is accessed via the Pilot-API, which provides two key abstractions: Pilot-Job and Pilot-Data. BigJob eliminates the need to interact with different kinds of compute resources, for example, batch-style HPC\/HTC as well as cloud resources. In order to communicate with these resources, BigJob uses the Simple API for Grid Applications to submit a Pilot-Job to a variety of different backends -- including PBS, SGE, Condor, and SLURM.
 
 \textit{Pilot Manager} orchestrates a set of Pilots running on the submission machine. This is the central coordinator of the framework.
@@ -1573,6 +1717,26 @@ BigJob is a Pilot-based framework which provides a higher-level, unifying interf
 
 
 \subsubsection{DIANE}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 \aznote{Do we want to define single-user vs multi-user? 
   Communication methods?  Output aggregrator?}
 
@@ -1633,6 +1797,25 @@ size of 1 core.
 % -----------------------------------------------------------------------------
 %
 \subsubsection{BoSCO}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
 
 BoSCO is a user-space job submission system based on HTCondor. BoSCO was
 designed to allow individual users to utilize heterogeneous HPC and grid
