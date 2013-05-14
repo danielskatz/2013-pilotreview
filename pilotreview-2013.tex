@@ -690,87 +690,135 @@ AMGA.
 \label{sec:vocab}
 \mtnote{MT/AZ/OW}
 
-\onote{This section tries to define everything from concepts (e.g., multi-level-
-scheduling) to specific architectural components (agents, manager). It's hard to
-parse and  I doubt that it will be particularly useful to the reader. I think it
-would make sense  to have a stricter distinction (e.g., by using sub-sections)
-between concepts (late-binding, early-binding, multi-level) and architectural
-building blocks that are common to  all PJ-Systems. On that note: why are we
-trying to come up with this arbitrary vocabulary (on the 'building block' side),
-consisting of 'agents' and 'managers' at all? After all, PJs are 'just' an
-instance of  Master-Worker with specific properties, capabilities and operating
-in a specific environment. I think shooting from that angle (at least making an
-attempt to) might help to introduce more clarity. I think this would be more
-intuitive from a reader's perspective. And after all, it's about unlearning P*,
-isn't it?}
+\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and  I doubt that it will be particularly useful to the reader. I think it would make sense  to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to  all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the 'building block' side), consisting of 'agents' and 'managers' at all? After all, PJs are 'just' an instance of  Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}
+\mtnote{Thank you Ole! Here a fairly revised version of the Section that tries to address the points you made.}
 
-\mtnote{why we need a common vocabulary and what we do with it.}
+The overview offered in \S 2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same term referring to multiple concepts or the same concept named in different ways. 
 
-The vocabulary adopted by different implementations of \pilotjob is heterogeneous. Features and capabilities are named inconsistently, with the same term referring to multiple concepts or the same concept named in different ways. In this section, a common vocabulary is offered so to overcome such inconsistencies and to ground the comparative analysis presented in \S 4.
+This section offers a minimal description of the functionalities that characterize the \pilotjob paradigm while fixing a common vocabulary by means of a set of definitions. Both the description of functionalities and the common vocabulary are eventually leveraged in \S 4 to produce a comparative analysis of \pilotjobs frameworks.
 
-\mtnote{How we define the common vocabulary.}
-\mtnote{Similarities/peculiarities among BJ implementations: potential
-topic to be discussed in Section 4?}
+% \mtnote{How we define the common vocabulary.}
+% \mtnote{Similarities/peculiarities among BJ implementations: potential topic to be discussed in Section 4?}
+% Initially, the concepts used by the implementations of \pilotjob outlined in \S 2 are isolated. Moving from the general to the particular, both common and distinctive concepts are described and explicitly defined. As expected, \pilotjob implementations share a minimal set of similarities but still present peculiarities depending on their specific design and deployment environment. This is a confirmation that the implementations of \pilotjob sampled in this paper should be considered as particular cases of a general \pilotjob system but also that their differences justify a comparative analysis.
 
-Initially, the concepts used by the implementations of \pilotjob outlined in \S 2 are isolated. Moving from the general to the particular, both common and distinctive concepts are described and explicitly defined. As expected, \pilotjob implementations share a minimal set of similarities but still present peculiarities depending on their specific design and deployment environment. This is a confirmation that the implementations of \pilotjob sampled in this paper should be considered as particular cases of a general \pilotjob system but also that their differences justify a comparative analysis.
+\subsection{Core Functionalities of \pilotjobs}
 
-\mtnote{Vocabulary: job}
+The functionalities of each \pilotjob framework can be broadly divided into two categories: One related to the execution of workloads the other to the deployment of the pilot machinery. 
+
+\pilotjobs leverage a Master-Worker paradigm [ref] for the execution of workloads. In such a paradigm, every given workload is reduced into tasks and each task, alongside the data needed for its execution, is bound by a master to one or more workers. Once the tasks have been executed, each worker makes available the results of the computation to the master. 
+
+Task and data binding alongside data retrieval are the distinguishing capabilities of a Master-Worker execution paradigm but each \pilotjob implementation can extend such a paradigm with specific functionalities. For example, \pilotjob frameworks can offer one or more strategy to aggregate the output of each task, interdependent tasks may be performed tanks to workers capable of direct communication, and tasks can be staged into pools so to improve efficiency and overall throughput.
+
+\pilotjob frameworks implement the Master-Worker paradigm. These frameworks are typically deployed within Distributed Computing Infrastructures (DCIs) like, for example, Grids, Clouds or HPC facilities. Implementation and configuration details varies considerably but each deployment of a \pilotjob framework depends at least on: (i) The provisioning of the workers on the resources of the targeted DCI, and (ii) the establishing of one or more communication channels between a Master and its workers.
+
+Also in this case, many capabilities are implementation and context dependent. For example, the worker provisioning depends on the capabilities exposed by the targeted DCI while one or more master can be deployed on a dedicated infrastructure, on the workstation of the user or directly on the DCI resources.
+
+Task and data binding, data retrieval from the workers, workers provisioning and master/worker communication are the defining capabilities of each \pilotjob framework. In the following two subsections, a minimal set of terms related to these capabilities is defined. The terms are sorted depending on the category of capability to which they belong. The end result is a coherent vocabulary that can be effectively adopted across multiple \pilotjob implementations. 
+
+Here a summary of the terms defined in the following subsections and the category of capabilities to which they belong.
+
+\begin{itemize}
+  \item Execution of workloads:
+  \begin{itemize}
+    \item `Task'
+    \item `manager'
+    \item `pilot'
+    \item `binding'
+    \item `data staging'
+  \end{itemize}
+  \item Deployment of the pilot machinery:
+  \begin{itemize}
+    \item `job'
+    \item `resource'
+    \item `infrastructure'
+    \item `provisioning'
+    \item `placeholder'
+  \end{itemize}
+\end{itemize}
+
+
+\subsection{Terms and Definitions}
+
 \onote{'data' is not mentioned at all in the context of Jobs. Why? }
-\aznote{``data'' is not mentioned, but ``resource'' is.  If we do mention
-  data explicitly, we will have to define it as well, just as ``resource''
-  and other ``job constituents'' are.  We can't bundle it into ``resource''
-  because resource implies something more consumable/limited as per the definition, correct?}
 
-The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. These two concepts are complex, meaning that they have logical constituents that need first to be clarified in order for them to be properly understood. Starting from the concept of `job', its most relevant constituents are `task', `resource', `infrastructure' and `scheduling'. These are well-known concepts in themselves [cit, cit] but it is worth here to recall briefly their definitions as a contribute towards a coherent terminology across \pilotjobs implementations. 
+The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. The definition of both concepts is context-dependent and several other terms needs to be clarified in order to offer a coherent terminology.
+
+Both `job' and `pilot' needs to be understood in the context of DCIs,  the infrastructures where \pilotjobs frameworks are deployed. DCIs offer compute, data and network resources and \pilotjobs allow for the users to consume those resources via a Master-Worker execution paradigm.
+
+\begin{description}
+  \item[Resource] Finite, typed and physical quantity that is consumed by executing one or more workload. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources exposed by different types of DCIs. [cit, cit]
+  \item[Infrastructure] Structured agglomerate of resources, possibly geographically and institutionally separated from the users consuming those resources to execute one or more workload. [cit, cit]
+\end{description}
+
+\subsubsection{Deployment of the pilot machinery}
+
+In order for a \pilotjob framework to implement a Master-Worker execution paradigm, workers needs to be implemented and provisioned on the targeted DCI(s). This is done through the capabilities exposed by each DCI in order to access and consume its resources. As seen in \S 2, most of the DCIs where \pilotjobs frameworks are deployed adopt an execution model based on `jobs', `schedulers' and `batch systems'. In such DCIs, jobs are scheduled by a user to be executed by a batch system on the DCI resources.
+
+\begin{description}
+  \item[Job] One or more programs that are executed on a given set of computing resources either directly by a user or indirectly by batch processing.
+\end{description}
+
+When executed by a batch system, a job needs to include also a job description specifying the configuration and execution parameters for the job's programs. Such a description has to be coded into a formal language that can be parsed by the batch system deployed within the targeted DCI.
+
+The DCIs where \pilotjobs framework are usually deployed, utilize a scheduler to manage the submission of jobs by multiple users. The scheduler introduced temporal and spatial constraints on the execution of each job in order to maximize resource utilization, performance and fairness. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and a limit on the amount of resources that it can use.
+
+Finally, many of the DCIs where \pilotjob frameworks are deployed leverage also a queuing system that allows for jobs to be submitted  when not enough resources are immediately available for their execution.
+
+All these features and capabilities are relevant when considering the deployment of \pilotjob frameworks because, in the context of these DCIs, every worker of the framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes a non-interactive deployment of the workers. 
+
+\begin{description}
+  \item[Provisioning] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.
+\end{description}
+
+Cloud-based DCIs introduce notable exceptions and differences in the way in which the workers of a \pilotjob framework can be deployed.[cit, cit] In a IaaS [cit] context, Virtual Machines (VMs) and not jobs are used to deploy one or more workers. VMs can often be instantiated directly, without waiting into a queue, and are not necessarily subjected to walltime limitations. Clearly, overheads are introduced by having to deal with VMs and not `simple' jobs and with the model adopted within a IaaS-based DCI to assign resources to each VM.[cit] It should be noted that a Platform as a Service (PaaS) [cit] approach to cloud computing is in principle compatible with a Master-Worker execution paradigm and, as such, a dedicated \pilotjob framework could be implemented to leverage the benefits offered by PaaS.[cit]
+
+Showing that the deployment modalities of a \pilotjob framework depend on the capabilities exposed by the targeted DCI illustrates the limits of choosing the term `job' to identify a worker. The use of the term `job' is due to an historical contingency, the targeting of a specific class of DCIs in which the term `job' is meaningful. With the development of new types of DCI, the term `job' has become too restrictive, a situation that can trigger confusion and the use of synonyms like `agent' or `pilot'.
+
+\subsubsection{Execution of workloads}
+
+\mtnote{Vocabulary: Placeholder}
+
+Functionally, a worker deployed as a job of a DCI  (PLACEHOLDER)
 
 \mtnote{Vocabulary: task}
 
 Users use \pilotjobs to perform one or more tasks. In this context, a task is described by a set of operations encoded into one or more applications that, once executed, allow for a user to achieve a given goal.
 
-\mtnote{Vocabulary: resource}
+%--------------
 
-The concept of operation entails that of resources, namely finite, typed and physical quantities that are consumed by executing the operations of a task. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources consumed by tasks. 
+% \mtnote{Multiple type of pilots: potential topic to discuss in Section
+% 4?}
 
-\mtnote{Vocabulary: infrastructure}
+% The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data \onote{you introduce data as `resource'. why?} or networks, depending on the resources made available by an infrastructure to its users.
 
-Resources are physically and logically organized into so called `infrastructures', agglomerates possibly geographically and institutionally separated from the users interested in performing their tasks [cit, cit].
+% \mtnote{Vocabulary: scheduling}
 
-\mtnote{Multiple type of pilots: potential topic to discuss in Section
-4?}
+% Tasks consume specific type of resources but they do not entail any
+% notion of resource provisioning. Therefore, tasks need to be bound to
+% resources over time, an operation commonly referred to as `scheduling'
+% [cit, cit]. A scheduler is an application executed on an infrastructure
+% that performs scheduling by means of dedicated algorithms.
 
-The operations of a task performed by means of a \pilotjob implementation are usually computational in nature but, in principle, they might also operate on other types of resources such as data \onote{you introduce data as 'resource'. why?} \aznote{agreed, this is incorrect given our definition of resources as consumables?} or networks, depending on the resources made available by an infrastructure to its users.
+% \mtnote{Vocabulary: back to job}
 
-\mtnote{Vocabulary: scheduling}
+% It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. \onote{I do not agree with this definition. 'Jobs' can IMHO be run on a resource directly, without involving a scheduler. Also, I don't understand why a scheduler  is coupled to an 'infrastructure' in this case.} As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
 
-Tasks consume specific type of resources but they do not entail any
-notion of resource provisioning. Therefore, tasks need to be bound to
-resources over time, an operation commonly referred to as `scheduling'
-[cit, cit]. A scheduler is an application executed on an infrastructure
-that performs scheduling by means of dedicated algorithms.
+% \mtnote{Vocabulary: pilot intro}
 
-\mtnote{Vocabulary: back to job}
+% The concept of `pilot' builds on some of the constituents of `job'
+% but includes also those of `pool', `manager' and `agent'. 
 
-It is now possible to define the concept of `job' by utilizing all its logical constituents. A `job' is a collection of tasks that a user submits to a scheduler of an infrastructure that offers the required amount and type of resources over an appropriate extent of time. 
-\onote{I do not agree with this definition. 'Jobs' can IMHO be run on a resource directly, without involving a scheduler. Also, I don't understand why a scheduler  
-is coupled to an 'infrastructure' in this case.} \aznote{Agreed}
-As a consequence, jobs need to be described in a machine-readable language indicating, among other properties, not only the tasks and the amount and type of resources needed but also the amount of time that those tasks should take to complete and the relevant properties of their execution environment.
+% \mtnote{Vocabulary: pool}
 
-\mtnote{Vocabulary: pilot intro}
-
-The concept of `pilot' builds on some of the constituents of `job'
-but includes also those of `pool', `manager' and `agent'. 
-
-\mtnote{Vocabulary: pool}
-
-\begin{figure} [t]
-	\centering
-	\includegraphics[width=0.45\textwidth]{figures/pilot_section3_1}
-	\caption{(a) Components and transitions of a generalized pilot
-		system; (b) Pilot systems may be composed of multiple
-	  instances of the same components. \aznote{Bottom of figure
-        is slightly cut off}}
-	\label{fig:s3_pilot_diagram}
-\end{figure}
+% \begin{figure} [t]
+%   \centering
+%   \includegraphics[width=0.45\textwidth]{figures/pilot_section3_1}
+%   \caption{(a) Components and transitions of a generalized pilot
+%     system; (b) Pilot systems may be composed of multiple
+%     instances of the same components. \aznote{Bottom of figure
+%         is slightly cut off}}
+%   \label{fig:s3_pilot_diagram}
+% \end{figure}
 
 \jhanote{The question is what are the fundamental ``concepts''. It is
   not necessary that the concepts have a specific implementation or
@@ -787,24 +835,14 @@ but includes also those of `pool', `manager' and `agent'.
   advantage of liberating us from the requirement of imposing on the
   the manager the need to push/pulling tasks from a pool.}
 
-\mtnote{Different pool implementations, ways to make tasks available
-  to the manager: potential topics to discuss in Section 4?}
+% \mtnote{Different pool implementations, ways to make tasks available
+%   to the manager: potential topics to discuss in Section 4?}
 
-Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. 
-\onote{the more I think about it, the less I am convinced that we need the notion of a pool here. It's an implementation detail that might not
-even be part of every PJ implementation. It is not important when describing a PJ.}
-The implementation of a pool varies among \pilotjobs\onote{-Systems} with the pool being a stand-alone component or a subsystem of a master
-\onote{what is 'master'?}, and storing only the state of tasks or having also a dedicated set of capabilities.
-\aznote{Throwing my two cents in re: pool/''logical grouping'' -- I personally think that the notion is
-  very useful to visualize/understand the concept of PJs and how they work in real-world situations,
-  but understand why we want to minimize the
-  amount of vocabulary we are responsible for introducing.  ``Logical grouping'' works fine for me,
-  but I do not see how we are free from describing pulling/pushing to the PJ-system with logical grouping.
-  Perhaps if we drop both pools/logical grouping we are free to discuss task execution in the abstract/in such
-  a way that assumes that PJs are always available to begin execution immediately, and throw in something about
-  ``additions to the base PJ-concept may be made such as logical grouping/task pools/(other sundries), but are not
-  vital/necessary components like the aforementioned concepts...'' at the end of the section as a way of tying
-  up potential loose ends reviewers may be thinking?}
+% Functionally, a pilot is a system that allows for a user to gain exclusive - i.e. not shared - control over the scheduling and execution of her tasks. As shown in Figure~\ref{fig:s3_pilot_diagram}, users submit tasks to a `pool', a store where tasks are collected and made available to a manager. 
+% \onote{the more I think about it, the less I am convinced that we need the notion of a pool here. It's an implementation detail that might not
+% even be part of every PJ implementation. It is not important when describing a PJ.}
+% The implementation of a pool varies among \pilotjobs\onote{-Systems} with the pool being a stand-alone component or a subsystem of a master
+% \onote{what is 'master'?}, and storing only the state of tasks or having also a dedicated set of capabilities.
 
 \mtnote{Vocabulary: manager}
 \mtnote{Capabilities across different manager implementations: potential topic to discuss in Section 4?}
@@ -821,10 +859,6 @@ offered, or potentially implementable, in this type of managers.
 \mtnote{Vocabulary: agent}
 
 Agents executes the tasks pushed by or pulled from one or more managers (Figure~\ref{fig:s3_pilot_diagram}). Clearly, an agent must have the right amount and type of resources for an appropriate extent of time in order to execute its tasks. As such, this requirement brings together pilots and jobs.
-/aznote{Unclear how resource requirements brings ``pilots'' and ``jobs'' together; do we mean to say that we are producing
-a potential mapping of sorts between tasks and the jobs (or jobs and pilots) they are capable of running as a part of?  In
-other words, we are discussing tasks relating to agents, and then implicitly asserting that this shows a pilot and job relation
--- I think that we will have to explain this a bit more.}
 
 \mtnote{Vocabulary: Pilot Job}
 
@@ -844,13 +878,7 @@ of resources for the indicated period of time and their agents are
 executed. At this point, an agent becomes a placeholder for the set of
 resources that have been specified by and assigned to its job.
 \onote{not convinced that we need a formal definition of
-  'placeholder'.}\aznote{I think a definition of ``placeholder''
-helps emphasize the concept of a job that is actively holding resources
-but may not be actively executed; to just describe this as a ``job'' 
-may be confusing to readers who equate ``resources taken with a job''
-with ``task execution is active and ongoing''.  It also helps detail
-why some ``non-\pilotjob systems'' like AppLeS are NOT true \pilotjobs
-despite being able to submit/manage jobs...}
+  'placeholder'.}
 
 \mtnote{How different \pilotjob implementations deal with the
   peculiarities of the job submission system of different
@@ -866,12 +894,7 @@ have to deal with limitations on what processes can be executed on a
 specific infrastructure. Particularly important in this context are
 networking capabilities as, without connectivity, agents would not be
 able to communicate with their managers and, ultimately, with the end
-users.  \aznote{I get the importance of networking capabilities, but
-it reads kind of off as it is (i.e., why would a user even consider
-the idea of submitting to a non-network connected machine?)  Consider
-listing it as ``bidirectional networking'' (i.e. some compute nodes
-do not allow external communication).  Or, are we thinking about reliability
-with regards to network connectivity?}
+users.
 
 Once one or more placeholders become available on the given
 infrastructures, users can start to use a \pilotjob system to execute
@@ -879,9 +902,6 @@ their tasks. Users own the placeholders and can run their tasks by
 means of the corresponding agents without having to deal with the job
 submission system of the infrastructure. \jhanote{Is is necessary that
   users ``own'' the agents. can the manager not own the placeholder?}
-\aznote{The idea of ``owning'' them emphasizes user control IMO; perhaps
-a less ambiguous way would be ``Placeholders are user-controllable, allowing
-users to run their tasks by means of...''}
 
 \mtnote{Vocabulary: multi-level scheduling}
 \mtnote{Different ways to implement task scheduling: potential topics to discuss in Section 4?}
@@ -945,85 +965,85 @@ high-level, resource-independent parameters for their tasks as, for
 example, the amount of time or money that should be spent for their
 execution. 
 
-\subsection{Different components of the Landscape}
+% \subsection{Different components of the Landscape}
 
-\mtnote{The idea is to focus this subsection on the relationship between \pilotjob and the environment - re infrastructure - where its agents are scheduled and executed. The analysis should focus on the set of capabilities that pertain exclusively - at least in theory - to each domain. This would outline functionally and qualitatively the `landscape' of \pilotjob and offer a base for the critical analysis of the \pilotjobs implementations in \S 4. The idea would be to show how implementations choose ad hoc solutions depending on the specific characteristic of their landscape, both in terms of compensating for their limitations or exploiting their peculiarities. }
+% \mtnote{The idea is to focus this subsection on the relationship between \pilotjob and the environment - re infrastructure - where its agents are scheduled and executed. The analysis should focus on the set of capabilities that pertain exclusively - at least in theory - to each domain. This would outline functionally and qualitatively the `landscape' of \pilotjob and offer a base for the critical analysis of the \pilotjobs implementations in \S 4. The idea would be to show how implementations choose ad hoc solutions depending on the specific characteristic of their landscape, both in terms of compensating for their limitations or exploiting their peculiarities. }
 
-\begin{itemize}
+% \begin{itemize}
 
-    \item Resource Types
+%     \item Resource Types
 
-        \begin{itemize}
-            \item HTC Grids
-            \item HPC Grids
-            \item Virtualized Environments (Clouds)
-            \item Hybrids, Cloud-bursting, etc.
-        \end{itemize}
+%         \begin{itemize}
+%             \item HTC Grids
+%             \item HPC Grids
+%             \item Virtualized Environments (Clouds)
+%             \item Hybrids, Cloud-bursting, etc.
+%         \end{itemize}
 
-    \item Organizational Structures
+%     \item Organizational Structures
 
-        \begin{itemize}
-            \item Virtual Organizations
-            \item "The XSEDE Model"
-        \end{itemize}
+%         \begin{itemize}
+%             \item Virtual Organizations
+%             \item "The XSEDE Model"
+%         \end{itemize}
 
-    \item Software and Services \mtnote{this subsection would focus specifically on this item}
+%     \item Software and Services \mtnote{this subsection would focus specifically on this item}
 
-        \begin{itemize}
-            \item Single-site, local workload mgmt. systems (HPC schedulers)
-            \item Single-site endpoint services (e.g., GRAM, CREAM)
-            \item Multi-site workload mgmt. systems (meta-scheduler)
-            \item File transfer services
-            \item Metadata services
-        \end{itemize}
+%         \begin{itemize}
+%             \item Single-site, local workload mgmt. systems (HPC schedulers)
+%             \item Single-site endpoint services (e.g., GRAM, CREAM)
+%             \item Multi-site workload mgmt. systems (meta-scheduler)
+%             \item File transfer services
+%             \item Metadata services
+%         \end{itemize}
 
-    \item Access Mechanisms
+%     \item Access Mechanisms
 
-        \begin{itemize}
-    	    \item API 
-            \item CMD Line tools
-            \item Gateways (web)
-        \end{itemize}
+%         \begin{itemize}
+%           \item API 
+%             \item CMD Line tools
+%             \item Gateways (web)
+%         \end{itemize}
 
-    \item Applications and Use-Cases
+%     \item Applications and Use-Cases
 
-        \begin{itemize}
-            \item X
-        \end{itemize}
+%         \begin{itemize}
+%             \item X
+%         \end{itemize}
 
-\end{itemize}
+% \end{itemize}
 
-\jhanote{Something akin to Matteo's diagram}
+% \jhanote{Something akin to Matteo's diagram}
 
-%\begin{itemize}
-%        \item PJ abstractions are not defined in a void;
-%	\item use cases, scientific practice and distributed applications;
-%        \item heterogeneous DIs: grid, cloud and hybrids;
-%	\item jobs and services;
-%        \item LoAs implied by the PJ abstractions;
-%	\item diagram.
-%\end{itemize}
-%
-\subsection{Common Terms and Definitions}
+% %\begin{itemize}
+% %        \item PJ abstractions are not defined in a void;
+% % \item use cases, scientific practice and distributed applications;
+% %        \item heterogeneous DIs: grid, cloud and hybrids;
+% % \item jobs and services;
+% %        \item LoAs implied by the PJ abstractions;
+% % \item diagram.
+% %\end{itemize}
+% %
+% \subsection{Common Terms and Definitions}
 
-\alnote{What to do with the terms, such as many-task computing, meta computing, grid computing, etc.? It might make sense to couple the evolution of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe in history section.}
+% \alnote{What to do with the terms, such as many-task computing, meta computing, grid computing, etc.? It might make sense to couple the evolution of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe in history section.}
 
-\mtnote{I think subsection 3.0 addresses this comment. If we all agree on todays call, I will comment out the entire subsection.}
+% \mtnote{I think subsection 3.0 addresses this comment. If we all agree on todays call, I will comment out the entire subsection.}
 
-\alnote{Can we start of with the P* elements so that we have something?}
-\begin{itemize}
-    \item application
-    \item workflow
-    \item pilot framework
-    \item manager
-    \item pilot, agent, executor, butler process, placeholder
-    \item scheduler
-    \item job
-    \item workload
-    \item ensemble
-    \item \computeunit
-    \item platform
-\end{itemize}
+% \alnote{Can we start of with the P* elements so that we have something?}
+% \begin{itemize}
+%     \item application
+%     \item workflow
+%     \item pilot framework
+%     \item manager
+%     \item pilot, agent, executor, butler process, placeholder
+%     \item scheduler
+%     \item job
+%     \item workload
+%     \item ensemble
+%     \item \computeunit
+%     \item platform
+% \end{itemize}
 
 % \mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
 % \begin{itemize}
