@@ -1194,7 +1194,7 @@ vocabulary.
   \hline
           AppLeS            & --                                       & --                                 & --                     & --                     \\ 
   \hline
-          MyCluster         & Manual, Explicitly User-controllable     & Manual                             & --                     & --                     \\ 
+          MyCluster         & Manual, Explicitly User-controllable     & Manual                             & Single (?)                  & --                     \\ 
   \hline
           PanDA             & Automatic, Not user-controllable         & --                                 & --                          & --                     \\ 
   \hline
@@ -1258,74 +1258,78 @@ defined manager with full Pilot-Job syntax}
 % -----------------------------------------------------------------------------
 %
 \subsubsection{MyCluster}
-\aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
-``Our system delegates the responsibility of submitting the
-job proxies to a single semi-autonomous agent spawned,
-through Globus, at each TeraGrid site during a virtual login
-session. This agent translates the job proxy submission to the
-local batch submission syntax, maintains some number of job
-proxies throughout the lifetime of a login session, and may
-negotiate migration of job proxies between sites based on
-prevailing job load conditions across sites.''
-Rather, it looks like MyCluster provides some method of 
-submitting jobs to resources in a unified manner, much like
-AppLeS.  When it comes time for the job to run, however,
-it must wait in the local queuing system...?  In short,
-looks like abstraction across multiple resources with some
-functionality to handle everything from a single unified
-access point including data handling, but
-there is no concept of a placeholder/agent.
-}
+%% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
+%% ``Our system delegates the responsibility of submitting the
+%% job proxies to a single semi-autonomous agent spawned,
+%% through Globus, at each TeraGrid site during a virtual login
+%% session. This agent translates the job proxy submission to the
+%% local batch submission syntax, maintains some number of job
+%% proxies throughout the lifetime of a login session, and may
+%% negotiate migration of job proxies between sites based on
+%% prevailing job load conditions across sites.''
+%% Rather, it looks like MyCluster provides some method of 
+%% submitting jobs to resources in a unified manner, much like
+%% AppLeS.  When it comes time for the job to run, however,
+%% it must wait in the local queuing system...?  In short,
+%% looks like abstraction across multiple resources with some
+%% functionality to handle everything from a single unified
+%% access point including data handling, but
+%% there is no concept of a placeholder/agent.
+%% }
 
-\aznote{I still agree with my above statements after additional reading --
-it looks like this is kind of a ``virtualization'' system for grids
-where you can submit/monitor jobs via a centralized interface and lacking
-in what we consider vital to be a full-fledged Pilot-Job system.  Would
-welcome discussion here.}
+%% \aznote{I still agree with my above statements after additional reading --
+%% it looks like this is kind of a ``virtualization'' system for grids
+%% where you can submit/monitor jobs via a centralized interface and lacking
+%% in what we consider vital to be a full-fledged Pilot-Job system.  Would
+%% welcome discussion here.}
 
 MyCluster~\cite{1652061}...
-
-MyCluster is a \textit{Basic Pilot Job system} which is a direct
+MyCluster is a \textit{Basic \pilotjob system} which is a direct
 abstraction of cluster-based distributed computing systems.
+The stated goal of the project is to 
+``build personal [...] clusters on demand''
+\aznote{from webpage} and in doing so
+inadvertantly implements \pilotjob functionality to accomplish
+its aims..
 
+MyCluster implements several \pilotjob analogues:
+the \texttt{Master Node Manager}, which acts as a \textit{\pilotjob Manager},
+the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, and 
+\texttt{???}, which are the equivalent of \textit{\pilotjob \cus}.
+ 
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
 
-Shortcomings include ...  (lack of heterogenous support?)
+%% Shortcomings include ...  (lack of heterogenous support?)
 
-
-\begin{itemize}
-\item Master Node Manager = Manager \aznote{Master Node
-Manager process within a GNU Screen session that then
-starts the Condor/SGE master daemons in user space if
-needed.}
-\item Agent Manager \aznote{ The
-agent manager remotely executes a Proxy Manager process at
-each participating site using Globus GRAM}
-\item Submission Agent -- \aznote{Wrapper for GridShell, wraps
-  multiple grid resources to a single ``virtual'' cluster
-\url{https://www.opensciencegrid.org/bin/view/Interoperability/GridShellEvaluation}}
-\item Proxy Manager = one at each site, reports back to central
-  agent manager w/ heartbeat to keep awareness of resource state
-\item Task Manager = \textit{agent}
-\item Slave-node managers = compute units (?) (probably not,
-  barely mentioned in the paper)
-  \aznote{The slave node managers are responsible for starting the
-    Condor or SGE job-starter daemons. These daemons connect
-    back to the master processes on the client workstation, or to a
-    pre-existing departmental cluster, depending on the virtual
-    login configuration.
-  }
-\item Job proxy (?)
-\end{itemize}
-
+%% \begin{itemize}
+%% \item Master Node Manager = Manager \aznote{Master Node
+%% Manager process within a GNU Screen session that then
+%% starts the Condor/SGE master daemons in user space if
+%% needed.}
+%% \item Agent Manager \aznote{ The
+%% agent manager remotely executes a Proxy Manager process at
+%% each participating site using Globus GRAM}
+%% \item Submission Agent -- \aznote{Wrapper for GridShell, wraps
+%%   multiple grid resources to a single ``virtual'' cluster
+%% \url{https://www.opensciencegrid.org/bin/view/Interoperability/GridShellEvaluation}}
+%% \item Proxy Manager = one at each site, reports back to central
+%%   agent manager w/ heartbeat to keep awareness of resource state
+%% \item Task Manager = \textit{agent}
+%% \item Slave-node managers = compute units (?) (probably not,
+%%   barely mentioned in the paper)
+%%   \aznote{The slave node managers are responsible for starting the
+%%     Condor or SGE job-starter daemons. These daemons connect
+%%     back to the master processes on the client workstation, or to a
+%%     pre-existing departmental cluster, depending on the virtual
+%%     login configuration.
+%%   }
+%% \item Job proxy (?)
+%% \end{itemize}
 
 % -----------------------------------------------------------------------------
 %
 \subsubsection{PanDA}
-\aznote{Some of this is limited to the PanDA Pilot Factory paper -- 
-unsure as to where we should draw the line over what is included as part
-of PanDA ``proper'', and what is part of extensions...}
 PanDA contains all of the baseline capabilities required for a \pilotjob.
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
 jobs with pilots in addition to handling data management.  PanDA's \textit{pilot}
@@ -1337,44 +1341,49 @@ PanDA contains some additional backend features such as \texttt{AutoPilot}, whic
 tracks site statuses via a database, and \texttt{Bamboo} which adds
 ATLAS database interfacing.  Enhancements to the userspace include 
 \texttt{Monitor}, for web-based monitoring, and the \texttt{PanDA client}.
+\texttt{PanDA Dynamic Data Placement} \cite{maeno_pd2p:_2012} 
+allows for additional, automatic data
+management by replicating popular input data to underutilized resources
+for later computations.
+
 
 %% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
 %%   agent, Pilot-Job, placeholder, multi-level scheduling, binding, early/late
 %%   binding}
 
-\begin{itemize}
-\item Based upon Condor-G/Glidein, uses multiple queues
-\item Jobs submitted via Condor-G
-\item Jobs run with wrappers, on worker nodes they download/execute PanDA pilot code
-\item Pilot then asks for job that worker node can handle
-\item Stages in input files; executes and monitors progress of job; stages out output;
-  cleans up environment
-\item ``Special Features''
-  \begin{itemize}
-  \item Job/disk monitoring
-  \item Job recovery (leaves output files resident for another 
-    process to resume from)
-  \item Multi-job processing (submit batch of jobs to a single pilot)
-  \item Certificate/token-based security
-  \item gLExec security (user's identity used instead of Pilot credentials)
-  \end{itemize}
+%% \begin{itemize}
+%% \item Based upon Condor-G/Glidein, uses multiple queues
+%% \item Jobs submitted via Condor-G
+%% \item Jobs run with wrappers, on worker nodes they download/execute PanDA pilot code
+%% \item Pilot then asks for job that worker node can handle
+%% \item Stages in input files; executes and monitors progress of job; stages out output;
+%%   cleans up environment
+%% \item ``Special Features''
+%%   \begin{itemize}
+%%   \item Job/disk monitoring
+%%   \item Job recovery (leaves output files resident for another 
+%%     process to resume from)
+%%   \item Multi-job processing (submit batch of jobs to a single pilot)
+%%   \item Certificate/token-based security
+%%   \item gLExec security (user's identity used instead of Pilot credentials)
+%%   \end{itemize}
 
-\item PanDA server (task buffer -- job queue manager keeps track of
-  active jobs, brokerage -- matches jobs  with sites/pilots and manages
-  data placement, job dispatcher -- receives requests from pilots and sends
-  jobs payloads, data service -- dispatch and retrieval from sites)
-\item PanDA DB (general DB = advert?)
-\item PanDA client (user client for submission/etc)
-\item Pilot (execution environment)
-\item AutoPilot (pilot submission, management, monitoring), submits
-  pilots to remote sites and tracks site status via database
-\item SchedConfig (configuration database)
-\item Monitor (Web-based monitoring)
-\item Logger (logs incidents w/ Python logging)
-\item Bamboo (interface w/ ATLAS database)
-\item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
-  and monitors pilot status, basically enables use of glideins with PanDA (?)
-\end{itemize}
+%% \item PanDA server (task buffer -- job queue manager keeps track of
+%%   active jobs, brokerage -- matches jobs  with sites/pilots and manages
+%%   data placement, job dispatcher -- receives requests from pilots and sends
+%%   jobs payloads, data service -- dispatch and retrieval from sites)
+%% \item PanDA DB (general DB = advert?)
+%% \item PanDA client (user client for submission/etc)
+%% \item Pilot (execution environment)
+%% \item AutoPilot (pilot submission, management, monitoring), submits
+%%   pilots to remote sites and tracks site status via database
+%% \item SchedConfig (configuration database)
+%% \item Monitor (Web-based monitoring)
+%% \item Logger (logs incidents w/ Python logging)
+%% \item Bamboo (interface w/ ATLAS database)
+%% \item PilotFactory -- generates pilots (sends schedd glideins to remote sites)
+%%   and monitors pilot status, basically enables use of glideins with PanDA (?)
+%% \end{itemize}
 
 
 
