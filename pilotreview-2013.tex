@@ -150,8 +150,8 @@
 
 \section{Introduction} 
 
-\jhanote{consistency between PJ sytems and \pilot systems and
-  \pilotjob systems please}
+\jhanote{Please use macros! e.g., for consistency between PJ sytems
+  and \pilot systems and \pilotjob systems}
 
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
@@ -162,8 +162,8 @@ usage suggested that \pilotjobs were arguably one of the most
 widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
 of production distributed cyberinfrastructures that support them.
-\jhanote{Interestingly we find that \pilotjobs have been used even
-  before they were named as such!}
+Interestingly we find that \pilotjobs have been used even before they
+were named as such!
 
 \jhanote{Now develop the following paragraph along the lines of: Why
   have \pilotjobs been successful?}
@@ -212,26 +212,26 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remains difficult if not infeasible.
 
-% \subsection{Prior Work}
-
 \section{A Preliminary Survey of Existing Pilot-Jobs Systems}
 \label{sec:survey}
 
-\mrnote{Add linky text between introduction and function PJ sections - overview section 2}
+%\subsection{A Functional Approach to Pilot-Jobs}
+%Many scientific communities began running into the same issues: 
 
-\subsection{A Functional Approach to Pilot-Jobs}
+As distributed systems grew in capacity and capability, they also grew
+in complexity and heterogeneity. For example, many machines
+implemented their own batch queuing systems, and oftentimes these
+systems varied from machine to machine.  The wide use of heterogenous
+resources, resulted in the need for workload management across these
+resources.  In order to harness the power of these heterogeneous
+resources to run jobs, one particular solution proposed is that of
+\pilotjobs
 
-As the uptake of grids grew, the need for job submission management
-via batch queuing systems and middleware access also grew. Many
-machines implemented their own batch queuing systems, and oftentimes
-these systems varied from machine to machine. Many scientific
-communities began running into the same issues: the wide use of (i) heterogenous
-resources, and the need for (ii) workload management and (iii) support of various
-applications. In order to harness the power of these
-heterogeneous resources to run jobs, several solutions have been proposed. 
-One such solution is that of \pilotjobs, which have historically been
-used as a means of solving these issues. We briefly discuss some of
-the specific uses of pilot jobs below.
+% , which have historically been used as a means of solving these
+% issues.
+% This gave rise to the the need for job submission management via batch
+% queuing systems and middleware access also grew.
+%We briefly discuss some specific uses of \pilotjobs below.
 
 \pilotjobs are most commonly used for the execution of many tasks
 through the use of a container job. They are often measured by
@@ -242,22 +242,29 @@ or ensemble-based applications. \pilotjobs have also been used for
 parameter sweeps, chained tasks, and loosely-coupled but distinct
 tasks. %note to self: cite these with papers
 
-Multi-scale simulations have also benefited from the use of
-\pilotjobs. A \pilotjob load balancing algorithm was proposed for
-coupled Multi-Physics MPI Simulations \cite{ko-efficient} in which
-more processors were assigned to jobs with longer runtimes, so as to
-make the simulation take the same amount of wall-clock time between
-points when they need to communicate with one another (via MPI).
+\jhanote{in addition to tps the total number of tasks executed is also
+  an important consideration sometimes}
 
-Some simulations require varying number of tasks to complete -- that
-is, 10 tasks may start a program but the results of these tasks may
-spawn more tasks to complete. \pilotjobs can be utilized for these
-types of dynamic simulations, because once they are active, the agents
-have an available slot for executing tasks on a given number of
-cores. As more tasks are added to the system, the \pilot can continue
-to execute new tasks until the job is considered
+Multi-scale simulations have also benefited from the use of
+\pilotjobs. A framework for load balancing via dynamic resource
+allocation for coupled multi-physics (MPI-based) simulations using
+\pilotjobs was demonstrated in Ref.~\cite{ko-efficient}.
+\jhanote{melissa: this sentence is awkward. please fix}in which more
+processors were assigned to jobs with longer runtimes, so as to make
+the simulation take the same amount of wall-clock time between points
+when they need to communicate with one another (via MPI).
+
+\jhanote{this paragraph needs major rewriting. unclear what the
+  message/aim is} Some simulations require varying number of tasks to
+complete -- that is, 10 tasks may start a program but the results of
+these tasks may spawn more tasks to complete. \pilotjobs can be
+utilized for these types of dynamic simulations, because once they are
+active, the agents have an available slot for executing tasks on a
+given number of cores. As more tasks are added to the system, the
+\pilot can continue to execute new tasks until the job is considered
 complete. Without \pilotjobs, these simulations would have to be
-resubmitted to the job queue and wait for their time to become active again~\cite{luckow2009adaptive}. 
+resubmitted to the job queue and wait for their time to become active
+again~\cite{luckow2009adaptive}.
 
 \pilotjobs have also been used to avoid queue wait times for many jobs
 as well as harness and utilize different resources (with different
