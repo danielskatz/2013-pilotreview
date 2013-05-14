@@ -1220,6 +1220,8 @@ vocabulary.
  \hline
           BoSCO             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\ 
  \hline
+          BigJob             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\ 
+ \hline
  \end{tabular}
  \caption{\textbf{Different pilot-job systems and their key. 
  \onote{Possible classifiers:
@@ -1512,6 +1514,15 @@ Coasters was designed to both usability and performance goals.
 
 % -----------------------------------------------------------------------------
 %
+\subsubsection{BigJob}
+
+BigJob is a Pilot-based framework which provides a higher-level, unifying interface to heterogeneous and/or distributed data and compute resources. The framework is accessed via the Pilot-API, which provides two key abstractions: Pilot-Job and Pilot-Data. BigJob eliminates the need to interact with different kinds of compute resources, for example, batch-style HPC\/HTC as well as cloud resources. In order to communicate with these resources, BigJob uses the Simple API for Grid Applications to submit a Pilot-Job to a variety of different backends -- including PBS, SGE, Condor, and SLURM.
+
+\textit{Pilot Manager} orchestrates a set of Pilots running on the submission machine. This is the central coordinator of the framework.
+\textit{Pilot Agent} is a decentralized component which manages the set of resources assigned to it.
+\textit{Distributed Coordination Service} is used for communication between the Manager and the Agents.
+
+
 \subsubsection{DIANE}
 \aznote{Do we want to define single-user vs multi-user? 
   Communication methods?  Output aggregrator?}
