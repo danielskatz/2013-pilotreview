@@ -1333,8 +1333,7 @@ defined manager with full Pilot-Job syntax}
 %% in what we consider vital to be a full-fledged Pilot-Job system.  Would
 %% welcome discussion here.}
 
-MyCluster~\cite{1652061}...
-MyCluster is a \textit{Basic \pilotjob system} which is a direct
+MyCluster is a \textit{basic \pilotjob system} which is a direct
 abstraction of cluster-based distributed computing systems.
 The stated goal of the project is to 
 ``build personal [...] clusters on demand''
@@ -1344,8 +1343,14 @@ its aims..
 
 MyCluster implements several \pilotjob analogues:
 the \texttt{Master Node Manager}, which acts as a \textit{\pilotjob Manager},
-the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, and 
-\texttt{???}, which are the equivalent of \textit{\pilotjob \cus}.
+the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, 
+\texttt{Job Proxies}, which act as \textit{\pilotjobs},
+and 
+\texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob \cus}.
+
+The end result is a complete \textit{basic \pilotjob system}, despite the
+authors of the system being constructed not having used the word ``pilot''
+once!~\cite{1652061}
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
@@ -1380,13 +1385,17 @@ the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent}, and
 % -----------------------------------------------------------------------------
 %
 \subsubsection{PanDA}
-PanDA contains all of the baseline capabilities required for a \pilotjob.
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
-jobs with pilots in addition to handling data management.  PanDA's \textit{pilot}
+jobs with \pilots in addition to handling data management.
+PanDA's \textit{\pilot}
 is called, appropriately enough, a \texttt{pilot}, and handles the execution
 environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
 which also monitors the status of pilots.
+This basic functionality (pilot creation and management) provides 
+PanDA with all of the baseline capabilities required for a \pilotjob.  
 
+As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
+beyond that of a \textit{Basic \pilotjob}.
 PanDA contains some additional backend features such as \texttt{AutoPilot}, which
 tracks site statuses via a database, and \texttt{Bamboo} which adds
 ATLAS database interfacing.  Enhancements to the userspace include 
