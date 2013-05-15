@@ -720,19 +720,56 @@ This section offers a minimal description of the functionalities that characteri
 
 \subsection{Core Functionalities of \pilotjobs}
 
-The functionalities of each \pilotjob framework can be broadly divided into two categories: One related to the execution of workloads the other to the deployment of the pilot machinery. 
+\mtnote{possibly add a cap}\\ The functionalities of each \pilotjob
+framework can be broadly divided into two categories: One related to the
+execution of workloads the other to the deployment of the framework
+itself. 
 
-\pilotjobs leverage a Master-Worker paradigm [ref] for the execution of workloads. In such a paradigm, every given workload is reduced into tasks and each task, alongside the data needed for its execution, is bound by a master to one or more workers. Once the tasks have been executed, each worker makes available the results of the computation to the master. 
+\pilotjobs leverage a Master-Worker paradigm [ref] for the execution of
+workloads. In such a paradigm, every given workload is reduced into
+tasks and each task, alongside the data needed for its execution, is
+bound by a master to one or more workers. Once the tasks have been
+executed, each worker makes available the results of the computation to
+the master. \pilotjob frameworks implement the Master-Worker and are
+typically deployed within Distributed Computing Infrastructures (DCIs)
+like, for example, Grids, Clouds or HPC facilities. Implementation and
+configuration details varies considerably but each deployment of a
+\pilotjob framework depends at least on: (i) The provisioning of the
+workers on the resources of the targeted DCI, and (ii) the establishing
+of one or more communication channels between a Master and its workers.
 
-Task and data binding alongside data retrieval are the distinguishing capabilities of a Master-Worker execution paradigm but each \pilotjob implementation can extend such a paradigm with specific functionalities. For example, \pilotjob frameworks can offer one or more strategy to aggregate the output of each task; interdependent tasks may be performed thanks to workers capable of direct communication; and tasks can be staged into pools so to improve efficiency and overall throughput.
+\mtnote{Extend including not only extension of the paradigm but also
+different ways to implementing it}\\ Task and data binding alongside
+data retrieval are the distinguishing capabilities of a Master-Worker
+execution paradigm but each \pilotjob framework can extend such a
+paradigm with specific functionalities. For example, \pilotjob
+frameworks can offer one or more strategy to aggregate the output of
+each task; interdependent tasks may be performed thanks to workers
+capable of direct communication; and tasks can be staged into pools so
+to improve efficiency and overall throughput. 
 
-\pilotjob frameworks implement the Master-Worker and are typically deployed within Distributed Computing Infrastructures (DCIs) like, for example, Grids, Clouds or HPC facilities. Implementation and configuration details varies considerably but each deployment of a \pilotjob framework depends at least on: (i) The provisioning of the workers on the resources of the targeted DCI, and (ii) the establishing of one or more communication channels between a Master and its workers.
+The same flexibility and variety of implementations is found in how
+\pilotjob frameworks are deployed. For example, the provisioning of
+workers depends on the capabilities exposed by the targeted DCI while
+one or more master can be deployed on a dedicated infrastructure, on the
+workstation of the user or directly on the DCI resources.
+\mtnote{<stub>} More liberal interpretations of the Master-Worker
+paradigm leads to deployments in which the distinctive line between
+master and workers is blurred.  \mtnote{</stub>}
 
-Also in this case, many capabilities are implementation and context dependent. For example, the provisioning or workers depends on the capabilities exposed by the targeted DCI while one or more master can be deployed on a dedicated infrastructure, on the workstation of the user or directly on the DCI resources.
+\mtnote{Expand the listing from implicit to explicit and add a cap about
+necessary and sufficient capabilities of a PJ}\\ Task and data binding,
+data retrieval from the workers, workers provisioning and master/worker
+communication are the defining capabilities of each \pilotjob framework.
+In the following two subsections, a minimal set of terms related to
+these capabilities is defined. The terms are sorted depending on the
+category of capability to which they belong. The end result is a
+coherent vocabulary that can be effectively adopted across multiple
+\pilotjob implementations. 
 
-Task and data binding, data retrieval from the workers, workers provisioning and master/worker communication are the defining capabilities of each \pilotjob framework. In the following two subsections, a minimal set of terms related to these capabilities is defined. The terms are sorted depending on the category of capability to which they belong. The end result is a coherent vocabulary that can be effectively adopted across multiple \pilotjob implementations. 
-
-Here a summary of the terms defined in the following subsections and the category of capabilities to which they belong.
+\mtnote{Expand by describing explicitly the shift from capabilities to
+terminology} Here a summary of the terms defined in the following
+subsections and the category of capabilities to which they belong.
 
 \begin{itemize}
   \item Execution of workloads:
