@@ -1324,7 +1324,7 @@ vocabulary.
  \hline
           BoSCO             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\ 
  \hline
-          BigJob             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\ 
+          BigJob             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Single              & --                     \\ 
  \hline
  \end{tabular}
  \caption{\textbf{Different pilot-job systems and their key. 
@@ -1769,12 +1769,9 @@ Coasters was designed to both usability and performance goals.
 \end{itemize}
 }
 
-BigJob is a Pilot-based framework which provides a higher-level, unifying interface to heterogeneous and/or distributed data and compute resources. The framework is accessed via the Pilot-API, which provides two key abstractions: Pilot-Job and Pilot-Data. BigJob eliminates the need to interact with different kinds of compute resources, for example, batch-style HPC\/HTC as well as cloud resources. In order to communicate with these resources, BigJob uses the Simple API for Grid Applications to submit a Pilot-Job to a variety of different backends -- including PBS, SGE, Condor, and SLURM.
+In the BigJob framework, a \pilot is, appropriately enough, called a \pilot. The BigJob \textit{manager} is called a \texit{\pilot Manager}, which is the central coordinator of the framework. The \pilot Manager is responsible for the orchestration and scheduling of \pilots. It runs locally on the machine used to run the distributed application. The manager ensures that tasks are launched onto the correct resource using the correct number of processes. When a \pilot is submitted to a remote resource's batch queueing system and becomes active, a \texit{\pilot Agent} on the remote resource gathers information about its resource and executes the actual tasks on said resource. Each resource has its own \pilot Agent. The communication between the Manager and Agent is achieved through the \texit{Distributed Coordination Service}, which is most often a database that stores information about jobs, information about the jobs (executable, input data, etc.), and job status. These functionalities comprise a set of baseline capabilities that constitute a \pilotjob.
 
-\textit{Pilot Manager} orchestrates a set of Pilots running on the submission machine. This is the central coordinator of the framework.
-\textit{Pilot Agent} is a decentralized component which manages the set of resources assigned to it.
-\textit{Distributed Coordination Service} is used for communication between the Manager and the Agents.
-
+BigJob extends the notion of a basic \pilotjob and offers user-level control of \pilot placement as well as late-binding capabilities of a \pilot to a remote resource. BigJob was designed to natively provide support for MPI jobs, as well as work on a variety of back-end systems by utilizing the Simple API for Grid Applications (SAGA) as its backend. BigJob has been extended to work with data and, similarly to \pilotjobs, abstract away direct user communication between different storage systems. This makes BigJob extensible to both cloud and heterogenous storage environments.
 
 \subsubsection{DIANE}
 
