@@ -237,35 +237,36 @@ resources to run jobs, one particular solution proposed is that of
 \pilotjobs are most commonly used for the execution of many tasks
 through the use of a container job. They are often measured by
 their throughput, that is, the number of tasks that they can complete
-per second (tps). As such, \pilotjobs are used to achieve
+per second (tps), or alternatively, by the total number of tasks
+executed. As such, \pilotjobs are used to achieve
 high-throughput, for example, when using genome sequencing techniques
 or ensemble-based applications. \pilotjobs have also been used for
 parameter sweeps, chained tasks, and loosely-coupled but distinct
 tasks. %note to self: cite these with papers
 
-\jhanote{melissa: in addition to tps the total number of tasks
-  executed is also an important consideration sometimes}
-
 Multi-scale simulations have also benefited from the use of
 \pilotjobs. A framework for load balancing via dynamic resource
 allocation for coupled multi-physics (MPI-based) simulations using
 \pilotjobs was demonstrated in Ref.~\cite{ko-efficient}.
-\jhanote{melissa: this sentence is awkward. please fix}in which more
-processors were assigned to jobs with longer runtimes, so as to make
-the simulation take the same amount of wall-clock time between points
-when they need to communicate with one another (via MPI).
+This was achieved by dynamically assigning more processors to
+jobs with longer runtimes, so that these jobs could accomplish their workload
+in the same amount of wall-clock time as those with shorter runtimes.
+This led to an overall reduction of jobs that were waiting to communicate
+via MPI, and an overall reduction of the total simulation runtime. 
 
 \jhanote{melissa: this paragraph needs major rewriting. unclear what
-  the message/aim is} Some simulations require varying number of tasks
-to complete -- that is, 10 tasks may start a program but the results
-of these tasks may spawn more tasks to complete. \pilotjobs can be
-utilized for these types of dynamic simulations, because once they are
-active, the agents have an available slot for executing tasks on a
-given number of cores. As more tasks are added to the system, the
-\pilot can continue to execute new tasks until the job is considered
-complete. Without \pilotjobs, these simulations would have to be
-resubmitted to the job queue and wait for their time to become active
-again~\cite{luckow2009adaptive}.
+  the message/aim is} \mrnote{Tried a rewrite...} 
+  
+\pilotjobs can be used for  simulations
+ with varying numbers of tasks to complete, for example,
+molecular dynamics simulations requiring task restart. These types of 
+ simulations may start with a fixed number of tasks but spawn 
+ more tasks in order to continue simulating. \pilotjobs can be
+utilized for these types of dynamic simulations, because 
+new tasks can be fed to the \pilot at any time within a given 
+runtime. Without \pilotjobs, these simulations would have to 
+be resubmitted to the batch queue and wait for their time
+to become active again~\cite{luckow2009adaptive}.
 
 \pilotjobs have also been used to avoid queue wait times for many jobs
 as well as harness and utilize different resources (with different
@@ -279,7 +280,7 @@ time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-
 In order to appreciate \pilotjobs, we outline the evolution of
 \pilot-like capabilities ultimately leading to the creation of the
 first actual \pilotjob. We present a brief chronological order of
-\pilotjob-like systems, beginning with simple Master-Worker
+\pilotjob-like systems, beginning with simple Master-Worker-based
 applications through advanced workload management systems.
 
 \jhanote{melissa: I don't think M-W should be referred to as
