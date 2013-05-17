@@ -870,7 +870,7 @@ such DCIs, jobs are scheduled and then executed by a batch system.
   uncomfortable with the implication that \pilotjobs are just
   implementation of M-W. I think the difference is more
   ``associative'' than ``causative'', or M-W as obvious, simple choice
-  than a necessary choice...}
+  than a necessary choice...}\alnote{+1}
 
 \jhanote{``execution model'' vs ``execution paradigm''. needs
   tightening and as alluded to consistent usage}
@@ -881,15 +881,23 @@ such DCIs, jobs are scheduled and then executed by a batch system.
 
 When executed by a batch system, a job needs to include also a job description specifying the configuration and execution parameters for the job's programs. Such a description has to be coded into a formal language that can be parsed by the batch system deployed within the targeted DCI.
 
+\alnote{I would distinguish between a scheduler and resource manager. A scheduler is the planning component of the resource management system.}
 The DCIs where \pilotjobs framework are deployed, often utilize a scheduler to manage job submitted by multiple users. The scheduler introduces temporal and spatial constraints on the execution of each job so to maximize the overall resource utilization, performance and allocation. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use.
 
 Finally, many of the DCIs where \pilotjob frameworks are commonly deployed leverage also a queuing system that allows for jobs to be submitted  when not enough resources are immediately available for their execution.
 
-\jhanote{we should put this before the definitions/explaination of
-  schedulars, batch and queuing} Schedulers, batch processing and queuing are relevant because they determine how a \pilotjob framework is deployed on a DCI. Specifically, in the type of DCIs just described, every worker of the \pilotjob framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces execution delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes to deploy all the workers non interactively. 
+\jhanote{we should put this before the definitions/explaination of schedulars, batch and queuing} Schedulers,
+batch processing and queuing are relevant because they determine how a \pilotjob framework is deployed on a
+DCI. Specifically, in the type of DCIs just described, every worker of the \pilotjob framework is a job on the
+DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the
+workers of a \pilotjob framework can be deployed.\alnote{I am struggling a bit with the term deployment for
+allocating resources and executing the agent on these....} Queuing introduces execution delays, scheduling
+imposes limits on for how long a worker can be available to its master and on how many resources can consume,
+while batch processing imposes to deploy all the workers non interactively.
 
 \begin{description}
-  \item[Provisioning.] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.
+
+  \item[Provisioning.] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.	\alnote{What is the difference between provisioning and deployment?}
 \end{description}
 
 Cloud-based DCIs introduce notable exceptions and differences in the way in which the workers of a \pilotjob framework can be deployed.[cit, cit] Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used to deploy workers. VMs can often be instantiated without waiting into a queue, and limitations on the execution time of a VM can be virtually absent. Clearly, overheads are introduced by having to deal with VMs and not simple jobs and the model adopted within a IaaS-based DCI to assign resources to each VM can affect the flexibility of the whole \pilotjob framework.[cit] A similar assessment could be done for a DCI deploying a PaaS model of cloud computing.[cit]
