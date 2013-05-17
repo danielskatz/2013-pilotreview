@@ -858,7 +858,22 @@ Both `job' and `pilot' needs to be understood in the context of DCIs,  the infra
 
 \subsubsection{Deployment of the pilot machinery}
 
-In order for a \pilotjob framework to implement a Master-Worker execution paradigm, workers needs to be provisioned on the targeted DCI(s). This is done through the capabilities that a DCI exposes to allow for accessing and consuming its resources. As seen in \S 2, most of the DCIs where \pilotjobs frameworks are deployed adopt an execution model based on `jobs', `schedulers' and `batch systems'. In such DCIs, jobs are scheduled and then executed by a batch system.
+In order for a \pilotjob framework to implement a Master-Worker
+execution paradigm, workers needs to be provisioned on the targeted
+DCI(s). This is done through the capabilities that a DCI exposes to
+allow for accessing and consuming its resources. As seen in \S 2, most
+of the DCIs where \pilotjobs frameworks are deployed adopt an
+execution model based on `jobs', `schedulers' and `batch systems'. In
+such DCIs, jobs are scheduled and then executed by a batch system.
+
+\jhanote{I know the onus is on me to say/be specific, but I somehow am
+  uncomfortable with the implication that \pilotjobs are just
+  implementation of M-W. I think the difference is more
+  ``associative'' than ``causative'', or M-W as obvious, simple choice
+  than a necessary choice...}
+
+\jhanote{``execution model'' vs ``execution paradigm''. needs
+  tightening and as alluded to consistent usage}
 
 \begin{description}
   \item[Job.] One or more program executed on a given set of computing resources either directly by a user or indirectly by batch system.
@@ -870,7 +885,8 @@ The DCIs where \pilotjobs framework are deployed, often utilize a scheduler to m
 
 Finally, many of the DCIs where \pilotjob frameworks are commonly deployed leverage also a queuing system that allows for jobs to be submitted  when not enough resources are immediately available for their execution.
 
-Schedulers, batch processing and queuing are relevant because they determine how a \pilotjob framework is deployed on a DCI. Specifically, in the type of DCIs just described, every worker of the \pilotjob framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces execution delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes to deploy all the workers non interactively. 
+\jhanote{we should put this before the definitions/explaination of
+  schedulars, batch and queuing} Schedulers, batch processing and queuing are relevant because they determine how a \pilotjob framework is deployed on a DCI. Specifically, in the type of DCIs just described, every worker of the \pilotjob framework is a job on the DCI. When present, queuing, scheduling or batch processing define the practical boundaries for how and when the workers of a \pilotjob framework can be deployed. Queuing introduces execution delays, scheduling imposes limits on for how long a worker can be available to its master and on how many resources can consume, while batch processing imposes to deploy all the workers non interactively. 
 
 \begin{description}
   \item[Provisioning.] Leveraging the capabilities offered by a DCI to execute one or more workers implemented in accordance to a Master-Worker execution model.
