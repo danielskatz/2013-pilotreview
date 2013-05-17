@@ -749,10 +749,19 @@ functionalities and the common vocabulary are eventually leveraged in
 \mtnote{possibly add a cap}\\ The functionalities of each \pilotjob
 framework can be broadly divided into two categories: One related to the
 execution of workloads the other to the deployment of the framework
-itself. 
+itself.  
 
-\jhanote{PJs enable decoupling between assigning a workload from 
-  the spatial/temporal execution properties of its execution}
+\jhanote{I understand the spirit/intent of the above and I agree with
+  the separation (in fact it is very useful), however calling the
+  deployment of the framework itself a functionality of the framework
+  is somewhat circular (i understand the appeal of circular logic is
+  that it has no loose ends :) however we should still fix.. )}
+
+\jhanote{I think all the functionality of PJs is predicated on the
+  following core capability: enable the decoupling between assigning a
+  workload from the spatial/temporal execution properties of its
+  execution. Should this get mentioned somewhere in core
+  functionality?}
 
 \pilotjobs leverage a Master-Worker paradigm [ref] for the execution
 of workloads. In such a paradigm, every given workload is reduced into
