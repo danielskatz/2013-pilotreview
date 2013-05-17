@@ -708,12 +708,37 @@ AMGA.
 \label{sec:vocab}
 \mtnote{MT/AZ/OW}
 
-\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and  I doubt that it will be particularly useful to the reader. I think it would make sense  to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to  all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the 'building block' side), consisting of 'agents' and 'managers' at all? After all, PJs are 'just' an instance of  Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}
-\mtnote{Thank you Ole! Here a fairly revised version of the Section that tries to address the points you made.}
+\onote{This section tries to define everything from concepts (e.g.,
+  multi-level-scheduling) to specific architectural components
+  (agents, manager). It's hard to parse and I doubt that it will be
+  particularly useful to the reader. I think it would make sense to
+  have a stricter distinction (e.g., by using sub-sections) between
+  concepts (late-binding, early-binding, multi-level) and
+  architectural building blocks that are common to all PJ-Systems. On
+  that note: why are we trying to come up with this arbitrary
+  vocabulary (on the 'building block' side), consisting of 'agents'
+  and 'managers' at all? After all, PJs are 'just' an instance of
+  Master-Worker with specific properties, capabilities and operating
+  in a specific environment. I think shooting from that angle (at
+  least making an attempt to) might help to introduce more clarity. I
+  think this would be more intuitive from a reader's perspective. And
+  after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you
+  Ole! Here a fairly revised version of the Section that tries to
+  address the points you made.}
 
-The overview offered in \S 2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same term referring to multiple concepts or the same concept named in different ways. 
+The overview offered in \S 2 shows a degree of heterogeneity both in
+the functionalities of \pilotjobs and in the vocabulary adopted by
+their different implementations. Implementation details tend to hide
+the functional commonalities and differences among \pilotjobs
+frameworks while features and capabilities are named inconsistently,
+often with the same term referring to multiple concepts or the same
+concept named in different ways.
 
-This section offers a minimal description of the functionalities that characterize the \pilotjob paradigm while fixing a common vocabulary by means of a set of definitions. Both the description of functionalities and the common vocabulary are eventually leveraged in \S 4 to produce a comparative analysis of \pilotjobs frameworks.
+This section offers a minimal description of the functionalities that
+characterize the \pilotjob paradigm while fixing a common vocabulary
+by means of a set of definitions. Both the description of
+functionalities and the common vocabulary are eventually leveraged in
+\S 4 to produce a comparative analysis of \pilotjobs frameworks.
 
 % \mtnote{How we define the common vocabulary.}
 % \mtnote{Similarities/peculiarities among BJ implementations: potential topic to be discussed in Section 4?}
@@ -726,28 +751,39 @@ framework can be broadly divided into two categories: One related to the
 execution of workloads the other to the deployment of the framework
 itself. 
 
-\pilotjobs leverage a Master-Worker paradigm [ref] for the execution of
-workloads. In such a paradigm, every given workload is reduced into
+\jhanote{PJs enable decoupling between assigning a workload from 
+  the spatial/temporal execution properties of its execution}
+
+\pilotjobs leverage a Master-Worker paradigm [ref] for the execution
+of workloads. In such a paradigm, every given workload is reduced into
 tasks and each task, alongside the data needed for its execution, is
 bound by a master to one or more workers. Once the tasks have been
-executed, each worker makes available the results of the computation to
-the master. \pilotjob frameworks implement the Master-Worker and are
-typically deployed within Distributed Computing Infrastructures (DCIs)
-like, for example, Grids, Clouds or HPC facilities. Implementation and
-configuration details varies considerably but each deployment of a
-\pilotjob framework depends at least on: (i) The provisioning of the
-workers on the resources of the targeted DCI, and (ii) the establishing
-of one or more communication channels between a Master and its workers.
+executed, each worker makes available the results of the computation
+to the master. \pilotjob frameworks implement the Master-Worker
+\jhanote{I would say utilize the M-W coordination/communication
+  paradigm} and are typically deployed within Distributed Computing
+Infrastructures (DCIs) like, for example, Grids, Clouds or HPC
+facilities. As the specifics of these DCI are different, not
+suprisingly, these differences permeate into differences in the
+\pilotjobs themselves, but in addition to that there are reasons why
+\pilotjobs differ in their design and implementation.
+
+The implementation and configuration details vary considerably but
+each deployment of a \pilotjob framework depends at least on: (i) The
+provisioning of the workers on the resources of the targeted DCI, and
+(ii) the establishing of one or more communication channels between a
+Master and its workers.
 
 \mtnote{Extend including not only extension of the paradigm but also
-different ways to implementing it}\\ Task and data binding alongside
-data retrieval are the distinguishing capabilities of a Master-Worker
-execution paradigm but each \pilotjob framework can extend such a
-paradigm with specific functionalities. For example, \pilotjob
-frameworks can offer one or more strategy to aggregate the output of
-each task; interdependent tasks may be performed thanks to workers
-capable of direct communication; and tasks can be staged into pools so
-to improve efficiency and overall throughput. 
+  different ways to implementing it}\\
+Task and data binding alongside data retrieval are the distinguishing
+capabilities of a Master-Worker execution paradigm but each \pilotjob
+framework can extend such a paradigm with specific
+functionalities. For example, \pilotjob frameworks can offer one or
+more strategy to aggregate the output of each task; interdependent
+tasks may be performed thanks to workers capable of direct
+communication; and tasks can be staged into pools so to improve
+efficiency and overall throughput.
 
 The same flexibility and variety of implementations is found in how
 \pilotjob frameworks are deployed. For example, the provisioning of
@@ -758,15 +794,23 @@ workstation of the user or directly on the DCI resources.
 paradigm leads to deployments in which the distinctive line between
 master and workers is blurred.  \mtnote{</stub>}
 
-\mtnote{Expand the listing from implicit to explicit and add a cap about
-necessary and sufficient capabilities of a PJ}\\ Task and data binding,
-data retrieval from the workers, workers provisioning and master/worker
-communication are the defining capabilities of each \pilotjob framework.
-In the following two subsections, a minimal set of terms related to
-these capabilities is defined. The terms are sorted depending on the
-category of capability to which they belong. The end result is a
-coherent vocabulary that can be effectively adopted across multiple
-\pilotjob implementations. 
+\mtnote{Expand the listing from implicit to explicit and add a cap
+  about
+  necessary and sufficient capabilities of a PJ}\\
+Task and data binding, data retrieval from the workers, workers
+provisioning and master/worker communication are the defining
+capabilities of each \pilotjob framework.  In the following two
+subsections, a minimal set of terms related to these capabilities is
+defined. The terms are sorted depending on the category of capability
+to which they belong. The end result is a coherent vocabulary that can
+be effectively adopted across multiple \pilotjob implementations.
+
+\jhanote{Let me see if I get this right: M-W has 3 distinguishing
+  capabilities, and PJ's 4? Either way I think we need
+  consistency/discussion on whether we call M-W execution paradigm or
+  a control/communication paradigm?}
+
+
 
 \mtnote{Expand by describing explicitly the shift from capabilities to
 terminology} Here a summary of the terms defined in the following
