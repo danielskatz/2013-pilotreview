@@ -1480,7 +1480,6 @@ schedules to account for changes in performance predictions.
 \aznote{Previous sentence to satisfy request for \pilotjob
 domain usage}
 
-
 %% \aznote{Lack of multi-level scheduling asserted because even
 %% though AppLeS allows for application-level scheduling,
 %% it is still submitted to usual resource manager queues, not an internal
@@ -1498,9 +1497,6 @@ it's ``late binding''.  So that is what I will go with.}
 
 %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
 %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
-
-\aznote{Not sure if we should term the AppLeS agent a ``manager'', since we have
-defined manager with full Pilot-Job syntax}
 
 % -----------------------------------------------------------------------------
 %
@@ -1552,25 +1548,37 @@ defined manager with full Pilot-Job syntax}
 
 MyCluster is a \textit{basic \pilotjob system} which is a direct
 abstraction of cluster-based distributed computing systems.
-The stated goal of the project is to 
-``build personal [...] clusters on demand''
-\aznote{from webpage} and in doing so
-inadvertantly implements \pilotjob functionality to accomplish
-its aims..
+%% The stated goal of the project is to 
+%% ``build personal [...] clusters on demand''
+%% \aznote{from webpage} and in doing so
+%% inadvertantly implements \pilotjob functionality to accomplish
+%% its aims.
+The authors describe their system
+as a ``personal cluster'' with the goal of achieving on-demand,
+user-schedulable computational resources aligning closely with what is
+provided by our more formal definition of \pilotjobs.
 
 MyCluster implements several \pilotjob analogues: the \texttt{Master
   Node Manager}, which acts as a \textit{\pilotjob Manager}, the
 \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
-\texttt{Job Proxies}, which act as \textit{\pilotjobs}, and
+\texttt{Job Proxies}, which act as \textit{placeholders}, and
 \texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob
-  \cus}.
-
-The end result is a complete \textit{basic \pilotjob system}, despite the
+  \cus}.  The end result is a complete \textit{basic \pilotjob system}, despite the
 authors of the system being constructed not having used the word ``pilot''
-once!~\cite{1652061}  The authors describing their system
-as a ``personal cluster'' with the goal of achieving on-demand,
-user-schedulable computational resources aligning closely with what is
-provided with our more formal definition of \pilotjobs.
+once!~\cite{1652061}
+
+Additional features above and beyond the \textit{basic \pilotjob system}
+concept include: the concept of a \texttt{virtual login session}, which
+is commandline interface designed to allow users to interactively
+monitor the status of their \textit{placeholders} and \textit{\cus};
+the automatic recovery of placeholders after loss due to exceeding wallclock
+limitations or node reboots; and authentication of all TCP
+connections used in the system via 64-bit key encryption and
+GSI authentication mechanisms.
+
+MyCluster was designed for and successfully executed on NSF TeraGrid
+resources, enabling large-scale cross-site submission of ensemble
+job submissions.
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
