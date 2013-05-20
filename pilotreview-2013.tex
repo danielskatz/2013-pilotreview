@@ -1639,8 +1639,11 @@ PanDA's \textit{\pilot}
 is called, appropriately enough, a \texttt{pilot}, and handles the execution
 environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
 which also monitors the status of pilots.
+Pilot resource provisioning is handled by PanDA itself and is not 
+user-controllable, whereas the job-to-resource bindings are handled
+manually by users.
 This basic functionality (pilot creation and management) provides 
-PanDA with all of the baseline capabilities required for a \pilotjob.  
+PanDA with all of the baseline capabilities required for a \pilotjob.
 
 As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
@@ -1653,8 +1656,12 @@ allows for additional, automatic data
 management by replicating popular input data to underutilized resources
 for later computations.
 
-\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
-work for this, or is this out-of scope?}
+PanDA was developed to provide a \pilotjob system for ATLAS which could
+handle large numbers of data-driven processing workloads.  Having proven itself
+capable in this role, it has also been used for other projects such
+as the Open Science Grid.
+%\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
+%work for this, or is this out-of scope?}
 
 
 %% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
