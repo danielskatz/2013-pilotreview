@@ -1390,7 +1390,7 @@ vocabulary.
   \hline
   \textbf{Pilot-Job System} &\textbf{Pilot (Resource) Provisioning}    &\textbf{Job-to-Resource (Pilot) Binding}  &\textbf{Single-/Multi-User Pilots} &\textbf{Classifier IV}  \\
   \hline
-          AppLeS            & --                                       & Automatic (algorithmic/profiling)  & Single (?) & --                     \\ 
+          AppLeS            & N/A                                      & Automatic (algorithmic/profiling)  & Single (?) & --                     \\ 
   \hline
           MyCluster         & Manual, Explicitly User-controllable     & Manual                             & Single (?)                  & --                     \\ 
   \hline
@@ -1456,6 +1456,7 @@ per-application \texttt{AppleS agent}.
 An \texttt{AppLeS agent} roughly handles the \pilotjob functionality contained in
 \textit{\pilotjob agents} and \textit{managers}.  This includes resource
 selection, scheduling tasks to resources, and managing application execution.
+Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
 %.  In addition, an incomplete subset of
 %\pilotjob functionality such as application-scheduling is present in AppLeS.
 AppleS also contains features not fundamental to the Pilot-Job paradigm, such
@@ -1563,9 +1564,11 @@ MyCluster implements several \pilotjob analogues: the \texttt{Master
 \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
 \texttt{Job Proxies}, which act as \textit{placeholders}, and
 \texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob
-  \cus}.  The end result is a complete \textit{basic \pilotjob system}, despite the
+  \cus}.  Both resource provisioning and job-to-resource \textit{bindings}
+are handled manually by the end user.
+The end result is a complete \textit{basic \pilotjob system}, despite the
 authors of the system being constructed not having used the word ``pilot''
-once!~\cite{1652061}
+once!~\cite{1652061}  
 
 Additional features above and beyond the \textit{basic \pilotjob system}
 concept include: the concept of a \texttt{virtual login session}, which
@@ -1639,8 +1642,11 @@ PanDA's \textit{\pilot}
 is called, appropriately enough, a \texttt{pilot}, and handles the execution
 environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
 which also monitors the status of pilots.
+Pilot-resource \textit{provisioning} is handled by PanDA itself and is not 
+user-controllable, whereas job-to-resource \textit{binding} is handled
+manually by users.
 This basic functionality (pilot creation and management) provides 
-PanDA with all of the baseline capabilities required for a \pilotjob.  
+PanDA with all of the baseline capabilities required for a \pilotjob.
 
 As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
@@ -1653,8 +1659,12 @@ allows for additional, automatic data
 management by replicating popular input data to underutilized resources
 for later computations.
 
-\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
-work for this, or is this out-of scope?}
+PanDA was developed to provide a \pilotjob system for ATLAS which could
+handle large numbers of data-driven processing workloads.  Having proven itself
+capable in this role, it has also been used for other projects such
+as the Open Science Grid.
+%\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
+%work for this, or is this out-of scope?}
 
 
 %% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
