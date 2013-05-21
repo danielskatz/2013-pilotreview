@@ -151,7 +151,7 @@
 \section{Introduction} 
 
 \jhanote{Please use macros! e.g., for consistency between PJ sytems
-  and \pilot systems and \pilotjob systems}
+  and \pilot systems and \pilotjob systems. similarly for M-W}
 
 \jhanote{Generally not good style to begin new subsection immediately
   after section starting}
@@ -254,9 +254,6 @@ in the same amount of wall-clock time as those with shorter runtimes.
 This led to an overall reduction of jobs that were waiting to communicate
 via MPI, and an overall reduction of the total simulation runtime. 
 
-\jhanote{melissa: this paragraph needs major rewriting. unclear what
-  the message/aim is} \mrnote{Tried a rewrite...} 
-  
 \pilotjobs can be used for  simulations
  with varying numbers of tasks to complete, for example,
 molecular dynamics simulations requiring task restart. These types of 
@@ -282,10 +279,6 @@ In order to appreciate \pilotjobs, we outline the evolution of
 first actual \pilotjob. We present a brief chronological order of
 \pilotjob-like systems, beginning with simple Master-Worker-based
 applications through advanced workload management systems.
-
-\jhanote{melissa: I don't think M-W should be referred to as
-  applications; possibly M-W based applications. Also please make use
-  of M-W consistent}
 
 \subsubsection*{The Evolution of \pilotjobs} 
 
@@ -408,14 +401,15 @@ architecture of each \pilotjob system.
   further criteria... Also, it is important to note that not all
   criteria are used for every \pilotjob system}
 
+
 \jhanote{Andre L: these need elaboration and explanation. A possible
   consideration might be whether to remove bullet points and use
-  regular prose}
+  regular prose}\alnote{work in progress}
 
 
 \emph{Functional Features:}
 The functional criteria describe the capabilities of the \pilotjob system: (i)
-(i) What use cases? What applications types and usage modes are supported
+What use cases are targeted by the PJ system? What applications types and usage modes are supported
 (MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
 provided to the developer: API, CLI, web service, web portal?, (iii) Does the
 \pilotjob system support distribution?, (iv) Are there any higher-level tools
@@ -425,6 +419,21 @@ infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
 provide interoperability support? and (vii) does the framework support 
 advanced workload management capabilities (e.g. the automatic provisioning 
 of \pilots).
+
+% =======
+% \emph{Functional Features:} The functional criteria describe the
+% capabilities of the \pilotjob system: (i) What use cases? What
+% applications types and usage modes are supported (MPI, ensembles,
+% workflows)?, (ii) What abstraction and user interface is provided to
+% the developer: API, CLI, web service, web portal?, (iii) Does the
+% \pilotjob system support distribution?, (iv) Are there any
+% higher-level tools available for \pilotjob system (e.g. workflow
+% systems, data analysis systems)?, (v) Does the \pilotjob system
+% support data?, (vi) What types of infrastructure are supported (HTC,
+% HPC, cloud)? Does the \pilotjob system provide interoperability
+% support? and (vii) does the framework support advanced workload
+% management capabilities (e.g. the automatic provisioning of \pilots).
+% >>>>>>> 2a28d5db65ad725dca738b6c953398b67cedfdee
 
 \emph{Non-Functional Features:} Non-functional features describe the characteristics and behavior of a
 \pilotjob system and are not directly related to a specific function or
@@ -468,10 +477,13 @@ components/services?
           systems that offer resource management capabilities based on
           \pilots and (iii) applications, tools and services that
           utilize \pilots for resource management. \jhanote{we should
-            change the ``higher-level pilot-based frameworks'' to
-            ``higher-level frameworks that can use pilot-jobs''.}}
-        \alnote{mention that these layers are not cleanly separated:
-          Pegasus is constraint to a single PJ system (Corral)}
+            make the three levels of the diagram consistent with the
+            three categories, ``core PJ'' , ``advanced PJ'' and
+            ``higher-level PJs'' . Also earlier comment about adding
+            ``higher-level pilot-based frameworks'' to ``higher-level
+            frameworks that can use pilot-jobs''.}}  \alnote{mention
+          that these layers are not cleanly separated: Pegasus is
+          constraint to a single PJ system (Corral)}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -1308,18 +1320,24 @@ execution.
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
-Despite the apparent diversity in existing Pilot-Jobs,
+Despite the apparent diversity in existing \pilotjobs,
 they can be reduced to a set of common functionality and
-discussed as such.  This reduction has implications
-for the interoperability of existing and future Pilot-Jobs, and
-lends insight into application design to enhance job/data(?)
-mobility, management, and potential run-time responsiveness via
-late-binding/etc.  We will see that throughout the evolution
-of the Pilot-Job concept, several core concepts have remained stable
+discussed as such via use of the the terminology presented
+in \S\ref{sec:vocab}.
+%has implications
+%for the interoperability of existing and future \pilotjobs, and
+%lends insight into the design and usage of \pilotjob systems.
+% application design to enhance job/data(?)
+%mobility, management, and potential run-time responsiveness via
+%late-binding/etc.  
+We will see that throughout the evolution
+of the \pilotjob concept, several core concepts have remained stable
 while new additions enhance cross-platform interoperability,
-ease of usage and deployment, and add the ability to
-schedule data as well as jobs. \aznote{Check this
-sentence later to make sure it is not overreaching}
+ease of usage and deployment, and incorporate the ability to
+schedule data as well as jobs.   These additions illustrate
+the flexibility and power of \pilotjobs, and emphasize the
+need for a common vocabulary/treatment to describe the
+developing landscape.
 
 \jhanote{Ashley to ``finish'': AppLeS, MyCluster and PANDA: Ole to
   finish Glide-in, Corral and Bosco: Mark to finish DIANE,
@@ -1328,38 +1346,37 @@ sentence later to make sure it is not overreaching}
 \aznote{Should we organize this section in order of when the PJ-systems
 were released?}
 
-\subsection{Comparing Pilot-Jobs via a Common Framework \& Vocabulary}
-\aznote{Ashley's section}
-
+\subsection{Comparing \pilotjobs via a Common Framework \& Vocabulary}
+\aznote{Suggest removing the subsection header; making individual
+pilotjobs into subsections instead?  Unless we decide to include
+another subsection in here -- but in that case, do not want to overlap
+with the conclusion}
 In light of the common vocabulary discussion in 
-Section~\ref{sec:vocab}, a representative set of Pilot-Jobs
+\S\ref{sec:vocab}, a representative set of \pilotjobs
 has been chosen for further analysis.  
 
-\aznote{Two approaches here:  this is the first}
-
-Each Pilot-Job is from a respective categorization from
-Section~\ref{sec:survey}.  Examining each of these Pilot-Jobs via a
+At least one \pilotjob from each categorization in
+\S\ref{sec:survey} is analyzed via a common
+vocabulary, allowing for a standard
+``baseline'' of each \pilotjob categorization to be
+examined.  Examining these \pilotjobs via a
 common vocabulary exposes their core similarities, and allows a
 detailed analysis of their differences.
 
-\aznote{And the second potential approach}
-Representative Pilot-Jobs from each Pilot-Job category
-in Section~\ref{sec:survey} are chosen and compared within
-the bounds of that category, illustrating the core similarities
-between the Pilot-Jobs in a given category.
+%Representative \pilotjobs from each \pilotjob category
+%in Section~\ref{sec:survey} are chosen and compared within
+%the bounds of that category, illustrating the core similarities
+%between the Pilot-Jobs in a given category.
 
-\aznote{Either approach requires the best ``representative PJs''
-  to be chosen.  This is more important if we pick just one of
-  each, of course...}
-
-Finally, we perform
+\textit{Finally, we perform
 a cross-cutting analysis, demonstrating that across the categorical
-distinctions all approaches remain true ``Pilot-Jobs'' with regard
+distinctions all approaches remain true ``\pilotjobs'' with regard
 to their base functionality.  The segmentation between categories
-is exposed to reveal why Pilot-Jobs have evolved to have
+is exposed to reveal why \pilotjobs have evolved to have
 differing capabilities, with the end-goal being a
-complete understanding of the Pilot-Job ecosystem via a common
-vocabulary.
+complete understanding of the \pilotjob ecosystem via a common
+vocabulary.}
+\aznote{Maybe this is better-suited for the conclusion?}
 
 %\subsubsection{Condor-G}
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
@@ -1457,7 +1474,7 @@ vocabulary.
 \end{itemize}
 }
 
-AppLeS is a framework which allows software built using it to take advantage
+AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection capabilities.
 With AppLeS, application-level scheduling and resource selection are handled by a
 per-application \texttt{AppleS agent}.
@@ -1470,7 +1487,7 @@ selection, scheduling tasks to resources, and managing application execution.
 Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
 %.  In addition, an incomplete subset of
 %\pilotjob functionality such as application-scheduling is present in AppLeS.
-AppleS also contains features not fundamental to the Pilot-Job paradigm, such
+AppleS also contains features not fundamental to the \pilotjob paradigm, such
 as resource discovery via Grid resource discovery services and peformance
 modelling for resource selection.  The entire package thereby reduces the
 complexity of assigning tasks to resources from the user's point of view
@@ -1480,7 +1497,7 @@ The lack of a \textit{placeholder job} limits the functionality
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
-is not a ``true'' \pilotjob system, as a placeholder
+is not a ``true'' \pilotjob system, as a \textit{placeholder}
 is required to enable fundamental \pilotjob functionality such as
 \textit{multi-level scheduling.}
 However, AppLeS has still been used to choose destinations
@@ -1491,6 +1508,12 @@ analyze biochemical interactions while dynamically recreating
 schedules to account for changes in performance predictions.
 \aznote{Previous sentence to satisfy request for \pilotjob
 domain usage}
+\aznote{Should I put something here like 
+``AppLeS has been successful in these domains due in part
+to the usefulness of the M-W paradigm which \pilotjobs
+are based on, but the following ``True'' \pilotjobs
+illustrate the extended reach/power made available
+through a proper \pilotjob approach''?}
 
 %% \aznote{Lack of multi-level scheduling asserted because even
 %% though AppLeS allows for application-level scheduling,
@@ -1582,7 +1605,8 @@ authors of the system being constructed not having used the word ``pilot''
 once!~\cite{1652061}  
 
 Additional features above and beyond the \textit{basic \pilotjob system}
-concept include: the concept of a \texttt{virtual login session}, which
+concept include: the inclusion of a MyCluster
+\texttt{virtual login session}, which
 is commandline interface designed to allow users to interactively
 monitor the status of their \textit{placeholders} and \textit{\cus};
 the automatic recovery of placeholders after loss due to exceeding wallclock
@@ -1592,7 +1616,12 @@ GSI authentication mechanisms.
 
 MyCluster was designed for and successfully executed on NSF TeraGrid
 resources, enabling large-scale cross-site submission of ensemble
-job submissions.
+job submissions via its virtualized cluster interface.  
+This approach makes the \textit{multi-level scheduling} abilities
+of \pilotjobs explicit; rather than directly \textit{binding}
+to individual TeraGrid resources, users allow the virtual grid
+overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
+as a whole.
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
@@ -1673,7 +1702,10 @@ for later computations.
 PanDA was developed to provide a \pilotjob system for ATLAS which could
 handle large numbers of data-driven processing workloads.  Having proven itself
 capable in this role, it has also been used for other projects such
-as the Open Science Grid.
+as the Open Science Grid.  This illustrates the importance of designing
+\pilotjobs which are easily adaptable such that \pilots are not tied
+to any particular DCI; in this manner, their advantages can be made
+available beyond their original design scope.
 %\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
 %work for this, or is this out-of scope?}
 
