@@ -151,7 +151,7 @@
 \section{Introduction} 
 
 \jhanote{Please use macros! e.g., for consistency between PJ sytems
-  and \pilot systems and \pilotjob systems}
+  and \pilot systems and \pilotjob systems. similarly for M-W}
 
 \jhanote{Generally not good style to begin new subsection immediately
   after section starting}
@@ -254,9 +254,6 @@ in the same amount of wall-clock time as those with shorter runtimes.
 This led to an overall reduction of jobs that were waiting to communicate
 via MPI, and an overall reduction of the total simulation runtime. 
 
-\jhanote{melissa: this paragraph needs major rewriting. unclear what
-  the message/aim is} \mrnote{Tried a rewrite...} 
-  
 \pilotjobs can be used for  simulations
  with varying numbers of tasks to complete, for example,
 molecular dynamics simulations requiring task restart. These types of 
@@ -282,10 +279,6 @@ In order to appreciate \pilotjobs, we outline the evolution of
 first actual \pilotjob. We present a brief chronological order of
 \pilotjob-like systems, beginning with simple Master-Worker-based
 applications through advanced workload management systems.
-
-\jhanote{melissa: I don't think M-W should be referred to as
-  applications; possibly M-W based applications. Also please make use
-  of M-W consistent}
 
 \subsubsection*{The Evolution of \pilotjobs} 
 
@@ -408,14 +401,15 @@ architecture of each \pilotjob system.
   further criteria... Also, it is important to note that not all
   criteria are used for every \pilotjob system}
 
+
 \jhanote{Andre L: these need elaboration and explanation. A possible
   consideration might be whether to remove bullet points and use
-  regular prose}
+  regular prose}\alnote{work in progress}
 
 
 \emph{Functional Features:}
 The functional criteria describe the capabilities of the \pilotjob system: (i)
-(i) What use cases? What applications types and usage modes are supported
+What use cases are targeted by the PJ system? What applications types and usage modes are supported
 (MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
 provided to the developer: API, CLI, web service, web portal?, (iii) Does the
 \pilotjob system support distribution?, (iv) Are there any higher-level tools
@@ -425,6 +419,21 @@ infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
 provide interoperability support? and (vii) does the framework support 
 advanced workload management capabilities (e.g. the automatic provisioning 
 of \pilots).
+
+% =======
+% \emph{Functional Features:} The functional criteria describe the
+% capabilities of the \pilotjob system: (i) What use cases? What
+% applications types and usage modes are supported (MPI, ensembles,
+% workflows)?, (ii) What abstraction and user interface is provided to
+% the developer: API, CLI, web service, web portal?, (iii) Does the
+% \pilotjob system support distribution?, (iv) Are there any
+% higher-level tools available for \pilotjob system (e.g. workflow
+% systems, data analysis systems)?, (v) Does the \pilotjob system
+% support data?, (vi) What types of infrastructure are supported (HTC,
+% HPC, cloud)? Does the \pilotjob system provide interoperability
+% support? and (vii) does the framework support advanced workload
+% management capabilities (e.g. the automatic provisioning of \pilots).
+% >>>>>>> 2a28d5db65ad725dca738b6c953398b67cedfdee
 
 \emph{Non-Functional Features:} Non-functional features describe the characteristics and behavior of a
 \pilotjob system and are not directly related to a specific function or
@@ -468,10 +477,13 @@ components/services?
           systems that offer resource management capabilities based on
           \pilots and (iii) applications, tools and services that
           utilize \pilots for resource management. \jhanote{we should
-            change the ``higher-level pilot-based frameworks'' to
-            ``higher-level frameworks that can use pilot-jobs''.}}
-        \alnote{mention that these layers are not cleanly separated:
-          Pegasus is constraint to a single PJ system (Corral)}
+            make the three levels of the diagram consistent with the
+            three categories, ``core PJ'' , ``advanced PJ'' and
+            ``higher-level PJs'' . Also earlier comment about adding
+            ``higher-level pilot-based frameworks'' to ``higher-level
+            frameworks that can use pilot-jobs''.}}  \alnote{mention
+          that these layers are not cleanly separated: Pegasus is
+          constraint to a single PJ system (Corral)}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -748,36 +760,45 @@ functionalities and the common vocabulary are eventually leveraged in
 
 \subsection{Core Functionalities of \pilotjobs}
 
-\mtnote{possibly add a cap}\\ The functionalities of each \pilotjob
-framework can be broadly divided into two categories: One related to the
-execution of workloads the other to the deployment of the framework
-itself.  
+All the \pilotjob systems described in \S2 are engineered to allow for the execution of workloads on Distributed Computing Resources (DCIs) such as, for example, Grids, Clouds or HPC facilities. This is achieved differently, depending on use cases, design and implementation choices and on the constraints imposed by the peculiarities of the targeted DCIs. Finding common denominators among these systems require an analysis on multiple dimensions.
 
-\jhanote{I understand the spirit/intent of the above and I agree with
-  the separation (in fact it is very useful), however calling the
-  deployment of the framework itself a functionality of the framework
-  is somewhat circular (i understand the appeal of circular logic is
-  that it has no loose ends :) however we should still fix.. )}
+\pilotjobs can be analyzed and compared by looking at their architectural, deployment and workload execution characteristics. Each of these aspects involves specific properties and functionalities, some peculiar to a given \pilotjob system, others related to the \pilotjob paradigm itself. The latter are what distinguish \pilotjobs from other types of distributed systems. Isolating them means to find the common denominators among every \pilotjob system.
+
+At an high level of abstraction, all the \pilotjob systems introduced in \S2 leverages an architecture based on two separate but intercommunicating logical components: one related to the management of a workload and its tasks, the other to the execution of the tasks on the targeted resources. As it will be explained in \S4, the implementations of these two components greatly varies from system to system with one or more elements responsible for specific functionalities both at application or infrastructure level. Nonetheless, the two architectural components can be distinguished across all the \pilotjob systems. 
+
+For example, looking at the core \pilotjob systems introduced in \S2.2.2, the scheduler and dispatcher of Nimrod-G belong to the architectural component dedicated to workload management while the job-wrapper belong to that relative to the execution of tasks. Similar examples can be given for the advanced \pilotjob systems and for the Pilot-Based frameworks. GlideinWMS offers an extended set of capabilities when compared to the scheduler and dispatcher of Nimrod-G but all of them belong to the same, well-defined and self-contained architectural component. The same is valid for Corral or SWIFT. They both offer evolved functionalities and interfaces form managing workloads but, as such, they both are part of an architecture where workload management and task execution belongs to two distinct and intercommunicating components.
+
+It is worth noting that the \MW paradigm can be considered a further specification of the architectural features here described. A Master can be  identified with the architectural component concerning workload management while the Worker with the one concerning the execution of the workload's tasks. However, the \MW paradigm usually implies a specific distribution of capabilities between Master and Worker, and, in some cases, also a specific communication model between the two. On the contrary, the common traits among \pilotjob architectures are agnostic about the feature amount and distribution and does not impose any specific communication model. 
 
 \jhanote{I think all the functionality of PJs is predicated on the
   following core capability: enable the decoupling between assigning a
   workload from the spatial/temporal execution properties of its
   execution. Should this get mentioned somewhere in core
-  functionality?}
+  functionality?} \mtnote{Following our discussion I would riformulate as whether late binding is a defining capability of \pilotjob. At the moment I am not sure but I will get on it once I will have properly defined `late binding'}
 
-\pilotjobs leverage a Master-Worker paradigm [ref] for the execution
-of workloads. In such a paradigm, every given workload is reduced into
-tasks and each task, alongside the data needed for its execution, is
-bound by a master to one or more workers. Once the tasks have been
-executed, each worker makes available the results of the computation
-to the master. \pilotjob frameworks implement the Master-Worker
-\jhanote{I would say utilize the M-W coordination/communication
-  paradigm} and are typically deployed within Distributed Computing
-Infrastructures (DCIs) like, for example, Grids, Clouds or HPC
-facilities. As the specifics of these DCI are different, not
-suprisingly, these differences permeate into differences in the
-\pilotjobs themselves, but in addition to that there are reasons why
-\pilotjobs differ in their design and implementation.
+The architectural properties of \pilotjob are functional to the implementation of those capabilities that allows for workloads to be executed on the targeted DCIs. Assuming that communication among components is a necessary trait for every type of distributed system, \pilotjobs included, a minimal set of capabilities needs to be implemented in order to manage workloads and execute tasks.
+\begin{itemize}
+  \item Assigning one or more tasks to one or more pilot jobs.
+  \item Staging in and out the data required and produced by the execution of a task.
+  \item Executing a task on the targeted DCI. 
+\end{itemize}
+
+\jhanote{I understand the spirit/intent of the above and I agree with
+  the separation (in fact it is very useful), however calling the
+  deployment of the framework itself a functionality of the framework
+  is somewhat circular (i understand the appeal of circular logic is
+  that it has no loose ends :) however we should still fix.. )} \mtnote{yep, let me fix this.}
+
+The deployment procedures of \pilotjob systems also greatly varies \[...\]
+
+
+\begin{center}
+\line(1,0){250}
+\end{center}
+\mtnote{from now on the whole section needs extensive rewriting.}
+\begin{center}
+\line(1,0){250}
+\end{center}
 
 The implementation and configuration details vary considerably but
 each deployment of a \pilotjob framework depends at least on: (i) The
