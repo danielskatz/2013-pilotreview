@@ -1453,7 +1453,7 @@ vocabulary.}
 \end{itemize}
 }
 
-AppLeS is a framework which allows software built using it to take advantage
+AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
 of enhanced scheduling and resource selection capabilities.
 With AppLeS, application-level scheduling and resource selection are handled by a
 per-application \texttt{AppleS agent}.
@@ -1476,7 +1476,7 @@ The lack of a \textit{placeholder job} limits the functionality
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
-is not a ``true'' \pilotjob system, as a placeholder
+is not a ``true'' \pilotjob system, as a \textit{placeholder}
 is required to enable fundamental \pilotjob functionality such as
 \textit{multi-level scheduling.}
 However, AppLeS has still been used to choose destinations
@@ -1487,6 +1487,12 @@ analyze biochemical interactions while dynamically recreating
 schedules to account for changes in performance predictions.
 \aznote{Previous sentence to satisfy request for \pilotjob
 domain usage}
+\aznote{Should I put something here like 
+``AppLeS has been successful in these domains due in part
+to the usefulness of the M-W paradigm which \pilotjobs
+are based on, but the following ``True'' \pilotjobs
+illustrate the extended reach/power made available
+through a proper \pilotjob approach''?}
 
 %% \aznote{Lack of multi-level scheduling asserted because even
 %% though AppLeS allows for application-level scheduling,
@@ -1589,7 +1595,12 @@ GSI authentication mechanisms.
 
 MyCluster was designed for and successfully executed on NSF TeraGrid
 resources, enabling large-scale cross-site submission of ensemble
-job submissions.
+job submissions via its virtualized cluster interface.  
+This approach makes the \textit{multi-level scheduling} abilities
+of \pilotjobs explicit; rather than directly \textit{binding}
+to individual TeraGrid resources, users allow the virtual grid
+overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
+as a whole.
  
 %\textit{Manager} functionality is handled by MyCluster's 
 %\texttt{Master Node Manager}.
