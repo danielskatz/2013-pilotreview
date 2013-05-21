@@ -388,7 +388,7 @@ simulations where many jobs need to be run at one time.
 
 \subsubsection{Criteria and Classifications}
 
-We assess the \pilotjob systems according to the according to different 
+We survey the \pilotjob systems according to different 
 functional and non-functional criteria. Further we analyze the internal 
 architecture of each \pilotjob system.
 
@@ -405,46 +405,48 @@ architecture of each \pilotjob system.
   consideration might be whether to remove bullet points and use
   regular prose}
 
-\noindent
-\emph{Functional Features}
 
+\emph{Functional Features:}
 The functional criteria describe the capabilities of the \pilotjob system: (i)
 (i) What use cases? What applications types and usage modes are supported
 (MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
 provided to the developer: API, CLI, web service, web portal?, (iii) Does the
 \pilotjob system support distribution?, (iv) Are there any higher-level tools
 available for \pilotjob system (e.g. workflow systems, data analysis
-systems)?, (v) Does the \piltojob system support data? and (vi) What types of
+systems)?, (v) Does the \pilotjob system support data?, (vi) What types of
 infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
-provide interoperability support?
+provide interoperability support? and (vii) does the framework support 
+advanced workload management capabilities (e.g. the automatic provisioning 
+of \pilots).
 
-\emph{Non-Functional Features}
-\begin{itemize}
-	\item Performance 
-	\item Scalability (task throughput, number resources/slots)
-	\item Fault Tolerance
-	\item Interoperability
-	\item \emph{Security} describes the security mechanisms used by the 
-	framework, e.\,g.\ for authentication of the user, for securing the 
-	communication protocol and for sandboxing the application. Further, some 
-	\pilotjobs solely support single users, while more complex \pilot-based 
-	workload managers commonly support multiple users (e.\,g.\ using glexec).
-\end{itemize}
-\emph{Internal}
-\begin{itemize}
-	\item Internal Architecture (communication \& coordination, central 
-	vs. decentral architectures; push vs. pull model, agent-based; number 
-	of supported pilots/resources; vertical/horizontal integration...)
-	\item What low-level infrastructures/middleware are supported? How 
-	interoperable is the framework (vertically, horizontally)?
-	\item Deployment Model: hosted service versus tool/library, 
-	application vs. system-level
-	\item Scheduling: supported algorithms, support for application-level 
-	scheduling, data-compute scheduling, resource acquisition/release 
-	policies, dispatch policies, number of scheduling levels	
-	\item Dynamic provisioning
-	\item Dependencies, re-use of other components/services	
-\end{itemize}		
+\emph{Non-Functional Features:} Non-functional features describe the characteristics and behavior of a
+\pilotjob system and are not directly related to a specific function or
+capability of the \pilotjob system. Non-functional properties include: (i)
+performance, (ii) scalability (task throughput, number resources/slots), (iii)
+fault tolerance, (iv) interoperability and (v) security.
+
+The performance and scalability define the response times and size of the
+workload a user can expect to be supported. Security describes the security
+mechanisms used by the framework, e.\,g.\ for authentication of the user, for
+securing the communication protocol and for sandboxing the application.
+Further, some \pilotjobs solely support single users, while more complex
+\pilot-based workload managers commonly support multiple users (e.\,g.\ using
+glexec).
+
+
+\alnote{we might want to consider to merge internal and non-functional}
+\emph{Internal Aspects:} Internal features of a \pilotjob system include: (i)
+the architecture of the system (layers, sub-systems, communication \&
+coordination, central vs. decentral architectures; push vs. pull model,
+agent-based; number of supported resource types), (ii) resource access layer:
+What low-level infrastructures/middleware are supported? How interoperable is
+the framework (vertically, horizontally)?, (iii) the deployment model: hosted
+service versus tool/library, application vs. system-level, (iv) how is the
+workload managed and scheduled (supported algorithms, support for
+application-level scheduling, data-compute scheduling, resource
+acquisition/release policies, dispatch policies, number of scheduling levels)
+and (v) does the framework have dependencies to other third-party
+components/services?
 
 
 
