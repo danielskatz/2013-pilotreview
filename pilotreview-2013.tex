@@ -386,7 +386,7 @@ reduces the net wait time of a collection of tasks, and also prevents
 saturation of resource batch queuing systems from high-throughput
 simulations where many jobs need to be run at one time.
 
-\subsubsection{Criteria and Classifications}
+\subsubsection{Pilot-Job Systems Overview}
 
 We survey the \pilotjob systems according to different 
 functional and non-functional criteria. Further we analyze the internal 
@@ -406,7 +406,7 @@ architecture of each \pilotjob system.
   consideration might be whether to remove bullet points and use
   regular prose}\alnote{work in progress}
 
-
+\alnote{move functional/non-functional after overview...}
 \emph{Functional Features:}
 The functional criteria describe the capabilities of the \pilotjob system: (i)
 What use cases are targeted by the PJ system? What applications types and usage modes are supported
@@ -466,7 +466,7 @@ components/services?
 
 
 
-\subsubsection{Pilot-Job Systems Overview}
+% \subsubsection{Pilot-Job Systems Overview}
 
 \begin{figure}[t]
 	\centering
@@ -498,6 +498,7 @@ that provide resource management capabilities based on \pilots and
   explicit. Please refine}
 
 \subsubsection*{Core Pilot-Job Systems}
+\alnote{add BigJob}
 
 Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
 provisioning of the placeholder job capability. Various Master-Worker systems
@@ -760,7 +761,13 @@ functionalities and the common vocabulary are eventually leveraged in
 
 \subsection{Core Functionalities of \pilotjobs}
 
-All the \pilotjob systems described in \S2 are engineered to allow for the execution of workloads on Distributed Computing Resources (DCIs) such as, for example, Grids, Clouds or HPC facilities. This is achieved differently, depending on use cases, design and implementation choices and on the constraints imposed by the peculiarities of the targeted DCIs. Finding common denominators among these systems require an analysis on multiple dimensions.
+
+All the \pilotjob systems described in \S2 are engineered to allow for the
+execution of workloads on Distributed Computing Resources (DCIs) such as, for
+example, Grids, Clouds or HPC facilities. This is achieved differently,
+depending on use cases, design and implementation choices and on the
+constraints imposed by the peculiarities of the targeted DCIs. Finding common
+denominators among these systems require an analysis on multiple dimensions.
 
 \pilotjobs can be analyzed and compared by looking at their architectural, deployment and workload execution characteristics. Each of these aspects involves specific properties and functionalities, some peculiar to a given \pilotjob system, others related to the \pilotjob paradigm itself. The latter are what distinguish \pilotjobs from other types of distributed systems. Isolating them means to find the common denominators among every \pilotjob system.
 
@@ -774,7 +781,7 @@ It is worth noting that the \MW paradigm can be considered a further specificati
   following core capability: enable the decoupling between assigning a
   workload from the spatial/temporal execution properties of its
   execution. Should this get mentioned somewhere in core
-  functionality?} \mtnote{Following our discussion I would riformulate as whether late binding is a defining capability of \pilotjob. At the moment I am not sure but I will get on it once I will have properly defined `late binding'}
+  functionality?} \mtnote{Following our discussion I would reformulate as whether late binding is a defining capability of \pilotjob. At the moment I am not sure but I will get on it once I will have properly defined `late binding'}
 
 The architectural properties of \pilotjob are functional to the implementation of those capabilities that allows for workloads to be executed on the targeted DCIs. Assuming that communication among components is a necessary trait for every type of distributed system, \pilotjobs included, a minimal set of capabilities needs to be implemented in order to manage workloads and execute tasks.
 \begin{itemize}
