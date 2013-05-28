@@ -631,8 +631,6 @@ AMGA.
 
 
 \subsection{Evaluation Criteria}
-\pilotjob systems can be described and compared using a set of 
-functional and non-functional criteria. 
 
 \jhanote{I don't think we should say we ``assess'' according to these
   different criteria, but we should say that a brief survey of the
@@ -647,7 +645,9 @@ functional and non-functional criteria.
   consideration might be whether to remove bullet points and use
   regular prose}\alnote{work in progress}
 
-\alnote{move functional/non-functional after overview...}
+\pilotjob systems can be described and compared using a set of 
+functional and non-functional criteria. 
+
 \emph{Functional Features:}
 The functional criteria describe the capabilities of the \pilotjob system: (i)
 What use cases are targeted by the PJ system? What applications types and usage modes are supported
@@ -719,7 +719,7 @@ components/services?
 \label{sec:vocab}
 \mtnote{MT/AZ/OW}
 
-\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and I doubt that it will be particularly useful to the reader. I think it would make sense to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the `building block' side), consisting of `agents' and `managers' at all? After all, PJs are `just' an instance of Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you Ole! Here a completely rewrite of the Section that tries to address the points you made.}
+%\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and I doubt that it will be particularly useful to the reader. I think it would make sense to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the `building block' side), consisting of `agents' and `managers' at all? After all, PJs are `just' an instance of Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you Ole! Here a completely rewrite of the Section that tries to address the points you made.}
 
 The overview offered in \S2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same term referring to multiple concepts or the same concept named in different ways.
 
@@ -783,7 +783,7 @@ Communication and coordination are two fundamental characteristics of every dist
   functionality?} \mtnote{The following paragraph is a first attempt to address this comment. More details will follow when late binding will be properly defined.}
 
 \alnote{maybe cleanly separating architecture and the way the workload is 
-scheduled/binding takes place.}\mt{that `support' is meant to make that separation. Care to elaborate, suggest an editing?}
+scheduled/binding takes place.}\mtnote{that `support' is meant to make that separation. Care to elaborate, suggest an editing?}
 The architectural properties of \pilotjob systems support a distinctive execution strategy with benefits for both the compute performance and for the task submission process. The tasks of a workload are bound to one or more pilots without having to be directly scheduled on the DCI's job management system. Furthermore, the binding of tasks to pilot might happen before or after the pilot has been assigned its portion of the DCI's resources and it can progress for the whole time the pilot can hold on them. This execution strategy requires dedicated capabilities both for performing the binding of tasks to pilots but also for the provisioning of pilots so that they can be assigned portions of the DCI's resources.
 
 \jhanote{I understand the spirit/intent of the above and I agree with
@@ -863,7 +863,7 @@ The term `pilot' is often associated to that of `placeholder'. This is a way to 
 
 From a terminology point of view, it should be noted that the term `pilot' as here defined is called differently across multiple \pilotjob systems. In addiction to the already said `placeholder', pilot is also called `agent' and, in some cases, `pilotjob'.
 
-\onote{you introduce data as `resource'. why?} \mtnote{It is a direct consequence of defining resources as typed consumables while distinguishing them from an infrastructure as a whole. Data is a type of resource that might be consume by a task as much as the bandwidth of a specific type of (logical/physical) network.}
+%\onote{you introduce data as `resource'. why?} \mtnote{It is a direct consequence of defining resources as typed consumables while distinguishing them from an infrastructure as a whole. Data is a type of resource that might be consume by a task as much as the bandwidth of a specific type of (logical/physical) network.}
 
 Another important detail to notice is that while the operations of a task performed by means of a \pilot are usually computational in nature, in principle, they might also operate on other type of resources such as data or network bandwidth, depending on the resources made available by an infrastructure to its users. In this context, it would be likely for some \pilotjob systems to use the terms `pilot data' or `pilot network'.
 
