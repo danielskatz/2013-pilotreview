@@ -386,86 +386,6 @@ reduces the net wait time of a collection of tasks, and also prevents
 saturation of resource batch queuing systems from high-throughput
 simulations where many jobs need to be run at one time.
 
-\subsubsection{Pilot-Job Systems Overview}
-
-We survey the \pilotjob systems according to different 
-functional and non-functional criteria. Further we analyze the internal 
-architecture of each \pilotjob system.
-
-\jhanote{I don't think we should say we ``assess'' according to these
-  different criteria, but we should say that a brief survey of the
-  \pilotjob literatures shows that many different and often
-  inconsistent criteria have been used. then we need to add some
-  criteria of our own stating that based upon our
-  literature/understanding we think it will be useful to develop
-  further criteria... Also, it is important to note that not all
-  criteria are used for every \pilotjob system}
-
-
-\jhanote{Andre L: these need elaboration and explanation. A possible
-  consideration might be whether to remove bullet points and use
-  regular prose}\alnote{work in progress}
-
-\alnote{move functional/non-functional after overview...}
-\emph{Functional Features:}
-The functional criteria describe the capabilities of the \pilotjob system: (i)
-What use cases are targeted by the PJ system? What applications types and usage modes are supported
-(MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
-provided to the developer: API, CLI, web service, web portal?, (iii) Does the
-\pilotjob system support distribution?, (iv) Are there any higher-level tools
-available for \pilotjob system (e.g. workflow systems, data analysis
-systems)?, (v) Does the \pilotjob system support data?, (vi) What types of
-infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
-provide interoperability support? and (vii) does the framework support 
-advanced workload management capabilities (e.g. the automatic provisioning 
-of \pilots).
-
-% =======
-% \emph{Functional Features:} The functional criteria describe the
-% capabilities of the \pilotjob system: (i) What use cases? What
-% applications types and usage modes are supported (MPI, ensembles,
-% workflows)?, (ii) What abstraction and user interface is provided to
-% the developer: API, CLI, web service, web portal?, (iii) Does the
-% \pilotjob system support distribution?, (iv) Are there any
-% higher-level tools available for \pilotjob system (e.g. workflow
-% systems, data analysis systems)?, (v) Does the \pilotjob system
-% support data?, (vi) What types of infrastructure are supported (HTC,
-% HPC, cloud)? Does the \pilotjob system provide interoperability
-% support? and (vii) does the framework support advanced workload
-% management capabilities (e.g. the automatic provisioning of \pilots).
-% >>>>>>> 2a28d5db65ad725dca738b6c953398b67cedfdee
-
-\emph{Non-Functional Features:} Non-functional features describe the characteristics and behavior of a
-\pilotjob system and are not directly related to a specific function or
-capability of the \pilotjob system. Non-functional properties include: (i)
-performance, (ii) scalability (task throughput, number resources/slots), (iii)
-fault tolerance, (iv) interoperability and (v) security.
-
-The performance and scalability define the response times and size of the
-workload a user can expect to be supported. Security describes the security
-mechanisms used by the framework, e.\,g.\ for authentication of the user, for
-securing the communication protocol and for sandboxing the application.
-Further, some \pilotjobs solely support single users, while more complex
-\pilot-based workload managers commonly support multiple users (e.\,g.\ using
-glexec).
-
-
-\alnote{we might want to consider to merge internal and non-functional}
-\emph{Internal Aspects:} Internal features of a \pilotjob system include: (i)
-the architecture of the system (layers, sub-systems, communication \&
-coordination, central vs. decentral architectures; push vs. pull model,
-agent-based; number of supported resource types), (ii) resource access layer:
-What low-level infrastructures/middleware are supported? How interoperable is
-the framework (vertically, horizontally)?, (iii) the deployment model: hosted
-service versus tool/library, application vs. system-level, (iv) how is the
-workload managed and scheduled (supported algorithms, support for
-application-level scheduling, data-compute scheduling, resource
-acquisition/release policies, dispatch policies, number of scheduling levels)
-and (v) does the framework have dependencies to other third-party
-components/services?
-
-
-
 % \subsubsection{Pilot-Job Systems Overview}
 
 \begin{figure}[t]
@@ -487,17 +407,20 @@ components/services?
 	\label{fig:figures_classification}
 \end{figure}
 
+In this section, we give a brief overview of different \pilotjob systems.
+\pilotjob systems differ in their focus and architecture.
+Figure~\ref{fig:figures_classification} categorized \pilotjob systems into
+three layers: (i) core \pilotjob systems that solely provide a simple \pilot
+capability, (ii) advanced \pilotjob systems offer sophisticated resource
+management capabilities based on \pilots and (iii) higher level \pilot-based
+frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data
+analytics.
 
-As shown Figure~\ref{fig:figures_classification}, PJ systems operate
-on different levels of the distributed computing stack: (i) Core PJ
-systems that solely provide a simple \pilot capability, (ii) systems
-that provide resource management capabilities based on \pilots and
-(iii) applications, tools and services that utilize
-\pilots. \jhanote{the mapping of the above to the different levels in
+\jhanote{the mapping of the above to the different levels in
   the diagram is implied, but the text above does not guide/make it
-  explicit. Please refine}
+  explicit. Please refine}\alnote{improved}
 
-\subsubsection*{Core Pilot-Job Systems}
+\subsubsection{Core Pilot-Job Systems}
 \alnote{add BigJob}
 
 Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
@@ -553,7 +476,7 @@ significantly.
 
 
 %%%%%%%%%%%%%%%%%%%%
-\subsubsection*{Advanced Pilot-Job Systems}
+\subsubsection{Advanced Pilot-Job Systems}
 %  \pilot-based Workload Manager, Systems for Multi-Level Scheduling}
 
 
@@ -627,7 +550,7 @@ is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its
 multi-user support and the support for standards, such as DRMAA, OGSA-BES and 
 JSDL.
 
-\subsubsection*{Higher-Level \pilot-based Frameworks}
+\subsubsection{Higher-Level \pilot-based Frameworks}
 
 Many higher-level tools and frameworks, such as workflow,
 visualization or data analytics systems, utilize \pilotjob systems to
@@ -635,8 +558,8 @@ manage their computational workload. In general, two approaches exist:
 (i) the framework vertically integrates with a custom \pilotjob
 implementation (e.\,g.\ Swift/Coaster) or (ii) it re-uses a general
 purpose PJ system (e.\,g\ Pegasus/Condor-G). In case (i), the PJ
-system is often re-factored to also serve as a multi-purpose PJ
-system. \jhanote{last sentence needs refinement}
+system is also often exposed as stand-alone, multi-purpose \pilotjob systems. 
+\jhanote{last sentence needs refinement}\alnote{done}
 
 In the context of scientific workflows, \pilotjob systems have been
 proven as effective tool for managing the workload. In the context of
@@ -707,6 +630,79 @@ AMGA.
 \end{itemize}
 
 
+\subsection{Evaluation Criteria}
+\pilotjob systems can be described and compared using a set of 
+functional and non-functional criteria. 
+
+\jhanote{I don't think we should say we ``assess'' according to these
+  different criteria, but we should say that a brief survey of the
+  \pilotjob literatures shows that many different and often
+  inconsistent criteria have been used. then we need to add some
+  criteria of our own stating that based upon our
+  literature/understanding we think it will be useful to develop
+  further criteria... Also, it is important to note that not all
+  criteria are used for every \pilotjob system}
+
+\jhanote{Andre L: these need elaboration and explanation. A possible
+  consideration might be whether to remove bullet points and use
+  regular prose}\alnote{work in progress}
+
+\alnote{move functional/non-functional after overview...}
+\emph{Functional Features:}
+The functional criteria describe the capabilities of the \pilotjob system: (i)
+What use cases are targeted by the PJ system? What applications types and usage modes are supported
+(MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
+provided to the developer: API, CLI, web service, web portal?, (iii) Does the
+\pilotjob system support distribution?, (iv) Are there any higher-level tools
+available for \pilotjob system (e.g. workflow systems, data analysis
+systems)?, (v) Does the \pilotjob system support data?, (vi) What types of
+infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
+provide interoperability support? and (vii) does the framework support 
+advanced workload management capabilities (e.g. the automatic provisioning 
+of \pilots).
+
+% =======
+% \emph{Functional Features:} The functional criteria describe the
+% capabilities of the \pilotjob system: (i) What use cases? What
+% applications types and usage modes are supported (MPI, ensembles,
+% workflows)?, (ii) What abstraction and user interface is provided to
+% the developer: API, CLI, web service, web portal?, (iii) Does the
+% \pilotjob system support distribution?, (iv) Are there any
+% higher-level tools available for \pilotjob system (e.g. workflow
+% systems, data analysis systems)?, (v) Does the \pilotjob system
+% support data?, (vi) What types of infrastructure are supported (HTC,
+% HPC, cloud)? Does the \pilotjob system provide interoperability
+% support? and (vii) does the framework support advanced workload
+% management capabilities (e.g. the automatic provisioning of \pilots).
+% >>>>>>> 2a28d5db65ad725dca738b6c953398b67cedfdee
+
+\emph{Non-Functional Features:} Non-functional features describe the 
+characteristics and behavior of a
+\pilotjob system and are not directly related to a specific function or
+capability of the \pilotjob system. Non-functional properties include: (i)
+performance, (ii) scalability (task throughput, number resources/slots), (iii)
+fault tolerance, (iv) interoperability and (v) security.
+
+The performance and scalability define the response times and size of the
+workload a user can expect to be supported. Security describes the security
+mechanisms used by the framework, e.\,g.\ for authentication of the user, for
+securing the communication protocol and for sandboxing the application.
+Further, some \pilotjobs solely support single users, while more complex
+\pilot-based workload managers commonly support multiple users (e.\,g.\ using
+glexec).
+
+Further non-functional aspects describe the internals of a \pilotjob system, 
+e.\,g.: (i) the architecture of the system (layers, sub-systems,
+communication \& coordination, central vs. decentral architectures; push vs.
+pull model, agent-based; number of supported resource types), (ii) resource
+access layer: What low-level infrastructures/middleware are supported? How
+interoperable is the framework (vertically, horizontally)?, (iii) the
+deployment model: hosted service versus tool/library, application vs.
+system-level, (iv) how is the workload managed and scheduled (supported
+algorithms, support for application-level scheduling, data-compute scheduling,
+resource acquisition/release policies, dispatch policies, number of scheduling
+levels) and (v) does the framework have dependencies to other third-party
+components/services?
 
 
 % Higher-level applications and tools either 
