@@ -743,7 +743,8 @@ characteristics that are either peculiar to a given system, or distinctive of
 the \pilotjob paradigm itself. Isolating the latter means to outline what
 distinguish \pilotjobs from other types of distributed systems and, as a
 consequence, finding the minimal set of concepts and terms that have to apply
-to every \pilotjob implementation.
+to every \pilotjob implementation. \mrnote{"are necessary" - "have to" sounds
+awkward in this context}
 
 At a high level of abstraction, for the execution of workloads all the
 \pilotjob systems introduced in \S2 leverages an architecture based on two
@@ -756,7 +757,7 @@ infrastructure level. Nonetheless, the two architectural components can be
 distinguished across multiple types of \pilotjob systems.\alnote{should we 
 assign a name to these two components?}\mtnote{\MW? ;) I see that later on you use `Workload manager' and `task executor'. Would you be happy with them? Would the others?}
 
-For example, looking at the core \pilotjob systems introduced in \S2.2.2, the
+For example, looking at the core \pilotjob systems introduced in \S2.2.2\mrnote{I suggest we use section labels and not hardcode the section numbers - as you can see, this has already created problems in the first paragraph because we changed section 2.2.1 to 2.3 and this was not captured by this section}, the
 scheduler and dispatcher of Nimrod-G belong to the architectural component
 dedicated to workload management while the job-wrapper belongs to the
 component responsible for the execution of tasks. Similar examples can be
@@ -774,7 +775,7 @@ makes these systems advanced.}\mtnote{Would that not be a repetition of \S2? If 
   ``associative'' than ``causative'', or M-W as obvious, simple choice
   than a necessary choice...}\alnote{+1}\mtnote{I think the new version of the section addresses this concern. I see at least two choices here: either we find out at least one \pilotjob system that does not leverage a \MW paradigm or we say how it could be implemented differently and we give an example. I am happy to defer to your combined experience for both choosing the argumentative line and outlining a couple of examples in one or the other direction.}
 
-Communication and coordination are two fundamental characteristics of every distributed architecture but none of their specific paradigm is distinctive of \pilotjob systems. \alnote{Is communication and coordination a component or a characteristic? (see P* paper)}\mtnote{Done.} For example, as seen in \S2.2.2, the \MW paradigm is very common among \pilotjobs. Functionally, the Master can be  identified with the architectural component concerning workload management while the Worker with the one concerning the execution of the workload's tasks. However, the \MW paradigm usually implies a specific distribution of capabilities between Master and Worker, and, in some cases, also a communication model. Both these characteristics are not necessary to implement a \pilotjob as shown, for example, by .... and .... .\mtnote{AL/all: any suggestions to fill these dots --- see note above?} 
+Communication and coordination are two fundamental characteristics of every distributed architecture but none of their specific paradigm is distinctive of \pilotjob systems. \alnote{Is communication and coordination a component or a characteristic? (see P* paper)}\mtnote{Done.} For example, as seen in \S2.2.2, the \MW paradigm is very common among \pilotjobs. Functionally, the Master can be  identified with the architectural component concerning workload management while the Worker with the one concerning the execution of the workload's tasks. However, the \MW paradigm usually implies a specific distribution of capabilities between Master and Worker, and, in some cases, also a communication model. Both these characteristics are not necessary to implement a \pilotjob as shown, for example, by .... and .... .\mtnote{AL/all: any suggestions to fill these dots --- see note above?}\mrnote{I think there are two sides to this: not just that M-W implies a specific distribution of capabilities but that M-W can be used to apply to a non-fixed set of capabilities. For instance, M-W is used to refer to applications, frameworks, architectures, etc, as such, a clear definition of M-W does not exist. The ellipses marks can be filled in an easier manner if we change the sentence to be positive from its currently negative state. For example, as SJ says above M-W can be ``associative'' - i.e. ``while the M-W concept can be applied to Pilot-Jobs, it's ambiguity and wide-range of capabilities make it difficult to define as a necessity for a PJ system.''}
 
 \jhanote{I think all the functionality of PJs is predicated on the
   following core capability: enable the decoupling between assigning a
@@ -792,7 +793,7 @@ The architectural properties of \pilotjob systems support a distinctive executio
   is somewhat circular (i understand the appeal of circular logic is
   that it has no loose ends :) however we should still fix.. )} \mtnote{Right! The following paragraph should address this error.}
 
-The minimal set of capabilities that needs to be implemented by a \pilotjob system in order to execute workloads involves \pilot provision, data staging and task dispatching. \alnote{is data staging minimal?}\mtnote{if you think about it as input/output files not strictly - even if basically you would be able to run very little science without them. When you consider staging of data in general, then I believe it becomes minimal.} The procedures to provision pilots depends on how each targeted DCI exposes its resources. Typically, for a DCI adopting queue, batch and scheduler systems, provisioning a pilot involves for it to be submitted as a job. Conversely, for a IaaS, a pilot would be executed after instantiating one of more virtual machines. Data staging is used to transfer the task description and the input and output files to and from one or more pilots. Implementations of data staging vary greatly across \pilotjob implementations as much as the task dispatching procedure.
+The minimal set of capabilities that needs to be implemented by a \pilotjob system in order to execute workloads involves \pilot provision, data staging and task dispatching. \alnote{is data staging minimal?}\mtnote{if you think about it as input/output files not strictly - even if basically you would be able to run very little science without them. When you consider staging of data in general, then I believe it becomes minimal.}\mrnote{What do you mean by considering it in general? I could stage my files manually to-and-fro and only worry about the Pilots as task executors using hardcoded paths to my data. Data-staging therefore would not be required, especially on machines with shared filesystems} The procedures to provision pilots depends on how each targeted DCI exposes its resources. Typically, for a DCI adopting queue, batch and scheduler systems, provisioning a pilot involves for it to be submitted as a job. Conversely, for a IaaS, a pilot would be executed after instantiating one or more virtual machines. Data staging is used to transfer the task description and the input and output files to and from one or more pilots. Implementations of data staging vary greatly across \pilotjob implementations as much as the task dispatching procedure.\mrnote{I just want to make sure if we call data staging necessary that every PJ system we currently know of uses data staging}
 
 In the following two subsections, a minimal set of terms related to these capabilities is defined. Here a summary of this set:
 
@@ -841,15 +842,15 @@ As seen in \S2, most of the DCIs where \pilotjobs frameworks are deployed adopt 
 
 \alnote{I would distinguish between a scheduler and resource manager. A scheduler is the planning component of the resource management system.} \mtnote{It should be done. I now use `resource manager system' later on.}
 
-The capabilities exposed by the job submission system of the targeted infrastructure determine also the submission process of pilots. Pilots are programs with specific capabilities and, for example, they are submitted as jobs on the type of DCI just described. In such a context, schedulers, batch processing and queuing define the practical boundaries for how and when the pilots can be provisioned on a given DCI. 
+The capabilities exposed by the job submission system of the targeted infrastructure determine also the submission process of pilots. Pilots are programs with specific capabilities and, for example, they are submitted as jobs on the type of DCI just described. In such a context, schedulers, batch processing and queuing define the practical boundaries for how and when the pilots can be provisioned on a given DCI.\mrnote{I am slightly uncomfortable with ``pilots are programs'' - maybe we can discuss this in person. I think of a Pilot as a relatively dumb 'container' - a PJ system would be a program to me, but I'm not sure of the Pilot itself, at least its unclear given my mental definition of pilots up til this point in the section}
 
 \begin{description}
   \item[Provisioning.] Leveraging the capabilities offered by a DCI to execute one or more pilots.  
 \end{description}
 
-Queuing allows for delayed execution as it allows for jobs to be submitted when not enough resources are immediately available for their execution. Scheduling introduces temporal and spatial constraints on the execution of each job so to help with maximizing resource utilization, performance and allocation within one or more partitions of the DCI. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use. Finally, batch processing imposes to deploy all the pilots non interactively by including a job description specifying the configuration and execution parameters for the job's programs.
+Queuing allows for delayed execution as it allows for jobs to be submitted when not enough resources are immediately available for their execution. Scheduling introduces temporal and spatial constraints on the execution of each job so to help with maximizing resource utilization, performance and allocation within one or more partitions of the DCI. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use. Finally, batch processing imposes to deploy all the pilots non interactively by including a job description specifying the configuration and execution parameters for the job's programs.\mrnote{Again, we use the word programs - I think if we define a task to be a set of instructions - then a job has a task - not a program. If task is distinctively different, don't use it, but we either should use the word ``executable'' or define what we mean when we say program}
 
-It should be noted that cloud-based DCIs introduce notable exceptions and differences in the way in which pilots can be provisioned.[cit, cit] Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for their provisioning. VMs can often be instantiated without waiting into a queue, and limitations on the execution time of a VM can be virtually absent. Clearly, overheads are introduced by having to deal with VMs and not simple jobs and the model adopted within a IaaS-based DCI to assign resources to each VM can affect the flexibility of the whole \pilotjob system.[cit] A similar assessment could be done for a DCI deploying a PaaS model of cloud computing.[cit]
+It should be noted that cloud-based DCIs introduce notable exceptions and differences in the way in which pilots can be provisioned.[cit, cit] Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for their provisioning. VMs can often be instantiated without waiting into a queue, and limitations on the execution time of a VM can be virtually absent. Clearly, overheads are introduced by having to deal with VMs and not simple jobs and the model adopted within a IaaS-based DCI to assign resources to each VM can affect the flexibility of the whole \pilotjob system. \mrnote{Though you avoid queue wait, you introduce VM start-up time overhead as well}[cit] A similar assessment could be done for a DCI deploying a PaaS model of cloud computing.[cit]
 
 Showing that the way in which a pilot is provisioned depends on the capabilities exposed by the targeted DCI illustrates the limits of choosing the term `job'. The use of that term is due to a historical contingency, the targeting of a specific class of DCIs in which the term `job' was --- and still is --- meaningful. Nonetheless, with the development of new types of DCI, the term `job' has become too restrictive, a situation that can lead to terminological and conceptual confusion, and to the use of synonyms for both the terms `pilot' and `pilotjob'.
 
@@ -861,7 +862,7 @@ The term `pilot' is often associated to that of `placeholder'. This is a way to 
   \item[Pilot.] A placeholder running on a given infrastructure and capable of executing pushed and pulled tasks while managing data stage in and out. 
 \end{description}
 
-From a terminology point of view, it should be noted that the term `pilot' as here defined is called differently across multiple \pilotjob systems. In addiction to the already said `placeholder', pilot is also called `agent' and, in some cases, `pilotjob'.
+From a terminology point of view, it should be noted that the term `pilot' as here defined is called differently across multiple \pilotjob systems. In additition to the already said `placeholder', pilot is also called `agent' and, in some cases, `pilotjob'. \mrnote{Is a Pilot really the same as an Agent? This gives me the heebie-jeebies}
 
 %\onote{you introduce data as `resource'. why?} \mtnote{It is a direct consequence of defining resources as typed consumables while distinguishing them from an infrastructure as a whole. Data is a type of resource that might be consume by a task as much as the bandwidth of a specific type of (logical/physical) network.}
 
@@ -1130,7 +1131,12 @@ vocabulary, allowing for a standard
 ``baseline'' of each \pilotjob categorization to be
 examined.  Examining these \pilotjobs via a
 common vocabulary exposes their core similarities, and allows a
-detailed analysis of their differences.
+detailed analysis of their differences.  The selection of
+\pilotjobs was made such that ``exemplars'' were chosen;
+these are \pilotjobs which either laid foundational
+\pilotjob concept or incorporated strides in interoperability,
+usability, architecture or otherwise to advance the
+understanding and usage of \pilotjobs.
 
 %Representative \pilotjobs from each \pilotjob category
 %in Section~\ref{sec:survey} are chosen and compared within
@@ -1233,6 +1239,73 @@ vocabulary.}
 
 % -----------------------------------------------------------------------------
 %
+\subsubsection{AppLeS -- new/restructured (compare to old below0}
+\paragraph{Rationale}
+AppLeS is an ideal introductory software package to be studied
+as it is a \textit{pre-\pilot} framework; it is capable of
+addressing some of the issues \pilotjobs are designed to handle,
+but lacks some fundamental components which limit its usability
+compared to the full \pilotjob approach.
+
+\paragraph{Design Goals}
+The main design goal of AppLeS is adaptivity, granting applications
+the ability to generate schedules dynamically and incorporating
+application performance characteristics into these schedules.
+\aznote{I want to talk about its being designed for grids here,
+perhaps merge this section with the resource landscape section
+as the resource landscape likely drove the design goals of
+many of these \pilotjobs?}
+
+\paragraph{Applications}
+AppLeS has been used to choose destinations
+for storing (analyzing?)
+satellite image files, optimize the execution of data-parallel matrix
+calculations, distribute computational biology genetic searches 
+across resources with varying response/availability times, and
+analyze biochemical interactions while dynamically recreating
+schedules to account for changes in performance predictions.
+
+\paragraph{Deployment Scenarios (VO/multiuser)}
+\aznote{Not entirely sure what is meant here and how it is distinct
+from resource landscape}
+The deployment characteristics of AppLeS-enabled software rely
+mainly upon the application writers themselves; applications
+may be adapted to use AppLeS which are either single or multi-user.
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+Heterogeneous grid computing resources were targeted by
+AppLeS, with the dynamism inherent in grid resources (availability,
+power, etc) being a driving motivator for AppLeS itself.  AppLeS
+was first developed in 1996, precluding the development of clouds;
+regardless, as with ``true'' \pilotjob approaches, adaptations
+and additions which could enable cloud functionality are easily
+envisioned.  To expand the reach of AppLeS, middleware-specific
+extensions must be implemented. \aznote{By end-users or by
+AppLeS authors, check}
+
+\paragraph{Architecture \& Interface}
+AppLeS requires a tight coupling between the target application
+and the AppLeS code.  \textit{AppLeS templates} were created
+to ease this process, but the application code in essence must
+be modified to make use of AppLeS, as opposed to \pilotjob
+systems which can (generally?) be taken advantage of without
+requiring code modification of the underlying applications being
+executed.
+
+The lack of a \textit{placeholder job} limits the functionality 
+of application-level scheduling, as tasks
+must wait in unpredictable resource manager queues before being executed,
+undermining the level of control.  For this reason, AppLeS
+is not a ``true'' \pilotjob system, as a \textit{placeholder}
+is required to enable fundamental \pilotjob functionality such as
+\textit{multi-level scheduling.}
+
+\paragraph{AppLeS Conclusion}
+\aznote{Not in the structure guide -- should we have this?}
+AppLeS shows the power of the Master-Worker approach \aznote{too loaded?},
+but the following ``true'' \pilotjobs will show the flexibility/power
+that the \pilotjob approach offers.
+
 \subsubsection{AppLeS}
 
 \textcolor{green}
