@@ -1238,6 +1238,73 @@ vocabulary.}
 
 % -----------------------------------------------------------------------------
 %
+\subsubsection{AppLeS -- new/restructured (compare to old below0}
+\paragraph{Rationale}
+AppLeS is an ideal introductory software package to be studied
+as it is a \textit{pre-\pilot} framework; it is capable of
+addressing some of the issues \pilotjobs are designed to handle,
+but lacks some fundamental components which limit its usability
+compared to the full \pilotjob approach.
+
+\paragraph{Design Goals}
+The main design goal of AppLeS is adaptivity, granting applications
+the ability to generate schedules dynamically and incorporating
+application performance characteristics into these schedules.
+\aznote{I want to talk about its being designed for grids here,
+perhaps merge this section with the resource landscape section
+as the resource landscape likely drove the design goals of
+many of these \pilotjobs?}
+
+\paragraph{Applications}
+AppLeS has been used to choose destinations
+for storing (analyzing?)
+satellite image files, optimize the execution of data-parallel matrix
+calculations, distribute computational biology genetic searches 
+across resources with varying response/availability times, and
+analyze biochemical interactions while dynamically recreating
+schedules to account for changes in performance predictions.
+
+\paragraph{Deployment Scenarios (VO/multiuser)}
+\aznote{Not entirely sure what is meant here and how it is distinct
+from resource landscape}
+The deployment characteristics of AppLeS-enabled software rely
+mainly upon the application writers themselves; applications
+may be adapted to use AppLeS which are either single or multi-user.
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+Heterogeneous grid computing resources were targeted by
+AppLeS, with the dynamism inherent in grid resources (availability,
+power, etc) being a driving motivator for AppLeS itself.  AppLeS
+was first developed in 1996, precluding the development of clouds;
+regardless, as with ``true'' \pilotjob approaches, adaptations
+and additions which could enable cloud functionality are easily
+envisioned.  To expand the reach of AppLeS, middleware-specific
+extensions must be implemented. \aznote{By end-users or by
+AppLeS authors, check}
+
+\paragraph{Architecture \& Interface}
+AppLeS requires a tight coupling between the target application
+and the AppLeS code.  \textit{AppLeS templates} were created
+to ease this process, but the application code in essence must
+be modified to make use of AppLeS, as opposed to \pilotjob
+systems which can (generally?) be taken advantage of without
+requiring code modification of the underlying applications being
+executed.
+
+The lack of a \textit{placeholder job} limits the functionality 
+of application-level scheduling, as tasks
+must wait in unpredictable resource manager queues before being executed,
+undermining the level of control.  For this reason, AppLeS
+is not a ``true'' \pilotjob system, as a \textit{placeholder}
+is required to enable fundamental \pilotjob functionality such as
+\textit{multi-level scheduling.}
+
+\paragraph{AppLeS Conclusion}
+\aznote{Not in the structure guide -- should we have this?}
+AppLeS shows the power of the Master-Worker approach \aznote{too loaded?},
+but the following ``true'' \pilotjobs will show the flexibility/power
+that the \pilotjob approach offers.
+
 \subsubsection{AppLeS}
 
 \textcolor{green}
