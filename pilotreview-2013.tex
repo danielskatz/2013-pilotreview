@@ -279,6 +279,11 @@ applications through advanced workload management systems.
 
 \subsubsection*{The Evolution of \pilotjobs} 
 
+\jhanote{if we are calling this ``evolution'' we should be sure to
+  discuss topics in chronological order. Melissa, can you please check
+  that topics are in deed presented in chronological order and maybe
+  even create a table of timelines. thanks}
+
 Interestingly we find that \pilotjobs have been used even before they
 were named as such; we refer to these as pre-\pilotjob systems, a
 prominent example of which is the Master-Worker (M-W) scheme and
@@ -415,6 +420,13 @@ analytics.
 
 \subsubsection{Core Pilot-Job Systems}
 \alnote{add BigJob}
+
+\jhanote{I think the very brief description of the various examples of
+  the three types is helpful, but the individual subsubsections need
+  to go on beyond simply describing the examples. The subsubsections
+  open out well with some description but they need to close out after
+  they distill what is common to the grouped examples, so as to
+  understand better the distinction between categories}
 
 Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
 provisioning of the placeholder job capability. Various Master-Worker systems
@@ -624,14 +636,14 @@ AMGA.
 
 \subsection{Evaluation Criteria}
 
-\jhanote{I don't think we should say we ``assess'' according to these
-  different criteria, but we should say that a brief survey of the
-  \pilotjob literatures shows that many different and often
-  inconsistent criteria have been used. then we need to add some
-  criteria of our own stating that based upon our
-  literature/understanding we think it will be useful to develop
-  further criteria... Also, it is important to note that not all
-  criteria are used for every \pilotjob system}
+% \jhanote{I don't think we should say we ``assess'' according to these
+%   different criteria, but we should say that a brief survey of the
+%   \pilotjob literatures shows that many different and often
+%   inconsistent criteria have been used. then we need to add some
+%   criteria of our own stating that based upon our
+%   literature/understanding we think it will be useful to develop
+%   further criteria... Also, it is important to note that not all
+%   criteria are used for every \pilotjob system}
 
 \jhanote{Andre L: these need elaboration and explanation. A possible
   consideration might be whether to remove bullet points and use
@@ -640,18 +652,19 @@ AMGA.
 \pilotjob systems can be described and compared using a set of 
 functional and non-functional criteria. 
 
-\emph{Functional Features:}
-The functional criteria describe the capabilities of the \pilotjob system: (i)
-What use cases are targeted by the PJ system? What applications types and usage modes are supported
-(MPI, ensembles, workflows)?, (ii) What abstraction and user interface is
-provided to the developer: API, CLI, web service, web portal?, (iii) Does the
-\pilotjob system support distribution?, (iv) Are there any higher-level tools
-available for \pilotjob system (e.g. workflow systems, data analysis
-systems)?, (v) Does the \pilotjob system support data?, (vi) What types of
-infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob system
-provide interoperability support? and (vii) does the framework support 
-advanced workload management capabilities (e.g. the automatic provisioning 
-of \pilots).
+\emph{Functional Features:} The functional criteria describe the
+capabilities of the \pilotjob system: (i) What use cases are targeted
+by the PJ system? What applications types and usage modes are
+supported (MPI, ensembles, workflows)?, (ii) What abstraction and user
+interface is provided to the developer: API, CLI, web service, web
+portal?, (iii) Does the \pilotjob system support distribution?, (iv)
+Are there any higher-level tools available for \pilotjob system
+(e.g. workflow systems, data analysis systems)?, (v) Does the
+\pilotjob system support data?, (vi) What types of infrastructure are
+supported (HTC, HPC, cloud)? Does the \pilotjob system provide
+interoperability support? and (vii) does the framework support
+advanced workload management capabilities (e.g. the automatic
+provisioning of \pilots).
 
 % =======
 % \emph{Functional Features:} The functional criteria describe the
@@ -668,12 +681,25 @@ of \pilots).
 % management capabilities (e.g. the automatic provisioning of \pilots).
 % >>>>>>> 2a28d5db65ad725dca738b6c953398b67cedfdee
 
-\emph{Non-Functional Features:} Non-functional features describe the 
-characteristics and behavior of a
-\pilotjob system and are not directly related to a specific function or
-capability of the \pilotjob system. Non-functional properties include: (i)
-performance, (ii) scalability (task throughput, number resources/slots), (iii)
-fault tolerance, (iv) interoperability and (v) security.
+\emph{Non-Functional Features:} Non-functional features describe the
+characteristics and behavior of a \pilotjob system and are not
+directly related to a specific function or capability of the \pilotjob
+system. Non-functional properties include: (i) performance, (ii)
+scalability (task throughput, number resources/slots), (iii) fault
+tolerance, (iv) interoperability and (v) security.
+
+\jhanote{I think performance and scalability should be moved into
+  functional attributes. I think performance and scalability (as
+  measured by tps, resources/slots) are in deed capabilities of a
+  \pilotjob. Also, I think, ``What abstraction and user interface is
+  provided to the developer: API, CLI, web service, web portal?'', as
+  well as ``Are there any higher level tools'', should be moved to
+  non-functional features. If functional and non-functional is not a
+  good enough classification, then we might further sub-divide
+  functional attributed; having already discussed core, advanced and
+  higher-level pilot, I think we are losing the opportunity to connect
+  to and utilize that discussion}
+
 
 The performance and scalability define the response times and size of the
 workload a user can expect to be supported. Security describes the security
