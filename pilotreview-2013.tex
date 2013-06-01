@@ -150,9 +150,6 @@
 
 \section{Introduction} 
 
-\jhanote{Please use macros! e.g., for consistency between PJ sytems
-  and \pilot systems and \pilotjob systems. similarly for M-W}
-
 \jhanote{Generally not good style to begin new subsection immediately
   after section starting}
 
@@ -416,10 +413,6 @@ management capabilities based on \pilots and (iii) higher level \pilot-based
 frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data
 analytics.
 
-\jhanote{the mapping of the above to the different levels in
-  the diagram is implied, but the text above does not guide/make it
-  explicit. Please refine}\alnote{improved}
-
 \subsubsection{Core Pilot-Job Systems}
 \alnote{add BigJob}
 
@@ -559,7 +552,6 @@ manage their computational workload. In general, two approaches exist:
 implementation (e.\,g.\ Swift/Coaster) or (ii) it re-uses a general
 purpose PJ system (e.\,g\ Pegasus/Condor-G). In case (i), the PJ
 system is also often exposed as stand-alone, multi-purpose \pilotjob systems. 
-\jhanote{last sentence needs refinement}\alnote{done}
 
 In the context of scientific workflows, \pilotjob systems have been
 proven as effective tool for managing the workload. In the context of
@@ -899,7 +891,8 @@ DCI.\mrnote{I am slightly uncomfortable with ``pilots are programs'' -
 \begin{description}
 \item[Provisioning.] Leveraging the capabilities offered by a DCI to
   execute one or more pilots. \jhanote{I don't think we should provide
-    pilot specific definitions for generally applicable terms}
+    pilot specific definitions for generally applicable terms in this
+    paper}
 \end{description}
 
 Queuing allows for delayed execution as it allows for jobs to be submitted when not enough resources are immediately available for their execution. Scheduling introduces temporal and spatial constraints on the execution of each job so to help with maximizing resource utilization, performance and allocation within one or more partitions of the DCI. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use. Finally, batch processing imposes to deploy all the pilots non interactively by including a job description specifying the configuration and execution parameters for the job's programs.\mrnote{Again, we use the word programs - I think if we define a task to be a set of instructions - then a job has a task - not a program. If task is distinctively different, don't use it, but we either should use the word ``executable'' or define what we mean when we say program}
