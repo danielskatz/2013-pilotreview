@@ -751,7 +751,13 @@ The first part of this Section offers an analysis of the minimal set of features
 \mtnote{I reviewed both definitions and I would suggest to use
   paradigm while leaving model for a technical use.}
 
-All the \pilotjob systems described in \S2 are engineered to allow for the execution of multiple types of workloads on Distributed Computing Resources (DCIs) such as, for example, Grids, Clouds or HPC facilities. This is achieved differently, depending on use cases, design and implementation choices, but also on the constraints imposed by the peculiarities of the targeted DCIs. Finding common denominators among these systems require an analysis on multiple dimensions.
+All the \pilotjob systems described in \S2 are engineered to allow for
+the execution of multiple types of workloads on Distributed Computing
+Resources (DCIs) such as, for example, Grids, Clouds or HPC
+facilities. This is achieved differently, depending on use cases,
+design and implementation choices, but also on the constraints imposed
+by the peculiarities of the targeted DCIs. Finding common denominators
+among these systems require an analysis along multiple dimensions.
 
 As seen in \S2.2.1, \jhanote{another example of why we should not use
   hard coded section/sub-section numbers. Please fix!} \pilotjobs can
@@ -937,15 +943,47 @@ In the following two subsections, a minimal set of terms related to these capabi
 The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. The definition of both concepts is context-dependent and several other terms needs to be clarified in order to offer a coherent terminology. Both `job' and `pilot' needs to be understood in the context of DCIs, the infrastructures where \pilotjobs systems are provisioned. DCIs offer compute, data and network resources and \pilotjobs allow for the users to consume those resources to execute the tasks of a workload.
 
 \begin{description}
-  \item[Task.] A set of operations encoded into one or more applications that, once executed, contribute for a user to achieve a given goal.
-  \item[Resource.] Finite, typed and physical quantity that is consumed by executing one or more workload. Compute cores, memory, storage space,  interconnects bandwidth are all examples of resources exposed by different types of DCIs. [cit, cit]
-  \item[Infrastructure.] Structured set of resources, possibly geographically and institutionally separated from the users consuming those resources to execute one or more workload. [cit, cit] Infrastructures can be logically partitioned, with a direct or indirect mapping onto individual pools of hardware. Here Infrastructure can be used also to indicate a Distributed Computing Infrastructure (DCI).
+
+\item[Task.] A set of operations encoded into one or more applications
+  that, once executed, contribute for a user to achieve a given
+  goal. \jhanote{I don't think a task has to be encoded into one or
+    more applications. Conversely, a single application can be
+    comprised of multiple tasks. I think we should try to steer the
+    definition of task towoards the workload sans any resource or
+    scheduling information.}
+
+\item[Resource.] Finite, typed and physical quantity that is consumed
+  by executing one or more workload. Compute cores, memory, storage
+  space, interconnects bandwidth are all examples of resources exposed
+  by different types of DCIs. [cit, cit] \jhanote{how about utilized
+    in lieu of consumed? Also an issue of active versus passive. Does
+    the resource execute the workload, or is the workload executed on
+    the resource. I prefer the latter}
+
+\item[Infrastructure.] Structured set of resources, possibly
+  geographically and institutionally separated from the users
+  consuming those resources to execute one or more workload. [cit,
+  cit] Infrastructures can be logically partitioned, with a direct or
+  indirect mapping onto individual pools of hardware. Here
+  Infrastructure can be used also to indicate a Distributed Computing
+  Infrastructure (DCI).
 \end{description}
 
-As seen in \S2, most of the DCIs where \pilotjobs frameworks are deployed adopt an execution model based on `queues', `batch systems' and `schedulers'. In such DCIs, jobs are scheduled and then executed by a batch system.
+As seen in \S2, most of the DCIs where \pilotjobs frameworks are
+deployed adopt an execution model based on `queues', `batch systems'
+and `schedulers'. In such DCIs, jobs are scheduled and then executed
+by a batch system. \jhanote{I think the arrow of determinism is: DCI
+  determines what is available and thus if scheduler and batch systems
+  are utilized.}
 
 \begin{description}
-  \item[Job.] One or more program executed on a given set of computing resources either directly by a user or indirectly by batch system.
+\item[Job.] One or more program executed on a given set of computing
+  resources either directly by a user or indirectly by batch system.
+  \jhanote{we need to relate job to task. How is a task different from
+    a job? One way of addressing this is that a job is simply a task,
+    or set of arbitarily coordinated tasks executing on a well defined
+    resource. The notion of a batch system should not be central to
+    the definition of a job, IMO}
 \end{description}
 
 \alnote{I am struggling a bit with the term deployment for allocating
@@ -984,18 +1022,53 @@ DCI.\mrnote{I am slightly uncomfortable with ``pilots are programs'' -
     paper}
 \end{description}
 
-Queuing allows for delayed execution as it allows for jobs to be submitted when not enough resources are immediately available for their execution. Scheduling introduces temporal and spatial constraints on the execution of each job so to help with maximizing resource utilization, performance and allocation within one or more partitions of the DCI. Commonly, such constraints include a limit on the amount of time that a job can take to complete its execution and on the amount of resources that it can use. Finally, batch processing imposes to deploy all the pilots non interactively by including a job description specifying the configuration and execution parameters for the job's programs.\mrnote{Again, we use the word programs - I think if we define a task to be a set of instructions - then a job has a task - not a program. If task is distinctively different, don't use it, but we either should use the word ``executable'' or define what we mean when we say program}
+\jhanote{I think the following paragraph can be removed. It is not
+  central to what we need to develop in this section} Queuing allows
+for delayed execution as it allows for jobs to be submitted when not
+enough resources are immediately available for their
+execution. Scheduling introduces temporal and spatial constraints on
+the execution of each job so to help with maximizing resource
+utilization, performance and allocation within one or more partitions
+of the DCI. Commonly, such constraints include a limit on the amount
+of time that a job can take to complete its execution and on the
+amount of resources that it can use. Finally, batch processing imposes
+to deploy all the pilots non interactively by including a job
+description specifying the configuration and execution parameters for
+the job's programs.\mrnote{Again, we use the word programs - I think
+  if we define a task to be a set of instructions - then a job has a
+  task - not a program. If task is distinctively different, don't use
+  it, but we either should use the word ``executable'' or define what
+  we mean when we say program}
 
-It should be noted that cloud-based DCIs introduce notable exceptions and differences in the way in which pilots can be provisioned.[cit, cit] Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for their provisioning. VMs can often be instantiated without waiting into a queue, and limitations on the execution time of a VM can be virtually absent. Clearly, overheads are introduced by having to deal with VMs and not simple jobs and the model adopted within a IaaS-based DCI to assign resources to each VM can affect the flexibility of the whole \pilotjob system. \mrnote{Though you avoid queue wait, you introduce VM start-up time overhead as well}[cit] A similar assessment could be done for a DCI deploying a PaaS model of cloud computing.[cit]
+\jhanote{this paragraph should be moved into section 5} It should be
+noted that cloud-based DCIs introduce notable exceptions and
+differences in the way in which pilots can be provisioned.[cit, cit]
+Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for
+their provisioning. VMs can often be instantiated without waiting into
+a queue, and limitations on the execution time of a VM can be
+virtually absent. Clearly, overheads are introduced by having to deal
+with VMs and not simple jobs and the model adopted within a IaaS-based
+DCI to assign resources to each VM can affect the flexibility of the
+whole \pilotjob system. \mrnote{Though you avoid queue wait, you
+  introduce VM start-up time overhead as well}[cit] A similar
+assessment could be done for a DCI deploying a PaaS model of cloud
+computing.[cit]
 
 Showing that the way in which a pilot is provisioned depends on the capabilities exposed by the targeted DCI illustrates the limits of choosing the term `job'. The use of that term is due to a historical contingency, the targeting of a specific class of DCIs in which the term `job' was --- and still is --- meaningful. Nonetheless, with the development of new types of DCI, the term `job' has become too restrictive, a situation that can lead to terminological and conceptual confusion, and to the use of synonyms for both the terms `pilot' and `pilotjob'.
 
 The term `pilot' is often associated to that of `placeholder'. This is a way to illustrate two of the distinctive capabilities that every pilot has to implement: Acting as a proxy for the resources acquired by running on a DCI, and executing tasks that consume those resources. Other two fundamental capabilities of a pilot are pulling or being push with the tasks to executed, and managing the data that are staged in and out before and after the execution of those tasks. Thanks to these capabilities, a pilot allows for a user or a group of users, depending on implementation details, to gain exclusive control over the binding and execution of her or their tasks.
 
 \begin{description}
-  \item[Placeholder.] A proxy for a bounded set of resources of a given infrastructure.
-  \item[Stage in and out.] Moving data payloads across one or more infrastructures --- e.g. input and output files.
-  \item[Pilot.] A placeholder running on a given infrastructure and capable of executing pushed and pulled tasks while managing data stage in and out. 
+  \item[Placeholder.] A proxy for a bounded set of resources of a
+    given infrastructure. \jhanote{is it a proxy for set of resources
+      or is it a proxy for the workload or job}
+  \item[Stage in and out.] Moving data payloads across one or more
+    infrastructures --- e.g. input and output files. \jhanote{this can
+      be safely removed. not needed}
+  \item[Pilot.] A placeholder running on a given infrastructure and
+    capable of executing pushed and pulled tasks while managing data
+    stage in and out. \jhanote{should it be placeholder job?}
+
 \end{description}
 
 From a terminology point of view, it should be noted that the term
@@ -1005,7 +1078,11 @@ pilot is also called `agent' and, in some cases,
 `pilotjob'. \mrnote{Is a Pilot really the same as an Agent? This gives
   me the heebie-jeebies}\jhanote{Heebie-jeebies being the technical
   term for uncomfortable :). Jokes aside, I too think there is a
-  difference between pilots and an Agent}
+  difference between pilots and an Agent}\jhanote{OK I see what Matteo
+  is trying to say, which is different from what is presented: The
+  point is that depending upon context, a pilot is also called an
+  agent, a pilotjob. The statement is not that a pilot is an agent
+  etc}
 
 %\onote{you introduce data as `resource'. why?} \mtnote{It is a direct consequence of defining resources as typed consumables while distinguishing them from an infrastructure as a whole. Data is a type of resource that might be consume by a task as much as the bandwidth of a specific type of (logical/physical) network.}
 
@@ -1027,17 +1104,59 @@ terms `pilot data' or `pilot network'. \jhanote{this should move to
 
 Once one or more pilots become available on the targeted infrastructures, users can start to use a \pilotjob system to execute their tasks. Users can assign their tasks to one or more pilots without having to deal with the job submission system of the infrastructure. How the assignment among tasks and pilots is performed is a matter of implementation. For example, a dedicated scheduler could be used or the tasks might be directly assigned by the user to the pilots. The simplification obtained by circumventing the job submission system of the infrastructure is one of the main responsible for the success of the \pilotjob systems. The overhead and lack of control imposed by a centralized job management system are bypassed allowing for a faster and more reliable execution of workloads. 
 
-The \pilotjob systems are said to implement multi-level scheduling because the access to the resources happens in at least two stages. A portion of the resources of an infrastructure are first assigned to a pilot and then consumed by one or more tasks. This is an important feature of \pilotjob systems because it allows for a task to be assigned to a pilot before it to be bound to the resources. This is why a \pilotjob system is said to allow for `late-binding' while a traditional job-submission system of an infrastructure would allow only for an early-binding, namely for a job to be bound to a resource... \mtnote{discussion on the definition and distinction between early and late binding is needed.}  
+The \pilotjob systems are said to implement multi-level scheduling
+because the access to the resources happens in at least two stages. A
+portion of the resources of an infrastructure are first assigned to a
+pilot and then consumed by one or more tasks. This is an important
+feature of \pilotjob systems because it allows for a task to be
+assigned to a pilot before it is bound to the resources. This is
+why a \pilotjob system is said to allow for `late-binding' while a
+traditional job-submission system of an infrastructure would allow
+only for an early-binding, namely for a job to be bound to a
+resource... \mtnote{discussion on the definition and distinction
+  between early and late binding is needed.}
+
+% jhanote{I have brought the above sentence down here. I think for ease
+%   of readability, once we start discussing binding we should continue
+%   onto early and late binding. Also in the definition of early and
+%   late binding, we should IMHO explicitly use the concept of ``when''
+%   a task is bound to a resource in order for it to be concrete.}
+
+\mtnote{yet another way to define early/late binding. I would suggest
+  to discuss about the definitions of these two concepts at our next
+  meeting before attempting to write any conclusive definition.}
+
+The act of assigning resources to tasks is called `binding'. Note how
+`binding' is defined in contrast to scheduling. \jhanote{I'd like to
+  suggest that tasks are bound to a resource not the other way
+  around. OK?}
+
+\jhanote{How about?} Assignment is the notion of commiting a task (or
+a pilot) to a specific resource. Binding is the process of
+constraining a task (or a pilot) at a specific point in time to a
+resource; Furthermore, scheduling is the process of commiting a task
+that has been bound to a resource to a specific execution queue. The
+order of these atomic operations may differ.
 
 \begin{description}
-  \item[Multi-level scheduling.] .
-  \item[Early binding.] .
-  \item[Late binding.] . 
+  \item[Early binding.] When a task is bound to a resource but not
+    the pilot that will run on that resource
+  \item[Late binding.] . When a task is assigned to a pilot that has
+    alrady been bound to a resource
+  \item[Multi-level scheduling.] The fact that there are multiple
+    temporal points and levels/entities (tasks or pilots) that undergo
+    binding scheduling decisions that need to be made. 
 \end{description}
 
-\mtnote{yet another way to define early/late binding. I would suggest to discuss about the definitions of these two concepts at our next meeting before attempting to write any conclusive definition.}
-
-\jhanote{For ease of readability, we should make explicit the difference between binding and scheduling here.}  The act of assigning resources to tasks is called `binding'. Note how `binding' is defined in contrast to scheduling.  \jhanote{I have brought the above sentence down here. I think for ease of readability, once we start discussing binding we should continue onto early and late binding. Also in the definition of early and late binding, we should  IMHO explicitly use the concept of ``when'' a task is bound to a resource in order for it to be concrete.}  The control exercised by the users on their placeholders depends on the amount of information they include when submitting their tasks to a pool. Users may fully specify how and where a task should be executed or may leave the manager and agents to evaluate those parameters for them. The former is called `early binding' as users decide in advance how and where to execute their tasks, the latter is called `late binding' because, at submission time, how and where a task will be executed is unspecified.
+ 
+The control exercised by the users on their placeholders depends on
+the amount of information they include when submitting their tasks to
+a pool. Users may fully specify how and where a task should be
+executed or may leave the manager and agents to evaluate those
+parameters for them. The former is called `early binding' as users
+decide in advance how and where to execute their tasks, the latter is
+called `late binding' because, at submission time, how and where a
+task will be executed is unspecified.
 
 Late binding requires specific capabilities. Manager(s) and agent(s) must be able to evaluate the requirements of the submitted tasks and maximize the efficiency of their binding depending on the peculiar properties, configuration and state of the resources made available through the placeholder(s). As such, in a late binding scenario, managers and agents may decide the amount of placeholders to use, the granularity of their partitions, the amount and type of the resources to allocate to the tasks and where such tasks should be executed. In an ideal late binding situation, users would be free only to specify high-level, resource-independent parameters for their tasks as, for example, the amount of time or money that should be spent for their execution. 
 
