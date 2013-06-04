@@ -1578,97 +1578,97 @@ AppLeS shows the power of the Master-Worker approach \aznote{too loaded?},
 but the following ``true'' \pilotjobs will show the flexibility/power
 that the \pilotjob approach offers.
 
-\subsubsection{AppLeS}
+%% \subsubsection{AppLeS}
 
-\textcolor{green}
-{
-\textbf{Structure}
-\begin{itemize}
-\item Functional description: core components -- X does that, Y does that, Z doest that.
-\item What applications were they designed for?
-\end{itemize}
-}
+%% \textcolor{green}
+%% {
+%% \textbf{Structure}
+%% \begin{itemize}
+%% \item Functional description: core components -- X does that, Y does that, Z doest that.
+%% \item What applications were they designed for?
+%% \end{itemize}
+%% }
 
-\textcolor{red}
-{
-\textbf{Usage of 'relevant' terms from section three}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
+%% \textcolor{red}
+%% {
+%% \textbf{Usage of 'relevant' terms from section three}
+%% \begin{itemize}
+%% \item Term 1 =
+%% \item Term 2 =
+%% \end{itemize}
+%% }
 
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
+%% \textcolor{blue}
+%% {
+%% \textbf{Mapping to table 1:}
+%% \begin{itemize}
+%% \item Pilot (Resource) Provisioning:
+%% \item Job-to-Resource (Pilot) Binding:
+%% \item Singe-/Multi-User pilots:
+%% \end{itemize}
+%% }
 
-AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
-of enhanced scheduling and resource selection capabilities.
-With AppLeS, application-level scheduling and resource selection are handled by a
-per-application \texttt{AppleS agent}.
-%\aznote{AppLeS agent covers resource discovery, resource selection,
-%  schedule generation, schedule selection, application execution,
-%  and schedule adaptation}
-An \texttt{AppLeS agent} roughly handles the \pilotjob functionality contained in
-\textit{\pilotjob agents} and \textit{managers}.  This includes resource
-selection, scheduling tasks to resources, and managing application execution.
-Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
-%.  In addition, an incomplete subset of
-%\pilotjob functionality such as application-scheduling is present in AppLeS.
-AppleS also contains features not fundamental to the \pilotjob paradigm, such
-as resource discovery via Grid resource discovery services and peformance
-modelling for resource selection.  The entire package thereby reduces the
-complexity of assigning tasks to resources from the user's point of view
-and enables applications to run in a more adaptive fashion.
+%% AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
+%% of enhanced scheduling and resource selection capabilities.
+%% With AppLeS, application-level scheduling and resource selection are handled by a
+%% per-application \texttt{AppleS agent}.
+%% %\aznote{AppLeS agent covers resource discovery, resource selection,
+%% %  schedule generation, schedule selection, application execution,
+%% %  and schedule adaptation}
+%% An \texttt{AppLeS agent} roughly handles the \pilotjob functionality contained in
+%% \textit{\pilotjob agents} and \textit{managers}.  This includes resource
+%% selection, scheduling tasks to resources, and managing application execution.
+%% Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
+%% %.  In addition, an incomplete subset of
+%% %\pilotjob functionality such as application-scheduling is present in AppLeS.
+%% AppleS also contains features not fundamental to the \pilotjob paradigm, such
+%% as resource discovery via Grid resource discovery services and peformance
+%% modelling for resource selection.  The entire package thereby reduces the
+%% complexity of assigning tasks to resources from the user's point of view
+%% and enables applications to run in a more adaptive fashion.
 
-The lack of a \textit{placeholder job} limits the functionality 
-of application-level scheduling, as tasks
-must wait in unpredictable resource manager queues before being executed,
-undermining the level of control.  For this reason, AppLeS
-is not a ``true'' \pilotjob system, as a \textit{placeholder}
-is required to enable fundamental \pilotjob functionality such as
-\textit{multi-level scheduling.}
-However, AppLeS has still been used to choose destinations
-for satellite image files, optimize the execution of data-parallel matrix
-calculations, distribute computational biology genetic searches 
-across resources with varying response/availability times, and
-analyze biochemical interactions while dynamically recreating
-schedules to account for changes in performance predictions.
-\aznote{Previous sentence to satisfy request for \pilotjob
-domain usage}
-\aznote{Should I put something here like 
-``AppLeS has been successful in these domains due in part
-to the usefulness of the M-W paradigm which \pilotjobs
-are based on, but the following ``True'' \pilotjobs
-illustrate the extended reach/power made available
-through a proper \pilotjob approach''?}
+%% The lack of a \textit{placeholder job} limits the functionality 
+%% of application-level scheduling, as tasks
+%% must wait in unpredictable resource manager queues before being executed,
+%% undermining the level of control.  For this reason, AppLeS
+%% is not a ``true'' \pilotjob system, as a \textit{placeholder}
+%% is required to enable fundamental \pilotjob functionality such as
+%% \textit{multi-level scheduling.}
+%% However, AppLeS has still been used to choose destinations
+%% for satellite image files, optimize the execution of data-parallel matrix
+%% calculations, distribute computational biology genetic searches 
+%% across resources with varying response/availability times, and
+%% analyze biochemical interactions while dynamically recreating
+%% schedules to account for changes in performance predictions.
+%% \aznote{Previous sentence to satisfy request for \pilotjob
+%% domain usage}
+%% \aznote{Should I put something here like 
+%% ``AppLeS has been successful in these domains due in part
+%% to the usefulness of the M-W paradigm which \pilotjobs
+%% are based on, but the following ``True'' \pilotjobs
+%% illustrate the extended reach/power made available
+%% through a proper \pilotjob approach''?}
 
-%% \aznote{Lack of multi-level scheduling asserted because even
-%% though AppLeS allows for application-level scheduling,
-%% it is still submitted to usual resource manager queues, not an internal
-%% ``pilot'' queue}
-%% Such enhancements
-%% are made in the ``true'' \pilotjob systems which succeed it,
-%% offering additional adaptibility and user-control over that
-%% made possible by AppLeS.
-\aznote{Early vs. late binding here -- I am not sure.  AppLeS generates
-a task-resource mapping early before jobs are even running + then sticks 
-to it making it ``early binding'' in my mind,
-even though it does so after profiling the application.  However, according
-to the vocab, if the manager/agents choose which resources will be used
-it's ``late binding''.  So that is what I will go with.}
+%% %% \aznote{Lack of multi-level scheduling asserted because even
+%% %% though AppLeS allows for application-level scheduling,
+%% %% it is still submitted to usual resource manager queues, not an internal
+%% %% ``pilot'' queue}
+%% %% Such enhancements
+%% %% are made in the ``true'' \pilotjob systems which succeed it,
+%% %% offering additional adaptibility and user-control over that
+%% %% made possible by AppLeS.
+%% \aznote{Early vs. late binding here -- I am not sure.  AppLeS generates
+%% a task-resource mapping early before jobs are even running + then sticks 
+%% to it making it ``early binding'' in my mind,
+%% even though it does so after profiling the application.  However, according
+%% to the vocab, if the manager/agents choose which resources will be used
+%% it's ``late binding''.  So that is what I will go with.}
 
-%\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
-%The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
+%% %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
+%% %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
-% -----------------------------------------------------------------------------
-%
+%% % -----------------------------------------------------------------------------
+%% %
 \subsubsection{MyCluster}
 
 \textcolor{red}
