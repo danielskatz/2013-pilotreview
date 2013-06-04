@@ -1650,102 +1650,174 @@ is required to enable fundamental \pilotjob functionality such as
 \textit{multi-level scheduling.}
 
 \paragraph{AppLeS Conclusion}
-\aznote{Not in the structure guide -- should we have this?}
+\aznote{Not in the structure guide -- should we have this?  If not,
+might be useful for us in ``real'' conclusion, so throwing in anyway...}
 AppLeS shows the power of the Master-Worker approach \aznote{too loaded?},
 but the following ``true'' \pilotjobs will show the flexibility/power
 that the \pilotjob approach offers.
 
-\subsubsection{AppLeS}
+%% \subsubsection{AppLeS}
 
-\textcolor{green}
-{
-\textbf{Structure}
-\begin{itemize}
-\item Functional description: core components -- X does that, Y does that, Z doest that.
-\item What applications were they designed for?
-\end{itemize}
-}
+%% \textcolor{green}
+%% {
+%% \textbf{Structure}
+%% \begin{itemize}
+%% \item Functional description: core components -- X does that, Y does that, Z doest that.
+%% \item What applications were they designed for?
+%% \end{itemize}
+%% }
 
-\textcolor{red}
-{
-\textbf{Usage of 'relevant' terms from section three}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
+%% \textcolor{red}
+%% {
+%% \textbf{Usage of 'relevant' terms from section three}
+%% \begin{itemize}
+%% \item Term 1 =
+%% \item Term 2 =
+%% \end{itemize}
+%% }
 
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
+%% \textcolor{blue}
+%% {
+%% \textbf{Mapping to table 1:}
+%% \begin{itemize}
+%% \item Pilot (Resource) Provisioning:
+%% \item Job-to-Resource (Pilot) Binding:
+%% \item Singe-/Multi-User pilots:
+%% \end{itemize}
+%% }
 
-AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
-of enhanced scheduling and resource selection capabilities.
-With AppLeS, application-level scheduling and resource selection are handled by a
-per-application \texttt{AppleS agent}.
-%\aznote{AppLeS agent covers resource discovery, resource selection,
-%  schedule generation, schedule selection, application execution,
-%  and schedule adaptation}
-An \texttt{AppLeS agent} roughly handles the \pilotjob functionality contained in
-\textit{\pilotjob agents} and \textit{managers}.  This includes resource
-selection, scheduling tasks to resources, and managing application execution.
-Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
-%.  In addition, an incomplete subset of
-%\pilotjob functionality such as application-scheduling is present in AppLeS.
-AppleS also contains features not fundamental to the \pilotjob paradigm, such
-as resource discovery via Grid resource discovery services and peformance
-modelling for resource selection.  The entire package thereby reduces the
-complexity of assigning tasks to resources from the user's point of view
-and enables applications to run in a more adaptive fashion.
+%% AppLeS is a \textit{pre-pilot} framework which allows software built using it to take advantage
+%% of enhanced scheduling and resource selection capabilities.
+%% With AppLeS, application-level scheduling and resource selection are handled by a
+%% per-application \texttt{AppleS agent}.
+%% %\aznote{AppLeS agent covers resource discovery, resource selection,
+%% %  schedule generation, schedule selection, application execution,
+%% %  and schedule adaptation}
+%% An \texttt{AppLeS agent} roughly handles the \pilotjob functionality contained in
+%% \textit{\pilotjob agents} and \textit{managers}.  This includes resource
+%% selection, scheduling tasks to resources, and managing application execution.
+%% Job-to-Resource \textit{binding} is handled automatically via the AppLeS agent.
+%% %.  In addition, an incomplete subset of
+%% %\pilotjob functionality such as application-scheduling is present in AppLeS.
+%% AppleS also contains features not fundamental to the \pilotjob paradigm, such
+%% as resource discovery via Grid resource discovery services and peformance
+%% modelling for resource selection.  The entire package thereby reduces the
+%% complexity of assigning tasks to resources from the user's point of view
+%% and enables applications to run in a more adaptive fashion.
 
-The lack of a \textit{placeholder job} limits the functionality 
-of application-level scheduling, as tasks
-must wait in unpredictable resource manager queues before being executed,
-undermining the level of control.  For this reason, AppLeS
-is not a ``true'' \pilotjob system, as a \textit{placeholder}
-is required to enable fundamental \pilotjob functionality such as
-\textit{multi-level scheduling.}
-However, AppLeS has still been used to choose destinations
-for satellite image files, optimize the execution of data-parallel matrix
-calculations, distribute computational biology genetic searches 
-across resources with varying response/availability times, and
-analyze biochemical interactions while dynamically recreating
-schedules to account for changes in performance predictions.
-\aznote{Previous sentence to satisfy request for \pilotjob
-domain usage}
-\aznote{Should I put something here like 
-``AppLeS has been successful in these domains due in part
-to the usefulness of the M-W paradigm which \pilotjobs
-are based on, but the following ``True'' \pilotjobs
-illustrate the extended reach/power made available
-through a proper \pilotjob approach''?}
+%% The lack of a \textit{placeholder job} limits the functionality 
+%% of application-level scheduling, as tasks
+%% must wait in unpredictable resource manager queues before being executed,
+%% undermining the level of control.  For this reason, AppLeS
+%% is not a ``true'' \pilotjob system, as a \textit{placeholder}
+%% is required to enable fundamental \pilotjob functionality such as
+%% \textit{multi-level scheduling.}
+%% However, AppLeS has still been used to choose destinations
+%% for satellite image files, optimize the execution of data-parallel matrix
+%% calculations, distribute computational biology genetic searches 
+%% across resources with varying response/availability times, and
+%% analyze biochemical interactions while dynamically recreating
+%% schedules to account for changes in performance predictions.
+%% \aznote{Previous sentence to satisfy request for \pilotjob
+%% domain usage}
+%% \aznote{Should I put something here like 
+%% ``AppLeS has been successful in these domains due in part
+%% to the usefulness of the M-W paradigm which \pilotjobs
+%% are based on, but the following ``True'' \pilotjobs
+%% illustrate the extended reach/power made available
+%% through a proper \pilotjob approach''?}
 
-%% \aznote{Lack of multi-level scheduling asserted because even
-%% though AppLeS allows for application-level scheduling,
-%% it is still submitted to usual resource manager queues, not an internal
-%% ``pilot'' queue}
-%% Such enhancements
-%% are made in the ``true'' \pilotjob systems which succeed it,
-%% offering additional adaptibility and user-control over that
-%% made possible by AppLeS.
-\aznote{Early vs. late binding here -- I am not sure.  AppLeS generates
-a task-resource mapping early before jobs are even running + then sticks 
-to it making it ``early binding'' in my mind,
-even though it does so after profiling the application.  However, according
-to the vocab, if the manager/agents choose which resources will be used
-it's ``late binding''.  So that is what I will go with.}
+%% %% \aznote{Lack of multi-level scheduling asserted because even
+%% %% though AppLeS allows for application-level scheduling,
+%% %% it is still submitted to usual resource manager queues, not an internal
+%% %% ``pilot'' queue}
+%% %% Such enhancements
+%% %% are made in the ``true'' \pilotjob systems which succeed it,
+%% %% offering additional adaptibility and user-control over that
+%% %% made possible by AppLeS.
+%% \aznote{Early vs. late binding here -- I am not sure.  AppLeS generates
+%% a task-resource mapping early before jobs are even running + then sticks 
+%% to it making it ``early binding'' in my mind,
+%% even though it does so after profiling the application.  However, according
+%% to the vocab, if the manager/agents choose which resources will be used
+%% it's ``late binding''.  So that is what I will go with.}
 
-%\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
-%The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
+%% %\aznote{\url{http://www.sc2000.org/techpapr/papers/pap.pap169.pdf} - Also consider this paper:
+%% %The AppLeS Parameter Sweep Template: User-Level Middleware for the Grid?}
 
-% -----------------------------------------------------------------------------
-%
+%% % -----------------------------------------------------------------------------
+%% %
+
+\subsubsection{MyCluster -- Rewritten}
+\paragraph{Rationale}
+The authors describe their system
+as a ``personal cluster'' with the goal of achieving on-demand,
+user-schedulable computing resources aligning closely with what is
+provided by our more formal definition of \pilotjobs -- in this case,
+the resources are spread across a national DCI.
+
+\paragraph{Design Goals}
+MyCluster was developed to allow users to submit and manage
+jobs across heterogeneous NSF TeraGrid resources in a uniform
+manner.  TeraGrid existed as a group of compute clusters
+connected by high-bandwidth links facilitating the movement
+of data, but with many different job deployment mechanisms
+requiring cluster-specific submission scripts.  MyCluster
+allowed all cluster resources to be submitted to via a
+\pilotjob-based approach.
+
+\paragraph{Applications}
+\aznote{There appear to only be synthetic benchmarks
+in cited paper; verify/dig up actual applications
+if this is the case}
+
+\paragraph{Deployment Scenarios (VO/multiuser)}
+\aznote{Still unsure exactly what to put here...  move TeraGrid
+details here from the design section?  But those details motivate the design...}
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+MyCluster was designed for and successfully executed on NSF TeraGrid
+resources, enabling large-scale cross-site submission of ensemble
+job submissions via its virtualized cluster interface.  
+This approach makes the \textit{multi-level scheduling} abilities
+of \pilotjobs explicit; rather than directly \textit{binding}
+to individual TeraGrid resources, users allow the virtual grid
+overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
+as a whole.
+
+\paragraph{Architecture \& Interface}
+MyCluster implements several \pilotjob analogues: the \texttt{Master
+  Node Manager}, which acts as a \textit{\pilotjob Manager}, the
+\texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
+\texttt{Job Proxies}, which act as \textit{placeholders}, and
+\texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob
+  \cus}.  Both resource provisioning and job-to-resource \textit{bindings}
+are handled manually by the end user.
+The end result is a complete \textit{basic \pilotjob system}, despite the
+authors of the system being constructed not having used the word ``pilot''
+once!~\cite{1652061}  
+
+Additional features above and beyond the \textit{basic \pilotjob system}
+concept include: the inclusion of a MyCluster
+\texttt{virtual login session}, which
+is commandline interface designed to allow users to interactively
+monitor the status of their \textit{placeholders} and \textit{\cus};
+the automatic recovery of placeholders after loss due to exceeding wallclock
+limitations or node reboots; and authentication of all TCP
+connections used in the system via 64-bit key encryption and
+GSI authentication mechanisms.
+
+\paragraph{MyCluster Conclusion}
+\aznote{Not in the structure guide -- should we have this?  If not,
+might be useful for us in ``real'' conclusion, so throwing in anyway...}
+MyCluster illustrates how an approach aimed at \textit{multi-level
+scheduling} by marshalling multiple heterogeneous resources lends
+itself perfectly to a \pilotjob-based approach.  The fact that
+the researchers behind it formed a complete \pilotjob system
+while working toward interoperability/uniform access is a testament
+to the usefulness of \pilotjobs in attacking these problems. 
+\aznote{I know this paragraph is bad, but wanted to start..}
+
 \subsubsection{MyCluster}
 
 \textcolor{red}
