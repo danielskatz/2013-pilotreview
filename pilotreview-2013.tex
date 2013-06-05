@@ -738,9 +738,9 @@ components/services?
 
 %\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and I doubt that it will be particularly useful to the reader. I think it would make sense to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the `building block' side), consisting of `agents' and `managers' at all? After all, PJs are `just' an instance of Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you Ole! Here a completely rewrite of the Section that tries to address the points you made.}
 
-The overview offered in \S2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same term referring to multiple concepts or the same concept named in different ways.
+The overview offered in \S2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same terms referring to multiple concepts or the same concept named in different ways.
 
-The first part of this Section offers an analysis of the minimal set of features and functionalities that are shared by different \pilotjob implementations. The terminology used in such an analysis is then defined in the second part of the Section. The set of well-defined terms so obtained constitute a vocabulary that remains consistent across different \pilotjob implementation. Both the minimal set of features and functionalities, and the  vocabulary here defined are leveraged in \S4 and \S5 to produce a comparative analysis of \pilotjobs frameworks.
+The first part of this Section offers an analysis of the minimal set of features and functionalities that are shared by different \pilotjob implementations. The terminology used in such an analysis is then defined in the second part of this Section. This well-defined set of terms provide a vocabulary that remains consistent across different \pilotjob implementation. Both the minimal set of features and functionalities, and the  vocabulary here defined are leveraged in \S4 and \S5 to produce a comparative analysis of \pilotjobs frameworks.
 
 % \mtnote{How we define the common vocabulary.}
 % \mtnote{Similarities/peculiarities among BJ implementations: potential topic to be discussed in Section 4?}
@@ -763,7 +763,7 @@ multiple dimensions.
 As seen in \S2.2.1, \pilotjobs can be analyzed according to multiple criteria,
 both functional and non-functional. In this Section, the focus is on the former
 as the latter are adapted by definition to each specific pilot implementations.
-Each \pilotjob system presents architectural, provision and execution 
+Each \pilotjob system exhibits architectural, provisioning and execution 
 characteristics that are distinctive of the \pilotjob paradigm itself.
 Isolating them means to outline the minimal set of concepts and terms that 
 have to apply to every \pilotjob implementation.
@@ -782,25 +782,25 @@ the last subsection of 2. What do you think?.}
 \jhanote{another example of why we should not use hard coded section/sub-
 section numbers. Please fix!}\mtnote{I do not have the lock on Section 2 so I cannot add the references to those Sections and Subsections. If the owners of that sections add the anchors I will be happy to use them here.}
 
-\jhanote{I'm not sure I agree with the very last bit of
-  the previous sentence. I think it would be more effective if we
-  could use terminology defined in section 2 namely funcional or
-  non-functional, and say we will discuss only functional features}\mtnote{
-  done}\\---\\
+%\jhanote{I'm not sure I agree with the very last bit of
+%  the previous sentence. I think it would be more effective if we
+%  could use terminology defined in section 2 namely funcional or
+%  non-functional, and say we will discuss only functional features}\mtnote{
+%  done}\\---\\
 
-\mrnote{"are necessary" - "have to" sounds awkward in this context}\mtnote{Done.} 
+%\mrnote{"are necessary" - "have to" sounds awkward in this context}\mtnote{Done.} 
+%
+%\jhanote{this is essentially a repeat of the previous paragraph; please 
+%merge/refine.}\mtnote{Done.}\\---\\
 
-\jhanote{this is essentially a repeat of the previous paragraph; please 
-merge/refine.}\mtnote{Done.}\\---\\
-
-At a high level of abstraction, for the execution of workloads all the
-\pilotjob systems introduced in \S2 leverages an architecture based on two
-separate but intercommunicating logical components: One related to the
+From a high level perspective,  all  \pilotjob systems introduced in \S2
+leverage a similar architecture based on two separate but intercommunicating
+logical components to accomplish workload execution:  one is related to the
 management of the workloads and their tasks, the other to the execution of the
 tasks on targeted resources. As it will be shown in \S4, the implementations of
-these two components greatly varies from system to system, with one or more
-elements responsible for specific functionalities both at application or
-infrastructure level. Nonetheless, the two architectural components can be
+these two components significantly vary from system to system, with one or more
+elements responsible for specific functionalities both on application as well as
+infrastructure level. Nevertheless, the two architectural components can be
 distinguished  across multiple types of \pilotjob systems.
 
 \alnote{should we assign a name to these two
@@ -811,14 +811,13 @@ distinguished  across multiple types of \pilotjob systems.
 For example, looking at the core \pilotjob systems introduced in
 \S2.2.2, the scheduler and dispatcher of Nimrod-G
 belong to the architectural component dedicated to workload management
-while the job-wrapper belongs to the component responsible for the
-execution of tasks. Similar examples can be given for the advanced
-\pilotjob systems and for the Pilot-Based frameworks.  GlideinWMS
+while the job-wrapper \onote{job-wrapper seems to be an arbitrary term?} belongs to the component responsible for task execution. Similar examples can be given for the advanced
+\pilotjob systems and for the Pilot-Based frameworks: GlideinWMS
 offers an extended set of features when compared to the scheduler and
 dispatcher of Nimrod-G, but all those features belong to the same,
 well-defined and self-contained architectural component --- i.e. the
 one in charge of managing the workloads. The same is valid for Corral
-or SWIFT. They both offer evolved functionalities and interfaces to
+or SWIFT: they both offer evolved functionalities and interfaces to
 manage workloads but, as such, they both are part of an architecture
 where workload management and task execution belongs to two distinct
 components. 
@@ -844,9 +843,11 @@ components.
   what is in \S2 or will be in \S4.} \jhanote{yes, need to be careful
   about how specific we get in order to make a point.}\\---\\
 
+\onote{Flow interrupted w.r.t., prev. paragraph}
+
 Communication and coordination are two fundamental characteristics of
-every distributed architecture but none of their specific paradigm is
-distinctive of \pilotjob systems. For example, as seen in \S2.2.2, the
+every distributed architecture but none of their specific paradigms is
+a distinctive feature of \pilotjob systems. For example, as seen in \S2.2.2, the
 \MW paradigm is very common among \pilotjobs. Functionally, the Master
 can be identified with the architectural component concerning workload
 management while the Worker with the one concerning the execution of
