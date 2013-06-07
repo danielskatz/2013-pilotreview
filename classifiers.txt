@@ -1,0 +1,30 @@
+Classifiers:
+
+* Pilot Jobs: Resource Acquisition | Workload Execution. (analogous to cloud)
+
+
+TODO: Describe classifiers, instead of putting in values right away. 
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!...
+
+Move away from the manual / automatic classifiers 
+
+Classifier 1: Resource Provisioning
+  - more general | 
+  - which component does it? 
+  - automatic or manual? 
+  - user-controllable or not?
+
+Classifier 2: Workload Execution and Management 
+  - which component(s) does it? What are the involved entities 
+  - Job-to-resource binding become sub-classifier
+
+Classifier 3: DATA
+  - how is data moved
+  - file based, other?
+  - is it user-controllable or not
+
+
+Classifiers: Non-Functional 
+  - 'brownie points' with the reviewers / practitioners might find this useful 
+  - Fault tolerance
+  - Security 
