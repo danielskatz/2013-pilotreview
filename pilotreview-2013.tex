@@ -852,7 +852,7 @@ distinct components.
 
 The Workload Manager and the Task Executor are separate and well-defined
 architectural components that communicate and coordinate in order to exchange
-tasks, input and output files and related data. While communication and
+tasks, input and output files, and related data. While communication and
 coordination are two fundamental characteristics of every distributed
 architecture, none of their specific paradigms is a distinctive feature of
 \pilotjob systems. For example, as seen in \S2.2.2, the \MW paradigm is very
@@ -989,41 +989,58 @@ the end of the revision process so to avoid multiple rewrite of the list.}
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
 
-\jhanote{Ideally we should have a table of terms and a diagram showing
-  their relationship. I see two ways of organizing the terms: the
-  first involves defining terms based upon which of the two
-  functional categories we have discussed so far they fall under, (i)
-  execution management, workload management, C-C sub-system, or (ii)
-  Pilot provisioning, data staging or task dispatch.}\\---\\
+\jhanote{Ideally we should have a table of terms and a diagram showing their
+  relationship. I see two ways of organizing the terms: the first involves
+  defining terms based upon which of the two functional categories we have
+  discussed so far they fall under, (i) execution management, workload
+  management, C-C sub-system, or (ii) Pilot provisioning, data staging or task
+  dispatch.}\mtnote{Why not having both: column 1 with the list of terms,
+  column   2 named `capability', and column 3 named `Architecture'. For each 
+  term, we have for column 2 this list of possible values: [Pilot 
+  provisioning, data management, task dispatch]. For column 3 we have this 
+  list of possible values: [Work Manager (WM), Job Executor (JE)]. Yes, C-C is 
+  not in the list of possible values of Colum 3 by design ;) Once we will have 
+  agreed on the table I will put it together in \LaTeX. }\\---\\
 
-The name `\pilotjob' indicates the primary role played by the concepts of `pilot' and `job' in this type of system. The definition of both concepts is context-dependent and several other terms needs to be clarified in order to offer a coherent terminology. Both `job' and `pilot' needs to be understood in the context of DCIs, the infrastructures where \pilotjobs systems are provisioned. DCIs offer compute, data and network resources and \pilotjobs allow for the users to consume those resources to execute the tasks of a workload.
+The name `\pilotjob' indicates the primary role played by the concepts of
+`pilot' and `job' in this type of system. The definition of both concepts is
+context-dependent and several other terms needs to be clarified in order to
+offer a coherent terminology. Both `job' and `pilot' needs to be understood in
+the context of DCIs, the infrastructures where \pilotjobs systems are
+provisioned. DCIs offer compute, data and network resources and \pilotjobs 
+allow for the users to utilize those resources to execute the tasks of a 
+workload.
 
 \begin{description}
 
-\item[Task.] A set of operations encoded into one or more applications
-  that, once executed, contribute for a user to achieve a given
-  goal. \jhanote{I don't think a task has to be encoded into one or
-    more applications. Conversely, a single application can be
-    comprised of multiple tasks. I think we should try to steer the
-    definition of task towoards the workload sans any resource or
-    scheduling information.}
+\item[Workload.] A set of tasks that if executed on an infrastructure 
+contribute for a user to achieve a goal.
 
-\item[Resource.] Finite, typed and physical quantity that is consumed
-  by executing one or more workload. Compute cores, memory, storage
-  space, interconnects bandwidth are all examples of resources exposed
-  by different types of DCIs. [cit, cit] \jhanote{how about utilized
-    in lieu of consumed? Also an issue of active versus passive. Does
-    the resource execute the workload, or is the workload executed on
-    the resource. I prefer the latter}
+\item[Task.] A set of operations that are part of a workload and are encoded
+into one or more programs. \jhanote{I don't think a task has to be encoded into
+one or more applications. Conversely, a single application can be  comprised of
+multiple tasks. } \mtnote{Apologies, I meant programs.} \jhanote{I think we
+should try to steer the definition of task towoards the workload sans any
+resource or scheduling information.} \mtnote{Done.}
 
-\item[Infrastructure.] Structured set of resources, possibly
-  geographically and institutionally separated from the users
-  consuming those resources to execute one or more workload. [cit,
-  cit] Infrastructures can be logically partitioned, with a direct or
-  indirect mapping onto individual pools of hardware. Here
-  Infrastructure can be used also to indicate a Distributed Computing
-  Infrastructure (DCI).
-\end{description}
+\item[Resource.] Finite, typed and physical quantity utilized when executing 
+one or more workloads. Compute cores, data storage space, or bandwidth are all 
+examples of resources commonly utilized by running workloads\jhanote{how about 
+utilized in lieu of consumed?} \mtnote{Done. I might still have some spurious 
+`consume' around the subsection but I will try to clean it up.} \jhanote{Also 
+an issue of active versus passive. Does the resource execute the workload, or 
+is the workload executed on the  resource. I prefer the latter} \mtnote{I 
+agree. I believe that in the narrow meaning we give to resources it should be 
+the latter. Does this comment still apply to the revised version of the 
+definition? BTW, I am not sure I like the last sentence ending with `pools' 
+but I know I like the meaning it should convey.}
+
+\item[Infrastructure.] Structured set of resources, possibly geographically and
+institutionally separated from the users utilizing those resources to execute
+one or more workload. [cit, cit] Infrastructures can be logically partitioned,
+with a direct or indirect mapping onto individual pools of hardware. Commonly,
+Infrastructure can be used also to indicate a Distributed Computing
+Infrastructure (DCI). \end{description}
 
 As seen in \S2, most of the DCIs where \pilotjobs frameworks are
 deployed adopt an execution model based on `queues', `batch systems'
@@ -1032,7 +1049,8 @@ by a batch system.
 
 \jhanote{I think the arrow of determinism is: DCI
   determines what is available and thus if scheduler and batch systems
-  are utilized.}\\---\\
+  are utilized.} \mtnote{I am not sure I understand the comment, apologies.}
+  \\---\\
 
 \begin{description}
 \item[Job.] One or more program executed on a given set of computing
