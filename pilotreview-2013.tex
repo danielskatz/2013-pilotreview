@@ -812,18 +812,18 @@ distinguished  across multiple types of \pilotjob systems.
   the others?}\\---\\
 
 For example, looking at the core \pilotjob systems introduced in
-\S2.2.2, the scheduler and dispatcher of Nimrod-G
-belong to the architectural component dedicated to workload management
-while the job-wrapper \onote{job-wrapper seems to be an arbitrary term?} belongs to the component responsible for task execution. Similar examples can be given for the advanced
-\pilotjob systems and for the Pilot-Based frameworks: GlideinWMS
-offers an extended set of features when compared to the scheduler and
-dispatcher of Nimrod-G, but all those features belong to the same,
-well-defined and self-contained architectural component --- i.e. the
-one in charge of managing the workloads. The same is valid for Corral
-or SWIFT: they both offer evolved functionalities and interfaces to
-manage workloads but, as such, they both are part of an architecture
-where workload management and task execution belongs to two distinct
-components. 
+\S2.2.2, the scheduler and dispatcher of Nimrod-G belong to the
+architectural component dedicated to workload management while the
+job-wrapper belongs to the component responsible for task
+execution. Similar examples can be given for the advanced \pilotjob
+systems and for the Pilot-Based frameworks: GlideinWMS offers an
+extended set of features when compared to the scheduler and dispatcher
+of Nimrod-G, but all those features belong to the same, well-defined
+and self-contained architectural component --- i.e. the one in charge
+of managing the workloads. The same is valid for Corral or SWIFT: they
+both offer evolved functionalities and interfaces to manage workloads
+but, as such, they both are part of an architecture where workload
+management and task execution belongs to two distinct components.
 
 \mrnote{I suggest we use section labels and not hardcode the
   section numbers - as you can see, this has already created problems
@@ -847,6 +847,8 @@ components.
   about how specific we get in order to make a point.}\\---\\
 
 \onote{Flow interrupted w.r.t., prev. paragraph}
+
+\onote{job-wrapper seems to be an arbitrary term?} 
 
 Communication and coordination are two fundamental characteristics of
 every distributed architecture but none of their specific paradigms is
@@ -889,7 +891,7 @@ in some cases, also a communication model. Moreover, \MW is applied to a non-fix
   than try to all inclusive/exhaustive}\mtnote{This is still in progress. To summarize the checkpoint of our discussion: assigning Communication/Coordination to a sub-system would mean to move C-C into an architectural component of PJ. In so doing we would incur into an over-specification of the minimal PJ architecture. After all, C-C does not necessarily need to belong to an independent, well-defined architectural component of PJ, it could be a feature implemented in the Workload manager and the task executor. The paragraph opens stating the fundamental nature of C-C and goes on explaining that no specific pattern for both Cs is required.}\\---\\
 
 The architectural properties of \pilotjob systems support a distinctive
-execution strategy \jhanote{paradigm?} with benefits for both the
+execution strategy  with benefits for both the
 compute performance and for the task submission process. The tasks of
 a workload are bound to one or more pilots without having to be
 directly scheduled on the DCI's job management system. Furthermore,
