@@ -816,12 +816,9 @@ both offer evolved functionalities and interfaces to manage workloads
 but, as such, they both are part of an architecture where workload
 management and task execution belongs to two distinct components.
 
-\jhanote{I have no idea how the later part of this paragraph (starting
-  ``Communiction and coordination..'') has become duplicated.  Is the
-  intent for the next paragraph to be the actual paragraph?}  The
-Workload Manager and the Task Executor are separate and well-defined
-architectural components that communicate and coordinate in order to
-exchange tasks, input and output files, and related data.
+The Workload Manager and the Task Executor are separate and
+well-defined architectural components that communicate and coordinate
+in order to exchange tasks, input and output files, and related data.
 Communication and coordination are two fundamental characteristics of
 every distributed architecture but none of their specific paradigms is
 a distinctive feature of \pilotjob systems. For example, as seen in
@@ -915,11 +912,6 @@ get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
 want to add them to the list of criteria in what is now 2.2.1 and will become 
 the last subsection of 2. What do you think?.} 
 
-\mrnote{I suggest we use section labels and not hardcode the section
-  numbers - as you can see, this has already created problems in the
-  first paragraph because we changed section 2.2.1 to 2.3 and this was
-  not captured by this section} \jhanote{Melissa: Could you do the
-  needful please?}
 
 \alnote{maybe mention
   explicit what these components are in the GlideinWMS case?  Also it
@@ -936,30 +928,8 @@ the last subsection of 2. What do you think?.}
   will be in \S4.} \jhanote{yes, need to be careful about how specific
   we get in order to make a point.}
 
-\jhanote{I know the onus is on me to say/be specific, but I somehow am
-  uncomfortable with the implication that \pilotjobs are just
-  implementation of M-W. I think the difference is more
-  ``associative'' than ``causative'', or M-W as obvious, simple choice
-  than a necessary choice...}\alnote{+1}\mtnote{I think the new
-  version of the section addresses this concern. I see at least two
-  choices here: either we find out one or more \pilotjob systems that
-  does not leverage a \MW paradigm or we say how it could be
-  implemented differently and we give an example. I am happy to defer
-  to your combined experience for both choosing the argumentative line
-  and outlining a couple of examples in one or the other direction.}
 
-\mtnote{AL/all: any suggestions to fill these dots --- see note
-  above?}\mrnote{I think there are two sides to this: not just that
-  M-W implies a specific distribution of capabilities but that M-W can
-  be used to apply to a non-fixed set of capabilities. For instance,
-  M-W is used to refer to applications, frameworks, architectures,
-  etc, as such, a clear definition of M-W does not exist. The ellipses
-  marks can be filled in an easier manner if we change the sentence to
-  be positive from its currently negative state. For example, as SJ
-  says above M-W can be ``associative'' - i.e. ``while the M-W concept
-  can be applied to Pilot-Jobs, it's ambiguity and wide-range of
-  capabilities make it difficult to define as a necessity for a PJ
-  system.''}\mtnote{I have incorporated your comment in the paragraph
+\mtnote{I have incorporated your comment in the paragraph
   above. Please note that a closure is still needed as it is not
   strong enough to argue that \MW is too ambiguous to be necessary. A
   simple rebuttal would be: make it less ambiguous and you will see
@@ -1006,20 +976,16 @@ PJ system we currently know of uses data staging}\mtnote{I changed the term `sta
 \jhanote{I think all the functionality of PJs is predicated on the
   following core capability: enable the decoupling between assigning a
   workload from the spatial/temporal execution properties of its
-  execution. Should this get mentioned somewhere in core
-  functionality?} \mtnote{The previous paragraph is a first attempt
-  to address this comment. More details will follow when late binding
+  execution. In condor, this is mentioned as ``separating between job
+  scheduling and resource''. This get mentioned somewhere in core
+  functionality?} \mtnote{The previous paragraph is a first attempt to
+  address this comment. More details will follow when late binding
   will be properly defined.}
 
 
-\onote{job-wrapper seems to be an arbitrary term?}\mtnote{Is the the
-  term used in Section 2. Before using it I checked and found it used
-  in this Nimrod-G paper  (http://arxiv.org/ftp/cs/papers/0009/0009021.pdf)}
-
-\onote{Flow interrupted w.r.t., prev. paragraph}\mtnote{I am not sure
-  I got the comment right but, if so, I added a `cap' to the beginning
-  of the following paragraph to avoid a sudden change of
-  topic.}
+\mtnote{Is the the term used in Section 2. Before using it I checked
+  and found it used in this Nimrod-G paper
+  (http://arxiv.org/ftp/cs/papers/0009/0009021.pdf)}
 
 
 \subsection{Terms and Definitions}
