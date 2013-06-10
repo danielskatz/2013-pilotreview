@@ -782,9 +782,6 @@ get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
 want to add them to the list of criteria in what is now 2.2.1 and will become 
 the last subsection of 2. What do you think?.} 
 
-\jhanote{another example of why we should not use hard coded section/sub-
-section numbers. Please fix!}\mtnote{I do not have the lock on Section 2 so I cannot add the references to those Sections and Subsections. If the owners of that sections add the anchors I will be happy to use them here.}\\---\\
-
 %\jhanote{I'm not sure I agree with the very last bit of
 %  the previous sentence. I think it would be more effective if we
 %  could use terminology defined in section 2 namely funcional or
@@ -807,13 +804,6 @@ both on application as well as infrastructure level. Nevertheless, the two
 architectural components can be consistently distinguished and isolated across 
 multiple types of \pilotjob systems.
 
-\alnote{should we assign a name to these two
-  components?}
-
-\mtnote{\MW? ;) I see that later on you use `Workload manager' and
-  `task executor'. Would you be happy with them? Would the
-  others?}\\---\\
-
 For example, looking at the core \pilotjob systems introduced in
 \S2.2.2, the scheduler and dispatcher of Nimrod-G belong to the
 architectural component dedicated to workload management while the
@@ -827,35 +817,6 @@ of managing the workloads. The same is valid for Corral or SWIFT: they
 both offer evolved functionalities and interfaces to manage workloads
 but, as such, they both are part of an architecture where workload
 management and task execution belongs to two distinct components.
-
-\mtnote{In absence of further comments, for now I have used those
-  terms.}\\---\\
-
-\mrnote{I suggest we use section labels and not hardcode the
-  section numbers - as you can see, this has already created problems
-  in the first paragraph because we changed section 2.2.1 to 2.3 and
-  this was not captured by this section}\jhanote{Melissa: Could you do
-  the needful please?}
-
-\alnote{maybe mention
-  explicit what these components are in the GlideinWMS case?  Also it
-  would be good to explain what makes these systems
-  advanced.}\mtnote{Would that not be a repetition of \S2? If we need
-  more details I would add them there.}
-
-\alnote{Without getting into some more analysis for Corral
-  and Swift, the value by stating that they have a workload manager
-  and task executor is limited.}\mtnote{At this level of abstraction,
-  the point to make is that those two components are there and
-  separated. All the rest would be too specific. We can add details
-  about Corral and Swift implementations but then we risk to repeat
-  what is in \S2 or will be in \S4.} \jhanote{yes, need to be careful
-<<<<<<< HEAD
-  about how specific we get in order to make a point.}\\---\\
-
-\onote{Flow interrupted w.r.t., prev. paragraph}
-
-\onote{job-wrapper seems to be an arbitrary term?} 
 
 Communication and coordination are two fundamental characteristics of
 every distributed architecture but none of their specific paradigms is
@@ -873,16 +834,6 @@ flexibility makes \MW a viable choice for implementing \pilotjobs but
 not one of its defining characteristics. After all, \pilotjobs system
 with an highly capable task executors and workload managers could be
 easily conceived.
-
-\onote{job-wrapper seems to be an arbitrary term?}\mtnote{Is the the
-  term used in Section 2. Before using it I checked and found it used
-  in this Nimrod-G paper
-  (http://arxiv.org/ftp/cs/papers/0009/0009021.pdf)}
-
-\onote{Flow interrupted w.r.t., prev. paragraph}\mtnote{I am not sure
-  I got the comment right but, if so, I added a `cap' to the beginning
-  of the following paragraph to avoid a sudden change of
-  topic.}\\---\\
 
 The Workload Manager and the Task Executor are separate and
 well-defined architectural components that communicate and coordinate
@@ -902,41 +853,6 @@ implementing \pilotjobs but not one of its defining
 characteristics. After all, \pilotjobs system with highly capable task
 executors and workload managers could be easily conceived.
 
-\jhanote{I know the onus is on me to say/be specific, but I somehow am
-  uncomfortable with the implication that \pilotjobs are just
-  implementation of M-W. I think the difference is more
-  ``associative'' than ``causative'', or M-W as obvious, simple choice
-  than a necessary choice...}\alnote{+1}\mtnote{I think the new
-  version of the section addresses this concern. I see at least two
-  choices here: either we find out one or more \pilotjob systems that
-  does not leverage a \MW paradigm or we say how it could be
-  implemented differently and we give an example. I am happy to defer
-  to your combined experience for both choosing the argumentative line
-  and outlining a couple of examples in one or the other direction.}
-
-\mtnote{AL/all: any suggestions to fill these dots ---
-  see note above?}\mrnote{I think there are two sides to this: not
-  just that M-W implies a specific distribution of capabilities but
-  that M-W can be used to apply to a non-fixed set of
-  capabilities. For instance, M-W is used to refer to applications,
-  frameworks, architectures, etc, as such, a clear definition of M-W
-  does not exist. The ellipses marks can be filled in an easier manner
-  if we change the sentence to be positive from its currently negative
-  state. For example, as SJ says above M-W can be ``associative'' -
-  i.e. ``while the M-W concept can be applied to Pilot-Jobs, it's
-  ambiguity and wide-range of capabilities make it difficult to define
-  as a necessity for a PJ system.''}\mtnote{I have incorporated your comment in the paragraph above. Please note that a closure is still needed as it is not strong enough to argue that \MW is too ambiguous to be necessary. A simple rebuttal would be: make it less ambiguous and you will see that it is indeed necessary because, after all, there is no plausible alternative. I still think this specific paragraph is too thin so please feel free to add/change/edit directly the paragraph.}
-
-\jhanote{echoing what Melissa says, it might be more productive to introduce
-  C-C as a sub-system at par with Workload Management and Execution Management
-  rather than try to all inclusive/exhaustive}\mtnote{This is still in
-  progress. To summarize the checkpoint of our discussion: assigning
-  Communication/Coordination to a sub-system would mean to move C-C into an
-  architectural component of PJ. In so doing we might incur into an over-
-  specification of the minimal PJ architecture. After all, C-C does not
-  necessarily need to belong to an independent, well-defined architectural
-  component of PJ, it could be a feature implemented in the Workload manager 
-  and the task executor.}\\---\\
 
 The architectural properties of \pilotjob systems support a
 distinctive execution strategy with benefits for both the compute
@@ -950,20 +866,6 @@ requires dedicated capabilities both for performing the binding of
 tasks to pilots but also for the provisioning of pilots so that they
 can be assigned portions of the DCI's resources.
 
-\alnote{Is communication and coordination a component or a characteristic? (
-see P* paper)}\mtnote{Done.}
-
-\alnote{maybe cleanly separating architecture and the way the workload
-  is scheduled/binding takes place.}\mtnote{that `support' is meant to
-  make that separation. Care to elaborate, suggest or editing?}\\---\\
-
-% \jhanote{I understand the spirit/intent of the above and I agree with
-%   the separation (in fact it is very useful), however calling the
-%   deployment of the framework itself a functionality of the framework
-%   is somewhat circular (i understand the appeal of circular logic is
-%   that it has no loose ends :) however we should still fix.. )}
-% \mtnote{Right! The following paragraph should address this error.}
-
 The minimal set of capabilities that needs to be implemented by a \pilotjob
 system in order to execute workloads involves \pilot provision, data management
 and task dispatching. The procedures to provision pilots depends on how each
@@ -976,18 +878,6 @@ example, a Virtual Machine on the so called Infrastructures as a Service IaaS
 and output files to and from one or more pilots. Implementations of data 
 management capabilities vary greatly across \pilotjob implementations as much 
 as the task dispatching procedure.
-
-\alnote{is data staging minimal?}\mtnote{if you think about it as input/output 
-files not strictly - even if basically you would be able to run very little 
-science without them. When you consider staging of data in general, then I 
-believe it becomes minimal.}\mrnote{What do you mean by considering it in 
-general? I could stage my files manually to-and-fro and only worry about the 
-Pilots as task executors using hardcoded paths to my data. Data-staging 
-therefore would not be required, especially on machines with shared filesystems
-}\mtnote{Apologies, my comment was too generic. I mean that it is not only about staging I/O files, it can also be about staging the pilot/agent --- BJ auto-install into a venv for example --- or downloading the the executable used for the task. If we take away the very possibility to move data --- whatever function they play into the execution `model' of PJ --- in and out I think that the PJ system as a whole cannot work. If you think this explanation is convincing, we might want to transform it into a small paragraph.}
-
-\mrnote{I just want to make sure if we call data staging necessary that every 
-PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}\\---\\
 
 In the following two subsections, a minimal set of terms related to these 
 capabilities is defined. Here a summary of this set:
@@ -1015,6 +905,98 @@ the end of the revision process so to avoid multiple rewrite of the list.}
   \end{itemize}
 \end{itemize}
 
+
+\mtnote{In absence of further comments, for now I have used those
+  terms.}\\---\\
+
+\mrnote{I suggest we use section labels and not hardcode the
+  section numbers - as you can see, this has already created problems
+  in the first paragraph because we changed section 2.2.1 to 2.3 and
+  this was not captured by this section}\jhanote{Melissa: Could you do
+  the needful please?}
+
+\alnote{maybe mention
+  explicit what these components are in the GlideinWMS case?  Also it
+  would be good to explain what makes these systems
+  advanced.}\mtnote{Would that not be a repetition of \S2? If we need
+  more details I would add them there.}
+
+\alnote{Without getting into some more analysis for Corral and Swift,
+  the value by stating that they have a workload manager and task
+  executor is limited.}\mtnote{At this level of abstraction, the point
+  to make is that those two components are there and separated. All
+  the rest would be too specific. We can add details about Corral and
+  Swift implementations but then we risk to repeat what is in \S2 or
+  will be in \S4.} \jhanote{yes, need to be careful about how specific
+  we get in order to make a point.}\\---\\
+
+\jhanote{I know the onus is on me to say/be specific, but I somehow am
+  uncomfortable with the implication that \pilotjobs are just
+  implementation of M-W. I think the difference is more
+  ``associative'' than ``causative'', or M-W as obvious, simple choice
+  than a necessary choice...}\alnote{+1}\mtnote{I think the new
+  version of the section addresses this concern. I see at least two
+  choices here: either we find out one or more \pilotjob systems that
+  does not leverage a \MW paradigm or we say how it could be
+  implemented differently and we give an example. I am happy to defer
+  to your combined experience for both choosing the argumentative line
+  and outlining a couple of examples in one or the other direction.}
+
+\mtnote{AL/all: any suggestions to fill these dots --- see note
+  above?}\mrnote{I think there are two sides to this: not just that
+  M-W implies a specific distribution of capabilities but that M-W can
+  be used to apply to a non-fixed set of capabilities. For instance,
+  M-W is used to refer to applications, frameworks, architectures,
+  etc, as such, a clear definition of M-W does not exist. The ellipses
+  marks can be filled in an easier manner if we change the sentence to
+  be positive from its currently negative state. For example, as SJ
+  says above M-W can be ``associative'' - i.e. ``while the M-W concept
+  can be applied to Pilot-Jobs, it's ambiguity and wide-range of
+  capabilities make it difficult to define as a necessity for a PJ
+  system.''}\mtnote{I have incorporated your comment in the paragraph
+  above. Please note that a closure is still needed as it is not
+  strong enough to argue that \MW is too ambiguous to be necessary. A
+  simple rebuttal would be: make it less ambiguous and you will see
+  that it is indeed necessary because, after all, there is no
+  plausible alternative. I still think this specific paragraph is too
+  thin so please feel free to add/change/edit directly the paragraph.}
+
+\jhanote{echoing what Melissa says, it might be more productive to
+  introduce C-C as a sub-system at par with Workload Management and
+  Execution Management rather than try to all
+  inclusive/exhaustive}\mtnote{This is still in progress. To summarize
+  the checkpoint of our discussion: assigning
+  Communication/Coordination to a sub-system would mean to move C-C
+  into an architectural component of PJ. In so doing we might incur
+  into an over- specification of the minimal PJ architecture. After
+  all, C-C does not necessarily need to belong to an independent,
+  well-defined architectural component of PJ, it could be a feature
+  implemented in the Workload manager and the task executor.}\\---\\
+
+
+\alnote{maybe cleanly separating architecture and the way the workload
+  is scheduled/binding takes place.}\mtnote{that `support' is meant to
+  make that separation. Care to elaborate, suggest or editing?}\\---\\
+
+% \jhanote{I understand the spirit/intent of the above and I agree with
+%   the separation (in fact it is very useful), however calling the
+%   deployment of the framework itself a functionality of the framework
+%   is somewhat circular (i understand the appeal of circular logic is
+%   that it has no loose ends :) however we should still fix.. )}
+% \mtnote{Right! The following paragraph should address this error.}
+
+\alnote{is data staging minimal?}\mtnote{if you think about it as input/output 
+files not strictly - even if basically you would be able to run very little 
+science without them. When you consider staging of data in general, then I 
+believe it becomes minimal.}\mrnote{What do you mean by considering it in 
+general? I could stage my files manually to-and-fro and only worry about the 
+Pilots as task executors using hardcoded paths to my data. Data-staging 
+therefore would not be required, especially on machines with shared filesystems
+}\mtnote{Apologies, my comment was too generic. I mean that it is not only about staging I/O files, it can also be about staging the pilot/agent --- BJ auto-install into a venv for example --- or downloading the the executable used for the task. If we take away the very possibility to move data --- whatever function they play into the execution `model' of PJ --- in and out I think that the PJ system as a whole cannot work. If you think this explanation is convincing, we might want to transform it into a small paragraph.}
+
+\mrnote{I just want to make sure if we call data staging necessary that every 
+PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}\\---\\
+
 \jhanote{I think all the functionality of PJs is predicated on the
   following core capability: enable the decoupling between assigning a
   workload from the spatial/temporal execution properties of its
@@ -1022,6 +1004,17 @@ the end of the revision process so to avoid multiple rewrite of the list.}
   functionality?} \mtnote{The previous paragraph is a first attempt
   to address this comment. More details will follow when late binding
   will be properly defined.}\\---\\
+
+
+\onote{job-wrapper seems to be an arbitrary term?}\mtnote{Is the the
+  term used in Section 2. Before using it I checked and found it used
+  in this Nimrod-G paper  (http://arxiv.org/ftp/cs/papers/0009/0009021.pdf)}
+
+\onote{Flow interrupted w.r.t., prev. paragraph}\mtnote{I am not sure
+  I got the comment right but, if so, I added a `cap' to the beginning
+  of the following paragraph to avoid a sudden change of
+  topic.}\\---\\
+
 
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
