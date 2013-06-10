@@ -780,11 +780,6 @@ that have to apply to every \pilotjob implementation.
 % aspects that directly depend on the characteristics and capabilities taken 
 % here into consideration.
 
-\alnote{the previous characteristics are not defined yet. Are they suppose to 
-get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might 
-want to add them to the list of criteria in what is now 2.2.1 and will become 
-the last subsection of 2. What do you think?.} 
-
 %\jhanote{I'm not sure I agree with the very last bit of
 %  the previous sentence. I think it would be more effective if we
 %  could use terminology defined in section 2 namely funcional or
@@ -913,13 +908,18 @@ the end of the revision process so to avoid multiple rewrite of the list.}
 
 
 \mtnote{In absence of further comments, for now I have used those
-  terms.}\\---\\
+  terms.}
 
-\mrnote{I suggest we use section labels and not hardcode the
-  section numbers - as you can see, this has already created problems
-  in the first paragraph because we changed section 2.2.1 to 2.3 and
-  this was not captured by this section}\jhanote{Melissa: Could you do
-  the needful please?}
+\alnote{the previous characteristics are not defined yet. Are they suppose to 
+get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might 
+want to add them to the list of criteria in what is now 2.2.1 and will become 
+the last subsection of 2. What do you think?.} 
+
+\mrnote{I suggest we use section labels and not hardcode the section
+  numbers - as you can see, this has already created problems in the
+  first paragraph because we changed section 2.2.1 to 2.3 and this was
+  not captured by this section} \jhanote{Melissa: Could you do the
+  needful please?}
 
 \alnote{maybe mention
   explicit what these components are in the GlideinWMS case?  Also it
@@ -934,7 +934,7 @@ the end of the revision process so to avoid multiple rewrite of the list.}
   the rest would be too specific. We can add details about Corral and
   Swift implementations but then we risk to repeat what is in \S2 or
   will be in \S4.} \jhanote{yes, need to be careful about how specific
-  we get in order to make a point.}\\---\\
+  we get in order to make a point.}
 
 \jhanote{I know the onus is on me to say/be specific, but I somehow am
   uncomfortable with the implication that \pilotjobs are just
@@ -977,12 +977,12 @@ the end of the revision process so to avoid multiple rewrite of the list.}
   into an over- specification of the minimal PJ architecture. After
   all, C-C does not necessarily need to belong to an independent,
   well-defined architectural component of PJ, it could be a feature
-  implemented in the Workload manager and the task executor.}\\---\\
+  implemented in the Workload manager and the task executor.}
 
 
 \alnote{maybe cleanly separating architecture and the way the workload
   is scheduled/binding takes place.}\mtnote{that `support' is meant to
-  make that separation. Care to elaborate, suggest or editing?}\\---\\
+  make that separation. Care to elaborate, suggest or editing?}
 
 % \jhanote{I understand the spirit/intent of the above and I agree with
 %   the separation (in fact it is very useful), however calling the
@@ -1001,7 +1001,7 @@ therefore would not be required, especially on machines with shared filesystems
 }\mtnote{Apologies, my comment was too generic. I mean that it is not only about staging I/O files, it can also be about staging the pilot/agent --- BJ auto-install into a venv for example --- or downloading the the executable used for the task. If we take away the very possibility to move data --- whatever function they play into the execution `model' of PJ --- in and out I think that the PJ system as a whole cannot work. If you think this explanation is convincing, we might want to transform it into a small paragraph.}
 
 \mrnote{I just want to make sure if we call data staging necessary that every 
-PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}\\---\\
+PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}
 
 \jhanote{I think all the functionality of PJs is predicated on the
   following core capability: enable the decoupling between assigning a
@@ -1009,7 +1009,7 @@ PJ system we currently know of uses data staging}\mtnote{I changed the term `sta
   execution. Should this get mentioned somewhere in core
   functionality?} \mtnote{The previous paragraph is a first attempt
   to address this comment. More details will follow when late binding
-  will be properly defined.}\\---\\
+  will be properly defined.}
 
 
 \onote{job-wrapper seems to be an arbitrary term?}\mtnote{Is the the
@@ -1019,7 +1019,7 @@ PJ system we currently know of uses data staging}\mtnote{I changed the term `sta
 \onote{Flow interrupted w.r.t., prev. paragraph}\mtnote{I am not sure
   I got the comment right but, if so, I added a `cap' to the beginning
   of the following paragraph to avoid a sudden change of
-  topic.}\\---\\
+  topic.}
 
 
 \subsection{Terms and Definitions}
@@ -1036,7 +1036,7 @@ PJ system we currently know of uses data staging}\mtnote{I changed the term `sta
   provisioning, data management, task dispatch]. For column 3 we have this 
   list of possible values: [Work Manager (WM), Job Executor (JE)]. Yes, C-C is 
   not in the list of possible values of Colum 3 by design ;) Once we will have 
-  agreed on the table I will put it together in \LaTeX. }\\---\\
+  agreed on the table I will put it together in \LaTeX. }
 
 The name `\pilotjob' indicates the primary role played by the concepts of
 `pilot' and `job' in this type of system. The definition of both concepts is
@@ -1083,7 +1083,6 @@ by a batch system.
 \jhanote{I think the arrow of determinism is: DCI
   determines what is available and thus if scheduler and batch systems
   are utilized.} \mtnote{I am not sure I understand the comment, apologies.}
-  \\---\\
 
 \begin{description}
 \item[Job.] A container for one or more programs, a description of their properties and indications on how they should be executed.
@@ -1128,7 +1127,7 @@ what they are and so on. Pilots do something, they are executed and they run.
 Within them, they may have an agent - if so we want to implement that specific
 set of capabilities - they can have an execution subsystem, they can be just
 scripts that download and unpack other programs. As such I believe they qualify
-as programs. What do you think?}\\---\\
+as programs. What do you think?}
 
 % \begin{description}
 % \item[Provisioning.] Leveraging the capabilities offered by a DCI to
@@ -1197,7 +1196,7 @@ when reasoning about multiple \pilotjob systems.
    from what is presented: The point is that depending upon context, a
    pilot is also called an agent, a pilotjob. The statement is not
    that a pilot is an agent etc} \mtnote{Yep, exactly so. I attempted
-   a revision but please feel free to edit if still unclear.}\\---\\
+   a revision but please feel free to edit if still unclear.}
 
 %\onote{you introduce data as `resource'. why?} \mtnote{It is a direct
 %\consequence of defining resources as typed consumables while distinguishing
@@ -1215,7 +1214,7 @@ terms `pilot data' or `pilot network'.
 
 \jhanote{this should move to much later in this section or maybe to Section 5.
 Must bring clarity to compute before opening other cans of worms} \mtnote{OK,
-let's wait for the Section draft to be complete to decide.} \\---\\
+let's wait for the Section draft to be complete to decide.} 
 
 % \jhanote{Is is necessary that users ``own'' the agents. can the
 %   manager not own the placeholder?}\mtnote{The landscape should be
@@ -2607,7 +2606,7 @@ deploying a PaaS model of cloud computing.[cit]
 \mrnote{Though you avoid queue wait, you introduce VM start-up time overhead 
 as well}
 
-\jhanote{the previous paragraph should be moved into section 5}\\---\\
+\jhanote{the previous paragraph should be moved into section 5}
 
 
 \subsection{revisit the ``myths''}
