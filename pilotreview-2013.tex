@@ -270,9 +270,11 @@ As a fault tolerant mechanism, many \pilotjob systems monitor
 failed jobs and have the ability to restart them within the given 
 time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-g,nilsson2011atlas}. 
 
-\subsection{landscape of pilot-jobs}
+\subsection{landscape of pilot-jobs}\label{ssec:landscape}
 
-q\subsection{Historical Context}
+\jhanote{I will write}
+
+\subsection{Historical Context}\label{ssec:history}
 
 In order to appreciate \pilotjobs, we outline the evolution of
 \pilot-like capabilities ultimately leading to the creation of the
@@ -280,7 +282,7 @@ first actual \pilotjob. We present a brief chronological order of
 \pilotjob-like systems, beginning with simple Master-Worker-based
 applications through advanced workload management systems.
 
-\subsubsection*{The Evolution of \pilotjobs} 
+\subsubsection*{The Evolution of \pilotjobs}\label{sssec:evolution}
 
 \jhanote{if we are calling this ``evolution'' we should be sure to
   discuss topics in chronological order. Melissa, can you please check
@@ -378,7 +380,7 @@ the creation of the modern idea of \pilots.
 % Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
 
 \subsection{Informal Description of Pilot-Job Systems}
-\label{sec:pj}
+\label{ssec:informal}
 
 \note{talk about tool development, unregulated cottage industry - Why
   is that? diverse low-level infrastructure, no incentive to use
@@ -637,7 +639,7 @@ AMGA.
 \end{itemize}
 
 
-\subsection{Evaluation Criteria}
+\subsection{Evaluation Criteria}\label{ssec:evaluation}
 
 % \jhanote{I don't think we should say we ``assess'' according to these
 %   different criteria, but we should say that a brief survey of the
@@ -763,13 +765,14 @@ also on the constraints imposed by the peculiarities of the targeted DCIs.
 Finding common denominators among these systems require an analysis along
 multiple dimensions.
 
-As seen in \S2.2.1, \pilotjobs can be analyzed according to multiple criteria,
-both functional and non-functional. In this Section, the focus is on the former
-as the latter are adapted by definition to each specific pilot implementations.
-Each \pilotjob system exhibits architectural, provisioning and execution 
+As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed
+according to multiple criteria, both functional and non-functional. In
+this Section, the focus is on the former as the latter are adapted by
+definition to each specific pilot implementations.  Each \pilotjob
+system exhibits architectural, provisioning and execution
 characteristics that are distinctive of the \pilotjob paradigm itself.
-Isolating them means to outline the minimal set of concepts and terms that 
-have to apply to every \pilotjob implementation.
+Isolating them means to outline the minimal set of concepts and terms
+that have to apply to every \pilotjob implementation.
 
 % Other aspects as interfaces, packaging, security, performance or scalability
 % are here not considered because they are not directly relevant to the
@@ -805,7 +808,7 @@ architectural components can be consistently distinguished and isolated across
 multiple types of \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
-\S2.2.2, the scheduler and dispatcher of Nimrod-G belong to the
+\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
 architectural component dedicated to workload management while the
 job-wrapper belongs to the component responsible for task
 execution. Similar examples can be given for the advanced \pilotjob
@@ -818,12 +821,16 @@ both offer evolved functionalities and interfaces to manage workloads
 but, as such, they both are part of an architecture where workload
 management and task execution belongs to two distinct components.
 
-\jhanote{I have no idea how this paragraph has become duplicated.  Is
-  the intent for the next paragraph to be the actual paragraph?}
+\jhanote{I have no idea how the later part of this paragraph (starting
+  ``Communiction and coordination..'') has become duplicated.  Is the
+  intent for the next paragraph to be the actual paragraph?}  The
+Workload Manager and the Task Executor are separate and well-defined
+architectural components that communicate and coordinate in order to
+exchange tasks, input and output files, and related data.
 Communication and coordination are two fundamental characteristics of
 every distributed architecture but none of their specific paradigms is
 a distinctive feature of \pilotjob systems. For example, as seen in
-\S2.2.2, the \MW paradigm is very common among
+\S\ref{ssec:informal}, the \MW paradigm is very common among
 \pilotjobs. Functionally, the Master can be identified with the
 architectural component concerning workload management while the
 Worker with the one concerning the execution of the workload's
@@ -837,23 +844,20 @@ not one of its defining characteristics. After all, \pilotjobs system
 with an highly capable task executors and workload managers could be
 easily conceived.
 
-The Workload Manager and the Task Executor are separate and
-well-defined architectural components that communicate and coordinate
-in order to exchange tasks, input and output files, and related
-data. While communication and coordination are two fundamental
-characteristics of every distributed architecture, none of their
-specific paradigms is a distinctive feature of \pilotjob systems. For
-example, as seen in \S2.2.2, the \MW paradigm is very common among
-\pilotjobs. Functionally, the Master can be identified with the
-Workload Manager while the Worker with task Executor. However, the \MW
-paradigm usually implies a specific distribution of capabilities
-between Master and Worker, and, in some cases, also a communication
-pattern. Moreover, \MW is applied to a non-fixed set of capabilities
-while referring not only to architectures but also to frameworks and
-applications. This flexibility makes \MW a viable choice for
-implementing \pilotjobs but not one of its defining
-characteristics. After all, \pilotjobs system with highly capable task
-executors and workload managers could be easily conceived.
+% While communication and coordination are two fundamental
+% characteristics of every distributed architecture, none of their
+% specific paradigms is a distinctive feature of \pilotjob systems. For
+% example, as seen in \S2.2.2, the \MW paradigm is very common among
+% \pilotjobs. Functionally, the Master can be identified with the
+% Workload Manager while the Worker with task Executor. However, the \MW
+% paradigm usually implies a specific distribution of capabilities
+% between Master and Worker, and, in some cases, also a communication
+% pattern. Moreover, \MW is applied to a non-fixed set of capabilities
+% while referring not only to architectures but also to frameworks and
+% applications. This flexibility makes \MW a viable choice for
+% implementing \pilotjobs but not one of its defining
+% characteristics. After all, \pilotjobs system with highly capable task
+% executors and workload managers could be easily conceived.
 
 
 The architectural properties of \pilotjob systems support a
