@@ -1047,23 +1047,20 @@ workload.
 contribute for a user to achieve a goal.
 
 \item[Task.] A set of operations that are part of a workload and are encoded
-into one or more programs. \jhanote{I don't think a task has to be encoded into
-one or more applications. Conversely, a single application can be  comprised of
-multiple tasks. } \mtnote{Apologies, I meant programs.} \jhanote{I think we
-should try to steer the definition of task towoards the workload sans any
-resource or scheduling information.} \mtnote{Done.}
+into one or more programs.
 
-\item[Resource.] Finite, typed and physical quantity utilized when executing 
-one or more workloads. Compute cores, data storage space, or bandwidth are all 
-examples of resources commonly utilized by running workloads\jhanote{how about 
-utilized in lieu of consumed?} \mtnote{Done. I might still have some spurious 
-`consume' around the subsection but I will try to clean it up.} \jhanote{Also 
-an issue of active versus passive. Does the resource execute the workload, or 
-is the workload executed on the  resource. I prefer the latter} \mtnote{I 
-agree. I believe that in the narrow meaning we give to resources it should be 
-the latter. Does this comment still apply to the revised version of the 
-definition? BTW, I am not sure I like the last sentence ending with `pools' 
-but I know I like the meaning it should convey.}
+
+\item[Resource.] Finite, typed and physical quantity utilized when
+  executing one or more workloads. Compute cores, data storage space,
+  or bandwidth are all examples of resources commonly utilized by
+  running workloads \jhanote{Also an issue of active versus
+    passive. Does the resource execute the workload, or is the
+    workload executed on the resource. I prefer the latter} \mtnote{I
+    agree. I believe that in the narrow meaning we give to resources
+    it should be the latter. Does this comment still apply to the
+    revised version of the definition? BTW, I am not sure I like the
+    last sentence ending with `pools' but I know I like the meaning it
+    should convey.}
 
 \item[Infrastructure.] Structured set of resources, possibly geographically and
 institutionally separated from the users utilizing those resources to execute
@@ -1093,9 +1090,6 @@ In the context of a \pilotjob system, jobs and tasks are functionally analogous 
     or set of arbitrarily coordinated tasks executing on a well defined
     resource.} \mtnote{First attempt done. I this we need to keep them separated because of the double role played by a pilot - both a job and a task executor. We cannot write this at this point of the Subsection because we still need to introduce the concept of pilot.}
 
-\jhanote{The notion of a batch system should not be central to
-    the definition of a job, IMO} \mtnote{Done.}
-
 \alnote{I am struggling a bit with the term deployment for allocating
   resources and executing the agent on these....} \alnote{What is the
   difference between provisioning and deployment?} \mtnote{I would
@@ -1107,11 +1101,6 @@ In the context of a \pilotjob system, jobs and tasks are functionally analogous 
   the same as scheduling, it is more like arranging. Deployment is
   about ``setting up T=0 requirements, which could be software
   environment, input/data dependencies, as well as resources.''} \mtnote{+1}
-
-\alnote{I would distinguish between a scheduler and resource
-  manager. A scheduler is the planning component of the resource
-  management system.} \mtnote{It should be done. I now use `resource
-  manager system' later on.}\\---\\
 
 The capabilities exposed by the job submission system of the targeted
 infrastructure determine also the submission process of pilots. Pilots
@@ -1153,9 +1142,6 @@ as programs. What do you think?}\\---\\
 % by including a job description  specifying the configuration and execution
 % parameters for the job's programs.
 
-\jhanote{I think the previous paragraph can be removed. It is not
-  central to what we need to develop in this section} \mtnote{done.}
-
 \mrnote{Again, we use the word programs - I think
   if we define a task to be a set of instructions - then a job has a
   task - not a program. If task is distinctively different, don't use
@@ -1189,26 +1175,23 @@ exclusive control over the binding and execution of her or their tasks.
   %   infrastructures --- e.g. input and output files. \jhanote{this can
   %     be safely removed. not needed}
   \item[Pilot.] A placeholder running on a given infrastructure and
-    capable of executing pushed and pulled tasks while managing data. \jhanote{should it be placeholder job?} \mtnote{It would be consistent but do we need it? If we go for it we will need to use also placeholder VM.} 
+    capable of executing pushed and pulled tasks while managing data. 
 
 \end{description}
 
-From a terminology point of view, the term `pilot' as here defined is named
-differently across multiple \pilotjob systems. Depending upon context, in
-addition to the term `placeholder', pilot is also named `agent' and, in some
-cases, `pilotjob'. All these terms should be considered synonyms and their use
-to indicate the same concept is a clear indication that a minimal and
-consistent vocabulary is needed when reasoning about multiple \pilotjob 
-systems.
+From a terminology point of view, the term `pilot' as defined here is
+named differently across multiple \pilotjob systems. Depending upon
+context, in addition to the term `placeholder', pilot is also named
+`agent' and, in some cases, `pilotjob'. All these terms should be
+considered synonyms and their use to indicate the same concept is a
+clear indication that a minimal and consistent vocabulary is needed
+when reasoning about multiple \pilotjob systems.
 
-\mrnote{Is a Pilot really the same as an Agent? This gives me the heebie-
-jeebies} \jhanote{Heebie-jeebies being the technical term for uncomfortable :).
-Jokes aside, I too think there is a difference between pilots and an Agent}
-\jhanote{OK I see what Matteo is trying to say, which is different from what is
-presented: The point is that depending upon context, a pilot is also called an
-agent, a pilotjob. The statement is not that a pilot is an agent etc}
-\mtnote{Yep, exactly so. I attempted a revision but please feel free to edit if
-still unclear.}\\---\\
+ \jhanote{OK I see what Matteo is trying to say, which is different
+   from what is presented: The point is that depending upon context, a
+   pilot is also called an agent, a pilotjob. The statement is not
+   that a pilot is an agent etc} \mtnote{Yep, exactly so. I attempted
+   a revision but please feel free to edit if still unclear.}\\---\\
 
 %\onote{you introduce data as `resource'. why?} \mtnote{It is a direct
 %\consequence of defining resources as typed consumables while distinguishing
@@ -1267,10 +1250,6 @@ bound to a pilot before it is in turn bound to the resources.
 
 % The act of assigning resources to tasks is called `binding'. Note how
 % `binding' is defined in contrast to scheduling. 
-
-\jhanote{I'd like to
-  suggest that tasks are bound to a resource not the other way
-  around. OK?} \mtnote{Yep, that was part of a old version.}
 
 \jhanote{How about?} Assignment is the notion of commiting a task (or
 a pilot) to a specific resource. Binding is the process of
