@@ -1041,10 +1041,7 @@ with a direct or indirect mapping onto individual pools of hardware. Commonly,
 Infrastructure can be used also to indicate a Distributed Computing
 Infrastructure (DCI). \end{description}
 
-As seen in \S2, most of the DCIs where \pilotjobs frameworks are
-deployed adopt an execution model based on `queues', `batch systems'
-and `schedulers'. In such DCIs, jobs are scheduled and then executed
-by a batch system. 
+As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize `queues', `batch systems' and `schedulers'. In such DCIs, jobs are scheduled and then executed by a batch system.
 
 \jhanote{I think the arrow of determinism is: DCI
   determines what is available and thus if scheduler and batch systems
@@ -1056,10 +1053,10 @@ by a batch system.
 
 In the context of a \pilotjob system, jobs and tasks are functionally analogous but qualitatively different. Functionally, both jobs and tasks are a set of programs with metadata but the term `task' is used when reasoning about workloads while `job' is used in relation to a specific type of infrastructure where such a container can be executed. Accordingly, tasks are here considered as the functional units of a workload while jobs as a way to execute programs on a given infrastructure. It should be noted that the two terms can be used interchangeably when considered outside the context of \pilotjob systems. Workloads are encoded into jobs when they have to be directly executed on infrastructures that support or require that type of container.
 
-\jhanote{we need to relate job to task. How is a task different from
-    a job? One way of addressing this is that a job is simply a task,
-    or set of arbitrarily coordinated tasks executing on a well defined
-    resource.} \mtnote{First attempt done. I this we need to keep them separated because of the double role played by a pilot - both a job and a task executor. We cannot write this at this point of the Subsection because we still need to introduce the concept of pilot.}
+% \jhanote{we need to relate job to task. How is a task different from
+%     a job? One way of addressing this is that a job is simply a task,
+%     or set of arbitrarily coordinated tasks executing on a well defined
+%     resource.} \mtnote{First attempt done. I this we need to keep them separated because of the double role played by a pilot - both a job and a task executor. We cannot write this at this point of the Subsection because we still need to introduce the concept of pilot.}
 
 \alnote{I am struggling a bit with the term deployment for allocating
   resources and executing the agent on these....} \alnote{What is the
