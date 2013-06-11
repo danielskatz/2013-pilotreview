@@ -1766,16 +1766,25 @@ available beyond their original design scope.
 PanDA has been used to process data and jobs relating to ATLAS, which is
 a particle detector at the Large Hadron Collider.  Approximately
 several hundred thousand jobs a day are managed \aznote{depending on source, 
-\texttt{``Distributed processing and analysis of ATLAS
-experimental data'' 2011 paper} says 100k+, atlas panda pilot in operation
+``Distributed processing and analysis of ATLAS
+experimental data'' 2011 paper says 100k+, atlas panda pilot in operation
 paper says 40-50k}, which handle
-simulation, analysis, and other work.  Cloud capabilities have been used as part
+simulation, analysis, and other work.  
+
+\paragraph{Deployment Scenarios (VO/multiuser)}
+PaNDA has been deployed as the WMS system for ATLAS.  \aznote{Elaborate}
+\aznote{Per-user/per-working group reference made in slides, follow-up}
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+PanDA began as a specialized \pilotjob for the ATLAS grid, and has been extended
+into a generalized \pilotjob which is capable of working across other grids
+as well as HPC and cloud resources.  \aznote{list other grids, clouds}
+Cloud capabilities have been used as part
 of Helix Nebula \texttt{presentation, cite?} (CloudSigma, T-Systems, ATOS) as well
-as in FutureGrid and the Synnefo cloud, extending the reach of PaNDA to
+as in the FutureGrid and Synnefo clouds, extending the reach of PaNDA to
 cloud queues.  \aznote{Have not currently found papers making explicit use of Cloud,
 just as a  ``supported'' feature}
-\paragraph{Deployment Scenarios (VO/multiuser)}
-\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+
 \paragraph{Architecture \& Interface}
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
 jobs with \pilots in addition to handling data management.
@@ -1800,7 +1809,7 @@ allows for additional, automatic data
 management by replicating popular input data to underutilized resources
 for later computations.
 
-\paragraph{AppLeS Conclusion}
+\paragraph{PanDA Conclusion}
 
 \textcolor{red}
 {
