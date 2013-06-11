@@ -1127,22 +1127,26 @@ the terms `pilot' and `pilotjob'.
 
 The term `pilot' is often associated to that of `placeholder'. This is a way 
 to illustrate two of the distinctive capabilities that every pilot has to 
-implement: Acting as a proxy for the resources acquired by running on a DCI, 
-and executing tasks that utilize those resources. Other two fundamental 
-capabilities of a pilot are pulling or being push with the tasks to execute, 
-and managing the data that are staged in and out before and after the 
-execution of those tasks. Thanks to these capabilities, a pilot allows for a 
-user or a group of users, depending on implementation details, to gain 
-exclusive control over the binding and execution of her or their tasks.
+implement: Acquiring bounded set of resources by running on a DCI, and 
+executing tasks that utilize them. Other two fundamental capabilities of a 
+pilot are pulling or being push with the tasks to execute, and managing the 
+data that are staged in and out before and after the execution of those tasks. 
+Thanks to these capabilities, a pilot allows for a user or a group of users, 
+depending on implementation details, to gain exclusive control over the 
+binding and execution of her or their tasks.
 
 \begin{description}
-  \item[Placeholder.] A proxy for a bounded set of resources of a
-    given infrastructure. \jhanote{is it a proxy for set of resources
-      or is it a proxy for the workload or job} \mtnote{In my mental model it is a proxy for resources. It holds the office of resources, it is a proxy between who needs resources and the resources themselves. It can have that role because the resources are first assigned to it and once it holds them it can let others use them.}
+  % \item[Placeholder.] A proxy for a bounded set of resources of a
+  % given infrastructure. \jhanote{is it a proxy for set of resources
+  % or is it a proxy for the workload or job} \mtnote{In my mental model it is 
+  % a proxy for resources. It holds the office of resources, it is a proxy 
+  % between who needs resources and the resources themselves. It can have that 
+  % role because the resources are first assigned to it and once it holds them 
+  % it can let others use them.}
   % \item[Stage in and out.] Moving data payloads across one or more
   %   infrastructures --- e.g. input and output files. \jhanote{this can
   %     be safely removed. not needed}
-  \item[Pilot.] A placeholder running on a given infrastructure and
+  \item[Pilot.] A resource placeholder running on a given infrastructure and
     capable of executing pushed and pulled tasks while managing data. 
 
 \end{description}
@@ -1204,7 +1208,16 @@ pilot and then to one or more tasks for consumption. This is an important
 feature of \pilotjob systems because it allows for a task to be 
 bound to a pilot before it is in turn bound to the resources.
 
-\mtnote{The new description of early/late binding goes here}  
+The binding of tasks to pilots depends on the state of the pilot. A pilot is
+inactive until it is executed on a DCI, active after that. Early binding
+indicates the binding of a task to an inactive pilot, late binding to an active
+one. The binding process in itself is referred to as scheduling. Early binding
+is useful to increase the flexibility with which pilots are deployed. By
+knowing in advance the properties of the tasks that are bound to a pilot
+specific deployment decisions can be made. Late binding is critical in assuring
+high throughput by allowing for tasks to be executed without waiting in a queue
+or waiting for a specific container - for example a job or a VM - to be
+instantiated.
 
 % jhanote{I have brought the above sentence down here. I think for ease
 %   of readability, once we start discussing binding we should continue
@@ -1219,233 +1232,23 @@ bound to a pilot before it is in turn bound to the resources.
 % The act of assigning resources to tasks is called `binding'. Note how
 % `binding' is defined in contrast to scheduling. 
 
-\jhanote{How about?} Assignment is the notion of commiting a task (or
-a pilot) to a specific resource. Binding is the process of
-constraining a task (or a pilot) at a specific point in time to a
-resource; Furthermore, scheduling is the process of commiting a task
-that has been bound to a resource to a specific execution queue. The
-order of these atomic operations may differ.
+% \jhanote{How about?} Assignment is the notion of commiting a task (or
+% a pilot) to a specific resource. Binding is the process of
+% constraining a task (or a pilot) at a specific point in time to a
+% resource; Furthermore, scheduling is the process of commiting a task
+% that has been bound to a resource to a specific execution queue. The
+% order of these atomic operations may differ.
 
 \begin{description}
-  \item[Early binding.] When a task is bound to a resource but not
-    the pilot that will run on that resource
-  \item[Late binding.] . When a task is assigned to a pilot that has
-    alrady been bound to a resource
-  \item[Multi-level scheduling.] The fact that there are multiple
-    temporal points and levels/entities (tasks or pilots) that undergo
-    binding scheduling decisions that need to be made. 
+  \item[Multi-level scheduling.] Scheduling tasks and pilots by means of different schedulers and in a different chronological order.  
+  \item[Early binding.] Binding one or more tasks to an inactive pilot.
+  \item[Late binding.] Binding one or more tasks to an active pilot.
 \end{description}
 
-% The control exercised by the users on their placeholders depends on
-% the amount of information they include when submitting their tasks to
-% a pool. Users may fully specify how and where a task should be
-% executed or may leave the manager and agents to evaluate those
-% parameters for them. The former is called `early binding' as users
-% decide in advance how and where to execute their tasks, the latter is
-% called `late binding' because, at submission time, how and where a
-% task will be executed is unspecified.
-
-% Late binding requires specific capabilities. Manager(s) and agent(s) must be able to evaluate the requirements of the submitted tasks and maximize the efficiency of their binding depending on the peculiar properties, configuration and state of the resources made available through the placeholder(s). As such, in a late binding scenario, managers and agents may decide the amount of placeholders to use, the granularity of their partitions, the amount and type of the resources to allocate to the tasks and where such tasks should be executed. In an ideal late binding situation, users would be free only to specify high-level, resource-independent parameters for their tasks as, for example, the amount of time or money that should be spent for their execution. 
-
-% \subsection{Different components of the Landscape}
-
-% \mtnote{The idea is to focus this subsection on the relationship between \pilotjob and the environment - re infrastructure - where its agents are scheduled and executed. The analysis should focus on the set of capabilities that pertain exclusively - at least in theory - to each domain. This would outline functionally and qualitatively the `landscape' of \pilotjob and offer a base for the critical analysis of the \pilotjobs implementations in \S 4. The idea would be to show how implementations choose ad hoc solutions depending on the specific characteristic of their landscape, both in terms of compensating for their limitations or exploiting their peculiarities. }
-
-% \begin{itemize}
-
-%     \item Resource Types
-
-%         \begin{itemize}
-%             \item HTC Grids
-%             \item HPC Grids
-%             \item Virtualized Environments (Clouds)
-%             \item Hybrids, Cloud-bursting, etc.
-%         \end{itemize}
-
-%     \item Organizational Structures
-
-%         \begin{itemize}
-%             \item Virtual Organizations
-%             \item "The XSEDE Model"
-%         \end{itemize}
-
-%     \item Software and Services \mtnote{this subsection would focus specifically on this item}
-
-%         \begin{itemize}
-%             \item Single-site, local workload mgmt. systems (HPC schedulers)
-%             \item Single-site endpoint services (e.g., GRAM, CREAM)
-%             \item Multi-site workload mgmt. systems (meta-scheduler)
-%             \item File transfer services
-%             \item Metadata services
-%         \end{itemize}
-
-%     \item Access Mechanisms
-
-%         \begin{itemize}
-%           \item API 
-%             \item CMD Line tools
-%             \item Gateways (web)
-%         \end{itemize}
-
-%     \item Applications and Use-Cases
-
-%         \begin{itemize}
-%             \item X
-%         \end{itemize}
-
-% \end{itemize}
-
-% \jhanote{Something akin to Matteo's diagram}
-
-% %\begin{itemize}
-% %        \item PJ abstractions are not defined in a void;
-% % \item use cases, scientific practice and distributed applications;
-% %        \item heterogeneous DIs: grid, cloud and hybrids;
-% % \item jobs and services;
-% %        \item LoAs implied by the PJ abstractions;
-% % \item diagram.
-% %\end{itemize}
-% %
-% \subsection{Common Terms and Definitions}
-
-% \alnote{What to do with the terms, such as many-task computing, meta computing, grid computing, etc.? It might make sense to couple the evolution of \pilots to the evolution of these infrastructure paradigms (hypes). Maybe in history section.}
-
-% \mtnote{I think subsection 3.0 addresses this comment. If we all agree on todays call, I will comment out the entire subsection.}
-
-% \alnote{Can we start of with the P* elements so that we have something?}
-% \begin{itemize}
-%     \item application
-%     \item workflow
-%     \item pilot framework
-%     \item manager
-%     \item pilot, agent, executor, butler process, placeholder
-%     \item scheduler
-%     \item job
-%     \item workload
-%     \item ensemble
-%     \item \computeunit
-%     \item platform
-% \end{itemize}
-
-% \mtnote{Following AndreL suggestion. Work in progress, I am still trying to map this list into \S2 + P*. The final version of the diagram will be based on these lists.}
-% \begin{itemize}
-%     \item Common concepts
-%         \begin{itemize}
-%              \item Placeholder
-%              \item $\langle$Late binding/placement$\rangle$
-%              \item $\langle$Master/worker$\rangle$
-%              \item Workload
-%              \item Job
-%              \item \computeunit
-%         \end{itemize}
-%     \item Distinctive concepts
-%         \begin{itemize}
-%              \item $\langle$High-level framework$\rangle$
-%              \item Workflow
-%              \item Scheduler
-%              \item Ensemble?
-%         \end{itemize}
-% \end{itemize}
-
-%The terminology used to describe the implementations of pilot-job reviewed in
-%section 2 varies depending not only on the type of implementation considered --
-%simple/core, pilot-based scheduling and higher-level application framework --
-%but also on the application domain where they are deployed and leveraged.
-%Nonetheless, some common concepts can be identified so that a common vocabulary
-%can be developed. The goal is to leverage such a vocabulary to ...
-%\mtnote{what exactly do we want to achieve with Section 4?}.
-
-%'Late-binding' is one of the concepts that persist unchanged across all the
-%pilot-job implementations. 
-%\begin{itemize}
-%        \item Late-binding: 
-%\end{itemize}
-%
-%The very same nature of pilot-job is that of enabling a late-binding of
-%resources to jobs. This is what allows for a pilot-job to offer 'load
-%balancing', 'scheduling' and to some extent 'domain distribution'. Late-binding
-%is also directly related to the possibility for a pilot-job system to fulfil
-%the qualitative requirements related to the efficiency with which jobs are
-%distributed, scheduled and executed by the user on one or more distributed
-%infrastructure. \mtnote{shall we assume these definitions? I think so but I
-%want to be sure.}
-
-%% \newpage
-
-%% \begin{table*}[t]
-%%   \footnotesize{
-%%  \up
-%%  \centering
-%%  %\begin{tabular}{|p{2.5cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
-%%  \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-%%   \hline
-%%   \textbf{Pilot Element}
-%%   &\textbf{BigJob} &\textbf{DIANE} &\textbf{Condor-G/Glide-in} &\textbf{Swift/Coaster} &\textbf{Bosco} &\textbf{GWPilot}\\
-%%   \hline
-%%   Pilot-Manager &BigJob Manager & RunMaster & condor\_master, condor\_collector, condor\_negotiator, condor\_schedd &Coaster Service & Condor & Gridway\aznote{fill in}\\ 
-%%   \hline
-%%   \pilot &BigJob Agent  & Worker Agent &condor\_master, condor\_startd &Coaster Worker & condor\_master, condor\_startd& GWpilot\aznote{(?) check} \\
-%%   \hline
-%%   \computeunit  \ (CU) &Task &Task &Job &Application Interface Function (Swift Script) & Job & Task\\
-%%   \hline
-%%   \su \ (SU) &Sub-Job &Task &Job &Job & Job & Task \\
-%%   \hline
-%%   Data support & BigData& & & & &\\
-%%   \hline
-%%   Deployment (centrally hosted vs application)  & Application & & & &Runs locally, requires remote cluster install & Centrally hosted \aznote{Req. gridway install}\\
-%%   \hline
-%%   Interoperable & via SAGA & & & &Yes, via Condor & Yes, via BLAHPD\\
-%%   \hline
-%%   Abstraction(?) & & & & & &\\
-%%   \hline
-%%   Coordination(?) &Advert & & & & &\\
-
-%% % \hline
-%% % Dynamic Resources &no/yes &yes (AgentFactories)\\
-%%  \hline
-%%  \end{tabular}
-%%  \caption{\textbf{Comparing PJ Systems} 
-%%    Exposing the commonalities of PJ systems \aznote{Some of these are going to be almost identical e.g. Bosco w/
-%%      Condor -- combine their columns to emphasize similarity?} \aznote{properly formatted later once complete/judged relevant}
-%%    \aznote{Not sure of relevance of an ``all-encompassing table'' if we are
-%%      going to be focusing on ``landmark'' Pilot-Job systems...
-%%      put this on the back-burner for the time being..}
-%%  \up
-%%  } 
-%%  \label{table:bigjob-saga-diane}
-%% }
-%% \end{table*}
-
-
-%% \begin{landscape}
-%% \begin{table}
-%% \begin{center}
-%% \begin{footnotesize}
-%% \begin{tabular}{|p{3.0cm}|p{3.5cm}|p{2.3cm}|p{1.9cm}|p{3.7cm}|p{2.5cm}|}
-%% \hline {\bf BigJob}
-%% & {\bf Diane}
-%% & {\bf Condor/Glide-in}
-%% & {\bf Swift}
-%% & {\bf Bosco}
-%% & {\bf GWPilot}
-%% \\
-%% \hline
-
-%% Montage
-%% & Multiple sequential and parallel executables
-%% & Files
-%% & Dataflow (DAG)
-%% & Dynamic process creation, workflow execution, file transfer
-%% & test
-%% \\
-%% \hline
-
-%% \end{tabular}
-%% \end{footnotesize}
-%% \caption{\label{Tab:AppChars} }
-%% \end{center}
-%% \end{table}
-%% \end{landscape}
+Depending on the specific capabilities implemented in the workload management
+component, some \pilotjob systems allows for pilots to be defined on the bases
+of the available tasks. This assigning process should not be confused with
+early binding as the latter requires for a pilot to have been already defined.
 
 \section{Pilot-Job Systems Revisited}
 \aznote{Ashley's section}
