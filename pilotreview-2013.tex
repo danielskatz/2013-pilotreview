@@ -1752,15 +1752,17 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% % -----------------------------------------------------------------------------
 %% %
 \subsubsection{PanDA}
+
 \paragraph{Rationale}
-\paragraph{Design Goals}
 PanDA was developed to provide a \pilotjob system for ATLAS which could
-handle large numbers of data-driven processing workloads.  Having proven itself
-capable in this role, it has also been used for other projects such
-as the Open Science Grid.  This illustrates the importance of designing
-\pilotjobs which are easily adaptable such that \pilots are not tied
-to any particular DCI; in this manner, their advantages can be made
-available beyond their original design scope.
+handle large numbers of data-driven processing workloads. 
+
+\paragraph{Design Goals}
+PanDA was designed to support the basic functionality required of a
+\pilotjob, while adding additional requirements such as the ability
+to manage data, monitor job/disk space, and recover from failures.
+A modular approach allowing the use of plug-ins was chosen in order
+to incorporate additional features in the future.
 
 \paragraph{Applications}
 PanDA has been used to process data and jobs relating to ATLAS, which is
@@ -1810,6 +1812,11 @@ management by replicating popular input data to underutilized resources
 for later computations.
 
 \paragraph{PanDA Conclusion}
+PanDA has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
+as the Open Science Grid.  This illustrates the importance of designing
+\pilotjobs which are easily adaptable such that \pilots are not tied
+to any particular DCI; in this manner, their advantages can be made
+available beyond their original design scope.
 
 \textcolor{red}
 {
