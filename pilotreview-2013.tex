@@ -1752,26 +1752,21 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% % -----------------------------------------------------------------------------
 %% %
 \subsubsection{PanDA}
+\paragraph{Rationale}
+\paragraph{Design Goals}
+PanDA was developed to provide a \pilotjob system for ATLAS which could
+handle large numbers of data-driven processing workloads.  Having proven itself
+capable in this role, it has also been used for other projects such
+as the Open Science Grid.  This illustrates the importance of designing
+\pilotjobs which are easily adaptable such that \pilots are not tied
+to any particular DCI; in this manner, their advantages can be made
+available beyond their original design scope.
 
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
+\paragraph{Applications}
 
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
+\paragraph{Deployment Scenarios (VO/multiuser)}
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+\paragraph{Architecture \& Interface}
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
 jobs with \pilots in addition to handling data management.
 PanDA's \textit{\pilot}
@@ -1795,13 +1790,27 @@ allows for additional, automatic data
 management by replicating popular input data to underutilized resources
 for later computations.
 
-PanDA was developed to provide a \pilotjob system for ATLAS which could
-handle large numbers of data-driven processing workloads.  Having proven itself
-capable in this role, it has also been used for other projects such
-as the Open Science Grid.  This illustrates the importance of designing
-\pilotjobs which are easily adaptable such that \pilots are not tied
-to any particular DCI; in this manner, their advantages can be made
-available beyond their original design scope.
+\paragraph{AppLeS Conclusion}
+
+\textcolor{red}
+{
+\textbf{Mapping to section 3:}
+\begin{itemize}
+\item Term 1 =
+\item Term 2 =
+\end{itemize}
+}
+
+\textcolor{blue}
+{
+\textbf{Mapping to table 1:}
+\begin{itemize}
+\item Pilot (Resource) Provisioning:
+\item Job-to-Resource (Pilot) Binding:
+\item Singe-/Multi-User pilots:
+\end{itemize}
+}
+
 %\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
 %work for this, or is this out-of scope?}
 
