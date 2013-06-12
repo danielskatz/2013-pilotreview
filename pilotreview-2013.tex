@@ -148,7 +148,7 @@
   % the \pstar model.
 \end{abstract}
 
-\section{Introduction} 
+\section{Introduction}\label{sec:intro}
 
 \jhanote{Generally not good style to begin new subsection immediately
   after section starting}
@@ -210,8 +210,8 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remains difficult if not infeasible.
 
-\section{A Preliminary Survey of Existing Pilot-Jobs Systems}
-\label{sec:survey}
+\section{A Preliminary Survey of Existing Pilot-Jobs
+  Systems}\label{sec:prelim}
 
 
 %\subsection{A Functional Approach to Pilot-Jobs}
@@ -741,38 +741,63 @@ components/services?
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 
-%\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and I doubt that it will be particularly useful to the reader. I think it would make sense to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the `building block' side), consisting of `agents' and `managers' at all? After all, PJs are `just' an instance of Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you Ole! Here a completely rewrite of the Section that tries to address the points you made.}
+The overview offered in \S\ref{sec:prelim} shows a degree of
+heterogeneity both in the functionalities of \pilotjobs and in the
+vocabulary adopted by their different implementations. Implementation
+details tend to hide the functional commonalities and differences
+among \pilotjobs frameworks while features and capabilities are named
+inconsistently, often with the same terms referring to multiple
+concepts or the same concept named in different ways.
 
-The overview offered in \S2 shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same terms referring to multiple concepts or the same concept named in different ways.
-
-The first part of this Section offers an analysis of the minimal set of features and functionalities that are shared by different \pilotjob implementations. The terminology used in such an analysis is then defined in the second part of this Section. This well-defined set of terms provide a vocabulary that remains consistent across different \pilotjob implementation. Both the minimal set of features and functionalities, and the  vocabulary here defined are leveraged in \S4 and \S5 to produce a comparative analysis of \pilotjobs frameworks.
+The first part of this Section offers an analysis of the minimal set
+of features and functionalities that are shared by different \pilotjob
+implementations. The terminology used in such an analysis is then
+defined in the second part of this Section. This well-defined set of
+terms provide a vocabulary that remains consistent across different
+\pilotjob implementation. Both the minimal set of features and
+functionalities, and the vocabulary defined here are leveraged in
+\S\ref{sec:4} and \S\ref{sec:5} to produce a comparative analysis of
+\pilotjobs frameworks.
 
 % \mtnote{How we define the common vocabulary.}
-% \mtnote{Similarities/peculiarities among BJ implementations: potential topic to be discussed in Section 4?}
-% Initially, the concepts used by the implementations of \pilotjob outlined in \S 2 are isolated. Moving from the general to the particular, both common and distinctive concepts are described and explicitly defined. As expected, \pilotjob implementations share a minimal set of similarities but still present peculiarities depending on their specific design and deployment environment. This is a confirmation that the implementations of \pilotjob sampled in this paper should be considered as particular cases of a general \pilotjob system but also that their differences justify a comparative analysis.
+% \mtnote{Similarities/peculiarities among BJ implementations:
+%   potential topic to be discussed in Section 4?}  Initially, the
+% concepts used by the implementations of \pilotjob outlined in \S 2
+% are isolated. Moving from the general to the particular, both common
+% and distinctive concepts are described and explicitly defined. As
+% expected, \pilotjob implementations share a minimal set of
+% similarities but still present peculiarities depending on their
+% specific design and deployment environment. This is a confirmation
+% that the implementations of \pilotjob sampled in this paper should
+% be considered as particular cases of a general \pilotjob system but
+% also that their differences justify a comparative analysis.
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
-% \mtnote{I reviewed both definitions and I would suggest to use
-%   paradigm while leaving model for a technical use.}
-
-All the \pilotjob systems described in \S2 are engineered to allow for the
-execution of multiple types of workloads on Distributed Computing Resources
-(DCIs) such as, for example, Grids, Clouds or HPC facilities. This is achieved
-differently, depending on use cases, design and implementation choices, but
-also on the constraints imposed by the peculiarities of the targeted DCIs.
-Finding common denominators among these systems require an analysis along
-multiple dimensions.
+All the \pilotjob systems described in \S\ref{sec:prelim} are
+engineered to allow for the execution of multiple types of workloads
+on Distributed Computing Resources (DCIs) such as, Grids, Clouds or
+HPC facilities. This is achieved differently, depending on use cases,
+design and implementation choices, but also on the constraints imposed
+by the peculiarities of the targeted DCIs.  Finding common
+denominators among these systems require an analysis along multiple
+dimensions.
 
 As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed
 according to multiple criteria, both functional and non-functional. In
 this Section, the focus is on the former as the latter are adapted by
 definition to each specific pilot implementations.  Each \pilotjob
 system exhibits architectural, provisioning and execution
-characteristics that are distinctive of the \pilotjob paradigm itself.
-Isolating them means to outline the minimal set of concepts and terms
-that have to apply to every \pilotjob implementation.
+characteristics that are integral to the \pilotjob paradigm itself.
+However, many \pilotjob systems also exhibit specific or non-integral
+characteristics. Discerning and distinguishing characteristics into
+these categeries, requires isolating and defining a minimal set of
+concepts and terms that have to apply to every \pilotjob
+implementation.
+
+% them means to outline the minimal set of concepts and terms that have
+% to apply to every \pilotjob implementation.
 
 % Other aspects as interfaces, packaging, security, performance or scalability
 % are here not considered because they are not directly relevant to the
@@ -791,27 +816,29 @@ that have to apply to every \pilotjob implementation.
 %\jhanote{this is essentially a repeat of the previous paragraph; please 
 %merge/refine.}\mtnote{Done.}\\---\\
 
-From a high level perspective, all \pilotjob systems introduced in \S2 leverage
-a similar architecture based on two separate but intercommunicating logical
-components to accomplish workload execution. One component is related to the
-management of the workloads and their tasks; the other to the execution of the
-tasks on targeted resources. As it will be shown in \S4, the implementations of
-both the Workload Manager and the Task Executor significantly vary from system
-to system, with one or more elements responsible for specific functionalities
-both on application as well as infrastructure level. Nevertheless, the two
-architectural components can be consistently distinguished and isolated across 
-multiple types of \pilotjob systems.
+At some level, all \pilotjob systems introduced in \S\ref{sec:prelim}
+leverage a similar architecture based on two separate, but
+intercommunicating logical components to accomplish workload
+execution. One component is related to the management of the workloads
+and their tasks; the other to the execution of the tasks on target
+resources. As will be shown in \S\ref{sec:4}, the implementations of
+both the Workload Manager and the Task Executor significantly vary
+from system to system, with one or more elements responsible for
+specific functionalities both on application as well as infrastructure
+level. Nevertheless, the two architectural components can be
+consistently distinguished and isolated across different \pilotjob
+systems.
 
 For example, looking at the core \pilotjob systems introduced in
-\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
-architectural component dedicated to workload management while the
-job-wrapper belongs to the component responsible for task
+\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong
+to the architectural component dedicated to workload management, while
+the job-wrapper belongs to the component responsible for task
 execution. Similar examples can be given for the advanced \pilotjob
-systems and for the Pilot-Based frameworks: GlideinWMS offers an
-extended set of features when compared to the scheduler and dispatcher
-of Nimrod-G, but all those features belong to the same, well-defined
-and self-contained architectural component --- i.e. the one in charge
-of managing the workloads. The same is valid for Corral or SWIFT: they
+systems and for Pilot-based frameworks: GlideinWMS offers an extended
+set of features when compared to the scheduler and dispatcher of
+Nimrod-G, but all those features belong to the same, well-defined and
+self-contained architectural component --- i.e. the one in charge of
+managing the workloads. The same is valid for Corral or SWIFT: they
 both offer evolved functionalities and interfaces to manage workloads
 but, as such, they both are part of an architecture where workload
 management and task execution belongs to two distinct components.
@@ -820,65 +847,65 @@ The Workload Manager and the Task Executor are separate and
 well-defined architectural components that communicate and coordinate
 in order to exchange tasks, input and output files, and related data.
 Communication and coordination are two fundamental characteristics of
-every distributed architecture but none of their specific paradigms is
-a distinctive feature of \pilotjob systems. For example, as seen in
-\S\ref{ssec:informal}, the \MW paradigm is very common among
-\pilotjobs. Functionally, the Master can be identified with the
-architectural component concerning workload management while the
-Worker with the one concerning the execution of the workload's
-tasks. However, the \MW paradigm usually implies a specific
-distribution of capabilities between Master and Worker, and, in some
-cases, also a communication model. Moreover, \MW is applied to a
-non-fixed set of capabilities while referring not only to
-architectures but also to frameworks and applications. This
+every distributed architecture, but we posit that it is not an
+integral architectural component of \pilotjob systems, nor is any
+specific communication and coordination paradigm a distinctive feature
+of a \pilotjob system.
+% none of their specific paradigms is distinctive feature of \pilotjob
+% systems.
+For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is
+very common among \pilotjobs. Functionally, the Master can be
+identified with the architectural component concerning workload
+management, while the Worker identified with the component concerning
+the execution of the workload's tasks. However, the \MW paradigm
+usually implies a specific distribution of capabilities between Master
+and Worker, and, in some cases, also a communication model. Moreover,
+\MW is applied to a non-fixed set of capabilities while referring not
+only to architectures but also to frameworks and applications. This
 flexibility makes \MW a viable choice for implementing \pilotjobs but
-not one of its defining characteristics. After all, \pilotjobs system
-with an highly capable task executors and workload managers could be
-easily conceived.
+not one of its defining
+characteristics. % After all, \pilotjobs system
+% with an highly capable task executors and workload managers could be
+% easily conceived.
 
-% While communication and coordination are two fundamental
-% characteristics of every distributed architecture, none of their
-% specific paradigms is a distinctive feature of \pilotjob systems. For
-% example, as seen in \S2.2.2, the \MW paradigm is very common among
-% \pilotjobs. Functionally, the Master can be identified with the
-% Workload Manager while the Worker with task Executor. However, the \MW
-% paradigm usually implies a specific distribution of capabilities
-% between Master and Worker, and, in some cases, also a communication
-% pattern. Moreover, \MW is applied to a non-fixed set of capabilities
-% while referring not only to architectures but also to frameworks and
-% applications. This flexibility makes \MW a viable choice for
-% implementing \pilotjobs but not one of its defining
-% characteristics. After all, \pilotjobs system with highly capable task
-% executors and workload managers could be easily conceived.
+% The architectural properties of \pilotjob systems support a
+% distinctive execution strategy with benefits for both the compute
+% performance and for the task submission process.  
 
+The proposed architectural model (or decomposition?) of \pilotjob
+systems support flexible execution strategies along with 
+performance  in the task submission proces.
+% the benefits of compute performance and for the task submission
+% process.
+The tasks of a workload are bound to one or more pilots without having
+to be directly scheduled on the DCI's job management
+system. Furthermore, the binding of tasks to a pilot might happen
+before or after the pilot has been assigned a portion of the DCI's
+resources, and it can progress for the whole time the pilot can hold
+on them. This execution strategy requires dedicated capabilities both
+for performing the binding of tasks to pilots but also for the
+provisioning of pilots so that they can be assigned portions of the
+DCI's resources. \jhanote{I need to understand better..}
 
-The architectural properties of \pilotjob systems support a
-distinctive execution strategy with benefits for both the compute
-performance and for the task submission process. The tasks of a
-workload are bound to one or more pilots without having to be directly
-scheduled on the DCI's job management system. Furthermore, the binding
-of tasks to pilot might happen before or after the pilot has been
-assigned its portion of the DCI's resources and it can progress for
-the whole time the pilot can hold on them. This execution strategy
-requires dedicated capabilities both for performing the binding of
-tasks to pilots but also for the provisioning of pilots so that they
-can be assigned portions of the DCI's resources.
-
-The minimal set of capabilities that needs to be implemented by a \pilotjob
-system in order to execute workloads involves \pilot provision, data management
-and task dispatching. The procedures to provision pilots depends on how each
-targeted DCI exposes its resources. Typically, for a DCI adopting queue, batch
-and scheduler systems, provisioning a pilot involves for it to be submitted as
-a job. Conversely, for infrastructures that do not adopt a job-based submission
-system a pilot would be executed by means of other logical containers as, for
-example, a Virtual Machine on the so called Infrastructures as a Service IaaS
-(IaaS). Data staging is used to transfer the task description, and the input 
-and output files to and from one or more pilots. Implementations of data 
-management capabilities vary greatly across \pilotjob implementations as much 
-as the task dispatching procedure.
+The minimal set of capabilities that needs to be implemented by a
+\pilotjob system in order to execute workloads, involves \pilot
+provision, data management and task dispatching. The specific
+procedure to provision pilots depends on how each targeted DCI exposes
+its resources. Typically, for a DCI adopting queue, batch and
+scheduling systems, provisioning a pilot involves it be submitted as a
+job. Conversely, for infrastructures that do not adopt a job-based
+submission system, a pilot would be executed by means of other logical
+containers as, for example, a Virtual Machine on so called
+Infrastructures as a Service IaaS (IaaS). Data staging is used to
+transfer the task description, and the input and output files to and
+from one or more pilots. Implementations of data management
+capabilities vary greatly across \pilotjob implementations as much as
+the task dispatching procedure.
 
 In the following two subsections, a minimal set of terms related to these 
-capabilities is defined. Here a summary of this set:
+capabilities is defined. 
+
+%Here a summary of this set:
 
 \mtnote{The following list is still to be updated following a complete list of 
 the definitions offered in the next subsection. I am going to do it towards 
@@ -904,6 +931,22 @@ the end of the revision process so to avoid multiple rewrite of the list.}
 \end{itemize}
 
 
+% While communication and coordination are two fundamental
+% characteristics of every distributed architecture, none of their
+% specific paradigms is a distinctive feature of \pilotjob systems. For
+% example, as seen in \S2.2.2, the \MW paradigm is very common among
+% \pilotjobs. Functionally, the Master can be identified with the
+% Workload Manager while the Worker with task Executor. However, the \MW
+% paradigm usually implies a specific distribution of capabilities
+% between Master and Worker, and, in some cases, also a communication
+% pattern. Moreover, \MW is applied to a non-fixed set of capabilities
+% while referring not only to architectures but also to frameworks and
+% applications. This flexibility makes \MW a viable choice for
+% implementing \pilotjobs but not one of its defining
+% characteristics. After all, \pilotjobs system with highly capable task
+% executors and workload managers could be easily conceived.
+
+
 \mtnote{In absence of further comments, for now I have used those
   terms.}
 
@@ -919,14 +962,14 @@ the last subsection of 2. What do you think?.}
   advanced.}\mtnote{Would that not be a repetition of \S2? If we need
   more details I would add them there.}
 
-\alnote{Without getting into some more analysis for Corral and Swift,
-  the value by stating that they have a workload manager and task
-  executor is limited.}\mtnote{At this level of abstraction, the point
-  to make is that those two components are there and separated. All
-  the rest would be too specific. We can add details about Corral and
-  Swift implementations but then we risk to repeat what is in \S2 or
-  will be in \S4.} \jhanote{yes, need to be careful about how specific
-  we get in order to make a point.}
+% \alnote{Without getting into some more analysis for Corral and Swift,
+%   the value by stating that they have a workload manager and task
+%   executor is limited.}\mtnote{At this level of abstraction, the point
+%   to make is that those two components are there and separated. All
+%   the rest would be too specific. We can add details about Corral and
+%   Swift implementations but then we risk to repeat what is in \S2 or
+%   will be in \S4.} \jhanote{yes, need to be careful about how specific
+%   we get in order to make a point.}
 
 
 \mtnote{I have incorporated your comment in the paragraph
@@ -937,17 +980,17 @@ the last subsection of 2. What do you think?.}
   plausible alternative. I still think this specific paragraph is too
   thin so please feel free to add/change/edit directly the paragraph.}
 
-\jhanote{echoing what Melissa says, it might be more productive to
-  introduce C-C as a sub-system at par with Workload Management and
-  Execution Management rather than try to all
-  inclusive/exhaustive}\mtnote{This is still in progress. To summarize
-  the checkpoint of our discussion: assigning
-  Communication/Coordination to a sub-system would mean to move C-C
-  into an architectural component of PJ. In so doing we might incur
-  into an over- specification of the minimal PJ architecture. After
-  all, C-C does not necessarily need to belong to an independent,
-  well-defined architectural component of PJ, it could be a feature
-  implemented in the Workload manager and the task executor.}
+% \jhanote{echoing what Melissa says, it might be more productive to
+%   introduce C-C as a sub-system at par with Workload Management and
+%   Execution Management rather than try to all
+%   inclusive/exhaustive}\mtnote{This is still in progress. To summarize
+%   the checkpoint of our discussion: assigning
+%   Communication/Coordination to a sub-system would mean to move C-C
+%   into an architectural component of PJ. In so doing we might incur
+%   into an over- specification of the minimal PJ architecture. After
+%   all, C-C does not necessarily need to belong to an independent,
+%   well-defined architectural component of PJ, it could be a feature
+%   implemented in the Workload manager and the task executor.}
 
 
 \alnote{maybe cleanly separating architecture and the way the workload
@@ -972,15 +1015,6 @@ therefore would not be required, especially on machines with shared filesystems
 
 \mrnote{I just want to make sure if we call data staging necessary that every 
 PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}
-
-\jhanote{I think all the functionality of PJs is predicated on the
-  following core capability: enable the decoupling between assigning a
-  workload from the spatial/temporal execution properties of its
-  execution. In condor, this is mentioned as ``separating between job
-  scheduling and resource''. This get mentioned somewhere in core
-  functionality?} \mtnote{The previous paragraph is a first attempt to
-  address this comment. More details will follow when late binding
-  will be properly defined.}
 
 
 \mtnote{Is the the term used in Section 2. Before using it I checked
@@ -1025,14 +1059,7 @@ into one or more programs.
 \item[Resource.] Finite, typed and physical quantity utilized when
   executing one or more workloads. Compute cores, data storage space,
   or bandwidth are all examples of resources commonly utilized by
-  running workloads \jhanote{Also an issue of active versus
-    passive. Does the resource execute the workload, or is the
-    workload executed on the resource. I prefer the latter} \mtnote{I
-    agree. I believe that in the narrow meaning we give to resources
-    it should be the latter. Does this comment still apply to the
-    revised version of the definition? BTW, I am not sure I like the
-    last sentence ending with `pools' but I know I like the meaning it
-    should convey.}
+  running workloads 
 
 \item[Infrastructure.] Structured set of resources, possibly geographically and
 institutionally separated from the users utilizing those resources to execute
@@ -1043,9 +1070,6 @@ Infrastructure (DCI). \end{description}
 
 As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize `queues', `batch systems' and `schedulers'. In such DCIs, jobs are scheduled and then executed by a batch system.
 
-\jhanote{I think the arrow of determinism is: DCI
-  determines what is available and thus if scheduler and batch systems
-  are utilized.} \mtnote{I am not sure I understand the comment, apologies.}
 
 \begin{description}
 \item[Job.] A container for one or more programs, a description of their properties and indications on how they should be executed.
@@ -1053,22 +1077,6 @@ As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize `
 
 In the context of a \pilotjob system, jobs and tasks are functionally analogous but qualitatively different. Functionally, both jobs and tasks are a set of programs with metadata but the term `task' is used when reasoning about workloads while `job' is used in relation to a specific type of infrastructure where such a container can be executed. Accordingly, tasks are here considered as the functional units of a workload while jobs as a way to execute programs on a given infrastructure. It should be noted that the two terms can be used interchangeably when considered outside the context of \pilotjob systems. Workloads are encoded into jobs when they have to be directly executed on infrastructures that support or require that type of container.
 
-% \jhanote{we need to relate job to task. How is a task different from
-%     a job? One way of addressing this is that a job is simply a task,
-%     or set of arbitrarily coordinated tasks executing on a well defined
-%     resource.} \mtnote{First attempt done. I this we need to keep them separated because of the double role played by a pilot - both a job and a task executor. We cannot write this at this point of the Subsection because we still need to introduce the concept of pilot.}
-
-\alnote{I am struggling a bit with the term deployment for allocating
-  resources and executing the agent on these....} \alnote{What is the
-  difference between provisioning and deployment?} \mtnote{I would
-  need more details to understand why you are struggling with
-  `deploying'. As deploying and provisioning have a similar meaning, I
-  am going to collapse the two into a single concept avoiding to split
-  hairs.} \jhanote{deployment and provisioning are not the same in my
-  opinion: provisioning is about resources, i.e., provisioning is not
-  the same as scheduling, it is more like arranging. Deployment is
-  about ``setting up T=0 requirements, which could be software
-  environment, input/data dependencies, as well as resources.''} \mtnote{+1}
 
 The capabilities exposed by the job submission system of the targeted
 infrastructure determine also the submission process of pilots. Pilots
@@ -1159,11 +1167,11 @@ considered synonyms and their use to indicate the same concept is a
 clear indication that a minimal and consistent vocabulary is needed
 when reasoning about multiple \pilotjob systems.
 
- \jhanote{OK I see what Matteo is trying to say, which is different
-   from what is presented: The point is that depending upon context, a
-   pilot is also called an agent, a pilotjob. The statement is not
-   that a pilot is an agent etc} \mtnote{Yep, exactly so. I attempted
-   a revision but please feel free to edit if still unclear.}
+%  \jhanote{OK I see what Matteo is trying to say, which is different
+%    from what is presented: The point is that depending upon context, a
+%    pilot is also called an agent, a pilotjob. The statement is not
+%    that a pilot is an agent etc} \mtnote{Yep, exactly so. I attempted
+%    a revision but please feel free to edit if still unclear.}
 
 %\onote{you introduce data as `resource'. why?} \mtnote{It is a direct
 %\consequence of defining resources as typed consumables while distinguishing
@@ -1219,25 +1227,7 @@ high throughput by allowing for tasks to be executed without waiting in a queue
 or waiting for a specific container - for example a job or a VM - to be
 instantiated.
 
-% jhanote{I have brought the above sentence down here. I think for ease
-%   of readability, once we start discussing binding we should continue
-%   onto early and late binding. Also in the definition of early and
-%   late binding, we should IMHO explicitly use the concept of ``when''
-%   a task is bound to a resource in order for it to be concrete.}
 
-% \mtnote{yet another way to define early/late binding. I would suggest
-%   to discuss about the definitions of these two concepts at our next
-%   meeting before attempting to write any conclusive definition.}
-
-% The act of assigning resources to tasks is called `binding'. Note how
-% `binding' is defined in contrast to scheduling. 
-
-% \jhanote{How about?} Assignment is the notion of commiting a task (or
-% a pilot) to a specific resource. Binding is the process of
-% constraining a task (or a pilot) at a specific point in time to a
-% resource; Furthermore, scheduling is the process of commiting a task
-% that has been bound to a resource to a specific execution queue. The
-% order of these atomic operations may differ.
 
 \begin{description}
   \item[Multi-level scheduling.] Scheduling tasks and pilots by means of different schedulers and in a different chronological order.  
@@ -1250,8 +1240,35 @@ component, some \pilotjob systems allows for pilots to be defined on the bases
 of the available tasks. This assigning process should not be confused with
 early binding as the latter requires for a pilot to have been already defined.
 
-\section{Pilot-Job Systems Revisited}
-\aznote{Ashley's section}
+% \jhanote{we need to relate job to task. How is a task different from
+%     a job? One way of addressing this is that a job is simply a task,
+%     or set of arbitrarily coordinated tasks executing on a well defined
+%     resource.} \mtnote{First attempt done. I this we need to keep them separated because of the double role played by a pilot - both a job and a task executor. We cannot write this at this point of the Subsection because we still need to introduce the concept of pilot.}
+
+% \jhanote{I think the arrow of determinism is: DCI
+%   determines what is available and thus if scheduler and batch systems
+%   are utilized.} \mtnote{I am not sure I understand the comment, apologies.}
+
+% \jhanote{Also an issue of active versus
+%     passive. Does the resource execute the workload, or is the
+%     workload executed on the resource. I prefer the latter} \mtnote{I
+%     agree. I believe that in the narrow meaning we give to resources
+%     it should be the latter. Does this comment still apply to the
+%     revised version of the definition? BTW, I am not sure I like the
+%     last sentence ending with `pools' but I know I like the meaning it
+%     should convey.}
+
+% \alnote{I am struggling a bit with the term deployment for allocating
+%   resources and executing the agent on these....} \alnote{What is the
+%   difference between provisioning and deployment?} \mtnote{I would
+%   need more details to understand why you are struggling with
+%   `deploying'. As deploying and provisioning have a similar meaning, I
+%   am going to collapse the two into a single concept avoiding to split
+%   hairs.} 
+
+
+\section{Pilot-Job Systems Revisited}\label{sec:4}
+
 Despite the apparent diversity in existing \pilotjobs,
 they can be reduced to a set of common functionality and
 discussed as such via use of the the terminology presented
@@ -1287,18 +1304,16 @@ In light of the common vocabulary discussion in
 \S\ref{sec:vocab}, a representative set of \pilotjobs
 has been chosen for further analysis.  
 
-At least one \pilotjob from each categorization in
-\S\ref{sec:survey} is analyzed via a common
-vocabulary, allowing for a standard
-``baseline'' of each \pilotjob categorization to be
-examined.  Examining these \pilotjobs via a
-common vocabulary exposes their core similarities, and allows a
-detailed analysis of their differences.  The selection of
-\pilotjobs was made such that ``exemplars'' were chosen;
-these are \pilotjobs which either laid foundational
-\pilotjob concept or incorporated strides in interoperability,
-usability, architecture or otherwise to advance the
-understanding and usage of \pilotjobs.
+At least one \pilotjob from each categorization in \S\ref{sec:prelim}
+is analyzed via a common vocabulary, allowing for a standard
+``baseline'' of each \pilotjob categorization to be examined.
+Examining these \pilotjobs via a common vocabulary exposes their core
+similarities, and allows a detailed analysis of their differences.
+The selection of \pilotjobs was made such that ``exemplars'' were
+chosen; these are \pilotjobs which either laid foundational \pilotjob
+concept or incorporated strides in interoperability, usability,
+architecture or otherwise to advance the understanding and usage of
+\pilotjobs.
 
 %Representative \pilotjobs from each \pilotjob category
 %in Section~\ref{sec:survey} are chosen and compared within
@@ -2382,7 +2397,7 @@ monitor BoSCO jobs are the same as in Condor (\texttt{condor\_submit},
 %go with this, however, to avoid hitting the ``conclusion'' material in this section?
 %}
 
-\section{Conclusion and Discussion}
+\section{Conclusion and Discussion}\label{sec:5}
 
 \jhanote{Main message is: (i) \pilotjobs have potential, but it is not
   being realized due to ad hoc nature of theory and practise, (ii) we
@@ -2497,6 +2512,44 @@ prevent similar situation for \pilotjobs.
   whether we can add/extend a paragraph by introducing the concept of
   grouping.}
 
+\section{Discussion Area}
+
+\jhanote{I think all the functionality of PJs is predicated on the
+  following core capability: enable the decoupling between assigning a
+  workload from the spatial/temporal execution properties of its
+  execution. In condor, this is mentioned as ``separating between job
+  scheduling and resource''. This get mentioned somewhere in core
+  functionality?}
+
+\jhanote{deployment and provisioning are not the same in my
+  opinion: provisioning is about resources, i.e., provisioning is not
+  the same as scheduling, it is more like arranging. Deployment is
+  about ``setting up T=0 requirements, which could be software
+  environment, input/data dependencies, as well as resources.''}
+
+% jhanote{I have brought the above sentence down here. I think for ease
+%   of readability, once we start discussing binding we should continue
+%   onto early and late binding. Also in the definition of early and
+%   late binding, we should IMHO explicitly use the concept of ``when''
+%   a task is bound to a resource in order for it to be concrete.}
+
+% \mtnote{yet another way to define early/late binding. I would suggest
+%   to discuss about the definitions of these two concepts at our next
+%   meeting before attempting to write any conclusive definition.}
+
+% The act of assigning resources to tasks is called `binding'. Note how
+% `binding' is defined in contrast to scheduling. 
+
+% \jhanote{How about?} Assignment is the notion of commiting a task (or
+% a pilot) to a specific resource. Binding is the process of
+% constraining a task (or a pilot) at a specific point in time to a
+% resource; Furthermore, scheduling is the process of commiting a task
+% that has been bound to a resource to a specific execution queue. The
+% order of these atomic operations may differ.
+
+%\onote{This section tries to define everything from concepts (e.g., multi-level-scheduling) to specific architectural components (agents, manager). It's hard to parse and I doubt that it will be particularly useful to the reader. I think it would make sense to have a stricter distinction (e.g., by using sub-sections) between concepts (late-binding, early-binding, multi-level) and architectural building blocks that are common to all PJ-Systems. On that note: why are we trying to come up with this arbitrary vocabulary (on the `building block' side), consisting of `agents' and `managers' at all? After all, PJs are `just' an instance of Master-Worker with specific properties, capabilities and operating in a specific environment. I think shooting from that angle (at least making an attempt to) might help to introduce more clarity. I think this would be more intuitive from a reader's perspective. And after all, it's about unlearning P*, isn't it?}  \mtnote{Thank you Ole! Here a completely rewrite of the Section that tries to address the points you made.}
+
+
 \section*{Acknowledgements}
 {\footnotesize{This work is funded by NSF CHE-1125332 (Cyber-enabled
   Discovery and Innovation), NSF-ExTENCI (OCI-1007115) and
@@ -2512,6 +2565,8 @@ prevent similar situation for \pilotjobs.
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{abbrv}
 \bibliography{pilotjob,literatur,saga,saga-related}
+
+
 
 
 \end{document}
