@@ -1619,11 +1619,25 @@ allowed all cluster resources to be submitted to via a
 \pilotjob-based approach.
 
 \paragraph{Applications}
+Applications are launched via MyCluster in a ``traditional''
+HPC manner, via a \texttt{virtual
+login session} which contains usual queuing commands to submit
+and manage jobs.  This means that applications do not need
+to be explicitly rewritten to make use of MyCluster functionality;
+rather, MyCluster provides user-level \pilotjob capabilities
+which users can then use to schedule their applications with.
 \aznote{There appear to only be synthetic benchmarks
-in cited paper; verify/dig up actual applications
-if this is the case}
+in cited paper; spent some time going through
+papers which reference MyCluster and did not find
+any specific applications/papers which explicitly used
+MyCluster}
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
+MyCluster is designed for a single-user.  A MyCluster
+installation resides in userspace, and may be used
+to marshal resources ranging from small local resource pools 
+(e.g. departmental Condor or SGE engines) to large HPC installations
+including TeraGrid (now XSEDE).
 \aznote{Still unsure exactly what to put here...  move TeraGrid
 details here from the design section?  But those details motivate the design...}
 
@@ -1665,7 +1679,7 @@ might be useful for us in ``real'' conclusion, so throwing in anyway...}
 MyCluster illustrates how an approach aimed at \textit{multi-level
 scheduling} by marshalling multiple heterogeneous resources lends
 itself perfectly to a \pilotjob-based approach.  The fact that
-the researchers behind it formed a complete \pilotjob system
+the researchers behind it form1ed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems. 
 \aznote{I know this paragraph is bad, but wanted to start..}
