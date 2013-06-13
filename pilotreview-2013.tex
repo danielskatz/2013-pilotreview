@@ -1075,30 +1075,26 @@ As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize `
 \item[Job.] A container for one or more programs, a description of their properties and indications on how they should be executed.
 \end{description}
 
-In the context of a \pilotjob system, jobs and tasks are functionally analogous but qualitatively different. Functionally, both jobs and tasks are a set of programs with metadata but the term `task' is used when reasoning about workloads while `job' is used in relation to a specific type of infrastructure where such a container can be executed. Accordingly, tasks are here considered as the functional units of a workload while jobs as a way to execute programs on a given infrastructure. It should be noted that the two terms can be used interchangeably when considered outside the context of \pilotjob systems. Workloads are encoded into jobs when they have to be directly executed on infrastructures that support or require that type of container.
+In the context of a \pilotjob system, jobs and tasks are functionally
+analogous but qualitatively different; it is important to highlight
+their distinction. Functionally, both jobs and tasks are a set of
+programs with metadata but the term `task' is used when reasoning
+about workloads while `job' is used in relation to a specific type of
+infrastructure where such a container can be executed. Accordingly,
+tasks are considered as the functional units of a workload, while jobs
+as a way to execute programs on a given infrastructure. It should be
+noted that the two terms can be used interchangeably when considered
+outside the context of \pilotjob systems. Workloads are encoded into
+jobs when they have to be directly executed on infrastructures that
+support or require that type of container.
 
 
-The capabilities exposed by the job submission system of the targeted
-infrastructure determine also the submission process of pilots. Pilots
-are programs with specific capabilities and, for example, they are
-submitted as jobs on the type of DCI just described. In such a
-context, schedulers, batch processing and queuing define the practical
-boundaries for how and when the pilots can be provisioned on a given
-DCI.
-
-\mrnote{I am slightly uncomfortable with ``pilots are programs'' -
-maybe we can discuss this in person. I think of a Pilot as a relatively dumb
-`container' - a PJ system would be a program to me, but I'm not sure of the
-Pilot itself, at least its unclear given my mental definition of pilots up till
-this point in the section} \mtnote{It is definitively a fuzzy territory. I
-guess this is why we are struggling so much to put together a consistent set of
-definitions. In my mental model, jobs are containers as they do `nothing' but
-containing a set of data about programs - how to execute them, what they need,
-what they are and so on. Pilots do something, they are executed and they run.
-Within them, they may have an agent - if so we want to implement that specific
-set of capabilities - they can have an execution subsystem, they can be just
-scripts that download and unpack other programs. As such I believe they qualify
-as programs. What do you think?}
+The capabilities exposed by the job submission system of the target
+infrastructure determine the submission process of pilots: pilots are
+programs with specific capabilities and are submitted as jobs on the
+type of DCI just described. In such a context, schedulers, batch
+processing and queuing define the practical boundaries for how and
+when the pilots can be provisioned on a given DCI.
 
 % \begin{description}
 % \item[Provisioning.] Leveraging the capabilities offered by a DCI to
@@ -1118,30 +1114,31 @@ as programs. What do you think?}
 % by including a job description  specifying the configuration and execution
 % parameters for the job's programs.
 
-\mrnote{Again, we use the word programs - I think
-  if we define a task to be a set of instructions - then a job has a
-  task - not a program. If task is distinctively different, don't use
-  it, but we either should use the word ``executable'' or define what
-  we mean when we say program} \mtnote{Executable sounds good to me. The Section has changed quite dramatically, could you please indicate where you think it would be better to substitute `program' with `executable'? I am also happy for you to do the substitution if you want.}
+Showing that the way in which a pilot is provisioned depends on the
+capabilities exposed by the target DCI illustrates the limits of
+choosing the term `job'. The use of that term is due to a historical
+contingency, viz., the targeting of a specific class of DCIs in which
+the term `job' was --- and still is --- meaningful. Nonetheless, with
+the development of new types of DCI, the term `job' has become too
+restrictive, a situation that can lead to terminological and
+conceptual confusion, and to the use of synonyms for both the terms
+`pilot' and `pilot-job'.
 
-Showing that the way in which a pilot is provisioned depends on the 
-capabilities exposed by the targeted DCI illustrates the limits of choosing 
-the term `job'. The use of that term is due to a historical contingency, the 
-targeting of a specific class of DCIs in which the term `job' was --- and 
-still is --- meaningful. Nonetheless, with the development of new types of 
-DCI, the term `job' has become too restrictive, a situation that can lead to 
-terminological and conceptual confusion, and to the use of synonyms for both 
-the terms `pilot' and `pilotjob'.
-
-The term `pilot' is often associated to that of `placeholder'. This is a way 
-to illustrate two of the distinctive capabilities that every pilot has to 
-implement: Acquiring bounded set of resources by running on a DCI, and 
-executing tasks that utilize them. Other two fundamental capabilities of a 
-pilot are pulling or being push with the tasks to execute, and managing the 
-data that are staged in and out before and after the execution of those tasks. 
-Thanks to these capabilities, a pilot allows for a user or a group of users, 
-depending on implementation details, to gain exclusive control over the 
-binding and execution of her or their tasks.
+The term `pilot' is often associated with that of `placeholder'. This
+is a way to illustrate two of the distinctive capabilities that every
+pilot has to implement: acquiring bounded set of resources by running
+on a DCI, and executing tasks submitted (to the system that the pilot
+belongs) that will utilize them.  \jhanote{I don't agree with the
+  pulling or pushing as fundamental properties of the pilot. Nor do I
+  think the data management is a fundamental property of the pilot. In
+  PANDA for example PD2P is the associated infrastructure that does
+  the data managemnet} Two other fundamental capabilities of a pilot
+are pulling or being push with the tasks to execute, and managing the
+data that are staged in and out before and after the execution of
+those tasks.  Thanks to these capabilities, a pilot allows for a user
+or a group of users, depending on implementation details, to gain
+exclusive control over the binding and execution of her or their
+tasks.
 
 \begin{description}
   % \item[Placeholder.] A proxy for a bounded set of resources of a
@@ -1154,18 +1151,20 @@ binding and execution of her or their tasks.
   % \item[Stage in and out.] Moving data payloads across one or more
   %   infrastructures --- e.g. input and output files. \jhanote{this can
   %     be safely removed. not needed}
-  \item[Pilot.] A resource placeholder running on a given infrastructure and
-    capable of executing pushed and pulled tasks while managing data. 
+\item[Pilot.] A resource placeholder running on a given infrastructure
+  and capable of executing pushed or pulled tasks while managing
+  data.
 
 \end{description}
 
 From a terminology point of view, the term `pilot' as defined here is
 named differently across multiple \pilotjob systems. Depending upon
 context, in addition to the term `placeholder', pilot is also named
-`agent' and, in some cases, `pilotjob'. All these terms should be
-considered synonyms and their use to indicate the same concept is a
-clear indication that a minimal and consistent vocabulary is needed
-when reasoning about multiple \pilotjob systems.
+`agent' and, in some cases, `pilotjob'. \jhanote{references here
+  please} All these terms should be considered synonyms and their use
+to indicate the same concept is a clear indication that a minimal and
+consistent vocabulary is needed when reasoning about multiple
+\pilotjob systems.
 
 %  \jhanote{OK I see what Matteo is trying to say, which is different
 %    from what is presented: The point is that depending upon context, a
@@ -1185,7 +1184,7 @@ nature, in principle, they might also operate on other type of
 resources such as data or network bandwidth, depending on the
 resources made available by an infrastructure to its users. In this
 context, it would be likely for some \pilotjob systems to use the
-terms `pilot data' or `pilot network'. 
+terms `pilot data' or `pilot network'.
 
 \jhanote{this should move to much later in this section or maybe to Section 5.
 Must bring clarity to compute before opening other cans of worms} \mtnote{OK,
@@ -1198,47 +1197,53 @@ let's wait for the Section draft to be complete to decide.}
 % \mtnote{the use of assignment and binding is still inconsistent. Refinement 
 % needed.}
 
-Once one or more pilots become available on the targeted infrastructures, 
-users can start to use a \pilotjob system to execute their tasks without 
-having to deal with the job submission system of the targeted infrastructure. 
-How the assignment among tasks and pilots is performed is a matter of 
-implementation. For example, a dedicated scheduler could be used or the tasks 
-might be directly assigned by the user to the pilots. The simplification 
-obtained by circumventing the job submission system of the infrastructure is 
-one of the main reasons for the success of the \pilotjob systems. The 
-overhead and lack of control imposed by a centralized job management system 
-are bypassed allowing for a faster and more reliable execution of workloads. 
+Once one or more pilots become available on the targeted
+infrastructures, users can start to use a \pilotjob system to execute
+their tasks without having to deal with the job submission system of
+the targeted infrastructure.  How the assignment \jhanote{of
+  resources? passing of control information?} among tasks and pilots
+is performed is a matter of implementation. For example, a dedicated
+scheduler could be used or the tasks might be directly assigned by the
+user to the pilots. The simplification obtained by circumventing the
+job submission system of the infrastructure is one of the main reasons
+for the success of the \pilotjob systems. The overhead and lack of
+control imposed by a centralized job management system are bypassed,
+allowing for a faster and more reliable execution of workloads.
 
-The \pilotjob systems are said to implement multi-level scheduling 
-because the access to the resources happens in at least two stages. A 
-portion of the resources of an infrastructure are first bound to a 
-pilot and then to one or more tasks for consumption. This is an important 
-feature of \pilotjob systems because it allows for a task to be 
-bound to a pilot before it is in turn bound to the resources.
+The \pilotjob systems are said to implement multi-level scheduling
+because task access \jhanote{assignment?} to the resources happens in
+at least two stages. A portion of the resources of an infrastructure
+are first bound to a pilot and then to one or more tasks for
+consumption. This is an important feature of \pilotjob systems because
+it allows for a task to be bound to a pilot before it is in turn bound
+to the resources.
 
-The binding of tasks to pilots depends on the state of the pilot. A pilot is
-inactive until it is executed on a DCI, active after that. Early binding
-indicates the binding of a task to an inactive pilot, late binding to an active
-one. The binding process in itself is referred to as scheduling. Early binding
-is useful to increase the flexibility with which pilots are deployed. By
-knowing in advance the properties of the tasks that are bound to a pilot
-specific deployment decisions can be made. Late binding is critical in assuring
-high throughput by allowing for tasks to be executed without waiting in a queue
-or waiting for a specific container - for example a job or a VM - to be
-instantiated.
-
+The binding of tasks to pilots depends on the state of the pilot. A
+pilot is inactive until it is executed on a DCI, active after
+that. Early binding indicates the binding of a task to an inactive
+pilot; late binding the binding of a task to an active pilot. The
+binding process in itself is often an instance of scheduling. Early
+binding is useful to increase the flexibility with which pilots are
+deployed. By knowing in advance the properties of the tasks that are
+bound to a pilot, specific deployment decisions can be made. Late
+binding is critical in assuring high throughput by allowing for tasks
+to be executed without waiting in a queue or waiting for a specific
+container - for example a job or a VM - to be instantiated.
 
 
 \begin{description}
-  \item[Multi-level scheduling.] Scheduling tasks and pilots by means of different schedulers and in a different chronological order.  
+\item[Multi-level scheduling.] Scheduling tasks and pilots to
+  different schedulers and in distinct chronological order.
   \item[Early binding.] Binding one or more tasks to an inactive pilot.
   \item[Late binding.] Binding one or more tasks to an active pilot.
 \end{description}
 
-Depending on the specific capabilities implemented in the workload management
-component, some \pilotjob systems allows for pilots to be defined on the bases
-of the available tasks. This assigning process should not be confused with
-early binding as the latter requires for a pilot to have been already defined.
+Depending on the specific capabilities implemented in the workload
+management component, some \pilotjob systems allows for pilots to be
+defined \jhanote{not sure what this ``defined'' is} on the bases of
+the available tasks. This assigning process should not be confused
+with early binding as the latter requires for a pilot to have been
+already defined.
 
 % \jhanote{we need to relate job to task. How is a task different from
 %     a job? One way of addressing this is that a job is simply a task,
@@ -1266,6 +1271,25 @@ early binding as the latter requires for a pilot to have been already defined.
 %   am going to collapse the two into a single concept avoiding to split
 %   hairs.} 
 
+\mrnote{I am slightly uncomfortable with ``pilots are programs'' -
+maybe we can discuss this in person. I think of a Pilot as a relatively dumb
+`container' - a PJ system would be a program to me, but I'm not sure of the
+Pilot itself, at least its unclear given my mental definition of pilots up till
+this point in the section} \mtnote{It is definitively a fuzzy territory. I
+guess this is why we are struggling so much to put together a consistent set of
+definitions. In my mental model, jobs are containers as they do `nothing' but
+containing a set of data about programs - how to execute them, what they need,
+what they are and so on. Pilots do something, they are executed and they run.
+Within them, they may have an agent - if so we want to implement that specific
+set of capabilities - they can have an execution subsystem, they can be just
+scripts that download and unpack other programs. As such I believe they qualify
+as programs. What do you think?}
+
+\mrnote{Again, we use the word programs - I think
+  if we define a task to be a set of instructions - then a job has a
+  task - not a program. If task is distinctively different, don't use
+  it, but we either should use the word ``executable'' or define what
+  we mean when we say program} \mtnote{Executable sounds good to me. The Section has changed quite dramatically, could you please indicate where you think it would be better to substitute `program' with `executable'? I am also happy for you to do the substitution if you want.}
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
 
