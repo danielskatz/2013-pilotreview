@@ -727,7 +727,6 @@ resource acquisition/release policies, dispatch policies, number of scheduling
 levels) and (v) does the framework have dependencies to other third-party
 components/services?
 
-
 % Higher-level applications and tools either
 % provide a highly-integrated vertical framework, which deeply integrates the PJ
 % system (e.\,g.\ Swift/Coasters), or rely on a third-party
@@ -741,36 +740,142 @@ components/services?
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 
-The overview offered in \S\ref{sec:prelim} shows a degree of heterogeneity both in the functionalities of \pilotjobs and in the vocabulary adopted by their different implementations. Implementation details tend to hide the functional commonalities and differences among \pilotjobs frameworks while features and capabilities are named inconsistently, often with the same terms referring to multiple concepts or the same concept named in different ways.
+The overview offered in \S\ref{sec:prelim} shows a degree of heterogeneity
+both in the functionalities of \pilotjobs and in the vocabulary adopted by
+their different implementations. Implementation details tend to hide the
+functional commonalities and differences among \pilotjobs frameworks while
+features and capabilities are named inconsistently, often with the same terms
+referring to multiple concepts or the same concept named in different ways.
 
-This Section presents an analysis of the minimal set of architectural components, capabilities and concepts that underline every \pilotjob implementations. All the concepts utilized in this Section are defined so that they can be leveraged in \S\ref{sec:4} and \S\ref{sec:5} to produce a comparative and critical analysis of diverse \pilotjobs frameworks.
+This Section presents an analysis of the minimal set of architectural
+components, capabilities and concepts that underline every \pilotjob
+implementations. All the concepts utilized in this Section are defined so that
+they can be leveraged in \S\ref{sec:4} and \S\ref{sec:5} to produce a
+comparative and critical analysis of diverse \pilotjobs frameworks.
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
-All the \pilotjob systems described in \S\ref{sec:prelim} are engineered to allow for the execution of multiple types of workloads on Distributed Computing Resources (DCIs) such as, Grids, Clouds or HPC facilities. This is achieved differently, depending on use cases, design and implementation choices, but also on the constraints imposed by the peculiarities of the targeted DCI. Finding common denominators among these systems requires an analysis along multiple dimensions.
+All the \pilotjob systems described in \S\ref{sec:prelim} are engineered to
+allow for the execution of multiple types of workloads on Distributed
+Computing Resources (DCIs) such as, Grids, Clouds or HPC facilities. This is
+achieved differently, depending on use cases, design and implementation
+choices, but also on the constraints imposed by the peculiarities of the
+targeted DCI. Finding common denominators among these systems requires an
+analysis along multiple dimensions.
 
-As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed according to multiple criteria, both functional and non-functional. In this Section, the focus is on the former as the latter are adapted by definition to each specific pilot implementation. Each \pilotjob system exhibits architectural, provisioning and execution characteristics that are integral to the \pilotjob paradigm itself. However, many \pilotjob systems also exhibit specific or non-integral characteristics. Discerning and distinguishing characteristics into these categories, requires isolating and defining a minimal set of concepts and terms that have to apply to every \pilotjob implementation.
+As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed according to
+multiple criteria, both functional and non-functional. In this Section, the
+focus is on the former as the latter are adapted by definition to each
+specific pilot implementation. Each \pilotjob system exhibits architectural,
+provisioning and execution characteristics that are integral to the \pilotjob
+paradigm itself. However, many \pilotjob systems also exhibit specific or non-
+integral characteristics. Discerning and distinguishing characteristics into
+these categories, requires isolating and defining a minimal set of concepts
+and terms that have to apply to every \pilotjob implementation.
 
-At some level, all \pilotjob systems introduced in \S\ref{sec:prelim} leverage a similar architecture to accomplish workload execution. Such an architecture is based on two separate, but intercommunicating logical components: one component is related to the management of the workloads and their tasks; the other to the execution of the tasks on target resources. As will be shown in \S\ref{sec:4}, the implementations of both the Workload Manager and the Task Executor significantly vary from system to system, with one or more elements responsible for specific functionalities both on application as well as infrastructure level. Nevertheless, the two architectural components can be consistently distinguished and isolated across different \pilotjob systems.
+At some level, all \pilotjob systems introduced in \S\ref{sec:prelim} leverage
+a similar architecture to accomplish workload execution. Such an architecture
+is based on two separate, but intercommunicating logical components: one
+component is related to the management of the workloads and their tasks; the
+other to the execution of the tasks on target resources. As will be shown in
+\S\ref{sec:4}, the implementations of both the Workload Manager and the Task
+Executor significantly vary from system to system, with one or more elements
+responsible for specific functionalities both on application as well as
+infrastructure level. Nevertheless, the two architectural components can be
+consistently distinguished and isolated across different \pilotjob systems.
 
-For example, looking at the core \pilotjob systems introduced in \S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the architectural component dedicated to workload management, while the job-wrapper belongs to the component responsible for task execution. Similar examples can be given for the advanced \pilotjob systems and for Pilot-based frameworks: GlideinWMS offers an extended set of features when compared to the scheduler and dispatcher of Nimrod-G, but all those features belong to the same, well-defined and self-contained architectural component --- i.e. the one in charge of managing the workloads. The same is valid for Corral or SWIFT: they both offer evolved functionalities and interfaces to manage workloads but, as such, they both are part of an architecture where workload management and task execution belongs to two distinct components.
+For example, looking at the core \pilotjob systems introduced in
+\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
+architectural component dedicated to workload management, while the job-
+wrapper belongs to the component responsible for task execution. Similar
+examples can be given for the advanced \pilotjob systems and for Pilot-based
+frameworks: GlideinWMS offers an extended set of features when compared to the
+scheduler and dispatcher of Nimrod-G, but all those features belong to the
+same, well-defined and self-contained architectural component --- i.e. the one
+in charge of managing the workloads. The same is valid for Corral or SWIFT:
+they both offer evolved functionalities and interfaces to manage workloads
+but, as such, they both are part of an architecture where workload management
+and task execution belongs to two distinct components.
 
-The Workload Manager and the Task Executor are separate and well-defined architectural components that communicate and coordinate in order to exchange tasks, input and output files, and related data. Communication and coordination are two fundamental characteristics of every distributed architecture, but we posit that it is not an integral architectural component of \pilotjob systems, nor is any specific communication and coordination paradigm a distinctive feature of a \pilotjob system.
+The Workload Manager and the Task Executor are separate and well-defined
+architectural components that communicate and coordinate in order to exchange
+tasks, input and output files, and related data. Communication and
+coordination are two fundamental characteristics of every distributed
+architecture, but we posit that it is not an integral architectural component
+of \pilotjob systems, nor is any specific communication and coordination
+paradigm a distinctive feature of a \pilotjob system.
 
-For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is very common among \pilotjobs. Functionally, the Master can be identified with the Workload Manager, while the Worker with the Task Executor. However, the \MW paradigm usually implies a specific distribution of capabilities between Master and Worker, and, in some cases, also a communication model. Moreover, \MW is applied to a non-fixed set of capabilities while referring not only to architectures but also to frameworks and applications. This flexibility makes \MW a viable choice for implementing \pilotjobs but not one of its defining characteristics.
+For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is very common
+among \pilotjobs. Functionally, the Master can be identified with the Workload
+Manager, while the Worker with the Task Executor. However, the \MW paradigm
+usually implies a specific distribution of capabilities between Master and
+Worker, and, in some cases, also a communication model. Moreover, \MW is
+applied to a non-fixed set of capabilities while referring not only to
+architectures but also to frameworks and applications. This flexibility makes \
+MW a viable choice for implementing \pilotjobs but not one of its defining
+characteristics.
 
-The proposed architectural components for \pilotjob systems support flexible execution strategies along with performance in the task submission process. The tasks of a workload are bound to one or more pilots without having to be directly scheduled on the DCI's job management system. Furthermore, the binding of tasks to a pilot might happen before or after the pilot has been assigned a portion of the DCI's resources, and it can progress for the whole time the pilot can hold on them. This execution strategy requires dedicated capabilities both for performing the binding of tasks to pilots but also for the provisioning of pilots so that they can be assigned portions of the DCI's resources. \jhanote{I need to understand better..}\mtnote{Action on this comment on hold. See the comment at the end of the following paragraph. By expanding the discussion on the three main capabilities we should also get this paragraph better grounded.}
+The proposed architectural components for \pilotjob systems support flexible
+execution strategies along with performance in the task submission process.
+The tasks of a workload are bound to one or more pilots without having to be
+directly scheduled on the DCI's job management system. Furthermore, the bind
+of tasks to a pilot might happen before or after the pilot has been assigned a
+portion of the DCI's resources, and it can last for the whole time the pilot
+can hold on its resources. This execution strategy requires dedicated
+functionalities both for performing the bind of tasks to pilots but also for
+the provisioning of pilots so that they can be assigned portions of the DCI's
+resources.
 
-The minimal set of capabilities that needs to be implemented by a \pilotjob system in order to execute workloads, involves \pilot provision, data management and task dispatching. The specific procedure to provision pilots depends on how each targeted DCI exposes its resources. Typically, for a DCI adopting queue, batch and scheduling systems, provisioning a pilot involves it be submitted as a job. Conversely, for infrastructures that do not adopt a job-based submission system, a pilot would be executed by means of other logical containers as, for example, a Virtual Machine on so called Infrastructures as a Service IaaS (IaaS). Data staging is used to transfer the task description, and the input and output files to and from one or more pilots. Implementations of data management capabilities vary greatly across \pilotjob implementations as much as the task dispatching procedure. \mtnote{As discussed, I will probably want to split these paragraphs into three, each one for: \pilot provision, data management and task dispatching.}
+% \jhanote{I need to understand better..}\mtnote{Action on this comment on
+% hold. See the comment at the end of the following paragraph. By expanding the
+% discussion on the three main capabilities we should also get this paragraph
+% better grounded.}
+
+The minimal set of functionalities that needs to be implemented by a \pilotjob
+system involves \pilot provisioning and task dispatching. \pilot provisioning
+is a core functionality of every \pilot system because it is essential for the
+creation of resource overlays. This type of overlay allows for tasks to
+utilize resources without directly depending on the capabilities exposed by
+the targeted DCI. Pilots are bound to the DCI resources by means of the DCI
+capabilities but, once bound, pilots make those resources directly available
+for the execution of the tasks of a workload. Thanks to resource overlays,
+\pilot systems can also implement functionalities tailored to the requirements
+of specific user communities [cit, cit, cit].
+
+The procedures and mechanisms to provision pilots depend on the capabilities
+exposed by the targeted DCI and on the implementation of the considered \pilot
+system. Typically, for a DCI adopting queue, batch and scheduling systems,
+provisioning a pilot involves it be submitted as a job. Conversely, for
+infrastructures that do not adopt a job-based submission system, a pilot would
+be executed by means of other types of logical container as, for example, the
+one implemented by means of a Virtual Machine (VM) on a so called
+Infrastructure as a Service IaaS (IaaS).
+
+Once pilots are bound to DCI resources, tasks need to be dispatched to those
+pilots for execution. Thanks to resource overlays, task dispatching does not
+depend on other functionalities provided by the DCI and can be implemented
+within the boundaries of the \pilot systems. This independence allows to shift
+the control of tasks of a workload directly and exclusively to the \pilot
+system, a distinguishing characteristic of such systems.
+
+Data management may have an important role within \pilot systems. For example,
+functionalities can be provided to support data staging for task execution or
+for managing task-related data according to the capabilities offered by
+specific DCI. Nonetheless, \pilot systems can be devised in which tasks do not
+require data management because they do not necessitate input files, they do
+not produce output files or data is already locally available. As such, data
+management should not be considered a necessary functionality of \pilot
+systems even when present in many of them.
 
 In the following two subsections, a minimal set of terms related to these
 capabilities is defined.
 
-%Here a summary of this set:
-% \mtnote{The following list is still to be updated following a complete list of
-% the definitions offered in the next subsection. I am going to do it towards
-% the end of the revision process so to avoid multiple rewrite of the list.}
+% Here a summary of this set:
+% \mtnote{The following list is still to be updated following a complete list
+% of the definitions offered in the next subsection. I am going to do it
+% towards the end of the revision process so to avoid multiple rewrite of the
+% list.}
 % \begin{itemize}
 %   \item Execution of workloads:
 %   \begin{itemize}
@@ -794,16 +899,15 @@ capabilities is defined.
 % \mtnote{In absence of further comments, for now I have used those
 %   terms.}
 
-\alnote{the previous characteristics are not defined yet. Are they suppose to
-get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
-want to add them to the list of criteria in what is now 2.2.1 and will become
-the last subsection of 2. What do you think?.}
+% \alnote{the previous characteristics are not defined yet. Are they suppose to
+% get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
+% want to add them to the list of criteria in what is now 2.2.1 and will become
+% the last subsection of 2. What do you think?.}
 
-
-\alnote{maybe mention   explicit what these components are in the GlideinWMS
-case?  Also it   would be good to explain what makes these systems
-advanced.}\mtnote{Would that not be a repetition of \S2? If we need   more
-details I would add them there.}
+% \alnote{maybe mention   explicit what these components are in the GlideinWMS
+% case?  Also it   would be good to explain what makes these systems
+% advanced.}\mtnote{Would that not be a repetition of \S2? If we need   more
+% details I would add them there.}
 
 % \alnote{Without getting into some more analysis for Corral and Swift,
 %   the value by stating that they have a workload manager and task
@@ -814,14 +918,13 @@ details I would add them there.}
 %   will be in \S4.} \jhanote{yes, need to be careful about how specific
 %   we get in order to make a point.}
 
-
-\mtnote{I have incorporated your comment in the paragraph
-  above. Please note that a closure is still needed as it is not
-  strong enough to argue that \MW is too ambiguous to be necessary. A
-  simple rebuttal would be: make it less ambiguous and you will see
-  that it is indeed necessary because, after all, there is no
-  plausible alternative. I still think this specific paragraph is too
-  thin so please feel free to add/change/edit directly the paragraph.}
+% \mtnote{I have incorporated your comment in the paragraph
+%   above. Please note that a closure is still needed as it is not
+%   strong enough to argue that \MW is too ambiguous to be necessary. A
+%   simple rebuttal would be: make it less ambiguous and you will see
+%   that it is indeed necessary because, after all, there is no
+%   plausible alternative. I still think this specific paragraph is too
+%   thin so please feel free to add/change/edit directly the paragraph.}
 
 % \jhanote{echoing what Melissa says, it might be more productive to
 %   introduce C-C as a sub-system at par with Workload Management and
@@ -835,10 +938,9 @@ details I would add them there.}
 %   well-defined architectural component of PJ, it could be a feature
 %   implemented in the Workload manager and the task executor.}
 
-
-\alnote{maybe cleanly separating architecture and the way the workload
-  is scheduled/binding takes place.}\mtnote{that `support' is meant to
-  make that separation. Care to elaborate, suggest or editing?}
+% \alnote{maybe cleanly separating architecture and the way the workload
+%   is scheduled/binding takes place.}\mtnote{that `support' is meant to
+%   make that separation. Care to elaborate, suggest or editing?}
 
 % \jhanote{I understand the spirit/intent of the above and I agree with
 %   the separation (in fact it is very useful), however calling the
@@ -847,14 +949,21 @@ details I would add them there.}
 %   that it has no loose ends :) however we should still fix.. )}
 % \mtnote{Right! The following paragraph should address this error.}
 
-\alnote{is data staging minimal?}\mtnote{if you think about it as input/output
-files not strictly - even if basically you would be able to run very little
-science without them. When you consider staging of data in general, then I
-believe it becomes minimal.}\mrnote{What do you mean by considering it in
-general? I could stage my files manually to-and-fro and only worry about the
-Pilots as task executors using hardcoded paths to my data. Data-staging
-therefore would not be required, especially on machines with shared filesystems
-}\mtnote{Apologies, my comment was too generic. I mean that it is not only about staging I/O files, it can also be about staging the pilot/agent --- BJ auto-install into a venv for example --- or downloading the the executable used for the task. If we take away the very possibility to move data --- whatever function they play into the execution `model' of PJ --- in and out I think that the PJ system as a whole cannot work. If you think this explanation is convincing, we might want to transform it into a small paragraph.}
+% \alnote{is data staging minimal?}\mtnote{if you think about it as input/output
+% files not strictly - even if basically you would be able to run very little
+% science without them. When you consider staging of data in general, then I
+% believe it becomes minimal.}\mrnote{What do you mean by considering it in
+% general? I could stage my files manually to-and-fro and only worry about the
+% Pilots as task executors using hardcoded paths to my data. Data-staging
+% therefore would not be required, especially on machines with shared
+% filesystems}\mtnote{Apologies, my comment was too generic. I mean that it is
+% not only about staging I/O files, it can also be about staging the
+% pilot/agent --- BJ auto-install into a venv for example --- or downloading
+% the the executable used for the task. If we take away the very possibility
+% to move data --- whatever function they play into the execution `model' of
+% PJ --- in and out I think that the PJ system as a whole cannot work. If you
+% think this explanation is convincing, we might want to transform it into a
+% small paragraph.}
 
 \mrnote{I just want to make sure if we call data staging necessary that every
 PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}
