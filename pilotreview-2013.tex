@@ -1892,7 +1892,48 @@ available beyond their original design scope.
 
 % -----------------------------------------------------------------------------
 %
-\subsubsection{HTCondor GlideinWMS}
+\subsubsection{HTCondor}
+
+HTCondor can be considered one of the most prevalent distributed  computing
+project of all time in terms of its pervasiveness and size of its  user
+community and is often cited as the project that coined the term \pilotjob. But
+despite this fact, describing HTCondor along the lines of a \pilotjob system has
+turned out to be difficult, if not partly impossible for several reasons.
+
+HTCondor is used in multiple different contexts: the HTCondor \textit{project},
+the HTCondor \textit{software} and HTCondor \textit{grids}. But even if we only
+look at the software parts of the landscape, we are faced with a
+\textit{hodgepodge} of concepts, components and services that have been grown
+and curated opportunistically for the past 20 years.
+
+\paragraph{Architecture}
+
+\onote{dig out name of the actual daemon processes}
+\onote{Workload Manager and Task Executor - were defined properly?}
+
+A complete HTCondor system that accepts user tasks and executes them on one or
+more resources is called an HTCondor \textbf{pool}. A pool consists of
+multiple loosely coupled components that together implement the functionality of
+Workload Manager and Task Executor.
+
+In HTCondor, user tasks (\textbf{jobs}) are represented as job description files
+and are submitted to a so-called \textbf{agent} (very different usage of the
+term) via a command-line tool. An agent is deployed as operating system services
+(\texttt{schedd}) on so-called \textit{gateway machines} (user front-ends of an
+HTCondor pool) and accepts tasks from multiple users. Agents implement three
+different aspects of the overall architecture: (1) the provide persistent
+storage for user jobs and (2) they find resource for a task to execute by
+contacting the \textbf{matchmaker} and (3) they marshal task execution via a so-
+called \textbf{shadow}.
+
+
+
+
+The agent is responsible for remembering jobs
+in persistent storage
+
+\paragraph{Condor-G}
+
 
 \textcolor{red}
 {
