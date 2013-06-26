@@ -1193,6 +1193,8 @@ container - for example a job or a VM - to be instantiated.
   \item[Early binding.] Binding one or more tasks to an inactive pilot.
   \item[Late binding.] Binding one or more tasks to an active pilot.
 \end{description}
+\aznote{We don't have anything for application-level scheduling, though
+this term was used previously in section 2.  Do we need anything for it?}
 
 Depending on the specific capabilities implemented in the workload
 management component, some \pilotjob systems allows for pilots to be
@@ -1435,8 +1437,10 @@ AppLeS, with the dynamism inherent in grid resources (availability,
 power, etc) being a driving motivator for AppLeS itself.  AppLeS
 was first developed in 1996, precluding the development of clouds;
 regardless, as with ``true'' \pilotjob approaches, adaptations
-and additions which could enable cloud functionality are easily
-envisioned.  To expand the reach of AppLeS, middleware-specific
+and additions which enable cloud functionality are easily
+envisioned.  \aznote{Don't like ``easily envisioned'',
+but not sure how to fix at this point}
+ To expand the reach of AppLeS, middleware-specific
 extensions must be implemented. \aznote{By end-users or by
 AppLeS authors, check}
 
@@ -1449,20 +1453,29 @@ systems which can (generally?) be taken advantage of without
 requiring code modification of the underlying applications being
 executed.
 
-The lack of a \textit{placeholder job} limits the functionality
+The lack of a \textit{placeholder job} limits the agility
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
 is not a ``true'' \pilotjob system, as a \textit{placeholder}
 is required to enable fundamental \pilotjob functionality such as
-\textit{multi-level scheduling.}
+\textit{multi-level scheduling.} \aznote{Not sure if this is a valid
+claim -- according to \S \ref{subsec:vocab_terms_and_definitions},
+AppLeS does multi-level scheduling since it can submit tasks to
+different schedulers, not sure how to argue for the additional benefits
+of a placeholder here using our vocabulary -- technically as
+far as I can tell AppLeS does both multi/application-level scheduling,
+so if that is correct I will use the lack of placeholder to argue 
+that there is a loss in flexibility/agility/speed...}
 
 \paragraph{AppLeS Conclusion}
 \aznote{Not in the structure guide -- should we have this?  If not,
 might be useful for us in ``real'' conclusion, so throwing in anyway...}
-AppLeS shows the power of the Master-Worker approach \aznote{too loaded?},
-but the following ``true'' \pilotjobs will show the flexibility/power
-that the \pilotjob approach offers.
+AppLeS shows the power of scheduling tasks across multiple computing resources
+via the \textit{Master-Worker} approach \aznote{too loaded?} which many
+\pilotjobs use as a partial foundation.  However,
+the following ``true'' \pilotjobs will show the flexibility/power
+that a full \pilotjob approach offers.
 
 %% \subsubsection{AppLeS}
 
@@ -1561,18 +1574,24 @@ that the \pilotjob approach offers.
 The authors describe their system
 as a ``personal cluster'' with the goal of achieving on-demand,
 user-schedulable computing resources aligning closely with what is
-provided by our more formal definition of \pilotjobs -- in this case,
-the resources are spread across a national DCI.
+provided by our formal definition of \pilotjobs.  This enhancement
+to user control was thereby envisioned as a means of allowing
+users to submit and manage thousands of jobs at once, even
+across heterogeneous distributed computing infrastructure.
+
+%  in this case,
+%the resources are spread across a national DCI.
 
 \paragraph{Design Goals}
 MyCluster was developed to allow users to submit and manage
-jobs across heterogeneous NSF TeraGrid resources in a uniform
-manner.  TeraGrid existed as a group of compute clusters
+jobs across heterogeneous NSF TeraGrid resources in a uniform,
+on-demand manner.  TeraGrid existed as a group of compute clusters
 connected by high-bandwidth links facilitating the movement
 of data, but with many different job deployment mechanisms
 requiring cluster-specific submission scripts.  MyCluster
 allowed all cluster resources to be submitted to via a
-\pilotjob-based approach.
+\pilotjob-based approach, reducing the complexity of
+multi-cluster submission and increasing scheduling flexibility.
 
 \paragraph{Applications}
 Applications are launched via MyCluster in a ``traditional''
@@ -1591,8 +1610,8 @@ MyCluster}
 \paragraph{Deployment Scenarios (VO/multiuser)}
 MyCluster is designed for a single-user.  A MyCluster
 installation resides in userspace, and may be used
-to marshal resources ranging from small local resource pools
-(e.g. departmental Condor or SGE engines) to large HPC installations
+to marshal multiple resources ranging from small local resource pools
+(e.g. departmental Condor or SGE systems) to large HPC installations
 including TeraGrid (now XSEDE).
 \aznote{Still unsure exactly what to put here...  move TeraGrid
 details here from the design section?  But those details motivate the design...}
@@ -1605,7 +1624,8 @@ This approach makes the \textit{multi-level scheduling} abilities
 of \pilotjobs explicit; rather than directly \textit{binding}
 to individual TeraGrid resources, users allow the virtual grid
 overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
-as a whole.
+presented as a single cohesive resource. \aznote{change ``presented''
+to ``virtualized''?}
 
 \paragraph{Architecture \& Interface}
 MyCluster implements several \pilotjob analogues: the \texttt{Master
@@ -1622,7 +1642,7 @@ once!~\cite{1652061}
 Additional features above and beyond the \textit{basic \pilotjob system}
 concept include: the inclusion of a MyCluster
 \texttt{virtual login session}, which
-is commandline interface designed to allow users to interactively
+is a commandline interface designed to allow users to interactively
 monitor the status of their \textit{placeholders} and \textit{\cus};
 the automatic recovery of placeholders after loss due to exceeding wallclock
 limitations or node reboots; and authentication of all TCP
@@ -1635,7 +1655,7 @@ might be useful for us in ``real'' conclusion, so throwing in anyway...}
 MyCluster illustrates how an approach aimed at \textit{multi-level
 scheduling} by marshalling multiple heterogeneous resources lends
 itself perfectly to a \pilotjob-based approach.  The fact that
-the researchers behind it form1ed a complete \pilotjob system
+the researchers behind it formed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems.
 \aznote{I know this paragraph is bad, but wanted to start..}
@@ -1664,7 +1684,7 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% %% ``Our system delegates the responsibility of submitting the
 %% %% job proxies to a single semi-autonomous agent spawned,
-%% %% through Globus, at each TeraGrid site during a virtual login
+%% %% through Globus, at each Te raGrid site during a virtual login
 %% %% session. This agent translates the job proxy submission to the
 %% %% local batch submission syntax, maintains some number of job
 %% %% proxies throughout the lifetime of a login session, and may
@@ -1763,8 +1783,12 @@ to the usefulness of \pilotjobs in attacking these problems.
 \subsubsection{PanDA}
 
 \paragraph{Rationale}
-PanDA was developed to provide a \pilotjob system for ATLAS which could
-handle large numbers of data-driven processing workloads.
+PanDA was developed to provide a \pilotjob system for ATLAS \aznote{todo: ref ATLAS}
+which could
+handle large numbers (100,000+/day) of jobs for data-driven processing workloads.
+In addition to the logistics of handling large-scale job submission, there was
+a need for integrated monitoring for analysis of system state and a high
+degree of automation to reduce the need for user/administrative intervention.
 
 \paragraph{Design Goals}
 PanDA was designed to support the basic functionality required of a
@@ -1806,19 +1830,27 @@ which also monitors the status of pilots.
 Pilot-resource \textit{provisioning} is handled by PanDA itself and is not
 user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
+A central job queue allows users to submit jobs
+to distributed reseoruces in a uniform manner.  \aznote{Not required for
+\pilotjob -- put later or remove?}
 This basic functionality (pilot creation and management) provides
 PanDA with all of the baseline capabilities required for a \pilotjob.
 
 As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
 PanDA contains some additional backend features such as \texttt{AutoPilot}, which
-tracks site statuses via a database, and \texttt{Bamboo} which adds
-ATLAS database interfacing.  Enhancements to the userspace include
+tracks site statuses via a database, \texttt{Bamboo} which adds
+ATLAS database interfacing, and automatic error handling and recovery. 
+PanDA contains support for queues in clouds, including EC2, Helix Nebula,
+and FutureGrid.
+Enhancements to the userspace include
 \texttt{Monitor}, for web-based monitoring, and the \texttt{PanDA client}.
 \texttt{PanDA Dynamic Data Placement} \cite{maeno_pd2p:_2012}
 allows for additional, automatic data
-management by replicating popular input data to underutilized resources
-for later computations.
+management by replicating popular or backlogged input data to underutilized resources
+for later computations and enables jobs to be placed where the data
+already exists.
+
 
 \paragraph{PanDA Conclusion}
 PanDA has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
