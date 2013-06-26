@@ -1911,19 +1911,19 @@ curated opportunistically for the past 20 years.
 \onote{dig out name of the actual daemon processes}
 \onote{Workload Manager and Task Executor - were defined properly?}
 
-A 'complete' HTCondor system that accepts user tasks and executes them on one or
-more resources is called an HTCondor \textbf{pool}. A pool consists of multiple
-loosely coupled components that together implement the functionality of Workload
-Manager and Task Executor.
+A "complete'' HTCondor system that accepts user tasks and executes them on one
+or more resources is called an HTCondor \textbf{pool}. A pool consists of
+multiple loosely coupled, usually distributed  components that together
+implement the functionality of Workload Manager and Task Executor in a 
+PilotJob system.
 
-In an HTCondor pool, user tasks (\textbf{jobs}) are represented as job
-description files and are submitted to a (user-)\textbf{agent} (very different
-usage of the term) via a command-line tool. Agents are deployed as system
-services / daemons (\texttt{schedd}) on so-called \textit{gateway machines}
-(user front-ends of an HTCondor pool) and accept tasks from multiple users.
-Agents implement three different aspects of the overall architecture: (1) they
-provide persistent storage for user jobs, (2) they find resource for a task to
-execute by contacting the \textbf{matchmaker} and (3) they marshal task
+In a pool, user tasks (\textbf{jobs}) are represented through job description
+files and submitted to a (user-)\textbf{agent} via command-line tools. Agents
+are deployed as system services (\texttt{schedd}) on so-called \textit{gateway
+machines} (user front-ends of an HTCondor pool) and accept tasks from multiple
+users. Agents implement three different aspects of the overall architecture: (1)
+they provide persistent storage for user jobs, (2) they find resource for a task
+to execute by contacting the \textbf{matchmaker} and (3) they marshal task
 execution via a so- called \textbf{shadow}.
 
 The matchmaker, also called the \textit{central manager}, is another system 
@@ -1932,15 +1932,18 @@ with one or more of the resources available to an HTCondor pool. The
 matchmaking process is based on \textit{ClassAds} a description language that 
 can capture both, resource capabilities as well as task requirements. 
 
-Resources in an HTCondor pool are represented by \texttt{startd} services
-that are analogous to our definition of a \textit{Pilot}. 
+Resources are tied into an HTCondor pool by \texttt{startd} system services that
+are analogous to our definition of a \pilot. The \texttt{startd} \pilots are
+deployed on the pool's compute resources. They report resource state and 
+capabilities back to the matchmaker and start tasks submitted by agents on
+the resource in encapsulated \textbf{sandboxes}.
 
+Resources in a pool can span a wide spectrum of system. While some pools
+are comprised of regular desktop PCs (sometimes called a campus grid), other
+pools incorporate large HPC clusters and cloud resources. Hybrid pools with
+heterogeneous sets of resources are also common.
 
-
-
-
-The agent is responsible for remembering jobs
-in persistent storage
+This is why different resource prov. and deployment techniques are used ... 
 
 \paragraph{Condor-G}
 
