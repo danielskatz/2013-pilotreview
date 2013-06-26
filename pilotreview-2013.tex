@@ -1940,10 +1940,10 @@ curated opportunistically for the past 20 years.
 
 \paragraph{Architecture}
 
-\onote{dig out name of the actual daemon processes}
-\onote{Workload Manager and Task Executor - were defined properly?}
+%\onote{dig out name of the actual daemon processes}
+%\onote{Workload Manager and Task Executor - were defined properly?}
 
-A "complete'' HTCondor system that accepts user tasks and executes them on one
+A ``complete'' HTCondor system that accepts user tasks and executes them on one
 or more resources is called an HTCondor \textbf{pool}. A pool consists of
 multiple loosely coupled, usually distributed  components that together
 implement the functionality of Workload Manager and Task Executor in a 
@@ -1962,12 +1962,12 @@ The matchmaker, also called the \textit{central manager}, is another system
 service that realizes the concept of late binding by matching user tasks 
 with one or more of the resources available to an HTCondor pool. The 
 matchmaking process is based on \textit{ClassAds} a description language that 
-can capture both, resource capabilities as well as task requirements. 
+can capture both, resource capabilities as well as task requirements.
 
-Resources are tied into an HTCondor pool by \texttt{startd} system services that
-are analogous to our definition of a \pilot. The \texttt{startd} \pilots are
-deployed on the pool's compute resources. They report resource state and 
-capabilities back to the matchmaker and start tasks submitted by agents on
+\textbf{Resources} are tied into an HTCondor pool by \texttt{startd} system
+services that are analogous to our definition of a \pilot. The \texttt{startd}
+\pilots are deployed on the pool's compute resources. They report resource state
+and  capabilities back to the matchmaker and start tasks submitted by agents on
 the resource in encapsulated \textbf{sandboxes}.
 
 Resources in a pool can span a wide spectrum of system. While some pools
@@ -1975,9 +1975,29 @@ are comprised of regular desktop PCs (sometimes called a campus grid), other
 pools incorporate large HPC clusters and cloud resources. Hybrid pools with
 heterogeneous sets of resources are also common.
 
-This is why different resource prov. and deployment techniques are used ... 
+It is possible for two or more HTCondor pools to ``collaborate'' so that one 
+pool has access to the resources of another pool and vice versa. In HTCondor,
+this concept is called \textbf{flocking} and allows agents to query 
+matchmakers outside their own pool for compatible resources. Flocking is 
+used to implement load-balancing between multiple pools but also to provide
+a broader set of heterogeneous resources to user communities. 
+
+The components described above, jobs, agent, matchmaker, resource, shadow and
+sandboxes are sometimes collectively referred to as the \textbf{HTCondor Kernel}
+and satisfy the requirements for a \pilotjob system as outlined in Section
+\ref{subsec:vocab_core_functionalities}. However, the provisioning, allocation
+and usage of resources within a pool can differentiate between different pools
+and multiple different approaches and software systems have emerged over time,
+all under the umbrella of the wider HTCondor project.
 
 \paragraph{Condor-G}
+
+Condor-G is an alternative agent that can speak the Globus GRAM (Grid Resource 
+Access and Management) protocol. Condor-G agents use the GRAM protocol to 
+launch HTCondor \texttt{startd} \pilots via a GRAM gateway on a remote HPC
+cluster. Condor tasks submitted through this agent are then assigned by a 
+local matchmaker to these ad-hoc provisioned \pilots. This concept is called 
+\textit{gliding-in} or \textbf{glide-in}.
 
 \paragraph{glidein-WMS}
 
