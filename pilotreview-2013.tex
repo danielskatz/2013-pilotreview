@@ -1684,7 +1684,7 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% %% ``Our system delegates the responsibility of submitting the
 %% %% job proxies to a single semi-autonomous agent spawned,
-%% %% through Globus, at each TeraGrid site during a virtual login
+%% %% through Globus, at each Te raGrid site during a virtual login
 %% %% session. This agent translates the job proxy submission to the
 %% %% local batch submission syntax, maintains some number of job
 %% %% proxies throughout the lifetime of a login session, and may
@@ -1783,8 +1783,12 @@ to the usefulness of \pilotjobs in attacking these problems.
 \subsubsection{PanDA}
 
 \paragraph{Rationale}
-PanDA was developed to provide a \pilotjob system for ATLAS which could
-handle large numbers of data-driven processing workloads.
+PanDA was developed to provide a \pilotjob system for ATLAS \aznote{todo: ref ATLAS}
+which could
+handle large numbers (100,000+/day) of jobs for data-driven processing workloads.
+In addition to the logistics of handling large-scale job submission, there was
+a need for integrated monitoring for analysis of system state and a high
+degree of automation to reduce the need for user/administrative intervention.
 
 \paragraph{Design Goals}
 PanDA was designed to support the basic functionality required of a
