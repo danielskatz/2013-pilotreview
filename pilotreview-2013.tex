@@ -1193,6 +1193,8 @@ container - for example a job or a VM - to be instantiated.
   \item[Early binding.] Binding one or more tasks to an inactive pilot.
   \item[Late binding.] Binding one or more tasks to an active pilot.
 \end{description}
+\aznote{We don't have anything for application-level scheduling, though
+this term was used previously in section 2.  Do we need anything for it?}
 
 Depending on the specific capabilities implemented in the workload
 management component, some \pilotjob systems allows for pilots to be
@@ -1435,8 +1437,10 @@ AppLeS, with the dynamism inherent in grid resources (availability,
 power, etc) being a driving motivator for AppLeS itself.  AppLeS
 was first developed in 1996, precluding the development of clouds;
 regardless, as with ``true'' \pilotjob approaches, adaptations
-and additions which could enable cloud functionality are easily
-envisioned.  To expand the reach of AppLeS, middleware-specific
+and additions which enable cloud functionality are easily
+envisioned.  \aznote{Don't like ``easily envisioned'',
+but not sure how to fix at this point}
+ To expand the reach of AppLeS, middleware-specific
 extensions must be implemented. \aznote{By end-users or by
 AppLeS authors, check}
 
@@ -1449,13 +1453,20 @@ systems which can (generally?) be taken advantage of without
 requiring code modification of the underlying applications being
 executed.
 
-The lack of a \textit{placeholder job} limits the functionality
+The lack of a \textit{placeholder job} limits the agility
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
 is not a ``true'' \pilotjob system, as a \textit{placeholder}
 is required to enable fundamental \pilotjob functionality such as
-\textit{multi-level scheduling.}
+\textit{multi-level scheduling.} \aznote{Not sure if this is a valid
+claim -- according to \S \ref{subsec:vocab_terms_and_definitions},
+AppLeS does multi-level scheduling since it can submit tasks to
+different schedulers, not sure how to argue for the additional benefits
+of a placeholder here using our vocabulary -- technically as
+far as I can tell AppLeS does both multi/application-level scheduling,
+so if that is correct I will use the lack of placeholder to argue 
+that there is a loss in flexibility/agility/speed...}
 
 \paragraph{AppLeS Conclusion}
 \aznote{Not in the structure guide -- should we have this?  If not,
