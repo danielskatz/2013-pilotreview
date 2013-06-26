@@ -1830,19 +1830,27 @@ which also monitors the status of pilots.
 Pilot-resource \textit{provisioning} is handled by PanDA itself and is not
 user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
+A central job queue allows users to submit jobs
+to distributed reseoruces in a uniform manner.  \aznote{Not required for
+\pilotjob -- put later or remove?}
 This basic functionality (pilot creation and management) provides
 PanDA with all of the baseline capabilities required for a \pilotjob.
 
 As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
 PanDA contains some additional backend features such as \texttt{AutoPilot}, which
-tracks site statuses via a database, and \texttt{Bamboo} which adds
-ATLAS database interfacing.  Enhancements to the userspace include
+tracks site statuses via a database, \texttt{Bamboo} which adds
+ATLAS database interfacing, and automatic error handling and recovery. 
+PanDA contains support for queues in clouds, including EC2, Helix Nebula,
+and FutureGrid.
+Enhancements to the userspace include
 \texttt{Monitor}, for web-based monitoring, and the \texttt{PanDA client}.
 \texttt{PanDA Dynamic Data Placement} \cite{maeno_pd2p:_2012}
 allows for additional, automatic data
-management by replicating popular input data to underutilized resources
-for later computations.
+management by replicating popular or backlogged input data to underutilized resources
+for later computations and enables jobs to be placed where the data
+already exists.
+
 
 \paragraph{PanDA Conclusion}
 PanDA has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
