@@ -1574,18 +1574,24 @@ that a full \pilotjob approach offers.
 The authors describe their system
 as a ``personal cluster'' with the goal of achieving on-demand,
 user-schedulable computing resources aligning closely with what is
-provided by our more formal definition of \pilotjobs -- in this case,
-the resources are spread across a national DCI.
+provided by our formal definition of \pilotjobs.  This enhancement
+to user control was thereby envisioned as a means of allowing
+users to submit and manage thousands of jobs at once, even
+across heterogeneous distributed computing infrastructure.
+
+%  in this case,
+%the resources are spread across a national DCI.
 
 \paragraph{Design Goals}
 MyCluster was developed to allow users to submit and manage
-jobs across heterogeneous NSF TeraGrid resources in a uniform
-manner.  TeraGrid existed as a group of compute clusters
+jobs across heterogeneous NSF TeraGrid resources in a uniform,
+on-demand manner.  TeraGrid existed as a group of compute clusters
 connected by high-bandwidth links facilitating the movement
 of data, but with many different job deployment mechanisms
 requiring cluster-specific submission scripts.  MyCluster
 allowed all cluster resources to be submitted to via a
-\pilotjob-based approach.
+\pilotjob-based approach, reducing the complexity of
+multi-cluster submission and increasing scheduling flexibility.
 
 \paragraph{Applications}
 Applications are launched via MyCluster in a ``traditional''
@@ -1604,8 +1610,8 @@ MyCluster}
 \paragraph{Deployment Scenarios (VO/multiuser)}
 MyCluster is designed for a single-user.  A MyCluster
 installation resides in userspace, and may be used
-to marshal resources ranging from small local resource pools
-(e.g. departmental Condor or SGE engines) to large HPC installations
+to marshal multiple resources ranging from small local resource pools
+(e.g. departmental Condor or SGE systems) to large HPC installations
 including TeraGrid (now XSEDE).
 \aznote{Still unsure exactly what to put here...  move TeraGrid
 details here from the design section?  But those details motivate the design...}
@@ -1618,7 +1624,8 @@ This approach makes the \textit{multi-level scheduling} abilities
 of \pilotjobs explicit; rather than directly \textit{binding}
 to individual TeraGrid resources, users allow the virtual grid
 overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
-as a whole.
+presented as a single cohesive resource. \aznote{change ``presented''
+to ``virtualized''?}
 
 \paragraph{Architecture \& Interface}
 MyCluster implements several \pilotjob analogues: the \texttt{Master
@@ -1635,7 +1642,7 @@ once!~\cite{1652061}
 Additional features above and beyond the \textit{basic \pilotjob system}
 concept include: the inclusion of a MyCluster
 \texttt{virtual login session}, which
-is commandline interface designed to allow users to interactively
+is a commandline interface designed to allow users to interactively
 monitor the status of their \textit{placeholders} and \textit{\cus};
 the automatic recovery of placeholders after loss due to exceeding wallclock
 limitations or node reboots; and authentication of all TCP
@@ -1648,7 +1655,7 @@ might be useful for us in ``real'' conclusion, so throwing in anyway...}
 MyCluster illustrates how an approach aimed at \textit{multi-level
 scheduling} by marshalling multiple heterogeneous resources lends
 itself perfectly to a \pilotjob-based approach.  The fact that
-the researchers behind it form1ed a complete \pilotjob system
+the researchers behind it formed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems.
 \aznote{I know this paragraph is bad, but wanted to start..}
