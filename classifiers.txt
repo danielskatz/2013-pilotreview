@@ -28,3 +28,12 @@ Classifiers: Non-Functional
   - 'brownie points' with the reviewers / practitioners might find this useful 
   - Fault tolerance
   - Security 
+
+
+- Section 4 needs re-structuring:
+  4. 
+  4.1
+  4.1.1
+  4.1.2
+  4.1.3 ...
+
