@@ -1997,7 +1997,8 @@ Access and Management) protocol. Condor-G agents use the GRAM protocol to
 launch HTCondor \texttt{startd} \pilots via a GRAM gateway on a remote HPC
 cluster. Condor tasks submitted through this agent are then assigned by a 
 local matchmaker to these ad-hoc provisioned \pilots. This concept is called 
-\textit{gliding-in} or \textbf{glide-in}.
+\textit{gliding-in} or \textbf{glide-in}. It implements \textbf{late-binding}
+on top of GRAM/HPC systems that generally support only \textbf{early-binding}.
 
 \paragraph{glidein-WMS}
 
