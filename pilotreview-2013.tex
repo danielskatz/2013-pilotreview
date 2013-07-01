@@ -969,15 +969,6 @@ capabilities is defined.
 % think this explanation is convincing, we might want to transform it into a
 % small paragraph.}
 
-\mrnote{I just want to make sure if we call data staging necessary that every
-PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}
-
-
-\mtnote{Is the the term used in Section 2. Before using it I checked
-  and found it used in this Nimrod-G paper
-  (http://arxiv.org/ftp/cs/papers/0009/0009021.pdf)}
-
-
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
 
@@ -1228,26 +1219,6 @@ already defined.
 %   `deploying'. As deploying and provisioning have a similar meaning, I
 %   am going to collapse the two into a single concept avoiding to split
 %   hairs.}
-
-\mrnote{I am slightly uncomfortable with ``pilots are programs'' -
-maybe we can discuss this in person. I think of a Pilot as a relatively dumb
-`container' - a PJ system would be a program to me, but I'm not sure of the
-Pilot itself, at least its unclear given my mental definition of pilots up till
-this point in the section} \mtnote{It is definitively a fuzzy territory. I
-guess this is why we are struggling so much to put together a consistent set of
-definitions. In my mental model, jobs are containers as they do `nothing' but
-containing a set of data about programs - how to execute them, what they need,
-what they are and so on. Pilots do something, they are executed and they run.
-Within them, they may have an agent - if so we want to implement that specific
-set of capabilities - they can have an execution subsystem, they can be just
-scripts that download and unpack other programs. As such I believe they qualify
-as programs. What do you think?}
-
-\mrnote{Again, we use the word programs - I think
-  if we define a task to be a set of instructions - then a job has a
-  task - not a program. If task is distinctively different, don't use
-  it, but we either should use the word ``executable'' or define what
-  we mean when we say program} \mtnote{Executable sounds good to me. The Section has changed quite dramatically, could you please indicate where you think it would be better to substitute `program' with `executable'? I am also happy for you to do the substitution if you want.}
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
 
@@ -2171,11 +2142,56 @@ Coasters was designed to both usability and performance goals.
 \end{itemize}
 }
 
+\paragraph{Rationale}
+BigJob was designed as a flexible and extensible \pilotjob
+to work on a variety of infrastructures. It was designed to
+natively support many scientific applications, including
+MPI jobs~\ref{saga_bigjob_condor_cloud}. 
+
+\paragraph{Design Goals}
+BigJob supports the basic functionality required of a \pilotjob,
+with the added capability of interfacing with a number of 
+different batch queuing systems and infrastructures (grids,
+clouds, clusters, etc.). BigJob was also designed to 
+support MPI jobs without adding additional configuration
+requirements to the end-user. Lastly, the application-level
+programmability that BigJob offers was incorporated as a
+means of giving the end-user more flexibility and control
+over their job management.
+
+Most recently, BigJob has been extended to work with data and, similarly to
+\pilotjobs, abstract away direct user communication between different
+storage systems\mrnote{Ref: Pilot Data}. This work has extended BigJob from being a purely
+\pilotjob-based system to a more complete job and data management 
+system.
+
+\paragraph{Applications}
+BigJob has been used for many different ensemble-based or
+replica-exchange-based applications in both the computational chemistry
+and bioinformatics disciplines. It has been shown to work across multiple
+XSEDE~\ref{xsede_url} machines and scale up to thousands of concurrent
+jobs. It has also been used as the underlying job
+management layer in the release of an asynchronous replica-exchange
+software package~\ref{2013-xsede-cdi}.
+
+\paragraph{Deployment Scenarios (Single User)}
+\mrnote{elaborate}
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+BigJob uses the Simple API for Grid Applications (SAGA)~\ref{ogf-gfd-90, sagastuff}
+in order to interface with different grid middleware. It can work on HPC grid
+environments, such as XSEDE or FutureGrid \mrnote{ref}, as well as personal
+clusters with batch queuing systems. In addition, BigJob has been shown to work
+on clouds~\ref{cpe_pmr_cloud_2012}, where it has the capability to both 
+launch VMs and submit jobs to these VMs. 
+
+\paragraph{Architecture \& Interface}
+
 In the BigJob framework, a \pilot is, appropriately enough, called a
 \pilot. The BigJob \textit{manager} is called a \textit{\pilot
   Manager}, which is the central coordinator of the
 framework. \jhanote{Which is the general concept? I think
-  Pilot-Manager is the general concept and BigJob-Manager a specfic
+  Pilot-Manager is the general concept and BigJob-Manager a specific
   realization of it} The \textit{\pilot-Manager} is responsible for
 the orchestration and scheduling of \pilots. It runs locally on the
 machine used to initiate the distributed application which may or may
@@ -2194,6 +2210,7 @@ and executes the actual tasks the resource. \jhanote{I don't think we
   each resource} \jhanote{the separation of roles between the agent
   and the manager is unclear: does the agent do the mapping of tasks
   to the cores/nodes/processors or is that done by the manager?}
+  \mrnote{WIP}
 
 The communication between the Manager and Agent(s) is achieved through
 the {\it Distributed Coordination Service}, which is most often a
@@ -2202,15 +2219,8 @@ jobs (executable, input data, etc.), and job status. These
 functionalities comprise a set of baseline capabilities that
 constitute a Pilot-Job.
 
-BigJob extends the notion of a basic \pilotjob and offers user-level
-control of \pilot placement as well as late-binding capabilities of a
-\pilot to a remote resource. BigJob was designed to natively provide
-support for MPI jobs, as well as work on a variety of back-end systems
-by utilizing the Simple API for Grid Applications (SAGA) as its
-backend. BigJob has been extended to work with data and, similarly to
-\pilotjobs, abstract away direct user communication between different
-storage systems. This makes BigJob extensible to both cloud and
-heterogenous storage environments.
+\paragraph{BigJob Conclusion}
+\mrnote{WIP}
 
 \subsubsection{DIANE}
 
