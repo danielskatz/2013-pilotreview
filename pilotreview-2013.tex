@@ -409,10 +409,10 @@ simulations where many jobs need to be run at one time.
             ``higher-level PJs'' . Also earlier comment about adding
             ``higher-level pilot-based frameworks'' to ``higher-level
             frameworks that can use pilot-jobs''.}}  \alnote{mention
-          that these layers are not cleanly separated, add 
-          capabilities (outside)/properties (internal) of 
-          each layer, what is the overlap between the layers (how they 
-          interrelated?, what is the overlap?)?} 
+          that these layers are not cleanly separated, add
+          capabilities (outside)/properties (internal) of
+          each layer, what is the overlap between the layers (how they
+          interrelated?, what is the overlap?)?}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -744,18 +744,14 @@ components/services?
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 
-The overview offered in \S\ref{sec:prelim} shows a degree of heterogeneity
-both in the functionalities of \pilotjobs and in the vocabulary adopted by
-their different implementations. Implementation details tend to hide the
-functional commonalities and differences among \pilotjobs frameworks while
+The overview presented in \S\ref{sec:prelim} shows a degree of heterogeneity
+both in the functionalities and the vocabulary adopted by
+different \pilotjob systems. Often, implementation details hide the
+functional commonalities and differences among \pilotjobs systems while
 features and capabilities are named inconsistently, often with the same terms
 referring to multiple concepts or the same concept named in different ways.
 
-This Section presents an analysis of the minimal set of architectural
-components, capabilities and concepts that underline every \pilotjob
-implementations. All the concepts utilized in this Section are defined so that
-they can be leveraged in \S\ref{sec:4} and \S\ref{sec:5} to produce a
-comparative and critical analysis of diverse \pilotjobs frameworks.
+This Section offers an analysis of the architectural components, functionalities, and terminology shared by every \pilotjob system. The goal is to offer both a conceptual description of an exemplar \pilotjon system and a well-defined vocabulary that can be leveraged to produce a comparative and critical analysis of diverse \pilotjobs frameworks in \S\ref{sec:4} and \S\ref{sec:5}.
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
@@ -875,34 +871,6 @@ systems even when present in many of them.
 In the following two subsections, a minimal set of terms related to these
 capabilities is defined.
 
-% Here a summary of this set:
-% \mtnote{The following list is still to be updated following a complete list
-% of the definitions offered in the next subsection. I am going to do it
-% towards the end of the revision process so to avoid multiple rewrite of the
-% list.}
-% \begin{itemize}
-%   \item Execution of workloads:
-%   \begin{itemize}
-%     \item `Task'
-%     \item `manager'
-%     \item `pilot'
-%     \item `binding'
-%     \item `data staging'
-%   \end{itemize}
-%   \item Pilot provision:
-%   \begin{itemize}
-%     \item `job'
-%     \item `resource'
-%     \item `infrastructure'
-%     \item `overlay'
-%     \item `provisioning'
-%     \item `placeholder'
-%   \end{itemize}
-% \end{itemize}
-
-% \mtnote{In absence of further comments, for now I have used those
-%   terms.}
-
 % \alnote{the previous characteristics are not defined yet. Are they suppose to
 % get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
 % want to add them to the list of criteria in what is now 2.2.1 and will become
@@ -953,25 +921,24 @@ capabilities is defined.
 %   that it has no loose ends :) however we should still fix.. )}
 % \mtnote{Right! The following paragraph should address this error.}
 
-% \alnote{is data staging minimal?}\mtnote{if you think about it as input/output
-% files not strictly - even if basically you would be able to run very little
-% science without them. When you consider staging of data in general, then I
-% believe it becomes minimal.}\mrnote{What do you mean by considering it in
-% general? I could stage my files manually to-and-fro and only worry about the
-% Pilots as task executors using hardcoded paths to my data. Data-staging
-% therefore would not be required, especially on machines with shared
-% filesystems}\mtnote{Apologies, my comment was too generic. I mean that it is
-% not only about staging I/O files, it can also be about staging the
-% pilot/agent --- BJ auto-install into a venv for example --- or downloading
-% the the executable used for the task. If we take away the very possibility
-% to move data --- whatever function they play into the execution `model' of
-% PJ --- in and out I think that the PJ system as a whole cannot work. If you
-% think this explanation is convincing, we might want to transform it into a
-% small paragraph.}
+% \alnote{is data staging minimal?}\mtnote{if you think about it as
+% input/output files not strictly - even if basically you would be able to run
+% very little science without them. When you consider staging of data in
+% general, then I believe it becomes minimal.}\mrnote{What do you mean by
+% considering it in general? I could stage my files manually to-and-fro and
+% only worry about the Pilots as task executors using hardcoded paths to my
+% data. Data-staging therefore would not be required, especially on machines
+% with shared filesystems}\mtnote{Apologies, my comment was too generic. I
+% mean that it is not only about staging I/O files, it can also be about
+% staging the pilot/agent --- BJ auto-install into a venv for example --- or
+% downloading the the executable used for the task. If we take away the very
+% possibility to move data --- whatever function they play into the execution
+% `model' of PJ --- in and out I think that the PJ system as a whole cannot
+% work. If you think this explanation is convincing, we might want to
+% transform it into a small paragraph.}
 
 \mrnote{I just want to make sure if we call data staging necessary that every
 PJ system we currently know of uses data staging}\mtnote{I changed the term `stage' into `management'. Hopefully this will avoid confusion.}
-
 
 \mtnote{Is the the term used in Section 2. Before using it I checked
   and found it used in this Nimrod-G paper
@@ -1044,7 +1011,6 @@ outside the context of \pilotjob systems. Workloads are encoded into
 jobs when they have to be directly executed on infrastructures that
 support or require that type of container.
 
-
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are
 programs with specific capabilities and are submitted as jobs on the
@@ -1080,21 +1046,13 @@ restrictive, a situation that can lead to terminological and
 conceptual confusion, and to the use of synonyms for both the terms
 `pilot' and `pilot-job'.
 
-The term `pilot' is often associated with that of `placeholder'. This
-is a way to illustrate two of the distinctive capabilities that every
-pilot has to implement: acquiring bounded set of resources by running
-on a DCI, and executing tasks submitted (to the system that the pilot
-belongs) that will utilize them.  \jhanote{I don't agree with the
-  pulling or pushing as fundamental properties of the pilot. Nor do I
-  think the data management is a fundamental property of the pilot. In
-  PANDA for example PD2P is the associated infrastructure that does
-  the data managemnet} Two other fundamental capabilities of a pilot
-are pulling or being push with the tasks to execute, and managing the
-data that are staged in and out before and after the execution of
-those tasks.  Thanks to these capabilities, a pilot allows for a user
-or a group of users, depending on implementation details, to gain
-exclusive control over the binding and execution of her or their
-tasks.
+The term `pilot' is often associated with that of `placeholder'. This is a way
+to illustrate two of the distinctive capabilities that every pilot has to
+implement: acquiring bounded set of resources by running on a DCI, and
+executing tasks submitted (to the system that the pilot belongs) that will
+utilize them. Thanks to these capabilities, a pilot allows for a user or a
+group of users, depending on implementation details, to gain exclusive control
+over the binding and execution of her or their tasks.
 
 \begin{description}
   % \item[Placeholder.] A proxy for a bounded set of resources of a
@@ -1116,11 +1074,10 @@ tasks.
 From a terminology point of view, the term `pilot' as defined here is
 named differently across multiple \pilotjob systems. Depending upon
 context, in addition to the term `placeholder', pilot is also named
-`agent' and, in some cases, `pilotjob'. \jhanote{references here
-  please} All these terms should be considered synonyms and their use
-to indicate the same concept is a clear indication that a minimal and
-consistent vocabulary is needed when reasoning about multiple
-\pilotjob systems.
+`agent' and, in some cases, `pilotjob' [cit]. All these terms should be
+considered synonyms and their use to indicate the same concept is a clear
+indication that a minimal and consistent vocabulary is needed when reasoning
+about multiple \pilotjob systems.
 
 %  \jhanote{OK I see what Matteo is trying to say, which is different
 %    from what is presented: The point is that depending upon context, a
