@@ -776,14 +776,15 @@ and terms that have to apply to every \pilotjob implementation.
 
 At some level, all \pilotjob systems introduced in \S\ref{sec:prelim} leverage
 a similar architecture to accomplish workload execution. Such an architecture
-is based on two separate, but intercommunicating logical components: one
-component is related to the management of the workloads and their tasks; the
-other to the execution of the tasks on target resources. As will be shown in
-\S\ref{sec:4}, the implementations of both the Workload Manager and the Task
-Executor significantly vary from system to system, with one or more elements
-responsible for specific functionalities both on application as well as
-infrastructure level. Nevertheless, the two architectural components can be
-consistently distinguished and isolated across different \pilotjob systems.
+is based on two separate, but intercommunicating logical components: a \textbf{
+Workload Manager} and a \textbf{Task Executor}. The Workload Manager is is
+related to the management of the workloads and their tasks; the Task Executor
+to the execution of the tasks on target resources. As will be shown in
+\S\ref{sec:4}, the implementations of both components significantly vary from
+system to system, with one or more elements responsible for specific
+functionalities both on application as well as infrastructure level.
+Nevertheless, the two architectural components can be consistently
+distinguished and isolated across different \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
 \S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
@@ -812,8 +813,8 @@ Manager, while the Worker with the Task Executor. However, the \MW paradigm
 usually implies a specific distribution of capabilities between Master and
 Worker, and, in some cases, also a communication model. Moreover, \MW is
 applied to a non-fixed set of capabilities while referring not only to
-architectures but also to frameworks and applications. This flexibility makes \
-MW a viable choice for implementing \pilotjobs but not one of its defining
+architectures but also to frameworks and applications. This flexibility makes
+\MW a viable choice for implementing \pilotjobs but not one of its defining
 characteristics.
 
 The proposed architectural components for \pilotjob systems support flexible
