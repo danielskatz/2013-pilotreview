@@ -1241,12 +1241,24 @@ the flexibility and power of \pilotjobs, and emphasize the
 need for a common vocabulary/treatment to describe the
 developing landscape.
 
-\jhanote{Ashley to ``finish'': AppLeS, MyCluster and PANDA: Ole to
-  finish Glide-in, Corral and Bosco: Mark to finish DIANE,
-  Swift/falkon, DIRAC(?)}
-
-\aznote{Should we organize this section in order of when the PJ-systems
-were released?}
+\textcolor{red}
+{
+\textbf{Ideas 4.1.X structure}
+\begin{itemize}
+\item CHECK OVERLAP WITH 2.1
+\item Why did we pick this specific PJ? - already described in section 2?
+\item What was this PJ designed for (motivates architecture)
+\item What applications are using this PJ (if any?)
+\item (deployment assumptions) What is the typical deployment and usage scenario (e.g., VO. multi-user)
+\item (resource landscape assumptions) What is the resource landscape it assumes (Clouds, HPC, 'Grid', single machines,... )
+\item Architecture
+  \begin{itemize}
+    \item Components (mapping to 3)
+    \item How do components communicate? (e.g., push/pull propr. TCP protocol, REST)
+    \item Interface (how is it accessed)
+  \end{itemize}
+\end{itemize}
+}
 
 \subsection{Comparing \pilotjobs via a Common Framework \& Vocabulary}
 \aznote{Suggest removing the subsection header; making individual
@@ -1282,6 +1294,17 @@ differing capabilities, with the end-goal being a
 complete understanding of the \pilotjob ecosystem via a common
 vocabulary.}
 \aznote{Maybe this is better-suited for the conclusion?}
+
+\subsection{Comparing \pilotjobs via Classifiers}
+\onote{see ashley's comment above - the structure of section 4 is currently 
+a bit weird and the section titles clunky. I'll put the description of the 
+classifiers here for now, but at some point, this needs some grooming.}
+
+\subsubsection{A}
+
+\subsubsection{B}
+
+\subsubsection{C}
 
 %\subsubsection{Condor-G}
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
@@ -1346,26 +1369,7 @@ vocabulary.}
  \label{table:bigjob-saga-diane}
 \end{table*}
 
-
-\textcolor{red}
-{
-\textbf{Ideas 4.1.X structure}
-\begin{itemize}
-\item CHECK OVERLAP WITH 2.1
-\item Why did we pick this specific PJ? - already described in section 2?
-\item What was this PJ designed for (motivates architecture)
-\item What applications are using this PJ (if any?)
-\item (deployment assumptions) What is the typical deployment and usage scenario (e.g., VO. multi-user)
-\item (resource landscape assumptions) What is the resource landscape it assumes (Clouds, HPC, 'Grid', single machines,... )
-\item Architecture
-  \begin{itemize}
-    \item Components (mapping to 3)
-    \item How do components communicate? (e.g., push/pull propr. TCP protocol, REST)
-    \item Interface (how is it accessed)
-  \end{itemize}
-\end{itemize}
-}
-
+\subsection{"The Systems"}
 
 % -----------------------------------------------------------------------------
 %
