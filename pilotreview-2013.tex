@@ -409,10 +409,10 @@ simulations where many jobs need to be run at one time.
             ``higher-level PJs'' . Also earlier comment about adding
             ``higher-level pilot-based frameworks'' to ``higher-level
             frameworks that can use pilot-jobs''.}}  \alnote{mention
-          that these layers are not cleanly separated, add 
-          capabilities (outside)/properties (internal) of 
-          each layer, what is the overlap between the layers (how they 
-          interrelated?, what is the overlap?)?} 
+          that these layers are not cleanly separated, add
+          capabilities (outside)/properties (internal) of
+          each layer, what is the overlap between the layers (how they
+          interrelated?, what is the overlap?)?}
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -744,18 +744,14 @@ components/services?
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 
-The overview offered in \S\ref{sec:prelim} shows a degree of heterogeneity
-both in the functionalities of \pilotjobs and in the vocabulary adopted by
-their different implementations. Implementation details tend to hide the
-functional commonalities and differences among \pilotjobs frameworks while
+The overview presented in \S\ref{sec:prelim} shows a degree of heterogeneity
+both in the functionalities and the vocabulary adopted by
+different \pilotjob systems. Often, implementation details hide the
+functional commonalities and differences among \pilotjobs systems while
 features and capabilities are named inconsistently, often with the same terms
 referring to multiple concepts or the same concept named in different ways.
 
-This Section presents an analysis of the minimal set of architectural
-components, capabilities and concepts that underline every \pilotjob
-implementations. All the concepts utilized in this Section are defined so that
-they can be leveraged in \S\ref{sec:4} and \S\ref{sec:5} to produce a
-comparative and critical analysis of diverse \pilotjobs frameworks.
+This Section offers an analysis of the architectural components, functionalities, and terminology shared by every \pilotjob system. The goal is to offer both a conceptual description of an exemplar \pilotjon system and a well-defined vocabulary that can be leveraged to produce a comparative and critical analysis of diverse \pilotjobs frameworks in \S\ref{sec:4} and \S\ref{sec:5}.
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
@@ -780,14 +776,15 @@ and terms that have to apply to every \pilotjob implementation.
 
 At some level, all \pilotjob systems introduced in \S\ref{sec:prelim} leverage
 a similar architecture to accomplish workload execution. Such an architecture
-is based on two separate, but intercommunicating logical components: one
-component is related to the management of the workloads and their tasks; the
-other to the execution of the tasks on target resources. As will be shown in
-\S\ref{sec:4}, the implementations of both the Workload Manager and the Task
-Executor significantly vary from system to system, with one or more elements
-responsible for specific functionalities both on application as well as
-infrastructure level. Nevertheless, the two architectural components can be
-consistently distinguished and isolated across different \pilotjob systems.
+is based on two separate, but intercommunicating logical components: a \textbf{
+Workload Manager} and a \textbf{Task Executor}. The Workload Manager is is
+related to the management of the workloads and their tasks; the Task Executor
+to the execution of the tasks on target resources. As will be shown in
+\S\ref{sec:4}, the implementations of both components significantly vary from
+system to system, with one or more elements responsible for specific
+functionalities both on application as well as infrastructure level.
+Nevertheless, the two architectural components can be consistently
+distinguished and isolated across different \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
 \S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
@@ -816,8 +813,8 @@ Manager, while the Worker with the Task Executor. However, the \MW paradigm
 usually implies a specific distribution of capabilities between Master and
 Worker, and, in some cases, also a communication model. Moreover, \MW is
 applied to a non-fixed set of capabilities while referring not only to
-architectures but also to frameworks and applications. This flexibility makes \
-MW a viable choice for implementing \pilotjobs but not one of its defining
+architectures but also to frameworks and applications. This flexibility makes
+\MW a viable choice for implementing \pilotjobs but not one of its defining
 characteristics.
 
 The proposed architectural components for \pilotjob systems support flexible
@@ -875,34 +872,6 @@ systems even when present in many of them.
 In the following two subsections, a minimal set of terms related to these
 capabilities is defined.
 
-% Here a summary of this set:
-% \mtnote{The following list is still to be updated following a complete list
-% of the definitions offered in the next subsection. I am going to do it
-% towards the end of the revision process so to avoid multiple rewrite of the
-% list.}
-% \begin{itemize}
-%   \item Execution of workloads:
-%   \begin{itemize}
-%     \item `Task'
-%     \item `manager'
-%     \item `pilot'
-%     \item `binding'
-%     \item `data staging'
-%   \end{itemize}
-%   \item Pilot provision:
-%   \begin{itemize}
-%     \item `job'
-%     \item `resource'
-%     \item `infrastructure'
-%     \item `overlay'
-%     \item `provisioning'
-%     \item `placeholder'
-%   \end{itemize}
-% \end{itemize}
-
-% \mtnote{In absence of further comments, for now I have used those
-%   terms.}
-
 % \alnote{the previous characteristics are not defined yet. Are they suppose to
 % get defined in 2?}\mtnote{The whole \S3.1 is dedicated to them but we might
 % want to add them to the list of criteria in what is now 2.2.1 and will become
@@ -953,21 +922,21 @@ capabilities is defined.
 %   that it has no loose ends :) however we should still fix.. )}
 % \mtnote{Right! The following paragraph should address this error.}
 
-% \alnote{is data staging minimal?}\mtnote{if you think about it as input/output
-% files not strictly - even if basically you would be able to run very little
-% science without them. When you consider staging of data in general, then I
-% believe it becomes minimal.}\mrnote{What do you mean by considering it in
-% general? I could stage my files manually to-and-fro and only worry about the
-% Pilots as task executors using hardcoded paths to my data. Data-staging
-% therefore would not be required, especially on machines with shared
-% filesystems}\mtnote{Apologies, my comment was too generic. I mean that it is
-% not only about staging I/O files, it can also be about staging the
-% pilot/agent --- BJ auto-install into a venv for example --- or downloading
-% the the executable used for the task. If we take away the very possibility
-% to move data --- whatever function they play into the execution `model' of
-% PJ --- in and out I think that the PJ system as a whole cannot work. If you
-% think this explanation is convincing, we might want to transform it into a
-% small paragraph.}
+% \alnote{is data staging minimal?}\mtnote{if you think about it as
+% input/output files not strictly - even if basically you would be able to run
+% very little science without them. When you consider staging of data in
+% general, then I believe it becomes minimal.}\mrnote{What do you mean by
+% considering it in general? I could stage my files manually to-and-fro and
+% only worry about the Pilots as task executors using hardcoded paths to my
+% data. Data-staging therefore would not be required, especially on machines
+% with shared filesystems}\mtnote{Apologies, my comment was too generic. I
+% mean that it is not only about staging I/O files, it can also be about
+% staging the pilot/agent --- BJ auto-install into a venv for example --- or
+% downloading the the executable used for the task. If we take away the very
+% possibility to move data --- whatever function they play into the execution
+% `model' of PJ --- in and out I think that the PJ system as a whole cannot
+% work. If you think this explanation is convincing, we might want to
+% transform it into a small paragraph.}
 
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
@@ -1035,7 +1004,6 @@ outside the context of \pilotjob systems. Workloads are encoded into
 jobs when they have to be directly executed on infrastructures that
 support or require that type of container.
 
-
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are
 programs with specific capabilities and are submitted as jobs on the
@@ -1071,21 +1039,13 @@ restrictive, a situation that can lead to terminological and
 conceptual confusion, and to the use of synonyms for both the terms
 `pilot' and `pilot-job'.
 
-The term `pilot' is often associated with that of `placeholder'. This
-is a way to illustrate two of the distinctive capabilities that every
-pilot has to implement: acquiring bounded set of resources by running
-on a DCI, and executing tasks submitted (to the system that the pilot
-belongs) that will utilize them.  \jhanote{I don't agree with the
-  pulling or pushing as fundamental properties of the pilot. Nor do I
-  think the data management is a fundamental property of the pilot. In
-  PANDA for example PD2P is the associated infrastructure that does
-  the data managemnet} Two other fundamental capabilities of a pilot
-are pulling or being push with the tasks to execute, and managing the
-data that are staged in and out before and after the execution of
-those tasks.  Thanks to these capabilities, a pilot allows for a user
-or a group of users, depending on implementation details, to gain
-exclusive control over the binding and execution of her or their
-tasks.
+The term `pilot' is often associated with that of `placeholder'. This is a way
+to illustrate two of the distinctive capabilities that every pilot has to
+implement: acquiring bounded set of resources by running on a DCI, and
+executing tasks submitted (to the system that the pilot belongs) that will
+utilize them. Thanks to these capabilities, a pilot allows for a user or a
+group of users, depending on implementation details, to gain exclusive control
+over the binding and execution of her or their tasks.
 
 \begin{description}
   % \item[Placeholder.] A proxy for a bounded set of resources of a
@@ -1107,11 +1067,10 @@ tasks.
 From a terminology point of view, the term `pilot' as defined here is
 named differently across multiple \pilotjob systems. Depending upon
 context, in addition to the term `placeholder', pilot is also named
-`agent' and, in some cases, `pilotjob'. \jhanote{references here
-  please} All these terms should be considered synonyms and their use
-to indicate the same concept is a clear indication that a minimal and
-consistent vocabulary is needed when reasoning about multiple
-\pilotjob systems.
+`agent' and, in some cases, `pilotjob' [cit]. All these terms should be
+considered synonyms and their use to indicate the same concept is a clear
+indication that a minimal and consistent vocabulary is needed when reasoning
+about multiple \pilotjob systems.
 
 %  \jhanote{OK I see what Matteo is trying to say, which is different
 %    from what is presented: The point is that depending upon context, a
@@ -1296,8 +1255,8 @@ vocabulary.}
 \aznote{Maybe this is better-suited for the conclusion?}
 
 \subsection{Comparing \pilotjobs via Classifiers}
-\onote{see ashley's comment above - the structure of section 4 is currently 
-a bit weird and the section titles clunky. I'll put the description of the 
+\onote{see ashley's comment above - the structure of section 4 is currently
+a bit weird and the section titles clunky. I'll put the description of the
 classifiers here for now, but at some point, this needs some grooming.}
 
 Along with the common framework and vocabulary, we have identified a set of  key
@@ -1446,7 +1405,7 @@ AppLeS does multi-level scheduling since it can submit tasks to
 different schedulers, not sure how to argue for the additional benefits
 of a placeholder here using our vocabulary -- technically as
 far as I can tell AppLeS does both multi/application-level scheduling,
-so if that is correct I will use the lack of placeholder to argue 
+so if that is correct I will use the lack of placeholder to argue
 that there is a loss in flexibility/agility/speed...}
 
 \paragraph{AppLeS Conclusion}
@@ -1821,7 +1780,7 @@ As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
 PanDA contains some additional backend features such as \texttt{AutoPilot}, which
 tracks site statuses via a database, \texttt{Bamboo} which adds
-ATLAS database interfacing, and automatic error handling and recovery. 
+ATLAS database interfacing, and automatic error handling and recovery.
 PanDA contains support for queues in clouds, including EC2, Helix Nebula,
 and FutureGrid.
 Enhancements to the userspace include
@@ -1927,7 +1886,7 @@ curated opportunistically for the past 20 years.
 A ``complete'' HTCondor system that accepts user tasks and executes them on one
 or more resources is called an HTCondor \textbf{pool}. A pool consists of
 multiple loosely coupled, usually distributed  components that together
-implement the functionality of Workload Manager and Task Executor in a 
+implement the functionality of Workload Manager and Task Executor in a
 PilotJob system.
 
 In a pool, user tasks (\textbf{jobs}) are represented through job description
@@ -1939,10 +1898,10 @@ they provide persistent storage for user jobs, (2) they find resource for a task
 to execute by contacting the \textbf{matchmaker} and (3) they marshal task
 execution via a so- called \textbf{shadow}.
 
-The matchmaker, also called the \textit{central manager}, is another system 
-service that realizes the concept of late binding by matching user tasks 
-with one or more of the resources available to an HTCondor pool. The 
-matchmaking process is based on \textit{ClassAds} a description language that 
+The matchmaker, also called the \textit{central manager}, is another system
+service that realizes the concept of late binding by matching user tasks
+with one or more of the resources available to an HTCondor pool. The
+matchmaking process is based on \textit{ClassAds} a description language that
 can capture both, resource capabilities as well as task requirements.
 
 \textbf{Resources} are tied into an HTCondor pool by \texttt{startd} system
@@ -1956,12 +1915,12 @@ are comprised of regular desktop PCs (sometimes called a campus grid), other
 pools incorporate large HPC clusters and cloud resources. Hybrid pools with
 heterogeneous sets of resources are also common.
 
-It is possible for two or more HTCondor pools to ``collaborate'' so that one 
+It is possible for two or more HTCondor pools to ``collaborate'' so that one
 pool has access to the resources of another pool and vice versa. In HTCondor,
-this concept is called \textbf{flocking} and allows agents to query 
-matchmakers outside their own pool for compatible resources. Flocking is 
+this concept is called \textbf{flocking} and allows agents to query
+matchmakers outside their own pool for compatible resources. Flocking is
 used to implement load-balancing between multiple pools but also to provide
-a broader set of heterogeneous resources to user communities. 
+a broader set of heterogeneous resources to user communities.
 
 The components described above, jobs, agent, matchmaker, resource, shadow and
 sandboxes are sometimes collectively referred to as the \textbf{HTCondor Kernel}
@@ -1973,11 +1932,11 @@ all under the umbrella of the wider HTCondor project.
 
 \paragraph{Condor-G}
 
-Condor-G is an alternative agent that can speak the Globus GRAM (Grid Resource 
-Access and Management) protocol. Condor-G agents use the GRAM protocol to 
+Condor-G is an alternative agent that can speak the Globus GRAM (Grid Resource
+Access and Management) protocol. Condor-G agents use the GRAM protocol to
 launch HTCondor \texttt{startd} \pilots via a GRAM gateway on a remote HPC
-cluster. Condor tasks submitted through this agent are then assigned by a 
-local matchmaker to these ad-hoc provisioned \pilots. This concept is called 
+cluster. Condor tasks submitted through this agent are then assigned by a
+local matchmaker to these ad-hoc provisioned \pilots. This concept is called
 \textit{gliding-in} or \textbf{glide-in}. It implements \textbf{late-binding}
 on top of GRAM/HPC systems that generally support only \textbf{early-binding}.
 
@@ -2156,13 +2115,13 @@ Coasters was designed to both usability and performance goals.
 BigJob was designed as a flexible and extensible \pilotjob
 to work on a variety of infrastructures. It was designed to
 natively support many scientific applications, including
-MPI jobs~\ref{saga_bigjob_condor_cloud}. 
+MPI jobs~\ref{saga_bigjob_condor_cloud}.
 
 \paragraph{Design Goals}
 BigJob supports the basic functionality required of a \pilotjob,
-with the added capability of interfacing with a number of 
+with the added capability of interfacing with a number of
 different batch queuing systems and infrastructures (grids,
-clouds, clusters, etc.). BigJob was also designed to 
+clouds, clusters, etc.). BigJob was also designed to
 support MPI jobs without adding additional configuration
 requirements to the end-user. Lastly, the application-level
 programmability that BigJob offers was incorporated as a
@@ -2172,7 +2131,7 @@ over their job management.
 Most recently, BigJob has been extended to work with data and, similarly to
 \pilotjobs, abstract away direct user communication between different
 storage systems\mrnote{Ref: Pilot Data}. This work has extended BigJob from being a purely
-\pilotjob-based system to a more complete job and data management 
+\pilotjob-based system to a more complete job and data management
 system.
 
 \paragraph{Applications}
@@ -2192,8 +2151,8 @@ BigJob uses the Simple API for Grid Applications (SAGA)~\ref{ogf-gfd-90, sagastu
 in order to interface with different grid middleware. It can work on HPC grid
 environments, such as XSEDE or FutureGrid \mrnote{ref}, as well as personal
 clusters with batch queuing systems. In addition, BigJob has been shown to work
-on clouds~\ref{cpe_pmr_cloud_2012}, where it has the capability to both 
-launch VMs and submit jobs to these VMs. 
+on clouds~\ref{cpe_pmr_cloud_2012}, where it has the capability to both
+launch VMs and submit jobs to these VMs.
 
 \paragraph{Architecture \& Interface}
 
