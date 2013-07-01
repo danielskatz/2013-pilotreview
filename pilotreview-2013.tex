@@ -1260,16 +1260,45 @@ a bit weird and the section titles clunky. I'll put the description of the
 classifiers here for now, but at some point, this needs some grooming.}
 
 Along with the common framework and vocabulary, we have identified a set of  key
-classifiers along which we discuss the functional and non-functional aspects of
-\pilotjob systems.  While these classifiers are by no means exhaustive or
-complete, they are a useful tool to highlight and discuss the differences in 
-usage-modes, deployment and capabilities between different \pilotjob systems.
+classifiers along which we discuss the functional and non-functional properties
+of \pilotjob systems.  While these classifiers are by no means meant to be
+exhaustive or complete, they are a useful tool to highlight and discuss the
+differences in  usage-modes, deployment and capabilities between different
+\pilotjob systems. We divide our classifiers into three functional high-level
+categories: \textit{Resource Provisioning}, \textit{Workload Execution and
+Management} and \textit{Data Handling and Management}. In each category we
+define classifiers that give further information about (1) if and how a
+capability is implemented, and (2) if and on which level a capability is
+controllable. A fourth set of classifiers covers the non-functional properties
+of \pilotjob systems.
 
-\subsubsection{Resource Provisioning}
 
-\subsubsection{Workload Execution and Management}
+\paragraph{Resource Provisioning}
 
-\subsubsection{Data Handling and Management}
+\paragraph{Workload Execution and Management}
+
+\paragraph{Data Handling and Management}
+
+\paragraph{Non-Functional Properties}
+
+As non-functional properties we define the properties that are not
+specifically related to \pilotjob systems but rather describe general concepts
+commonly found in distributed applications, frameworks and tools. These
+properties are:
+
+\begin{itemize}
+
+\item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
+system from component failures?
+
+\item \textit{Authentication and Authorization}: How is a user identified in
+the system and how are identities and access credentials delegated to individual
+resources / pilots?
+
+\item \textit{Transfer Protocols}: What network protocols that are used to
+connect the individual component of the \pilotjob system?
+
+\end{itemize}
 
 %\subsubsection{Condor-G}
 %% \aznote{Section copied and pasted from IPDPS paper for now -- plan
