@@ -1388,66 +1388,67 @@ but lacks some fundamental components which limit its usability
 compared to the full \pilotjob approach.
 
 \paragraph{Design Goals}
-The main design goal of AppLeS is adaptivity, granting applications
+The main design goal of AppLeS is to enable users
+to submit jobs to multiple computing resources via a
+single unified interface, granting the
+appearance of a ``personal cluster''.
+The ``personal cluster'' concept requires several further
+design goals so that changing conditions on heterogeneous
+resources can be adapted to, including granting applications
 the ability to generate schedules dynamically and incorporating
 application performance characteristics into these schedules.
-\aznote{I want to talk about its being designed for grids here,
-perhaps merge this section with the resource landscape section
-as the resource landscape likely drove the design goals of
-many of these \pilotjobs?}
 
 \paragraph{Applications}
 AppLeS has been used to choose destinations
-for storing (analyzing?)
-satellite image files, optimize the execution of data-parallel matrix
-calculations, distribute computational biology genetic searches
-across resources with varying response/availability times, and
+for storing satellite image files (Simple SARA), 
+optimize the execution of data-parallel matrix
+calculations (Jacobi 2D AppLeS), 
+distribute computational biology genetic searches
+across resources with varying response/availability times 
+(AppLeS for Complib), and
 analyze biochemical interactions while dynamically recreating
-schedules to account for changes in performance predictions.
+schedules to account for changes in performance predictions
+(AppLeS for MCell).
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
-\aznote{Not entirely sure what is meant here and how it is distinct
-from resource landscape}
 The deployment characteristics of AppLeS-enabled software rely
 mainly upon the application writers themselves; applications
 may be adapted to use AppLeS which are either single or multi-user.
+AppLeS templates exist, which are application-class-based (e.g.
+parameter sweep, master-worker) 
+software frameworks created
+to ease the adaptation of existing applications to make use
+of AppLeS.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 Heterogeneous grid computing resources were targeted by
 AppLeS, with the dynamism inherent in grid resources (availability,
-power, etc) being a driving motivator for AppLeS itself.  AppLeS
+computational power, etc) being a driving 
+motivator for AppLeS itself.  AppLeS
 was first developed in 1996, precluding the development of clouds;
 regardless, as with ``true'' \pilotjob approaches, adaptations
-and additions which enable cloud functionality are easily
-envisioned.  \aznote{Don't like ``easily envisioned'',
-but not sure how to fix at this point}
+and additions which enable cloud functionality could
+feasibly be built on top of the AppLeS framework as e.g.
+cloud middleware service interfaces.
  To expand the reach of AppLeS, middleware-specific
-extensions must be implemented. \aznote{By end-users or by
-AppLeS authors, check}
+extensions must be implemented.
 
 \paragraph{Architecture \& Interface}
 AppLeS requires a tight coupling between the target application
 and the AppLeS code.  \textit{AppLeS templates} were created
 to ease this process, but the application code in essence must
 be modified to make use of AppLeS, as opposed to \pilotjob
-systems which can (generally?) be taken advantage of without
+systems which can \aznote{(generally?)} be taken advantage of without
 requiring code modification of the underlying applications being
 executed.
 
-The lack of a \textit{placeholder job} limits the agility
+The lack of a \textit{Pilot} limits the agility
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
 undermining the level of control.  For this reason, AppLeS
-is not a ``true'' \pilotjob system, as a \textit{placeholder}
+is not a ``true'' \pilotjob system, as a \textit{Pilot}
 is required to enable fundamental \pilotjob functionality such as
-\textit{multi-level scheduling.} \aznote{Not sure if this is a valid
-claim -- according to \S \ref{subsec:vocab_terms_and_definitions},
-AppLeS does multi-level scheduling since it can submit tasks to
-different schedulers, not sure how to argue for the additional benefits
-of a placeholder here using our vocabulary -- technically as
-far as I can tell AppLeS does both multi/application-level scheduling,
-so if that is correct I will use the lack of placeholder to argue
-that there is a loss in flexibility/agility/speed...}
+\textit{multi-level scheduling}.
 
 \paragraph{AppLeS Conclusion}
 \aznote{Not in the structure guide -- should we have this?  If not,
