@@ -86,16 +86,8 @@
   functional attribute of \pilotjobs that is generally agreed upon is
   they are tools/services that support multi-level and/or
   application-level scheduling by providing a scheduling overlay on
-  top of the system-provided schedulers.  \aznote{Not sure it is good
-    to open our abstract stating the confusion/uncertainty inherent
-    in defining Pilot-Jobs...  perhaps first state our motivation for
-    this work (``aim(ing) to provide appropriate context, insight, and
-    analysis of a \pilotjobs, and thereby bring about a hitherto
-    missing consilience...'')  and then state that it's somewhat
-    controversial?  I see where it could be eye-catching to outright
-    state that there IS controversy/uncertainty though, and that we
-    are aiming to quash it.  Making this note to try and figure this
-    out :)} Nearly everything else is either specific to an
+  top of the system-provided schedulers.  
+  Nearly everything else is either specific to an
   implementation, open to interpretation or not agreed upon. For
   example, are \pilotjobs part of the application space, or part of
   the services provided by an infrastructure? We will see that
@@ -107,9 +99,7 @@
   bring about a hitherto missing consilience in the community's
   appreciation of \pilotjobs.  Specifically this paper aims to provide
   a comprehensive survey of \pilotjobs, or more generically of
-  \pilotjob like capabilities.  \aznote{Is a ``comprehensive survey''
-    still true given last week's discussion of focusing on
-    ``landmark'' pilotjobs?}  A primary motivation for this work stems
+  \pilotjob like capabilities.  A primary motivation for this work stems
   from our experience when looking for an interoperable, extensible
   and general-purpose \pilotjobs; in the process, we realized that
   such a capability did not exist. The situation was however even more
@@ -1066,8 +1056,6 @@ container - for example a job or a VM - to be instantiated.
   \item[Early binding.] Binding one or more tasks to an inactive pilot.
   \item[Late binding.] Binding one or more tasks to an active pilot.
 \end{description}
-\aznote{We don't have anything for application-level scheduling, though
-this term was used previously in section 2.  Do we need anything for it?}
 
 Depending on the specific capabilities implemented in the workload
 management component, some \pilotjob systems allows for pilots to be
@@ -1143,10 +1131,6 @@ developing landscape.
 }
 
 \subsection{Comparing \pilotjobs via a Common Framework \& Vocabulary}
-\aznote{Suggest removing the subsection header; making individual
-pilotjobs into subsections instead?  Unless we decide to include
-another subsection in here -- but in that case, do not want to overlap
-with the conclusion}
 In light of the common vocabulary discussion in
 \S\ref{sec:vocab}, a representative set of \pilotjobs
 has been chosen for further analysis.
@@ -1175,7 +1159,6 @@ is exposed to reveal why \pilotjobs have evolved to have
 differing capabilities, with the end-goal being a
 complete understanding of the \pilotjob ecosystem via a common
 vocabulary.}
-\aznote{Maybe this is better-suited for the conclusion?}
 
 \subsection{Evaluation Criteria}\label{ssec:evaluation}
 
