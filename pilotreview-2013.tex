@@ -2180,6 +2180,8 @@ software package~\ref{2013-xsede-cdi}.
 BigJob is installable by a user onto the resource of his or her choice. It is capable of
 running only in ``single user'' mode; that is, a \pilot belongs to the user who
 spawned it and cannot be accessed by other users.
+\mrnote{I feel I need more clarification on what exactly I'm supposed to say 
+in this section...}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 BigJob uses the Simple API for Grid Applications (SAGA)~\ref{ogf-gfd-90, sagastuff}
@@ -2192,36 +2194,31 @@ launch VMs and submit jobs to these VMs.
 \paragraph{Architecture \& Interface}
 
 In the BigJob framework, a \pilot is, appropriately enough, called a
-\pilot. The BigJob \textit{manager} is called a \textit{\pilot
-  Manager}, which is the central coordinator of the
-framework. \jhanote{Which is the general concept? I think
-  Pilot-Manager is the general concept and BigJob-Manager a specific
-  realization of it} The \textit{\pilot-Manager} is responsible for
+\pilot. The \pilot-\textit{Manager} is called a \textit{BigJob-
+Manager}, which is the central coordinator of the
+framework. The \textit{BigJob-Manager} is responsible for
 the orchestration and scheduling of \pilots. It runs locally on the
 machine used to initiate the distributed application which may or may
 not be the same resource as the machine used on which the distributed
 application executes.
 
-The manager ensures that tasks are launched onto the correct resource
-using the correct number of processes. The \pilot-manager submits a
+The Manager ensures that tasks are launched onto the correct resource
+using the correct number of processes. The BigJob-Manager submits a
 \pilot to a remote resource's batch queueing system; when these
-\pilots becomes active, a \textit{Agent} (of the manager, not of the
-pilot) on the remote resource gathers information about its resource
-and executes the actual tasks the resource. \jhanote{I don't think we
-  should call it a pilot-agent, as it is agent of the manager not of
-  the pilot. OK?}  Each resource has its own Pilot Agent.\jhanote{I
-  don't think this is correct. Each pilot should contain an agent, not
-  each resource} \jhanote{the separation of roles between the agent
-  and the manager is unclear: does the agent do the mapping of tasks
-  to the cores/nodes/processors or is that done by the manager?}
-  \mrnote{WIP}
-
+\pilots becomes active, a \textit{BigJob-Agent} on the remote resource 
+gathers information about its resource
+and executes the actual tasks the resource. The \textit{BigJob-Agent}
+acts as a proxy for the BigJob-Manager on the remote resource.
+ 
 The communication between the Manager and Agent(s) is achieved through
 the {\it Distributed Coordination Service}, which is most often a
 database that stores information about jobs, information about the
-jobs (executable, input data, etc.), and job status. These
-functionalities comprise a set of baseline capabilities that
-constitute a Pilot-Job.
+jobs (executable, input data, etc.), and job status. In the BigJob framework,
+this Distributed Coordination Service is achieved through the use
+of the \textit{redis} database\mrnote{cite redis}. 
+The \pilot creation and management capabilities of BigJob meet 
+the baseline capabilities for a \pilotjob as described in Section 3.
+
 
 \paragraph{BigJob Conclusion}
 \mrnote{WIP}
