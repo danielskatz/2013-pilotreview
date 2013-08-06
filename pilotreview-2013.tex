@@ -1450,8 +1450,6 @@ is required to enable fundamental \pilotjob functionality such as
 \textit{multi-level scheduling}.
 
 \paragraph{AppLeS Conclusion}
-\aznote{Not in the structure guide -- should we have this?  If not,
-might be useful for us in ``real'' conclusion, so throwing in anyway...}
 AppLeS shows the power of scheduling tasks across multiple computing resources
 via the \textit{Master-Worker} approach \aznote{too loaded?} which many
 \pilotjobs use as a partial foundation.  However,
@@ -1552,27 +1550,27 @@ that a full \pilotjob approach offers.
 
 \subsubsection{MyCluster}
 \paragraph{Rationale}
-The authors describe their system
-as a ``personal cluster'' with the goal of achieving on-demand,
-user-schedulable computing resources aligning closely with what is
-provided by our formal definition of \pilotjobs.  This enhancement
-to user control was thereby envisioned as a means of allowing
-users to submit and manage thousands of jobs at once, even
-across heterogeneous distributed computing infrastructure.
-
-%  in this case,
-%the resources are spread across a national DCI.
-
-\paragraph{Design Goals}
 MyCluster was developed to allow users to submit and manage
 jobs across heterogeneous NSF TeraGrid resources in a uniform,
 on-demand manner.  TeraGrid existed as a group of compute clusters
 connected by high-bandwidth links facilitating the movement
-of data, but with many different job deployment mechanisms
+of data, but with many different job deployment middlewares
 requiring cluster-specific submission scripts.  MyCluster
 allowed all cluster resources to be submitted to via a
 \pilotjob-based approach, reducing the complexity of
 multi-cluster submission and increasing scheduling flexibility.
+%  in this case,
+%the resources are spread across a national DCI.
+
+\paragraph{Design Goals}
+The authors describe their system
+as a ``personal cluster'' with the goal of achieving on-demand,
+user-schedulable computing resources aligning closely with what is
+provided by our formal definition of \pilotjobs.  This enhancement
+to user control was envisioned as a means of allowing
+users to submit and manage thousands of jobs at once
+across heterogeneous distributed computing infrastructures, while
+providing an familiar interface\aznote{abstraction?} for submission.
 
 \paragraph{Applications}
 Applications are launched via MyCluster in a ``traditional''
@@ -1586,7 +1584,7 @@ which users can then use to schedule their applications with.
 in cited paper; spent some time going through
 papers which reference MyCluster and did not find
 any specific applications/papers which explicitly used
-MyCluster}
+MyCluster.  Is this a problem?}
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
 MyCluster is designed for a single-user.  A MyCluster
@@ -1594,8 +1592,6 @@ installation resides in userspace, and may be used
 to marshal multiple resources ranging from small local resource pools
 (e.g. departmental Condor or SGE systems) to large HPC installations
 including TeraGrid (now XSEDE).
-\aznote{Still unsure exactly what to put here...  move TeraGrid
-details here from the design section?  But those details motivate the design...}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 MyCluster was designed for and successfully executed on NSF TeraGrid
@@ -1605,16 +1601,15 @@ This approach makes the \textit{multi-level scheduling} abilities
 of \pilotjobs explicit; rather than directly \textit{binding}
 to individual TeraGrid resources, users allow the virtual grid
 overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
-presented as a single cohesive resource. \aznote{change ``presented''
-to ``virtualized''?}
+presented as a single cohesive, unified resource.
 
 \paragraph{Architecture \& Interface}
 MyCluster implements several \pilotjob analogues: the \texttt{Master
   Node Manager}, which acts as a \textit{\pilotjob Manager}, the
 \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
 \texttt{Job Proxies}, which act as \textit{placeholders}, and
-\texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob
-  \cus}.  Both resource provisioning and job-to-resource \textit{bindings}
+\texttt{Slave Node Managers}, which handle \textit{\pilotjob Tasks}
+Both resource provisioning and job-to-resource \textit{bindings}
 are handled manually by the end user.
 The end result is a complete \textit{basic \pilotjob system}, despite the
 authors of the system being constructed not having used the word ``pilot''
@@ -1624,22 +1619,19 @@ Additional features above and beyond the \textit{basic \pilotjob system}
 concept include: the inclusion of a MyCluster
 \texttt{virtual login session}, which
 is a commandline interface designed to allow users to interactively
-monitor the status of their \textit{placeholders} and \textit{\cus};
+monitor the status of their \textit{placeholders} and \textit{\tasks},
 the automatic recovery of placeholders after loss due to exceeding wallclock
 limitations or node reboots; and authentication of all TCP
 connections used in the system via 64-bit key encryption and
 GSI authentication mechanisms.
 
 \paragraph{MyCluster Conclusion}
-\aznote{Not in the structure guide -- should we have this?  If not,
-might be useful for us in ``real'' conclusion, so throwing in anyway...}
 MyCluster illustrates how an approach aimed at \textit{multi-level
 scheduling} by marshalling multiple heterogeneous resources lends
 itself perfectly to a \pilotjob-based approach.  The fact that
 the researchers behind it formed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems.
-\aznote{I know this paragraph is bad, but wanted to start..}
 
 %% \subsubsection{MyCluster}
 
