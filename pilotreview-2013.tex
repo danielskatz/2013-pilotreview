@@ -2208,7 +2208,8 @@ using the correct number of processes. The BigJob-Manager submits a
 \pilots becomes active, a \textit{BigJob-Agent} on the remote resource 
 gathers information about its resource
 and executes the actual tasks the resource. The \textit{BigJob-Agent}
-acts as a proxy for the BigJob-Manager on the remote resource.
+represents the \pilotjob, and thus, the application-level resource
+manager on the respective resource.
  
 The communication between the Manager and Agent(s) is achieved through
 the {\it Distributed Coordination Service}, which is most often a
