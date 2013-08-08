@@ -1920,13 +1920,12 @@ look at the software parts of the landscape, we are faced with a
 \textit{plethora} of concepts, components and services that have been grown and
 curated opportunistically for the past 20 years.
 
-\paragraph{Architecture}
+% -----------------------------------------------------------------------------
+%
+\paragraph{Base System Architecture}
 
-%\onote{dig out name of the actual daemon processes}
-%\onote{Workload Manager and Task Executor - were defined properly?}
-
-A ``complete'' HTCondor system that accepts user tasks and executes them on one
-or more resources is called an HTCondor \textbf{pool}. A pool consists of
+A ``complete'' HTCondor system that accepts user tasks and executes them on
+one or more resources is called an HTCondor \textbf{pool}. A pool consists of
 multiple loosely coupled, usually distributed  components that together
 implement the functionality of Workload Manager and Task Executor in a
 PilotJob system.
@@ -1935,91 +1934,117 @@ In a pool, user tasks (\textbf{jobs}) are represented through job description
 files and submitted to a (user-)\textbf{agent} via command-line tools. Agents
 are deployed as system services (\texttt{schedd}) on so-called \textit{gateway
 machines} (user front-ends of an HTCondor pool) and accept tasks from multiple
-users. Agents implement three different aspects of the overall architecture: (1)
-they provide persistent storage for user jobs, (2) they find resource for a task
-to execute by contacting the \textbf{matchmaker} and (3) they marshal task
-execution via a so- called \textbf{shadow}.
+users. Agents implement three different aspects of the overall architecture:
+(1) they provide persistent storage for user jobs, (2) they find resource for
+a task to execute by contacting the \textbf{matchmaker} and (3) they marshal
+task execution via a so- called \textbf{shadow}.
 
 The matchmaker, also called the \textit{central manager}, is another system
-service that realizes the concept of late binding by matching user tasks
-with one or more of the resources available to an HTCondor pool. The
-matchmaking process is based on \textit{ClassAds} a description language that
-can capture both, resource capabilities as well as task requirements.
+service that realizes the concept of late binding by matching user tasks with
+one or more of the resources available to an HTCondor pool. The matchmaking
+process is based on \textit{ClassAds} a description language that can capture
+both, resource capabilities as well as task requirements.
 
 \textbf{Resources} are tied into an HTCondor pool by \texttt{startd} system
 services that are analogous to our definition of a \pilot. The \texttt{startd}
-\pilots are deployed on the pool's compute resources. They report resource state
-and  capabilities back to the matchmaker and start tasks submitted by agents on
-the resource in encapsulated \textbf{sandboxes}.
+\pilots are deployed on the pool's compute resources. They report resource
+state and  capabilities back to the matchmaker and start tasks submitted by
+agents on the resource in encapsulated \textbf{sandboxes}.
 
-Resources in a pool can span a wide spectrum of system. While some pools
-are comprised of regular desktop PCs (sometimes called a campus grid), other
-pools incorporate large HPC clusters and cloud resources. Hybrid pools with
+Resources in a pool can span a wide spectrum of system. While some pools are
+comprised of regular desktop PCs (sometimes called a campus grid), other pools
+incorporate large HPC clusters and cloud resources. Hybrid pools with
 heterogeneous sets of resources are also common.
 
 It is possible for two or more HTCondor pools to ``collaborate'' so that one
 pool has access to the resources of another pool and vice versa. In HTCondor,
 this concept is called \textbf{flocking} and allows agents to query
-matchmakers outside their own pool for compatible resources. Flocking is
-used to implement load-balancing between multiple pools but also to provide
-a broader set of heterogeneous resources to user communities.
+matchmakers outside their own pool for compatible resources. Flocking is used
+to implement load-balancing between multiple pools but also to provide a
+broader set of heterogeneous resources to user communities.
 
 The components described above, jobs, agent, matchmaker, resource, shadow and
-sandboxes are sometimes collectively referred to as the \textbf{HTCondor Kernel}
-and satisfy the requirements for a \pilotjob system as outlined in Section
-\ref{subsec:vocab_core_functionalities}. However, the provisioning, allocation
-and usage of resources within a pool can differentiate between different pools
-and multiple different approaches and software systems have emerged over time,
-all under the umbrella of the wider HTCondor project.
+sandboxes are sometimes collectively referred to as the \textbf{HTCondor
+Kernel} and satisfy the requirements for a \pilotjob system as outlined in
+Section \ref{subsec:vocab_core_functionalities}. However, the provisioning,
+allocation and usage of resources within a pool can differentiate between
+different pools and multiple different approaches and software systems have
+emerged over time, all under the umbrella of the wider HTCondor project.
 
-\paragraph{Condor-G}
+% -----------------------------------------------------------------------------
+%
+\paragraph{Condor-G -- Condor via Globus}
 
-Condor-G is an alternative agent that can speak the Globus GRAM (Grid Resource
-Access and Management) protocol. Condor-G agents use the GRAM protocol to
-launch HTCondor \texttt{startd} \pilots via a GRAM gateway on a remote HPC
-cluster. Condor tasks submitted through this agent are then assigned by a
-local matchmaker to these ad-hoc provisioned \pilots. This concept is called
-\textit{gliding-in} or \textbf{glide-in}. It implements \textbf{late-binding}
-on top of GRAM/HPC systems that generally support only \textbf{early-binding}.
+Condor-G is an alternative (user-)agent for HTCondor that can ``speak'' the
+Globus GRAM (Grid Resource Access and Management) protocol. GRAM services are
+often deployed as remote job submission endpoints on top of HPC cluster
+queuing systems. Condor-G allows users to incorportate those HPC resources
+temporarily to an HTCondor pool.
 
-\paragraph{glidein-WMS}
+Condor-G agents use the GRAM protocol to launch HTCondor \texttt{startd}
+\pilots ad hoc via a GRAM endpoint service on a remote system. Tasks submitted
+through the Condor-G (user-)agent are then assigned by a local matchmaker to
+these ad-hoc provisioned \pilots. This concept is called \textit {gliding-in}
+or \textbf{glide-in}. It implements \textbf{late-binding} on top of GRAM/HPC
+systems: the (user-)agent can assign tasks to \texttt{startd}s \textit{after}
+they have been scheduled and started through the HPC queueing system. This
+effectively decouples resource allocation (\texttt{startd} scheduling through
+GRAM) and task assignment.
+
+% -----------------------------------------------------------------------------
+%
+\paragraph{glidein-WMS -- \pilot Provisioning}
 
 
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
+% -----------------------------------------------------------------------------
+%
+\paragraph{BoSCO}
 
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
+BoSCO is a user-space job submission system based on HTCondor. BoSCO was
+designed to allow individual users to utilize heterogeneous HPC and grid
+computing resources through a uniform interface. Supported backends include
+PBS, LSF and GridEngine clusters as well as other  grid resource pools managed
+by HTCondor. BoSCO supports both, an agent-based (\textit{glidein} / worker)
+and a native job execution mode through a single user-interface.
 
-\textit{Collectors} are the managers, with one collector per
-GlideinWMS system.
-\textit{Glidein factory daemon}s are responsible for
-submitting pilot jobs to grid pools\aznote{Use diff vocab for grid pool?}.
-They therefore correspond to pilot managers.
-\textit{VO frontend daemons} are the schedulers, which map jobs
-to pilots.  GlideinWMS takes advantage of late-binding, as
-jobs are not selected for resources until the pilots start.\aznote{This
-should be true of all systems described in this section -- do we
-need to explicitly say so for each pilot system?}
-\textit{WMS collector machine} manages communication between the glidein
-factory daemons(pilot managers) and VO frontend daemons(schedulers)
-and so corresponds to \aznote{We don't have anything for this.  This
-sounds like what REDIS/etc do for BJ though.  Should we incorporate this
-into our vocabulary?}
-\textit{User jobs} correspond to compute units \aznote{Right?}
+BoSCO exposes the same \textit{ClassAd}-based user-interface as HTCondor,
+however, the backend implementation for job management and resource
+provisioning is significantly more lightweight than in HTCondor and explicitly
+allows for ad hoc user-space deployment. BoSCO provides a \pilotjob-based
+system that does not require the user to have access to a centrally-
+administered HTCondor campus grid or  resource pool. The user has direct
+control over \pilotjob agent provisioning (via the \texttt{bosco\_cluster}
+command) and job-to-resource binding via \textit{ClassAd} requirements.
+
+The overall architecture of BoSCO is very similar to that of HTCondor. The
+\textit{BoSCO submit-node} (analogous to Condor \texttt{schedd}) provides the
+central job submission service and manages the job queue as well as the worker
+agent pool. Worker agents communicate with the \textit{BoSCO submit-node} via
+pull-requests (TCP). They can be dynamically added and removed to a
+\textit{BoSCO submit-node} by the user. BoSCO can be installed in user-space
+as well as in system space. In the former case, worker agents are exclusively
+available to a single user, while in the latter case, worker agents can be
+shared among multiple users. The client-side tools to submit, control and
+monitor BoSCO jobs are the same as in Condor (\texttt{condor\_submit},
+\texttt{condor\_q}, etc).
+
+
+%\textit{Collectors} are the managers, with one collector per
+%GlideinWMS system.
+%\textit{Glidein factory daemon}s are responsible for
+%submitting pilot jobs to grid pools\aznote{Use diff vocab for grid pool?}.
+%They therefore correspond to pilot managers.
+%\textit{VO frontend daemons} are the schedulers, which map jobs
+%to pilots.  GlideinWMS takes advantage of late-binding, as
+%jobs are not selected for resources until the pilots start.\aznote{This
+%should be true of all systems described in this section -- do we
+%need to explicitly say so for each pilot system?}
+%\textit{WMS collector machine} manages communication between the glidein
+%factory daemons(pilot managers) and VO frontend daemons(schedulers)
+%and so corresponds to \aznote{We don't have anything for this.  This
+%sounds like what REDIS/etc do for BJ though.  Should we incorporate this
+%into our vocabulary?}
+%\textit{User jobs} correspond to compute units \aznote{Right?}
 
 \begin{itemize}
 %Unlisted things \\
@@ -2311,56 +2336,6 @@ DIANE is primarily designed with respect to HTC environments (such as
 EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
 size of 1 core.
 
-% -----------------------------------------------------------------------------
-%
-\subsubsection{BoSCO}
-
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
-
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
-BoSCO is a user-space job submission system based on HTCondor. BoSCO was
-designed to allow individual users to utilize heterogeneous HPC and grid
-computing resources through a uniform interface. Supported backends include PBS,
-LSF and GridEngine clusters as well as other  grid resource pools managed by
-HTCondor. BoSCO supports both, an agent-based (\textit{glidein} / worker) and
-a native job execution mode through a single user-interface.
-
-BoSCO exposes the same \textit{ClassAd}-based user-interface as HTCondor,
-however, the backend implementation for job management and resource provisioning
-is significantly more lightweight than in HTCondor and explicitly allows for ad
-hoc user-space deployment. BoSCO provides a \pilotjob-based system that does not
-require the user to have access to a centrally-administered HTCondor campus grid
-or  resource pool. The user has direct control over \pilotjob agent provisioning
-(via the \texttt{bosco\_cluster} command) and job-to-resource binding via
-\textit{ClassAd} requirements.
-
-The overall architecture of BoSCO is very similar to that of HTCondor. The
-\textit{BoSCO submit-node} (analogous to Condor \texttt{schedd}) provides the
-central job submission service and manages the job queue as well as the worker
-agent pool. Worker agents communicate with the \textit{BoSCO submit-node} via
-pull-requests (TCP). They can be dynamically added and removed to a
-\textit{BoSCO submit-node} by the user. BoSCO can be installed in user-space as
-well as in system space. In the former case, worker agents are exclusively
-available to a single user, while in the latter case, worker agents can be
-shared among multiple users. The client-side tools to submit, control and
-monitor BoSCO jobs are the same as in Condor (\texttt{condor\_submit},
-\texttt{condor\_q}, etc).
 
 
 
