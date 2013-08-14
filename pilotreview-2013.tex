@@ -625,11 +625,19 @@ Web services are used for communication.
 %%%%%%%%%%%%%%%%%%
 % Higher-Level Apps
 
+\subsubsection{Pilot-concepts used in other systems}
+
 WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an application-centric
 environment for supporting drug discovery. The architecture utilizes an agent
 run as a Grid job to pull tasks from a central metadata service referred to as
 AMGA.
 
+OAR~\cite{oar} is a batch scheduler system for clusters and other
+computing infrastructures. Besides its more traditional batch scheduler
+features, it also has the functionality of \textit{container jobs}. These type
+of jobs allow the execution of jobs within other jobs, effectively making it a
+sub-scheduling mechanism, and thereby making it a batch scheduler with
+\pilotjob capabilities.
 
 
 \begin{itemize}
