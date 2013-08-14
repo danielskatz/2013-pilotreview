@@ -340,10 +340,15 @@ discussion of pre-pilot systems in section~\ref{sec:prepilot}, we will in-depth
 discuss the three types of \pilotjob systems in sections~\ref{sec:corepj} -- 
 \ref{sec:pjframeworks}.
 
+\msnote{Im still uncomfortable with this classification. It feels awkward. And
+on a more formal note, its weird that we classify at this stage, while only later in
+the paper we start to define what "Core" functionality is.}
 
 \subsubsection{Pre Pilot-Job Systems}
 \label{sec:prepilot}
 \alnote{maybe merge with core pilotjobs}
+\msnote{I agree with AL, as even "core" pilotjobs were/are not called pilots in
+(their first incarnations).}
 
 \pilotjobs have been used even before they
 were named as such; we refer to these as pre-\pilotjob systems, a
@@ -565,6 +570,11 @@ JSDL.
 \subsubsection{Higher-Level \pilot-based Frameworks}
 \label{sec:pjframeworks}
 
+\msnote{In what way are these systems intrinsically pilot based? I think for
+example with Pegasus, it can make use of pilots, but uses it as just yet
+another "job submission backend". In this way, any system that creates "task"
+could be adopted to submit to a pilot-based backend}
+
 Many higher-level tools and frameworks, such as workflow,
 visualization or data analytics systems, utilize \pilotjob systems to
 manage their computational workload. In general, two approaches exist:
@@ -616,24 +626,21 @@ service. Falkon also utilizes a master-work coordination model,
 i.\,e.\ the executors periodically query the dispatcher for new SUs.
 Web services are used for communication.
 
-
-
 %%%%%%%%%%%%%%%%%%
 % Higher-Level Apps
-
-\subsubsection{Pilot-concepts used in other systems}
-
 WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an application-centric
 environment for supporting drug discovery. The architecture utilizes an agent
 run as a Grid job to pull tasks from a central metadata service referred to as
 AMGA.
+
+\subsubsection{Pilot-concepts used in other systems}
 
 OAR~\cite{oar} is a batch scheduler system for clusters and other
 computing infrastructures. Besides its more traditional batch scheduler
 features, it also has the functionality of \textit{container jobs}. These type
 of jobs allow the execution of jobs within other jobs, effectively making it a
 sub-scheduling mechanism, and thereby making it a batch scheduler with
-\pilotjob capabilities.
+\pilotjob capabilities. \msnote{Or is this just "similar" to condor glide-in?}
 
 
 \begin{itemize}
@@ -1209,6 +1216,12 @@ tolerance, (iv) interoperability and (v) security.
   functional attributed; having already discussed core, advanced and
   higher-level pilot, I think we are losing the opportunity to connect
   to and utilize that discussion}
+\msnote{Formally performance, etc. are non-functiona attributes. But
+performance / scalability is often a reason to use pilot-jobs, so what I think
+you are asking for is a more prominent place to discuss performance? Does that
+tell us that functional vs non-func is not a useful distinction here?
+(func/non-func normally belongs to requirements, and thats not what we are
+talking about here anyway}
 
 
 The performance and scalability define the response times and size of the
