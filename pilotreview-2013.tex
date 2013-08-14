@@ -279,18 +279,7 @@ time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-
 \jhanote{if we are calling this ``evolution'' we should be sure to
   discuss topics in chronological order. Melissa, can you please check
   that topics are in deed presented in chronological order and maybe
-  even create a table of timelines. thanks}'
-
-
-
-% Cite: Work Queue: http://www3.nd.edu/~ccl/research/papers/wq-python-pyhpc2011.pdf
-% Work queue is not based on pilots but is an interesting read for ensemble-based scientific applications on grids using python
-
-
-
-\note{talk about tool development, unregulated cottage industry - Why
-  is that? diverse low-level infrastructure, no incentive to use
-  multiple infrastructures? External vs.  internal perspective?}
+  even create a table of timelines. thanks}
 
 \pilotjobs provide the ability to distribute workload across multiple systems and
 offer an easy way to schedule many jobs at one time. This in turn improves the
@@ -305,13 +294,15 @@ a need for more complex management of these workloads and additional capabilitie
 for user-level control of the tasks that would be executed within the placeholder
 job. This drove the creation of the modern idea of \pilots.
 
-
 \pilotjob systems differ in their focus and architecture.
 Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
 layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
-(ii) advanced \pilotjob systems offer sophisticated resource management
-capabilities based on \pilots and (iii) higher level \pilot-based frameworks
-utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
+(ii) advanced \pilotjob systems that offer sophisticated resource management
+capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
+that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
+One of the important aspects of these layers is that they often overlap or
+have evolved from one another. For instance, the Pre-\pilotjob
+\mrnote{As AL suggested, start talking about the overlaps, etc.}
 
 
 \begin{figure}[t]
@@ -336,8 +327,8 @@ utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
 \end{figure}
 
 In this section, we give a brief overview of different \pilotjob systems. After a 
-discussion of pre-pilot systems in section~\ref{sec:prepilot}, we will in-depth 
-discuss the three types of \pilotjob systems in sections~\ref{sec:corepj} -- 
+discussion of pre-pilot systems in section~\ref{sec:prepilot}, we will discuss 
+the three types of \pilotjob systems in-depth in sections~\ref{sec:corepj} -- 
 \ref{sec:pjframeworks}.
 
 
@@ -2214,8 +2205,6 @@ software package~\ref{2013-xsede-cdi}.
 BigJob is installable by a user onto the resource of his or her choice. It is capable of
 running only in ``single user'' mode; that is, a \pilot belongs to the user who
 spawned it and cannot be accessed by other users.
-\mrnote{I feel I need more clarification on what exactly I'm supposed to say 
-in this section...}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 BigJob uses the Simple API for Grid Applications (SAGA)~\ref{ogf-gfd-90, sagastuff}
