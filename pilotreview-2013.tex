@@ -294,16 +294,32 @@ a need for more complex management of these workloads and additional capabilitie
 for user-level control of the tasks that would be executed within the placeholder
 job. This drove the creation of the modern idea of \pilots.
 
-\pilotjob systems differ in their focus and architecture.
-Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
-layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
-(ii) advanced \pilotjob systems that offer sophisticated resource management
-capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
-that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
-One of the important aspects of these layers is that they often overlap or
-have evolved from one another. For instance, the Pre-\pilotjob
-\mrnote{As AL suggested, start talking about the overlaps, etc.}
+\mrnote{Maybe we should change the figure? -- I am changing the 
+overall text of this section but i have no idea how to make figures}
 
+\pilotjob systems differ in their focus and architecture. Our preliminary
+survey of existing \pilotjobs helped to identify three major layers that
+these systems exhibit: (i) core \pilotjob functionality - this provides the 
+minimally complete set of capabilities for a simple \pilotjob, (ii) advanced
+\pilotjob functionality - a system that offers all of (i) plus a more sophisticated
+resource management mechanism, and (iii) higher-level \pilot-based frameworks
+- frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics. 
+As one can intuit from the above descriptions, existing \pilotjob systems maybe
+overlap and overflow into these different layers, and each layer builds upon the
+previous one. Therefore, we use these classification layers only as a means
+to explain the basic progression of a \pilotjob system from simple scheduling
+reservation mechanisms to more complete job management systems. A 
+more semantically-rich terminology and classification scheme will be presented
+in Sections \ref{sec:vocab} and \ref{sec:4}.
+
+
+%Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
+%layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
+%(ii) advanced \pilotjob systems that offer sophisticated resource management
+%capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
+%that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
+%One of the important aspects of these layers is that they often overlap or
+%have evolved from one another. Therefore, it is hard to classify 
 
 \begin{figure}[t]
 	\centering
@@ -326,7 +342,22 @@ have evolved from one another. For instance, the Pre-\pilotjob
 	\label{fig:figures_classification}
 \end{figure}
 
-In this section, we give a brief overview of different \pilotjob systems. After a 
+In this section, we give a brief overview of different \pilotjob systems. As
+grid computing advanced in its size and capabilities, the need for
+job scheduling and time-sharing became more prevalent. Batch
+queuing systems were installed to solve this problem, wherein a login
+node accepted all job submissions and then the queuing system
+divvied up the work to the worker nodes. 
+The requirements of distributed applications, such as efficient load
+balancing and resource utilization across multiple resources, drove
+the need for user-level control of tasks and ease of use of job
+descriptions for data driven
+applications~\cite{ko-efficient}~\cite{DBLP:conf/hpdc/KimHMAJ10}, but
+the concept of a \pilot was not the first type of application-level scheduling 
+introduced.
+
+
+After a 
 discussion of pre-pilot systems in section~\ref{sec:prepilot}, we will discuss 
 the three types of \pilotjob systems in-depth in sections~\ref{sec:corepj} -- 
 \ref{sec:pjframeworks}.
@@ -334,6 +365,7 @@ the three types of \pilotjob systems in-depth in sections~\ref{sec:corepj} --
 \msnote{Im still uncomfortable with this classification. It feels awkward. And
 on a more formal note, its weird that we classify at this stage, while only later in
 the paper we start to define what "Core" functionality is.}
+\mrnote{Yeah, I will take this into consideration}
 
 \subsubsection{Pre Pilot-Job Systems}
 \label{sec:prepilot}
@@ -767,8 +799,8 @@ system. Typically, for a DCI adopting queue, batch and scheduling systems,
 provisioning a pilot involves it be submitted as a job. Conversely, for
 infrastructures that do not adopt a job-based submission system, a pilot would
 be executed by means of other types of logical container as, for example, the
-one implemented by means of a Virtual Machine (VM) on a so called
-Infrastructure as a Service (IaaS).
+one implemented by means of a Virtual Machine (VM) on so called
+Infrastructures as a Service (IaaS).
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
 pilots for execution. Thanks to resource overlays, task dispatching does not
@@ -786,8 +818,8 @@ not produce output files or data is already locally available. As such, data
 management should not be considered a necessary functionality of \pilot
 systems even when present in many of them.
 
-In the following two subsections, a minimal set of terms related to these
-capabilities is defined.
+In the following subsection, a minimal set of terms related to the
+capabilities just described is defined.
 
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
@@ -848,8 +880,8 @@ to execute the tasks of a workload.
 
 \begin{description}
 
-\item[Workload.] A set of tasks that if executed on an infrastructure
-contribute for a user to achieve a goal.
+\item[Workload.] A set of tasks, possibly correlated, that when executed on an
+infrastructure contribute for a user to achieve a goal.
 
 \item[Task.] A set of operations that are part of a workload and are encoded
 into one or more programs.
@@ -857,28 +889,32 @@ into one or more programs.
 \item[Resource.] Finite, typed and physical quantity utilized when
   executing one or more workloads. Compute cores, data storage space,
   or bandwidth are all examples of resources commonly utilized by
-  running workloads
+  running workloads.
 
 \item[Infrastructure.] Structured set of resources, possibly geographically and
 institutionally separated from the users utilizing those resources to execute
 one or more workloads. [cit, cit] Infrastructures can be logically partitioned,
 with a direct or indirect mapping onto individual pools of hardware. Commonly,
 Infrastructure can be used also to indicate a Distributed Computing
-Infrastructure (DCI). \end{description}
+Infrastructure (DCI). 
 
-As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize
-`queues', `batch systems' and `schedulers'. In such DCIs, jobs are scheduled
-and then executed by a batch system.
+\end{description}
+
+As seen in \S\ref{ssec:informal}, most of the DCIs where \pilotjobs systems
+are executed utilize `queues', `batch systems' and `schedulers'. In such DCIs,
+jobs are scheduled and then executed by a batch system.
 
 \begin{description}
+
 \item[Job.] A container for one or more programs, a description of their
   properties and indications on how they should be executed.
+
 \end{description}
 
 In the context of a \pilotjob system, jobs and tasks are functionally
-analogous but qualitatively different; it is important to highlight their
-distinction. Functionally, both jobs and tasks are a set of programs with
-metadata but the term `task' is used when reasoning about workloads while
+analogous but qualitatively different; it is therefore relevant to highlight
+their distinction. Functionally, both jobs and tasks are a set of programs
+with metadata but the term `task' is used when reasoning about workloads while
 `job' is used in relation to a specific type of infrastructure where such a
 container can be executed. Accordingly, tasks are considered as the functional
 units of a workload, while jobs as a way to execute programs on a given
@@ -889,7 +925,7 @@ infrastructures that support or require that type of container.
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are programs
-with specific capabilities and are submitted as jobs on the type of DCI just
+with specific capabilities and are submitted as jobs on the type of DCIs just
 described. In such a context, schedulers, batch processing and queuing define
 the practical boundaries for how and when the pilots can be provisioned on a
 given DCI.
@@ -903,13 +939,13 @@ DCI, the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion, and to the use of synonyms for both
 the terms `pilot' and `pilot-job'.
 
-The term `pilot' is often associated with that of `placeholder'. This is a way
-to illustrate two of the distinctive capabilities that every pilot has to
-implement: acquiring bounded set of resources by running on a DCI, and
-executing tasks submitted (to the system that the pilot belongs) that will
-utilize them. Thanks to these capabilities, a pilot allows for a user or a
-group of users, depending on implementation details, to gain exclusive control
-over the binding and execution of her or their tasks.
+The term `pilot' is often associated with that of `placeholder' so to
+emphasize the two distinctive capabilities that every pilot system has to
+implement: acquiring a set of resources by running on a DCI, and executing
+tasks that will utilize those resources. A pilot is a 'placeholder' because it
+holds portion of the DCI resources for a user or a group of users, depending
+on implementation details, to gain exclusive control over the binding and
+execution of a workload.
 
 \begin{description}
 \item[Pilot.] A resource placeholder running on a given infrastructure
@@ -925,28 +961,18 @@ considered synonyms and their use to indicate the same concept is a clear
 indication that a minimal and consistent vocabulary is needed when reasoning
 about multiple \pilotjob systems.
 
-Another important detail to notice is that while the operations of a
-task performed by means of a \pilot are usually computational in
-nature, in principle, they might also operate on other type of
-resources such as data or network bandwidth, depending on the
-resources made available by an infrastructure to its users. In this
-context, it would be likely for some \pilotjob systems to use the
-terms `pilot data' or `pilot network'.
-
-\jhanote{this should move to much later in this section or maybe to Section 5.
-Must bring clarity to compute before opening other cans of worms} \mtnote{OK,
-let's wait for the Section draft to be complete to decide.}
-
 Once one or more pilots become available on the targeted infrastructures,
 users can start to use a \pilotjob system to execute their tasks without
 having to deal with the job submission system of the targeted infrastructure.
 How tasks are assigned to pilots is a matter of implementation. For example, a
-dedicated scheduler could be used or tasks might be directly assigned by the
-user to a pilot. The simplification obtained by circumventing the job
-submission system of the infrastructure is one of the main reasons for the
-success of the \pilotjob systems. The overhead and lack of control imposed by
-a centralized job management system shared among multiple users are bypassed,
-allowing for a faster and more reliable execution of workloads.
+dedicated scheduler could be adopted or tasks might be directly assigned by
+the user to a pilot. 
+
+The simplification obtained by circumventing the job submission system of the
+DCI is one of the main reasons for the success of the \pilotjob systems. The
+overhead and lack of control imposed by a centralized job management system
+shared among multiple users are bypassed, allowing for a faster and more
+reliable execution of workloads.
 
 The \pilotjob systems are said to implement multi-level scheduling because the
 assignment of resources to tasks happens in at least two stages. A portion of
@@ -961,16 +987,20 @@ indicates the binding of a task to an inactive pilot; late binding the binding
 of a task to an active pilot. The binding process in itself is often an
 instance of scheduling. Early binding is useful to increase the flexibility
 with which pilots are deployed. By knowing in advance the properties of the
-tasks that are bound to a pilot, specific deployment decisions can be made.
-Late binding is critical in assuring high throughput by allowing for tasks to
-be executed without waiting in a queue or waiting for a specific container -
-for example a job or a VM - to be instantiated.
+tasks that are bound to a pilot, specific deployment decisions can be made for
+that pilot. Late binding is critical in assuring high throughput by allowing
+for tasks to be executed without waiting in a queue or waiting for a specific
+container - for example a job or a VM - to be instantiated.
 
 \begin{description}
-\item[Multi-level scheduling.] Scheduling tasks and pilots to
-  different schedulers and in distinct chronological order.
-  \item[Early binding.] Binding one or more tasks to an inactive pilot.
-  \item[Late binding.] Binding one or more tasks to an active pilot.
+
+\item[Multi-level scheduling.] Scheduling tasks and pilots to   different
+schedulers and in distinct chronological order.
+
+\item[Early binding.] Binding one or more tasks to an inactive pilot.
+
+\item[Late binding.] Binding one or more tasks to an active pilot.
+
 \end{description}
 
 Depending on the specific capabilities implemented in the workload management
@@ -1248,7 +1278,7 @@ connect the individual component of the \pilot system?
   \hline
   \textbf{Pilot-Job System} &\textbf{Pilot (Resource) Provisioning}    &\textbf{Job-to-Resource (Pilot) Binding}  &\textbf{Single-/Multi-User Pilots} &\textbf{Classifier IV}  \\
   \hline
-          \apples            & N/A                                      & Automatic (algorithmic/profiling)  & Single (?) & --                     \\
+          AppLeS            & N/A                                      & Automatic (algorithmic/profiling)  & Single (?) & --                     \\
   \hline
           MyCluster         & Manual, Explicitly User-controllable     & Manual                             & Single (?)                  & --                     \\
   \hline
@@ -1275,16 +1305,16 @@ connect the individual component of the \pilot system?
 
 % -----------------------------------------------------------------------------
 %
-\subsubsection{\apples}
+\subsubsection{AppLeS}
 \paragraph{Rationale}
-\apples is an ideal introductory software package to be studied
+AppLeS is an ideal introductory software package to be studied
 as it is a \textit{pre-\pilot} framework; it is capable of
 addressing some of the issues \pilotjobs are designed to handle,
 but lacks some fundamental components which limit its usability
 compared to the full \pilotjob approach.
 
 \paragraph{Design Goals}
-The main design goal of \apples is adaptivity, granting applications 
+The main design goal of AppLeS is adaptivity, granting applications 
 the ability to generate schedules dynamically and incorporating
 application performance characteristics into these schedules.
 The concept requires several further
@@ -1294,45 +1324,45 @@ the ability to generate schedules dynamically and incorporating
 application performance characteristics into these schedules.
 
 \paragraph{Applications}
-\apples has been used to choose destinations
+AppLeS has been used to choose destinations
 for storing satellite image files (Simple SARA), 
 optimize the execution of data-parallel matrix
-calculations (Jacobi 2D \apples), 
+calculations (Jacobi 2D AppLeS), 
 distribute computational biology genetic searches
 across resources with varying response/availability times 
-(\apples for Complib), and
+(AppLeS for Complib), and
 analyze biochemical interactions while dynamically recreating
 schedules to account for changes in performance predictions
-(\apples for MCell).
+(AppLeS for MCell).
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
-The deployment characteristics of \apples-enabled software rely
+The deployment characteristics of AppLeS-enabled software rely
 mainly upon the application writers themselves; applications
-may be adapted to use \apples which are either single or multi-user.
-\apples templates exist, which are application-class-based (e.g.
+may be adapted to use AppLeS which are either single or multi-user.
+AppLeS templates exist, which are application-class-based (e.g.
 parameter sweep, master-worker) 
 software frameworks created
 to ease the adaptation of existing applications to make use
-of \apples.
+of AppLeS.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 Heterogeneous grid computing resources were targeted by
-\apples, with the dynamism inherent in grid resources (availability,
+AppLeS, with the dynamism inherent in grid resources (availability,
 computational power, etc) being a driving 
-motivator for \apples itself.  \apples
+motivator for AppLeS itself.  AppLeS
 was first developed in 1996, precluding the development of clouds;
 regardless, as with ``true'' \pilotjob approaches, adaptations
 and additions which enable cloud functionality could
-feasibly be built on top of the \apples framework as e.g.
+feasibly be built on top of the AppLeS framework as e.g.
 cloud middleware service interfaces.
- To expand the reach of \apples, middleware-specific
+ To expand the reach of AppLeS, middleware-specific
 extensions must be implemented.
 
 \paragraph{Architecture \& Interface}
-\apples requires a tight coupling between the target application
-and the \apples code.  \textit{\apples templates} were created
+AppLeS requires a tight coupling between the target application
+and the AppLeS code.  \textit{AppLeS templates} were created
 to ease this process, but the application code in essence must
-be modified to make use of \apples, as opposed to \pilotjob
+be modified to make use of AppLeS, as opposed to \pilotjob
 systems which can \aznote{(generally?)} be taken advantage of without
 requiring code modification of the underlying applications being
 executed.
@@ -1340,13 +1370,13 @@ executed.
 The lack of a \textit{Pilot} limits the agility
 of application-level scheduling, as tasks
 must wait in unpredictable resource manager queues before being executed,
-undermining the level of control.  For this reason, \apples
+undermining the level of control.  For this reason, AppLeS
 is not a ``true'' \pilotjob system, as a \textit{Pilot}
 is required to enable fundamental \pilotjob functionality such as
 \textit{multi-level scheduling}.
 
-\paragraph{\apples Conclusion}
-\apples shows the power of scheduling tasks across multiple computing resources
+\paragraph{AppLeS Conclusion}
+AppLeS shows the power of scheduling tasks across multiple computing resources
 via the \textit{Master-Worker} approach \aznote{too loaded?} which many
 \pilotjobs use as a partial foundation.  However,
 the following ``true'' \pilotjobs will show the flexibility/power
@@ -1649,93 +1679,89 @@ to the usefulness of \pilotjobs in attacking these problems.
 
 %% % -----------------------------------------------------------------------------
 %% %
-\subsubsection{\panda}
+\subsubsection{PanDA}
 
 \paragraph{Rationale}
-\panda was developed to provide a multi-user
+PanDA was developed to provide a multi-user
 \pilotjob system for ATLAS~\cite{aad2008atlas}, which is
 a particle detector at the Large Hadron Collider
 which could
-handle large numbers
-of jobs for data-driven processing workloads.
+handle large numbers (100,000+/day) of jobs for data-driven processing workloads.
 In addition to the logistics of handling large-scale job submission, there was
 a need for integrated monitoring for analysis of system state and a high
 degree of automation to reduce the need for user/administrative intervention.
 
 \paragraph{Design Goals}
-\panda was designed as an advanced \pilotjob system,
+PanDA was designed as an advanced \pilotjob system,
 satisfying requirements such as the ability
 to manage data, monitor job/disk space, and recover from failures.
 A modular approach allowing the use of plug-ins was chosen in order
 to incorporate additional features in the future.
-\panda was designed from the ground-up to meet these requirements
+PanDA was designed from the ground-up to meet these requirements
 while scaling to handle the large scale of jobs and data produced
 by the ATLAS experiment.
 
 \paragraph{Applications}
-\panda has been used to process data and jobs relating to ATLAS.  Approximately
-a million jobs a day are managed~\cite{pandapresentation2013-06} 
+PanDA has been used to process data and jobs relating to ATLAS.  Approximately
+several hundred thousand jobs a day are managed~\cite{barberis2011distributed} 
 which handle simulation, analysis, and other work~\cite{maeno_pd2p:_2012}. 
 The ATLAS experiment itself produces several petabytes of data a year
 which must be processed and analyzed.
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
-\panda has been initially deployed as an HTC-oriented
-multi-user
+PaNDA has been initially deployed as the multi-user
 WMS system for ATLAS, consisting
 of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
-Recent improvements to \panda have been designed to extend 
+Recent improvements to PaNDA have been designed to extend 
 the range of deployment scenarios to non-ATLAS infrastructures
-making \panda a general-use \pilotjob~\cite{nilsson2012recent}.
+making PaNDA a general-use \pilotjob~\cite{nilsson2012recent}.
 \aznote{Per-user/per-working group reference made in slides, follow-up
 with actual papers}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-\panda began as a specialized \pilotjob for the ATLAS grid, and has been extended
+PanDA began as a specialized \pilotjob for the ATLAS grid, and has been extended
 into a generalized \pilotjob which is capable of working across other grids
-as well as HPC and cloud resources.
+as well as HPC and cloud resources.  \aznote{list other grids, clouds}
 Cloud capabilities have been used as part
-of Helix Nebula (CloudSigma, T-Systems, ATOS),
-the FutureGrid and Synnefo clouds, and the commercial
-Google and EC2 cloud offerings as well~\cite{pandapresentation2013-06},
-extending the reach of \panda to
-cloud resources as well.  Future \panda developments seek
-to interoperate with HPC resources~\cite{pandapresentation2013-06}.
+of Helix Nebula \texttt{presentation, cite?} (CloudSigma, T-Systems, ATOS) as well
+as in the FutureGrid and Synnefo clouds, extending the reach of PaNDA to
+cloud queues.  \aznote{Have not currently found papers making explicit use of Cloud,
+just as a  ``supported'' feature}
 
 \paragraph{Architecture \& Interface}
-\panda's \textit{manager} is called a \texttt{\panda server}, and matches
+PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
 jobs with \pilots in addition to handling data management.
-\panda's \textit{\pilot}
+PanDA's \textit{\pilot}
 is called, appropriately enough, a \texttt{pilot}, and handles the execution
-environment.  These pilots are generated via \panda's \texttt{PilotFactory},
+environment.  These pilots are generated via PanDA's \texttt{PilotFactory},
 which also monitors the status of pilots.
-Pilot-resource \textit{provisioning} is handled by \panda itself and is not
+Pilot-resource \textit{provisioning} is handled by PanDA itself and is not
 user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
 A central job queue allows users to submit jobs
 to distributed reseoruces in a uniform manner.  \aznote{Not required for
 \pilotjob -- put later or remove?}
 This basic functionality (pilot creation and management) provides
-\panda with all of the baseline capabilities required for a \pilotjob.
+PanDA with all of the baseline capabilities required for a \pilotjob.
 
-As \panda is an \textit{Advanced \pilotjob System}, it enables functionality
+As PanDA is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
-\panda contains some additional backend features such as \texttt{AutoPilot}, which
+PanDA contains some additional backend features such as \texttt{AutoPilot}, which
 tracks site statuses via a database, \texttt{Bamboo} which adds
 ATLAS database interfacing, and automatic error handling and recovery.
-\panda contains support for queues in clouds, including EC2, Helix Nebula,
+PanDA contains support for queues in clouds, including EC2, Helix Nebula,
 and FutureGrid.\aznote{Have to find a good cite for this}
 Enhancements to the userspace include
-\texttt{Monitor}, for web-based monitoring, and the \texttt{\panda client}.
-\texttt{\panda Dynamic Data Placement} \cite{maeno_pd2p:_2012}
+\texttt{Monitor}, for web-based monitoring, and the \texttt{PanDA client}.
+\texttt{PanDA Dynamic Data Placement} \cite{maeno_pd2p:_2012}
 allows for additional, automatic data
 management by replicating popular or backlogged input data to underutilized resources
 for later computations and enables jobs to be placed where the data
 already exists.
 
 
-\paragraph{\panda Conclusion}
-\panda has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
+\paragraph{PanDA Conclusion}
+PanDA has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
 as the Open Science Grid.  This illustrates the importance of designing
 \pilotjobs which are easily adaptable such that \pilots are not tied
 to any particular DCI; in this manner, their advantages can be made
@@ -2472,6 +2498,17 @@ deploying a PaaS model of cloud computing.[cit]
 as well}
 
 \jhanote{the previous paragraph should be moved into section 5}
+
+Another important detail to notice is that while the operations of a
+task performed by means of a \pilot are usually computational in
+nature, in principle, they might also operate on other type of
+resources such as data or network bandwidth, depending on the
+resources made available by an infrastructure to its users. In this
+context, it would be likely for some \pilotjob systems to use the
+terms `pilot data' or `pilot network'.
+
+\jhanote{this should move to much later in this section or maybe to Section 5.
+Must bring clarity to compute before opening other cans of worms}
 
 
 \subsection{revisit the ``myths''}
