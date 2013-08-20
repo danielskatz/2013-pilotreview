@@ -1656,7 +1656,8 @@ PanDA was developed to provide a multi-user
 \pilotjob system for ATLAS~\cite{aad2008atlas}, which is
 a particle detector at the Large Hadron Collider
 which could
-handle large numbers (100,000+/day) of jobs for data-driven processing workloads.
+handle large numbers
+of jobs for data-driven processing workloads.
 In addition to the logistics of handling large-scale job submission, there was
 a need for integrated monitoring for analysis of system state and a high
 degree of automation to reduce the need for user/administrative intervention.
@@ -1673,13 +1674,14 @@ by the ATLAS experiment.
 
 \paragraph{Applications}
 PanDA has been used to process data and jobs relating to ATLAS.  Approximately
-several hundred thousand jobs a day are managed~\cite{barberis2011distributed} 
+a million jobs a day are managed~\cite{pandapresentation2013-06} 
 which handle simulation, analysis, and other work~\cite{maeno_pd2p:_2012}. 
 The ATLAS experiment itself produces several petabytes of data a year
 which must be processed and analyzed.
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
-PaNDA has been initially deployed as the multi-user
+PaNDA has been initially deployed as an HTC-oriented
+multi-user
 WMS system for ATLAS, consisting
 of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
 Recent improvements to PaNDA have been designed to extend 
@@ -1691,12 +1693,14 @@ with actual papers}
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 PanDA began as a specialized \pilotjob for the ATLAS grid, and has been extended
 into a generalized \pilotjob which is capable of working across other grids
-as well as HPC and cloud resources.  \aznote{list other grids, clouds}
+as well as HPC and cloud resources.
 Cloud capabilities have been used as part
-of Helix Nebula \texttt{presentation, cite?} (CloudSigma, T-Systems, ATOS) as well
-as in the FutureGrid and Synnefo clouds, extending the reach of PaNDA to
-cloud queues.  \aznote{Have not currently found papers making explicit use of Cloud,
-just as a  ``supported'' feature}
+of Helix Nebula (CloudSigma, T-Systems, ATOS),
+the FutureGrid and Synnefo clouds, and the commercial
+Google and EC2 cloud offerings as well~\cite{pandapresentation2013-06},
+extending the reach of PaNDA to
+cloud resources as well.  Future PanDA developments seek
+to interoperate with HPC resources~\cite{pandapresentation2013-06}.
 
 \paragraph{Architecture \& Interface}
 PanDA's \textit{manager} is called a \texttt{PanDA server}, and matches
