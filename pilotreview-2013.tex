@@ -294,16 +294,32 @@ a need for more complex management of these workloads and additional capabilitie
 for user-level control of the tasks that would be executed within the placeholder
 job. This drove the creation of the modern idea of \pilots.
 
-\pilotjob systems differ in their focus and architecture.
-Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
-layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
-(ii) advanced \pilotjob systems that offer sophisticated resource management
-capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
-that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
-One of the important aspects of these layers is that they often overlap or
-have evolved from one another. For instance, the Pre-\pilotjob
-\mrnote{As AL suggested, start talking about the overlaps, etc.}
+\mrnote{Maybe we should change the figure? -- I am changing the 
+overall text of this section but i have no idea how to make figures}
 
+\pilotjob systems differ in their focus and architecture. Our preliminary
+survey of existing \pilotjobs helped to identify three major layers that
+these systems exhibit: (i) core \pilotjob functionality - this provides the 
+minimally complete set of capabilities for a simple \pilotjob, (ii) advanced
+\pilotjob functionality - a system that offers all of (i) plus a more sophisticated
+resource management mechanism, and (iii) higher-level \pilot-based frameworks
+- frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics. 
+As one can intuit from the above descriptions, existing \pilotjob systems maybe
+overlap and overflow into these different layers, and each layer builds upon the
+previous one. Therefore, we use these classification layers only as a means
+to explain the basic progression of a \pilotjob system from simple scheduling
+reservation mechanisms to more complete job management systems. A 
+more semantically-rich terminology and classification scheme will be presented
+in Sections \ref{sec:vocab} and \ref{sec:4}.
+
+
+%Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
+%layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
+%(ii) advanced \pilotjob systems that offer sophisticated resource management
+%capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
+%that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
+%One of the important aspects of these layers is that they often overlap or
+%have evolved from one another. Therefore, it is hard to classify 
 
 \begin{figure}[t]
 	\centering
@@ -326,7 +342,22 @@ have evolved from one another. For instance, the Pre-\pilotjob
 	\label{fig:figures_classification}
 \end{figure}
 
-In this section, we give a brief overview of different \pilotjob systems. After a 
+In this section, we give a brief overview of different \pilotjob systems. As
+grid computing advanced in its size and capabilities, the need for
+job scheduling and time-sharing became more prevalent. Batch
+queuing systems were installed to solve this problem, wherein a login
+node accepted all job submissions and then the queuing system
+divvied up the work to the worker nodes. 
+The requirements of distributed applications, such as efficient load
+balancing and resource utilization across multiple resources, drove
+the need for user-level control of tasks and ease of use of job
+descriptions for data driven
+applications~\cite{ko-efficient}~\cite{DBLP:conf/hpdc/KimHMAJ10}, but
+the concept of a \pilot was not the first type of application-level scheduling 
+introduced.
+
+
+After a 
 discussion of pre-pilot systems in section~\ref{sec:prepilot}, we will discuss 
 the three types of \pilotjob systems in-depth in sections~\ref{sec:corepj} -- 
 \ref{sec:pjframeworks}.
@@ -334,6 +365,7 @@ the three types of \pilotjob systems in-depth in sections~\ref{sec:corepj} --
 \msnote{Im still uncomfortable with this classification. It feels awkward. And
 on a more formal note, its weird that we classify at this stage, while only later in
 the paper we start to define what "Core" functionality is.}
+\mrnote{Yeah, I will take this into consideration}
 
 \subsubsection{Pre Pilot-Job Systems}
 \label{sec:prepilot}
