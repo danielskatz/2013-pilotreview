@@ -950,7 +950,12 @@ execution of a workload.
 \begin{description}
 \item[Pilot.] A resource placeholder running on a given infrastructure
   and capable of executing pushed or pulled tasks while managing
-  data.
+  data.\msnote{This can be improved: Im not sure if the placeholder is for a
+  resource. Because if the pilot is really a placeholder of the resource, than
+  it can't run on an infrastructure. I'm also not sure if "running" is a core
+  characteristic of a pilot (e.g. in the VM scenario). This is also addressed
+  in the next paragraph, but the definition here should be correct and concise
+  ofcourse.}
 \end{description}
 
 From a terminology point of view, the term `pilot' as defined here is
@@ -982,20 +987,26 @@ systems because it allows for a task to be bound to a pilot before it is in
 turn bound to the resources.
 
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
-inactive until it is executed on a DCI, active after that. Early binding
+inactive until it is executed on a DCI, active after that\msnote{this might be
+true for the "agent" scenario, but is probably too narrow of a definition, at
+this stage it would be fair to say that a pilot can be active or inactive}. Early binding
 indicates the binding of a task to an inactive pilot; late binding the binding
 of a task to an active pilot. The binding process in itself is often an
 instance of scheduling. Early binding is useful to increase the flexibility
 with which pilots are deployed. By knowing in advance the properties of the
 tasks that are bound to a pilot, specific deployment decisions can be made for
-that pilot. Late binding is critical in assuring high throughput by allowing
+that pilot\msnote{I might start to understand where you want to go with this,
+but I'm not sure if this holds in a HTC scenario where you have many pilots.
+By then "early" binding tasks to pilots, you actually loose flexibility}
+. Late binding is critical in assuring high throughput by allowing
 for tasks to be executed without waiting in a queue or waiting for a specific
 container - for example a job or a VM - to be instantiated.
 
 \begin{description}
 
-\item[Multi-level scheduling.] Scheduling tasks and pilots to   different
-schedulers and in distinct chronological order.
+\item[Multi-level scheduling.] Scheduling tasks and pilots to different
+schedulers and in distinct chronological order. \msnote{Do we mean "by"
+different schedulers? I would possibly use the word "hierarchical" here too.}
 
 \item[Early binding.] Binding one or more tasks to an inactive pilot.
 
@@ -1007,7 +1018,8 @@ Depending on the specific capabilities implemented in the workload management
 component, some \pilotjob systems allows for pilots to be described on the
 bases of the available tasks. This assigning process should not be confused
 with early binding as the latter requires for a pilot to have been already
-described.
+described.\msnote{I dont fully understand what is written here, probably a good
+discussion point for the meeting}
 
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
