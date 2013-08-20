@@ -767,8 +767,8 @@ system. Typically, for a DCI adopting queue, batch and scheduling systems,
 provisioning a pilot involves it be submitted as a job. Conversely, for
 infrastructures that do not adopt a job-based submission system, a pilot would
 be executed by means of other types of logical container as, for example, the
-one implemented by means of a Virtual Machine (VM) on a so called
-Infrastructure as a Service (IaaS).
+one implemented by means of a Virtual Machine (VM) on so called
+Infrastructures as a Service (IaaS).
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
 pilots for execution. Thanks to resource overlays, task dispatching does not
@@ -786,8 +786,8 @@ not produce output files or data is already locally available. As such, data
 management should not be considered a necessary functionality of \pilot
 systems even when present in many of them.
 
-In the following two subsections, a minimal set of terms related to these
-capabilities is defined.
+In the following subsection, a minimal set of terms related to the
+capabilities just described is defined.
 
 \subsection{Terms and Definitions}
 \label{subsec:vocab_terms_and_definitions}
@@ -848,8 +848,8 @@ workload.
 
 \begin{description}
 
-\item[Workload.] A set of tasks that if executed on an infrastructure
-contribute for a user to achieve a goal.
+\item[Workload.] A set of tasks, possibly correlated, that when executed on an
+infrastructure contribute for a user to achieve a goal.
 
 \item[Task.] A set of operations that are part of a workload and are encoded
 into one or more programs.
@@ -857,28 +857,32 @@ into one or more programs.
 \item[Resource.] Finite, typed and physical quantity utilized when
   executing one or more workloads. Compute cores, data storage space,
   or bandwidth are all examples of resources commonly utilized by
-  running workloads
+  running workloads.
 
 \item[Infrastructure.] Structured set of resources, possibly geographically and
 institutionally separated from the users utilizing those resources to execute
 one or more workloads. [cit, cit] Infrastructures can be logically partitioned,
 with a direct or indirect mapping onto individual pools of hardware. Commonly,
 Infrastructure can be used also to indicate a Distributed Computing
-Infrastructure (DCI). \end{description}
+Infrastructure (DCI). 
 
-As seen in \S2, most of the DCIs where \pilotjobs systems are executed utilize
-`queues', `batch systems' and `schedulers'. In such DCIs, jobs are scheduled
-and then executed by a batch system.
+\end{description}
+
+As seen in \S\ref{ssec:informal}, most of the DCIs where \pilotjobs systems
+are executed utilize `queues', `batch systems' and `schedulers'. In such DCIs,
+jobs are scheduled and then executed by a batch system.
 
 \begin{description}
+
 \item[Job.] A container for one or more programs, a description of their
   properties and indications on how they should be executed.
+
 \end{description}
 
 In the context of a \pilotjob system, jobs and tasks are functionally
-analogous but qualitatively different; it is important to highlight their
-distinction. Functionally, both jobs and tasks are a set of programs with
-metadata but the term `task' is used when reasoning about workloads while
+analogous but qualitatively different; it is therefore relevant to highlight
+their distinction. Functionally, both jobs and tasks are a set of programs
+with metadata but the term `task' is used when reasoning about workloads while
 `job' is used in relation to a specific type of infrastructure where such a
 container can be executed. Accordingly, tasks are considered as the functional
 units of a workload, while jobs as a way to execute programs on a given
@@ -889,7 +893,7 @@ infrastructures that support or require that type of container.
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are programs
-with specific capabilities and are submitted as jobs on the type of DCI just
+with specific capabilities and are submitted as jobs on the type of DCIs just
 described. In such a context, schedulers, batch processing and queuing define
 the practical boundaries for how and when the pilots can be provisioned on a
 given DCI.
@@ -903,13 +907,13 @@ DCI, the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion, and to the use of synonyms for both
 the terms `pilot' and `pilot-job'.
 
-The term `pilot' is often associated with that of `placeholder'. This is a way
-to illustrate two of the distinctive capabilities that every pilot has to
-implement: acquiring bounded set of resources by running on a DCI, and
-executing tasks submitted (to the system that the pilot belongs) that will
-utilize them. Thanks to these capabilities, a pilot allows for a user or a
-group of users, depending on implementation details, to gain exclusive control
-over the binding and execution of her or their tasks.
+The term `pilot' is often associated with that of `placeholder' so to
+emphasize the two distinctive capabilities that every pilot system has to
+implement: acquiring a set of resources by running on a DCI, and executing
+tasks that will utilize those resources. A pilot is a 'placeholder' because it
+holds portion of the DCI resources for a user or a group of users, depending
+on implementation details, to gain exclusive control over the binding and
+execution of a workload.
 
 \begin{description}
 \item[Pilot.] A resource placeholder running on a given infrastructure
@@ -925,28 +929,18 @@ considered synonyms and their use to indicate the same concept is a clear
 indication that a minimal and consistent vocabulary is needed when reasoning
 about multiple \pilotjob systems.
 
-Another important detail to notice is that while the operations of a
-task performed by means of a \pilot are usually computational in
-nature, in principle, they might also operate on other type of
-resources such as data or network bandwidth, depending on the
-resources made available by an infrastructure to its users. In this
-context, it would be likely for some \pilotjob systems to use the
-terms `pilot data' or `pilot network'.
-
-\jhanote{this should move to much later in this section or maybe to Section 5.
-Must bring clarity to compute before opening other cans of worms} \mtnote{OK,
-let's wait for the Section draft to be complete to decide.}
-
 Once one or more pilots become available on the targeted infrastructures,
 users can start to use a \pilotjob system to execute their tasks without
 having to deal with the job submission system of the targeted infrastructure.
 How tasks are assigned to pilots is a matter of implementation. For example, a
-dedicated scheduler could be used or tasks might be directly assigned by the
-user to a pilot. The simplification obtained by circumventing the job
-submission system of the infrastructure is one of the main reasons for the
-success of the \pilotjob systems. The overhead and lack of control imposed by
-a centralized job management system shared among multiple users are bypassed,
-allowing for a faster and more reliable execution of workloads.
+dedicated scheduler could be adopted or tasks might be directly assigned by
+the user to a pilot. 
+
+The simplification obtained by circumventing the job submission system of the
+DCI is one of the main reasons for the success of the \pilotjob systems. The
+overhead and lack of control imposed by a centralized job management system
+shared among multiple users are bypassed, allowing for a faster and more
+reliable execution of workloads.
 
 The \pilotjob systems are said to implement multi-level scheduling because the
 assignment of resources to tasks happens in at least two stages. A portion of
@@ -961,10 +955,10 @@ indicates the binding of a task to an inactive pilot; late binding the binding
 of a task to an active pilot. The binding process in itself is often an
 instance of scheduling. Early binding is useful to increase the flexibility
 with which pilots are deployed. By knowing in advance the properties of the
-tasks that are bound to a pilot, specific deployment decisions can be made.
-Late binding is critical in assuring high throughput by allowing for tasks to
-be executed without waiting in a queue or waiting for a specific container -
-for example a job or a VM - to be instantiated.
+tasks that are bound to a pilot, specific deployment decisions can be made for
+that pilot. Late binding is critical in assuring high throughput by allowing
+for tasks to be executed without waiting in a queue or waiting for a specific
+container - for example a job or a VM - to be instantiated.
 
 \begin{description}
 \item[Multi-level scheduling.] Scheduling tasks and pilots to
@@ -2468,6 +2462,17 @@ deploying a PaaS model of cloud computing.[cit]
 as well}
 
 \jhanote{the previous paragraph should be moved into section 5}
+
+Another important detail to notice is that while the operations of a
+task performed by means of a \pilot are usually computational in
+nature, in principle, they might also operate on other type of
+resources such as data or network bandwidth, depending on the
+resources made available by an infrastructure to its users. In this
+context, it would be likely for some \pilotjob systems to use the
+terms `pilot data' or `pilot network'.
+
+\jhanote{this should move to much later in this section or maybe to Section 5.
+Must bring clarity to compute before opening other cans of worms}
 
 
 \subsection{revisit the ``myths''}
