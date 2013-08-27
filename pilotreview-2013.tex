@@ -873,9 +873,10 @@ The name `\pilotjob' indicates the primary role played by the concepts of
 context-dependent and several other terms needs to be clarified in order to
 offer a coherent terminology. Both `job' and `pilot' needs to be understood in
 the context of DCIs, the infrastructures where \pilotjobs systems are
-provisioned. DCIs offer compute, data\msnote{Im tempted to say storage} and
-network resources and \pilotjobs allow for the users to utilize those resources
-to execute the tasks of a workload.
+provisioned. DCIs offer compute, data\msnote{Im tempted to say
+storage}\mtnote{Happy to change if everyone agrees.} and network resources and
+\pilotjobs allow for the users to utilize those resources to execute the tasks
+of a workload.
 
 \begin{description}
 
@@ -954,13 +955,14 @@ execution of a workload.
   it can't run on an infrastructure. I'm also not sure if "running" is a core
   characteristic of a pilot (e.g. in the VM scenario). This is also addressed
   in the next paragraph, but the definition here should be correct and concise
-  ofcourse.}
+  ofcourse.}\mtnote{I guess this goes back to the discussion we had about pilot
+  data. Is it so?}
 \end{description}
 
 From a terminology point of view, the term `pilot' as defined here is
 named differently across multiple \pilotjob systems. Depending upon
 context, in addition to the term `placeholder', pilot is also named
-`agent' and, in some cases, `pilotjob' [cit]. All these terms should be
+`agent' and, in some cases, `\pilotjob' [cit]. All these terms should be
 considered synonyms and their use to indicate the same concept is a clear
 indication that a minimal and consistent vocabulary is needed when reasoning
 about multiple \pilotjob systems.
@@ -988,37 +990,48 @@ turn bound to the resources.
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
 inactive until it is executed on a DCI, active after that\msnote{this might be
 true for the "agent" scenario, but is probably too narrow of a definition, at
-this stage it would be fair to say that a pilot can be active or inactive}. Early binding
-indicates the binding of a task to an inactive pilot; late binding the binding
-of a task to an active pilot. The binding process in itself is often an
-instance of scheduling. Early binding is useful to increase the flexibility
-with which pilots are deployed. By knowing in advance the properties of the
-tasks that are bound to a pilot, specific deployment decisions can be made for
-that pilot\msnote{I might start to understand where you want to go with this,
-but I'm not sure if this holds in a HTC scenario where you have many pilots.
-By then "early" binding tasks to pilots, you actually loose flexibility}
-. Late binding is critical in assuring high throughput by allowing
-for tasks to be executed without waiting in a queue or waiting for a specific
-container - for example a job or a VM - to be instantiated.
+this stage it would be fair to say that a pilot can be active or
+inactive}\mtnote{I guess this goes back to the discussion we had about pilot
+data. Is it so?}. Early binding indicates the binding of a task to an inactive
+pilot; late binding the binding of a task to an active pilot. Early binding is
+useful to increase the flexibility with which pilots are deployed. By knowing
+in advance the properties of the tasks that are bound to a pilot, specific
+deployment decisions can be made for that pilot \msnote{I might start to
+understand where you want to go with this, but I'm not sure if this holds in a
+HTC scenario where you have many pilots. By then "early" binding tasks to
+pilots, you actually loose flexibility}\mtnote{Unfortunately, I do not
+understand your comment.} . Late binding is critical in assuring high
+throughput by allowing for tasks to be executed without waiting in a queue or
+waiting for a specific container - for example a job or a VM - to be
+instantiated.
+
+Binding pilots to their resources and tasks to pilots depends on placement 
+choices. As such, the binding process in itself is often an instance of 
+scheduling. Pilot systems implement multi-level scheduling because they require
+the scheduling of two types of entities - pilots and tasks - in a distinct
+chronological order.
 
 \begin{description}
-
-\item[Multi-level scheduling.] Scheduling tasks and pilots to different
-schedulers and in distinct chronological order. \msnote{Do we mean "by"
-different schedulers? I would possibly use the word "hierarchical" here too.}
 
 \item[Early binding.] Binding one or more tasks to an inactive pilot.
 
 \item[Late binding.] Binding one or more tasks to an active pilot.
 
+\item[Multi-level scheduling.] Scheduling pilots onto resources and tasks onto
+active or inactive pilots in distinct chronological order. \msnote{Do we mean "by"
+different schedulers? I would possibly use the word "hierarchical" here too.}
+\mtnote{I have modified the definition accordingly.}
+
 \end{description}
 
 Depending on the specific capabilities implemented in the workload management
-component, some \pilotjob systems allows for pilots to be described on the
-bases of the available tasks. This assigning process should not be confused
-with early binding as the latter requires for a pilot to have been already
-described.\msnote{I dont fully understand what is written here, probably a good
-discussion point for the meeting}
+component, some \pilotjob systems allows for pilots to be specified by taking
+into consideration the properties of the task of a workload. This type of
+specification process should not be confused with early binding as the latter
+requires for a pilot to have been already specified but not yet bound to a
+resource. \msnote{I dont fully understand what is written here, probably a good
+discussion point for the meeting}\mtnote{Well spotted. I reviewed the
+paragraph, let me know whether now it is more intelligible.}
 
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
