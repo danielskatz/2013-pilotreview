@@ -1093,7 +1093,6 @@ vocabulary.}
 
 \subsection{Evaluation Criteria}\label{ssec:evaluation}
 
-
 \jhanote{Andre L: these need elaboration and explanation. A possible
   consideration might be whether to remove bullet points and use
   regular prose}\alnote{work in progress}
@@ -1101,29 +1100,73 @@ vocabulary.}
 \pilotjob systems can be described and compared using a set of
 functional and non-functional criteria.
 
+%\alnote{use functional/non-functional properties}
 
-\alnote{use functional/non-functional properties}
-\emph{Functional Features:} The functional criteria describe the
-capabilities of the \pilotjob system: (i) What use cases are targeted
-by the PJ system? What applications types and usage modes are
-supported (MPI, ensembles, workflows)?, (ii) What abstraction and user
-interface is provided to the developer: API, CLI, web service, web
-portal?, (iii) Does the \pilotjob system support distribution?, (iv)
-Are there any higher-level tools available for \pilotjob system
-(e.g. workflow systems, data analysis systems)?, (v) Does the
-\pilotjob system support data?, (vi) What types of infrastructure are
-supported (HTC, HPC, cloud)? Does the \pilotjob system provide
-interoperability support? and (vii) does the framework support
-advanced workload management capabilities (e.g. the automatic
-provisioning of \pilots).
+Section 2 and 3 discussed how \pilotjobs have evolved functionally, as
+well discussed the different ways in which \pilotjobs have been
+used and developed. It follows that there exist multiple aspects and
+attributes of \pilotjobs that need to be kept in considered when
+trying to determine an appropriate implementation.  Here we try to
+gather the broad set of criteria, most but not all of which follows
+from earlier discussions.
+
+In order to understand the landscape of \pilotjobs it is important to
+understand the types of workflows and workloads they can support, the
+types of resources they can be used with and how, what middleware
+dependencies they have, the type, level and granularity of scheduling
+control they expose and the algorithms they use, control on the
+workload placement they provide and the
+constraints on the workload they impose. 
+
+Whereas the answers to some of the above influence the usability and
+usefulness of a \pilotjob, not all of the above attributes influence
+their functional or performance capabilities.  No rigid classification
+of the attributes of \pilotjobs is possible, as an attribute that
+influences the performance or functional capability of one \pilotjob
+may not influence or even exist for another \pilotjob. Mindful of
+these limitation, we propose the following features that provide a
+fair coverage of the attributes required to understand the usability
+(which correlates with non-functiontional properties etc.)  and
+usefulness (performance constraints, functional capabilities etc.)  of
+any given \pilotjob.
+
+What use cases (application workloads, MPI/ensembles, workflow types)
+and use modes are supported (natively or via extensions) to the core
+\pilotjob system?  How is the \pilotjob system used deployed, viz.,
+what abstraction and user interfaces are provided to the user (e.g.,
+CLI, web-service, web portal?). Does the \pilotjob system support
+distribution?, What middleware dependencies does the \pilotjob system
+have?  What execution strategies are supported? (HTC, HPC, cloud)?
+What type of security contexts are supported?  Once a \pilotjob is
+usable, attributes that influence wether a \pilotjob is useful include
+the scalability (number of tasks, number of distributed resources,
+number of cores that can be marshalled, task throughput, number
+resources/slots) properties of the \pilotjob, interoperability and
+fault tolerance.
+
+%Does the \pilotjob system provide interoperability support?
+% does the framework support advanced workload management capabilities
+% (e.g. the automatic provisioning of \pilots).
+
+% \emph{Functional Features:} The functional criteria describe the
+% capabilities of the \pilotjob system: (i) What use cases are
+% targeted by the PJ system? What applications types and usage modes
+% are supported (MPI, ensembles, workflows)?, (ii) What abstraction
+% and user interface is provided to the developer: API, CLI, web
+% service, web portal?, (iii) Does the \pilotjob system support
+% distribution?, (iv) Are there any higher-level tools available for
+% \pilotjob system (e.g. workflow systems, data analysis systems)?,
+% (v) Does the \pilotjob system support data?, (vi) What types of
+% infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob
+% system provide interoperability support? and (vii) does the
+% framework support advanced workload management capabilities
+% (e.g. the automatic provisioning of \pilots).
 
 
-\emph{Non-Functional Features:} Non-functional features describe the
-characteristics and behavior of a \pilotjob system and are not
-directly related to a specific function or capability of the \pilotjob
-system. Non-functional properties include: (i) performance, (ii)
-scalability (task throughput, number resources/slots), (iii) fault
-tolerance, (iv) interoperability and (v) security.
+% \emph{Non-Functional Features:} Non-functional features describe the
+% characteristics and behavior of a \pilotjob system and are not
+% directly related to a specific function or capability of the \pilotjob
+% system. Non-functional properties include: 
 
 \jhanote{I think performance and scalability should be moved into
   functional attributes. I think performance and scalability (as
@@ -1142,7 +1185,6 @@ you are asking for is a more prominent place to discuss performance? Does that
 tell us that functional vs non-func is not a useful distinction here?
 (func/non-func normally belongs to requirements, and thats not what we are
 talking about here anyway}
-
 
 The performance and scalability define the response times and size of the
 workload a user can expect to be supported. Security describes the security
