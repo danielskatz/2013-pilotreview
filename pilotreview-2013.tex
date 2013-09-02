@@ -1938,7 +1938,7 @@ curated opportunistically for the past 20 years.
 
 % -----------------------------------------------------------------------------
 %
-\paragraph{Base System Architecture}
+\paragraph{Core System}
 
 A ``complete'' HTCondor system that accepts user tasks and executes them on
 one or more resources is called an HTCondor \textbf{pool}. A pool consists of
@@ -2009,7 +2009,11 @@ GRAM) and task assignment.
 
 % -----------------------------------------------------------------------------
 %
-\paragraph{glidein-WMS -- \pilot Provisioning}
+\paragraph{glidein-WMS -- Automated \pilot Provisioning}
+
+The glidein workload management system (WMS)~\cite{1742-6596-119-6-062044} introduces advanced \pilotjob capabilities to HTCondor by 
+providing automated \pilot (\texttt{startd}) provisioning based on
+the state of an HTCondor pool.
 
 
 % -----------------------------------------------------------------------------
