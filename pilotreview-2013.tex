@@ -728,9 +728,11 @@ targeted DCI. Finding common denominators among these systems requires an
 analysis along multiple dimensions.
 
 As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed according to
-multiple criteria, both functional and non-functional. In this Section, the
+multiple criteria, both functional and non-functional. 
+\onote{avoid functional v.s. non-functional}
+In this Section, the
 focus is on the former as the latter are adapted by definition to each
-specific pilot implementation. Each \pilotjob system exhibits core
+specific pilot implementation. Each \pilotjob system exhibits
 architectural, provisioning and execution characteristics that are integral to
 the \pilotjob paradigm itself. However, many \pilotjob systems also exhibit
 specific or non-integral characteristics. Discerning and distinguishing
@@ -785,9 +787,13 @@ characteristics.
 
 The proposed architectural components for \pilotjob systems support flexible
 execution strategies along with performance in the task submission process.
-The tasks of a workload are bound to one or more pilots without having to be
-directly scheduled on the DCI's job management system. Furthermore, the bind
-of tasks to a pilot might happen before or after the pilot has been assigned a
+\onote{I am not sure if I understand the performance part.}
+The tasks of a workload are bound to one or more pilots 
+\onote{Shouldn't this be 'one or more Task Executors'? We haven't introduced 
+pilots yet.}
+without having to be
+directly scheduled on the DCI's job management system. Furthermore, the binding
+of tasks to a pilot \onote{'Task Executor'?} might happen before or after the pilot has been assigned a
 portion of the DCI's resources, and it can last for the whole time the pilot
 can hold on its resources. This execution strategy requires dedicated
 functionalities both for performing the bind of tasks to pilots but also for
@@ -809,8 +815,8 @@ requirements of specific user communities [cit, cit, cit].
 The procedures and mechanisms to provision pilots depend on the capabilities
 exposed by the targeted DCI and on the implementation of the considered \pilot
 system. Typically, for a DCI adopting queue, batch and scheduling systems,
-provisioning a pilot involves it be submitted as a job. Conversely, for
-infrastructures that do not adopt a job-based submission system, a pilot would
+provisioning a pilot involves it being submitted as a job. Conversely, for
+infrastructures that do not adopt a job-based approach, a pilot would
 be executed by means of other types of logical container as, for example, the
 one implemented by means of a Virtual Machine (VM) on so called
 Infrastructures as a Service (IaaS).
@@ -1253,9 +1259,6 @@ levels) and (v) does the framework have dependencies to other third-party
 components/services?
 
 \subsection{Comparing \pilot System via Classifiers}
-\onote{see ashley's comment above - the structure of section 4 is currently
-a bit weird and the section titles clunky. I'll put the description of the
-classifiers here for now, but at some point, this needs some grooming.}
 
 Along with the common framework and vocabulary, we have identified a set of  key
 classifiers along which we discuss the functional and non-functional properties
