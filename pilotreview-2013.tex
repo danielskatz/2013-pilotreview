@@ -724,15 +724,18 @@ The overview presented in \S\ref{sec:prelim} shows a degree of heterogeneity
 both in the functionalities and the vocabulary adopted by different \pilotjob
 systems. Implementation details sometimes hide the functional commonalities
 and differences among \pilotjobs systems while features and capabilities tend
-to be named inconsistently, often with the same terms referring to multiple
+to be named inconsistently\msnote{Inconsistently could mean here that the systems
+are not consistent themselves, but I think we try to convey is that the systems
+are not consistent with each other}, often with the same terms referring to multiple
 concepts or the same concept named in different ways.
 
-This Section offers an analysis of the architectural components,
-functionalities, and terminology shared by every \pilotjob system. The goal is
+This section offers an analysis of the architectural components,
+functionalities, and terminology shared by every \pilotjob system\msnote{Didnt
+we just about established that the terminology is not shared? :-)}. The goal is
 to offer both a conceptual description of an exemplar \pilotjob system and a
 well-defined vocabulary. Both will be leveraged in \S\ref{sec:4} and
 \S\ref{sec:5} to produce a comparative and critical analysis of diverse
-\pilotjobs frameworks.
+\pilotjob frameworks.
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
@@ -743,22 +746,24 @@ I think logical components should be used consistently and the
 term 'architectural components' should be avoided all together.}
 
 
-All the \pilotjob systems described in \S\ref{sec:prelim} are engineered to
+All the \pilotjob systems introduced in \S\ref{sec:prelim} are engineered to
 allow for the execution of multiple types of workloads on Distributed
-Computing Resources (DCIs) such as, Grids, Clouds or HPC facilities. This is
+Computing Infrastructures (DCIs) such as, Grids, Clouds or HPC facilities. This is
 achieved differently, depending on use cases, design and implementation
 choices, but also on the constraints imposed by the peculiarities of the
 targeted DCI. Finding common denominators among these systems requires an
 analysis along multiple dimensions.
 
-As seen in \S\ref{ssec:evaluation}, \pilotjobs can be analyzed according to
+As seen in \S\ref{ssec:evaluation}\msnote{Do we really want such a forward
+reference?}, \pilotjobs can be analyzed according to
 multiple criteria, both functional and non-functional. 
 \onote{avoid functional v.s. non-functional}
-In this Section, the
+In this section, the
 focus is on the former as the latter are adapted by definition to each
 specific pilot implementation. Each \pilotjob system exhibits
 architectural, provisioning and execution characteristics that are integral to
-the \pilotjob paradigm itself. However, many \pilotjob systems also exhibit
+the \pilotjob paradigm\msnote{I like the concept "pilot-job paradigm", it might
+be a good "general" term to use} itself. However, many \pilotjob systems also exhibit
 specific or non-integral characteristics. Discerning and distinguishing
 characteristics into these categories, requires isolating and defining a
 minimal set of concepts and terms that have to apply to every \pilotjob
@@ -766,7 +771,8 @@ implementation.
 
 At some level, all \pilotjob systems introduced in \S\ref{sec:prelim} leverage
 a similar architecture to accomplish workload execution. Such an architecture
-is based on two separate, but intercommunicating logical components: a
+is based on two separate, but intercommunicating\msnote{Is the definition of
+two-way on purpose?} logical components: a
 \textbf{ Workload Manager} and a \textbf{Task Executor}. The Workload Manager
 is related to the management of the workloads and their tasks; the Task
 Executor to the execution of the tasks on target resources. As will be shown
@@ -778,16 +784,16 @@ distinguished and isolated across different \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
 \S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
-architectural component dedicated to workload management, while the job-
-wrapper belongs to the component responsible for task execution. Similar
+architectural component dedicated to workload management, while the job-wrapper
+belongs to the component responsible for task execution. Similar
 examples can be given for the advanced \pilotjob systems and for Pilot-based
 frameworks: GlideinWMS offers an extended set of features when compared to the
 scheduler and dispatcher of Nimrod-G, but all those features belong to the
 same, well-defined and self-contained architectural component --- i.e. the one
-in charge of managing the workloads. The same is valid for Corral or SWIFT:
-they both offer evolved functionalities and interfaces to manage workloads
-but, as such, they both are part of an architecture where workload management
-and task execution belongs to two distinct components.
+in charge of managing the workloads. The same is valid for Corral and SWIFT:
+both offer evolved functionalities and interfaces to manage workloads
+but, as such, both are part of an architecture where workload management
+and task execution belong to two distinct components.
 
 The Workload Manager and the Task Executor are separate and well-defined
 architectural components that communicate and coordinate in order to exchange
@@ -795,9 +801,8 @@ tasks, input and output files, and related data. Communication and
 coordination are two fundamental characteristics of every distributed
 architecture, but we posit that it is not an integral architectural component
 of \pilotjob systems, nor is any specific communication and coordination
-paradigm a defining feature of a \pilotjob system\msnote{While I can agree
-on the former statement (not an integral part), the latter claim (distinctive
-feature) is doubtful, and unneccessary imho.}.
+paradigm a defining feature of a \pilotjob system.\msnote{How about changing
+the last words into: "... the \pilotjob paradigm."?}
 
 For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is very common
 among \pilotjobs. Functionally, the Master can be identified with the Workload
@@ -830,10 +835,11 @@ system involves \textbf{\pilot provisioning} and \textbf{task dispatching}.
 \pilot provisioning is a core functionality of every \pilot system because it is
 essential for the creation of resource overlays. This type of overlay allows for
 tasks to utilize resources without directly depending on the capabilities
-exposed by the targeted DCI. Pilots are bound to the DCI resources by means of
+exposed by the targeted DCI. Pilots are bound\msnote{scheduled?} to the DCI resources by means of
 the DCI capabilities but, once bound, pilots make those resources directly
-available for the execution of the tasks of a workload. Thanks to resource
-overlays, \pilot systems can also implement functionalities tailored to the
+available for the execution of the tasks of a workload.\msnote{Arent the
+resources only available after the pilot becomes "running"?}
+Thanks to resource overlays, \pilot systems can also implement functionalities tailored to the
 requirements of specific user communities [cit, cit, cit].
 
 The procedures and mechanisms to provision pilots depend on the capabilities
@@ -856,8 +862,9 @@ Data management may have an important role within \pilot systems. For example,
 functionalities can be provided to support data staging for task execution or
 for managing task-related data according to the capabilities offered by
 specific DCI. Nonetheless, \pilot systems can be devised in which tasks do not
-require data management because they do not necessitate input files, they do
-not produce output files or data is already locally available. As such, data
+require data management because they (i) do not necessitate input files, (ii) do
+not produce output files, (iii) data is already locally available or (iv) data management
+is left to the application itself. As such, data
 management should not be considered a necessary functionality of \pilot
 systems even when present in many of them.
 
@@ -917,8 +924,7 @@ The name `\pilotjob' indicates the primary role played by the concepts of
 context-dependent and several other terms needs to be clarified in order to
 offer a coherent terminology. Both `job' and `pilot' needs to be understood in
 the context of DCIs, the infrastructures where \pilotjobs systems are
-provisioned. DCIs offer compute, data\msnote{Im tempted to say
-storage}\mtnote{Happy to change if everyone agrees.} and network resources and
+provisioned. DCIs offer compute, storage, and network resources and
 \pilotjobs allow for the users to utilize those resources to execute the tasks
 of a workload.
 
