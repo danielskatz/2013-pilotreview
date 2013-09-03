@@ -101,7 +101,7 @@
   a comprehensive survey of \pilotjobs, or more generically of
   \pilotjob like capabilities.  A primary motivation for this work stems
   from our experience when looking for an interoperable, extensible
-  and general-purpose \pilotjobs; in the process, we realized that
+  and general-purpose \pilotjob; in the process, we realized that
   such a capability did not exist. The situation was however even more
   unsatisfactory: in fact there was no agreed upon definition or
   conceptual framework of \pilotjobs.  To substantiate these points of
@@ -152,6 +152,7 @@ usage suggested that \pilotjobs were arguably one of the most
 widely-used distributed computing abstractions – as measured by the
 number and types of applications that use them, as well as the number
 of production distributed cyberinfrastructures that support them.
+\msnote{ref?}
 
 \jhanote{Now develop the following paragraph along the lines of: Why
   have \pilotjobs been successful?}
@@ -191,14 +192,14 @@ DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
 PanDA~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
 Nimrod/G~\cite{10.1109/HPC.2000.846563}, Falkon~\cite{1362680} and
 MyCluster~\cite{1652061} to name a few. Although they are all, for the
-most parts, functionally equivalent -- they support the decoupling of
+most part, functionally equivalent -- they support the decoupling of
 workload submission from resource assignment -- it is often impossible
 to use them interoperably or even just to compare them functionally or
 qualitatively.  The situation is reminiscent of the proliferation of
 functionally similar yet incompatible workflow systems, where in spite
 of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
-needs), these objectives remains difficult if not infeasible.
+needs), these objectives remain difficult if not infeasible.
 
 \section{A Preliminary Survey of Existing Pilot-Jobs
   Systems}\label{sec:prelim}
@@ -225,7 +226,8 @@ resources to run jobs, one particular solution proposed is that of
 \pilotjobs are most commonly used for the execution of many tasks
 through the use of a container job. They are often measured by
 their throughput, that is, the number of tasks that they can complete
-per second (tps), or alternatively, by the total number of tasks
+per second (tps)\msnote{I dont think we use tps further in the paper},
+or alternatively, by the total number of tasks
 executed. As such, \pilotjobs are used to achieve
 high-throughput, for example, when using genome sequencing techniques
 or ensemble-based applications. \pilotjobs have also been used for
