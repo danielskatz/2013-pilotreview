@@ -737,6 +737,12 @@ well-defined vocabulary. Both will be leveraged in \S\ref{sec:4} and
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
+\onote{Sometimes we use 'logical' components and sometimes 
+'architectural components' throughout this section and others. 
+I think logical components should be used consistently and the 
+term 'architectural components' should be avoided all together.}
+
+
 All the \pilotjob systems described in \S\ref{sec:prelim} are engineered to
 allow for the execution of multiple types of workloads on Distributed
 Computing Resources (DCIs) such as, Grids, Clouds or HPC facilities. This is
@@ -879,7 +885,7 @@ capabilities just described is defined.
  \centering
  \begin{tabular}{|l|c|c|}
   \hline
-    \textbf{Terms} & \textbf{Functionality} & \textbf{Architectural Component} \\
+    \textbf{Terms} & \textbf{Functionality} & \textbf{Logical Component} \\
   \hline
     Workload & Task Dispatching & Workload Manager \\
   \hline
@@ -1292,50 +1298,38 @@ controllable. A fourth set of classifiers covers the non-functional properties
 of \pilot systems.
 
 
-\paragraph{Resource Interaction}
+\paragraph{Pilot Provisioning}
 
-Resource interaction classifiers capture how a \pilot system interacts with
-the physical resource world.
 
 \begin{itemize}
 
-\item \textit{Resource Access}: How does the system interface with the physical 
-resources, i.e., with the middleware that provides resource access.
+\item \textit{Resource Access}: How does the Workload Manager interface with 
+the physical resources, i.e., with the middleware that provides resource access.
 
 \item \textit{Pilot Provisioning}: How and when are \pilots launched and at
 which level of granularity can this be influenced and controlled?
 
 \end{itemize}
 
-\paragraph{Workload Execution and Management}
+\paragraph{Task Dispatching}
+
+Task dispatching is the second of two core capabilities we 
+have defined for \pilotjob systems in section~\ref{subsec:vocab_core_functionalities}.
+Both logical components -- workload manager and task executor -- are concerned 
+with the implementation of task dispatching (see Table{~\ref{table:terminology}). 
+The classifiers listed here help to distinguish how task dispatching is 
+implemented and what the distinct feature of a specific implementation are. 
+
 
 \begin{itemize}
 
-\item \textit{Task-to-Resource Binding}:
+\item \textit{Single or Multi-User Task Pool}
+
+\item \textit{}
+
 
 \end{itemize}
 
-\paragraph{Data Handling and Management}
-
-Due to its absence in some \pilot systems, data handling and management
-capabilities are not discussed as core functionalities in Section
-\ref{subsec:vocab_core_functionalities}. However because of the practical
-importance of this topic we discuss data handling and management in the context
-of classifiers instead. We look at the following properties:
-
-\begin{itemize}
-
-\item \textit{Data-Representation}: How is data represented in the system, i.e.,
-is it file-based or are other concepts like, e.g., streams supported? 
-
-\item \textit{Data-Movement}: What are the mechanisms to move data around 
-the system? How is data transferred to the resources?
-
-\item \textit{Data-Placement}: How is data placed in the system and how is  it
-\textit{bound} to tasks and at which level of granularity can this be
-influenced and controlled?
-
-\end{itemize}
 
 \paragraph{Qualitative Properties}
 
@@ -1357,37 +1351,7 @@ connect the individual component of the \pilot system?
 
 \end{itemize}
 
-%\subsubsection{Condor-G}
-%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
-%% to use this general sort of information + reword using our spiffy
-%% vocabulary presented in this paper}
-%% Condor-G pioneered the Pilot-Job concept~\cite{condor-g}. The pilot is
-%% actually a complete Condor pool that is started using the Globus
-%% service of a resource. This mechanism is referred to as Condor
-%% Glide-In. Subsequently, jobs can be submitted to this Glide-In pool
-%% using the standard Condor tools and APIs. Condor utilizes a
-%% master/worker coordination model. The PJ manager is referred to as the
-%% Condor Central Manager. The functionality of the Central Manager is
-%% provided by several daemons: the condor\_master that is generally
-%% responsible for managing all daemons on a machine, the
-%% condor\_collector which collects resource information, the
-%% condor\_negotiator that does the matchmaking and the condor\_schedd
-%% that is responsible for managing the binding and scheduling
-%% process. Condor generally does not differentiate between workload,
-%% i.\,e.\ WU, and schedulable entity, i.\,e.\ SU. Both entities are
-%% referred to as job. However, it supports late binding, i.\,e.\
-%% resources a job is submitted to must generally not be available at
-%% submission time. The scheduler matches the capabilities required by a
-%% WU to the available resources. This process is referred to as
-%% matchmaking. Further, a priority-based scheduler is used. For
-%% communication between the identified elements Condor utilizes
-%% point-to-point messaging using a binary protocol on top of TCP.
 
-%% Different fault tolerance mechanisms, such as automatic retries, are
-%% supported.  Further, Condor supports different security mechanisms:
-%% for authentication it integrates both with local account management
-%% systems (such as Kerberos) as well as grid authentication systems such
-%% as GIS. Communication traffic can be encrypted.
 
 
 \begin{table*}[t]
