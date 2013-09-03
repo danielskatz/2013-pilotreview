@@ -304,6 +304,13 @@ minimally complete set of capabilities for a simple \pilotjob, (ii) advanced
 \pilotjob functionality - a system that offers all of (i) plus a more sophisticated
 resource management mechanism, and (iii) higher-level \pilot-based frameworks
 - frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics. 
+
+\onote{These are not necessarily 'layers'. The more I think about it, the whole
+idea of 'layers' doesn't make so much sense if we want to distinguish between core and 
+advanced systems / frameworks. I think discussing these 'functionality' along 
+\textbf{orthogonal components} (that doesn't necessarily build upon each other)
+would make more sense. My (and ALs) comment w.r.t Figure 1 is related to this.}
+
 As one can intuit from the above descriptions, existing \pilotjob systems maybe
 overlap and overflow into these different layers, and each layer builds upon the
 previous one. Therefore, we use these classification layers only as a means
@@ -340,6 +347,9 @@ in Sections \ref{sec:vocab} and \ref{sec:4}.
           capabilities (outside)/properties (internal) of
           each layer, what is the overlap between the layers (how they
           interrelated?, what is the overlap?)?}
+          \onote{IMHO this figure doesn't really help to explain things
+          and is also wrong (see AL's comment above). I think we should 
+          get rid of it.  }
 	\label{fig:figures_classification}
 \end{figure}
 
@@ -598,6 +608,9 @@ JSDL.
 example with Pegasus, it can make use of pilots, but uses it as just yet
 another "job submission backend". In this way, any system that creates "task"
 could be adopted to submit to a pilot-based backend}
+
+\onote{Should we mention ATLAS (http://atlas.ch/)? It's based on 
+Panda, or better, Panda only exsits because of Atlas.}
 
 Many higher-level tools and frameworks, such as workflow,
 visualization or data analytics systems, utilize \pilotjob systems to
