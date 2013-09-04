@@ -887,6 +887,9 @@ capabilities just described is defined.
 %   not in the list of possible values of Colum 3 by design ;) Once we will have
 %   agreed on the table I will put it together in \LaTeX. }
 
+\msnote{Possibly use typesetting to mark usage of strictly defined terms in
+this section?}
+
 \begin{table*}[t]
  \up
  \centering
@@ -930,11 +933,14 @@ of a workload.
 
 \begin{description}
 
-\item[Workload.] A set of tasks, possibly correlated, that when executed on an
-infrastructure contribute for a user to achieve a goal.
+\item[Application.] Responsible for the definition of the workload and consumer
+of the \pilotjob system.
 
-\item[Task.] A set of operations that are part of a workload and are encoded
-into one or more programs.
+\item[Workload.] A set of tasks, possibly correlated, that are instrumental to
+the application to achieve its goal.
+
+\item[Task.] A set of operations specified by the application, that are encoded
+into one or more programs to be executed on a DCI. 
 
 \item[Resource.] Finite, typed and physical quantity utilized when
   executing one or more workloads. Compute cores, data storage space,
@@ -971,7 +977,8 @@ units of a workload, while jobs as a way to execute programs on a given
 infrastructure. It should be noted that the two terms can be used
 interchangeably when considered outside the context of \pilotjob systems.
 Workloads are encoded into jobs when they have to be directly executed on
-infrastructures that support or require that type of container.
+infrastructures that support or require that type of container\msnote{You mean
+when not using pilots, right?}.
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are programs
@@ -987,7 +994,9 @@ targeting of a specific class of DCIs in which the term `job' was --- and
 still is --- meaningful. Nonetheless, with the development of new types of
 DCI, the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion, and to the use of synonyms for both
-the terms `pilot' and `pilot-job'.
+the terms `pilot' and `pilot-job'\msnote{Now it reads like that the new dci's
+have lead to the interchangable use of pilot vs pilot-job, is that what you
+want to say?}.
 
 The term `pilot' is often associated with that of `placeholder' so to
 emphasize the two distinctive capabilities that every pilot system has to
@@ -1017,12 +1026,12 @@ considered synonyms and their use to indicate the same concept is a clear
 indication that a minimal and consistent vocabulary is needed when reasoning
 about multiple \pilotjob systems.
 
-Once one or more pilots become available on the targeted infrastructures,
-users can start to use a \pilotjob system to execute their tasks without
-having to deal with the job submission system of the targeted infrastructure.
+Once one or more pilots become available through a \pilotjob system on the
+targeted infrastructures, users can start to execute their tasks without
+having to deal with the job submission system of that infrastructure.
 How tasks are assigned to pilots is a matter of implementation. For example, a
-dedicated scheduler could be adopted or tasks might be directly assigned by
-the user to a pilot. 
+dedicated scheduler could be adopted, or tasks might be directly assigned to a
+pilot by the user. 
 
 The simplification obtained by circumventing the job submission system of the
 DCI is one of the main reasons for the success of the \pilotjob systems. The
@@ -1035,7 +1044,8 @@ assignment of resources to tasks happens in at least two stages. A portion of
 the resources of an infrastructure are first bound to a pilot and then to one
 or more tasks for consumption. This is an important feature of \pilotjob
 systems because it allows for a task to be bound to a pilot before it is in
-turn bound to the resources.
+turn bound to the resources.\msnote{Isn't this contradictory because of the
+"first ... and then"?}
 
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
 inactive until it is executed on a DCI, active after that\msnote{this might be
@@ -1068,21 +1078,16 @@ chronological order.
 \item[Late binding.] Binding one or more tasks to an active pilot.
 
 \item[Multi-level scheduling.] Scheduling pilots onto resources and tasks onto
-active or inactive pilots in distinct chronological order. \msnote{Do we mean "by"
-different schedulers? I would possibly use the word "hierarchical" here too.}
-\mtnote{I have modified the definition accordingly.}
+active or inactive pilots in distinct chronological order.
 
 \end{description}
 
 Depending on the specific capabilities implemented in the workload management
-component, some \pilotjob systems allows for pilots to be specified by taking
+component, some \pilotjob systems allow for pilots to be specified by taking
 into consideration the properties of the task of a workload. This type of
 specification process should not be confused with early binding as the latter
 requires for a pilot to have been already specified but not yet bound to a
-resource. \msnote{I dont fully understand what is written here, probably a good
-discussion point for the meeting}\mtnote{Well spotted. I reviewed the
-paragraph, let me know whether now it is more intelligible.}
-
+resource.
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
 
