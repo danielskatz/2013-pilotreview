@@ -1295,72 +1295,88 @@ components/services?
 
 \subsection{Comparing \pilot System via Classifiers}
 
-Along with the common framework and vocabulary, we have identified a set of  key
-classifiers along which we discuss the functional and non-functional properties
-of \pilot systems.  While these classifiers are by no means meant to be
-exhaustive or complete, they are a useful tool to highlight and discuss the
-differences in  usage-modes, deployment and capabilities between different
-\pilotjob systems. We divide our classifiers into three functional high-level
-categories: \textit{Resource Interaction}, \textit{Workload Execution and
-Management} and \textit{Data Handling and Management}. In each category we
-define classifiers that give further information about (1) if and how a
-capability is implemented, and (2) if and on which level a capability is
-controllable. A fourth set of classifiers covers the non-functional properties
-of \pilot systems.
+% Along with the common framework and vocabulary, we have identified a set of  key
+% classifiers along which we discuss the functional and non-functional properties
+% of \pilot systems.  While these classifiers are by no means meant to be
+% exhaustive or complete, they are a useful tool to highlight and discuss the
+% differences in  usage-modes, deployment and capabilities between different
+% \pilotjob systems. We divide our classifiers into three functional high-level
+% categories: \textit{Resource Interaction}, \textit{Workload Execution and
+% Management} and \textit{Data Handling and Management}. In each category we
+% define classifiers that give further information about (1) if and how a
+% capability is implemented, and (2) if and on which level a capability is
+% controllable. A fourth set of classifiers covers the non-functional properties
+% of \pilot systems.
 
 
 \paragraph{Pilot Provisioning}
 
-
 \begin{itemize}
 
-\item \textit{Resource Access}: How does the Workload Manager interface with 
-the physical resources, i.e., with the middleware that provides resource access.
+  \item \textit{Pilot ownership}: Who owns the pilot (job) -- the user or the \pilotjob system? Or in other
+    words, in which security context does the pilot operate? 
 
-\item \textit{Pilot Provisioning}: How and when are \pilots launched and at
-which level of granularity can this be influenced and controlled?
+  \item \textit{Supported DCI systems/services}: What are the type of systems (middelwares, services) 
+    that can be interfaced by the \pilotjob system to launch pilots? 
 
-\end{itemize}
+  \item \textit{Pilot Granularity (spatial)}: What unit of resource is controlled by a single pilot? 
+    A core, a node, multiple nodes, a cluster, ...? 
 
-\paragraph{Task Dispatching}
-
-Task dispatching is the second of two core capabilities we 
-have defined for \pilotjob systems in section~\ref{subsec:vocab_core_functionalities}.
-Both logical components -- workload manager and task executor -- are concerned 
-with the implementation of task dispatching (see Table{~\ref{table:terminology}). 
-The classifiers listed here help to distinguish how task dispatching is 
-implemented and what the distinct feature of a specific implementation are. 
-
-
-\begin{itemize}
-
-\item \textit{Single or Multi-User Task Pool}
-
-\item \textit{}
-
+  \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots instantiated where and which entity (system/user) 
+    has control over it at which level? 
 
 \end{itemize}
 
 
-\paragraph{Qualitative Properties}
-
-As qualitative properties we define the properties that are not specifically
-related to \pilot systems but rather describe general concepts commonly found
-in distributed applications, frameworks and tools. The classifiers we have
-picked are:
+\paragraph{Workload Management}
 
 \begin{itemize}
 
-\item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
-system from component failures?
+  \item \textit{Workload description}: How are workloads described, e.g., ClassAdd. JSDL...?
 
-\item \textit{Security}: How is a user identified in the system and how are
-identities and access credentials delegated to individual resources / pilots?
+  \item \textit{Supported ``logical'' workload types}: What types of workload are supported, e.g. 
+    single tasks, workflows, ...? (here ``logical'' as opposed to ``physical'' task types in the next category)
 
-\item \textit{Transfer Protocols}: What network protocols that are used to
-connect the individual component of the \pilot system?
+  \item \textit{Task-to-pilot assignment}: How are tasks assigned to pilots and at which level of
+    granularity can this be controlled by which entity (system/user)? 
+
 
 \end{itemize}
+
+\paragraph{Task Execution}
+
+\begin{itemize}
+
+  \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of a pilot in relation to the 
+    length of a task or workload?  
+
+  \item \textit{Task-pilot relationship (spatial)}: Does a pilot execute one ore more tasks concurrently? 
+
+  \item \textit{Supported ``physical'' task types}: What types of (physical) tasks are supported, e.g., single-core, MPI, ...?
+
+\end{itemize}
+
+
+
+% \paragraph{Qualitative Properties}
+
+% As qualitative properties we define the properties that are not specifically
+% related to \pilot systems but rather describe general concepts commonly found
+% in distributed applications, frameworks and tools. The classifiers we have
+% picked are:
+
+% \begin{itemize}
+
+% \item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
+% system from component failures?
+
+% \item \textit{Security}: How is a user identified in the system and how are
+% identities and access credentials delegated to individual resources / pilots?
+
+% \item \textit{Transfer Protocols}: What network protocols that are used to
+% connect the individual component of the \pilot system?
+
+% \end{itemize}
 
 
 
