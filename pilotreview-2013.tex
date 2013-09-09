@@ -1314,7 +1314,10 @@ components/services?
 \begin{itemize}
 
   \item \textit{Pilot ownership}: Who owns the pilot (job) -- the user or the \pilotjob system? Or in other
-    words, in which security context does the pilot operate? 
+    words, in which security context does the pilot operate?  \msnote{Dont
+    think we have defined "user" by now, so thats ambiguous} \msnote{As there
+    will be a wide spectrum of approaches in the various implementation, we
+    might just want to call this as general as "security"}
 
   \item \textit{Supported DCI systems/services}: What are the type of systems (middelwares, services) 
     that can be interfaced by the \pilotjob system to launch pilots? 
@@ -1336,6 +1339,7 @@ components/services?
 
   \item \textit{Supported ``logical'' workload types}: What types of workload are supported, e.g. 
     single tasks, workflows, ...? (here ``logical'' as opposed to ``physical'' task types in the next category)
+    \msnote{It seems this is a special case of the above item}
 
   \item \textit{Task-to-pilot assignment}: How are tasks assigned to pilots and at which level of
     granularity can this be controlled by which entity (system/user)? 
@@ -1348,7 +1352,8 @@ components/services?
 \begin{itemize}
 
   \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of a pilot in relation to the 
-    length of a task or workload?  
+    length of a task or workload? \msnote{What kind of answers to you expect
+    here in section 4.3?} 
 
   \item \textit{Task-pilot relationship (spatial)}: Does a pilot execute one ore more tasks concurrently? 
 
