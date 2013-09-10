@@ -2123,40 +2123,49 @@ national cyberinfrastructure (e.g., XSEDE).
 
 \paragraph{Rationale}
 
-
-\paragraph{Design Goals}
-
-
-\paragraph{Applications}
-
-
-\paragraph{Deployment Scenarios (Single User)}
-
-
-\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-- grids, clouds, and ad-hoc desktop-computer networks 
-
-
-\paragraph{Architecture \& Interface}
-
-
-
-
-\paragraph{Coasters Conclusion}
-\mrnote{WIP}
-
-
-
 The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
 created for the needs of the Swift parallel scripting language.
 
-Coasters was designed to both usability and performance goals.
+\paragraph{Design Goals}
 
+\begin{itemize}
+  \item Driven by the needs of Swift
+  \item Automatically-deployed to endpoint. Does not need user login to endpoint.
+  \item Supports file staging, on-demand opportunistic multi-node allocation, 
+  remote log gin, and remote monitoring
+\end{itemize}
+
+\paragraph{Applications}
+
+\begin{itemize}
+  \item It has been used since 2009 for applications in Þelds 
+that include biochemistry, earth systems science, 
+energy modeling, and neuroscience.
+  \item Above claim made in Coasters paper - need to obtain citations
+\end{itemize}
+
+\paragraph{Deployment Scenarios}
+
+
+\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+
+\begin{itemize}
+  \item grids, clouds, and ad-hoc desktop-computer networks 
+  \item OSG, TeraGrid/XSEDE, Blue Gene/P, Cray XT and XE, 
+  Sun Constellation, small clusters, clouds (BioNimbus, FutureGrid,
+  Amazon EC2)
+\end{itemize}
+
+\paragraph{Architecture \& Interface}
 
 \textit{Coaster Service} is deployed on remote clusters.
 
 \textit{Coaster Client} is deployed locally.
 \textit{Coaster Workers}
+
+
+\paragraph{Coasters Conclusion}
+\mrnote{WIP}
 
 
 \subsubsection{Falkon}
