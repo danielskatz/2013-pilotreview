@@ -1822,7 +1822,7 @@ already exists.
 \panda has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
 as the Open Science Grid.  This illustrates the importance of designing
 \pilotjobs which are easily adaptable such that \pilots are not tied
-to any particular DCI; in this manner, their advantages can be made
+to any particular DCI; in this manner, their advantages can be made 
 available beyond their original design scope.
 
 \textcolor{red}
@@ -2198,27 +2198,72 @@ energy modeling, and neuroscience.
 }
 
 \mrnote{Main Falkon ref: \url{http://dev.globus.org/images/7/78/Falkon_SC07_v42.pdf}}
+%\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon\#FALKON:\_A\_FAST\_AND\_LIGHT-WEIGHT\_TASK\_EXECUTION\_FRAMEWORK}}
 \mrnote{WIP: Bullet points that will later be converted to text}
 
 \paragraph{Rationale}
+\begin{itemize}
+\item Enable the rapid and efficient
+execution of many independent jobs large compute clusters
+\end{itemize}
+
 
 
 \paragraph{Design Goals}
+\begin{itemize}
+\item Reduce task dispatch time by using a streamlined
+dispatcher that eliminates support for features such
+as multiple queues, priorities, accounting, etc.
+\item Use an adaptive provisioner to acquire and/or release
+resources as application demand varies
+\item Cache data from remote locations to local disk at the
+computational resource to achieve better application
+performance and scalability.
+\end{itemize}
 
 
 \paragraph{Applications}
+\begin{itemize}
+\item fMRI (medical imaging)
+\item Montage (astronomy)
+\item MolDyn (chemistry, molecular dynamics sims)
+\end{itemize}
 
+From Falkon site: Large-scale applications from many domains (e.g., astronomy, medicine, biology, chemistry, molecular dynamics, economics, and analytics) have been successfully executed using the Falkon framework.
 
-\paragraph{Deployment Scenarios (Single User)}
+\paragraph{Deployment Scenarios}
 
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+Developed for the grid environment - expanded to clouds, Blue Gene/P. 
+Work has also been expanded in the data-realm (see: data dispersion)
+
+
+Currently tested on: TeraGrid, TeraPort, Amazon EC2, IBM 
+Blue Gene/L, SiCortex, Workspace Service
 
 
 \paragraph{Architecture \& Interface}
+Two techniques [1] multi-level scheduling and [2] streamlined task dispatching
+
+Falkon 2-tier architecture: 
+\begin{itemize}
+\item [1] Dispatcher: GRAM4 Web Service accepts task submission and sends to executors
+\item [2] Executor: Runs tasks on local resources
+\item Provisioner: Static and dynamic resource provisioning
+\end{itemize}
+
+Falkon can suspend faulty hosts
+
+
 
 
 \paragraph{Falkon Conclusion}
+A Note on Performance: Falkon can achieve relatively high throughput 
+in the range of hundreds to thousands of tasks per second when running
+fine grained tasks, with a per task overhead measured in milliseconds
+throughput in the range of hundredsto thousands of tasks persecond when running fine grain
+tasks, with a per task overhead measured in milliseconds.
 \mrnote{WIP}
 
 
@@ -2226,9 +2271,6 @@ energy modeling, and neuroscience.
  -----------------------------------------------------------------------------
 
 \subsubsection{BigJob}
-
-\jhanote{I think this is ready to be refined per the structure of
-  Apples in 4.1.1}
 
 \textcolor{red}
 {
@@ -2325,7 +2367,15 @@ the baseline capabilities for a \pilotjob as described in Section 3.
 
 
 \paragraph{BigJob Conclusion}
-\mrnote{WIP}
+Using SAGA has enabled BigJob to expand to many of the changing and evolving
+architectures and middlewares. As a result, BigJob can grow to accomodate
+new usage modes on heterogenous architectures. The uptake 
+of BigJob by the scientific community
+on both grid and cloud architectures shows the dynamism \pilotjobs offer.
+The use of a \pilotjob system, such as BigJob, to marshal VMs as ``Pilots'' 
+also lends itself to the extensibility of the \pilotjob concept.
+\mrnote{It's late and I don't know if the previous sentence makes sense.
+Read in morning}
 
 \subsubsection{DIANE}
 
