@@ -2722,7 +2722,14 @@ infeasible. The Pilot-API in conjunction with the P* Model aims to
 prevent similar situation for \pilotjobs.
 
 \note{What is the future of PJ? Why should we do to enhance the usability?}
-
+\aznote{I would argue that our work is important to \pilotjobs because
+by expressing a common model, we enable researchers to 1) understand the
+commonalities between existing \pilotjob approaches in order to 2) motivate
+innovation + construction of ``next-gen'' \pilotjob systems.  E.G.,
+implement the basics (or work from an existing system) + understand
+where the boundaries/unexplored territory is without having to first
+completely understand all 15+ existing \pilotjob systems and their
+unique vocabulary.}
 %\footnote{To be fair: we are not sure if a generic model and/or a
 %  generic WF API are achievable {\it on a useful level} -- we think,
 %  nevertherless, that our discussion is valid.}
@@ -2771,6 +2778,23 @@ prevent similar situation for \pilotjobs.
   the same as scheduling, it is more like arranging. Deployment is
   about ``setting up T=0 requirements, which could be software
   environment, input/data dependencies, as well as resources.''}
+
+\aznote{Some additional thoughts for this section...
+1) The early history of \pilotjobs seems to have a few ``independent''
+\pilotjob approaches, where systems (eg MyCluster/AppLeS) incorporate
+\pilotjob techniques with sometimes wildly differing 
+implementations/vocabulary but when boiled down, offering the same
+attempts at base/minimal functionality.  This helps push the
+value of the approach (multiple groups working on it independently
+helps imply its value), with increasingly complex \pilotjob systems
+coming out as time pushes on.  Our review aids both in the
+construction of these increasingly complex systems by exposing
+their core functionality + allowing researchers/etc to push
+the field forward by reducing the apparent complexity to a set
+of common terms/comparisons/classifiers/etc.  I don't know if this is
+too prescriptive/hand-wavey -- feel free to ignore if so, but I feel that 
+the essence of this is one
+potential contribution of our work.}
 
 % jhanote{I have brought the above sentence down here. I think for ease
 %   of readability, once we start discussing binding we should continue
