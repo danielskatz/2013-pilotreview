@@ -1057,7 +1057,7 @@ otherwise to advance the understanding and usage of \pilotjobs.
 Section 2 and 3 discussed how \pilotjobs have evolved functionally, as
 well discussed the different ways in which \pilotjobs have been
 used and developed. It follows that there exist multiple aspects and
-attributes of \pilotjobs that need to be kept in considered when
+attributes of \pilotjobs that need to be kept in consideration when
 trying to determine an appropriate implementation.  Here we try to
 gather the broad set of criteria, most but not all of which follows
 from earlier discussions.
@@ -1076,21 +1076,21 @@ their functional or performance capabilities.  No rigid classification
 of the attributes of \pilotjobs is possible, as an attribute that
 influences the performance or functional capability of one \pilotjob
 may not influence or even exist for another \pilotjob. Mindful of
-these limitation, we propose the following features that provide a
+these limitations, we propose the following features that provide a
 fair coverage of the attributes required to understand the usability
-(which correlates with non-functiontional properties etc.)  and
+(which correlates with non-functionional properties etc.)  and
 usefulness (performance constraints, functional capabilities etc.)  of
 any given \pilotjob.
 
 What use cases (application workloads, MPI/ensembles, workflow types)
-and use modes are supported (natively or via extensions) to the core
+and use modes are supported (natively or via extensions) by the core
 \pilotjob system?  How is the \pilotjob system used deployed, viz.,
 what abstraction and user interfaces are provided to the user (e.g.,
 CLI, web-service, web portal?). Does the \pilotjob system support
 distribution? What middleware dependencies does the \pilotjob system
 have?  What execution strategies are supported? (HTC, HPC, cloud)?
 What type of security contexts are supported?  Once a \pilotjob is
-usable, attributes that influence wether a \pilotjob is useful include
+usable, attributes that influence whether a \pilotjob is useful include
 the scalability (number of tasks, number of distributed resources,
 number of cores that can be marshalled, task throughput, number
 resources/slots) properties of the \pilotjob, interoperability and
@@ -1132,7 +1132,7 @@ fault tolerance.
 %   higher-level pilot, I think we are losing the opportunity to connect
 %   to and utilize that discussion}
 
-\msnote{Formally performance, etc. are non-functiona attributes. But
+\msnote{Formally performance, etc. are non-functional attributes. But
   performance / scalability is often a reason to use pilot-jobs, so
   what I think you are asking for is a more prominent place to discuss
   performance? Does that tell us that functional vs non-func is not a
@@ -1162,7 +1162,7 @@ resource acquisition/release policies, dispatch policies, number of scheduling
 levels) and (v) does the framework have dependencies to other third-party
 components/services?
 
-\subsection{Comparing \pilot System via Classifiers}
+\subsection{Comparing \pilot Systems via Classifiers}
 
 % Along with the common framework and vocabulary, we have identified a set of  key
 % classifiers along which we discuss the functional and non-functional properties
@@ -1187,8 +1187,18 @@ components/services?
     think we have defined "user" by now, so thats ambiguous} \msnote{As there
     will be a wide spectrum of approaches in the various implementation, we
     might just want to call this as general as "security"}
+    \aznote{I think this covers potentially multiple concepts: 1) security, as
+      in the level of direct access users have to pilots (can they for instance
+      force a kill directly?  Modify pilot configurations while it runs?)
+      2) Deployment, as in does the entire pilot-job system operate
+      in user-space or is it part of the (admin/privileged) system stack?
+      3) I would argue that this could relate directly to pilot-instantiation...
+      both from a security and deployment level.  Who can instantiate pilots?
+      What security level do they run on once instantiated?  So, maybe a ``security''
+      item as Mark suggested, but I'm not entirely sure if ``deployment'' should
+      be part of this as well...  they do seem connected to me though...}
 
-  \item \textit{Supported DCI systems/services}: What are the type of systems (middelwares, services) 
+  \item \textit{Supported DCI systems/services}: What are the type of systems (middlewares, services) 
     that can be interfaced by the \pilotjob system to launch pilots? 
 
   \item \textit{Pilot Granularity (spatial)}: What unit of resource is controlled by a single pilot? 
@@ -1224,7 +1234,7 @@ components/services?
     length of a task or workload? \msnote{What kind of answers to you expect
     here in section 4.3?} 
 
-  \item \textit{Task-pilot relationship (spatial)}: Does a pilot execute one ore more tasks concurrently? 
+  \item \textit{Task-pilot relationship (spatial)}: Does a pilot execute one or more tasks concurrently? 
 
   \item \textit{Supported ``physical'' task types}: What types of (physical) tasks are supported, e.g., single-core, MPI, ...?
 
@@ -1753,7 +1763,7 @@ already exists.
 \panda has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
 as the Open Science Grid.  This illustrates the importance of designing
 \pilotjobs which are easily adaptable such that \pilots are not tied
-to any particular DCI; in this manner, their advantages can be made
+to any particular DCI; in this manner, their advantages can be made 
 available beyond their original design scope.
 
 \textcolor{red}
@@ -2129,27 +2139,72 @@ energy modeling, and neuroscience.
 }
 
 \mrnote{Main Falkon ref: \url{http://dev.globus.org/images/7/78/Falkon_SC07_v42.pdf}}
+%\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon\#FALKON:\_A\_FAST\_AND\_LIGHT-WEIGHT\_TASK\_EXECUTION\_FRAMEWORK}}
 \mrnote{WIP: Bullet points that will later be converted to text}
 
 \paragraph{Rationale}
+\begin{itemize}
+\item Enable the rapid and efficient
+execution of many independent jobs large compute clusters
+\end{itemize}
+
 
 
 \paragraph{Design Goals}
+\begin{itemize}
+\item Reduce task dispatch time by using a streamlined
+dispatcher that eliminates support for features such
+as multiple queues, priorities, accounting, etc.
+\item Use an adaptive provisioner to acquire and/or release
+resources as application demand varies
+\item Cache data from remote locations to local disk at the
+computational resource to achieve better application
+performance and scalability.
+\end{itemize}
 
 
 \paragraph{Applications}
+\begin{itemize}
+\item fMRI (medical imaging)
+\item Montage (astronomy)
+\item MolDyn (chemistry, molecular dynamics sims)
+\end{itemize}
 
+From Falkon site: Large-scale applications from many domains (e.g., astronomy, medicine, biology, chemistry, molecular dynamics, economics, and analytics) have been successfully executed using the Falkon framework.
 
-\paragraph{Deployment Scenarios (Single User)}
+\paragraph{Deployment Scenarios}
 
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+Developed for the grid environment - expanded to clouds, Blue Gene/P. 
+Work has also been expanded in the data-realm (see: data dispersion)
+
+
+Currently tested on: TeraGrid, TeraPort, Amazon EC2, IBM 
+Blue Gene/L, SiCortex, Workspace Service
 
 
 \paragraph{Architecture \& Interface}
+Two techniques [1] multi-level scheduling and [2] streamlined task dispatching
+
+Falkon 2-tier architecture: 
+\begin{itemize}
+\item [1] Dispatcher: GRAM4 Web Service accepts task submission and sends to executors
+\item [2] Executor: Runs tasks on local resources
+\item Provisioner: Static and dynamic resource provisioning
+\end{itemize}
+
+Falkon can suspend faulty hosts
+
+
 
 
 \paragraph{Falkon Conclusion}
+A Note on Performance: Falkon can achieve relatively high throughput 
+in the range of hundreds to thousands of tasks per second when running
+fine grained tasks, with a per task overhead measured in milliseconds
+throughput in the range of hundredsto thousands of tasks persecond when running fine grain
+tasks, with a per task overhead measured in milliseconds.
 \mrnote{WIP}
 
 
@@ -2157,9 +2212,6 @@ energy modeling, and neuroscience.
  -----------------------------------------------------------------------------
 
 \subsubsection{BigJob}
-
-\jhanote{I think this is ready to be refined per the structure of
-  Apples in 4.1.1}
 
 \textcolor{red}
 {
@@ -2256,7 +2308,15 @@ the baseline capabilities for a \pilotjob as described in Section 3.
 
 
 \paragraph{BigJob Conclusion}
-\mrnote{WIP}
+Using SAGA has enabled BigJob to expand to many of the changing and evolving
+architectures and middlewares. As a result, BigJob can grow to accomodate
+new usage modes on heterogenous architectures. The uptake 
+of BigJob by the scientific community
+on both grid and cloud architectures shows the dynamism \pilotjobs offer.
+The use of a \pilotjob system, such as BigJob, to marshal VMs as ``Pilots'' 
+also lends itself to the extensibility of the \pilotjob concept.
+\mrnote{It's late and I don't know if the previous sentence makes sense.
+Read in morning}
 
 \subsubsection{DIANE}
 
@@ -2589,6 +2649,20 @@ Must bring clarity to compute before opening other cans of worms}
 
 \subsection{revisit the ``myths''}
 
+\aznote{From the e-mail chain:
+So the top 5 ``myths'' are:
+1) PJs are just for HTC and they just circumvent job queuing delays;
+PJs unfairly game HPC queuing system
+2) PJs are such a simple concept, it doesn't need more attention:
+Conversely, everyone should write their own PJ just because they can
+3) PJs have to be tied to specific infrastructure and infrastructures have
+to be tied to specific pjs
+4) PJs are stand-alone tools passive (system) tools, as opposed to
+user-space, active and extensible components of a CI
+5) PJs have well defined semantics and model. PJs dont help with data
+intensive applications
+}
+
 \subsection{The need for a common minimum model}
 
 ``pilot-abstractions works!'' , p* as a model ok.
@@ -2639,7 +2713,14 @@ infeasible. The Pilot-API in conjunction with the P* Model aims to
 prevent similar situation for \pilotjobs.
 
 \note{What is the future of PJ? Why should we do to enhance the usability?}
-
+\aznote{I would argue that our work is important to \pilotjobs because
+by expressing a common model, we enable researchers to 1) understand the
+commonalities between existing \pilotjob approaches in order to 2) motivate
+innovation + construction of ``next-gen'' \pilotjob systems.  E.G.,
+implement the basics (or work from an existing system) + understand
+where the boundaries/unexplored territory is without having to first
+completely understand all 15+ existing \pilotjob systems and their
+unique vocabulary.}
 %\footnote{To be fair: we are not sure if a generic model and/or a
 %  generic WF API are achievable {\it on a useful level} -- we think,
 %  nevertherless, that our discussion is valid.}
@@ -2688,6 +2769,23 @@ prevent similar situation for \pilotjobs.
   the same as scheduling, it is more like arranging. Deployment is
   about ``setting up T=0 requirements, which could be software
   environment, input/data dependencies, as well as resources.''}
+
+\aznote{Some additional thoughts for this section...
+1) The early history of \pilotjobs seems to have a few ``independent''
+\pilotjob approaches, where systems (eg MyCluster/AppLeS) incorporate
+\pilotjob techniques with sometimes wildly differing 
+implementations/vocabulary but when boiled down, offering the same
+attempts at base/minimal functionality.  This helps push the
+value of the approach (multiple groups working on it independently
+helps imply its value), with increasingly complex \pilotjob systems
+coming out as time pushes on.  Our review aids both in the
+construction of these increasingly complex systems by exposing
+their core functionality + allowing researchers/etc to push
+the field forward by reducing the apparent complexity to a set
+of common terms/comparisons/classifiers/etc.  I don't know if this is
+too prescriptive/hand-wavey -- feel free to ignore if so, but I feel that 
+the essence of this is one
+potential contribution of our work.}
 
 % jhanote{I have brought the above sentence down here. I think for ease
 %   of readability, once we start discussing binding we should continue
