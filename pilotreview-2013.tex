@@ -1744,7 +1744,7 @@ Pilot-resource \textit{provisioning} is handled by \panda itself and is not
 user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
 A central job queue allows users to submit jobs
-to distributed reseoruces in a uniform manner.  \aznote{Not required for
+to distributed resources in a uniform manner.  \aznote{Not required for
 \pilotjob -- put later or remove?}
 This basic functionality (pilot creation and management) provides
 \panda with all of the baseline capabilities required for a \pilotjob.
@@ -2051,76 +2051,78 @@ national cyberinfrastructure (e.g., XSEDE).
 
 % -----------------------------------------------------------------------------
 
-\subsubsection{Coasters}
-
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
-
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
-\msnote{Main coasters ref: \url{http://www.ci.uchicago.edu/swift/papers/UCC-coasters.pdf}}
-\mrnote{Coasters wiki: \url{http://wiki.cogkit.org/wiki/Coasters}}
-\mrnote{WIP: Bullet points that will later be converted to text}
-
-\paragraph{Rationale}
-
-The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
-created for the needs of the Swift parallel scripting language.
-
-\paragraph{Design Goals}
-
-\begin{itemize}
-  \item Driven by the needs of Swift
-  \item Automatically-deployed to endpoint. Does not need user login to endpoint.
-  \item Supports file staging, on-demand opportunistic multi-node allocation, 
-  remote log gin, and remote monitoring
-\end{itemize}
-
-\paragraph{Applications}
-
-\begin{itemize}
-  \item It has been used since 2009 for applications in fields 
-that include biochemistry, earth systems science, 
-energy modeling, and neuroscience.
-  \item Above claim made in Coasters paper - need to obtain citations
-\end{itemize}
-
-\paragraph{Deployment Scenarios}
-
-
-\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-
-\begin{itemize}
-  \item grids, clouds, and ad-hoc desktop-computer networks 
-  \item OSG, TeraGrid/XSEDE, Blue Gene/P, Cray XT and XE, 
-  Sun Constellation, small clusters, clouds (BioNimbus, FutureGrid,
-  Amazon EC2)
-\end{itemize}
-
-\paragraph{Architecture \& Interface}
-
-\textit{Coaster Service} is deployed on remote clusters.
-
-\textit{Coaster Client} is deployed locally.
-\textit{Coaster Workers}
-
-
-\paragraph{Coasters Conclusion}
-\mrnote{WIP}
+% AS PER SJ P* CALL: COASTERS SECTION IS CANCELED
+% mrnote: Reason - insufficient documentation, no citations to actual science problems
+%\subsubsection{Coasters}
+%
+%\textcolor{red}
+%{
+%\textbf{Mapping to section 3:}
+%\begin{itemize}
+%\item Term 1 =
+%\item Term 2 =
+%\end{itemize}
+%}
+%
+%\textcolor{blue}
+%{
+%\textbf{Mapping to table 1:}
+%\begin{itemize}
+%\item Pilot (Resource) Provisioning:
+%\item Job-to-Resource (Pilot) Binding:
+%\item Singe-/Multi-User pilots:
+%\end{itemize}
+%}
+%
+%\msnote{Main coasters ref: \url{http://www.ci.uchicago.edu/swift/papers/UCC-coasters.pdf}}
+%\mrnote{Coasters wiki: \url{http://wiki.cogkit.org/wiki/Coasters}}
+%\mrnote{WIP: Bullet points that will later be converted to text}
+%
+%\paragraph{Rationale}
+%
+%The Coaster System (or "Coasters") is a Java CoG based Pilot-Job system
+%created for the needs of the Swift parallel scripting language.
+%
+%\paragraph{Design Goals}
+%
+%\begin{itemize}
+%  \item Driven by the needs of Swift
+%  \item Automatically-deployed to endpoint. Does not need user login to endpoint.
+%  \item Supports file staging, on-demand opportunistic multi-node allocation, 
+%  remote log gin, and remote monitoring
+%\end{itemize}
+%
+%\paragraph{Applications}
+%
+%\begin{itemize}
+%  \item It has been used since 2009 for applications in fields 
+%that include biochemistry, earth systems science, 
+%energy modeling, and neuroscience.
+%  \item Above claim made in Coasters paper - need to obtain citations
+%\end{itemize}
+%
+%\paragraph{Deployment Scenarios}
+%
+%
+%\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
+%
+%\begin{itemize}
+%  \item grids, clouds, and ad-hoc desktop-computer networks 
+%  \item OSG, TeraGrid/XSEDE, Blue Gene/P, Cray XT and XE, 
+%  Sun Constellation, small clusters, clouds (BioNimbus, FutureGrid,
+%  Amazon EC2)
+%\end{itemize}
+%
+%\paragraph{Architecture \& Interface}
+%
+%\textit{Coaster Service} is deployed on remote clusters.
+%
+%\textit{Coaster Client} is deployed locally.
+%\textit{Coaster Workers}
+%
+%
+%\paragraph{Coasters Conclusion}
+%\mrnote{WIP}
 
 
 \subsubsection{Falkon}
@@ -2145,28 +2147,31 @@ energy modeling, and neuroscience.
 }
 
 \mrnote{Main Falkon ref: \url{http://dev.globus.org/images/7/78/Falkon_SC07_v42.pdf}}
-%\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon\#FALKON:\_A\_FAST\_AND\_LIGHT-WEIGHT\_TASK\_EXECUTION\_FRAMEWORK}}
-\mrnote{WIP: Bullet points that will later be converted to text}
+%\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon}}
 
 \paragraph{Rationale}
-\begin{itemize}
-\item Enable the rapid and efficient
-execution of many independent jobs large compute clusters
-\end{itemize}
-
-
+The Fast and Light-weight tasK executiON framework (Falkon)
+was created with the primary objective
+of enabling many independent tasks to run on large computer
+clusters (an objective shared by most \pilotjob systems). 
+A particular focus on performance and time-to-completion for jobs
+on such clusters drove Falkon development. In 
+addition to being \textit{fast}, Falkon, as its name suggests, 
+also focused on lightweight deployment schemes.
 
 \paragraph{Design Goals}
-\begin{itemize}
-\item Reduce task dispatch time by using a streamlined
-dispatcher that eliminates support for features such
-as multiple queues, priorities, accounting, etc.
-\item Use an adaptive provisioner to acquire and/or release
-resources as application demand varies
-\item Cache data from remote locations to local disk at the
-computational resource to achieve better application
-performance and scalability.
-\end{itemize}
+As previously stated, the design of Falkon was centered
+around the goal of providing support to run large numbers
+of jobs efficiently on large clusters and grids. Falkon
+realizes this goal through the use of (i) a 
+dispatcher to reduce the time to actually place
+tasks as jobs onto specific resources (such a feature
+was built to account for different issues amongst
+distributed cyberinfrastructure - such as multiple
+queues, different task priorities, allocations, etc), 
+(ii) a provisioner which is responsible for
+resource management, and (iii) data caching in
+a remote environment.
 
 
 \paragraph{Applications}
@@ -2178,42 +2183,80 @@ performance and scalability.
 
 From Falkon site: Large-scale applications from many domains (e.g., astronomy, medicine, biology, chemistry, molecular dynamics, economics, and analytics) have been successfully executed using the Falkon framework.
 
+\mrnote{WIP}
+
 \paragraph{Deployment Scenarios}
 
+The Dispatcher service in Falkon is implemented by means of a web service. 
+This Dispatcher implements a factory/instance deployment scenario.
+When a new client sends task submission information, a new instance
+of a Dispatcher is created. Each instantiation of the Dispatcher maintains
+its own task queue and state - in this way, Falkon can be considered
+a single-user deployment scheme, wherein the ``user'' in this case
+refers to a client.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-Developed for the grid environment - expanded to clouds, Blue Gene/P. 
-Work has also been expanded in the data-realm (see: data dispersion)
+Falkon was originally developed for use on large computer clusters
+in a grid environment, but has since been expanded to a 
+variety of current cyberinstractures - including clouds.
 
-
-Currently tested on: TeraGrid, TeraPort, Amazon EC2, IBM 
-Blue Gene/L, SiCortex, Workspace Service
+Falkon has been 
+shown to run on TeraGrid (now XSEDE), TeraPort, Amazon EC2, IBM
+Blue Gene/L, SiCortex, and Workspace Service.
+\mrnote{GitHub Issue 23} Work has also been done on Falkon
+to expand its data capabilities. In addition to data caching and
+efficient data scheduling techniques, Falkon has adopted a
+data diffusion approach. Using this approach, resources for
+both compute and data are acquire dynamically and compute
+is scheduled as close as possible to the data it requires.
+If necessary, the data diffusion approach replicates data
+in response to changing demands.
+\mrnote{Cite: \url{http://dev.globus.org/wiki/Incubator/Falkon/DataDiffusion}}
 
 
 \paragraph{Architecture \& Interface}
-Two techniques [1] multi-level scheduling and [2] streamlined task dispatching
 
-Falkon 2-tier architecture: 
-\begin{itemize}
-\item [1] Dispatcher: GRAM4 Web Service accepts task submission and sends to executors
-\item [2] Executor: Runs tasks on local resources
-\item Provisioner: Static and dynamic resource provisioning
-\end{itemize}
+Falkon's architecture relies on the use of multi-level scheduling
+as well as efficient dispatching of tasks to heterogeneous DCIs.
+As mentioned above, there are two main components of Falkon: 
+(i) the Dispatcher for farming out tasks and 
+(ii) the Provisioner for acquiring resources. 
 
-Falkon can suspend faulty hosts
+The overall task submission mechanism can be considered
+a 2-tier architecture; the Dispatcher (using the above terminology,
+this is the \pilot-Manager) and the Executor (the \pilot-Agent). 
+The Dispatcher is a GRAM4 web service whose primary
+function is to take task submission as input and farm
+out these tasks to the executors. The Executor runs on
+each local resource and is responsible for the actual
+task execution. Falkon also utilizes \textit{provisioning}
+capabilities with its Provisioner. The Falkon Provisioner
+is the creator and destroyer of Executors, and is capable of 
+providing both static and dynamic resource
+acquisition and release.
 
-
-
+Falkon has also extended itself beyond basic \pilotjob functionalities
+and supports a fault tolerance mechanism which suspends and
+dynamically readjusts for host failures. The \textit{data management}
+capabilities of Falkon also extend beyond the core \pilotjob
+functionalities as described above. Further, in order 
+to process more complex workflows, Falkon has been integrated
+with the Karajan workflow execution engine\mrnote{cite}. This
+integration allows Falkon to accept more complex workflow-based
+scientific applications as input to its \pilot-like job execution
+mechanism.
 
 \paragraph{Falkon Conclusion}
-A Note on Performance: Falkon can achieve relatively high throughput 
-in the range of hundreds to thousands of tasks per second when running
-fine grained tasks, with a per task overhead measured in milliseconds
-throughput in the range of hundredsto thousands of tasks persecond when running fine grain
-tasks, with a per task overhead measured in milliseconds.
-\mrnote{WIP}
-
-
+Falkon contains many of the basic functionalities required to 
+qualify it as a \pilotjob system, in addition to some advanced resource
+provisioning capabilities, fault tolerance, and workflow-execution integration.
+Falkon has been demonstrated to achieve throughput in the range
+of hundreds to thousands of tasks per second for very fine-grained
+tasks. The per task overhead of Falkon execution has been shown
+to be in the millisecond range. Falkon has extended its capabilities
+to encompass advanced data-scheduling and caching. Falkon does
+not support MPI jobs, however - a limiting factor in its adoption to
+certain scientific applications.
 
  -----------------------------------------------------------------------------
 
