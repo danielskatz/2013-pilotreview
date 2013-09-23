@@ -2151,7 +2151,7 @@ national cyberinfrastructure (e.g., XSEDE).
 
 \paragraph{Rationale}
 The Fast and Light-weight tasK executiON framework (Falkon)
-was created with the primary objective
+\mrnote{citeFalkonPaper} was created with the primary objective
 of enabling many independent tasks to run on large computer
 clusters (an objective shared by most \pilotjob systems). 
 A particular focus on performance and time-to-completion for jobs
@@ -2171,34 +2171,47 @@ distributed cyberinfrastructure - such as multiple
 queues, different task priorities, allocations, etc), 
 (ii) a provisioner which is responsible for
 resource management, and (iii) data caching in
-a remote environment.
+a remote environment\mrnote{cite Falkon paper}.
 
 
 \paragraph{Applications}
-\begin{itemize}
-\item fMRI (medical imaging)
-\item Montage (astronomy)
-\item MolDyn (chemistry, molecular dynamics sims)
-\end{itemize}
 
-From Falkon site: Large-scale applications from many domains (e.g., astronomy, medicine, biology, chemistry, molecular dynamics, economics, and analytics) have been successfully executed using the Falkon framework.
+Falkon has been shown to work with many large-scale
+applications across various domains. Falkon 
+has been integrated with the Karajan workflow language
+and execution engine, meaning that applications
+that utilize Karajan to describe their workflow
+will be able to be executed by Falkon. Simpler
+task execution can be achieved without 
+modifying the existing executables - sufficient
+task description in the web service is all that 
+is required to utilize the Falkon system. 
 
-\mrnote{WIP}
+Falkon has been tested for throughput 
+and performance in such as applications
+as fMRI (medical imaging), Montage (astronomy workflows),
+and MolDyn (molecular dynamics simulation) and has shown
+favorable results in terms of overall execution time when compared
+to GRAM and GRAM/Clustering methods\mrnote{citeFalkonPaper}.
 
 \paragraph{Deployment Scenarios}
 
-The Dispatcher service in Falkon is implemented by means of a web service. 
+The Swift parallel programming system\mrnote{citeSwift} was integrated
+with Falkon for the purpose of task dispatch. The overall provider
+mechanism of Falkon is roughly 840 lines of Java code and meant
+to be as lightweight as possible. The Dispatcher service 
+in Falkon is implemented by means of a web service. 
 This Dispatcher implements a factory/instance deployment scenario.
 When a new client sends task submission information, a new instance
 of a Dispatcher is created. Each instantiation of the Dispatcher maintains
 its own task queue and state - in this way, Falkon can be considered
 a single-user deployment scheme, wherein the ``user'' in this case
-refers to a client.
+refers to an individual client request.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 Falkon was originally developed for use on large computer clusters
-in a grid environment, but has since been expanded to a 
-variety of current cyberinstractures - including clouds.
+in a grid environment, but has since been expanded to work on
+clouds and other 
 
 Falkon has been 
 shown to run on TeraGrid (now XSEDE), TeraPort, Amazon EC2, IBM
@@ -2241,7 +2254,7 @@ dynamically readjusts for host failures. The \textit{data management}
 capabilities of Falkon also extend beyond the core \pilotjob
 functionalities as described above. Further, in order 
 to process more complex workflows, Falkon has been integrated
-with the Karajan workflow execution engine\mrnote{cite}. This
+with the Karajan workflow execution engine\mrnote{citeKarajan}. This
 integration allows Falkon to accept more complex workflow-based
 scientific applications as input to its \pilot-like job execution
 mechanism.
