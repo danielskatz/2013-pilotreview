@@ -2151,7 +2151,7 @@ national cyberinfrastructure (e.g., XSEDE).
 
 \paragraph{Rationale}
 The Fast and Light-weight tasK executiON framework (Falkon)
-\mrnote{citeFalkonPaper} was created with the primary objective
+~\cite{1362680} was created with the primary objective
 of enabling many independent tasks to run on large computer
 clusters (an objective shared by most \pilotjob systems). 
 A particular focus on performance and time-to-completion for jobs
@@ -2171,7 +2171,7 @@ distributed cyberinfrastructure - such as multiple
 queues, different task priorities, allocations, etc), 
 (ii) a provisioner which is responsible for
 resource management, and (iii) data caching in
-a remote environment\mrnote{cite Falkon paper}.
+a remote environment~\cite{1362680}.
 
 
 \paragraph{Applications}
@@ -2192,11 +2192,11 @@ and performance in such as applications
 as fMRI (medical imaging), Montage (astronomy workflows),
 and MolDyn (molecular dynamics simulation) and has shown
 favorable results in terms of overall execution time when compared
-to GRAM and GRAM/Clustering methods\mrnote{citeFalkonPaper}.
+to GRAM and GRAM/Clustering methods~\cite{1362680}.
 
 \paragraph{Deployment Scenarios}
 
-The Swift parallel programming system\mrnote{citeSwift} was integrated
+The Swift parallel programming system~\cite{Wilde2011} was integrated
 with Falkon for the purpose of task dispatch. The overall provider
 mechanism of Falkon is roughly 840 lines of Java code and meant
 to be as lightweight as possible. The Dispatcher service 
@@ -2215,7 +2215,7 @@ clouds and other
 
 Falkon has been 
 shown to run on TeraGrid (now XSEDE), TeraPort, Amazon EC2, IBM
-Blue Gene/L, SiCortex, and Workspace Service.
+Blue Gene/L, SiCortex, and Workspace Service~\cite{1362680}.
 \mrnote{GitHub Issue 23} Work has also been done on Falkon
 to expand its data capabilities. In addition to data caching and
 efficient data scheduling techniques, Falkon has adopted a
@@ -2223,8 +2223,7 @@ data diffusion approach. Using this approach, resources for
 both compute and data are acquire dynamically and compute
 is scheduled as close as possible to the data it requires.
 If necessary, the data diffusion approach replicates data
-in response to changing demands.
-\mrnote{Cite: \url{http://dev.globus.org/wiki/Incubator/Falkon/DataDiffusion}}
+in response to changing demands~\cite{raicu2008accelerating}.
 
 
 \paragraph{Architecture \& Interface}
@@ -2243,8 +2242,9 @@ function is to take task submission as input and farm
 out these tasks to the executors. The Executor runs on
 each local resource and is responsible for the actual
 task execution. Falkon also utilizes \textit{provisioning}
-capabilities with its Provisioner. The Falkon Provisioner
-is the creator and destroyer of Executors, and is capable of 
+capabilities with its Provisioner. The Falkon Provisioner is the 
+closest analogous entity to a \pilot: it is the creator and 
+destroyer of Executors, and is capable of 
 providing both static and dynamic resource
 acquisition and release.
 
@@ -2254,7 +2254,7 @@ dynamically readjusts for host failures. The \textit{data management}
 capabilities of Falkon also extend beyond the core \pilotjob
 functionalities as described above. Further, in order 
 to process more complex workflows, Falkon has been integrated
-with the Karajan workflow execution engine\mrnote{citeKarajan}. This
+with the Karajan workflow execution engine~\cite{karajan}. This
 integration allows Falkon to accept more complex workflow-based
 scientific applications as input to its \pilot-like job execution
 mechanism.
