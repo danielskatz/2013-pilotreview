@@ -1355,7 +1355,7 @@ extensions must be implemented.
 and the \apples code.  \textit{\apples templates} were created
 to ease this process, but the application code in essence must
 be modified to make use of \apples, as opposed to \pilotjob
-systems which can \aznote{(generally?)} be taken advantage of without
+systems which can generally be taken advantage of without
 requiring code modification of the underlying applications being
 executed.
 
@@ -1369,7 +1369,7 @@ is required to enable fundamental \pilotjob functionality such as
 
 \paragraph{\apples Conclusion}
 \apples shows the power of scheduling tasks across multiple computing resources
-via the \textit{Master-Worker} approach \aznote{too loaded?} which many
+via the \textit{Master-Worker} approach which many
 \pilotjobs use as a partial foundation.  However,
 the following ``true'' \pilotjobs will show the flexibility/power
 that a full \pilotjob approach offers.
@@ -1488,7 +1488,7 @@ provided by our formal definition of \pilotjobs.  This enhancement
 to user control was envisioned as a means of allowing
 users to submit and manage thousands of jobs at once
 across heterogeneous distributed computing infrastructures, while
-providing an familiar interface\aznote{abstraction?} for submission.
+providing an familiar interface for submission.
 
 \paragraph{Applications}
 Applications are launched via MyCluster in a ``traditional''
@@ -1498,11 +1498,11 @@ and manage jobs.  This means that applications do not need
 to be explicitly rewritten to make use of MyCluster functionality;
 rather, MyCluster provides user-level \pilotjob capabilities
 which users can then use to schedule their applications with.
-\aznote{There appear to only be synthetic benchmarks
-in cited paper; spent some time going through
-papers which reference MyCluster and did not find
-any specific applications/papers which explicitly used
-MyCluster.  Is this a problem?}
+%% \aznote{There appear to only be synthetic benchmarks
+%% in cited paper; spent some time going through
+%% papers which reference MyCluster and did not find
+%% any specific applications/papers which explicitly used
+%% MyCluster.  Is this a problem?}
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
 MyCluster is designed for a single-user.  A MyCluster
@@ -1710,8 +1710,8 @@ of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
 Recent improvements to \panda have been designed to extend 
 the range of deployment scenarios to non-ATLAS infrastructures
 making \panda a general-use \pilotjob~\cite{nilsson2012recent}.
-\aznote{Per-user/per-working group reference made in slides, follow-up
-with actual papers}
+%% \aznote{Per-user/per-working group reference made in slides, follow-up
+%% with actual papers}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 \panda began as a specialized \pilotjob for the ATLAS grid, and has been extended
@@ -1736,8 +1736,9 @@ Pilot-resource \textit{provisioning} is handled by \panda itself and is not
 user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
 A central job queue allows users to submit jobs
-to distributed resources in a uniform manner.  \aznote{Not required for
-\pilotjob -- put later or remove?}
+to distributed resources in a uniform manner. 
+%%  \aznote{Not required for
+%% \pilotjob -- put later or remove?}
 This basic functionality (pilot creation and management) provides
 \panda with all of the baseline capabilities required for a \pilotjob.
 
@@ -1747,7 +1748,8 @@ beyond that of a \textit{Basic \pilotjob}.
 tracks site statuses via a database, \texttt{Bamboo} which adds
 ATLAS database interfacing, and automatic error handling and recovery.
 \panda contains support for queues in clouds, including EC2, Helix Nebula,
-and FutureGrid.\aznote{Have to find a good cite for this}
+and FutureGrid~\cite{pandapresentation2013-06}.
+%% \aznote{Have to find a good cite for this}
 Enhancements to the userspace include
 \texttt{Monitor}, for web-based monitoring, and the \texttt{\panda client}.
 \texttt{\panda Dynamic Data Placement} \cite{maeno_pd2p:_2012}
