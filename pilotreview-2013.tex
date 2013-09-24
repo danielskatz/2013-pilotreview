@@ -140,8 +140,13 @@
 
 \section{Introduction}\label{sec:intro}
 
-\jhanote{Generally not good style to begin new subsection immediately
-  after section starting}
+% \jhanote{Generally not good style to begin new subsection immediately
+%   after section starting}
+% \jhanote{Now develop the following paragraph along the lines of: Why
+%   have \pilotjobs been successful?}
+
+% \jhanote{Although pilotjobs have solved/addressed many problems, now
+%     develop the problem with \pilotjobs themselves..}
 
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
@@ -154,21 +159,20 @@ number and types of applications that use them, as well as the number
 of production distributed cyberinfrastructures that support them.
 \msnote{ref?}
 
-\jhanote{Now develop the following paragraph along the lines of: Why
-  have \pilotjobs been successful?}
-
-The fundamental reason for the success of the \pilotjob abstraction is that
-\pilotjobs liberate applications/users from the challenging requirement of
-mapping specific tasks onto explicit heterogeneous and dynamic resource pools.
-In other words, at least in part, due to the decoupling between task/workload
-specification and task management. \pilotjobs also improve the efficiency of
-task assignment and shield applications from having to load-balance tasks
-across such resources.\onote{not sure if 'load-balance'  is appropriate here}
-Another concern often addressed by \pilotjobs is fault
-tolerance which commonly refers the ability of the \pilotjob system to verify
-the execution environment before executing jobs. The \pilotjob abstraction is
-also a promising route to address specific requirements of distributed
-scientific applications, such as coupled-execution and application-level
+The fundamental reason for the success of the \pilotjob abstraction is
+that \pilotjobs liberate applications/users from the challenging
+requirement of mapping specific tasks onto explicit heterogeneous and
+dynamic resource pools.  In other words, at least in part, due to the
+decoupling between task/workload specification and task
+management. \pilotjobs also improve the efficiency of task assignment
+and shield applications from having to load-balance tasks across such
+resources.\onote{not sure if 'load-balance' is appropriate here}
+Another concern often addressed by \pilotjobs is fault tolerance which
+commonly refers the ability of the \pilotjob system to verify the
+execution environment before executing jobs. The \pilotjob abstraction
+is also a promising route to address specific requirements of
+distributed scientific applications, such as coupled-execution and
+application-level
 scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
@@ -184,8 +188,6 @@ scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 %     call, it is by no means the only reason. Need to get the different
 %     reasons down here.. then find a nice balance and description}
 
-\jhanote{Although pilotjobs have solved/addressed many problems, now
-    develop the problem with \pilotjobs themselves..}
 
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
@@ -504,16 +506,6 @@ significantly.
 %onto these. Further, AppLeS provides different application templates,
 %e.\,g.\ for parameter sweep, master-worker and moldable parallel applications.
 
-\jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
-  capabilities?} \alnote{The question is: when is a \pilot a \pilot?
-  When the use the term \pilot and when \pilot-like? Apples has a
-  component -- the Actuator (Quote from paper: "... handles task
-  launching, polling, and cancellation ..."), which is quite similar
-  to a \pilot. But maybe AppLeS is something for the history section
-  or a separate category for Master/Worker frameworks...  PJ evolved
-  from the need to map master/worker style computations to
-  heterogeneous, dynamic distributed grid environments. Added a
-  pre-\pilot category to the history sub-section.}
 
 While core PJ systems mainly focus on providing simple \pilot capabilities
 commonly in application space, many of these systems evolved towards more
@@ -2695,8 +2687,6 @@ deploying a PaaS model of cloud computing.[cit]
 \mrnote{Though you avoid queue wait, you introduce VM start-up time overhead
 as well}
 
-\jhanote{the previous paragraph should be moved into section 5}
-
 Another important detail to notice is that while the operations of a
 task performed by means of a \pilot are usually computational in
 nature, in principle, they might also operate on other type of
@@ -2816,6 +2806,17 @@ unique vocabulary.}
   wait for the entire Section to stabilize further and then see
   whether we can add/extend a paragraph by introducing the concept of
   grouping.}
+
+\jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
+  capabilities?} \alnote{The question is: when is a \pilot a \pilot?
+  When the use the term \pilot and when \pilot-like? Apples has a
+  component -- the Actuator (Quote from paper: "... handles task
+  launching, polling, and cancellation ..."), which is quite similar
+  to a \pilot. But maybe AppLeS is something for the history section
+  or a separate category for Master/Worker frameworks...  PJ evolved
+  from the need to map master/worker style computations to
+  heterogeneous, dynamic distributed grid environments. Added a
+  pre-\pilot category to the history sub-section.}
 
 \section{Discussion Area}
 
