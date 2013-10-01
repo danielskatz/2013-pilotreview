@@ -958,6 +958,74 @@ resource.
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
 
+\msnote{BRAINDUMP/SCETCH MARK}
+
+Now that we, build up a vocabulary, distinguished logical component, described core
+functionalities and narrowed down definitions of pilot jobs, we can use use
+this acquired knowledge to analyse a certain set of \pilotjob frameworks.
+
+Note that above properties were derived in the context of coming up with a
+minimum framework for pilot frameworks. Given that, there are more properties
+that are distinctive for the various frameworks, eventhough they might not be
+distinctive for pilot-jobs per se.
+
+The set of frameworks we use for the analysis is chosen because of criteria x and y.
+
+% Logical: Workload Manager / Task Executor
+% Functionalities: Pilot Provisioning / Task dispatching
+
+
+Evaluation criteria:
+\begin{itemize}
+
+\item How does the \textbf{application} (responsible for definition of the
+\textbf{workload} and consumer of the pilot-job system) interact/interface with
+the pilot-job system? (API / CLI / Service / etc)
+
+\item What do \textbf{tasks} constitute of? What kind/type of \textbf{tasks}?
+
+\item How is the \textbf{workload} that is passed from the \textbf{application}
+to the pilot-job system described? E.g.: What is the syntax? What are the
+semantics? (This implicitly deals with \textbf{tasks} also).
+
+\item Does the pilot-job system allow the application to specify \textbf{early}
+and/or \textbf{late binding}?
+
+\item What knowledge (if any) does the application need about the actual
+\textbf{resources}/\textbf{infrastructrure} where to run?
+
+\item Whats the "nature" of the \textbf{\pilot} (placeholder)? Related to this,
+what kind of \textbf{jobs} can pilots be? How long do they "live"? Who/what
+instantiates them?
+
+\item Security? Does the pilot job system allows \textbf{\pilots} to be used by
+multiple users?
+
+\end{itemize}
+
+Suggested structure for "S4.3":
+\begin{itemize}
+
+\item "Soft" introduction: community, applications, etc. (Blabber style, by
+definition difficult to contrast)
+
+\item Answering the evaluation criteria (hopefully somewhat objectively)
+
+\item Implementation details / technology used? (Nice background, but might not
+help our story much)
+
+\item Published performance results (if any)?
+
+\item Summary (Not sure if this is required)
+
+\end{itemize}
+
+
+
+
+\msnote{End of Mark's rambling}
+
+
 Despite the apparent diversity in existing \pilotjobs,
 they can be reduced to a set of common functionality and
 discussed as such via use of the the terminology presented
