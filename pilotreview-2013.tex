@@ -1120,6 +1120,8 @@ otherwise to advance the understanding and usage of \pilotjobs.
 % vocabulary.}
 
 \subsection{Evaluation Criteria}\label{ssec:evaluation}
+\jhanote{I think we agreed to rename this sub-section, but can't
+  remember to what! yikes..}
 
 \begin{figure}[t]
 	\centering
@@ -1156,15 +1158,17 @@ constraints on the workload they impose.
 
 Whereas the answers to some of the above influence the usability and
 usefulness of a \pilotjob, not all of the above attributes influence
-their functional or performance capabilities.  No rigid classification
-of the attributes of \pilotjobs is possible, as an attribute that
-influences the performance or functional capability of one \pilotjob
-may not influence or even exist for another \pilotjob. Mindful of
-these limitations, we propose the following features that provide a
-fair coverage of the attributes required to understand the usability
-(which correlates with non-functionional properties etc.)  and
-usefulness (performance constraints, functional capabilities etc.)  of
-any given \pilotjob.
+their functional or performance capabilities.  \jhanote{the following
+  might/should go} No rigid classification of the attributes of
+\pilotjobs is possible, as an attribute that influences the
+performance or functional capability of one \pilotjob may not
+influence or even exist for another \pilotjob. Mindful of these
+limitations, we propose the following features that provide a fair
+coverage of the attributes required to understand the usability (which
+correlates with non-functionional properties etc.)  and usefulness
+(performance constraints, functional capabilities etc.)  of any given
+\pilotjob. \jhanote{need consistency: we use attribute,
+  characteristics, features to describe the same thing}
 
 What use cases (application workloads, MPI/ensembles, workflow types)
 and use modes are supported (natively or via extensions) by the core
@@ -1225,13 +1229,15 @@ fault tolerance.
   anyway}\jhanote{Mark: mostly addressed in discussions, comments
   (removal) and reworking}
 
-The performance and scalability define the response times and size of the
-workload a user can expect to be supported. Security describes the security
-mechanisms used by the framework, e.\,g.\ for authentication of the user, for
-securing the communication protocol and for sandboxing the application.
-Further, some \pilotjobs solely support single users, while more complex
-\pilot-based workload managers commonly support multiple users (e.\,g.\ using
-glexec).
+\jhanote{the following needs to be refined, as it is a very narrow
+  definition of performance} Performance and scalability define the
+response times and size of the workload a user can expect to be
+supported.  Security describes the security mechanisms used by the
+framework, e.\,g.\ for authentication of the user, for securing the
+communication protocol and for sandboxing the application.  Further,
+some \pilotjobs solely support single users, while more complex
+\pilot-based workload managers commonly support multiple users
+(e.\,g.\ using glexec).
 
 Further non-functional aspects describe the internals of a \pilotjob system,
 e.\,g.: (i) the architecture of the system (layers, sub-systems,
