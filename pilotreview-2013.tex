@@ -958,8 +958,6 @@ resource.
 
 \section{Pilot-Job Systems Revisited}\label{sec:4}
 
-\msnote{BRAINDUMP/SCETCH MARK}
-
 Now that we, build up a vocabulary, distinguished logical component, described core
 functionalities and narrowed down definitions of pilot jobs, we can use use
 this acquired knowledge to analyse a certain set of \pilotjob frameworks.
@@ -974,54 +972,95 @@ The set of frameworks we use for the analysis is chosen because of criteria x an
 % Logical: Workload Manager / Task Executor
 % Functionalities: Pilot Provisioning / Task dispatching
 
+\subsection{Properties}
 
-Evaluation criteria:
+This section discussed the properties of \pilotjob systems. First we list the
+\textit{principal} properties, the ones that are directly derived from section
+3.  Followed by that the auxiliary properties, properties that are just as
+important in the comparison of \pilotjob frameworks, but that are not directly
+derived from section 3.
+
+\subsubsection{Principal properties}
 \begin{itemize}
 
-\item How does the \textbf{application} (responsible for definition of the
-\textbf{workload} and consumer of the pilot-job system) interact/interface with
-the pilot-job system? (API / CLI / Service / etc)
+\item \textit{Task semantics:} What do \textbf{tasks} constitute of? What
+kind/type of \textbf{tasks}?
 
-\item What do \textbf{tasks} constitute of? What kind/type of \textbf{tasks}?
+\item \textit{Workload semantics:} How is the \textbf{workload} that is passed
+from the \textbf{application} to the pilot-job system described? E.g.: What is
+the syntax? What are the semantics? (This implicitly deals with \textbf{tasks}
+also).
 
-\item How is the \textbf{workload} that is passed from the \textbf{application}
-to the pilot-job system described? E.g.: What is the syntax? What are the
-semantics? (This implicitly deals with \textbf{tasks} also).
-
-\item Does the pilot-job system allow the application to specify \textbf{early}
+\item \textit{Binding behavior:} Does the pilot-job system allow the application to specify \textbf{early}
 and/or \textbf{late binding}?
 
-\item What knowledge (if any) does the application need about the actual
-\textbf{resources}/\textbf{infrastructrure} where to run?
+\item \textit{Resource exposure:} What knowledge (if any) does the application need
+about the actual \textbf{resources}/\textbf{infrastructrure} where to run?
 
-\item Whats the "nature" of the \textbf{\pilot} (placeholder)? Related to this,
-what kind of \textbf{jobs} can pilots be? How long do they "live"? Who/what
-instantiates them?
+\item \textit{Placeholder characteristics:} Whats the "nature" of the \textbf{\pilot}
+(placeholder)? Related to this, what kind of \textbf{jobs} can pilots be? How
+long do they "live"? Who/what instantiates them?
 
-\item Security? Does the pilot job system allows \textbf{\pilots} to be used by
-multiple users?
-
+\item \textit{Pilot instantiation:} Who/what is responsible for instantiating
+the \textbf{pilots}?
 \end{itemize}
 
-Classifiers/properties/mystical terms/etc:
+\subsubsection{Auxiliary properties}
+
 \begin{itemize}
+\item \textit{Usage Interface:} How does the \textbf{application} (responsible for
+definition of the \textbf{workload} and consumer of the pilot-job system)
+interact/interface with the pilot-job system? (API / CLI / Service / etc).
 
-\item \textbf{Interface:} CLI / (Web Service) / Library / Framework
+\item \textit{Programming Language:} In the case of an API, what language is bindings are
+available?
 
-\item \textbf{Workload semantics:} BoT / DAG
+\item \textit{Multi-user support:} Does the pilot job system allows \textbf{\pilots} to
+be used by multiple users?
 
-\item \textbf{Binding:} Early / Late / Both
+\item \textit{Resource/Pilot granularity:} How is the slicing and dicing of a
+resource exposed to the \textbf{pilot} and how much control is there on the
+granularity? How does this effect the suitability for HTC and/or HPC?
 
-\item \textbf{Resources exposed:} Yes / No
+\item \textit{Supported Middleware:} What middleware does the system connect with? Is it
+tightly coupled or flexible/extensible?
 
-\item \textbf{Pilot instantiation:} Explicit / Implicit
-
-\item \textbf{Multi-user Pilot:} Yes / No
+\item \textit{Data management:} Does the framework provide data management
+capabilities or should that be done out of band? If so, what does it offer?
 
 \end{itemize}
 
+\subsection{Organizing properties in space}
 
-Suggested structure for "S4.3":
+\subsubsection{Space: Workload Management}
+"How to express the workload."
+\begin{itemize}
+\item Task semantics (Principal)
+\item Workload semantics (Principal)
+\item Binding behavior (Principal)
+\item Data Management (Auxiliary)
+\end{itemize}
+
+\subsubsection{Space: Pilot Provisioning}
+"How to create a resource overlay."
+\begin{itemize}
+\item Resource exposure (Principal)
+\item Pilot Instantiation (Principal)
+\item Placeholder characteristics (Principal)
+\item Resource/Pilot granularity (Auxiliary)
+\end{itemize}
+
+\subsubsection{Space: Ecosystem}
+"How the system interacts with its environment."
+\begin{itemize}
+\item Usage Interface (Principal)
+\item Programming Language (Auxiliary)
+\item Supported Middleware (Auxiliary)
+\item Multi-user support (Auxiliary)
+\end{itemize}
+
+
+\subsection{Suggested structure for "S4.3"}
 \begin{itemize}
 
 \item "Soft" introduction: community, applications, etc. (Blabber style, by
@@ -1040,8 +1079,7 @@ help our story much)
 
 
 
-
-\msnote{End of Mark's rambling}
+\subsection{Old section 4 from here}
 
 
 Despite the apparent diversity in existing \pilotjobs,
