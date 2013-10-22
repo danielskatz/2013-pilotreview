@@ -992,35 +992,37 @@ the theoretical properties that underling such systems.
 
 \subsection{Properties}
 
-This section discussed the properties of \pilotjob systems. First we list the
-\textit{principal} properties, the ones that are directly derived from section
-3.  Followed by that the auxiliary properties, properties that are just as
-important in the comparison of \pilotjob frameworks, but that are not directly
-derived from section 3.
+This Section discusses the properties of diverse \pilotjob system
+implementations. Two sets of properties are introduced: Fundamental and
+auxiliary. \textit{Fundamental} properties are common to each \pilotjob
+implementation and, as such, directly derived from the minimal description
+offered in Section 3. Auxiliaries properties characterize instead specific
+\pilotjob implementations and they are not shared among all implementations.
 
 \subsubsection{Principal properties}
 \begin{itemize}
 
-\item \textit{Task semantics:} What do \textbf{tasks} constitute of? What
-kind/type of \textbf{tasks}?
-
 \item \textit{Workload semantics:} How is the \textbf{workload} that is passed
 from the \textbf{application} to the pilot-job system described? E.g.: What is
-the syntax? What are the semantics? (This implicitly deals with \textbf{tasks}
+the syntax? What is the semantics? (This implicitly deals with \textbf{tasks}
 also).
 
-\item \textit{Binding behavior:} Does the pilot-job system allow the application to specify \textbf{early}
-and/or \textbf{late binding}?
+\item \textit{Task semantics:} What are \textbf{tasks} constitute of? What
+kind/type of \textbf{tasks}?
 
-\item \textit{Resource exposure:} What knowledge (if any) does the application need
-about the actual \textbf{resources}/\textbf{infrastructrure} where to run?
+\item \textit{Binding behavior:} Does the \pilotjob system allow for the
+application to specify \textbf{early} and/or \textbf{late binding}?
 
-\item \textit{Placeholder characteristics:} Whats the "nature" of the \textbf{\pilot}
-(placeholder)? Related to this, what kind of \textbf{jobs} can pilots be? How
-long do they "live"? Who/what instantiates them?
+\item \textit{Resource exposure:} What knowledge (if any) does the application
+need about the actual \textbf{resources}/\textbf{infrastructrure} where to run?
+
+\item \textit{Placeholder characteristics:} Whats the "nature" of the
+\textbf{\pilot} (placeholder)? Related to this, what kind of \textbf{jobs} can
+pilots be? How long do they "live"? Who/what instantiates them?
 
 \item \textit{Pilot instantiation:} Who/what is responsible for instantiating
 the \textbf{pilots}?
+
 \end{itemize}
 
 \subsubsection{Auxiliary properties}
