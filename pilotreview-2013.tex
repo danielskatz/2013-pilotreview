@@ -669,6 +669,7 @@ analysis along multiple dimensions.
 % non-functional.  \onote{avoid functional v.s. non-functional} In this section,
 % the focus is on the former as the latter are adapted by definition to each
 % specific pilot implementation.
+
 Each \pilotjob system exhibits architectural, provisioning and execution
 characteristics that are integral to the \pilotjob paradigm itself.
 However, many \pilotjob systems also exhibit specific or non-integral
@@ -676,71 +677,89 @@ characteristics. Discerning and distinguishing characteristics into these
 categories, requires isolating and defining a minimal set of concepts and terms
 that have to apply to every \pilotjob implementation.
 
-At some level, all \pilotjob systems introduced in \S\ref{sec:history} leverage
-a similar architecture to accomplish workload execution. Such an architecture
-is based on two separate, but intercommunicating logical components: a \textbf{ Workload
-Manager} and a \textbf{Task Executor}. The Workload Manager is related to the
-management of the workloads and their tasks; the Task Executor to the execution
-of the tasks on target resources. As will be shown in \S\ref{sec:4}, the
-implementations of both components significantly vary from system to system,
-with one or more elements responsible for specific functionalities both on
-application as well as infrastructure level. Nevertheless, the two logical
-components can be consistently distinguished and isolated across different
-\pilotjob systems.
+At some level, all \pilotjob systems introduced in \S\ref{sec:history}
+leverage a similar architecture to accomplish workload execution. Such
+an architecture is based on two separate, but intercommunicating
+logical components: a \textbf{ Workload Manager} and a \textbf{Task
+  Executor}. The Workload Manager is related to the management of the
+workloads and their tasks; the Task Executor to the execution of the
+tasks on target resources. \jhanote{have we defined workloads and
+  tasks?} As will be shown in \S\ref{sec:4}, the implementations of
+both components significantly vary from system to system, with one or
+more elements responsible for specific functionalities both on
+application as well as infrastructure level. Nevertheless, the two
+logical components can be consistently distinguished and isolated
+across different \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
-\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong to the
-logical component dedicated to workload management, while the job-wrapper
-belongs to the component responsible for task execution. Similar
-examples can be given for the advanced \pilotjob systems and for Pilot-based
-frameworks: GlideinWMS offers an extended set of features when compared to the
-scheduler and dispatcher of Nimrod-G, but all those features belong to the
-same, well-defined and self-contained logical component --- i.e. the one
-in charge of managing the workloads. The same is valid for Corral and SWIFT:
-both offer evolved functionalities and interfaces to manage workloads
-but, as such, both are part of an architecture where workload management
-and task execution belong to two distinct components.
+\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong
+to the logical component dedicated to workload management, while the
+job-wrapper belongs to the component responsible for task
+execution. Similar examples can be given for the advanced \pilotjob
+systems and for Pilot-based frameworks: GlideinWMS \jhanote{we'll need
+  to be careful to not conflate a WMS with a PJ systems. It may be
+  just a matter of naming, ie replace GlideWMS with Condor-G, but
+  needs care either way..} offers an extended set of features when
+compared to the scheduler and dispatcher of Nimrod-G, but all those
+features belong to the same, well-defined and self-contained logical
+component --- i.e. the one in charge of managing the workloads. The
+same is valid for Corral and \jhanote{Need to replace SWIFT with
+  Coasters -- SWIFT is a workflow language; coasters is the underlying
+  pilot implementation.} SWIFT: both offer evolved functionalities and
+interfaces to manage workloads but, as such, both are part of an
+architecture where workload management and task execution belong to
+two distinct components.
 
-The Workload Manager and the Task Executor are separate and well-defined
-logical components that communicate and coordinate in order to exchange tasks,
-input and output files, and related data. Communication and coordination are
-two fundamental characteristics of every distributed architecture, but we posit
-that it is not an integral logical component of \pilotjob systems, nor is any
-specific communication and coordination pattern a defining feature of the
-\pilotjob paradigm.
+The Workload Manager and the Task Executor are separate and
+well-defined logical components that communicate and coordinate in
+order to exchange tasks, input and output files, and related
+data. Communication and coordination are two fundamental
+characteristics of every distributed architecture \jhanote{suggestion:
+  we should replace architecture with either tool or infrastructure or
+  something else...}, but we posit that it is not an integral logical
+component of \pilotjob systems, nor is any specific communication and
+coordination pattern a defining feature of the \pilotjob paradigm.
 
-For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is very common
-among \pilotjobs. Functionally, the Master can be identified with the Workload
-Manager, while the Worker with the Task Executor. However, the \MW paradigm
-usually implies a specific distribution of capabilities between Master and
-Worker, and, in some cases, also a communication model. Moreover, \MW is
-applied to a non-fixed set of capabilities while referring not only to
-architectures but also to frameworks and applications. This flexibility makes
-\MW a viable choice for implementing \pilotjobs but not one of its defining
-characteristics.
+For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is
+very common among \pilotjobs. Functionally, the Master can be
+identified with the Workload Manager, while the Worker with the Task
+Executor. However, the \MW paradigm usually implies a specific
+distribution of capabilities between Master and Worker, and, in some
+cases, also a communication model. Moreover, \MW is applied to a
+non-fixed set of capabilities while referring not only to
+architectures but also to frameworks and applications\jhanote{fix
+  sentence}. This flexibility makes \MW a viable choice for
+implementing \pilotjobs but not one of its defining characteristics.
+\jhanote{the paragraph started talking about C\&C not being integral,
+  but then focusses/ends on M-W}
 
 The described logical components of \pilotjob systems support flexible
-execution strategies along with improved performance in the task submission
-process when compared to scheduling tasks directly on DCIs. The tasks of a
-workload are bound to one or more Task Executor and, as such, to a pilot,
-without having to be directly scheduled on the DCI's job management system.
-Furthermore, the binding of tasks to a pilot might
-happen before or after the pilot has been assigned a portion of the DCI's
-resources, and it can last for the whole time the pilot can hold on its
-resources. This execution strategy requires dedicated functionalities both for
-performing the bind of tasks to pilots but also for the provisioning of pilots
-so that they can be assigned portions of the DCI's resources.
+execution strategies along with improved performance in the task
+submission process when compared to scheduling tasks directly on
+DCIs. The tasks of a workload are bound to one or more Task Executor
+and, as such, to a pilot, without having to be directly scheduled on
+the DCI's job management system.  Furthermore, the binding of tasks to
+a pilot might happen before or after the pilot has been assigned a
+portion of the DCI's resources, and it can last for the whole time the
+pilot can hold on its resources. This execution strategy requires
+dedicated functionalities both for performing the binding of tasks to
+pilots but also for the provisioning of pilots so that they can be
+assigned portions of the DCI's resources.
 
-The minimal set of functionalities that needs to be implemented by a \pilotjob
-system involves \textbf{\pilot provisioning} and \textbf{task dispatching}.
-\pilot provisioning is a core functionality of every \pilot system because it
-is essential for the creation of resource overlays. This type of overlay allows
-for tasks to utilize resources without directly depending on the capabilities
-exposed by the targeted DCI. Pilots are scheduled to the DCI resources by means
-of the DCI capabilities but, once scheduled and then run, pilots make those
-resources directly available for the execution of the tasks of a workload.
-Thanks to resource overlays, \pilot systems can also implement functionalities
-tailored to the requirements of specific user communities [cit, cit, cit].
+The minimal set of functionalities that needs to be implemented by a
+\pilotjob system involves \textbf{\pilot provisioning} and
+\textbf{task dispatching}.  \jhanote{need to justify the above
+  sentence. Note I'm using the distinction between core and minimal.}
+\pilot provisioning is a core functionality of every \pilot system
+because it is essential for the creation of resource overlays. This
+type of overlay allows for tasks to utilize resources without directly
+depending on the capabilities exposed by the targeted DCI. Pilots are
+scheduled to the DCI resources by means of the DCI capabilities but,
+once scheduled and then run, pilots make those resources directly
+available for the execution of the tasks of a workload.  Thanks to
+resource overlays, \pilot systems can also implement functionalities
+tailored to the requirements of specific user communities [cit, cit,
+cit].
 
 The procedures and mechanisms to provision pilots depend on the capabilities
 exposed by the targeted DCI and on the implementation of the considered \pilot
