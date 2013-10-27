@@ -1032,17 +1032,50 @@ the theoretical properties that underling such systems.
 \subsection{Properties}
 
 This Section discusses the properties of diverse \pilotjob system
-implementations. Two sets of properties are introduced: Fundamental
+implementations. Two sets of properties are introduced: Core
 and auxiliary. \textit{Core} properties are common to each
 \pilotjob implementation and, as such, directly derived from the
 minimal description offered in Section 3. Auxiliaries properties
 characterize instead specific \pilotjob implementations and they are
 not shared among all implementations.  More importantly however,
-auxillary properties are not unique to \pilotjob and are properties
+auxiliary properties are not unique to \pilotjob and are properties
 that can be found in other tools and services.
 
 \jhanote{Inconsistency between principal and fundamental needs to be
   resolved}
+
+\mtnote{We need now to 'justify' both types of proprieties. Why do we choose
+these proprieties? I think we should find this justification internally, i.e.
+by showing that each propriety can be brought back to those - more general -
+introduced in S3. This could be done by adding a table that maps the core
+proprieties to the functionalities of Table 1 in S3. The idea here is that the
+proprieties - BTW, we may want to simplify naming here and rethink about using
+the term `propriety' altogether - in S4 are `contained' in the functionalities
+listed in S3. With `contained' I mean that they are refinement of those
+functionalities at a lower level of abstraction and, as such, in 1 to N
+relationship so that multiple proprieties in S4 can be brought back to a single
+functionality in S3. This mapping would be the internal justification of the
+choice of the core proprieties. What about about the auxiliary proprieties?
+Well, here I need to think a bit more about it. At the moment, I am cogitating
+whether those proprieties could be seen as transversal to the functionalities
+listed in S3, a byproduct of lowering the level of abstraction but still, in
+principle, in the scope of S3 `model'. For example, the implementation language
+cut across all the core functionalities - assuming a single implementation
+language - and so does multi-user support as it maps on both task provisioning
+and pilot dispatching.}
+
+\mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
+is sufficient and necessary in order to discriminate between \pilotjob and
+not-\pilotjob systems; 2. Extend the `model' so to include a logical element
+and one or more functionalities related to Task Execution, and possibly another
+one relative to overlay enacting as distinguished from task dispatching; 3.
+Clean up Table 1 removing 'Infrastructure'.}
+
+\mtnote{As a general note, I see the current Subsections 4.1 and 4.2 as a
+brainstorming for refining the current Subsections 4.5 and 4.6. I would not
+want to rewrite them from scratch as I think there is a lot of substance in
+them as they are at the moment. I am assuming Subsection 4.3 is now obsolete
+and should be deleted.}
 
 \subsubsection{Core properties}
 \begin{itemize}
