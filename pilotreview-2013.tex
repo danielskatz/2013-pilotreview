@@ -1055,8 +1055,37 @@ listed in S3. With `contained' I mean that they are refinement of those
 functionalities at a lower level of abstraction and, as such, in 1 to N
 relationship so that multiple proprieties in S4 can be brought back to a single
 functionality in S3. This mapping would be the internal justification of the
-choice of the core proprieties. What about about the auxiliary proprieties?
-Well, here I need to think a bit more about it. At the moment, I am cogitating
+choice of the core proprieties. An initial example of the Table I am
+speaking about in Table \ref{table:core_properties}.}
+
+\begin{table*}[t]
+ \up
+ \centering
+ \begin{tabular}{|l|l|}
+  \hline
+    \textbf{Core Propriety} & \textbf{Functionality} \\
+  \hline
+    \textbf{Workload/Task Semantics} & Task Dispatching (and Task Execution 
+    in the future version of S3) \\
+  \hline
+    \textbf{Binding Behavior} & Task Dispatching (and Task Execution 
+    in the future version of S3) \\
+  \hline
+    \textbf{Resource Exposure} & Pilot Provisioning \\
+  \hline
+    \textbf{Placeholder Characteristics} & Pilot Provisioning \\
+  \hline
+    \textbf{Pilot Instantiation} & Pilot Provisioning \\
+  \hline
+ \end{tabular}
+ \caption{\textbf{Mapping of the Core Properties of \pilotjob system 
+ implementations into the functionalities described in 
+  \S\ref{subsec:vocab_core_functionalities}}\up}
+ \label{table:core_properties}
+\end{table*}
+
+\mtnote{What about about the justification of the auxiliary proprieties? Well,
+here I need to think a bit more about it. At the moment, I am cogitating
 whether those proprieties could be seen as transversal to the functionalities
 listed in S3, a byproduct of lowering the level of abstraction but still, in
 principle, in the scope of S3 `model'. For example, the implementation language
@@ -1089,10 +1118,17 @@ also).
 kind/type of \textbf{tasks}?
 
 \item \textit{Binding behavior:} Does the \pilotjob system allow for the
-application to specify \textbf{early} and/or \textbf{late binding}?
+application to specify \textbf{early} and/or \textbf{late binding}? \mtnote{I
+am not sure we should be adopt and application-centric vision of the core
+proprieties of \pilotjob implementations. This paper is about \pilotjob
+systems, not about how application use/interact/bound with them. So I think
+here we understand whether we care about an application been able to do specify
+early/late binding or for a \pilotjob implementation to allow for this
+distinction among type of bindings to be made at all.}
 
 \item \textit{Resource exposure:} What knowledge (if any) does the application
-need about the actual \textbf{resources}/\textbf{infrastructrure} where to run?
+need about the actual \textbf{resources}/\textbf{infrastructrure} where to
+run? \mtnote{See the comment above about an application-centric approach.}
 
 \item \textit{Placeholder characteristics:} Whats the "nature" of the
 \textbf{\pilot} (placeholder)? Related to this, what kind of \textbf{jobs} can
