@@ -1072,27 +1072,55 @@ to single or multiple pilots. Finally, task execution is analyzed by reviewing
 different strategies for task scheduling and by describing how \pilotjob
 systems support specific execution strategies for multiple types of workload.
 
+\begin{table*}[t]
+ \up
+ \centering
+ \begin{tabular}{|l|l|}
+  \hline
+    \textbf{Core Propriety} & \textbf{Functionality} \\
+  \hline
+    \textbf{Resource Dependences} & Pilot Provisioning \\
+  \hline
+    \textbf{Pilot Types} & Pilot Provisioning \\
+  \hline
+    \textbf{Workload Semantics} & Task Dispatching \\
+  \hline
+    \textbf{Binding Types} & Task Dispatching \\
+  \hline
+    \textbf{Instantiation Strategies} & Task Execution \\
+  \hline
+    \textbf{Execution Strategies} & Task Execution \\
+ \end{tabular}
+ \caption{\textbf{\mtnote{First draft with the revised naming for the Core 
+            Properties.}Mapping of the Core Properties of \pilotjob system 
+            implementations into the functionalities described in 
+         \S\ref{subsec:vocab_core_functionalities}}\up}
+ \label{table:core_properties}
+\end{table*}
+
 Several auxiliary properties play a fundamental role in distinguishing among
 \pilotjob systems implementations without being specific to Pilot Provisioning,
 Task Dispatching, or Task Execution. Multi-tenancy, authentication,
 authorization, and interoperability are all examples of properties that
-characterize each and every component of a \pilotjob implementation. As such,
-auxiliary properties are considered global properties of a system without
-defining any of its distinguishing feature.\mtnote{I am rambling here, maybe
+characterize each component of a \pilotjob implementation. As such, auxiliary
+properties are considered global properties of the \pilotjob system without
+defining any of its distinguishing features.\mtnote{I am rambling here, maybe
 something more insightful will come to mind after leaving this alone for few
 hours. Mark, any insight on why and how Auxiliary properties are relevant to
 our critical review of PJ implementations?}
 
 Both core and auxiliary properties have a direct impact on the multiple use
-cases for which \pilotjob systems are currently engineered and deployed. For
-example, while every \pilotjob system offers the opportunity to schedule the
-tasks of a workload on a pilot, the degree of support of specific workloads
-vastly varies across implementations. Some \pilotjob systems support workflows-
-based applications, others jobs that leverage a Message Passing Interface
-(MPI). Analogously, every \pilotjob systems support the execution of one or
-more type of workload but they differ when considering execution strategies
-that maximize throughput (HTC), computing (HPC) or container-based, high
-scalability (Cloud). 
+cases for which \pilotjob systems are currently engineered and
+deployed\mtnote{Are we going to introduce use cases in the Introduction or in
+Section 2? Once decided, I would add an internal reference after mentioning the
+use cases.}. For example, while every \pilotjob system offers the opportunity
+to schedule the tasks of a workload on a pilot, the degree of support of
+specific workloads vastly varies across implementations. Some \pilotjob systems
+support workflow-based applications, others jobs leverage a Message
+Passing Interface (MPI). Analogously, every \pilotjob systems support the
+execution of one or more type of workload but they differ when considering
+execution strategies that maximize throughput (HTC), computing (HPC) or
+container-based high scalability (Cloud).
 
 % \mtnote{We need now to 'justify' both types of proprieties. Why do we choose
 % these proprieties? I think we should find this justification internally, i.e.
@@ -1107,32 +1135,6 @@ scalability (Cloud).
 % functionality in S3. This mapping would be the internal justification of the
 % choice of the core proprieties. An initial example of the Table I am
 % speaking about in Table \ref{table:core_properties}.}
-
-\begin{table*}[t]
- \up
- \centering
- \begin{tabular}{|l|l|}
-  \hline
-    \textbf{Core Propriety} & \textbf{Functionality} \\
-  \hline
-    \textbf{Workload/Task Semantics} & Task Dispatching (and Task Execution 
-    in the future version of S3) \\
-  \hline
-    \textbf{Binding Behavior} & Task Dispatching (and Task Execution 
-    in the future version of S3) \\
-  \hline
-    \textbf{Resource Exposure} & Pilot Provisioning \\
-  \hline
-    \textbf{Placeholder Characteristics} & Pilot Provisioning \\
-  \hline
-    \textbf{Pilot Instantiation} & Pilot Provisioning \\
-  \hline
- \end{tabular}
- \caption{\textbf{\mtnote{Update table. At the moment it is OUTDATED.}Mapping of the Core Properties of \pilotjob system 
- implementations into the functionalities described in 
-  \S\ref{subsec:vocab_core_functionalities}}\up}
- \label{table:core_properties}
-\end{table*}
 
 % \mtnote{What about about the justification of the auxiliary proprieties? Well,
 % here I need to think a bit more about it. At the moment, I am cogitating
@@ -1156,6 +1158,11 @@ Clean up Table 1 removing 'Infrastructure'.}
 % them as they are at the moment.}
 
 \subsubsection{Core properties}
+
+\mtnote{TODO: . Change the naming of the Core Properties once we will have
+agreed about the naming used in Table 2. . Define each property not in
+interrogative form.}
+
 \begin{itemize}
 
 \item \textit{Workload semantics:} How is the \textbf{workload} that is passed
@@ -1163,36 +1170,41 @@ from the \textbf{application} to the pilot-job system described? E.g.: What is
 the syntax? What is the semantics? (This implicitly deals with \textbf{tasks}
 also).
 
-\item \textit{Task semantics:} What are \textbf{tasks} constitute of? What
-kind/type of \textbf{tasks}?
+% \item \textit{Task semantics:} What are \textbf{tasks} constitute of? What
+% kind/type of \textbf{tasks}?
 
-\item \textit{Binding behavior:} Does the \pilotjob system allow for the
-application to specify \textbf{early} and/or \textbf{late binding}? \mtnote{I
-am not sure we should be adopt and application-centric vision of the core
-proprieties of \pilotjob implementations. This paper is about \pilotjob
-systems, not about how application use/interact/bound with them. So I think
-here we understand whether we care about an application been able to do specify
-early/late binding or for a \pilotjob implementation to allow for this
-distinction among type of bindings to be made at all.}
-\msnote{I think your suggestion for scoping makes sense. I would be happy to
-"implement" that.}
+\item \textit{Binding behavior:} Does the \pilotjob system allow to specify
+\textbf{early} and/or textbf{late binding}?
 
-\item \textit{Resource exposure:} What knowledge (if any) does the application
-need about the actual \textbf{resources}/\textbf{infrastructrure} where to
-run? \mtnote{See the comment above about an application-centric approach.}
+% \mtnote{I am not sure we should be adopt and application-centric vision of the
+% core proprieties of \pilotjob implementations. This paper is about \pilotjob
+% systems, not about how application use/interact/bound with them. So I think
+% here we understand whether we care about an application been able to do specify
+% early/late binding or for a \pilotjob implementation to allow for this
+% distinction among type of bindings to be made at all.} \msnote{I think your
+% suggestion for scoping makes sense. I would be happy to "implement" that.}
 
-\item \textit{Placeholder characteristics:} Whats the "nature" of the
-\textbf{\pilot} (placeholder)? Related to this, what kind of \textbf{jobs} can
+\item \textit{Resource exposure:} What knowledge (if any) does the pilot layer
+need about the actual \textbf{resources}/\textbf{infrastructrure}? 
+% \mtnote{See the comment above about an application-centric approach.}
+
+\item \textit{Pilot characteristics:} Whats the "nature" of the
+\textbf{\pilot}? Related to this, what kind of \textbf{jobs} can
 pilots be? How long do they "live"? Who/what instantiates them?
 
-\item \textit{Pilot instantiation:} Who/what is responsible for instantiating
-the \textbf{pilots}?
+\item \textit{Pilot instantiation:} What are the scheduling strategies used to
+instantiate \textbf{pilots}?
 
 \end{itemize}
 
 \subsubsection{Auxiliary properties}
 
+\mtnote{TODO: . Change the naming/list of the Auxiliary Properties after
+finalizing the paragraph that introduce them at the beginning of the
+subsection.}
+
 \begin{itemize}
+
 \item \textit{Usage Interface:} How does the \textbf{application} (responsible for
 definition of the \textbf{workload} and consumer of the pilot-job system)
 interact/interface with the pilot-job system? (API / CLI / Service / etc).
@@ -1215,7 +1227,12 @@ capabilities or should that be done out of band? If so, what does it offer?
 
 \end{itemize}
 
+
 \subsection{Organizing properties in space}
+
+\mtnote{TODO: Move all this under the following subsection and normalize
+following the revised list and definition of both types of properties.
+Eliminate the use of the term 'Space' if not needed.}
 
 \subsubsection{Space: Workload Management}
 "How to express the workload."
