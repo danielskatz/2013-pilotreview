@@ -1064,24 +1064,30 @@ implementations and they are not shared among all implementations.
 More importantly however, auxiliary properties are not unique to
 \pilotjob and are properties that can be found in other tools and
 services. \jhanote{Give reader a reminder that ``the set'' of core
-  properties are both necessary and sufficient}
+  properties are both necessary and sufficient. Also, maybe this is
+  intended or implied, but it will help to make explicit that
+  auxiliary properties are not a closed set of properties, unlike
+  core}
   
 
 Core and auxiliary properties are chosen in accordance with the set of
 functionalities described in \S\ref{sec:vocab} (Table
-\ref{table:core_properties}). Each \pilotjob system is reviewed so to outline
-the differences among the implementations of Pilot Provisioning, Task
-Dispatching, and Task Execution. Pilot provisioning is reviewed
-\jhanote{analyzed?} by focusing on the requirements and dependences between the
-\pilotjob system and the underlying distributed resources, and on what type of
-resources the pilot system exposes in terms of computing, data and networking.
-\jhanote{please   elaborate on the previous sentence} For Task Dispatching, two
-specific core properties \jhanote{``core'' should probably not be used} are
-considered: The semantics of multiple types of workload and how the tasks of a
-given workload can be bound to single or multiple pilots. Finally, task
-execution is analyzed by reviewing different strategies for task scheduling and
-by describing how \pilotjob systems support specific execution strategies for
-multiple types of workload.
+\ref{table:core_properties}). Each \pilotjob system is reviewed so as
+to outline the differences among the implementations of Pilot
+Provisioning, Task Dispatching, and Task Execution. Pilot provisioning
+is reviewed \jhanote{analyzed?} by focusing on the requirements and
+dependencies between the \pilotjob system and the underlying
+distributed resources, and the type of resources the pilot system
+exposes in terms of computing, data and networking.  \jhanote{please
+  elaborate on the previous sentence, maybe with an example?} For Task
+Dispatching, two specific core properties \jhanote{``core'' should
+  probably not be used} are considered: The semantics of workloads,
+and how the tasks of a given workload can be bound to single or
+multiple pilots. Finally, Task Execution is analyzed by reviewing
+\jhanote{inconsistency: are we analyzing or are we reviewing. please
+  fix} different strategies for task scheduling and by describing how
+\pilotjob systems support specific execution strategies for multiple
+types of workload.
 
 \begin{table*}[t]
  \up
@@ -1109,17 +1115,20 @@ multiple types of workload.
  \label{table:core_properties}
 \end{table*}
 
-Several auxiliary properties play a fundamental role in distinguishing among
-\pilotjob systems implementations without being specific to Pilot Provisioning,
-Task Dispatching, or Task Execution. Multi-tenancy, authentication,
-authorization, and interoperability are all examples of properties that
-characterize each component of a \pilotjob implementation. As such, auxiliary
-properties are considered global properties of the \pilotjob system without
-defining any of its distinguishing features.\mtnote{I am rambling here, maybe
-something more insightful will come to mind after leaving this alone for few
-hours. Mark, any insight on why and how Auxiliary properties are relevant to
-our critical review of PJ implementations?} \jhanote{``global'' may need some
-qualification}
+Several auxiliary properties play a fundamental role in distinguishing
+\pilotjob systems implementations without recourse to the core
+properties of Pilot Provisioning, Task Dispatching, or Task
+Execution. Interface, middleware and usage modes supported,
+multi-tenancy, data management and transfer, authentication,
+authorization, and interoperability are all examples of properties
+that characterize each component of a \pilotjob implementation. As
+such, auxiliary properties are considered global properties of the
+\pilotjob system without defining any of its distinguishing
+features.\mtnote{I am rambling here, maybe something more insightful
+  will come to mind after leaving this alone for few hours. Mark, any
+  insight on why and how Auxiliary properties are relevant to our
+  critical review of PJ implementations?}  \jhanote{``global'' may
+  need some qualification, as I can't discern what is being suggested}
 
 Both core and auxiliary properties have a direct impact on the multiple use
 cases for which \pilotjob systems are currently engineered and
