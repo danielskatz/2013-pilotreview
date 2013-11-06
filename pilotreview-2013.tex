@@ -1226,51 +1226,69 @@ Clean up Table 1 removing 'Infrastructure'.}
 
 \begin{itemize}
 
-\item \textbf{Pilot Characteristics}: As a resource placeholders, pilots have
-different characteristics depending on the type and capabilities of the
-resources they expose and of the infrastructure on which they are provisioned.
-Within the domain of each type of resource, some of the typical characteristics
-of pilots are: Size (e.g. number of cores), lifespan, intercommunication (e.g.
-low-latency or inter-domain), computing platforms (e.g. x86, Cray, or CUDA),
-file systems (e.g. local, shared, or distributed).
+\item \textbf{Pilot Characteristics}: As resource placeholders, pilots
+  have different characteristics depending on the type and
+  capabilities of the resources they expose and of the infrastructure
+  on which they are provisioned. \jhanote{Opening clause, needs
+    revision. Sorry I can't proffer something, as I'm not sure of the
+    intent} Within the domain of each type of resource, some of the
+  typical characteristics of pilots are: Size (e.g. number of cores),
+  lifespan, intercommunication (e.g.  low-latency or inter-domain),
+  computing platforms (e.g. x86, Cray, or CUDA), file systems
+  (e.g. local, shared, or distributed). \jhanote{I'm a bit confused
+    between resource and infrastructure semantics now. See general
+    remark at the end of core properties. Does that help refine this
+    paragraph?}
 
-\item \textbf{Resource Dependences}: The provisioning of pilots depends on how
-the \pilotjob system interfaces with one or more targeted infrastructures. In
-this context, the degree of coupling between the \pilotjob system and the
-infrastructure can vary, depending on how the \pilotjob system is deployed, how
-much it is integrated with the middleware used within the targeted
-infrastructure, whether the \pilotjob system is interoperable across multiple
-types of middleware, and how much information the \pilotjob system needs about
-the states and capabilities of the targeted infrastructure.
+\item \textbf{Resource Dependences}: The provisioning of pilots
+  depends on how the \pilotjob system interfaces with one or more
+  targeted infrastructure(s). In this context, the degree of coupling
+  between the \pilotjob system and the infrastructure can vary,
+  depending on how the \pilotjob system is deployed, how much it is
+  integrated with the middleware used within the targeted
+  infrastructure, whether the \pilotjob system is interoperable across
+  multiple types of middleware, and how much information the \pilotjob
+  system needs about the states and capabilities of the targeted
+  infrastructure.
 
-\item \textbf{Workload Semantics}: The tasks of a workload are dispatched to 
-pilots depending on their semantics. Specifically, dispatching decisions
-depends on the relationship held by a task with the other tasks belonging to
-the workload, the affinity they require between data and compute resources, and
-the type of capabilities they require in order to be executed.  \pilotjob
-implementations support a varying degree of semantic richness for the workload
-and its tasks.
+\item \textbf{Workload Semantics}: The tasks of a workload are
+  dispatched to pilots depending on their semantics. Specifically,
+  dispatching decisions depends on the relationship held by a task
+  with the other tasks belonging to the workload, the affinity they
+  require between data and compute resources, and the type of
+  capabilities they require in order to be executed.  \pilotjob
+  implementations support a varying degree of semantic richness for
+  the workload and its tasks.
 
-\item \textbf{Task Binding Characteristics}: As seen in \S\ref{sec:vocab},
-\pilotjob systems may allow for two main types of binding between tasks and
-pilots: early binding and late binding. \pilotjob implementations differ in
-whether and how they support these two types of binding. Specifically, while
-there might be implementations that only support a single type of binding
-behavior, they might also differ in whether they allow for the users to control
-directly what type of binding is performed, and in whether both types of
-binding are available on an heterogeneous pool of resources.
+\item \textbf{Task Binding Characteristics}: As seen in
+  \S\ref{sec:vocab}, \pilotjob systems may allow for two main types of
+  binding between tasks and pilots: early binding and late
+  binding. \pilotjob implementations differ in whether and how they
+  support these two types of binding. Specifically, while there might
+  be implementations that only support a single type of binding
+  behavior, they might also differ in whether they allow for the users
+  to control directly what type of binding is performed, and in
+  whether both types of binding are available on an heterogeneous pool
+  of resources.
 
-\item \textbf{Deployment Strategies}: Once the tasks are dispatched to a 
-pilot, their execution may require for a specific environment to be set up.
-\pilotjob implementations differ in whether and how they offer such a
-capability. \pilotjob implementations may adopt dedicated components for
-managing execution environment or may relay on ad hoc configurations of the
-pilots. Furthermore, execution environment can be of varying complexity,
-depending on whether the \pilotjob implementation allows for data retrieval,
-dedicated software and library installations, communication and coordination
-among multiple execution environment and, in case, pilots.
+\item \textbf{Deployment Strategies}: Once the tasks are dispatched to
+  a pilot, their execution may require for a specific environment to
+  be set up.  \pilotjob implementations differ in whether and how they
+  offer such a capability. \pilotjob implementations may adopt
+  dedicated components for managing execution environments, or they
+  may relay an ad hoc configuration of the pilots. Furthermore,
+  execution environments can be of varying complexity, depending on
+  whether the \pilotjob implementation allows for data retrieval,
+  dedicated software and library installations, communication and
+  coordination among multiple execution environment and, in case,
+  pilots.
 
 \end{itemize}
+
+\jhanote{General comment: I can't remember if we distinguish
+  explicitly resources: compute, data and/or network; infrastructure:
+  specific physical realization of a resource. If not, we should
+  mention upstream}
 
 \subsubsection{Auxiliary properties}
 
@@ -1302,15 +1320,16 @@ to utilize the same instance of a \pilotjob system, while when available at
 local level, multiple users may use the same pilot instance or any other
 component or service implemented within the \pilotjob system.
 
-\item \textbf{Robustness}: Used to identify those properties that contribute 
+\item \textbf{Robustness}: Used to identify those properties that
+  contribute towards the resilience and the reliability of a \pilotjob
+  implementation. In this Section, the analysis focuses on
+  fault-tolerance, high-availability and state persistence. These
+  properties are considered indicators of both the maturity of the
+  development stage of the \pilotjob implementation, and the type of
+  support offered to the paradigmatic use cases introduced in Section
+  2.
 
-towards the resilience and the reliability of a \pilotjob implementation. In
-this Section, the analysis focuses on fault-tolerance, high-availability and
-state persistence. These properties are considered indicators of both the
-maturity of the development stage of the \pilotjob implementation, and the type
-of support offered to the paradigmatic use cases introduced in Section 2.
-
-\item textbf{Security}: While the properties of \pilotjob implementations 
+\item \textbf{Security}: While the properties of \pilotjob implementations 
 related to security would require a dedicated analysis, here only
 authentication, authorization and policies properties are taken into account.
 The scope of the analysis is further constrained by focusing the analysis only
