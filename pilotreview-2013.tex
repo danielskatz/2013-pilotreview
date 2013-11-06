@@ -1121,15 +1121,20 @@ networking. % \jhanote{please elaborate on the previous sentence, maybe
 %   with an example?}\mtnote{Done.}
 
 Two properties are also used to analyze the implementations of Task
-Dispatching: The semantics of workloads, and how the tasks of a given workload
-can be bound to single or multiple pilots. Semantically, a workload description
-contains all the information necessary for it to be dispatched to the
-appropriate resource. For example, information related to both space and time
-should be available when deciding how many resources of a specific type should
-be used to execute the given workload but also for how long such resources
-should be available. The granularity of the resources plays a similar role.
-Depending on the concurrency of a given workload, one or more pilots could be
-used to execute efficiently its tasks.
+Dispatching: The semantics of workloads, and how the tasks of a given
+workload can be bound to single or multiple pilots. Semantically, a
+workload description contains all the information necessary for it to
+be dispatched to the appropriate resource. For example, information
+related to both space and time should be available when deciding how
+many resources of a specific type should be used to execute the given
+workload but also for how long such resources should be available. The
+granularity of the resources plays a similar role.  Depending on the
+concurrency of a given workload, one or more pilots could be used to
+execute efficiently its tasks. \jhanote{I observe, we do not discuss
+  why ``task binding characteristics''. In conjunction, with
+  discussion in 4.1.1, I believe reader is left unsure why this is fit
+  for inclusion as a core property. Please see specific comment in
+  4.1.1.}
 
 Finally, implementations of Task Execution are analyzed by reviewing different
 strategies for task scheduling and by describing how \pilotjob systems support
@@ -1269,8 +1274,11 @@ Clean up Table 1 removing 'Infrastructure'.}
   behavior, they might also differ in whether they allow for the users
   to control directly what type of binding is performed, and in
   whether both types of binding are available on an heterogeneous pool
-  of resources.
-
+  of resources. \jhanote{I agree with the discussion above, but there
+    is case to be made that at some stage, we will have to argue why
+    this is a core and not an auxiliary property, as one could just
+    reduce this to an issue of control/implicit versus explicit?}
+    
 \item \textbf{Deployment Strategies}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
   be set up.  \pilotjob implementations differ in whether and how they
@@ -1294,31 +1302,46 @@ Clean up Table 1 removing 'Infrastructure'.}
 
 \begin{itemize}
 
-\item \textbf{Architecture}: \pilotjob systems may be implemented by means of 
-different type of architectures (e.g service-oriented, client-server, or peer-
-to-peer). The analysis and comparison of architectural choices is here limited
-to the trade-offs implied by such a choice, especially when considering how
-they affect the Core Properties listed above.
+\item \textbf{Architecture}: \pilotjob systems may be implemented by
+  means of different type of architectures (e.g service-oriented,
+  client-server, or peer- to-peer). The analysis and comparison of
+  architectural choices is limited to the trade-offs implied by such a
+  choice, especially when considering how they affect the Core
+  Properties listed \jhanote{A simple/quick example would help
+    appreciate the latter sentence; currently not sure. What about the
+    following?: ``For example, it is conceivable that architectural
+    choices/decisions influence if not preclude certain deployment
+    strategies.''}  \jhanote{sytlistic/consistency: either we use
+    ``Core Properties'' or ``core properties''. Can ignore for now,
+    but please converge/keep in mind.}
 
-\item \textbf{Interfaces}: The implementations of \pilotjob systems may present
-several types of interfaces: Among the main components of the \pilotjob system,
-between the application and pilot layer, between end users and the \pilotjob
-system, and for one or more programming languages.
+\item \textbf{Interfaces}: The implementations of \pilotjob systems
+  may present several types of interfaces. For example, there are
+  interface considerations between the main components of the
+  \pilotjob system, between the application and pilot layer, between
+  end users and the \pilotjob system, and for one or more programming
+  languages.
 
-\item \textbf{Interoperability}: Two types of interoperability are relevant 
-when analyzing different \pilotjob implementations: Interoperability with
-multiple type of resources and with diverse \pilotjob systems. The former
-allows for the \pilotjob to provision pilots and execute workloads on different
-type of resources and systems (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm
-or Torque) while the latter becomes relevant when considering a landscape where
-multiple \pilotjob implementations are available with diversified
-characteristics and capabilities.
+\item \textbf{Interoperability}: Two types of interoperability are
+  relevant when analyzing different \pilotjob implementations:
+  Interoperability with multiple type of resources and
+  interoperability across diverse \pilotjob systems. The former allows
+  for the \pilotjob to provision pilots and execute workloads on
+  different type of resources and systems (e.g. HTC, HPC, Cloud but
+  also Condor, LSF, Slurm or Torque), while the latter becomes
+  relevant when considering a landscape where multiple \pilotjob
+  implementations are available with diversified characteristics and
+  capabilities.
 
-\item \textbf{Multitenancy}: \pilotjob system may offer multitenancy at both
-system and local level. When offered at system level, multiple users are allow
-to utilize the same instance of a \pilotjob system, while when available at
-local level, multiple users may use the same pilot instance or any other
-component or service implemented within the \pilotjob system.
+\item \textbf{Multitenancy}: \pilotjob system may offer multitenancy
+  at both system and local level. When offered at system level,
+  multiple users are allow to utilize the same instance of a \pilotjob
+  system, while when available at local level, multiple users may use
+  the same pilot instance or any other component or service
+  implemented within the \pilotjob system.\jhanote{Editorial/Minor
+    note: I think I know what you mean by ``service within the PJS'',
+    but it is not explained or detailed somewhere. Maybe use
+    vocabulary/terminology already defined?}
 
 \item \textbf{Robustness}: Used to identify those properties that
   contribute towards the resilience and the reliability of a \pilotjob
@@ -1327,14 +1350,15 @@ component or service implemented within the \pilotjob system.
   properties are considered indicators of both the maturity of the
   development stage of the \pilotjob implementation, and the type of
   support offered to the paradigmatic use cases introduced in Section
-  2.
+  2. 
 
-\item \textbf{Security}: While the properties of \pilotjob implementations 
-related to security would require a dedicated analysis, here only
-authentication, authorization and policies properties are taken into account.
-The scope of the analysis is further constrained by focusing the analysis only
-on those elements of these properties that impact the Core Functionalities as
-defined in \S\ref{sec:vocab}.
+\item \textbf{Security}: While the properties of \pilotjob
+  implementations related to security would require a dedicated
+  analysis, we limit the discussion to authentication, authorization
+  and policies. The scope of the analysis is further constrained by
+  focusing the analysis only on those elements of these properties
+  that impact the Core Functionalities as defined in
+  \S\ref{sec:vocab}.
 
 \item \textbf{Usage Modes}: As shown in \S\ref{sec:history} and 
 \ref{sec:vocab}, \pilotjob systems support many different use cases involving
