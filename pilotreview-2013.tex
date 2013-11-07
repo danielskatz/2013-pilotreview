@@ -1011,31 +1011,29 @@ resource.
 %------------------------------------------------------------------------------
 \section{Pilot-Job Systems Implementations}\label{sec:4}
 
-Section \S\ref{sec:vocab} offered two main contributions: A minimal
-description of the logical components and the functionalities of
-\pilotjob systems, and a well-defined core terminology to support
-reasoning about such systems. The former sets the necessary and
-sufficient requirements for a distributed system to be a \pilotjob
-system, while the latter enables consistency when referring to
-different \pilotjob systems. Both these contributions are leveraged in
-this Section in order to review critically a set of relevant \pilotjob
-implementations. 
+Section \S\ref{sec:vocab} offered two main contributions: A minimal description
+of the logical components and the functionalities of \pilotjob systems, and a
+well-defined core terminology to support reasoning about such systems. The
+former sets the necessary and sufficient requirements for a distributed system
+to be a \pilotjob system, while the latter enables consistency when referring
+to different \pilotjob systems. Both these contributions are leveraged in this
+Section in order to review critically a set of relevant \pilotjob
+implementations.
 
 % \jhanote{More than twofold? I think we are missing the contributions
 %   of section 4.1 and 4.2}\mtnote{I would suggest to develop further
 %   the rest of the Section and then come back and refine this one.}
 
-The goal of this Section is twofold.  Initially, the set of
-functionalities presented in \S\ref{sec:vocab} are used as the basis
-to derive \jhanote{infer? deduce? discern?} a set of core
-implementation properties. A set of auxiliary properties is also
-defined when useful for a critical comparison among different
-\pilotjob implementations. Subsequently, several \pilotjob
+The goal of this Section is twofold.  Initially, the set of functionalities
+presented in \S\ref{sec:vocab} are used as the basis to infer \jhanote{infer?
+deduce? discern?}\mtnote{done.} a set of core implementation properties. A set
+of auxiliary properties is also defined when useful for a critical comparison
+among different \pilotjob implementations. Subsequently, several \pilotjob
 implementations are analyzed and then clustered around the properties
-previously defined. In this way, insight is offered about how to
-choose a \pilotjob system based on functional requirements, how
-\pilotjob systems are designed and engineered, and the theoretical
-properties that underly such systems.
+previously defined. In this way, insight is offered about how to choose a
+\pilotjob system based on functional requirements, how \pilotjob systems are
+designed and engineered, and the theoretical properties that underly such
+systems.
 
 % \jhanote{Matteo: I think the order of 4 differs from the message conveyed in
 % the previous paragraph. Also, I think the clustering is the reverse of what is
@@ -1067,24 +1065,23 @@ system. Two sets of properties are introduced: Core and auxiliary.
 auxiliaries characterize specific \pilotjob systems. Therefore, auxiliary
 properties are not shared among all \pilotjob implementations.
 
-As shown in Table \ref{table:core_properties}, the set of core
-properties is derived consistently with the set of functionalities
-presented in \S\ref{sec:vocab} - Pilot Provisioning, Task Dispatching,
-and Task Execution.  As such, core properties are both necessary and
-sufficient for an implementation of a distributed system to be
-classified as a \pilotjob. On the contrary, auxiliary properties are
-not defining of a \pilotjob system but they are implementation details
-that further characterize a \pilotjob system.  The set of auxillary
-properties we discuss is not closed, i.e., the complete set of
-auxillary properties includes, but is not limited to the set of
-auxillary properties we discuss.
+As shown in Table \ref{table:core_properties}, the set of core properties is
+derived consistently with the set of functionalities presented in
+\S\ref{sec:vocab} - Pilot Provisioning, Task Dispatching, and Task Execution.
+As such, core properties are both necessary and sufficient for an
+implementation of a distributed system to be classified as a \pilotjob. On the
+contrary, auxiliary properties are not defining of a \pilotjob system but they
+are implementation details that further characterize a \pilotjob system.  The
+set of auxillary properties we discuss is not closed, i.e., the complete set of
+auxillary properties includes, but is not limited to the set of auxillary
+properties we discuss.
 
 \jhanote{Give reader a reminder that ``the set'' of core properties
   are both necessary and sufficient. Also, maybe this is intended or
   implied, but it will help to make explicit that auxiliary properties
   are not a closed set of properties, unlike core}\mtnote{First go at
   it. Not sure what you mean exactly with 'closed' in this context.}
-\jhanote{Matteo, please see last sentence. Make sense?}
+\jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
 
 \begin{table}
 \centering
@@ -1108,33 +1105,40 @@ auxillary properties we discuss.
  \label{table:core_properties}
 \end{table}
 
-Implementations of Pilot Provisioning are analyzed by focusing on two
-specific properties: the requirements and dependencies between the
-\pilotjob system and the underlying distributed resources; and the
-type of resources the pilot system exposes in terms of computing, data
-and networking. For example, in order to schedule a pilot onto a
-specific resource, the \pilotjob system will need to know what type of
-container to use - e.g. pilot, virtual machine, what type of scheduler
-the resource exposes, but also what kind of functionalities will be
-available on the nodes of the resource in terms of compute, data and
-networking. % \jhanote{please elaborate on the previous sentence, maybe
+Implementations of Pilot Provisioning are analyzed by focusing on two specific
+properties: the requirements and dependencies between the \pilotjob system and
+the underlying distributed resources; and the type of resources the pilot
+system exposes in terms of computing, data and networking. For example, in
+order to schedule a pilot onto a specific resource, the \pilotjob system will
+need to know what type of container to use - e.g. pilot, virtual machine, what
+type of scheduler the resource exposes, but also what kind of functionalities
+will be available on the nodes of the resource in terms of compute, data and
+networking.
+
+% \jhanote{please elaborate on the previous sentence, maybe
 %   with an example?}\mtnote{Done.}
 
 Two properties are also used to analyze the implementations of Task
-Dispatching: The semantics of workloads, and how the tasks of a given
-workload can be bound to single or multiple pilots. Semantically, a
-workload description contains all the information necessary for it to
-be dispatched to the appropriate resource. For example, information
-related to both space and time should be available when deciding how
-many resources of a specific type should be used to execute the given
-workload but also for how long such resources should be available. The
-granularity of the resources plays a similar role.  Depending on the
-concurrency of a given workload, one or more pilots could be used to
-execute efficiently its tasks. \jhanote{I observe, we do not discuss
-  why ``task binding characteristics''. In conjunction, with
-  discussion in 4.1.1, I believe reader is left unsure why this is fit
-  for inclusion as a core property. Please see specific comment in
-  4.1.1.}
+Dispatching: The semantics of workloads, and how the tasks of a given workload
+can be bound to single or multiple pilots. Semantically, a workload description
+contains all the information necessary for it to be dispatched to the
+appropriate resource. For example, information related to both space and time
+should be available when deciding how many resources of a specific type should
+be used to execute the given workload but also for how long such resources
+should be available. Executing a workload requires for its tasks to be bound to
+the resources. Both the temporal and spatial dimensions of the binding
+operations are relevant for the implementation of Task Dispatching. Depending
+on the concurrency of a given workload, tasks could be dispatched to one or
+more pilots for an efficient execution. Furthermore, tasks could be bound to
+pilots before or after its instantiation, depending on resource availability
+and scheduling decisions.
+
+\jhanote{I observe, we do not discuss why ``task binding characteristics''. In
+conjunction, with discussion in 4.1.1, I believe reader is left unsure why this
+is fit for inclusion as a core property. Please see specific comment in
+4.1.1.}\mtnote{We had a discussion of binding but very implicit and limited to
+the spatial dimension. I have now extended the explanation adding the temporal
+dimension and mentioning binding explicitly.}
 
 Finally, implementations of Task Execution are analyzed by reviewing different
 strategies for task scheduling and by describing how \pilotjob systems support
@@ -1148,47 +1152,53 @@ be executed on the underlying architecture, often tasks require their
 environment to be set up so that some libraries, data or accessory programs
 are made available.
 
-Several auxiliary properties play a fundamental role in distinguishing
-among \pilotjob systems implementations, as well as
-address/set/provide constraints on their usability. \jhanote{See
-  comment in the next paaragraph} Programming and user interfaces;
-interoperability across differing middleware and other \pilotjob
-systems; multitenancy; strategies and abstractions for data
+Several auxiliary properties play a fundamental role in distinguishing among
+\pilotjob systems implementations, as well as address/set/provide constraints
+on their usability. \jhanote{See comment in the next paaragraph} Programming
+and user interfaces; interoperability across differing middleware and other
+\pilotjob systems; multitenancy; strategies and abstractions for data
 management; security including policies alongside authentication and
-authorization; support for multiple usage modes like HPC or HTC; or
-robustness in terms of fault-tolerance and high- availability; are all
-examples of properties that might characterize a \pilotjob
-implementation but in of themself, would not distinguish a \pilotjob
-as a specific \jhanote{would unique be more appropriate that
-  specific?} type of distributed system. \mtnote{I have been assuming
-  that a \pilotjob is always a type of distributed system. Do you
-  agree?}.  \jhanote{This needs discussion. It is definitely a system,
-  and definitely a software system. But is a distributed tool or a
-  distributed service always also a distributed system?}
+authorization; support for multiple usage modes like HPC or HTC; or robustness
+in terms of fault-tolerance and high-availability; are all examples of
+properties that might characterize a \pilotjob implementation but in of
+themself, would not distinguish a \pilotjob as a unique \jhanote{would unique
+be more appropriate that specific?} \mtnote{Done.} type of distributed system.
 
-Both core and auxiliary properties have a direct impact on the
-multiple use cases for which \pilotjob systems are currently
-engineered and deployed\mtnote{Are we going to introduce use cases in
-  the Introduction or in Section 2? Once decided, I would add an
-  internal reference after mentioning the use cases.}. \jhanote{Do we
-  need to distinguish usability versus use-case? I need to think, but
-  there is the issue of internal versus external constraints on the
-  usability. Auxiliary properties seem to me be about responding to
-  external factors; core properties seem to determine usability from
-  internal properties. I do not know if this additional qualifications
-  or helps, but needs thinking and discussion} For example, while
-every \pilotjob system offers the opportunity to schedule the tasks of
-a workload on a pilot, the degree of support of specific workloads
-varies vastly across implementations. Some \pilotjob systems support
-workflow-based applications, others jobs leveraging a Message Passing
-Interface (MPI). \jhanote{(i) A workflow-based application and MPI are
-  not mutually exclusive. (ii) Agree/Disagree: A workflow-based
-  application by the time it is supported by a \pilotjob system is
-  just a workload, and semantics of the workflow lost? If agree, then
-  we should use another example} Analogously, every \pilotjob systems,
-support the execution of one or more type of workload but they differ
-when considering execution modalities that maximize throughput (HTC),
-computing (HPC) or container-based high scalability (Cloud).
+\mtnote{I have been assuming that a \pilotjob is always a type of distributed
+system. Do you agree?}. \jhanote{This needs discussion. It is definitely a
+system, and definitely a software system. But is a distributed tool or a
+distributed service always also a distributed system?} \mtnote{I guess we need
+to pin down a proper definition of distributed system. Do you have a preferred
+one?}
+
+Both core and auxiliary properties have a direct impact on the multiple use
+cases for which \pilotjob systems are currently engineered and
+deployed\mtnote{Are we going to introduce use cases in   the Introduction or in
+Section 2? Once decided, I would add an   internal reference after mentioning
+the use cases.}. \jhanote{Do we   need to distinguish usability versus use-
+case?}\mtnote{I did not think about this distinction. I meant 'use cases'
+because I think we need some explanation on how these systems are used when we
+will show that some are tailored around a specific community while others are
+general-purpose. It should also be useful when arguing about the limitations of
+the \pilotjob paradigm - we do not want to give the impression that \pilotjobs
+are the solution for every possible user.} \jhanote{I need to think, but there
+is the issue of internal versus external constraints on the   usability.
+Auxiliary properties seem to me be about responding to   external factors; core
+properties seem to determine usability from   internal properties. I do not
+know if this additional qualifications   or helps, but needs thinking and
+discussion}\mtnote{I need to think too, happy to discuss about this one.} For
+example, while every \pilotjob system offers the opportunity to schedule the
+tasks of a workload on a pilot, the degree of support of specific workloads
+varies vastly across implementations. For example, some \pilotjob systems
+support Virtual Organizations and running tasks from multiple users on a single
+pilot while others support jobs leveraging a Message Passing Interface (MPI).
+\jhanote{(i) A workflow-based application and MPI are   not mutually exclusive.
+(ii) Agree/Disagree: A workflow-based   application by the time it is supported
+by a \pilotjob system is   just a workload, and semantics of the workflow lost?
+If agree, then   we should use another example}\mtnote{Done.} Analogously, every \pilotjob
+systems, support the execution of one or more type of workload but they differ
+when considering execution modalities that maximize throughput (HTC), computing
+(HPC) or container-based high scalability (Cloud).
 
 
 
