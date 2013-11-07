@@ -1024,16 +1024,16 @@ implementations.
 %   of section 4.1 and 4.2}\mtnote{I would suggest to develop further
 %   the rest of the Section and then come back and refine this one.}
 
-The goal of this Section is twofold.  Initially, the set of functionalities
-presented in \S\ref{sec:vocab} are used as the basis to infer \jhanote{infer?
-deduce? discern?}\mtnote{done.} a set of core implementation properties. A set
-of auxiliary properties is also defined when useful for a critical comparison
-among different \pilotjob implementations. Subsequently, several \pilotjob
+The goal of this Section is twofold.  Initially, the set of
+functionalities presented in \S\ref{sec:vocab} are used as the basis
+to infer a set of core implementation properties. A set of auxiliary
+properties is also defined when useful for a critical comparison among
+different \pilotjob implementations. Subsequently, several \pilotjob
 implementations are analyzed and then clustered around the properties
-previously defined. In this way, insight is offered about how to choose a
-\pilotjob system based on functional requirements, how \pilotjob systems are
-designed and engineered, and the theoretical properties that underly such
-systems.
+previously defined. In this way, insight is offered about how to
+choose a \pilotjob system based on functional requirements, how
+\pilotjob systems are designed and engineered, and the theoretical
+properties that underly such systems.
 
 % \jhanote{Matteo: I think the order of 4 differs from the message conveyed in
 % the previous paragraph. Also, I think the clustering is the reverse of what is
@@ -1076,12 +1076,12 @@ set of auxillary properties we discuss is not closed, i.e., the complete set of
 auxillary properties includes, but is not limited to the set of auxillary
 properties we discuss.
 
-\jhanote{Give reader a reminder that ``the set'' of core properties
-  are both necessary and sufficient. Also, maybe this is intended or
-  implied, but it will help to make explicit that auxiliary properties
-  are not a closed set of properties, unlike core}\mtnote{First go at
-  it. Not sure what you mean exactly with 'closed' in this context.}
-\jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
+% \jhanote{Give reader a reminder that ``the set'' of core properties
+%   are both necessary and sufficient. Also, maybe this is intended or
+%   implied, but it will help to make explicit that auxiliary properties
+%   are not a closed set of properties, unlike core}\mtnote{First go at
+%   it. Not sure what you mean exactly with 'closed' in this context.}
+% \jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
 
 \begin{table}
 \centering
@@ -1133,12 +1133,14 @@ more pilots for an efficient execution. Furthermore, tasks could be bound to
 pilots before or after its instantiation, depending on resource availability
 and scheduling decisions.
 
-\jhanote{I observe, we do not discuss why ``task binding characteristics''. In
-conjunction, with discussion in 4.1.1, I believe reader is left unsure why this
-is fit for inclusion as a core property. Please see specific comment in
-4.1.1.}\mtnote{We had a discussion of binding but very implicit and limited to
-the spatial dimension. I have now extended the explanation adding the temporal
-dimension and mentioning binding explicitly.}
+\jhanote{I observe, we do not discuss why ``task binding
+  characteristics''. In conjunction, with discussion in 4.1.1, I
+  believe reader is left unsure why this is fit for inclusion as a
+  core property. Please see specific comment in 4.1.1 under task
+  binding characteristics}\mtnote{We had a discussion of binding but
+  very implicit and limited to the spatial dimension. I have now
+  extended the explanation adding the temporal dimension and
+  mentioning binding explicitly.}
 
 Finally, implementations of Task Execution are analyzed by reviewing different
 strategies for task scheduling and by describing how \pilotjob systems support
@@ -1161,8 +1163,9 @@ management; security including policies alongside authentication and
 authorization; support for multiple usage modes like HPC or HTC; or robustness
 in terms of fault-tolerance and high-availability; are all examples of
 properties that might characterize a \pilotjob implementation but in of
-themself, would not distinguish a \pilotjob as a unique \jhanote{would unique
-be more appropriate that specific?} \mtnote{Done.} type of distributed system.
+themself, would not distinguish a \pilotjob as a unique % \jhanote{would unique
+% be more appropriate that specific?} \mtnote{Done.}
+type of distributed system.
 
 \mtnote{I have been assuming that a \pilotjob is always a type of distributed
 system. Do you agree?}. \jhanote{This needs discussion. It is definitely a
@@ -1192,10 +1195,11 @@ tasks of a workload on a pilot, the degree of support of specific workloads
 varies vastly across implementations. For example, some \pilotjob systems
 support Virtual Organizations and running tasks from multiple users on a single
 pilot while others support jobs leveraging a Message Passing Interface (MPI).
-\jhanote{(i) A workflow-based application and MPI are   not mutually exclusive.
-(ii) Agree/Disagree: A workflow-based   application by the time it is supported
-by a \pilotjob system is   just a workload, and semantics of the workflow lost?
-If agree, then   we should use another example}\mtnote{Done.} Analogously, every \pilotjob
+% \jhanote{(i) A workflow-based application and MPI are   not mutually exclusive.
+% (ii) Agree/Disagree: A workflow-based   application by the time it is supported
+% by a \pilotjob system is   just a workload, and semantics of the workflow lost?
+% If agree, then   we should use another example}\mtnote{Done.}
+Analogously, every \pilotjob
 systems, support the execution of one or more type of workload but they differ
 when considering execution modalities that maximize throughput (HTC), computing
 (HPC) or container-based high scalability (Cloud).
