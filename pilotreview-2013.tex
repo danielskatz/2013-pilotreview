@@ -1065,10 +1065,10 @@ system. Two sets of properties are introduced: Core and auxiliary.
 auxiliaries characterize specific \pilotjob systems. Therefore, auxiliary
 properties are not shared among all \pilotjob implementations.
 
-As shown in Table \ref{table:core_properties}, the set of core properties is
+As shown in Table \ref{table:core_properties}, the set of Core Properties is
 derived consistently with the set of functionalities presented in
 \S\ref{sec:vocab} - Pilot Provisioning, Task Dispatching, and Task Execution.
-As such, core properties are both necessary and sufficient for an
+As such, Core Properties are both necessary and sufficient for an
 implementation of a distributed system to be classified as a \pilotjob. On the
 contrary, auxiliary properties are not defining of a \pilotjob system but they
 are implementation details that further characterize a \pilotjob system.  The
@@ -1261,7 +1261,7 @@ inter-domain), computing platforms (e.g. x86, Cray, or CUDA), file systems
 (e.g. local, shared, or distributed). \jhanote{Opening clause, needs revision. 
 Sorry I can't proffer something, as I'm not sure of the intent}\jhanote{I'm a
 bit confused between resource and infrastructure semantics now. See general
-remark at the end of core properties. Does that help refine this
+remark at the end of Core Properties. Does that help refine this
 paragraph?}\mtnote{I tried to make it more consistent with the definitions we 
 gave in S3.}
 
@@ -1275,6 +1275,9 @@ gave in S3.}
   multiple types of middleware, and how much information the \pilotjob
   system needs about the states and capabilities of the targeted
   infrastructure.
+
+\item \textbf{Coordination and Communication}. \mtnote{To be decided whether 
+we need it. I think we do.}
 
 \item \textbf{Workload Semantics}: The tasks of a workload are
   dispatched to pilots depending on their semantics. Specifically,
@@ -1326,18 +1329,19 @@ otherwise we can leave also the following.}
 
 \begin{itemize}
 
-\item \textbf{Architecture}: \pilotjob systems may be implemented by
-  means of different type of architectures (e.g service-oriented,
-  client-server, or peer- to-peer). The analysis and comparison of
-  architectural choices is limited to the trade-offs implied by such a
-  choice, especially when considering how they affect the Core
-  Properties listed \jhanote{A simple/quick example would help
-    appreciate the latter sentence; currently not sure. What about the
-    following?: ``For example, it is conceivable that architectural
-    choices/decisions influence if not preclude certain deployment
-    strategies.''}  \jhanote{sytlistic/consistency: either we use
-    ``Core Properties'' or ``core properties''. Can ignore for now,
-    but please converge/keep in mind.}
+\item \textbf{Architecture}: \pilotjob systems may be implemented by means of
+different type of architectures (e.g service-oriented, client-server, or peer-
+to-peer). For example, it is conceivable that architectural choices influence
+if not preclude certain deployment strategies. The analysis and comparison of
+architectural choices is limited to the trade-offs implied by such a choice,
+especially when considering how they affect the Core Properties listed in the
+previous Subsection. \jhanote{A simple/quick example would help appreciate the 
+latter sentence; currently not sure. What about the     following?: ``For
+example, it is conceivable that architectural     choices/decisions influence
+if not preclude certain deployment     strategies.''}\mtnote{Thank you.
+Integrated into the text.}  \jhanote{sytlistic/consistency: either we use
+``Core Properties'' or ``core properties''. Can ignore for now,     but please
+converge/keep in mind.}\mtnote{Done.}
 
 \item \textbf{Interfaces}: The implementations of \pilotjob systems
   may present several types of interfaces. For example, there are
@@ -1361,11 +1365,13 @@ otherwise we can leave also the following.}
   at both system and local level. When offered at system level,
   multiple users are allow to utilize the same instance of a \pilotjob
   system, while when available at local level, multiple users may use
-  the same pilot instance or any other component or service
-  implemented within the \pilotjob system.\jhanote{Editorial/Minor
-    note: I think I know what you mean by ``service within the PJS'',
-    but it is not explained or detailed somewhere. Maybe use
-    vocabulary/terminology already defined?}
+  the same pilot instance or any other component implemented within the 
+  \pilotjob system.\jhanote{Editorial/Minor
+    note: I think I know what you mean by ``service within the PJS'', but it is
+    not explained or detailed somewhere. Maybe use vocabulary/terminology
+    already defined?}\mtnote{Thanks. I went for components alone because
+    services would still be components of a \pilotjob system. Service are a way
+    to implement its components.}
 
 \item \textbf{Robustness}: Used to identify those properties that
   contribute towards the resilience and the reliability of a \pilotjob
