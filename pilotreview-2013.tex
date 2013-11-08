@@ -1133,14 +1133,14 @@ more pilots for an efficient execution. Furthermore, tasks could be bound to
 pilots before or after its instantiation, depending on resource availability
 and scheduling decisions.
 
-\jhanote{I observe, we do not discuss why ``task binding
-  characteristics''. In conjunction, with discussion in 4.1.1, I
-  believe reader is left unsure why this is fit for inclusion as a
-  core property. Please see specific comment in 4.1.1 under task
-  binding characteristics}\mtnote{We had a discussion of binding but
-  very implicit and limited to the spatial dimension. I have now
-  extended the explanation adding the temporal dimension and
-  mentioning binding explicitly.}
+% \jhanote{I observe, we do not discuss why ``task binding
+%   characteristics''. In conjunction, with discussion in 4.1.1, I
+%   believe reader is left unsure why this is fit for inclusion as a
+%   core property. Please see specific comment in 4.1.1 under task
+%   binding characteristics}\mtnote{We had a discussion of binding but
+%   very implicit and limited to the spatial dimension. I have now
+%   extended the explanation adding the temporal dimension and
+%   mentioning binding explicitly.}
 
 Finally, implementations of Task Execution are analyzed by reviewing different
 strategies for task scheduling and by describing how \pilotjob systems support
@@ -1154,28 +1154,28 @@ be executed on the underlying architecture, often tasks require their
 environment to be set up so that some libraries, data or accessory programs
 are made available.
 
-Several auxiliary properties play a fundamental role in distinguishing among
-\pilotjob systems implementations, as well as address, set and provide
-constraints on their usability. \jhanote{See comment in the next paaragraph}
-Programming and user interfaces; interoperability across differing middleware
-and other \pilotjob systems; multitenancy; strategies and abstractions for data
+Several auxiliary properties play a fundamental role in distinguishing
+among \pilotjob systems implementations, as well as address, set and
+provide constraints on their usability.  Programming and user
+interfaces; interoperability across differing middleware and other
+\pilotjob systems; multitenancy; strategies and abstractions for data
 management; security including policies alongside authentication and
-authorization; support for multiple usage modes like HPC or HTC; or robustness
-in terms of fault-tolerance and high-availability; are all examples of
-properties that might characterize a \pilotjob implementation but in of
-themselves, would not distinguish a \pilotjob as a unique system. 
+authorization; support for multiple usage modes like HPC or HTC; or
+robustness in terms of fault-tolerance and high-availability; are all
+examples of properties that might characterize a \pilotjob
+implementation but in of themselves, would not distinguish a \pilotjob
+as a unique system.
 
-% \jhanote{would unique be more appropriate that specific?} \mtnote{Done.}
-\mtnote{I have been assuming that a \pilotjob is always a type of distributed
-system. Do you agree?}. \jhanote{This needs discussion. It is definitely a
-system, and definitely a software system. But is a distributed tool or a
-distributed service always also a distributed system?} \mtnote{I guess we need
-to pin down a proper definition of distributed system. Do you have a preferred
-one?} \mtnote{After a shared discussion, we decided to change the paragraph so
-that the issue does not arise. The issue itself can be addressed by pinning
-down the level of abstraction and defining 'distributed' at that level but, as
-such, it will also offer a relative definition of the class of system to which
-the pilot belongs and, as such, not a very interesting one.}
+% \mtnote{I have been assuming that a \pilotjob is always a type of distributed
+% system. Do you agree?}. \jhanote{This needs discussion. It is definitely a
+% system, and definitely a software system. But is a distributed tool or a
+% distributed service always also a distributed system?} \mtnote{I guess we need
+% to pin down a proper definition of distributed system. Do you have a preferred
+% one?} \mtnote{After a shared discussion, we decided to change the paragraph so
+% that the issue does not arise. The issue itself can be addressed by pinning
+% down the level of abstraction and defining 'distributed' at that level but, as
+% such, it will also offer a relative definition of the class of system to which
+% the pilot belongs and, as such, not a very interesting one.}
 
 Both core and auxiliary properties have a direct impact on the multiple use
 cases for which \pilotjob systems are currently engineered and deployed. For
@@ -1249,21 +1249,25 @@ Clean up Table 1 removing 'Infrastructure'.}
 
 \begin{itemize}
 
-\item \textbf{Pilot Characteristics}: In \S\ref{sec:vocabulary} pilots have 
-been defined as placeholders for resources. As such, the characteristics of
-each pilot depends upon the type and capabilities of the resource it exposes.
-Pilots usually expose computing resources but, depending on the capabilities
-offered by the infrastructure where the pilot is instantiated, they might also
-expose data and network capabilities. Within the domain of each type of
-resource and infrastructure, some of the typical characteristics of pilots are:
-Size (e.g. number of cores), lifespan, intercommunication (e.g. low-latency or
-inter-domain), computing platforms (e.g. x86, Cray, or CUDA), file systems
-(e.g. local, shared, or distributed). \jhanote{Opening clause, needs revision. 
-Sorry I can't proffer something, as I'm not sure of the intent}\jhanote{I'm a
-bit confused between resource and infrastructure semantics now. See general
-remark at the end of Core Properties. Does that help refine this
-paragraph?}\mtnote{I tried to make it more consistent with the definitions we 
-gave in S3.}
+\item \textbf{Pilot Characteristics}: In \S\ref{sec:vocabulary} pilots
+  have been defined as placeholders for resources. As such, the
+  characteristics of each pilot depends upon the type and capabilities
+  of the resource it exposes.  Pilots usually expose computing
+  resources but, depending on the capabilities offered by the
+  infrastructure where the pilot is instantiated, they might also
+  expose data and network capabilities. Within the domain of each type
+  of resource and infrastructure, some of the typical characteristics
+  of pilots are: Size (e.g. number of cores), lifespan,
+  intercommunication (e.g. low-latency or inter-domain), computing
+  platforms (e.g. x86, Cray, or CUDA), file systems (e.g. local,
+  shared, or distributed). 
+
+  % \jhanote{Opening clause, needs revision.  Sorry I can't proffer
+  %   something, as I'm not sure of the intent}\jhanote{I'm a bit
+  %   confused between resource and infrastructure semantics now. See
+  %   general remark at the end of Core Properties. Does that help
+  %   refine this paragraph?}\mtnote{I tried to make it more
+  %   consistent with the definitions we gave in S3.}
 
 \item \textbf{Resource Dependences}: The provisioning of pilots
   depends on how the \pilotjob system interfaces with one or more
@@ -1276,8 +1280,10 @@ gave in S3.}
   system needs about the states and capabilities of the targeted
   infrastructure.
 
-\item \textbf{Coordination and Communication}. \mtnote{To be decided whether 
-we need it. I think we do.}
+\item \textbf{Coordination and Communication}. \mtnote{To be decided
+  whether we need it. I think we do.}\jhanote{to be
+  discussed/determined after 20th November based upon feedback and
+  analysis from 4.2 update/refinements}
 
 \item \textbf{Workload Semantics}: The tasks of a workload are
   dispatched to pilots depending on their semantics. Specifically,
@@ -1288,23 +1294,27 @@ we need it. I think we do.}
   implementations support a varying degree of semantic richness for
   the workload and its tasks.
 
-\item \textbf{Task Binding Characteristics}: One of the core functionalities 
-implied by Task Dispatching is the binding of tasks to pilots. Without such
-capability, it would not be possible to know where to dispatch tasks, pilots
-could not be used to run tasks and, as such, the whole \pilotjob system would
-not be usable. As seen in \S\ref{sec:vocab}, \pilotjob systems may allow for
-two main types of binding between tasks and pilots: early binding and late
-binding. \pilotjob implementations differ in whether and how they support these
-two types of binding. Specifically, while there might be implementations that
-only support a single type of binding behavior, they might also differ in
-whether they allow for the users to control directly what type of binding is
-performed, and in whether both types of binding are available on an
-heterogeneous pool of resources. \jhanote{I agree with the discussion above, 
-but there is case to be made that at some stage, we will have to argue why this
-is a core and not an auxiliary property, as one could just reduce this to an
-issue of control/implicit versus explicit?}\mtnote{I added a first try at an
-explanation. We can stop to the first sentence if you think it is sufficient
-otherwise we can leave also the following.}
+\item \textbf{Task Binding Characteristics}: One of the core
+  functionalities implied by Task Dispatching is the binding of tasks
+  to pilots. Without such capability, it would not be possible to know
+  where to dispatch tasks, pilots could not be used to run tasks and,
+  as such, the whole \pilotjob system would not be usable. As seen in
+  \S\ref{sec:vocab}, \pilotjob systems may allow for two main types of
+  binding between tasks and pilots: early binding and late
+  binding. \pilotjob implementations differ in whether and how they
+  support these two types of binding. Specifically, while there might
+  be implementations that only support a single type of binding
+  behavior, they might also differ in whether they allow for the users
+  to control directly what type of binding is performed, and in
+  whether both types of binding are available on an heterogeneous pool
+  of resources.
+
+% \jhanote{I agree with the discussion above, but there is case to be
+%   made that at some stage, we will have to argue why this is a core
+%   and not an auxiliary property, as one could just reduce this to an
+%   issue of control/implicit versus explicit?}\mtnote{I added a first
+%   try at an explanation. We can stop to the first sentence if you
+%   think it is sufficient otherwise we can leave also the following.}
 
 \item \textbf{Deployment Strategies}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
@@ -1320,28 +1330,33 @@ otherwise we can leave also the following.}
 
 \end{itemize}
 
-\jhanote{General comment: I can't remember if we distinguish
-  explicitly resources: compute, data and/or network; infrastructure:
-  specific physical realization of a resource. If not, we should
-  mention upstream}\mtnote{Yes, we define them along these lines in S3.}
+% \jhanote{General comment: I can't remember if we distinguish
+%   explicitly resources: compute, data and/or network; infrastructure:
+%   specific physical realization of a resource. If not, we should
+%   mention upstream}\mtnote{Yes, we define them along these lines in S3.}
 
 \subsubsection{Auxiliary properties}
 
 \begin{itemize}
 
-\item \textbf{Architecture}: \pilotjob systems may be implemented by means of
-different type of architectures (e.g service-oriented, client-server, or peer-
-to-peer). For example, it is conceivable that architectural choices influence
-if not preclude certain deployment strategies. The analysis and comparison of
-architectural choices is limited to the trade-offs implied by such a choice,
-especially when considering how they affect the Core Properties listed in the
-previous Subsection. \jhanote{A simple/quick example would help appreciate the 
-latter sentence; currently not sure. What about the     following?: ``For
-example, it is conceivable that architectural     choices/decisions influence
-if not preclude certain deployment     strategies.''}\mtnote{Thank you.
-Integrated into the text.}  \jhanote{sytlistic/consistency: either we use
-``Core Properties'' or ``core properties''. Can ignore for now,     but please
-converge/keep in mind.}\mtnote{Done.}
+\item \textbf{Architecture}: \pilotjob systems may be implemented by
+  means of different type of architectures (e.g service-oriented,
+  client-server, or peer- to-peer). For example, it is conceivable
+  that architectural choices influence if not preclude certain
+  deployment strategies. The analysis and comparison of architectural
+  choices is limited to the trade-offs implied by such a choice,
+  especially when considering how they affect the Core Properties
+  listed in the previous Subsection.
+
+% \jhanote{A simple/quick example would help appreciate the latter
+%   sentence; currently not sure. What about the following?: ``For
+%   example, it is conceivable that architectural choices/decisions
+%   influence if not preclude certain deployment
+%   strategies.''}\mtnote{Thank you.  Integrated into the text.}
+
+% \jhanote{sytlistic/consistency: either we use ``Core Properties'' or
+%   ``core properties''. Can ignore for now, but please converge/keep
+%   in mind.}\mtnote{Done.}
 
 \item \textbf{Interfaces}: The implementations of \pilotjob systems
   may present several types of interfaces. For example, there are
@@ -1366,12 +1381,14 @@ converge/keep in mind.}\mtnote{Done.}
   multiple users are allow to utilize the same instance of a \pilotjob
   system, while when available at local level, multiple users may use
   the same pilot instance or any other component implemented within the 
-  \pilotjob system.\jhanote{Editorial/Minor
-    note: I think I know what you mean by ``service within the PJS'', but it is
-    not explained or detailed somewhere. Maybe use vocabulary/terminology
-    already defined?}\mtnote{Thanks. I went for components alone because
-    services would still be components of a \pilotjob system. Service are a way
-    to implement its components.}
+  \pilotjob system.
+
+  % \jhanote{Editorial/Minor note: I think I know what you mean by
+  %   ``service within the PJS'', but it is not explained or detailed
+  %   somewhere. Maybe use vocabulary/terminology already
+  %   defined?}\mtnote{Thanks. I went for components alone because
+  %   services would still be components of a \pilotjob
+  %   system. Service are a way to implement its components.}
 
 \item \textbf{Robustness}: Used to identify those properties that
   contribute towards the resilience and the reliability of a \pilotjob
