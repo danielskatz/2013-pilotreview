@@ -396,12 +396,15 @@ This was in effect a Master-Worker pattern~\cite{Shao:2000:masterslave}.
 	\label{fig:figures_forecast-factory}
 \end{figure}
 
-As established in the introduction, \pilotjobs have proven to be an effective
-tool for task parallelism.
-(Note that the name \textit{\pilotjob} was not used before X, and was introduced
-by Y.)
-One common use for the \pilotjob paradigm is the afore mentioned Master-Worker
-(M-W) scheme and it's associated frameworks.
+As established in the introduction, \pilotjobs have proven to be an
+effective tool for task parallelism.  (Note that the name
+\textit{\pilotjob} was not used before X, and was introduced by Y.)
+One common use for the \pilotjob paradigm is the afore mentioned
+Master-Worker (M-W) scheme and it's associated
+frameworks. \jhanote{Mark: I propose the following: One common use for
+  the M-W scheme is to serve as the coordination substrate for PJs. I
+  know its a bit nebulous, but it connects the two concepts directly,
+  which is the goal here}
 
 In the context of distributed systems, the M-W scheme was initially used for
 farming tasks from a master to a various number of workers, and could easily be
@@ -423,7 +426,7 @@ application-level scheduling.
 For this purpose, AppLeS provides an agent that can be embedded into an
 application enabling the application to acquire resources (e.\,g.\ via Globus,
 SSH or Legion) and efficiently schedule tasks onto these.
-Besides M/W, AppLeS provides also different application templates, e.\,g.\ for
+Besides M-W, AppLeS provides also different application templates, e.\,g.\ for
 parameter sweep and moldable parallel applications
 ~\cite{Berman:2003:ACG:766629.766632}.
 
@@ -474,18 +477,17 @@ queue reservation time still was an issue.
 % \msnote{Why was queue reservation time still an issue if there was user-level
 % control?}
 This brought about the idea of placeholder
-scheduling~\cite{Pinchak02practicalheterogeneous}.
-A placeholder was an early \pilot mechanism in that it was an abstraction layer
-above the various batch queuing systems available on different resources.
-It held a \textit{place} in the regular batch queue, and when it became active,
-it could pull tasks to execute.
-Placeholder scheduling was advantageous in that it did not require any special
-superuser privileges on the machines, which was something most grid users did
-not have access to.
-It also provided a means of load balancing across the different resources.
-As placeholder scheduling evolved, it came to include dynamic monitoring and
-throttling of the different placeholders based on the queue times on the
-machines.
+scheduling~\cite{Pinchak02practicalheterogeneous}.  A placeholder was
+an early \pilot mechanism in that it was an abstraction layer above
+the various batch queuing systems available on different resources.
+It held a \textit{place} in the regular batch queue, and when it
+became active, it could pull tasks to execute.  Placeholder scheduling
+was advantageous in that it did not require any special super-user
+privileges on the machines, which was something most grid users did
+not have access to.  It also provided a means of load balancing across
+the different resources.  As placeholder scheduling evolved, it came
+to include dynamic monitoring and throttling of the different
+placeholders based on the queue times on the machines.
 
 %Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
 %provisioning of the placeholder job capability. 
@@ -515,11 +517,14 @@ projects started using the M-W approach to achieve high-throughput calculations
 for a wide range of problems.
 %This also used a pull based model, as there was no central control of these
 %resources.
-These volunteer resources can be all around the world, users merely have to
-download a client program, and it runs in the background on their computer.
-The idea of farming out tasks in a distributed environment including personal
-computers was powerful in that it essentially made a computing grid out of many
-less powerful machines.
+These volunteer resources could be distributed around the world, users
+merely have to download a client program, and it runs in the
+background on their computer.  The volunteer workers were essentially
+heterogeneous and the pool of workers more dynamic, as opposed to
+essentially homogeneous and static in AppLeS. The idea of farming out
+tasks in a distributed environment including personal computers was
+powerful in that it essentially made a computing grid out of many less
+powerful machines.
 
 The first public volunteer computing project was The Great Internet Mersenne
 Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
@@ -541,6 +546,8 @@ This in contrast with when there is an orchestrated set of resources requested
 by the master, in that case the master can for example equally divide the tasks
 over the allocated masters.
 
+
+
 Condor is a high-throughput distributed batch computing system. Originally
 Condor was made for systems within one administrative domain.
 With Flocking~\cite{Epema:1996:flocking}, it was possible to group multiple
@@ -555,21 +562,20 @@ local condor pool and run their jobs on the added resource the same way that
 all condor jobs are submitted.
 % A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
 % distinctive feature? Arent the universes just labels anway?}.
-On the remote resource a set of Condor daemons is started, which then registers
-the available job slots with the central Condor pool.
-The resources added are available only for the user who added the resource to
-the pool, thus giving complete control over the resources for managing jobs
-without any queue waiting time.
-Glide-in installs and executes necessary Condor daemons and configuration on
-the remote resource, such that the resource reports to and joins the local
-Condor pool.
+On the remote resource a set of Condor daemons is started, which then
+registers the available job slots with the central Condor pool.  The
+resources added are available only for the user who added the resource
+to the pool, thus giving complete control over the resources for
+managing jobs without any queue waiting time.  Glide-in installs and
+executes necessary Condor daemons and configuration on the remote
+resource, such that the resource reports to and joins the local Condor
+pool. Various systems that built on the \pilot
+capabilities of Condor-G/Glide-in have been developed, e.\,g.\
+Bosco~\cite{bosco}.
+
 %Glide-in is limited in that the daemons must be running on a given resource,
 %meaning that this process must be approved by resource owners or system
 %administrators.
-Various systems that built on the \pilot capabilities of Condor-G/Glide-in have
-been developed, e.\,g.\ Bosco~\cite{bosco}, GlideinWMS and
-GlideCAF~\cite{Belforte:2006:glidecaf}.
-
 
 % Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like
 % capability on Microsoft Azure clouds called a Generic Worker. The
@@ -583,19 +589,31 @@ GlideCAF~\cite{Belforte:2006:glidecaf}.
 % existing cyberinfrastructures still have powerful grid computers that
 % can also be leveraged to assist with the data-driven computations.
 
-While core PJ systems mainly focus on providing simple \pilot capabilities
-commonly in application space, many of these systems evolved towards or were
-extended to \pilot-based workload managers.
-Such systems which are often centrally hosted, move critical functionality from
-the client to the server (i.e. a service model).
-These systems usually deploy \pilot factories that automatically start new
-\pilots on demand and integrate security mechanisms to support multiple users
+While core PJ systems mainly focus on providing simple \pilot
+capabilities commonly in application space, many of these systems
+evolved towards or were extended to \pilot-based workload managers.
+For example, various systems that built on the \pilot capabilities
+have been developed, e.\,g.\ GlideinWMS and
+GlideCAF~\cite{Belforte:2006:glidecaf}, and
+PanDa~\cite{1742-6596-331-7-072069}.  These higher-level systems which
+are often centrally hosted, move critical functionality from the
+client to the server (i.e. a service model).  These systems usually
+deploy \pilot factories that automatically start new \pilots on demand
+and integrate security mechanisms to support multiple users
 simultaneously.
-Several of these have been developed in the context of the LHC experiment at
-CERN, e.\,g.\ GlideInWMS, DIRAC~\cite{1742-6596-219-6-062049},
-PanDa~\cite{1742-6596-331-7-072069}, AliEn~\cite{1742-6596-119-6-062012} and
-Co-Pilot~\cite{copilot-tr}.
-Each of these \pilots serves a particular user community and experiment.
+
+Several of these have been developed in the context of the LHC
+experiment at CERN, which is associated with a major increase in the
+uptake and availability of \pilots, e.\,g.\ GlideInWMS,
+DIRAC~\cite{1742-6596-219-6-062049},
+PanDa~\cite{1742-6596-331-7-072069},
+AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}.
+Each of these \pilots serves a particular user community and
+experiment. Interestingly, we observe that these \pilots are
+functionaly very similar, work on almost the same underlying
+infrastructure and serve applications with very similar (if not
+identical) characteristics.
+
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor-G/Glide-in.
@@ -608,13 +626,14 @@ hide rather than expose the \pilot capabilities from the user.
 GlideinWMS is currently deployed in production on the Open Science Grid
 (OSG)~\cite{url_osg} and is the recommended mode for accessing OSG resources.
 
-The PanDA~\cite{1742-6596-331-7-072069} workload management systems is also
-based on Condor-G/Glidein. In contrast with a Condor-G only approach,
-PanDA can utilize multiple queues; each \pilot is assigned to a certain PanDA
-internal queue. PanDA also provides the ability to manage data associated the
-jobs managed by the PanDA workload manager.
-In comparison with the generic functionality of GlideinWMS, PanDA is much more
-specific to its application/community.
+In comparison with the generic functionality of GlideinWMS,
+PanDA~\cite{1742-6596-331-7-072069} workload management systemsis much
+more specific to its application/community. However it has been
+extended to use Condor-G/Glidein, in addition to its native \pilot
+system.  Furthemore, in contrast with a Condor-G only approach, PanDA
+can utilize multiple queues; each \pilot is assigned to a certain
+PanDA internal queue. PanDA also provides the ability to manage data
+associated the jobs managed by the PanDA workload manager.
 
 In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides
 the ability to tightly integrate storage and compute resources and is also able
@@ -636,11 +655,13 @@ Co-Pilot serves as integration point between different grid \pilotjob systems
 Co-Pilot is based more on the actual submission of jobs and is limited in its
 user-level controllability and allowance of application-level programming.
 
-In addition to the \pilotjob systems developed around the LHC experiment,
-several other systems emerged. GWPilot~\cite{gwpilot} is a \pilot systems that
-is based on the GridWay meta-scheduler. GWPilot particularly emphasizes its
-multi-user support and the support for standards, such as DRMAA, OGSA-BES and
-JSDL.
+In addition to the \pilotjob systems developed around the LHC
+experiment, several other systems emerged. GWPilot~\cite{gwpilot} is a
+\pilot systems that is based on the GridWay meta-scheduler. GWPilot in
+particular, emphasizes its multi-user support and the support for
+standards, such as DRMAA, OGSA-BES and JSDL. \jhanote{will need
+  references to these obscure acronyms! Furthermore, must check that
+  the reference to GWPilot is kosher}
 
 % \msnote{In what way are these systems intrinsically pilot based? I think for
 % example with Pegasus, it can make use of pilots, but uses it as just yet
@@ -656,13 +677,12 @@ JSDL.
 % purpose PJ system (e.\,g\ Pegasus/Condor-G). In case (i), the PJ
 % system is also often exposed as stand-alone, multi-purpose \pilotjob systems.
 
-In the context of scientific workflows, \pilotjob systems have been
-proven as effective tool for managing the workload.
-For the Pegasus project, the Corral
-system~\cite{Rynge:2011:EUG:2116259.2116599} was developed as a frontend to
-GlideinWMS.
-In contrast to GlideinWMS, Corral provides more explicit control over the
-placement and start of \pilots to the end-user.
+In the context of scientific workflows, \pilotjob systems have proven
+an effective tool for managing the workload.  For the Pegasus project,
+the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
+as a front-end to GlideinWMS.  In contrast to GlideinWMS, Corral
+provides more explicit control over the placement and start of \pilots
+to the end-user.
 % In contrast to GlideinWMS, Corral-Glide-Ins are run using
 % the credential of the user and not a VO credential.
 Corral has been developed to support the requirements of the Pegasus workflow
@@ -697,25 +717,32 @@ machines without needing any prior installation on the machine.
 Coaster relies on a master/worker coordination model.
 % communication is implemented using GSI-secured TCP sockets.
 SWIFT supports various scheduling mechanisms on top of Coaster, e.\,g.\ a FIFO
-and a load-aware scheduler.
+and a load-aware scheduler. 
 
-Further, SWIFT can be used in conjunction with other PJ systems,
-e.\,g.\ Falkon~\cite{1362680}.
-Falkon refers to pilots as the so called provisioner, which are created using
-the Globus GRAM service.
-The provisioner spawns a set of executor processes on the allocated resources,
-which are then responsible for managing the execution of task.
-Tasks are submitted via a so called dispatcher service.
-Falkon also utilizes a master-work coordination model, i.\,e.\ the executors
-periodically query the dispatcher for new tasks.
-Falkon was specifically engineered for many small tasks and shows high
+\jhanote{I think the previous paragraph can be highly reduced. The
+  next paragraph should be modified to highlight that {\bf
+    specialized} pilots have also emerged, namely falkon to support
+  many short running jobs on HPC systems. This is an important point
+  to make and speaks to the success of the pilot concept}
+
+Further, SWIFT can be used in conjunction with other \pilot systems,
+e.\,g.\ Falkon~\cite{1362680}.  Falkon refers to pilots as the so
+called provisioner, which are created using the Globus GRAM service.
+The provisioner spawns a set of executor processes on the allocated
+resources, which are then responsible for managing the execution of
+task.  Tasks are submitted via a so called dispatcher service.  Falkon
+also utilizes a master-work coordination model, i.\,e.\ the executors
+periodically query the dispatcher for new tasks.  Falkon was
+specifically engineered for many small tasks and shows high
 performance compared to native queuing systems.
 % Web services are used for communication\msnote{between?}.
 
-WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an application-centric
-environment for supporting drug discovery.
-The architecture utilizes an agent run as a Grid job to pull tasks from a
-central metadata service referred to as AMGA.
+WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an
+application-centric environment for supporting drug discovery.  The
+architecture utilizes an agent run as a Grid job to pull tasks from a
+central metadata service referred to as AMGA. \jhanote{this
+  paragraph/pilot can go. I don't see the new functional feature or
+  increased complexiy that WISDOM introduces}
 
 % A LRMS incorporating a pilot scheme:
 % OAR~\cite{oar} is a batch scheduler system for clusters and other
