@@ -209,8 +209,7 @@ In section \ref{sec:history} we go back in time and look at how the concept of
 \pilotjobs has evolved by dissecting existing \pilotjob systems and systems
 with pilot-like characteristics.
 
-\section{Functional Evolution of Pilot-Jobs}
-\label{sec:history}
+\section{Functional Evolution of Pilot-Jobs}\label{sec:history}
 
 %\subsection{A Functional Approach to Pilot-Jobs}
 %Many scientific communities began running into the same issues:
@@ -805,32 +804,33 @@ an architecture is based on two separate, but intercommunicating
 logical components: a \textbf{ Workload Manager} and a \textbf{Task
   Executor}. The Workload Manager is related to the management of the
 workloads and their tasks; the Task Executor to the execution of the
-tasks on target resources. \jhanote{have we defined workloads and
-  tasks?} As will be shown in \S\ref{sec:4}, the implementations of
-both components significantly vary from system to system, with one or
-more elements responsible for specific functionalities both on
-application as well as infrastructure level. Nevertheless, the two
-logical components can be consistently distinguished and isolated
-across different \pilotjob systems.
+tasks on target resources.  As will be shown in \S\ref{sec:4}, the
+implementations of both components significantly vary from system to
+system, with one or more elements responsible for specific
+functionalities both on application as well as infrastructure
+level. Nevertheless, the two logical components can be consistently
+distinguished and isolated across different \pilotjob systems.
 
 For example, looking at the core \pilotjob systems introduced in
-\S\ref{ssec:informal}, the scheduler and dispatcher of Nimrod-G belong
-to the logical component dedicated to workload management, while the
-job-wrapper belongs to the component responsible for task
-execution. Similar examples can be given for the advanced \pilotjob
-systems and for Pilot-based frameworks: GlideinWMS \jhanote{we'll need
-  to be careful to not conflate a WMS with a PJ systems. It may be
-  just a matter of naming, ie replace GlideWMS with Condor-G, but
-  needs care either way..} offers an extended set of features when
-compared to the scheduler and dispatcher of Nimrod-G, but all those
-features belong to the same, well-defined and self-contained logical
-component --- i.e. the one in charge of managing the workloads. The
-same is valid for Corral and \jhanote{Need to replace SWIFT with
-  Coasters -- SWIFT is a workflow language; coasters is the underlying
-  pilot implementation.} SWIFT: both offer evolved functionalities and
-interfaces to manage workloads but, as such, both are part of an
-architecture where workload management and task execution belong to
-two distinct components.
+\S\ref{ssec:history}, the scheduler and dispatcher of Nimrod-G
+\jhanote{this is now a stale statement, as Nimrod is not discussed in
+  Section\ref{ssec:history}} belong to the logical component
+dedicated to workload management, while the job-wrapper belongs to the
+component responsible for task execution. Similar examples can be
+given for the advanced \pilotjob systems and for Pilot-based
+frameworks: GlideinWMS \jhanote{we'll need to be careful to not
+  conflate a WMS with a PJ systems. It may be just a matter of naming,
+  ie replace GlideWMS with Condor-G, but needs care either way..}
+offers an extended set of features when compared to the scheduler and
+dispatcher of Nimrod-G, but all those features belong to the same,
+well-defined and self-contained logical component --- i.e. the one in
+charge of managing the workloads. The same is valid for Corral and
+\jhanote{Need to replace SWIFT with Coasters -- SWIFT is a workflow
+  language; coasters is the underlying pilot implementation.} SWIFT:
+both offer evolved functionalities and interfaces to manage workloads
+but, as such, both are part of an architecture where workload
+management and task execution belong to two distinct
+components. \jhanote{fix previous sentence}
 
 The Workload Manager and the Task Executor are separate and
 well-defined logical components that communicate and coordinate in
@@ -871,17 +871,16 @@ assigned portions of the DCI's resources.
 The minimal set of functionalities that needs to be implemented by a
 \pilotjob system involves \textbf{\pilot provisioning} and
 \textbf{task dispatching}.  \jhanote{need to justify the above
-  sentence. Note I'm using the distinction between core and minimal.}
-\pilot provisioning is a core functionality of every \pilot system
-because it is essential for the creation of resource overlays. This
-type of overlay allows for tasks to utilize resources without directly
-depending on the capabilities exposed by the targeted DCI. Pilots are
-scheduled to the DCI resources by means of the DCI capabilities but,
-once scheduled and then run, pilots make those resources directly
-available for the execution of the tasks of a workload.  Thanks to
-resource overlays, \pilot systems can also implement functionalities
-tailored to the requirements of specific user communities [cit, cit,
-cit].
+  sentence.} \pilot provisioning is a core functionality of every
+\pilot system because it is essential for the creation of resource
+overlays. This type of overlay allows for tasks to utilize resources
+without directly depending on the capabilities exposed by the targeted
+DCI. Pilots are scheduled to the DCI resources by means of the DCI
+capabilities but, once scheduled and then run, pilots make those
+resources directly available for the execution of the tasks of a
+workload.  Thanks to resource overlays, \pilot systems can also
+implement functionalities tailored to the requirements of specific
+user communities [cit, cit, cit].
 
 The procedures and mechanisms to provision pilots depend on the capabilities
 exposed by the targeted DCI and on the implementation of the considered \pilot
@@ -975,11 +974,11 @@ into one or more programs to be executed on a DCI.
 \item[Infrastructure.] Structured set of resources, possibly
   geographically and institutionally separated from the users
   utilizing those resources to execute one or more workloads. [cit,
-  cit] Infrastructures can be logically partitioned, with a direct or
-  indirect mapping onto individual pools of hardware. Commonly,
+    cit] Infrastructures can be logically partitioned, with a direct
+  or indirect mapping onto individual pools of hardware. Commonly,
   Infrastructure can be used also to indicate a DCI. \jhanote{I think
     this entry should be removed from table 1, just like application
-    does no find a mention in table 1?}
+    does not find a mention in table 1?}
 
 \end{description}
 
