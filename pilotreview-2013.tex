@@ -398,10 +398,10 @@ This was in effect a Master-Worker pattern~\cite{Shao:2000:masterslave}.
 
 As established in the introduction, \pilotjobs have proven to be an effective
 tool for task parallelism.
-Note that the name \textit{\pilotjob} was not used before X, and was introduced
-by Y.
-One common use for the \pilotjob paradigm is the before mentioned Master-Worker
-(M-W) scheme and associated frameworks.
+(Note that the name \textit{\pilotjob} was not used before X, and was introduced
+by Y.)
+One common use for the \pilotjob paradigm is the afore mentioned Master-Worker
+(M-W) scheme and it's associated frameworks.
 
 In the context of distributed systems, the M-W scheme was initially used for
 farming tasks from a master to a various number of workers, and could easily be
@@ -676,25 +676,26 @@ abstract workflows and computations.
 The language provides among many things capabilities for executing external
 application as well as the implicit management of data flows between
 application tasks.
-For this purpose, SWIFT formalizes the way that applications can define
-data-dependencies.
-Using so called mappers, these dependencies can be easily extended to files or
-groups of files.
+% For this purpose, SWIFT formalizes the way that applications can define
+% data-dependencies.
+% Using so called mappers, these dependencies can be easily extended to files or
+% groups of files.
 The runtime environment handles the allocation of resources and the spawning of
 the compute tasks.
 Both data- and execution management capabilities are provided
 via abstract interfaces.
-The Coaster system~\cite{coasters} has been
-developed to address the workload management requirements of Swift
-supporting various infrastructures, such as both cloud and grid.
+
+The Coaster system~\cite{coasters} has been developed to address the workload
+management requirements of Swift supporting various infrastructures, such as
+both cloud and grid.
 Using the Coaster service, one executes a Coaster Master on a head node, and
 the Coaster workers run on compute nodes to execute jobs.
-Coasters offers a zero-install feature in which it deploys itself and installs
-itself from the head node and onto the virtual machines \msnote{Where does the
-virtual machine suddenly come from?} without needing any prior installation on
-the machine.
-Coaster relies on a master/worker coordination model; communication is
-implemented using GSI-secured TCP sockets.
+In the case of cloud computing, Coasters offers a zero-install feature in which
+it deploys itself and installs itself from the head node and onto the virtual
+machines without needing any prior installation on the machine.
+% \msnote{Where does the virtual machine suddenly come from?}
+Coaster relies on a master/worker coordination model.
+% communication is implemented using GSI-secured TCP sockets.
 SWIFT supports various scheduling mechanisms on top of Coaster, e.\,g.\ a FIFO
 and a load-aware scheduler.
 
@@ -702,12 +703,13 @@ Further, SWIFT can be used in conjunction with other PJ systems,
 e.\,g.\ Falkon~\cite{1362680}.
 Falkon refers to pilots as the so called provisioner, which are created using
 the Globus GRAM service.
-The provisioner spawns a set of executor processes on the
-allocated resources, which are then responsible for managing the
-execution of task.
+The provisioner spawns a set of executor processes on the allocated resources,
+which are then responsible for managing the execution of task.
 Tasks are submitted via a so called dispatcher service.
 Falkon also utilizes a master-work coordination model, i.\,e.\ the executors
-periodically query the dispatcher for new SUs\msnote{SUs?}.
+periodically query the dispatcher for new tasks.
+Falkon was specifically engineered for many small tasks and shows high
+performance compared to native queuing systems.
 % Web services are used for communication\msnote{between?}.
 
 WISDOM~\cite{Ahn:2008:ITR:1444448.1445115,wisdom} is an application-centric
