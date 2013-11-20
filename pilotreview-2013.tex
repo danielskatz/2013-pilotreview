@@ -575,7 +575,11 @@ However, this mode of operation was limited to system space by the owners of
 the individual Condor systems and could be done on application level.
 \mrnote{There's a better way to word this previous sentence. system-space vs 
 user-space is more of a technical slang in this context. We should just
-improve the readability.= U ===
+improve the readability. Also, the however doesn't seem to fit with the conjunction -
+like however, it runs only in system space and this could be done on application
+level? i was wondering if this should be couldn't? but not sure. anyway, maybe
+just say that this mode of operation was limited in that Condor was only
+available on the systems in which administrators installed the software.}
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept.
 Glide-in is a mechanism by which a user can add remote grid resources to the
@@ -610,6 +614,9 @@ Bosco~\cite{bosco}.
 % existing cyberinfrastructures still have powerful grid computers that
 % can also be leveraged to assist with the data-driven computations.
 
+\mrnote{What are core PJ systems? Core pilot job systems =
+those that provide only simple pilot capabilities? What are
+simple pilot capabilities? Not sure this has been established.}
 While core PJ systems mainly focus on providing simple \pilot
 capabilities commonly in application space, many of these systems
 evolved towards or were extended to \pilot-based workload managers.
@@ -631,8 +638,8 @@ PanDa~\cite{1742-6596-331-7-072069},
 AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}.
 Each of these \pilots serves a particular user community and
 experiment. Interestingly, we observe that these \pilots are
-functionaly very similar, work on almost the same underlying
-infrastructure and serve applications with very similar (if not
+functionally very similar, work on almost the same underlying
+infrastructure, and serve applications with very similar (if not
 identical) characteristics.
 
 
@@ -648,10 +655,10 @@ GlideinWMS is currently deployed in production on the Open Science Grid
 (OSG)~\cite{url_osg} and is the recommended mode for accessing OSG resources.
 
 In comparison with the generic functionality of GlideinWMS,
-PanDA~\cite{1742-6596-331-7-072069} workload management systemsis much
-more specific to its application/community. However it has been
+PanDA~\cite{1742-6596-331-7-072069} workload management system is much
+more specific to its application/community. However, it has been
 extended to use Condor-G/Glidein, in addition to its native \pilot
-system.  Furthemore, in contrast with a Condor-G only approach, PanDA
+system.  Furthermore, in contrast with a Condor-G only approach, PanDA
 can utilize multiple queues; each \pilot is assigned to a certain
 PanDA internal queue. PanDA also provides the ability to manage data
 associated the jobs managed by the PanDA workload manager.
@@ -666,24 +673,31 @@ model~\cite{Saiz:2003:alien}.
 
 DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload
 management system built on top of \pilots.
-As PanDA and AliEn it supports the management of data, which can be placed in
+Akin to PanDA and AliEn, it supports the management of data, which can be placed in
 different kinds of storage elements (e.\,g.\ based on SRM).
+
+\mrnote{Do we really want to start comparing/contrasting these certain PJs
+that much? This was just the history - but these last 3 paras seems like they
+are more about a comparison than just a history}
 
 Another interesting \pilot that is used in the LHC context is
 Co-Pilot~\cite{copilot-tr}.
-Co-Pilot serves as integration point between different grid \pilotjob systems
+Co-Pilot serves as an integration point between different grid \pilotjob systems
 (such as AliEn and PanDA) and clouds.
 Co-Pilot is based more on the actual submission of jobs and is limited in its
 user-level controllability and allowance of application-level programming.
 
 In addition to the \pilotjob systems developed around the LHC
 experiment, several other systems emerged. GWPilot~\cite{gwpilot} is a
-\pilot systems that is based on the GridWay meta-scheduler. GWPilot in
+\pilot system that is based on the GridWay meta-scheduler. GWPilot, in
 particular, emphasizes its multi-user support and the support for
 standards, such as DRMAA, OGSA-BES and JSDL. \jhanote{will need
   references to these obscure acronyms! Furthermore, must check that
-  the reference to GWPilot is kosher}
-
+  the reference to GWPilot is kosher. No bacon allowed.}
+\mrnote{It seems a little awkward that we say several others
+have emerged, then we say gwpilot is one. but then we go
+into talking in next para about scientific workflows + pjs. 
+Several makes it sound like we have a bunch more to discuss}
 % \msnote{In what way are these systems intrinsically pilot based? I think for
 % example with Pegasus, it can make use of pilots, but uses it as just yet
 % another "job submission backend". In this way, any system that creates "task"
@@ -727,8 +741,8 @@ Both data- and execution management capabilities are provided
 via abstract interfaces.
 
 The Coaster system~\cite{coasters} has been developed to address the workload
-management requirements of Swift supporting various infrastructures, such as
-both cloud and grid.
+management requirements of Swift by supporting various infrastructures, including
+clouds and grids.
 Using the Coaster service, one executes a Coaster Master on a head node, and
 the Coaster workers run on compute nodes to execute jobs.
 In the case of cloud computing, Coasters offers a zero-install feature in which
@@ -764,6 +778,9 @@ architecture utilizes an agent run as a Grid job to pull tasks from a
 central metadata service referred to as AMGA. \jhanote{this
   paragraph/pilot can go. I don't see the new functional feature or
   increased complexiy that WISDOM introduces}
+
+\mrnote{I think this section should kind of conclude with something,
+but I'm not sure what}
 
 % A LRMS incorporating a pilot scheme:
 % OAR~\cite{oar} is a batch scheduler system for clusters and other
