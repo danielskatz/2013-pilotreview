@@ -928,8 +928,7 @@ implementing \pilotjobs but not one of its defining characteristics.
 The described logical components of \pilotjob systems support flexible
 execution strategies along with improved performance in the task
 submission process when compared to scheduling tasks directly on
-DCIs. \mrnote{Im not sure entirely if we are speaking of a distributed
-computing infrastructure or a single machine here.} 
+DCIs.
 The tasks of a workload are bound to one or more Task Executor
 and, as such, to a pilot, without having to be directly scheduled on
 the DCI's job management system.  Furthermore, the binding of tasks to
@@ -944,31 +943,36 @@ computer or machine is not a 'distributed computing infrastructure.'
 Therefore, the assumption when I am reading this is that you may
 be referring to a grid. But are you really talking about a machine? 
 Because if you're talking about a grid, then you know, submitting to the DCI
-would mean submitting to a grid-wide scheduler, not a specific 
-machine-specific scheduler}
+would mean submitting to a grid-wide scheduler, not a 
+machine-specific scheduler. It should be clarified}
 
 The minimal set of functionalities that needs to be implemented by a
 \pilotjob system involves \textbf{\pilot provisioning} and
 \textbf{task dispatching}.  \jhanote{need to justify the above
-  sentence.} \pilot provisioning is a core functionality of every
+  sentence.}\mrnote{Maybe we can say that we will now motivate
+  why we believe the two core functionalities are..., etc. I agree this sounds
+  like a strong claim, maybe the conclusion of the paragraph, not the lead}
+  \pilot provisioning is a core functionality of every
 \pilot system because it is essential for the creation of resource
 overlays. This type of overlay allows for tasks to utilize resources
 without directly depending on the capabilities exposed by the targeted
 DCI. Pilots are scheduled to the DCI resources by means of the DCI
 capabilities but, once scheduled and then run, pilots make those
 resources directly available for the execution of the tasks of a
-workload.  Thanks to resource overlays, \pilot systems can also
+workload. \mrnote{This is a much better and explicit use of DCI} 
+Thanks to resource overlays, \pilot systems can also
 implement functionalities tailored to the requirements of specific
 user communities [cit, cit, cit].
 
 The procedures and mechanisms to provision pilots depend on the capabilities
 exposed by the targeted DCI and on the implementation of the considered \pilot
-system. Typically, for a DCI adopting queue, batch and scheduling systems,
+system. Typically, for a DCI adopting queues, batch and scheduling systems,
 provisioning a pilot involves it being submitted as a job. Conversely, for
 infrastructures that do not adopt a job-based approach, a pilot would
 be executed by means of other types of logical container as, for example, the
 one implemented by means of a Virtual Machine (VM) on so-called
-Infrastructures as a Service (IaaS).
+Infrastructures as a Service (IaaS). \mrnote{Should this be a citation?
+It just sounds weird when it says ``the one''}
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
 pilots for execution. Thanks to resource overlays, task dispatching does not
@@ -1031,9 +1035,10 @@ Task, workload, resource, application?}
 The name `\pilotjob' indicates the primary role played by the concepts of
 `pilot' and `job' in this type of system. The definition of both concepts is
 context-dependent and several other terms needs to be clarified in order to
-offer a coherent terminology. Both `job' and `pilot' needs to be understood in
+offer a coherent terminology. Both `job' and `pilot' need to be understood in
 the context of DCIs, the infrastructures where \pilotjobs systems are
-provisioned. DCIs offer compute, storage, and network resources and
+provisioned\mrnote{Might not need the descriptive clause. We've covered
+that already above.} DCIs offer compute, storage, and network resources and
 \pilotjobs allow for the users to utilize those resources to execute the tasks
 of a workload.
 
@@ -1045,8 +1050,40 @@ of the \pilotjob system.
 \item[Workload.] A set of tasks, possibly correlated, that are instrumental to
 the application to achieve its goal.
 
+\mrnote{We should not use the term workload, as in the definition
+of Application, before it is defined. But then application is used circularly
+around to itself... not sure how to fix that, but we can't expect someone
+to know what 'responsible for the definition of the workload' means when 
+they don't know what a workload is}
+
 \item[Task.] A set of operations specified by the application, that are encoded
 into one or more programs to be executed on a DCI. 
+
+\mrnote{My issue here is, a single workload 
+is a set of tasks. An application, by these definitions, should be comprised
+of a possible series of workloads, even though workload is used in the singular
+to define an application. If an application is *just* a single workload, then the use of the word
+Application is extraneous (strictly going by the definition given above), 
+because then you can just use the term 'Workload' to say the 
+same thing. Note that you can salvage the definition above, if an application is not defined
+as simply a workload definition - i.e. in our asyncre python script, our single workload is really
+just the AMBER tasks, but it is considered an 'Application' (in this case) due to the fact
+that there's other logic in it besides just the workload definition.  If you want to define a workload
+as always singular to an application and just consider the tasks of the workflow to change, 
+then in this case, you still need to strengthen the definition - right now, I can think
+an application is simply the AMBER tasks and the job launch function which hands
+a CU to BigJob. The definition leaves no room for application-level logic, which are
+consumers of the task output, etc. On the note of consumers, I find the use
+of the phrase 'pilot job consumer',
+when not previously discussed or defined in this manner, unclear. At this point, 
+you haven't defined what it means to be a Pilot Job system consumer. It is unclear
+in what way an Application 'consumes' PJ resources (by definition, not by my knowledge)}
+
+\mrnote{Also, the use of the word program - is this all-encompassing, i.e. do you mean
+program binaries and programs? Or do you consider a binary a program? You know,
+if you consider a program, a series of instructions for a computer. It's just the word
+is a little iffy. I would adopt what BigJob uses which is 'application kernel.' or say
+programs and/or binaries}
 
 \item[Resource.] Finite, typed and physical quantity utilized when
   executing one or more workloads. Compute cores, data storage space,
@@ -1072,7 +1109,6 @@ jobs are scheduled and then executed by a batch system.
 
 \item[Job.] A container for one or more programs, a description of their
   properties and indications on how they should be executed.
-
 \end{description}
 
 In the context of a \pilotjob system, jobs and tasks are functionally analogous
