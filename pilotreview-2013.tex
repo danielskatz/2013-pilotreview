@@ -566,22 +566,23 @@ This in contrast with when there is an orchestrated set of resources requested
 by the master, in that case the master can for example equally divide the tasks
 over the allocated masters.
 
-
-
 Condor is a high-throughput distributed batch computing system. Originally
 Condor was made for systems within one administrative domain.
 With Flocking~\cite{Epema:1996:flocking}, it was possible to group multiple
-Condor systems (pools) together so that there resources could be used in an
+Condor systems (pools) together so that their resources could be used in an
 aggregative manner.
 However, this mode of operation was limited to system space by the owners of
-the individual Condor systems and could done on application level.
+the individual Condor systems and could be done on application level.
+\mrnote{There's a better way to word this previous sentence. system-space vs 
+user-space is more of a technical slang in this context. We should just
+improve the readability.= U ===
 Condor-G/Glide-in~\cite{condor-g} is one of the pioneers of the \pilotjob
 concept.
 Glide-in is a mechanism by which a user can add remote grid resources to the
 local condor pool and run their jobs on the added resource the same way that
 all condor jobs are submitted.
 % A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
-% distinctive feature? Arent the universes just labels anway?}.
+% distinctive feature? Arent the universes just labels anyway?}.
 On the remote resource a set of Condor daemons is started, which then
 registers the available job slots with the central Condor pool.  The
 resources added are available only for the user who added the resource
