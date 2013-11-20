@@ -390,6 +390,8 @@ pattern~\cite{Shao:2000:masterslave}.\alnote{Is this really the defining moment
 of the emergence of the master/worker pattern? I would argue that this pattern 
 exists since beginning of humanity....}\mrnote{I agree with AL. This is a stretch,
 and at this point, I feel like I have lost the Pilot mission of this paper.}
+\aznote{Agreed -- this seems like something that would fit in with a layman's
+introduction in a magazine, not directly relevant.}
 
 \begin{figure}[t]
 	\centering
@@ -405,7 +407,7 @@ effective tool for task parallelism.  (Note that the name
 \mrnote{Is the above parenthetical phrase supposed to be in the text
 as is? X vs. Y?}
 One common use for the \pilotjob paradigm is the aforementioned
-Master-Worker (M-W) scheme and it's associated
+Master-Worker (M-W) scheme and its associated
 frameworks. \jhanote{Mark: I propose the following: One common use for
   the M-W scheme is to serve as the coordination substrate for PJs. I
   know its a bit nebulous, but it connects the two concepts directly,
@@ -435,6 +437,7 @@ sure the right way to complete that]}
 Often, the type of scheduler on a one machine was different than that of
 another machine. There was a need for managing the heterogenous, dynamic grid environments,
 especially in terms of dynamic scheduling.
+\aznote{Yes -- at the very least, the term scheduling is used but not defined.}
 
 This drove the creation of AppLeS~\cite{Berman:1996:apples}, a framework for
 application-level scheduling.
@@ -487,13 +490,16 @@ parameter sweep and moldable parallel applications
 \end{figure}
 
 
-Although systems such as AppLeS, gave user-level control of scheduling, initial
+Although systems such as AppLeS gave user-level control of scheduling, initial
 queue reservation time still was an issue.
 % \msnote{Why was queue reservation time still an issue if there was user-level
 % control?}
 \mrnote{Is it really initial queue reservation time or is it really the aggregate 
 wait time of submitting
 many tasks to the same scheduler?}
+\aznote{Agreed -- could maybe add something here about variable workloads/delays
+in-between variable workload processes to motivate further, but that might
+just overly complicate things at this point in time...}
 This brought about the idea of placeholder
 scheduling~\cite{Pinchak02practicalheterogeneous}.  A placeholder was
 an early \pilot mechanism in that it was an abstraction layer above
@@ -551,10 +557,11 @@ secret-key challenge.
 The third large volunteer computing project was the SETI@Home project, which
 set out to analyze radio telescope data.
 Out of this last project, the generic BOINC distributed master-worker framework
-grow \cite{Anderson:2004:BSP:1032646.1033223}.
+grew \cite{Anderson:2004:BSP:1032646.1033223}.
 Applications can be built on top of BOINC for their own scientific endeavors.
 \mrnote{As just an end reader, it is really unclear how this relates to anything.
 Is this supposed to follow from the previous para?}
+\aznote{Yes -- perhaps combine this + last para?  maybe even next para too...}
 
 While in the AppLes and placeholder job scenarios the resources were planned
 from a central place, the resources in the volunteer computing were more of an
@@ -662,6 +669,11 @@ system.  Furthermore, in contrast with a Condor-G only approach, PanDA
 can utilize multiple queues; each \pilot is assigned to a certain
 PanDA internal queue. PanDA also provides the ability to manage data
 associated the jobs managed by the PanDA workload manager.
+\aznote{I believe this paragraph should be headed differently to
+focus on inter-pilot operation which is the biggest contribution
+contrasted to previous paragraphs.  ex ``Multi-\pilotjob operation
+is provided by systems such as PanDA, which is capable of 
+using Condor-G/Glidein in addition to its native \pilot system.''}
 
 In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides
 the ability to tightly integrate storage and compute resources and is also able
@@ -670,6 +682,7 @@ While all data can be accessed from anywhere, the scheduler is aware
 of data localities and attempts to schedule compute close to the data.
 In contrast with GlideinWMS and PanDA, AliEn deploys a pull-based
 model~\cite{Saiz:2003:alien}.
+\aznote{Need ``why''/justification for pull-based model.}
 
 DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload
 management system built on top of \pilots.
@@ -781,6 +794,13 @@ central metadata service referred to as AMGA. \jhanote{this
 
 \mrnote{I think this section should kind of conclude with something,
 but I'm not sure what}
+\aznote{Perhaps ``This evolution of \pilotjobs attests to their 
+usefulness across a wide range of deployment environments and
+application scenarios, but the divergence in specific
+functionality + per-\pilot terminology calls for a standard vocabulary
+to assist in understanding the varied approaches and their 
+commonalities/differences.}
+
 
 % A LRMS incorporating a pilot scheme:
 % OAR~\cite{oar} is a batch scheduler system for clusters and other
