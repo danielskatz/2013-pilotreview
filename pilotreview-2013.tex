@@ -947,7 +947,7 @@ system. Typically, for a DCI adopting queue, batch and scheduling systems,
 provisioning a pilot involves it being submitted as a job. Conversely, for
 infrastructures that do not adopt a job-based approach, a pilot would
 be executed by means of other types of logical container as, for example, the
-one implemented by means of a Virtual Machine (VM) on so called
+one implemented by means of a Virtual Machine (VM) on so-called
 Infrastructures as a Service (IaaS).
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
@@ -1004,6 +1004,9 @@ capabilities just described is defined.
   \S\ref{subsec:vocab_core_functionalities}.}\up}
  \label{table:terminology}
 \end{table*}
+\aznote{Suggest reordering introduction of terms from least to most
+complex to avoid defining a term using a word which is defined later.
+Task, workload, resource, application?} 
 
 The name `\pilotjob' indicates the primary role played by the concepts of
 `pilot' and `job' in this type of system. The definition of both concepts is
@@ -1139,7 +1142,8 @@ scheduling. Pilot systems implement multi-level scheduling because they require
 the scheduling of two types of entities - pilots and tasks - in a distinct
 chronological order. \jhanote{merge the previous sentence with the   paragraph
 beginning with The \pilotjob systems are said to implement multi-level
-scheduling because..}
+scheduling because..} \aznote{Agreed, need to not give two different
+definitons of ``multi-level scheduling'' as well?}
 
 \begin{description}
 
