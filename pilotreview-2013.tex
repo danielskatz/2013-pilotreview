@@ -150,7 +150,7 @@
 
 The seamless uptake of distributed infrastructures by scientific
 applications has been limited by the lack of pervasive and
-simple-to-use abstractions at multiple levels – at the development,
+simple-to-use abstractions at multiple levels � at the development,
 deployment and execution stages. Of all the abstractions proposed to
 support effective distributed resource utilization, a survey of actual
 usage suggested that \pilotjobs were arguably one of the most
@@ -376,7 +376,7 @@ with pilot-like characteristics.
 
 
 When Lewis Fry Richardson in 1922 devised his \textit{Forecast Factory} (Figure 
-\ref{fig:figures_forecast-factory}) it might have been the first
+\ref{fig:figures_forecast-factory}), it might have been the first
 mentioning of large scale parallel computing.
 In determining the necessary processing power for weather forecasting, he
 estimated that 64000 \textit{computers} (human beings in this case) would be
@@ -388,20 +388,23 @@ be collected by the clerk.
 This was in effect a Master-Worker 
 pattern~\cite{Shao:2000:masterslave}.\alnote{Is this really the defining moment 
 of the emergence of the master/worker pattern? I would argue that this pattern 
-exists since beginning of humanity....}
+exists since beginning of humanity....}\mrnote{I agree with AL. This is a stretch,
+and at this point, I feel like I have lost the Pilot mission of this paper.}
 
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=.45\textwidth]{figures/forecast-factory.jpg}
 	\caption{\textit{Forecast Factory} as envisioned by Lewis Fry Richardson.
-    Drawing by François Schuiten.}
+    Drawing by Fran{\c c}ois Schuiten.}
 	\label{fig:figures_forecast-factory}
 \end{figure}
 
 As established in the introduction, \pilotjobs have proven to be an
 effective tool for task parallelism.  (Note that the name
 \textit{\pilotjob} was not used before X, and was introduced by Y.)
-One common use for the \pilotjob paradigm is the afore mentioned
+\mrnote{Is the above parenthetical phrase supposed to be in the text
+as is? X vs. Y?}
+One common use for the \pilotjob paradigm is the aforementioned
 Master-Worker (M-W) scheme and it's associated
 frameworks. \jhanote{Mark: I propose the following: One common use for
   the M-W scheme is to serve as the coordination substrate for PJs. I
@@ -417,10 +420,20 @@ adapting the number of workers to match the resource availability.
 
 As the resources in distributed computing infrastructures adopted more and more
 batch queuing systems, users were forced to submit their jobs individually to a
-scheduler.
+scheduler. \mrnote{I find the above sentence to be grammatically awkward, also
+it does not flow right from the previous sentence, and it provides no context
+as to why distributed computing infrastructures started doing this. It also
+talks about these concepts as if everyone knows what they are. A proposal: 
+As distributed computing infrastructures became more popular and available, 
+user demand drove the need for efficient shared allocation of heterogenous
+resources. Leveraging the batch processing concept, first used in the time
+of punchcards, job schedulers were created to accommodate these needs, often
+called ``batch queuing systems.'' The adoption of batch queuing systems in 
+practice onto clusters and grids meant users were forced to submit their tasks
+individually to the job scheduler (or, queue). [I would say rather than..., but I'm not 
+sure the right way to complete that]} 
 Often, the type of scheduler on a one machine was different than that of
-another machine.
-There was a need for managing the heterogenous, dynamic grid environments,
+another machine. There was a need for managing the heterogenous, dynamic grid environments,
 especially in terms of dynamic scheduling.
 
 This drove the creation of AppLeS~\cite{Berman:1996:apples}, a framework for
