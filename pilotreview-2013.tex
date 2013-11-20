@@ -491,6 +491,9 @@ Although systems such as AppLeS, gave user-level control of scheduling, initial
 queue reservation time still was an issue.
 % \msnote{Why was queue reservation time still an issue if there was user-level
 % control?}
+\mrnote{Is it really initial queue reservation time or is it really the aggregate 
+wait time of submitting
+many tasks to the same scheduler?}
 This brought about the idea of placeholder
 scheduling~\cite{Pinchak02practicalheterogeneous}.  A placeholder was
 an early \pilot mechanism in that it was an abstraction layer above
@@ -550,6 +553,8 @@ set out to analyze radio telescope data.
 Out of this last project, the generic BOINC distributed master-worker framework
 grow \cite{Anderson:2004:BSP:1032646.1033223}.
 Applications can be built on top of BOINC for their own scientific endeavors.
+\mrnote{As just an end reader, it is really unclear how this relates to anything.
+Is this supposed to follow from the previous para?}
 
 While in the AppLes and placeholder job scenarios the resources were planned
 from a central place, the resources in the volunteer computing were more of an
