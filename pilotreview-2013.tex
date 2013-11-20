@@ -889,7 +889,10 @@ charge of managing the workloads. The same is valid for Corral and
 both offer evolved functionalities and interfaces to manage workloads
 but, as such, both are part of an architecture where workload
 management and task execution belong to two distinct
-components. \jhanote{fix previous sentence}
+components. \jhanote{fix previous sentence}\mrnote{I think
+this paragraph may need an entire revisit, since comparison 
+with Nimrod is no longer an option, swift is not a PJ-system, and
+glidein is compared vs nimrod}
 
 The Workload Manager and the Task Executor are separate and
 well-defined logical components that communicate and coordinate in
@@ -897,9 +900,17 @@ order to exchange tasks, input and output files, and related
 data. Communication and coordination are two fundamental
 characteristics of every distributed architecture \jhanote{suggestion:
   we should replace architecture with either tool or infrastructure or
-  something else...}, but we posit that it is not an integral logical
+  something else...},\mrnote{DCI, maybe?} but we posit that it is not an integral logical
 component of \pilotjob systems, nor is any specific communication and
 coordination pattern a defining feature of the \pilotjob paradigm.
+\mrnote{I am really not sold on the claims made in the above paragraph
+and then it is not really helped by the below paragraph.
+I can see maybe you don't call C and C a logical component, but I would
+like an example of a cross-machine pilot job implementation in which there
+is no way to communicate or coordinate with any pilots or tasks.  The exact 
+definitions given in task dispatching are actually C and C, just not called that.
+I am really uncomfortable with the way it is presented as not integral, and I
+think we should table this discussion again.}
 
 For example, as seen in \S\ref{ssec:informal}, the \MW paradigm is
 very common among \pilotjobs. Functionally, the Master can be
@@ -917,7 +928,9 @@ implementing \pilotjobs but not one of its defining characteristics.
 The described logical components of \pilotjob systems support flexible
 execution strategies along with improved performance in the task
 submission process when compared to scheduling tasks directly on
-DCIs. The tasks of a workload are bound to one or more Task Executor
+DCIs. \mrnote{Im not sure entirely if we are speaking of a distributed
+computing infrastructure or a single machine here.} 
+The tasks of a workload are bound to one or more Task Executor
 and, as such, to a pilot, without having to be directly scheduled on
 the DCI's job management system.  Furthermore, the binding of tasks to
 a pilot might happen before or after the pilot has been assigned a
@@ -925,7 +938,14 @@ portion of the DCI's resources, and it can last for the whole time the
 pilot can hold on its resources. This execution strategy requires
 dedicated functionalities both for performing the binding of tasks to
 pilots but also for the provisioning of pilots so that they can be
-assigned portions of the DCI's resources.
+assigned portions of the DCI's resources. \mrnote{This paragraph
+is making it somewhat difficult to understand. A single super
+computer or machine is not a 'distributed computing infrastructure.'
+Therefore, the assumption when I am reading this is that you may
+be referring to a grid. But are you really talking about a machine? 
+Because if you're talking about a grid, then you know, submitting to the DCI
+would mean submitting to a grid-wide scheduler, not a specific 
+machine-specific scheduler}
 
 The minimal set of functionalities that needs to be implemented by a
 \pilotjob system involves \textbf{\pilot provisioning} and
