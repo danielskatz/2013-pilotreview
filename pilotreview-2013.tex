@@ -1237,7 +1237,7 @@ resource.
 %------------------------------------------------------------------------------
 \section{Pilot-Job Systems Implementations}\label{sec:4}
 
-Section \S\ref{sec:vocab} offered two main contributions: A minimal description
+Section \S\ref{sec:vocab} offered two main contributions: a minimal description
 of the logical components and the functionalities of \pilotjob systems, and a
 well-defined core terminology to support reasoning about such systems. The
 former sets the necessary and sufficient requirements for a distributed system
@@ -1308,6 +1308,9 @@ properties we discuss.
 %   are not a closed set of properties, unlike core}\mtnote{First go at
 %   it. Not sure what you mean exactly with 'closed' in this context.}
 % \jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
+\mrnote{Resource Dependences is used a lot here, but I am pretty sure
+dependence cannot be pluralized like that. It might be dependencies?
+PS Merriam-Webster agrees}
 
 \begin{table}
 \centering
@@ -1336,7 +1339,7 @@ properties: the requirements and dependencies between the \pilotjob system and
 the underlying distributed resources; and the type of resources the pilot
 system exposes in terms of computing, data and networking. For example, in
 order to schedule a pilot onto a specific resource, the \pilotjob system will
-need to know what type of container to use - e.g. pilot, virtual machine, what
+need to know what type of container to use (e.g. pilot, virtual machine), what
 type of scheduler the resource exposes, but also what kind of functionalities
 will be available on the nodes of the resource in terms of compute, data and
 networking.
@@ -1473,6 +1476,17 @@ Clean up Table 1 removing 'Infrastructure'.}
 
 \subsubsection{Core properties}
 
+\mrnote{I didn't have a problem with the below paragraph
+until I tried to revise 4.2. As it turns out, Pilot characteristics
+are not core properties of the PJ system but actually of the 
+Pilots themselves. Like, number of cores... how would I answer that?
+The number of cores you can request is system-limited. Lifespan,
+again this depends on wall clock time given to the job. It is hard
+to say okay a core property of BigJob is the characteristics of 
+its Pilots - but I can't go on to say BigJob pilots have X size,
+Y lifespan, etc. because its individual pilot-dependent, and doesn't
+have anything to do with BigJob really}
+
 \begin{itemize}
 
 \item \textbf{Pilot Characteristics}: In \S\ref{sec:vocabulary} pilots
@@ -1494,7 +1508,7 @@ Clean up Table 1 removing 'Infrastructure'.}
   %   general remark at the end of Core Properties. Does that help
   %   refine this paragraph?}\mtnote{I tried to make it more
   %   consistent with the definitions we gave in S3.}
-
+\mrnote{dependences vs dependencies}
 \item \textbf{Resource Dependences}: The provisioning of pilots
   depends on how the \pilotjob system interfaces with one or more
   targeted infrastructure(s). In this context, the degree of coupling
@@ -1509,7 +1523,7 @@ Clean up Table 1 removing 'Infrastructure'.}
 \item \textbf{Coordination and Communication}. \mtnote{To be decided
   whether we need it. I think we do.}\jhanote{to be
   discussed/determined after 20th November based upon feedback and
-  analysis from 4.2 update/refinements}
+  analysis from 4.2 update/refinements}\mrnote{Agree with Mark}
 
 \item \textbf{Workload Semantics}: The tasks of a workload are
   dispatched to pilots depending on their semantics. Specifically,
@@ -1541,7 +1555,9 @@ Clean up Table 1 removing 'Infrastructure'.}
 %   issue of control/implicit versus explicit?}\mtnote{I added a first
 %   try at an explanation. We can stop to the first sentence if you
 %   think it is sufficient otherwise we can leave also the following.}
-
+\mrnote{Deployment strategies sounds like you mean how can
+the pilot job system be deployed, but it turns out it is how the environment
+required by the task can be created.}
 \item \textbf{Deployment Strategies}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
   be set up.  \pilotjob implementations differ in whether and how they
@@ -1602,7 +1618,7 @@ Clean up Table 1 removing 'Infrastructure'.}
   implementations are available with diversified characteristics and
   capabilities.
 
-\item \textbf{Multitenancy}: \pilotjob system may offer multitenancy
+\item \textbf{Multitenancy}: A \pilotjob system may offer multitenancy
   at both system and local level. When offered at system level,
   multiple users are allow to utilize the same instance of a \pilotjob
   system, while when available at local level, multiple users may use
@@ -2880,25 +2896,6 @@ national cyberinfrastructure (e.g., XSEDE).
 
 \subsubsection{Falkon}
 
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
-
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
 \mrnote{Main Falkon ref: \url{http://dev.globus.org/images/7/78/Falkon_SC07_v42.pdf}}
 %\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon}}
 
@@ -3028,24 +3025,49 @@ certain scientific applications.
 
 \subsubsection{BigJob}
 
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
 
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
+%\mrnote{Stabbing at the new format in note form}
+%
+%Application: a BigJob script that can also involve logic
+%and algorithms external to PJ system communication
+%Workload: A set of CUs
+%Task: CU
+%Resource: What is asked for in PCD
+%Infrastructure: Where BJ runs (grids, clouds, clusters)
+%
+%
+%
+%The core properties of BigJob are as follows:
+%
+%Pilot Characteristics can be user-defined using a
+%Pilot Compute Description. Define what that is.
+%Pilot characteristics
+%are often limited by policies on the infrastructures
+%in which they run - i.e. the size and lifespan of a
+%pilot may be limited by max number of cores
+%that can be reserved or max time of a job in local queue
+%
+%Resource dependencies: Not sure what this is. Here is an attempt.
+%BigJob can bootstrap itself into user-space on external targeted 
+%infrastructures, provided that the python version is greater than 2.5.
+%
+%C\&C: Redis
+%
+%Workload semantics: User-defined location affinity, wherein labels
+%can be given to pilots and tasks, so that if the user thinks a CU
+%should run on a certain pilot, the ComputeDataService scheduler
+%tries to place these together. 
+%
+%Binding Characteristics: Late-binding only. Ask someone if this is true.
+%
+%Deployment strategies: Allows for user to define env variables and input arguments.
+%Can use file transfer to move input files around. Env variables are sourced
+%on the given node (resource?) where a task will run, and input arguments
+%are passed to the executable in much the same way as if it were typed
+%by the user on command line.
+%
+%aux capabilities:
+
 
 \paragraph{Rationale}
 BigJob was designed as a flexible and extensible \pilotjob
