@@ -1114,7 +1114,7 @@ jobs are scheduled and then executed by a batch system.
 In the context of a \pilotjob system, jobs and tasks are functionally analogous
 but qualitatively different; it is therefore relevant to highlight their
 distinction. Functionally, both jobs and tasks are containers --- i.e. a set of
-programs with metadata but the term `task' is used when reasoning about
+programs with metadata --- but the term `task' is used when reasoning about
 workloads while `job' is used in relation to a specific type of infrastructure
 where such a container can be executed. Accordingly, tasks are considered as
 the functional units of a workload, while jobs as a way to execute programs on
@@ -1126,7 +1126,20 @@ infrastructures that support or require that type of container.
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots: pilots are programs
 with specific capabilities and are submitted as jobs on the type of DCIs just
-described. In such a context, schedulers, batch processing and queuing define
+described \mrnote{I'm uncomfortable with the word programs again, especially
+for a 'pilot'. Later we say the term pilot = the term agent = the term pilotjob. Not
+sure if I can agree with that - the PilotJob (or Pilot) is just a job (or container)
+you submit to the queue.
+It's not a running program. Just a job, traditional job script. The 'agent' in this
+case is the 'program' that becomes active when the 'job' has become
+active in the batch queue. 
+Remember that earlier we define a job and a task as being two
+separate things (this is at ``CU'' level). But we lump them
+together here by saying that the job (Pilot) is the task (program / set of
+operations that will be performed). Later, binding is discussed. Early
+binding is defined as binding of tasks to inactive pilot. So, if pilot = program,
+the definition is binding tasks to an inactive program?}. 
+In such a context, schedulers, batch processing and queuing define
 the practical boundaries for how and when the pilots can be provisioned on a
 given DCI.
 
