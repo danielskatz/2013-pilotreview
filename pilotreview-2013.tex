@@ -2073,6 +2073,32 @@ diversified usage modes - e.g. HPC, HTC and Cloud.
 % -----------------------------------------------------------------------------
 %
 \subsubsection{\apples}
+\begin{itemize}
+  \item
+    Pilot Characteristics - Lacks true Pilots 
+  \item
+    Resource Dependences - Application-level resource selection
+  \item
+    Workload Semantics - Application-level schedule generation 
+  \item
+    Task Binding Characteristics - Application-level binding 
+  \item
+    Deployment Strategies - App 
+  \item
+    Architecture - App 
+  \item
+    Interfaces - App 
+  \item
+    Interoperability - App 
+  \item
+    Multitenancy - App 
+  \item
+    Robustness - App 
+  \item
+    Security - App 
+  \item
+    Usage Modes - Grid 
+\end{itemize}
 \paragraph{Rationale}
 \apples is an ideal introductory software package to be studied
 as it is a \textit{pre-\pilot} framework; it is capable of
@@ -2242,6 +2268,34 @@ that a full \pilotjob approach offers.
 %% %
 
 \subsubsection{MyCluster}
+\begin{itemize}
+  \item
+    Pilot Characteristics - N/A 
+  \item
+    Resource Dependences - Condor/SGE resources
+  \item
+    Workload Semantics - ``Virtual Login'', CLI user-driven task submission 
+  \item
+    Task Binding Characteristics - Late-binding, pilots must be up before submitting 
+  \item
+    Deployment Strategies - Task manager/slave-node manager  
+  \item
+    Architecture - Client-server, agent manager server proxy manager clients, etc 
+  \item
+    Interfaces - CLI-user-driven 
+  \item
+    Interoperability - Condor/SGE, uni-pilot 
+  \item
+    Multitenancy - Single-user 
+  \item
+    Robustness - Each proxy at gateway maintains pilots in cases of network outage, gateway proxies
+    may go up/down in isolation 
+  \item
+    Security - GSI-Authenticated TCP, 64-bit key checking 
+  \item
+    Usage Modes - HPC/Grid 
+\end{itemize}
+
 \paragraph{Rationale}
 MyCluster was developed to allow users to submit and manage
 jobs across heterogeneous NSF TeraGrid resources in a uniform,
@@ -2448,6 +2502,38 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% %
 
 \subsubsection{\panda}
+
+\begin{itemize}
+  \item
+    Pilot Characteristics - ? 
+  \item
+    Resource Dependences - Condor Glide-in, supports PBS/LSF/others through this, plugin support
+  \item
+    Workload Semantics - job type, priority, input data/locality,  
+  \item
+    Task Binding Characteristics - Late-binding (?)  
+%When the pilot is launched, it collects information about the worker node and sends it to
+%the job dispatcher. If a matching job does not exist, the pilot will end. If a job does exist, the pilot will
+%fork a separate thread for the job and start monitoring its execution.
+  \item
+    Deployment Strategies - DDM handles data transfer, must have database access,
+    file stage-in/out + cleanup 
+  \item
+    Architecture - Client-server 
+  \item
+    Interfaces - Python/HTTP Client 
+  \item
+    Interoperability - Condor/SGE, uni-pilot 
+  \item
+    Multitenancy - Multi-user 
+  \item
+    Robustness - Disk space monitoring, job recovery of failed jobs from restarting
+    from crash if possible 
+  \item
+    Security - GSI Certificate-based security, HTTPS, glExec to run as given user 
+  \item
+    Usage Modes - HTC, Cloud, HPC WIP(?) 
+\end{itemize}
 
 \paragraph{Rationale}
 \panda was developed to provide a multi-user
