@@ -3157,37 +3157,61 @@ Read in morning}
 
 \subsubsection{DIANE}
 
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
-
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
-\aznote{Do we want to define single-user vs multi-user?
-  Communication methods?  Output aggregrator?}
-
-\aznote{DIANE runmaster/etc not included in current paper we
-have cited}
 
 
 \paragraph{Rationale}
 
-DIANE~\cite{Moscicki:908910} is a task coordination framework, which
-was originally designed for implementing master/worker applications,
-but also provides PJ functionality for job-style executions.
+DIANE~\cite{Moscicki:908910} is a task coordination framework, which follows
+the Master/Worker pattern.
+It was developed at CERN for data analysis in the LHC experiment.
+As DIANE is a framework \msnote{in contrast to a system? tool?}, some of its
+semantics are not fixed, as they can be implemented in various ways.
+
+The \textbf{Workload} 
+
+The central component of DIANE is the \textit{RunMaster}.
+It consists of a \textit{TaskScheduler} and an \textit{ApplicationManager}.
+Both are abstract classes that need to be implemented for the specific purpose
+at hand.
+The \textit{TaskScheduler} keeps track of the task entries, maps the tasks to
+the \textit{ApplicationWorkers}.
+The implementation of the \textit{ApplicationManager} is as its name suggest,
+responsible for defining the application \textbf{Workload} and the creating
+\textbf{Tasks} that are passed to the \textit{TaskScheduler}.
+
+The \pilot in DIANE is the \textit{WorkerAgent}.
+The core component of the \textit{WorkerAgent} is the
+\texttt{ApplicationWorker}, which is an abstract class that defines three
+methods that every implementation needs to implement.
+Two of these methods are for initialization and cleanup and the last
+\texttt{do\_work()} is the method that actually receives the task description
+and executes the work.
+
+The \textbf{Robustness} in DIANE comes from the mature CORBA communication
+layer, and from custom task-failure policies in the \textit{TaskScheduler}.
+
+As expected from the fact that DIANE is in essence a Master/Worker framework,
+the \textbf{Tasks} have inside the framework no relationships, thereby
+resembling a Bag-of-Tasks. 
+
+The \textbf{Coordination \& Communication} in DIANE is based on CORBA using
+TCP/IP.
+CORBA itself is invisible to the application.
+Networking-wise, the workers are clients of the master server.
+On low-level, communication is always uni-directionally from the
+\textit{WorkerAgent} to the \textit{RunMaster}.
+This implies that the network requirements are such that the
+\textit{WorkerAgent} needs to be able to reach the \textit{RunMaster} through
+TCP/IP.
+Bi-directional communication is achieved by periodic polling through
+heartbeats by the \textit{WorkerAgent}, where the \textit{RunMaster} responds
+with feedback.
+The authors report that in first instance they had implemented full
+bi-directional communication, but that turned out to be difficult to correctly
+implement and created scalability limitations.
+
+
+
 
 \paragraph{Design Goals}
 
