@@ -3159,7 +3159,7 @@ certain scientific applications.
 BigJob was designed as a flexible and extensible \pilotjob
 to work on a variety of infrastructures. It was designed to
 natively support many scientific applications, including
-MPI jobs~\ref{saga_bigjob_condor_cloud}.
+MPI jobs~\cite{saga_bigjob_condor_cloud}.
 
 \paragraph{Design Goals}
 BigJob supports the basic functionality required of a \pilotjob,
@@ -3182,10 +3182,10 @@ system.
 BigJob has been used for many different ensemble-based or
 replica-exchange-based applications in both the computational chemistry
 and bioinformatics disciplines. It has been shown to work across multiple
-XSEDE~\ref{xsede_url} machines and scale up to thousands of concurrent
+XSEDE~\cite{xsede_url} machines and scale up to thousands of concurrent
 jobs. It has also been used as the underlying job
 management layer in the release of an asynchronous replica-exchange
-software package~\ref{2013-xsede-cdi}.
+software package~\cite{2013-xsede-cdi}.
 
 \paragraph{Deployment Scenarios (Single User)}
 BigJob is installable by a user onto the resource of his or her choice. It is capable of
@@ -3193,11 +3193,11 @@ running only in ``single user'' mode; that is, a \pilot belongs to the user who
 spawned it and cannot be accessed by other users.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-BigJob uses the Simple API for Grid Applications (SAGA)~\ref{ogf-gfd-90, sagastuff}
+BigJob uses the Simple API for Grid Applications (SAGA)~\cite{ogf-gfd-90, sagastuff}
 in order to interface with different grid middleware. It can work on HPC grid
 environments, such as XSEDE or FutureGrid \mrnote{ref}, as well as personal
 clusters with batch queuing systems. In addition, BigJob has been shown to work
-on clouds~\ref{cpe_pmr_cloud_2012}, where it has the capability to both
+on clouds~\cite{cpe_pmr_cloud_2012}, where it has the capability to both
 launch VMs and submit jobs to these VMs.
 
 \paragraph{Architecture \& Interface}
