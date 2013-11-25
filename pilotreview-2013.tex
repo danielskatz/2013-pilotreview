@@ -1616,7 +1616,11 @@ required by the task can be created.}
   also Condor, LSF, Slurm or Torque), while the latter becomes
   relevant when considering a landscape where multiple \pilotjob
   implementations are available with diversified characteristics and
-  capabilities.
+  capabilities.\mrnote{Again, we are in the section labeled 'Auxiliary 
+  Properties' for PilotJob Systems. We are *not* talking about a layer
+  above that. You cannot have interoperability between PJ systems
+  at the level of the PJ system itself, otherwise it would be considered
+  a PilotJob Overlay of some sort and not an individual PJ system}
 
 \item \textbf{Multitenancy}: A \pilotjob system may offer multitenancy
   at both system and local level. When offered at system level,
@@ -3113,47 +3117,68 @@ certain scientific applications.
 
 
 %\mrnote{Stabbing at the new format in note form}
-%
-%Application: a BigJob script that can also involve logic
-%and algorithms external to PJ system communication
-%Workload: A set of CUs
-%Task: CU
-%Resource: What is asked for in PCD
-%Infrastructure: Where BJ runs (grids, clouds, clusters)
-%
-%
-%
-%The core properties of BigJob are as follows:
-%
-%Pilot Characteristics can be user-defined using a
-%Pilot Compute Description. Define what that is.
-%Pilot characteristics
-%are often limited by policies on the infrastructures
-%in which they run - i.e. the size and lifespan of a
-%pilot may be limited by max number of cores
-%that can be reserved or max time of a job in local queue
-%
-%Resource dependencies: Not sure what this is. Here is an attempt.
-%BigJob can bootstrap itself into user-space on external targeted 
-%infrastructures, provided that the python version is greater than 2.5.
-%
-%C\&C: Redis
-%
-%Workload semantics: User-defined location affinity, wherein labels
-%can be given to pilots and tasks, so that if the user thinks a CU
-%should run on a certain pilot, the ComputeDataService scheduler
-%tries to place these together. 
-%
-%Binding Characteristics: Late-binding only. Ask someone if this is true.
-%
-%Deployment strategies: Allows for user to define env variables and input arguments.
-%Can use file transfer to move input files around. Env variables are sourced
-%on the given node (resource?) where a task will run, and input arguments
-%are passed to the executable in much the same way as if it were typed
-%by the user on command line.
-%
-%aux capabilities:
 
+\begin{itemize}
+\item Application: a BigJob script that can also involve logic
+and algorithms external to PJ system communication
+\item Workload: A set of CUs
+\item Task: CU
+\item Resource: The resource is whatever is user-specified in the PCD, provided it
+follows the `Resource Dependencies' thing
+\item Infrastructure: Where BJ runs (grids, clouds, clusters)
+\end{itemize}
+
+
+The core properties of BigJob are as follows:
+
+\begin{itemize}
+\item Pilot Characteristics can be user-defined using a
+Pilot Compute Description. Define what that is.
+Pilot characteristics are often limited by policies on the infrastructures
+in which they run - i.e. the size and lifespan of a
+pilot may be limited by max number of cores
+that can be reserved or max time of a job in local queue
+
+\item Resource dependencies: Needs python >2.5 on remote resource. Supports submission to the following schedulers: SLURM, SGE, PBS/TORQUE, \mrnote{Other schedulers are eluding me at the moment}, also runs in fork:// or ssh:// mode. Submission to EC2, GCE, and Euca clouds. Here is an attempt.
+BigJob bootstraps itself into user-space on external targeted 
+infrastructures, provided that the python version is greater than 2.5.
+
+\item C\&C: Redis, centralized database approach. Communication from agents (pilots) to
+Redis to pull tasks.
+
+\item Workload semantics: User-defined location affinity, wherein labels
+can be given to pilots and tasks, so that if the user thinks a CU
+should run on a certain pilot, the ComputeDataService scheduler
+tries to place these together. 
+
+\item Task Binding Characteristics: Late-binding only.
+Tasks cannot be bound to a Pilot before the Pilot switches to active mode on the target
+resource.  \mrnote{Ask someone if this is true.}
+
+\item Deployment strategies: Allows for user to define env variables and input arguments.
+Can use file transfer to move input files around. Env variables are sourced
+on the given node (resource?) where a task will run, and input arguments
+are passed to the executable in much the same way as if it were typed
+by the user on command line. Pilot-Manager (sec. 3 term: application?)
+--- Pilot-Agent (sec. 3 term: pilot)
+\end{itemize}
+
+Auxiliary Capabilities:
+\begin{itemize}
+\item Architecture: Client/server; Agent (remote) / Manager (local). Centralized coordination server.
+
+\item Interfaces: User interfaces with PilotJob System via the Pilot API, implemented in BigJob using the python programming language. Pilot, in most case, interfaces with target machine using the Simple API for Grid Applications (SAGA) [meaning PJ system does not have to translate PilotJob into scheduler-specific script], cloud adaptors are coded in python into BigJob.
+
+\item Interoperability: Allows for interoperability with multiples types of resources (heterogenous schedulers and clouds/grids/clusters) at one time. Does not have interoperability across PilotJob systems
+
+\item Multitenancy: No multitenancy. Single-user. 
+
+\item Robustness: Depends on user for fault-tolerance, but can report job failures
+
+\item Security: Follows resource security for scheduler systems (i.e. policies like allocations, etc). SSH auth. For clouds, allows for private/public key specific to VM
+
+\item Usage Modes: Grids, clouds, clusters.
+\end{itemize}
 
 \paragraph{Rationale}
 BigJob was designed as a flexible and extensible \pilotjob
