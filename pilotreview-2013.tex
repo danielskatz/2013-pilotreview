@@ -1050,6 +1050,8 @@ of the \pilotjob system.
 \item[Workload.] A set of tasks, possibly correlated, that are instrumental to
 the application to achieve its goal.
 
+\jhanote{MR suggests ``and associated logic'' along with ``possibly correlated''}
+
 \mrnote{We should not use the term workload, as in the definition
 of Application, before it is defined. But then application is used circularly
 around to itself... not sure how to fix that, but we can't expect someone
@@ -1059,25 +1061,15 @@ they don't know what a workload is}
 \item[Task.] A set of operations specified by the application, that are encoded
 into one or more programs to be executed on a DCI. 
 
-\mrnote{My issue here is, a single workload 
-is a set of tasks. An application, by these definitions, should be comprised
-of a possible series of workloads, even though workload is used in the singular
-to define an application. If an application is *just* a single workload, then the use of the word
-Application is extraneous (strictly going by the definition given above), 
-because then you can just use the term 'Workload' to say the 
-same thing. Note that you can salvage the definition above, if an application is not defined
-as simply a workload definition - i.e. in our asyncre python script, our single workload is really
-just the AMBER tasks, but it is considered an 'Application' (in this case) due to the fact
-that there's other logic in it besides just the workload definition.  If you want to define a workload
-as always singular to an application and just consider the tasks of the workflow to change, 
-then in this case, you still need to strengthen the definition - right now, I can think
-an application is simply the AMBER tasks and the job launch function which hands
-a CU to BigJob. The definition leaves no room for application-level logic, which are
-consumers of the task output, etc. On the note of consumers, I find the use
-of the phrase 'pilot job consumer',
-when not previously discussed or defined in this manner, unclear. At this point, 
-you haven't defined what it means to be a Pilot Job system consumer. It is unclear
-in what way an Application 'consumes' PJ resources (by definition, not by my knowledge)}
+\mrnote{(i) My issue here is, a single workload is a set of tasks. An
+  application, by these definitions, should be comprised of a possible
+  series of workloads, even though workload is used in the singular to
+  define an application.  (ii) On the note of consumers, I find the
+  use of the phrase 'pilot job consumer', when not previously
+  discussed or defined in this manner, unclear. At this point, you
+  haven't defined what it means to be a Pilot Job system consumer. It
+  is unclear in what way an Application 'consumes' PJ resources (by
+  definition, not by my knowledge)}
 
 \mrnote{Also, the use of the word program - is this all-encompassing, i.e. do you mean
 program binaries and programs? Or do you consider a binary a program? You know,
