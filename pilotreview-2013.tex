@@ -2074,7 +2074,7 @@ diversified usage modes - e.g. HPC, HTC and Cloud.
 \subsubsection{\apples}
 \begin{itemize}
   \item
-    Pilot Characteristics - Lacks true Pilots 
+    Pilot Characteristics - Lacks true Pilots.
   \item
     Resource Dependences - Application-level resource selection
   \item
@@ -2082,21 +2082,34 @@ diversified usage modes - e.g. HPC, HTC and Cloud.
   \item
     Task Binding Characteristics - Application-level binding 
   \item
-    Deployment Strategies - App 
+    Deployment Strategies - Application-specific (determined
+    by AppLeS application developer)
   \item
-    Architecture - App 
+    Architecture - Master-worker, static partitioning,
+    client-server, (determined
+    by AppLeS application developer)  APST provides client-server,
+    AMWAT provides master-worker
   \item
-    Interfaces - App 
+    Interfaces - Template-based application development (APST, AMWAT), applications
+    must be programmed to make use of AppLeS, APST has some commandline tools,
+    AMWAT provides API
   \item
-    Interoperability - App 
+    Interoperability - Application-dependent -- AppLeS applications
+    can be coded to make use of ``ambient services'' i.e. whatever
+    is installed, or written to manually construct job submission.
+    APST provides ssh, GRAM, ftp, gridftp, etc.
   \item
-    Multitenancy - App 
+    Multitenancy - Local (I think -- since it is all application-based,
+    and a single user would run an application)
   \item
-    Robustness - App 
+    Robustness - Not explicitly included, may be present on
+    application-level, APST provides some simple failsafe/job restarting and
+    checkpointing of APST itself
   \item
-    Security - App 
+    Security - Not explicitly provided, APST uses security features
+    of protocols it is using
   \item
-    Usage Modes - Grid 
+    Usage Modes - Grid
 \end{itemize}
 \paragraph{Rationale}
 \apples is an ideal introductory software package to be studied
