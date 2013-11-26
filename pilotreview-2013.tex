@@ -1608,11 +1608,14 @@ required by the task can be created.}
   also Condor, LSF, Slurm or Torque), while the latter becomes
   relevant when considering a landscape where multiple \pilotjob
   implementations are available with diversified characteristics and
-  capabilities.\mrnote{Again, we are in the section labeled 'Auxiliary 
-  Properties' for PilotJob Systems. We are *not* talking about a layer
-  above that. You cannot have interoperability between PJ systems
-  at the level of the PJ system itself, otherwise it would be considered
-  a PilotJob Overlay of some sort and not an individual PJ system}
+  capabilities.\mrnote{Note from meeting with SJ: May want to
+  change to discuss one first (including descriptive text), then 
+  change tracks to discuss the second - they are two
+  very different concepts to grasp in the first sentence (I know
+  this detracts from the mathematical/proof language of it,
+  but I think its a good idea). Especially since the second
+  type of interoperability is very much less-common to a
+  single PJ system (except in cases like PANDA)}
 
 \item \textbf{Multitenancy}: A \pilotjob system may offer multitenancy
   at both system and local level. When offered at system level,
@@ -2071,7 +2074,7 @@ diversified usage modes - e.g. HPC, HTC and Cloud.
 \subsubsection{\apples}
 \begin{itemize}
   \item
-    Pilot Characteristics - Lacks true Pilots 
+    Pilot Characteristics - Lacks true Pilots.
   \item
     Resource Dependences - Application-level resource selection
   \item
@@ -2079,21 +2082,34 @@ diversified usage modes - e.g. HPC, HTC and Cloud.
   \item
     Task Binding Characteristics - Application-level binding 
   \item
-    Deployment Strategies - App 
+    Deployment Strategies - Application-specific (determined
+    by AppLeS application developer)
   \item
-    Architecture - App 
+    Architecture - Master-worker, static partitioning,
+    client-server, (determined
+    by AppLeS application developer)  APST provides client-server,
+    AMWAT provides master-worker
   \item
-    Interfaces - App 
+    Interfaces - Template-based application development (APST, AMWAT), applications
+    must be programmed to make use of AppLeS, APST has some commandline tools,
+    AMWAT provides API
   \item
-    Interoperability - App 
+    Interoperability - Application-dependent -- AppLeS applications
+    can be coded to make use of ``ambient services'' i.e. whatever
+    is installed, or written to manually construct job submission.
+    APST provides ssh, GRAM, ftp, gridftp, etc.
   \item
-    Multitenancy - App 
+    Multitenancy - Local (I think -- since it is all application-based,
+    and a single user would run an application)
   \item
-    Robustness - App 
+    Robustness - Not explicitly included, may be present on
+    application-level, APST provides some simple failsafe/job restarting and
+    checkpointing of APST itself
   \item
-    Security - App 
+    Security - Not explicitly provided, APST uses security features
+    of protocols it is using
   \item
-    Usage Modes - Grid 
+    Usage Modes - Grid
 \end{itemize}
 \paragraph{Rationale}
 \apples is an ideal introductory software package to be studied
@@ -2266,7 +2282,7 @@ that a full \pilotjob approach offers.
 \subsubsection{MyCluster}
 \begin{itemize}
   \item
-    Pilot Characteristics - N/A 
+    Pilot Characteristics - User-defined (choose \# cores, etc)?
   \item
     Resource Dependences - Condor/SGE resources
   \item
@@ -2501,7 +2517,8 @@ to the usefulness of \pilotjobs in attacking these problems.
 
 \begin{itemize}
   \item
-    Pilot Characteristics - ? 
+    Pilot Characteristics - ? (User-specifiable, varied, analysis re: others,
+    supports distributed data, etc)
   \item
     Resource Dependences - Condor Glide-in, supports PBS/LSF/others through this, plugin support
   \item
