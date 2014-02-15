@@ -826,45 +826,54 @@ commonalities/differences.
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
 
-The overview presented in \S\ref{sec:history} shows a degree of heterogeneity
-both in the functionalities and the vocabulary adopted by different \pilotjob
-systems. Implementation details sometimes hide the functional commonalities and
-differences among \pilotjobs systems while features and capabilities tend to be
-named inconsistently, often with the same terms referring to multiple concepts
-or the same concept named in different ways.
+The overview presented in \S\ref{sec:history} shows a degree of
+heterogeneity both in the functionalities and the vocabulary adopted by
+different \pilotjob systems. Implementation details sometimes hide the
+functional commonalities and differences among \pilotjobs systems while
+features and capabilities tend to be named inconsistently, often with
+the same terms referring to multiple concepts or the same concept named
+in different ways.
 
-This section offers an analysis of the architectural components,
-functionalities, and terminology shared by every \pilotjob system.  The goal is
-to offer both a conceptual description of an exemplar \pilotjob system and a
-well- defined vocabulary. Both will be leveraged in \S\ref{sec:4} and
-\S\ref{sec:5} to produce a comparative and critical analysis of diverse
-\pilotjob frameworks.
+This section offers an analysis of the logical components,
+functionalities, and terminology shared by every \pilotjob system. The
+goal is to offer both a paradigmatic description of a \pilotjob system
+and a well-defined vocabulary to reason about such a description and,
+eventually, about its multiple implementations.
+
+% Both will be leveraged in
+% \S\ref{sec:4} and \S\ref{sec:5} to produce a comparative and critical
+% analysis of diverse \pilotjob frameworks.
 
 \jhanote{not sure about first goal, ``an exemplar \pilotjob system''?}
+\mtnote{Any better?}
+
 \jhanote{forward reference, a matter of style, but either way must be
-  conservative with its usage} \jhanote{The 5th and 6th paragraphs
-  should be moved. It is interrupting the flow and delaying the reader
-  from getting to the message. 5th and 6th are useful but we should
-  present caveats/enhancements/refinements to a message only after we
-  have finished delivering the main message. For example, we can move
-  the discussion of C\&C to where we talk about data management.}
+conservative with its usage}
+\mtnote{Any better?}
+
+\jhanote{The 5th and 6th paragraphs should be moved. It is
+interrupting the flow and delaying the reader from getting to the
+message. 5th and 6th are useful but we should present
+caveats/enhancements/refinements to a message only after we have
+finished delivering the main message. For example, we can move the
+discussion of C\&C to where we talk about data management.}
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
-All the \pilotjob systems introduced in \S\ref{sec:history} are engineered to
-allow for the execution of multiple types of workloads on Distributed Computing
-Infrastructures (DCIs) such as, Grids, Clouds or HPC facilities. This is
-achieved differently, depending on use cases, design and implementation
-choices, but also on the constraints imposed by the peculiarities of the
-targeted DCI. Finding common denominators among these systems requires an
-analysis along multiple dimensions.
+All the \pilotjob systems introduced in \S\ref{sec:history} are
+engineered to allow for the execution of multiple types of workloads on
+Distributed Computing Infrastructures (DCIs) such as, Grids, Clouds or
+HPC facilities. This is achieved differently, depending on use cases,
+design and implementation choices, but also on the constraints imposed
+by the peculiarities of the targeted DCI. Finding common denominators
+among these systems requires an analysis along multiple dimensions.
 
-%As seen in \S\ref{ssec:evaluation}
-% \pilotjobs can be analyzed according to multiple criteria, both functional and
-% non-functional.  \onote{avoid functional v.s. non-functional} In this section,
-% the focus is on the former as the latter are adapted by definition to each
-% specific pilot implementation.
+% As seen in \S\ref{ssec:evaluation} \pilotjobs can be analyzed according
+% to multiple criteria, both functional and non-functional.  \onote{avoid
+% functional v.s. non-functional} In this section, the focus is on the
+% former as the latter are adapted by definition to each specific pilot
+% implementation.
 
 Each \pilotjob system exhibits architectural, provisioning and execution
 characteristics that are integral to the \pilotjob paradigm itself.
@@ -924,27 +933,29 @@ dynamic coordinator election, local or global information sharing.
 Furthermore, different network architectures might be leveraged as, for
 example, `dumb',  `intelligent', or overlay networks, while adopting
 different network protocols in order to achieve effective communication
-and coordination.  \jhanote{suggestion: we should replace architecture
-with either tool or infrastructure or something else...}\mrnote{DCI,
-maybe?}\mtnote{done} \mrnote{I am really not sold on the claims made in
-the above paragraph and then it is not really helped by the below
-paragraph. I can see maybe you don't call C and C a logical component,
-but I would like an example of a cross- machine pilot job implementation
-in which there is no way to communicate or coordinate with any pilots or
-tasks.}\mtnote{There might be a misunderstanding: communication and
-coordination are necessary between the WM and TE. Simply, C\&C can be
-achieved, organized and supported at implementation as preferred.
-Namely, they way to achieve, organize and support C\&C is *not* part of
-what defines the reference model for the implementation of a pilot
-system.} \mrnote{The exact definitions given in task dispatching are
-actually C and C, just not called that.} \mtnote{Again, there might be a
-misunderstanding: task dispatching requires communciation of data both
-relative to the task and to the coordination system used to agree on how
-to dispatch a task. C\&C is not task dispatch in itself.}\mrnote{I am
-really uncomfortable with the way it is presented as not integral, and I
-think we should table this discussion again.}\mtnote{I rewrote the whole
-paragraph including the clarifications given to your previous comments.
-Any better?}
+and coordination.
+
+% \jhanote{suggestion: we should replace architecture
+% with either tool or infrastructure or something else...}\mrnote{DCI,
+% maybe?}\mtnote{done} \mrnote{I am really not sold on the claims made in
+% the above paragraph and then it is not really helped by the below
+% paragraph. I can see maybe you don't call C and C a logical component,
+% but I would like an example of a cross- machine pilot job implementation
+% in which there is no way to communicate or coordinate with any pilots or
+% tasks.}\mtnote{There might be a misunderstanding: communication and
+% coordination are necessary between the WM and TE. Simply, C\&C can be
+% achieved, organized and supported at implementation as preferred.
+% Namely, they way to achieve, organize and support C\&C is *not* part of
+% what defines the reference model for the implementation of a pilot
+% system.} \mrnote{The exact definitions given in task dispatching are
+% actually C and C, just not called that.} \mtnote{Again, there might be a
+% misunderstanding: task dispatching requires communciation of data both
+% relative to the task and to the coordination system used to agree on how
+% to dispatch a task. C\&C is not task dispatch in itself.}\mrnote{I am
+% really uncomfortable with the way it is presented as not integral, and I
+% think we should table this discussion again.}\mtnote{I rewrote the whole
+% paragraph including the clarifications given to your previous comments.
+% Any better?}
 
 The distribution of functionalities among the Task Manager and the Task
 Executor should not be used as defining features of \pilot systems. Such
@@ -963,8 +974,9 @@ task scheduling, might require a relatively simple Workload Manager
 including only those capabilities related to task submission and a
 feautre-rich Task Executor capable or coordinating with its neighboor
 executors while leveraging, for example, an overlay network.
-\jhanote{the paragraph started talking about C\&C not being integral,
-but then focusses/ends on M-W}\mtnote{Rewritten. Any better?}
+
+% \jhanote{the paragraph started talking about C\&C not being integral,
+% but then focusses/ends on M-W}\mtnote{Rewritten. Any better?}
 
 The goal of \pilotjob systems is to support flexible execution
 strategies along with improved performance in the task submission
@@ -979,18 +991,20 @@ resource, and it can last for the whole time the pilot can hold on its
 resources. This execution strategy requires dedicated functionalities
 both for performing the binding of tasks to pilots but also for the
 provisioning of pilots so that they can be assigned portions of any of a
-DCI's resource. \mrnote{This paragraph is making it somewhat difficult
-to understand. A single super computer or machine is not a 'distributed
-computing infrastructure.' Therefore, the assumption when I am reading
-this is that you may be referring to a grid. But are you really talking
-about a machine? Because if you're talking about a grid, then you know,
-submitting to the DCI would mean submitting to a grid-wide scheduler,
-not a machine-specific scheduler. It should be clarified.}\mtnote{I
-clarified the relationship n:1 between resources and DCI. Any better?
-Please note that this creates an inconsistency between how a resource is
-defined and how the same name is used to indicate a cluster within a
-DCI. This is why, the common use of both the terms DCI and resource are
-inconsistent and why here I had tried to redefine them consistently.}
+DCI's resource.
+
+% \mrnote{This paragraph is making it somewhat difficult
+% to understand. A single super computer or machine is not a 'distributed
+% computing infrastructure.' Therefore, the assumption when I am reading
+% this is that you may be referring to a grid. But are you really talking
+% about a machine? Because if you're talking about a grid, then you know,
+% submitting to the DCI would mean submitting to a grid-wide scheduler,
+% not a machine-specific scheduler. It should be clarified.}\mtnote{I
+% clarified the relationship n:1 between resources and DCI. Any better?
+% Please note that this creates an inconsistency between how a resource is
+% defined and how the same name is used to indicate a cluster within a
+% DCI. This is why, the common use of both the terms DCI and resource are
+% inconsistent and why here I had tried to redefine them consistently.}
 
 In order to support the execution of workloads by means of pilots, a
 \pilot systems needs a set of functionalities to \textbf{provision
@@ -1004,11 +1018,13 @@ functionalties are needed in order to deploy, manage, or share a \pilot
 system among one or more users, functionalities related to security,
 workload submission, resource descripiton, or data management are,
 strinctly speaking, not required for \pilotjobs or tasks to be scheduled
-and executed. \jhanote{need to justify the above sentence.}\mrnote{Maybe
-we can say that we will now motivate   why we believe the two core
-functionalities are..., etc. I agree this sounds like a strong claim,
-maybe the conclusion of the paragraph, not the lead.} \mtnote{Rewritten.
-Any better?}
+and executed.
+
+% \jhanote{need to justify the above sentence.}\mrnote{Maybe
+% we can say that we will now motivate   why we believe the two core
+% functionalities are..., etc. I agree this sounds like a strong claim,
+% maybe the conclusion of the paragraph, not the lead.} \mtnote{Rewritten.
+% Any better?}
 
 Pilot provisioning is a core functionality of every \pilot system
 because it is essential for the creation of resource overlays. This type
@@ -1029,9 +1045,10 @@ submitted as a job. Conversely, for infrastructures that do not adopt a
 job-based approach, a pilot would be executed by means of other types of
 logical container as, for example, a container implemented by means of a
 Virtual Machine (VM) on so-called Infrastructures as a Service (IaaS).
-\mrnote{Should this be a citation? It just sounds weird when it says
-``the one''}\mtnote{I am not sure I udnersatnd why we would need a
-citation. I changed `the one'. Any better?}
+
+% \mrnote{Should this be a citation? It just sounds weird when it says
+% ``the one''}\mtnote{I am not sure I udnersatnd why we would need a
+% citation. I changed `the one'. Any better?}
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
 pilots for execution. Thanks to resource overlays, task dispatching does not
@@ -1085,9 +1102,10 @@ capabilities just described is defined.
   \S\ref{subsec:vocab_core_functionalities}.}\up}
  \label{table:terminology}
 \end{table*}
-\aznote{Suggest reordering introduction of terms from least to most
-complex to avoid defining a term using a word which is defined later.
-Task, workload, resource, application?}
+
+% \aznote{Suggest reordering introduction of terms from least to most
+% complex to avoid defining a term using a word which is defined later.
+% Task, workload, resource, application?}
 
 The name `\pilotjob' indicates the primary role played by the concepts
 of `pilot' and `job' in this type of system. The definition of both
@@ -1097,16 +1115,18 @@ clarified in order to offer a coherent terminology. Both `job' and
 infrastructures where \pilotjobs systems are provisioned. DCIs offer
 compute, storage, and network resources and \pilotjobs allow for the
 users to utilize those resources to execute the tasks of one or more
-workloads. \mrnote{Might not need the descriptive clause. We've covered
-that already above.} \mtnote{I will decide later, when the final
-version will be available.}
+workloads.
+
+% \mrnote{Might not need the descriptive clause. We've covered
+% that already above.} \mtnote{I will decide later, when the final
+% version will be available.}
 
 \begin{description}
 
-\item[Application.] A software that enable the user to achieve a set of
-goals.\mtnote{This was not a deifnition. It says what an applicaiton
-does, not what it is. I adjusted the definition. I am still not sure
-why do we need this definition at all.}
+% \item[Application.] A software that enable the user to achieve a set of
+% goals.\mtnote{This was not a deifnition. It says what an applicaiton
+% does, not what it is. I adjusted the definition. I am still not sure
+% why do we need this definition at all.}
 
 \item[Workload.] A set of tasks, possibly correlated by a set of
 arbitrary complex relations.
@@ -1121,45 +1141,43 @@ geographically and institutionally separated from the users   utilizing
 those resources to execute one or more workloads. [cit, cit]
 Infrastructures can be logically partitioned, with a direct or indirect
 mapping onto individual pools of hardware. Commonly, Infrastructure can
-be used also to indicate a DCI. \jhanote{I think this entry should be
-removed from table 1, just like application does not find a mention in
-table 1?}\mtnote{Done.}
+be used also to indicate a DCI.
 
-\jhanote{MR suggests ``and associated logic'' along with ``possibly
-correlated''}\mtnote{I do not understand this note.}
-
-\mrnote{We should not use the term workload, as in the definition of
-Application, before it is defined. But then application is used
-circularly around to itself... not sure how to fix that, but we can't
-expect someone to know what 'responsible for the definition of the
-workload' means when they don't know what a workload is}\mtnote{Also in
-this case, I do not undersatnd this note.}
+% \jhanote{I think this entry should be
+% removed from table 1, just like application does not find a mention in
+% table 1?}\mtnote{Done.}
+% \jhanote{MR suggests ``and associated logic'' along with ``possibly
+% correlated''}\mtnote{I do not understand this note.}
+% \mrnote{We should not use the term workload, as in the definition of
+% Application, before it is defined. But then application is used
+% circularly around to itself... not sure how to fix that, but we can't
+% expect someone to know what 'responsible for the definition of the
+% workload' means when they don't know what a workload is}\mtnote{Also in
+% this case, I do not undersatnd this note.}
 
 \item[Task.] A set of operations encodeed so that they can be executed
 on the resources of a DCI. Implementtions of a task may include
 wrappers, applicaitons, scripts, and, more in general, any type of
 `application kernel'.
 
-\mrnote{(i) My issue here is, a single workload is a set of tasks.}
-\mtnote{in an arbitrary complex set of relations.} \mrnote{ An
-application, by these definitions, should be comprised of a possible
-series of workloads, even though workload is used in the singular to
-define an application. (ii) On the note of consumers, I find the use of
-the phrase 'pilot job consumer', when not previously discussed or
-defined in this manner, unclear. At this point, you haven't defined what
-it means to be a Pilot Job system consumer. It is unclear in what way an
-Application 'consumes' PJ resources (by definition, not by my
-knowledge)}\mtnote{This note is probably outdated. It shows thought a
-problem that I still do have with how we use application and workload
-within radical.}
-
-\mrnote{Also, the use of the word program - is this all-encompassing,
-i.e. do you mean program binaries and programs? Or do you consider a
-binary a program? You know, if you consider a program, a series of
-instructions for a computer. It's just the word is a little iffy. I
-would adopt what BigJob uses which is 'application kernel.' or say
-programs and/or binaries}\mtnote{Done. Any better?}
-
+% \mrnote{(i) My issue here is, a single workload is a set of tasks.}
+% \mtnote{in an arbitrary complex set of relations.} \mrnote{ An
+% application, by these definitions, should be comprised of a possible
+% series of workloads, even though workload is used in the singular to
+% define an application. (ii) On the note of consumers, I find the use of
+% the phrase 'pilot job consumer', when not previously discussed or
+% defined in this manner, unclear. At this point, you haven't defined what
+% it means to be a Pilot Job system consumer. It is unclear in what way an
+% Application 'consumes' PJ resources (by definition, not by my
+% knowledge)}\mtnote{This note is probably outdated. It shows thought a
+% problem that I still do have with how we use application and workload
+% within radical.}
+% \mrnote{Also, the use of the word program - is this all-encompassing,
+% i.e. do you mean program binaries and programs? Or do you consider a
+% binary a program? You know, if you consider a program, a series of
+% instructions for a computer. It's just the word is a little iffy. I
+% would adopt what BigJob uses which is 'application kernel.' or say
+% programs and/or binaries}\mtnote{Done. Any better?}
 
 \end{description}
 
@@ -1196,21 +1214,23 @@ agent --- with  specific capabilities. For example,  the scheduler, a
 batch processor and a queuing  sytem exposed by a DCI's resource would
 imposed a the choice of a `job' as the \pilot container, and they would
 also set the practical boundaries for how and when the pilots could be
-provisioned.  \mrnote{I'm uncomfortable with the word programs again,
-especially for a 'pilot'.}\mtnote{I substituted 'program' with
-executable. As usual, please indicate the preferred word if you do not
-feel comfortable with 'executable'.} \mrnote{Later we say the term pilot
-= the term agent = the term pilotjob. Not sure if I can agree with that
-- the PilotJob (or Pilot) is just a job (or container) you submit to the
-queue. It's not a running program. Just a job, traditional job
-script.}\mtnote{Done.} \mrnote{The 'agent' in this case is the 'program'
-that becomes active when the 'job' has become active in the batch queue.
-Remember that earlier we define a job and a task as being two separate
-things (this is at ``CU'' level). But we lump them together here by
-saying that the job (Pilot) is the task (program / set of operations
-that will be performed). Later, binding is discussed. Early binding is
-defined as binding of tasks to inactive pilot. So, if pilot = program,
-the definition is binding tasks to an inactive program?}
+provisioned.
+
+% \mrnote{I'm uncomfortable with the word programs again,
+% especially for a 'pilot'.}\mtnote{I substituted 'program' with
+% executable. As usual, please indicate the preferred word if you do not
+% feel comfortable with 'executable'.} \mrnote{Later we say the term pilot
+% = the term agent = the term pilotjob. Not sure if I can agree with that
+% - the PilotJob (or Pilot) is just a job (or container) you submit to the
+% queue. It's not a running program. Just a job, traditional job
+% script.}\mtnote{Done.} \mrnote{The 'agent' in this case is the 'program'
+% that becomes active when the 'job' has become active in the batch queue.
+% Remember that earlier we define a job and a task as being two separate
+% things (this is at ``CU'' level). But we lump them together here by
+% saying that the job (Pilot) is the task (program / set of operations
+% that will be performed). Later, binding is discussed. Early binding is
+% defined as binding of tasks to inactive pilot. So, if pilot = program,
+% the definition is binding tasks to an inactive program?}
 
 Showing that the way in which a pilot is provisioned depends on the
 capabilities exposed by the target DCI illustrates the limits of
@@ -1235,6 +1255,7 @@ workload.
 \item[Pilot.] The sum of a container plus a set of executables
 functioning as a resource placeholder on a given infrastructure and
 capable of executing pushed or pulled tasks.
+
 %while managing data.
 
 \end{description}
@@ -1269,7 +1290,7 @@ tasks for consumption. This is an important feature of \pilotjob systems
 because it allows for a task to be bound to a pilot before it is in turn
 bound to the resources. Binding pilots to their resources and tasks to
 pilots depends on placement choices. As such, the binding process in
-itself is often an instance of scheduling.  
+itself is often an instance of scheduling.
 
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
 inactive until it is executed on a DCI, active after that. Early binding
@@ -1301,11 +1322,11 @@ specification process should not be confused with early binding as the latter
 requires for a pilot to have been already specified but not yet bound to a
 resource.
 
-\jhanote{I would remove the definition of application. It is one of
-  those conundrums, that you'll hardly help anyone, but definitely
-  aggravate someone!}\jhanote{Matteo: this section is ready for
-  clean-up, ie remove comments to the end and possibly into a
-  different file}
+% \jhanote{I would remove the definition of application. It is one of
+%   those conundrums, that you'll hardly help anyone, but definitely
+%   aggravate someone!}\jhanote{Matteo: this section is ready for
+%   clean-up, ie remove comments to the end and possibly into a
+%   different file}
 
 %------------------------------------------------------------------------------
 % SECTION 4
