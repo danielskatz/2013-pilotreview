@@ -408,6 +408,9 @@ This was in effect a Master-Worker pattern.
 	\label{fig:figures_forecast-factory}
 \end{figure}
 
+Figure~\ref{fig:timeline} shows the introduction of the discussed systems and
+terms. When available we use the date of first mention in a publication or
+otherwise release date of software.
 
 In the context of present distributed systems, the M-W scheme was initially
 used for farming tasks from a master to a various number of workers, and could
@@ -469,19 +472,17 @@ parameter sweep and moldable parallel applications
 % utilization of many heterogenous resources in an efficient manner.
 
 \begin{figure}[t]
-    \centering
-        \includegraphics[width=0.45\textwidth]{figures/timeline}
-                \caption{Introduction of terms and systems over
-                  time. \jhanote{this diagram can be extended to have
-                    an evolution of functional components on the lower
-                    x-y plane}}
+  \centering
+    \includegraphics[width=0.45\textwidth]{figures/timeline}
+    \caption{Introduction of terms and systems over time.}
+    \label{fig:timeline}
 \end{figure}
 
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
 	\caption{Pilot-Job Clustering}
-	\label{fig:figures_pilotjob-clustering}
+	\label{fig:pilotjob_clustering}
 \end{figure}
 
 
@@ -795,6 +796,11 @@ specific workload.
 %  paragraph/pilot can go. I don't see the new functional feature or
 %  increased complexiy that WISDOM introduces}
 
+Based on the descriptions and preliminary analysis done in this section we have
+identified some distinctions in terms of design, usage and operation of pilot
+related systems. Figure~\ref{fig:pilotjob_clustering} is a graphical
+representation of this rough clustering.
+
 This evolution of \pilotjobs attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
 specific functionality + per-\pilot terminology calls for a standard vocabulary
@@ -816,12 +822,6 @@ commonalities/differences.
 %------------------------------------------------------------------------------
 % SECTION 3
 %------------------------------------------------------------------------------
-
-\jhanote{There is no reference to figure 2 and 3, both literally as
-  well as in the flow of text. for example, currently we develop
-  place-holder job before coordination (if at all), but figure 2 seems
-  to imply the reverse -- either chronoligically or in terms of
-  functional sophistication}
 
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:vocab}
@@ -1159,7 +1159,7 @@ be used also to indicate a DCI.
 
 \item[Task.] A set of operations encodeed so that they can be executed
 on the resources of a DCI. Implementtions of a task may include
-wrappers, applicaitons, scripts, and, more in general, any type of
+wrappers, applications, scripts, and, more in general, any type of
 `application kernel'.
 
 % \mrnote{(i) My issue here is, a single workload is a set of tasks.}
@@ -1191,6 +1191,9 @@ jobs are scheduled and then executed by a batch system.
 
 \item[Job.] A container for one or more executables, a description of
 their properties and indications on how they should be executed.
+\msnote{I dont think a job is actually a container of executables}
+\msnote{Should we maybe relate job to tasks? Although I guess we do that in the
+next paragraph already ...}
 
 \end{description}
 
@@ -1205,18 +1208,23 @@ be executed. Accordingly, tasks are considered as the functional units
 of a workload, while jobs as a way to execute executables on a given
 infrastructure. It should be noted that the two terms can be used
 interchangeably when considered outside the context of \pilotjob
-systems. Workloads are encoded into jobs when they have to be directly
+systems.
+\msnote{Although I probably agree, doesnt this "note" add more confusion than it
+resolves?}
+Workloads are encoded into jobs when they have to be directly
 executed on infrastructures that support or require that type of
 container.
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots. A pilot
 indicates the sum of a container plus an executable --- usually called
-agent --- with  specific capabilities. For example,  the scheduler, a
+agent --- with  specific capabilities.
+For example,  the scheduler, a
 batch processor and a queuing  sytem exposed by a DCI's resource would
 imposed a the choice of a `job' as the \pilot container, and they would
 also set the practical boundaries for how and when the pilots could be
 provisioned.
+\msnote{I dont understand the part of "the sum" and the following example ...}
 
 % \mrnote{I'm uncomfortable with the word programs again,
 % especially for a 'pilot'.}\mtnote{I substituted 'program' with
@@ -1257,6 +1265,8 @@ workload.
 \item[Pilot.] The sum of a container plus a set of executables
 functioning as a resource placeholder on a given infrastructure and
 capable of executing pushed or pulled tasks.
+\msnote{I think I start to understand the earlier definition of "container
+sum", but we might want to clarify that earlier}
 
 %while managing data.
 
@@ -1283,12 +1293,16 @@ DCI is one of the main reasons for the success of the \pilotjob systems. The
 overhead and lack of control imposed by a centralized job management system
 shared among multiple users are bypassed, allowing for a faster and more
 reliable execution of workloads.
+\msnote{Im not sure if it is more reliable, but we can add or replace with
+"flexible"?}
 
 The \pilotjob systems are said to implement multi-level scheduling
 because they require the scheduling of two types of entities - pilots
 and tasks - in a distinct chronological order. A portion of the
 resources of a DCI is first bound to a pilot and then to one or more
-tasks for consumption. This is an important feature of \pilotjob systems
+tasks for consumption.
+\msnote{The "first and then" is possibly in conflict with the next sentences.}
+This is an important feature of \pilotjob systems
 because it allows for a task to be bound to a pilot before it is in turn
 bound to the resources. Binding pilots to their resources and tasks to
 pilots depends on placement choices. As such, the binding process in
@@ -1309,6 +1323,9 @@ instantiated.
 \begin{description}
 
 \item[Early binding.] Binding one or more tasks to an inactive pilot.
+\msnote{When a pilot is still in a queue, waiting to be run, it is inactive,
+but binding to this pilot would be considered late, right? (because the choice
+for the resource has already been made)}
 
 \item[Late binding.] Binding one or more tasks to an active pilot.
 
@@ -1323,6 +1340,7 @@ into consideration the properties of the task of a workload. This type of
 specification process should not be confused with early binding as the latter
 requires for a pilot to have been already specified but not yet bound to a
 resource.
+\msnote{The "specified" part here probably requires some clearification.}
 
 % \jhanote{I would remove the definition of application. It is one of
 %   those conundrums, that you'll hardly help anyone, but definitely
