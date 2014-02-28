@@ -918,8 +918,11 @@ paragraph may need an entire revisit, since comparison  with Nimrod is
 no longer an option, swift is not a PJ-system, and glidein is compared
 vs nimrod}\mtnote{Agreed. I will wait for S2 and S4 to be final before
 picking the right examples/vocabulary.}
+\msnote{Do we need "examples" here in the first place?}
 
-Communication and coordination are two characteristics of distributed
+Communication and coordination are two \msnote{I feel we need an adjective
+here, otherwise it reads a bit like "two randomly choosen characterics are ...
+:-)"} characteristics of distributed
 software tools and \pilotjob systems make no exception. The Workload
 Manager and the Task Executor are separate and well-defined logical
 components that need to communicate and coordinate in order to exchange
@@ -958,8 +961,12 @@ and coordination.
 % Any better?}
 
 The distribution of functionalities among the Task Manager and the Task
-Executor should not be used as defining features of \pilot systems. Such
-a distribution depends on the communication and coordination patterns
+Executor should not be used as defining features of \pilot systems.
+\msnote{Arguably, the "definition" of the logical components will restrict to
+some degree which functionality belongs here and there? At least not in general
+I would say. But maybe this statement is still too ambigious because we haven't
+talked about "functionality" yet?}
+Such a distribution depends on the communication and coordination patterns
 chosen to implement a \pilot system and, as such, can vary within
 different implementations of the same paradigm. For example, as seen in
 \S\ref{ssec:informal}, the \MW pattern is very common cooridnation
@@ -971,8 +978,9 @@ while, the functionalities needed to execute each task will be
 implemented into the Task Executor. Alternative coordination strategies,
 like for example those in which Task Executor directly coordinate the
 task scheduling, might require a relatively simple Workload Manager
-including only those capabilities related to task submission and a
-feautre-rich Task Executor capable or coordinating with its neighboor
+including only those capabilities related to task submission
+\msnote{submission is confusing here} and a
+feature-rich Task Executor capable or coordinating with its neighboor
 executors while leveraging, for example, an overlay network.
 
 % \jhanote{the paragraph started talking about C\&C not being integral,
@@ -1012,7 +1020,10 @@ In order to support the execution of workloads by means of pilots, a
 system would not be able to schedule \pilotjobs on the targeted
 resources, while without the latter the \pilot system would not be able
 to leverage its \pilots in order to execte the tasks of the given
-workload. Pilot provisioning and task dispatching should be considered
+workload.
+\msnote{We just describe what can't be done without them. Wouldn't it be better
+to (addionally) give a definition? Or was this approach deliberately chosen?}
+Pilot provisioning and task dispatching should be considered
 the minimal set of functionalities for a \pilot system. While many more
 functionalties are needed in order to deploy, manage, or share a \pilot
 system among one or more users, functionalities related to security,
@@ -1027,7 +1038,11 @@ and executed.
 % Any better?}
 
 Pilot provisioning is a core functionality of every \pilot system
-because it is essential for the creation of resource overlays. This type
+because it is essential for the creation of resource overlays.
+\msnote{What do we strictly consider the process of "pilot provisioning" to
+entail? In some definition, this would rule out DIANE as a pilot job framework
+as the launch of pilots is done out-of-band.}
+This type
 of overlay allows for tasks to utilize resources without directly
 depending on the capabilities exposed by the targeted DCI. Pilots are
 scheduled to the DCI resources by means of the DCI capabilities but,
@@ -1035,7 +1050,7 @@ once scheduled and then run, pilots make those resources directly
 available for the execution of the tasks of a workload. Thanks to
 resource overlays, \pilot systems can also implement functionalities
 tailored to the requirements of specific user communities [cit, cit,
-cit].
+cit]\msnote{What are we thinking of here?}.
 
 The procedures and mechanisms to provision pilots depend on the
 capabilities exposed by the targeted DCI and on the implementation of
@@ -1051,7 +1066,10 @@ Virtual Machine (VM) on so-called Infrastructures as a Service (IaaS).
 % citation. I changed `the one'. Any better?}
 
 Once pilots are bound to DCI resources, tasks need to be dispatched to those
-pilots for execution. Thanks to resource overlays, task dispatching does not
+pilots for execution.
+\msnote{Dispatch in this context has quite a literal meaning of "sending", and
+would kind of rule out pilots "pulling" tasks.}
+Thanks to resource overlays, task dispatching does not
 depend on other functionalities provided by the DCI and can be implemented
 within the boundaries of the \pilot systems. This independence allows to shift
 the control of tasks of a workload directly and exclusively to the \pilot
