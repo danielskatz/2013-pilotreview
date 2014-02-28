@@ -851,12 +851,12 @@ eventually, about its multiple implementations.
 conservative with its usage}
 \mtnote{Any better?}
 
-\jhanote{The 5th and 6th paragraphs should be moved. It is
-interrupting the flow and delaying the reader from getting to the
-message. 5th and 6th are useful but we should present
-caveats/enhancements/refinements to a message only after we have
-finished delivering the main message. For example, we can move the
-discussion of C\&C to where we talk about data management.}
+\jhanote{The 5th and 6th paragraphs should be moved. It is interrupting
+the flow and delaying the reader from getting to the message. 5th and
+6th are useful but we should present caveats/enhancements/refinements to
+a message only after we have finished delivering the main message. For
+example, we can move the discussion of C\&C to where we talk about data
+management.} \mtnote{I revised the two paragraphs and moved them down.}
 
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
@@ -885,7 +885,7 @@ concepts and terms that have to apply to every \pilotjob implementation.
 At some level, all \pilotjob systems introduced in \S\ref{sec:history}
 leverage a similar architecture to accomplish workload execution. Such
 an architecture is based on two separate, but intercommunicating logical
-components: a \textbf{ Workload Manager} and a \textbf{Task   Executor}.
+components: a \textbf{Workload Manager} and a \textbf{Task Executor}.
 The Workload Manager is related to the management of the workloads and
 their tasks; the Task Executor to the execution of the tasks on target
 resources.  As will be shown in \S\ref{sec:4}, the implementations of
@@ -902,14 +902,14 @@ Section\ref{ssec:history}} belong to the logical component dedicated to
 workload management, while the job-wrapper belongs to the component
 responsible for task execution. Similar examples can be given for the
 advanced \pilotjob systems and for Pilot-based frameworks: GlideinWMS
-\jhanote{we'll need to be careful to not   conflate a WMS with a PJ
-systems. It may be just a matter of naming,   ie replace GlideWMS with
+\jhanote{we'll need to be careful to not conflate a WMS with a PJ
+systems. It may be just a matter of naming, ie replace GlideWMS with
 Condor-G, but needs care either way..} offers an extended set of
 features when compared to the scheduler and dispatcher of Nimrod-G, but
 all those features belong to the same, well-defined and self-contained
 logical component --- i.e. the one in charge of managing the workloads.
 The same is valid for Corral and \jhanote{Need to replace Swift with
-Coasters -- Swift is a workflow   language; coasters is the underlying
+Coasters -- Swift is a workflow language; coasters is the underlying
 pilot implementation.} Swift: both offer evolved functionalities and
 interfaces to manage workloads but, as such, both are part of an
 architecture where workload management and task execution belong to two
@@ -919,21 +919,7 @@ no longer an option, swift is not a PJ-system, and glidein is compared
 vs nimrod}\mtnote{Agreed. I will wait for S2 and S4 to be final before
 picking the right examples/vocabulary.}
 
-Communication and coordination are two characteristics of distributed
-software tools and \pilotjob systems make no exception. The Workload
-Manager and the Task Executor are separate and well-defined logical
-components that need to communicate and coordinate in order to exchange
-tasks, input/output files, and related data. Nonetheless, the \pilotjob
-paradigm is nor defined by any specific communication and coordination
-pattern, nor by any specific network architecture or protocol. For
-exmaple, the Workload Manager and the Task Executor can communicate by
-means of point-to-point (i.e. one-to- one), many-to-one, or one-to-many
-(cit) patterns, coordinate by means of time syncronization, static or
-dynamic coordinator election, local or global information sharing.
-Furthermore, different network architectures might be leveraged as, for
-example, `dumb',  `intelligent', or overlay networks, while adopting
-different network protocols in order to achieve effective communication
-and coordination.
+% ranging from `dumb', `intelligent', or overlay networks,
 
 % \jhanote{suggestion: we should replace architecture
 % with either tool or infrastructure or something else...}\mrnote{DCI,
@@ -957,24 +943,6 @@ and coordination.
 % paragraph including the clarifications given to your previous comments.
 % Any better?}
 
-The distribution of functionalities among the Task Manager and the Task
-Executor should not be used as defining features of \pilot systems. Such
-a distribution depends on the communication and coordination patterns
-chosen to implement a \pilot system and, as such, can vary within
-different implementations of the same paradigm. For example, as seen in
-\S\ref{ssec:informal}, the \MW pattern is very common cooridnation
-pattern among \pilot systems. When the Master is identified with the
-Workload Manager, and the Worker with the Task Executor, the
-functionalities related, for example, to task description, scheduling,
-and monitoring will generally be implemented within the Workload Manager
-while, the functionalities needed to execute each task will be
-implemented into the Task Executor. Alternative coordination strategies,
-like for example those in which Task Executor directly coordinate the
-task scheduling, might require a relatively simple Workload Manager
-including only those capabilities related to task submission and a
-feautre-rich Task Executor capable or coordinating with its neighboor
-executors while leveraging, for example, an overlay network.
-
 % \jhanote{the paragraph started talking about C\&C not being integral,
 % but then focusses/ends on M-W}\mtnote{Rewritten. Any better?}
 
@@ -984,13 +952,13 @@ process when compared to scheduling tasks directly on the DCI resources.
 The tasks of a workload are bound to one or more Task Executor and, as
 such, to a pilot, without having to be directly scheduled on the job
 management systems of any the DCI's resources --- would such system be
-exposed by a single cluster of the DCI or by a DIC- wide scheduler.
+exposed by a single cluster of the DCI or by a DCI-wide scheduler.
 Furthermore, the binding of tasks to a pilot might happen before or
 after the pilot has been assigned a portion of any of the DCI's
 resource, and it can last for the whole time the pilot can hold on its
 resources. This execution strategy requires dedicated functionalities
-both for performing the binding of tasks to pilots but also for the
-provisioning of pilots so that they can be assigned portions of any of a
+both to perform the binding of tasks to pilots but also to
+provision pilots so that they can be assigned portions of any of a
 DCI's resource.
 
 % \mrnote{This paragraph is making it somewhat difficult
@@ -1050,22 +1018,56 @@ Virtual Machine (VM) on so-called Infrastructures as a Service (IaaS).
 % ``the one''}\mtnote{I am not sure I udnersatnd why we would need a
 % citation. I changed `the one'. Any better?}
 
-Once pilots are bound to DCI resources, tasks need to be dispatched to those
-pilots for execution. Thanks to resource overlays, task dispatching does not
-depend on other functionalities provided by the DCI and can be implemented
-within the boundaries of the \pilot systems. This independence allows to shift
-the control of tasks of a workload directly and exclusively to the \pilot
-system, a distinguishing characteristic of such systems.
+Once pilots are bound to DCI resources, tasks need to be dispatched to
+those pilots for execution. Thanks to resource overlays, task
+dispatching does not depend on other functionalities provided by the DCI
+and can be implemented within the boundaries of the \pilot systems. This
+independence allows to shift the control of tasks of a workload directly
+and exclusively to the \pilot system, a distinguishing characteristic of
+such systems.
 
-Data management may have an important role within \pilot systems. For example,
-functionalities can be provided to support data staging for task execution or
-for managing task-related data according to the capabilities offered by
-specific DCI. Nonetheless, \pilot systems can be devised in which tasks do not
-require data management because they (i) do not necessitate input files, (ii)
-do not produce output files, (iii) data is already locally available or (iv)
-data management is left to the application itself. As such, data management
-should not be considered a necessary functionality of \pilot systems even when
-present in many of them.
+The distribution of functionalities among the Task Manager and the Task
+Executor depends on the communication patterns and coordination
+strategies chosen to implement a \pilot system. Therefore, such a
+distribution should not be used to define the \pilot paradigm. For
+example, as seen in \S\ref{ssec:informal}, \MW is a very common
+cooridnation strategy among \pilot systems. When the Master is
+identified with the Workload Manager, and the Worker with the Task
+Executor, the functionalities related to task description, scheduling,
+and monitoring will generally be implemented within the Workload
+Manager, while the functionalities needed to execute each task will be
+implemented into the Task Executor. Alternative coordination strategies,
+for example the one where a Task Executor directly coordinates the task
+scheduling, might require a functionally simple Workload Manager but a
+feature-rick Task Executor. The former would require capabilities for
+submitting tasks, while the latter would require to coordinate with its
+neighboor executors leveraging, for example, an overlay network.
+
+Communication and coordination are two characteristics of distributed
+software tools and \pilotjob systems make no exception. The Workload
+Manager and the Task Executor are separate and well-defined logical
+components that need to communicate and coordinate in order to exchange
+tasks, input/output files, and related data. Nonetheless, the \pilotjob
+paradigm is nor defined by any specific communication and coordination
+pattern, nor by any specific network architecture or protocol. For
+exmaple, the Workload Manager and the Task Executor may communicate with
+every suitable pattern --- point-to-point (i.e. one-to-one), many-to-
+one, or one-to-many (cit) --- and coordinate adopting any suitable
+strategy --- time syncronization, static or dynamic coordinator
+election, local or global information sharing. Analogously, different
+network architectures and protocols may be leveraged in order to achieve
+effective communication and coordination.
+
+Data management may have an important role within \pilot systems. For
+example, functionalities can be provided to support data staging for
+task execution or for managing task-related data according to the
+capabilities offered by specific DCI. Nonetheless, \pilot systems can be
+devised in which tasks do not require data management because they (i)
+do not necessitate input files, (ii) do not produce output files, (iii)
+data is already locally available or (iv) data management is left to the
+application itself. As such, data management should not be considered a
+necessary functionality of \pilot systems even when present in many of
+them.
 
 In the following subsection, a minimal set of terms related to the
 capabilities just described is defined.
