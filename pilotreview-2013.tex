@@ -861,13 +861,14 @@ management.} \mtnote{I revised the two paragraphs and moved them down.}
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
-All the \pilotjob systems introduced in \S\ref{sec:history} are
-engineered to allow for the execution of multiple types of workloads on
-Distributed Computing Infrastructures (DCIs) such as, Grids, Clouds or
-HPC facilities. This is achieved differently, depending on use cases,
-design and implementation choices, but also on the constraints imposed
-by the peculiarities of the targeted DCI. Finding common denominators
-among these systems requires an analysis along multiple dimensions.
+All the \pilotjob systems introduced in \S\ref{sec:history} are engineered
+to allow for the execution of multiple types of workloads on Distributed
+Computing Infrastructures (DCIs) such as, Grids, Clouds or HPC
+facilities. This is achieved differently, depending on use cases, design
+and implementation choices, but also on the constraints imposed by the
+peculiarities of the targeted DCI. Finding common denominators among
+these systems requires an analysis along multiple dimensions: purpose,
+logical components, and functionalities.
 
 % As seen in \S\ref{ssec:evaluation} \pilotjobs can be analyzed according
 % to multiple criteria, both functional and non-functional.  \onote{avoid
@@ -875,25 +876,30 @@ among these systems requires an analysis along multiple dimensions.
 % former as the latter are adapted by definition to each specific pilot
 % implementation.
 
-Each \pilotjob system exhibits architectural, provisioning and execution
-characteristics that are integral to the \pilotjob paradigm itself.
-However, many \pilotjob systems also exhibit specific or non-integral
-characteristics. Discerning and distinguishing characteristics into
-these categories, requires isolating and defining a minimal set of
-concepts and terms that have to apply to every \pilotjob implementation.
+The purpose of a \pilotjob system is to improve performance of workload
+execution when compared to executing the same workload directly on the
+DCI resources. In order to achieve such a purpose, each \pilotjob system
+exhibits characteristics that are both integral and not-integral to the
+\pilotjob paradigm itself. Discerning and distinguishing characteristics
+into these categories requires isolating and defining a minimal set of
+logical components that are common to every \pilotjob implementation.
+Once these logical components have been defined, the minimal set of
+functionalities of a \pilotjob system will be derived.
 
 At some level, all \pilotjob systems introduced in \S\ref{sec:history}
-leverage a similar architecture to accomplish workload execution. Such
-an architecture is based on two separate, but intercommunicating logical
-components: a \textbf{Workload Manager} and a \textbf{Task Executor}.
-The Workload Manager is related to the management of the workloads and
-their tasks; the Task Executor to the execution of the tasks on target
-resources.  As will be shown in \S\ref{sec:4}, the implementations of
-both components significantly vary from system to system, with one or
-more elements responsible for specific functionalities both on
-application as well as infrastructure level. Nevertheless, the two
-logical components can be consistently distinguished and isolated across
-different \pilotjob systems.
+leverage three separate, but coordinated logical components: a
+\textbf{Pilot Manager}, a \textbf{Workload Manager}, and a \textbf{Task
+Executor}. The Pilot Manager handles the definition, instantiation, and
+use of one or more resource overlay called `pilot' on single or
+multiple DCIs. The workload manager handles the execution of one or more
+workloads and their tasks, while the Task Executor takes care of
+executing tasks on one or more pilots.  As will be shown in
+\S\ref{sec:4}, the implementation details of these three logical components
+significantly vary from \pilotjob system to \pilotjob system, with one
+or more elements responsible for specific functionalities both on
+application as well as infrastructure level. Nevertheless, the three
+components can be consistently distinguished across different \pilotjob
+systems.
 
 For example, looking at the core \pilotjob systems introduced in
 \S\ref{ssec:history}, the scheduler and dispatcher of Nimrod-G
@@ -946,21 +952,6 @@ picking the right examples/vocabulary.}
 % \jhanote{the paragraph started talking about C\&C not being integral,
 % but then focusses/ends on M-W}\mtnote{Rewritten. Any better?}
 
-The goal of \pilotjob systems is to support flexible execution
-strategies along with improved performance in the task submission
-process when compared to scheduling tasks directly on the DCI resources.
-The tasks of a workload are bound to one or more Task Executor and, as
-such, to a pilot, without having to be directly scheduled on the job
-management systems of any the DCI's resources --- would such system be
-exposed by a single cluster of the DCI or by a DCI-wide scheduler.
-Furthermore, the binding of tasks to a pilot might happen before or
-after the pilot has been assigned a portion of any of the DCI's
-resource, and it can last for the whole time the pilot can hold on its
-resources. This execution strategy requires dedicated functionalities
-both to perform the binding of tasks to pilots but also to
-provision pilots so that they can be assigned portions of any of a
-DCI's resource.
-
 % \mrnote{This paragraph is making it somewhat difficult
 % to understand. A single super computer or machine is not a 'distributed
 % computing infrastructure.' Therefore, the assumption when I am reading
@@ -974,19 +965,31 @@ DCI's resource.
 % DCI. This is why, the common use of both the terms DCI and resource are
 % inconsistent and why here I had tried to redefine them consistently.}
 
+The tasks of a workload are bound to one or more Task Executor that in
+turn is bound to one or more pilots. In this way, tasks do not have to
+be directly scheduled on the job management systems of any the DCI's
+resources --- would such system be exposed by a single cluster of the
+DCI or by a DCI-wide scheduler. Furthermore, the binding of tasks to a
+pilot might happen before or after the pilot has been assigned a portion
+of any of the DCI's resource, and it can last for the whole time the
+pilot can hold on its resources. This execution strategy requires
+dedicated functionalities both to perform the binding of tasks to pilots
+but also to provision pilots so that they can be assigned portions of
+any of a DCI's resource.
+
 In order to support the execution of workloads by means of pilots, a
 \pilot systems needs a set of functionalities to \textbf{provision
-\pilots} and \textbf{dispatch tasks}. Without the former, the \pilot
-system would not be able to schedule \pilotjobs on the targeted
-resources, while without the latter the \pilot system would not be able
-to leverage its \pilots in order to execte the tasks of the given
-workload. Pilot provisioning and task dispatching should be considered
-the minimal set of functionalities for a \pilot system. While many more
-functionalties are needed in order to deploy, manage, or share a \pilot
-system among one or more users, functionalities related to security,
-workload submission, resource descripiton, or data management are,
-strinctly speaking, not required for \pilotjobs or tasks to be scheduled
-and executed.
+\pilots}, \textbf{dispatch tasks}, and then \textbf{execute tasks}.
+Every \pilot system need to be able to schedule \pilotjobs on the
+targeted resources, schedule tasks on the available pilots and then
+leverage these \pilots to execte the tasks of the given workload. Pilot
+provisioning, task dispatching, and task execution should be therefore
+considered the minimal set of functionalities for a \pilot system. While
+many more functionalties are needed to deploy, manage, or share
+a \pilot system among one or more users, functionalities related to
+security, workload submission, resource descripiton, or data management
+are, strinctly speaking, not required for \pilotjobs or tasks to be
+scheduled and then executed.
 
 % \jhanote{need to justify the above sentence.}\mrnote{Maybe
 % we can say that we will now motivate   why we believe the two core
@@ -1007,12 +1010,12 @@ cit].
 
 The procedures and mechanisms to provision pilots depend on the
 capabilities exposed by the targeted DCI and on the implementation of
-the considered \pilot system. Typically, for a DCI adopting queues,
-batch and scheduling systems, provisioning a pilot involves it being
-submitted as a job. Conversely, for infrastructures that do not adopt a
-job-based approach, a pilot would be executed by means of other types of
-logical container as, for example, a container implemented by means of a
-Virtual Machine (VM) on so-called Infrastructures as a Service (IaaS).
+each \pilot system. Typically, for a DCI adopting queues, batch and
+scheduling systems, provisioning a pilot involves it being submitted as
+a job. Conversely, for infrastructures that do not adopt a job-based
+approach, a pilot would be executed by means of other types of logical
+container as, for example, a container implemented by means of a Virtual
+Machine (VM) on so-called Infrastructures as a Service (IaaS).
 
 % \mrnote{Should this be a citation? It just sounds weird when it says
 % ``the one''}\mtnote{I am not sure I udnersatnd why we would need a
@@ -1026,12 +1029,12 @@ independence allows to shift the control of tasks of a workload directly
 and exclusively to the \pilot system, a distinguishing characteristic of
 such systems.
 
-The distribution of functionalities among the Task Manager and the Task
-Executor depends on the communication patterns and coordination
-strategies chosen to implement a \pilot system. Therefore, such a
-distribution should not be used to define the \pilot paradigm. For
-example, as seen in \S\ref{ssec:informal}, \MW is a very common
-cooridnation strategy among \pilot systems. When the Master is
+The distribution of functionalities among the Pilot Manager, Workload
+Manager and the Task Executor depends on the communication patterns and
+coordination strategies chosen to implement a \pilot system. As such,
+communication and coordination should not be used to define the \pilot
+paradigm. For example, as seen in \S\ref{ssec:informal}, \MW is a very
+common cooridnation strategy among \pilot systems. When the Master is
 identified with the Workload Manager, and the Worker with the Task
 Executor, the functionalities related to task description, scheduling,
 and monitoring will generally be implemented within the Workload
@@ -1086,17 +1089,17 @@ capabilities just described is defined.
   \hline
     \textbf{Task} & Task Dispatching & Task Executor \\
   \hline
-    \textbf{Resource} & Pilot Provisioning & Workload Manager \\
+    \textbf{Resource} & Pilot Provisioning & Pilot Manager \\
   \hline
-    \textbf{Job} & Pilot Provisioning & Workload Manager \\
+    \textbf{Job} & Pilot Provisioning & Pilot Manager \\
   \hline
-    \textbf{Pilot} & Pilot Provisioning & Workload Manager \\
+    \textbf{Pilot} & Pilot Provisioning & Pilot Manager \\
   \hline
     \textbf{Multi-level scheduling} & Task Dispatching & Task Executor \\
   \hline
-    \textbf{Early binding} & Pilot Provisioning & Workload Manager \\
+    \textbf{Early binding} & Pilot Provisioning & Pilot Manager \\
   \hline
-    \textbf{Late binding} & Pilot Provisioning & Workload Manager \\
+    \textbf{Late binding} & Pilot Provisioning & Pilot Manager \\
   \hline
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
