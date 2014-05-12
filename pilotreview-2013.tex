@@ -861,14 +861,15 @@ management.} \mtnote{I revised the two paragraphs and moved them down.}
 \subsection{Core Functionalities of \pilotjobs}
 \label{subsec:vocab_core_functionalities}
 
-All the \pilotjob systems introduced in \S\ref{sec:history} are engineered
-to allow for the execution of multiple types of workloads on Distributed
-Computing Infrastructures (DCIs) such as, Grids, Clouds or HPC
-facilities. This is achieved differently, depending on use cases, design
-and implementation choices, but also on the constraints imposed by the
-peculiarities of the targeted DCI. Finding common denominators among
-these systems requires an analysis along multiple dimensions: purpose,
-logical components, and functionalities.
+All the \pilotjob systems introduced in \S\ref{sec:history} are
+engineered to allow for the execution of multiple types of workloads on
+Distributed Computing Infrastructures (DCIs) such as, Grids, Clouds or
+HPC facilities. This is achieved differently, depending on use cases,
+design and implementation choices, but also on the constraints imposed
+by the peculiarities of the targeted DCI. Finding common denominators
+among these systems requires the definition of the \pilotjob paradigm
+along multiple dimensions: purpose, logical components, and
+functionalities.
 
 % As seen in \S\ref{ssec:evaluation} \pilotjobs can be analyzed according
 % to multiple criteria, both functional and non-functional.  \onote{avoid
@@ -877,53 +878,53 @@ logical components, and functionalities.
 % implementation.
 
 The purpose of a \pilotjob system is to improve performance of workload
-execution when compared to executing the same workload directly on the
-DCI resources. In order to achieve such a purpose, each \pilotjob system
+execution when compared to executing the same workload directly on one
+or more  DCI. In order to achieve such a purpose, each \pilotjob system
 exhibits characteristics that are both integral and not-integral to the
-\pilotjob paradigm itself. Discerning and distinguishing characteristics
-into these categories requires isolating and defining a minimal set of
-logical components that are common to every \pilotjob implementation.
-Once these logical components have been defined, the minimal set of
-functionalities of a \pilotjob system will be derived.
+\pilotjob paradigm itself. Discerning and distinguishing these
+characteristics require isolating and defining the minimal set of logical
+components that characterize the \pilotjob paradigm.
 
 At some level, all \pilotjob systems introduced in \S\ref{sec:history}
 leverage three separate, but coordinated logical components: a
 \textbf{Pilot Manager}, a \textbf{Workload Manager}, and a \textbf{Task
 Executor}. The Pilot Manager handles the definition, instantiation, and
-use of one or more resource overlay called `pilot' on single or
-multiple DCIs. The workload manager handles the execution of one or more
-workloads and their tasks, while the Task Executor takes care of
-executing tasks on one or more pilots.  As will be shown in
-\S\ref{sec:4}, the implementation details of these three logical components
-significantly vary from \pilotjob system to \pilotjob system, with one
-or more elements responsible for specific functionalities both on
-application as well as infrastructure level. Nevertheless, the three
-components can be consistently distinguished across different \pilotjob
-systems.
+use of one or more resource overlay called `pilot' on single or multiple
+DCIs. The workload manager handles the inspection, submission and
+retrieval of one or more workload on the available resource overlays.
+Finally, the Task Executor takes care of executing the tasks of each
+workload on one or more resource overlays.
 
-For example, looking at the core \pilotjob systems introduced in
-\S\ref{ssec:history}, the scheduler and dispatcher of Nimrod-G
-\jhanote{this is now a stale statement, as Nimrod is not discussed in
-Section\ref{ssec:history}} belong to the logical component dedicated to
-workload management, while the job-wrapper belongs to the component
-responsible for task execution. Similar examples can be given for the
-advanced \pilotjob systems and for Pilot-based frameworks: GlideinWMS
-\jhanote{we'll need to be careful to not conflate a WMS with a PJ
-systems. It may be just a matter of naming, ie replace GlideWMS with
-Condor-G, but needs care either way..} offers an extended set of
-features when compared to the scheduler and dispatcher of Nimrod-G, but
-all those features belong to the same, well-defined and self-contained
-logical component --- i.e. the one in charge of managing the workloads.
-The same is valid for Corral and \jhanote{Need to replace Swift with
-Coasters -- Swift is a workflow language; coasters is the underlying
-pilot implementation.} Swift: both offer evolved functionalities and
-interfaces to manage workloads but, as such, both are part of an
-architecture where workload management and task execution belong to two
-distinct components. \jhanote{fix previous sentence}\mrnote{I think this
-paragraph may need an entire revisit, since comparison  with Nimrod is
-no longer an option, swift is not a PJ-system, and glidein is compared
-vs nimrod}\mtnote{Agreed. I will wait for S2 and S4 to be final before
-picking the right examples/vocabulary.}
+The implementation details of these three logical components
+significantly vary from \pilotjob system to \pilotjob system (see
+\S\ref{sec:4}), with one or more elements responsible for specific
+functionalities both on application as well as infrastructure level.
+Nevertheless, the three components can be consistently distinguished
+across different \pilotjob systems. For example, looking at the core
+\pilotjob systems introduced in \S\ref{ssec:history}, \ldots \mtnote{I
+will wait for S2 and S4 to be final before picking the right
+examples/vocabulary.}
+
+% the scheduler and dispatcher of Nimrod-G \jhanote{this is now a stale
+% statement, as Nimrod is not discussed in Section\ref{ssec:history}}
+% belong to the logical component dedicated to workload management, while
+% the job-wrapper belongs to the component responsible for task execution.
+% Similar examples can be given for the advanced \pilotjob systems and for
+% Pilot- based frameworks: GlideinWMS \jhanote{we'll need to be careful to
+% not conflate a WMS with a PJ systems. It may be just a matter of naming,
+% ie replace GlideWMS with Condor-G, but needs care either way..} offers
+% an extended set of features when compared to the scheduler and
+% dispatcher of Nimrod-G, but all those features belong to the same, well-
+% defined and self-contained logical component --- i.e. the one in charge
+% of managing the workloads. The same is valid for Corral and
+% \jhanote{Need to replace Swift with Coasters -- Swift is a workflow
+% language; coasters is the underlying pilot implementation.} Swift: both
+% offer evolved functionalities and interfaces to manage workloads but, as
+% such, both are part of an architecture where workload management and
+% task execution belong to two distinct components. \jhanote{fix previous
+% sentence}\mrnote{I think this paragraph may need an entire revisit,
+% since comparison  with Nimrod is no longer an option, swift is not a PJ-
+% system, and glidein is compared vs nimrod}
 
 % ranging from `dumb', `intelligent', or overlay networks,
 
@@ -965,31 +966,29 @@ picking the right examples/vocabulary.}
 % DCI. This is why, the common use of both the terms DCI and resource are
 % inconsistent and why here I had tried to redefine them consistently.}
 
-The tasks of a workload are bound to one or more Task Executor that in
-turn is bound to one or more pilots. In this way, tasks do not have to
-be directly scheduled on the job management systems of any the DCI's
-resources --- would such system be exposed by a single cluster of the
-DCI or by a DCI-wide scheduler. Furthermore, the binding of tasks to a
-pilot might happen before or after the pilot has been assigned a portion
-of any of the DCI's resource, and it can last for the whole time the
-pilot can hold on its resources. This execution strategy requires
-dedicated functionalities both to perform the binding of tasks to pilots
-but also to provision pilots so that they can be assigned portions of
-any of a DCI's resource.
+% The tasks of a workload are bound to one or more Task Executor that in
+% turn is bound to one or more pilots. In this way, tasks do not have to
+% be directly scheduled on the job management systems of any the DCI's
+% resources --- would such system be exposed by a single cluster of the
+% DCI or by a DCI-wide scheduler. Furthermore, the binding of tasks to a
+% pilot might happen before or after the pilot has been assigned a portion
+% of any of the DCI's resource, and it can last for the whole time the
+% pilot can hold on its resources. This execution strategy requires
+% dedicated functionalities both to perform the binding of tasks to pilots
+% but also to provision pilots so that they can be assigned portions of
+% any of a DCI's resource.
 
-In order to support the execution of workloads by means of pilots, a
-\pilot systems needs a set of functionalities to \textbf{provision
-\pilots}, \textbf{dispatch tasks}, and then \textbf{execute tasks}.
-Every \pilot system need to be able to schedule \pilotjobs on the
-targeted resources, schedule tasks on the available pilots and then
-leverage these \pilots to execte the tasks of the given workload. Pilot
-provisioning, task dispatching, and task execution should be therefore
-considered the minimal set of functionalities for a \pilot system. While
-many more functionalties are needed to deploy, manage, or share
-a \pilot system among one or more users, functionalities related to
-security, workload submission, resource descripiton, or data management
-are, strinctly speaking, not required for \pilotjobs or tasks to be
-scheduled and then executed.
+The logical components of the \pilotjob paradigm support a minimal set
+of functionalities that allow for the execution of workloads by means of
+pilots: \textbf{\pilot provisioning}, \textbf{task dispatching}, and
+\textbf{task execution}. Every \pilot system need to be able to schedule
+\pilotjobs on the targeted resources, schedule tasks on the available
+pilots and then leverage these \pilots to execute the tasks of the given
+workload. While many more functionalities are needed to deploy,
+manage, or share a \pilot system among one or more users,
+functionalities related to security, workload submission, resource
+description, or data management are, strictly speaking, not required
+for \pilotjobs or tasks to be scheduled and then executed.
 
 % \jhanote{need to justify the above sentence.}\mrnote{Maybe
 % we can say that we will now motivate   why we believe the two core
@@ -1080,26 +1079,26 @@ capabilities just described is defined.
 
 \begin{table*}
  \centering
- \begin{tabular}{|l|l|l|}
+ \begin{tabular}{|p{4cm}|p{3.2cm}|p{3.2cm}|}
   \hline
-    \textbf{Terms} & \textbf{Functionality} & \textbf{Logical Component} \\
+    \textbf{Term} & \textbf{Functionality} & \textbf{Logical Component} \\
   \hline
   \hline
     \textbf{Workload} & Task Dispatching & Workload Manager \\
   \hline
-    \textbf{Task} & Task Dispatching & Task Executor \\
+    \textbf{Task} & Task Dispatching \newline Task Execution & Workload Manager \newline Task Executor \\
   \hline
     \textbf{Resource} & Pilot Provisioning & Pilot Manager \\
   \hline
     \textbf{Job} & Pilot Provisioning & Pilot Manager \\
   \hline
-    \textbf{Pilot} & Pilot Provisioning & Pilot Manager \\
+    \textbf{Pilot} & Pilot Provisioning \newline Task Execution & Pilot Manager \newline Task Executor \\
   \hline
-    \textbf{Multi-level scheduling} & Task Dispatching & Task Executor \\
+    \textbf{Multi-level scheduling} & Pilot Provisioning \newline Task Dispatching & Pilot Manager \newline Workload Manager \\
   \hline
-    \textbf{Early binding} & Pilot Provisioning & Pilot Manager \\
+    \textbf{Early binding} & Task Dispatching \newline Pilot Provisioning & Workload Manager  \newline Pilot Manager\\
   \hline
-    \textbf{Late binding} & Pilot Provisioning & Pilot Manager \\
+    \textbf{Late binding} & Task Dispatching \newline Pilot Provisioning  & Workload Manager \newline Pilot Manager\\
   \hline
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
