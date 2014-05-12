@@ -2623,9 +2623,11 @@ available beyond their original design scope.
 
 HTCondor can be considered one of the most prevalent distributed computing
 project of all time in terms of its pervasiveness and size of its  user
-community. Is often cited as the project that coined the term \pilotjob. But
-despite this fact, describing HTCondor along the lines of a \pilotjob system has
-turned out to be difficult, if not partly impossible for several reasons.
+community.
+Is often cited as the project that introduced the \pilotjob concept.
+But despite this fact, describing HTCondor along the lines of a \pilotjob
+system has turned out to be difficult, if not partly impossible for several
+reasons.
 
 HTCondor is used in multiple different contexts: the HTCondor \textit{project},
 the HTCondor \textit{software} and HTCondor \textit{grids}. But even if we only
@@ -2637,11 +2639,13 @@ curated opportunistically for the past 20 years.
 %
 \paragraph{Core System}
 
-A ``complete'' HTCondor system that accepts user tasks and executes them on
-one or more resources is called an HTCondor \textbf{pool}. A pool consists of
-multiple loosely coupled, usually distributed  components that together
-implement the functionality of Workload Manager and Task Executor in a
-PilotJob system.
+At the heart of it, HTCondor is a high-throughput distributed batch computing
+system.
+It accepts user tasks and executes them on one or more resources called an
+HTCondor \textbf{pool}.
+%A pool consists of multiple loosely coupled, usually distributed  components
+%that together implement the functionality of Workload Manager and Task Executor
+%in a PilotJob system.
 
 In a pool, user tasks (\textbf{jobs}) are represented through job description
 files and submitted to a (user-)\textbf{agent} via command-line tools. Agents
@@ -2659,30 +2663,32 @@ process is based on \textit{ClassAds} a description language that can capture
 both, resource capabilities as well as task requirements.
 
 \textbf{Resources} are tied into an HTCondor pool by \texttt{startd} system
-services that are analogous to our definition of a \pilot. The \texttt{startd}
-\pilots are deployed on the pool's compute resources. They report resource
-state and  capabilities back to the matchmaker and start tasks submitted by
-agents on the resource in encapsulated \textbf{sandboxes}.
+services.
+The \texttt{startd} services are deployed on the pool's compute resources.
+They report resource state and  capabilities back to the matchmaker and start
+tasks submitted by agents on the resource in encapsulated \textbf{sandboxes}.
 
 Resources in a pool can span a wide spectrum of system. While some pools are
 comprised of regular desktop PCs (sometimes called a campus grid), other pools
-incorporate large HPC clusters and cloud resources. Hybrid pools with
-heterogeneous sets of resources are also common.
+incorporate large HPC clusters and cloud resources.
+Hybrid pools with heterogeneous sets of resources are also common.
 
 It is possible for two or more HTCondor pools to ``collaborate'' so that one
-pool has access to the resources of another pool and vice versa. In HTCondor,
-this concept is called \textbf{flocking} and allows agents to query
-matchmakers outside their own pool for compatible resources. Flocking is used
-to implement load-balancing between multiple pools but also to provide a
-broader set of heterogeneous resources to user communities.
+pool has access to the resources of another pool and vice versa.
+In HTCondor, this concept is called
+\textbf{flocking}~\cite{Epema:1996:flocking} and allows agents to query
+matchmakers outside their own pool for compatible resources.
+Flocking is used to implement load-balancing between multiple pools but also to
+provide a broader set of heterogeneous resources to user communities.
 
-The components described above, jobs, agent, matchmaker, resource, shadow and
-sandboxes are sometimes collectively referred to as the \textbf{HTCondor
-Kernel} and satisfy the requirements for a \pilotjob system as outlined in
-Section \ref{subsec:vocab_core_functionalities}. However, the provisioning,
-allocation and usage of resources within a pool can differentiate between
-different pools and multiple different approaches and software systems have
-emerged over time, all under the umbrella of the wider HTCondor project.
+%The components described above, jobs, agent, matchmaker, resource, shadow and
+%sandboxes are sometimes collectively referred to as the \textbf{HTCondor
+%Kernel} and satisfy the requirements for a \pilotjob system as outlined in
+%Section \ref{subsec:vocab_core_functionalities}.
+%However, the provisioning, allocation and usage of resources within a pool can
+%differentiate between different pools and multiple different approaches and
+%software systems have emerged over time, all under the umbrella of the wider
+%HTCondor project.
 
 % -----------------------------------------------------------------------------
 %
@@ -2698,7 +2704,7 @@ Condor-G agents use the GRAM protocol to launch HTCondor \texttt{startd}
 \pilots ad hoc via a GRAM endpoint service on a remote system. Tasks submitted
 through the Condor-G (user-)agent are then assigned by a local matchmaker to
 these ad-hoc provisioned \pilots. This concept is called \textit {gliding-in}
-or \textbf{glide-in}. It implements \textbf{late-binding} on top of GRAM/HPC
+or \textbf{GlideIn}. It implements \textbf{late-binding} on top of GRAM/HPC
 systems: the (user-)agent can assign tasks to \texttt{startd}s \textit{after}
 they have been scheduled and started through the HPC queueing system. This
 effectively decouples resource allocation (\texttt{startd} scheduling through
@@ -2706,11 +2712,12 @@ GRAM) and task assignment.
 
 % -----------------------------------------------------------------------------
 %
-\paragraph{glidein-WMS -- Automated \pilot Provisioning}
+\paragraph{glideinWMS -- Automated \pilot Provisioning}
 
-The glidein workload management system (WMS)~\cite{1742-6596-119-6-062044} introduces advanced \pilotjob capabilities to HTCondor by
-providing automated \pilot (\texttt{startd}) provisioning based on
-the state of an HTCondor pool.
+glideinWMS, a workload management system (WMS)~\cite{1742-6596-119-6-062044}
+based on Condor GlideIns introduces advanced \pilotjob capabilities to HTCondor
+by providing automated \pilot (\texttt{startd}) provisioning based on the state
+of an HTCondor pool.
 
 
 % -----------------------------------------------------------------------------
