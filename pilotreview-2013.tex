@@ -983,11 +983,11 @@ resources, schedule tasks on the available pilots and then leverage
 these \pilots to execute the tasks of the given workload. Clearly, many
 more functionalities are needed in order to implement a production-grade
 \pilotjob system. For example authentication, authorization and
-accounting (AAA), elaborate data staging, tailored load-balancing and
+accounting (AAA), elaborate data management, tailored load-balancing and
 fault-tolerant scheduling affects the usability of \pilotjob systems,
 not their inner functionalities. AAA are fundamental when exposing a
 \pilotjob system on a public network infrastructure, complex data
-staging is required only by specific type of workloads while fault-
+management is required only by specific type of workloads while fault-
 tolerance and load-balancing may play an important role only on specific
 type of DCIs. As such, these functionalities are here considered critical
 implementation details, depending on the specific characteristics of the
@@ -1067,15 +1067,19 @@ these systems, adopting different coordination strategies, should be
 considered \pilotjob systems.
 
 Data management may have an important role within \pilotjob systems. For
-example, functionalities can be provided to support data staging for
-task execution or for managing task-related data according to the
-capabilities offered by specific DCI. Nonetheless, \pilotjob systems can
-be devised in which tasks do not require data management because they
-(i) do not necessitate input files, (ii) do not produce output files,
-(iii) data is already locally available or (iv) data management is left
-to the application itself. As such, data management should not be
-considered a necessary functionality of a \pilotjob system even if, in
-practice, it is present in most of its implementations.
+example, functionalities can be provided to support data staging for task
+execution or for managing task-related data according to the capabilities
+offered by specific DCI. \pilotjob systems can be devised in which tasks do not
+require any data management because they (i) do not necessitate input files,
+(ii) do not produce output files, (iii) data is already locally available or
+(iv) data management is left to the application itself. Even if such systems are
+conceivable, for every practical reasons, a minimal set of data-related
+capabilities should be consider a necessary functionality of a \pilotjob system.
+Therefore, while staging input files in and out a resource has to be considered
+a necessary capability of every \pilotjob systems, the same does not apply to
+more advanced and specific data capabilities like, for example, data
+replication, concurrent data transfers, data abstractions different from a file,
+or pilot data.
 
 In the following subsection, a minimal set of terms related to the
 capabilities just described is defined.
@@ -1197,42 +1201,44 @@ jobs are scheduled and then executed by a batch system.
 
 \begin{description}
 
-\item[Job.] A container for one or more executables, a description of
-their properties and indications on how they should be executed.
-\msnote{I dont think a job is actually a container of executables}
-\msnote{Should we maybe relate job to tasks? Although I guess we do that in the
-next paragraph already ...}
+\item[Job.] A container for one or more executables, a description of their
+properties and indications on how they should be executed. \msnote{I dont think
+a job is actually a container of executables}\mtnote{Any suggestion on what a
+job should be for you?} \msnote{Should we maybe relate job to tasks? Although I
+guess we do that in the next paragraph already ...}\mtnote{I would avoid to mix
+the two but happy to hear your reasoning about it.}
 
 \end{description}
 
-In the context of a \pilotjob system, jobs and tasks are functionally
-analogous but qualitatively different; it is therefore relevant to
-highlight their distinction. Functionally, both jobs and tasks are
-containers --- i.e. a metadata wrapper around one or more executable
-often called 'kernel', 'agent', 'application', 'script' --- but the term
-`task' is used when reasoning about workloads while `job' is used in
-relation to a specific type of infrastructure where such a container can
-be executed. Accordingly, tasks are considered as the functional units
-of a workload, while jobs as a way to execute executables on a given
-infrastructure. It should be noted that the two terms can be used
-interchangeably when considered outside the context of \pilotjob
-systems.
+In the context of a \pilotjob system, jobs and tasks are functionally analogous
+but qualitatively different; it is therefore relevant to highlight their
+distinction. Functionally, both jobs and tasks are containers --- i.e. a
+metadata wrapper around one or more executable often called 'kernel', 'agent',
+'application', 'script' --- but the term `task' is used when reasoning about
+workloads while `job' is used in relation to a specific type of infrastructure
+where such a container can be executed. Accordingly, tasks are considered as the
+functional units of a workload, while jobs as a way to execute executables on a
+given infrastructure. It should be noted that the two terms can be used
+interchangeably when considered outside the context of \pilotjob systems.
 \msnote{Although I probably agree, doesnt this "note" add more confusion than it
-resolves?}
-Workloads are encoded into jobs when they have to be directly
-executed on infrastructures that support or require that type of
+resolves?}\mtnote{The goal of the note is to reassure the reader that knows
+about jobs and tasks but uses it interchangeably. Happy to take it away if both
+of you find it confusing.} Workloads are encoded into jobs when they have to be
+directly executed on infrastructures that support or require that type of
 container.
 
 The capabilities exposed by the job submission system of the target
-infrastructure determine the submission process of pilots. A pilot
-indicates the sum of a container plus an executable --- usually called
-agent --- with  specific capabilities.
-For example,  the scheduler, a
-batch processor and a queuing  sytem exposed by a DCI's resource would
-imposed a the choice of a `job' as the \pilot container, and they would
-also set the practical boundaries for how and when the pilots could be
-provisioned.
-\msnote{I dont understand the part of "the sum" and the following example ...}
+infrastructure determine the submission process of pilots. A pilot indicates a
+container plus an executable --- usually called agent --- with  specific
+capabilities. For example, a grid middleware [cit, cit] exposed by a DCI's
+resource would require a `job' as the \pilot container, and  would also
+determine how and when the pilots could be provisioned. A ``pilot job'' could be
+provisioned by submitting a job to the DCI queuing system, it would be available
+only once the job would be scheduled on the resources out of the queue, and it
+would be available only for the indicated amount of walltime. \msnote{I dont
+understand the part of "the sum" and the following example ...}\mtnote{Any
+better? Please feel free to edit the terminology used in the example if you
+think editing is needed.}
 
 % \mrnote{I'm uncomfortable with the word programs again,
 % especially for a 'pilot'.}\mtnote{I substituted 'program' with
@@ -1270,11 +1276,12 @@ workload.
 
 \begin{description}
 
-\item[Pilot.] The sum of a container plus a set of executables
-functioning as a resource placeholder on a given infrastructure and
-capable of executing pushed or pulled tasks.
-\msnote{I think I start to understand the earlier definition of "container
-sum", but we might want to clarify that earlier}
+\item[Pilot.] The sum of a container plus a set of executables functioning as a
+resource placeholder on a given infrastructure and capable of executing pushed
+or pulled tasks. \msnote{I think I start to understand the earlier definition of
+"container sum", but we might want to clarify that earlier}\mtnote{I have
+attempted an early clarification. Please let me know whether you think it is
+sufficient.}
 
 %while managing data.
 
@@ -1300,21 +1307,20 @@ The simplification obtained by circumventing the job submission system of the
 DCI is one of the main reasons for the success of the \pilotjob systems. The
 overhead and lack of control imposed by a centralized job management system
 shared among multiple users are bypassed, allowing for a faster and more
-reliable execution of workloads.
-\msnote{Im not sure if it is more reliable, but we can add or replace with
-"flexible"?}
+flexible execution of workloads. \msnote{Im not sure if it is more reliable, but
+we can add or replace with "flexible"?}\mtnote{Done.}
 
-The \pilotjob systems are said to implement multi-level scheduling
-because they require the scheduling of two types of entities - pilots
-and tasks - in a distinct chronological order. A portion of the
-resources of a DCI is first bound to a pilot and then to one or more
-tasks for consumption.
-\msnote{The "first and then" is possibly in conflict with the next sentences.}
-This is an important feature of \pilotjob systems
-because it allows for a task to be bound to a pilot before it is in turn
-bound to the resources. Binding pilots to their resources and tasks to
-pilots depends on placement choices. As such, the binding process in
-itself is often an instance of scheduling.
+The \pilotjob systems are said to implement multi-level scheduling because they
+require the scheduling of two types of entities - pilots and tasks. A portion of
+the resources of a DCI is scheduled to a pilot and one or more tasks is
+scheduled to a pilot. \msnote{The "first and then" is possibly in conflict with
+the next sentences.}\mtnote{Done. It is different from how we have been
+discussing multi-level scheduling and binding until now. Please let me know
+whether both of you are fine with the new interpretation.} This is an important
+feature of \pilotjob systems because it allows for a task to be bound to a pilot
+before of after it is in turn bound to the resources. Binding pilots to their
+resources and tasks to pilots depends on placement choices. As such, the binding
+process in itself is often an instance of scheduling.
 
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
 inactive until it is executed on a DCI, active after that. Early binding
@@ -1342,10 +1348,12 @@ active or inactive pilots in distinct chronological order.
 Depending on the specific capabilities implemented in the workload management
 component, some \pilotjob systems allow for pilots to be specified by taking
 into consideration the properties of the task of a workload. This type of
-specification process should not be confused with early binding as the latter
-requires for a pilot to have been already specified but not yet bound to a
-resource.
-\msnote{The "specified" part here probably requires some clearification.}
+specification should not be confused with early binding as the latter requires
+for a pilot to have been already specified but not yet bound to a resource.
+\msnote{The "specified" part here probably requires some
+clearification.}\mtnote{The paragraph reads fine to me but I would be happy to
+add more information. Do you have more details about what it should be
+clarified when speaking about specifying?}
 
 % \jhanote{I would remove the definition of application. It is one of
 %   those conundrums, that you'll hardly help anyone, but definitely
