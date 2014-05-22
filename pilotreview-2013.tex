@@ -3224,18 +3224,22 @@ DIANE~\cite{Moscicki:908910} is a task coordination framework, which follows
 the Master/Worker pattern.
 It was developed at CERN for data analysis in the LHC experiment, but has since
 been used in various other domains, though mainly in Life Sciences.
-As DIANE is a framework \msnote{in contrast to a system? tool?}, some of its
-semantics are not fixed, as they can be implemented in various ways.
+As DIANE is a software framework, some of its semantics are not fixed, as they
+can be implemented in various ways.
 
 The central component of DIANE is the \textit{RunMaster}.
 It consists of a \textit{TaskScheduler} and an \textit{ApplicationManager}.
 Both are abstract classes that need to be implemented for the specific purpose
-at hand.
-The \textit{TaskScheduler} keeps track of the task entries, maps the tasks to
-the \textit{ApplicationWorkers}.
+at hand. Example and/or default implementations are provided for the user to
+use or build upon.
+The \textit{TaskScheduler} keeps track of the task entries and is responsible
+for \textbf{Binding Tasks} to the \textit{ApplicationWorkers}.
 The implementation of the \textit{ApplicationManager} is as its name suggest,
 responsible for defining the application \textbf{Workload} and the creating
 \textbf{Tasks} that are passed to the \textit{TaskScheduler}.
+As the \textit{ApplicationWorker} asks for \textbf{Tasks} from the
+\textit{TaskScheculer} the natural way of implementing the scheduler is in a
+\textbf{Late Binding} fashion.
 
 The \pilot in DIANE is the \textit{WorkerAgent}.
 The core component of the \textit{WorkerAgent} is the
@@ -3246,8 +3250,8 @@ Two of these methods are for initialization and cleanup and the last
 and executes the work.
 
 As expected from the fact that DIANE is in essence a Master/Worker framework,
-the \textbf{Tasks} have inside the framework no relationships, thereby
-resembling a Bag-of-Tasks.
+the \textbf{Tasks} have no relationships inside the framework, thereby
+the \textbf{Workload Semantics} are that of a Bag-of-Tasks.
 The \textbf{Workload} that is managed by the application specific part can
 maintain any type of workload structure, as long as it can be translated to
 individual tasks\cite{diane-dag, diane-etc}.
@@ -3261,6 +3265,8 @@ CORBA itself is invisible to the application.
 Networking-wise, the workers are clients of the master server.
 On low-level, communication is always uni-directionally from the
 \textit{WorkerAgent} to the \textit{RunMaster}.
+\textbf{Security} is provided by a secret token that the \textit{WorkerAgent}
+needs to communicate back to the \textit{RunMaster}.
 This implies that the network requirements are such that the
 \textit{WorkerAgent} needs to be able to reach the \textit{RunMaster} through
 TCP/IP.
@@ -3276,8 +3282,8 @@ design pattern.
 It is a python framework, that formulates certain hooks that an
 \textbf{Application} can be programmed against. The aforementioned abstract
 classes need to be implement to provide the application-specific semantics.
-These "DIANE-\textbf{Applications}" are then started through a
-\texttt{diane-run} command.
+The \textbf{Interface} to these "DIANE-\textbf{Applications}" is to start them
+through the \texttt{diane-run} command.
 
 The \textbf{Robustness} in DIANE comes from the mature CORBA communication
 layer, and from custom task-failure policies in the \textit{TaskScheduler}.
@@ -3288,15 +3294,27 @@ Further, an automatic re-execution of tasks is possible.
 On the other hand, DIANE also leaves room for application specific strategies.
 
 DIANE is primarily designed with respect to HTC environments (such as
-EGI~\cite{egi}), i.\,e.\ one PJ consists of a single worker agent with the
-typical size of 1 core. DIANE architecture has the notition of "capacity" and
-applications can make use of that property do diverge from the 1 worker is 1
-core mode.
+EGI~\cite{egi}), i.\,e.\ one \pilot consists of a single worker agent with the
+typical size of 1 core.
+There is however no tight coupling with or \textbf{Resource Dependencies} on
+the infrastructures where DIANE can be deployed.
+One of the DIANE \pilot \textbf{Characteristics} is that it has the notition of
+"capacity" and applications can make use of that property do diverge from the
+"1 worker = 1 core" mode.
+The CORBA communiation channel between the Master and the Worker also allows
+for file transfers, meaning that the \pilot not only exposes cores, but also
+the file system on the worker node.
 
-DIANE supports various middleware security mechanisms (e.\,g.\ GSI, X509
-authentication) and backends through its integration with GANGA.
-GANGA provides a unified interface for job submissions to various resource
-types.
+\textbf{Interoperability} to various various middleware security mechanisms
+(e.\,g.\ GSI, X509 authentication) and backends is achieved through its
+integration with GANGA.
+The \pilot provisioning with GANGA provides a unified interface for job
+submissions to various resource types.
+The \textbf{Provisioning} of \pilots is done out-of-band by means of the
+\texttt{diane-submitter} script which can launch a \pilot on any infrastructure
+that is supported.
+
+
 
 %DIANE includes a simple capability matcher and FIFO-based task scheduler
 %to help facilitate the execution of jobs.
@@ -3304,11 +3322,10 @@ types.
 DIANE is in principle a single-user PJ, i.\,e.\ each PJ is executed with the
 privileges of the respective user.
 Also, only workload of this respective user can be executed by DIANE.
-However, DIANE is also used as a backend for Science Gateways, where it serves
-multiple users on the same installation, but with a single credential.
+However, \textbf{Multitenancy} with DIANE does happen when it is used as a
+backend for Science Gateways, where it serves multiple users on the same
+installation, but with a single credential.
 
-The CORBA communiation channel between the Master and the Worker also allows
-for file transfers.
 
 %DIANE utilizes a single hierarchy of worker agents as well as a PJ
 %\textit{manager} referred to as \texttt{RunMaster}.
