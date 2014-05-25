@@ -1430,6 +1430,7 @@ are implementation details that further characterize a \pilotjob system.  The
 set of auxillary properties we discuss is not closed, i.e., the complete set of
 auxillary properties includes, but is not limited to the set of auxillary
 properties we discuss.
+\msnote{todo: Fix/merge the two non-compatible definitions of aux props}
 
 % \jhanote{Give reader a reminder that ``the set'' of core properties
 %   are both necessary and sufficient. Also, maybe this is intended or
@@ -1630,6 +1631,9 @@ have anything to do with BigJob really}
   intercommunication (e.g. low-latency or inter-domain), computing
   platforms (e.g. x86, Cray, or CUDA), file systems (e.g. local,
   shared, or distributed).
+  \msnote{Possibly try to split this in more concrete properties to make it
+  easier to use in 4.2. To be decided once MS does more of the pilot section in
+  4.2}
 
   % \jhanote{Opening clause, needs revision.  Sorry I can't proffer
   %   something, as I'm not sure of the intent}\jhanote{I'm a bit
@@ -1698,6 +1702,7 @@ required by the task can be created.}
   dedicated software and library installations, communication and
   coordination among multiple execution environment and, in case,
   pilots.
+  \msnote{Maybe this is more about task execution?}
 
 \end{itemize}
 
@@ -1788,6 +1793,8 @@ required by the task can be created.}
 \item \textbf{Usage Modes}: As shown in \S\ref{sec:history} and
 \ref{sec:vocab}, \pilotjob systems support many different use cases involving
 diversified usage modes - e.g. HPC, HTC and Cloud.
+\msnote{This can go if we make sure that there is a "context" paragraph in
+every 4.2 subsection}
 
 % \item \textit{Interfaces:} How does the \textbf{application} (responsible for
 % definition of the \textbf{workload} and consumer of the pilot-job system)
