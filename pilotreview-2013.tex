@@ -3581,7 +3581,28 @@ installation, but with a single credential.
 % you have traced, with some changes in the order and number of the
 % items.}
 
+Sections 3 and 4 offered respectively a description of the minimal capabilities
+and properties of a \pilot system, a vocabulary defining `pilot' and its cognate
+concepts, a classification of the core and auxiliary properties of a
+paradigmatic pilot system implementation, and the analysis of an exemplar set of
+implementations. Altogether, these contributions are the foundation on which to
+define and then analyze the \pilot paradigm. [Brief definition of a paradigm and
+then introduction of P*.]
 
+The \pilot paradigm... Why it is a independent distributed system abstraction?
+Independent = unique characteristics and properties when compared to other
+distributed system paradigms. What `other' paradigms should we consider? In what
+sense the pilot paradigm is distributed? Why should we define the \pilot
+paradigm an abstraction?
+
+The pilot paradigm alongside its abstractions offer the opportunity to overcome
+a common [cit? cit?] interpretation of \pilot systems as... Debunk the pilot
+myths.
+
+The definition of the term `pilot' and the critical review of its
+implementations highlight the relation between \pilot systems and middleware as
+commonly defined in [cit, cit, cit]. Pilot as something more than a job,
+independent from the Grid paradigm.
 
 \begin{itemize}
 
@@ -3594,25 +3615,23 @@ a model ok. Our initial investigation~\cite{Luckow:2008la} into \pilot-
 Abstractions was motivated by the desire to provide a single conceptual
 framework --- referred to as the P* Model, that would be used to
 understand and reason the plethora and myriad \pilotjob implementations
-that exist. Once a common and uniform conceptual model was available,
-the notion of \pilotdata was conceived using the power of symmetry,
-i.e., the notion of \pilotdata was as fundamental to dynamic data
-placement and scheduling as \pilotjobs was to computational tasks. As a
-measure of validity, the \pstar model was amenable and easily extensible
-to \pilotdata.  The consistent and symmetrical treatment of data and
-compute in the model led to the generalization of the model as the {\it
-P* Model of Pilot Abstractions}.
+that exist.
 
-\item \textbf{Generality of the pilot abstraction} when compared to
-different types of resources. Is pilot useful only for compute
-resources? What about pilot data? Pilot network? Other types but
-compute, data, network? Another important detail to notice is that while
-the operations of a task performed by means of a \pilot are usually
-computational in nature, in principle, they might also operate on other
-type of resources such as data or network bandwidth, depending on the
-resources made available by an infrastructure to its users. In this
-context, it would be likely for some \pilotjob systems to use the terms
-`pilot data' or `pilot network'.
+\item \textbf{Generality of the pilot abstraction} when compared to different
+types of resources. Is pilot useful only for compute resources? What about pilot
+data? Pilot network? Other types but compute, data, network? Another important
+detail to notice is that while the operations of a task performed by means of a
+\pilot are usually computational in nature, in principle, they might also
+operate on other type of resources such as data or network bandwidth, depending
+on the resources made available by an infrastructure to its users. In this
+context, it would be likely for some \pilotjob systems to use the terms `pilot
+data' or `pilot network'. Once a common and uniform conceptual model was
+available, the notion of \pilotdata was conceived using the power of symmetry,
+i.e., the notion of \pilotdata was as fundamental to dynamic data placement and
+scheduling as \pilotjobs was to computational tasks. As a measure of validity,
+the \pstar model was amenable and easily extensible to \pilotdata.  The
+consistent and symmetrical treatment of data and compute in the model led to the
+generalization of the model as the {\it P* Model of Pilot Abstractions}.
 
 \item \textbf{Revisit the myths about pilot abstraction}: how they
 evolve from being a simple hack to get around queuing/scheduling
@@ -3665,6 +3684,9 @@ bit too specific? Should be abstract to something like: pilot
 abstraction and application abstraction?}
 
 \item \textbf{Take home messages}:
+
+\mtnote{Do we want to put this at the end of S4, in the analysis that we will
+have to write in 4.3?}
 
 \begin{itemize}
 
