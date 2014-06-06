@@ -3072,8 +3072,28 @@ certain scientific applications.
 
 \subsubsection{BigJob}
 
+BigJob was designed as a flexible and extensible \pilotjob to work on a variety
+of infrastructures.
+It was designed to natively support many scientific applications, including MPI
+jobs~\cite{saga_bigjob_condor_cloud}.
 
-%\mrnote{Stabbing at the new format in note form}
+BigJob supports the basic functionality required of a \pilotjob, with the added
+capability of interfacing with a number of different batch queuing systems and
+infrastructures (grids, clouds, clusters, etc.).
+BigJob was also designed to support MPI jobs without adding additional
+configuration requirements to the end-user.
+Lastly, the application-level programmability that BigJob offers was
+incorporated as a means of giving the end-user more flexibility and control
+over their job management.
+
+BigJob has been used for many different ensemble-based or
+replica-exchange-based applications in both the computational chemistry
+and bioinformatics disciplines. It has been shown to work across multiple
+XSEDE~\cite{xsede_url} machines and scale up to thousands of concurrent
+jobs. It has also been used as the underlying job
+management layer in the release of an asynchronous replica-exchange
+software package~\cite{2013-xsede-cdi}.
+
 
 \begin{itemize}
 \item Application: a BigJob script that can also involve logic
@@ -3084,7 +3104,6 @@ and algorithms external to PJ system communication
 follows the `Resource Dependencies' thing
 \item Infrastructure: Where BJ runs (grids, clouds, clusters)
 \end{itemize}
-
 
 The core properties of BigJob are as follows:
 
@@ -3120,56 +3139,31 @@ by the user on command line. Pilot-Manager (sec. 3 term: application?)
 --- Pilot-Agent (sec. 3 term: pilot)
 \end{itemize}
 
-Auxiliary Capabilities:
-\begin{itemize}
-\item Architecture: Client/server; Agent (remote) / Manager (local). Centralized coordination server.
 
-\item Interfaces: User interfaces with PilotJob System via the Pilot API, implemented in BigJob using the python programming language. Pilot, in most case, interfaces with target machine using the Simple API for Grid Applications (SAGA) [meaning PJ system does not have to translate PilotJob into scheduler-specific script], cloud adaptors are coded in python into BigJob.
+BigJob is a Python library and therefore user interface with it via the Pilot API.
+Pilot, in most case, interfaces with target machine using the Simple API for
+Grid Applications (SAGA) [meaning PJ system does not have to translate PilotJob
+into scheduler-specific script], cloud adaptors are coded in python into
+BigJob.
 
-\item Interoperability: Allows for interoperability with multiples types of resources (heterogenous schedulers and clouds/grids/clusters) at one time. Does not have interoperability across PilotJob systems
+BigJob allows for interoperability with multiples types of resources
+(heterogenous schedulers and clouds/grids/clusters) at one time.
+Does not have interoperability across PilotJob systems.
 
-\item Multitenancy: No multitenancy. Single-user.
+For fault-tolerance BigJob relies on the user to write the application logic to
+achieve \textbf{Robustness}, to assist in that process, it does report job
+failures.
 
-\item Robustness: Depends on user for fault-tolerance, but can report job failures
+The compute resource \textbf{Security} aspects of BigJob is that it follows
+security measures of the respective scheduler systems (i.e. policies like
+allocations, etc).
+The \textbf{Coordination \& Communication} using redis is publically
+accessible.
 
-\item Security: Follows resource security for scheduler systems (i.e. policies like allocations, etc). SSH auth. For clouds, allows for private/public key specific to VM
 
-\item Usage Modes: Grids, clouds, clusters.
-\end{itemize}
 
-\paragraph{Rationale}
-BigJob was designed as a flexible and extensible \pilotjob
-to work on a variety of infrastructures. It was designed to
-natively support many scientific applications, including
-MPI jobs~\cite{saga_bigjob_condor_cloud}.
 
-\paragraph{Design Goals}
-BigJob supports the basic functionality required of a \pilotjob,
-with the added capability of interfacing with a number of
-different batch queuing systems and infrastructures (grids,
-clouds, clusters, etc.). BigJob was also designed to
-support MPI jobs without adding additional configuration
-requirements to the end-user. Lastly, the application-level
-programmability that BigJob offers was incorporated as a
-means of giving the end-user more flexibility and control
-over their job management.
-
-Most recently, BigJob has been extended to work with data and, similarly to
-\pilotjobs, abstract away direct user communication between different
-storage systems\mrnote{Ref: Pilot Data}. This work has extended BigJob from being a purely
-\pilotjob-based system to a more complete job and data management
-system.
-
-\paragraph{Applications}
-BigJob has been used for many different ensemble-based or
-replica-exchange-based applications in both the computational chemistry
-and bioinformatics disciplines. It has been shown to work across multiple
-XSEDE~\cite{xsede_url} machines and scale up to thousands of concurrent
-jobs. It has also been used as the underlying job
-management layer in the release of an asynchronous replica-exchange
-software package~\cite{2013-xsede-cdi}.
-
-\paragraph{Deployment Scenarios (Single User)}
+Multitenancy: No multitenancy. Single-user.
 BigJob is installable by a user onto the resource of his or her choice. It is capable of
 running only in ``single user'' mode; that is, a \pilot belongs to the user who
 spawned it and cannot be accessed by other users.
@@ -3183,6 +3177,7 @@ on clouds~\cite{cpe_pmr_cloud_2012}, where it has the capability to both
 launch VMs and submit jobs to these VMs.
 
 \paragraph{Architecture \& Interface}
+Architecture: Client/server; Agent (remote) / Manager (local). Centralized coordination server.
 
 In the BigJob framework, a \pilot is, appropriately enough, called a
 \pilot. The \pilot-\textit{Manager} is called a \textit{BigJob-
@@ -3207,21 +3202,21 @@ the {\it Distributed Coordination Service}, which is most often a
 database that stores information about jobs, information about the
 jobs (executable, input data, etc.), and job status. In the BigJob framework,
 this Distributed Coordination Service is achieved through the use
-of the \textit{redis} database\mrnote{cite redis}.
+of the \textit{redis} database\footnote{http://redis.io/}.
 The \pilot creation and management capabilities of BigJob meet
 the baseline capabilities for a \pilotjob as described in Section 3.
 
-
-\paragraph{BigJob Conclusion}
 Using SAGA has enabled BigJob to expand to many of the changing and evolving
-architectures and middlewares. As a result, BigJob can grow to accomodate
-new usage modes on heterogenous architectures. The uptake
-of BigJob by the scientific community
-on both grid and cloud architectures shows the dynamism \pilotjobs offer.
+architectures and middlewares.
+
 The use of a \pilotjob system, such as BigJob, to marshal VMs as ``Pilots''
 also lends itself to the extensibility of the \pilotjob concept.
-\mrnote{It's late and I don't know if the previous sentence makes sense.
-Read in morning}
+
+Most recently, BigJob has been extended to work with data and, similarly to
+\pilotjobs, abstract away direct user communication between different storage
+systems\msnote{Ref: Pilot Data}.
+This work has extended BigJob from being a purely \pilotjob-based system to a
+more complete job and data management system.
 
 \subsubsection{DIANE}
 
