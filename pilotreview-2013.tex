@@ -817,7 +817,7 @@ commonalities and differences.
 %------------------------------------------------------------------------------
 
 \section{Understanding the Landscape: Developing a Vocabulary}
-\label{sec:vocab}
+\label{sec:3}
 
 The overview presented in \S\ref{sec:history} shows a degree of
 heterogeneity both in the functionalities and the vocabulary adopted by
@@ -852,7 +852,7 @@ eventually, about its multiple implementations.
 % management.} \mtnote{I revised the two paragraphs and moved them down.}
 
 \subsection{Core Functionalities of \pilotjobs}
-\label{subsec:vocab_core_functionalities}
+\label{subsec:3.1}
 
 All the \pilotjob systems introduced in \S\ref{sec:history} are
 engineered to allow for the execution of multiple types of workloads on
@@ -1085,7 +1085,7 @@ In the following subsection, a minimal set of terms related to the
 capabilities just described is defined.
 
 \subsection{Terms and Definitions}
-\label{subsec:vocab_terms_and_definitions}
+\label{subsec:3.2}
 
 \begin{table*}
  \centering
@@ -1113,7 +1113,7 @@ capabilities just described is defined.
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
   the functionalities and logical components described in
-  \S\ref{subsec:vocab_core_functionalities}.}\up}
+  \S\ref{subsec:3.1}.}\up}
  \label{table:terminology}
 \end{table*}
 
@@ -1169,8 +1169,8 @@ be used also to indicate a DCI.
 % workload' means when they don't know what a workload is}\mtnote{Also in
 % this case, I do not undersatnd this note.}
 
-\item[Task.] A set of operations encodeed so that they can be executed
-on the resources of a DCI. Implementtions of a task may include
+\item[Task.] A set of operations encoded so that they can be executed
+on the resources of a DCI. Implementations of a task may include
 wrappers, applications, scripts, and, more in general, any type of
 `application kernel'.
 
@@ -1202,30 +1202,35 @@ jobs are scheduled and then executed by a batch system.
 \begin{description}
 
 \item[Job.] A container for one or more executables, a description of their
-properties and indications on how they should be executed. \msnote{I dont think
-a job is actually a container of executables}\mtnote{Any suggestion on what a
-job should be for you?} \msnote{Should we maybe relate job to tasks? Although I
-guess we do that in the next paragraph already ...}\mtnote{I would avoid to mix
-the two but happy to hear your reasoning about it.}
+properties and indications on how they should be executed.
+
+% \msnote{I dont think
+% a job is actually a container of executables}\mtnote{Any suggestion on what a
+% job should be for you?} \msnote{Should we maybe relate job to tasks? Although I
+% guess we do that in the next paragraph already ...}\mtnote{I would avoid to mix
+% the two but happy to hear your reasoning about it.}
 
 \end{description}
 
-In the context of a \pilotjob system, jobs and tasks are functionally analogous
-but qualitatively different; it is therefore relevant to highlight their
-distinction. Functionally, both jobs and tasks are containers --- i.e. a
-metadata wrapper around one or more executable often called 'kernel', 'agent',
-'application', 'script' --- but the term `task' is used when reasoning about
-workloads while `job' is used in relation to a specific type of infrastructure
-where such a container can be executed. Accordingly, tasks are considered as the
-functional units of a workload, while jobs as a way to execute executables on a
-given infrastructure. It should be noted that the two terms can be used
-interchangeably when considered outside the context of \pilotjob systems.
-\msnote{Although I probably agree, doesnt this "note" add more confusion than it
-resolves?}\mtnote{The goal of the note is to reassure the reader that knows
-about jobs and tasks but uses it interchangeably. Happy to take it away if both
-of you find it confusing.} Workloads are encoded into jobs when they have to be
-directly executed on infrastructures that support or require that type of
+In the context of a \pilotjob system, jobs and tasks are functionally
+analogous but qualitatively different; it is therefore relevant to
+highlight their distinction. Functionally, both jobs and tasks are
+containers --- i.e. a metadata wrapper around one or more executable
+often called 'kernel', 'agent', 'application', 'script' --- but the term
+`task' is used when reasoning about workloads while `job' is used in
+relation to a specific type of infrastructure where such a container can
+be executed. Accordingly, tasks are considered as the functional units
+of a workload, while jobs as a way to execute executables on a given
+infrastructure. It should be noted that the two terms can be used
+interchangeably when considered outside the context of \pilotjob
+systems. Workloads are encoded into jobs when they have to be directly
+executed on infrastructures that support or require that type of
 container.
+
+% \msnote{Although I probably agree, doesnt this "note" add more confusion than it
+% resolves?}\mtnote{The goal of the note is to reassure the reader that knows
+% about jobs and tasks but uses it interchangeably. Happy to take it away if both
+% of you find it confusing.}
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots. A pilot indicates a
@@ -1235,10 +1240,11 @@ resource would require a `job' as the \pilot container, and  would also
 determine how and when the pilots could be provisioned. A ``pilot job'' could be
 provisioned by submitting a job to the DCI queuing system, it would be available
 only once the job would be scheduled on the resources out of the queue, and it
-would be available only for the indicated amount of walltime. \msnote{I dont
-understand the part of "the sum" and the following example ...}\mtnote{Any
-better? Please feel free to edit the terminology used in the example if you
-think editing is needed.}
+would be available only for the indicated amount of walltime.
+
+% \msnote{I dont understand the part of "the sum" and the following
+% example ...}\mtnote{Any better? Please feel free to edit the terminology
+% used in the example if you think editing is needed.}
 
 % \mrnote{I'm uncomfortable with the word programs again,
 % especially for a 'pilot'.}\mtnote{I substituted 'program' with
@@ -1278,12 +1284,12 @@ workload.
 
 \item[Pilot.] The sum of a container plus a set of executables functioning as a
 resource placeholder on a given infrastructure and capable of executing pushed
-or pulled tasks. \msnote{I think I start to understand the earlier definition of
-"container sum", but we might want to clarify that earlier}\mtnote{I have
-attempted an early clarification. Please let me know whether you think it is
-sufficient.}
+or pulled tasks.
 
-%while managing data.
+% \msnote{I think I start to understand the earlier definition of
+% "container sum", but we might want to clarify that earlier}\mtnote{I
+% have attempted an early clarification. Please let me know whether you
+% think it is sufficient.}
 
 \end{description}
 
@@ -1307,20 +1313,25 @@ The simplification obtained by circumventing the job submission system of the
 DCI is one of the main reasons for the success of the \pilotjob systems. The
 overhead and lack of control imposed by a centralized job management system
 shared among multiple users are bypassed, allowing for a faster and more
-flexible execution of workloads. \msnote{Im not sure if it is more reliable, but
-we can add or replace with "flexible"?}\mtnote{Done.}
+flexible execution of workloads.
 
-The \pilotjob systems are said to implement multi-level scheduling because they
-require the scheduling of two types of entities - pilots and tasks. A portion of
-the resources of a DCI is scheduled to a pilot and one or more tasks is
-scheduled to a pilot. \msnote{The "first and then" is possibly in conflict with
-the next sentences.}\mtnote{Done. It is different from how we have been
-discussing multi-level scheduling and binding until now. Please let me know
-whether both of you are fine with the new interpretation.} This is an important
-feature of \pilotjob systems because it allows for a task to be bound to a pilot
-before of after it is in turn bound to the resources. Binding pilots to their
-resources and tasks to pilots depends on placement choices. As such, the binding
-process in itself is often an instance of scheduling.
+% \msnote{Im not sure if it is more reliable, but we can add or replace
+% with "flexible"?}\mtnote{Done.}
+
+The \pilotjob systems are said to implement multi-level scheduling
+because they require the scheduling of two types of entities - pilots
+and tasks. A portion of the resources of a DCI is scheduled to a pilot
+and one or more tasks is scheduled to a pilot. This is an important
+feature of \pilotjob systems because it allows for a task to be bound to
+a pilot before of after it is in turn bound to the resources. Binding
+pilots to their resources and tasks to pilots depends on placement
+choices. As such, the binding process in itself is often an instance of
+scheduling.
+
+% \msnote{The "first and then" is possibly in conflict with the next
+% sentences.}\mtnote{Done. It is different from how we have been
+% discussing multi-level scheduling and binding until now. Please let me
+% know whether both of you are fine with the new interpretation.}
 
 The binding of tasks to pilots depends on the state of the pilot. A pilot is
 inactive until it is executed on a DCI, active after that. Early binding
@@ -1332,7 +1343,6 @@ decisions can be made for that pilot. Late binding is critical in assuring high
 throughput by allowing for tasks to be executed without waiting in a queue or
 waiting for a specific container - for example a job or a VM - to be
 instantiated.
-
 
 \begin{description}
 
@@ -1350,10 +1360,11 @@ component, some \pilotjob systems allow for pilots to be specified by taking
 into consideration the properties of the task of a workload. This type of
 specification should not be confused with early binding as the latter requires
 for a pilot to have been already specified but not yet bound to a resource.
-\msnote{The "specified" part here probably requires some
-clearification.}\mtnote{The paragraph reads fine to me but I would be happy to
-add more information. Do you have more details about what it should be
-clarified when speaking about specifying?}
+
+% \msnote{The "specified" part here probably requires some
+% clearification.}\mtnote{The paragraph reads fine to me but I would be
+% happy to add more information. Do you have more details about what it
+% should be clarified when speaking about specifying?}
 
 % \jhanote{I would remove the definition of application. It is one of
 %   those conundrums, that you'll hardly help anyone, but definitely
@@ -1364,9 +1375,10 @@ clarified when speaking about specifying?}
 %------------------------------------------------------------------------------
 % SECTION 4
 %------------------------------------------------------------------------------
-\section{Pilot-Job Systems: Analysis and Implementations}\label{sec:4}
+\section{Pilot-Job Systems: Analysis and Implementations}
+\label{sec:4}
 
-Section \S\ref{sec:vocab} offered two main contributions: a minimal description
+Section \S\ref{sec:3} offered two main contributions: a minimal description
 of the logical components and the functionalities of \pilotjob systems, and a
 well-defined core terminology to support reasoning about such systems. The
 former sets the necessary and sufficient requirements for a distributed system
@@ -1380,7 +1392,7 @@ implementations.
 %   the rest of the Section and then come back and refine this one.}
 
 The goal of this Section is twofold.  Initially, the set of
-functionalities presented in \S\ref{sec:vocab} are used as the basis
+functionalities presented in \S\ref{sec:3} are used as the basis
 to infer a set of core implementation properties. A set of auxiliary
 properties is also defined when useful for a critical comparison among
 different \pilotjob implementations. Subsequently, several \pilotjob
@@ -1422,7 +1434,7 @@ properties are not shared among all \pilotjob implementations.
 
 As shown in Table \ref{table:core_properties}, the set of Core Properties is
 derived consistently with the set of functionalities presented in
-\S\ref{sec:vocab} - Pilot Provisioning, Task Dispatching, and Task Execution.
+\S\ref{sec:3} - Pilot Provisioning, Task Dispatching, and Task Execution.
 As such, Core Properties are both necessary and sufficient for an
 implementation of a distributed system to be classified as a \pilotjob. On the
 contrary, auxiliary properties are not defining of a \pilotjob system but they
@@ -1460,7 +1472,7 @@ PS Merriam-Webster agrees}\mtnote{Done for 4.1.}
  \end{tabular}
  \caption{\textbf{Mapping of the Core Properties of \pilotjob system
                   implementations into the functionalities described in
-                  \S\ref{subsec:vocab_core_functionalities}.}\up}
+                  \S\ref{subsec:3.1}.}\up}
  \label{table:core_properties}
 \end{table}
 
@@ -1619,7 +1631,7 @@ have anything to do with BigJob really}
 
 \begin{itemize}
 
-\item \textbf{Pilot Characteristics}: In \S\ref{sec:vocabulary} pilots
+\item \textbf{Pilot Characteristics}: In~\S\ref{sec:3} pilots
   have been defined as placeholders for resources. As such, the
   characteristics of each pilot depends upon the type and capabilities
   of the resource it exposes.  Pilots usually expose computing
@@ -1672,7 +1684,7 @@ have anything to do with BigJob really}
   to pilots. Without such capability, it would not be possible to know
   where to dispatch tasks, pilots could not be used to run tasks and,
   as such, the whole \pilotjob system would not be usable. As seen in
-  \S\ref{sec:vocab}, \pilotjob systems may allow for two main types of
+  \S\ref{sec:3}, \pilotjob systems may allow for two main types of
   binding between tasks and pilots: early binding and late
   binding. \pilotjob implementations differ in whether and how they
   support these two types of binding. Specifically, while there might
@@ -1788,10 +1800,10 @@ required by the task can be created.}
   and policies. The scope of the analysis is further constrained by
   focusing the analysis only on those elements of these properties
   that impact the Core Functionalities as defined in
-  \S\ref{sec:vocab}.
+  \S\ref{sec:3}.
 
 \item \textbf{Usage Modes}: As shown in \S\ref{sec:history} and
-\ref{sec:vocab}, \pilotjob systems support many different use cases involving
+\ref{sec:3}, \pilotjob systems support many different use cases involving
 diversified usage modes - e.g. HPC, HTC and Cloud.
 \msnote{This can go if we make sure that there is a "context" paragraph in
 every 4.2 subsection}
@@ -3551,20 +3563,25 @@ installation, but with a single credential.
 
 \mtnote{To add a subsection 4.3 to recap the contribution of S4 as whole.}
 
+% -----------------------------------------------------------------------------
+% SECTION 5
+% -----------------------------------------------------------------------------
 \section{Conclusion and Discussion}
 \label{sec:5}
 
-\jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
-state clearly how section 3 and 4 help us define what a pilot is,   the
-necessary and sufficient conditions (if possible), discuss the
-classifiers and apply/discuss them to the set of pilot systems here.
-(iii) then we go on to say motivate P*/pilot for data, (iv) discuss
-implications for WF systems and conclude with a summary for
-tools/sustainability/etc. At some point, we discuss how/why pilots   are
-more than just pilots, eg can be RM layer for middleware,   runtime
-framework etc}\mtnote{I have organized the following items on the lines
-you have traced, with some changes in the order and number of the
-items.}
+% \jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
+% state clearly how section 3 and 4 help us define what a pilot is,   the
+% necessary and sufficient conditions (if possible), discuss the
+% classifiers and apply/discuss them to the set of pilot systems here.
+% (iii) then we go on to say motivate P*/pilot for data, (iv) discuss
+% implications for WF systems and conclude with a summary for
+% tools/sustainability/etc. At some point, we discuss how/why pilots   are
+% more than just pilots, eg can be RM layer for middleware,   runtime
+% framework etc}\mtnote{I have organized the following items on the lines
+% you have traced, with some changes in the order and number of the
+% items.}
+
+
 
 \begin{itemize}
 
