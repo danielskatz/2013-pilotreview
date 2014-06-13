@@ -3544,7 +3544,54 @@ installation, but with a single credential.
 %go with this, however, to avoid hitting the ``conclusion'' material in this section?
 %}
 
-\mtnote{To add a subsection 4.3 to recap the contribution of S4 as whole.}
+\subsubsection{DIRAC}
+
+DIRAC (Distributed Infrastructure with Remote Agent Control) is product that
+grew out of the CERN LHCb project\cite{diracgrid2004}.
+The DIRAC ecosystem consists of the DIRAC Pilot framework and the DIRAC
+Workload Management System.
+
+DIRAC Job Agents are empty resource reservation containers that perform sanity checks
+on the resources and if succesful in that, contribute to the creation of an
+overlay network.
+
+DIRAC uses the notion of TaskQueues to organize the application's payload at
+the side of the WMS.
+
+TasqQueueDirectors direct the workload from the TaskQueues for execution to the
+Job Agents.
+
+
+\subsection{Overall observations}
+
+Although we previously described many \pilot systems in detail, their
+architecture and design does not necessarily say something about the scale that
+is has been used for. In table \ref{table:scale} we have collected quantative
+information about scalability that we have been able to distil from
+publications from either the developers or users of the various system.
+
+\begin{table*}
+ \centering
+ \begin{tabular}{|p{3cm}|p{3.0cm}|p{2.0cm}|p{3.0cm}|}
+  \hline
+    \textbf{Pilot System} & \textbf{Infrastructure} & \textbf{Scale}  &
+    \textbf{Application}\\
+  \hline
+  \hline
+    BigJob & XSEDE & X cores & MD Simulations \cite{} \\
+  \hline
+    DIANE & EGI & X cores & Bird Flu \cite{} \\
+  \hline
+    Condor-G & OSG & X cores & HEP \cite{} \\
+  \hline
+    Falkon & HPC & X cores & MTC \cite{} \\
+  \hline
+    Panda & OSG & X cores & Atlas \cite{} \\
+  \hline
+ \end{tabular}
+ \caption{\textbf{Overview of largest (published) results with Pilot System}}
+ \label{table:scale}
+\end{table*}
 
 \section{Conclusion and Discussion}
 \label{sec:5}
