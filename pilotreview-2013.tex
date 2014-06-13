@@ -1085,7 +1085,7 @@ In the following subsection, a minimal set of terms related to the
 capabilities just described is defined.
 
 \subsection{Terms and Definitions}
-\label{subsec:3.2}
+\label{subsec:3-2}
 
 \begin{table*}
  \centering
@@ -3581,125 +3581,172 @@ installation, but with a single credential.
 % you have traced, with some changes in the order and number of the
 % items.}
 
-Sections~\ref{sec:3} and~\ref{sec:4} offered respectively a description
-of the minimal capabilities and properties of a \pilot system; a
-vocabulary defining `pilot' and its cognate concepts; a classification
-of the core and auxiliary properties of a paradigmatic pilot system
-implementation; and the analysis of an exemplar set of pilot system
-implementations. Considered altogether, these contributions show how the
-notion of \pilot is not limited to describe a generic system but,
-instead, indicates a paradigm for designing a task  execution software
-system.
+Sections~\ref{sec:3} and~\ref{sec:4} offered respectively a description of the
+minimal capabilities and properties of a \pilot \mtnote{In Section 3 we use
+\pilotjob. We will have to move to \pilot or decide to use the less correct
+\pilotjob here too.} system; a vocabulary defining `pilot' and its cognate
+concepts; a classification of the core and auxiliary properties of a
+paradigmatic pilot system implementation; and the analysis of an exemplar set
+of pilot system implementations. Considered altogether, these contributions
+show how the notion of \pilot indicates a paradigm for systems taking care of
+executing tasks on (distributed) resources.
 
-The \pilot paradigm identifies a specific pattern of distributed system
-with unique characteristics.
+The \pilot paradigm identifies a specific pattern of middleware system with
+unique characteristics. Middleware because it operates above operating systems
+and, in case, other middleware interfaces, unique because it is defined by
+resource placeholding \mtnote{we use resource overlay in 3.1 but we should
+probably use placeholding seeing how we use overlays these days in OWMS},
+multi-level scheduling, and early/late binding. Every software system with
+these three characteristics, built upon the logical components and the
+functionalities described in Section~\ref{subsec:3.1} is an implementation of a
+\pilot system as seen in Section~\ref{sec:4}.
 
-The \pilot paradigm... Why it is a independent distributed system abstraction?
-Independent = unique characteristics and properties when compared to other
-distributed system paradigms. What `other' paradigms should we consider? In what
-sense the pilot paradigm is distributed? Why should we define the \pilot
-paradigm an abstraction?
+It should be noted that the \pilot paradigm is also general. While the
+operations of a task performed by means of a \pilot are usually computational
+in nature, in principle, they might also operate on other type of resources
+such as data or networking, depending on the resources made available by an
+infrastructure to its users. In this context, it would be likely for some
+\pilotjob systems to use the terms `pilot data' or `pilot network'. In Ref.
+[pilot data], the notion of \pilotdata has been conceived using the power of
+symmetry, i.e., \pilotdata taken to be a notion as fundamental to dynamic data
+placement and scheduling as \pilotjobs is to computational tasks.
+
+The unique characteristics and generality of the \pilot paradigm has been
+modeled in Ref.~\cite{Luckow:2008la}. This investigation was motivated by the
+desire to provide a single conceptual framework -- the so called $P*$ Model --
+that would be used to subsume the design characteristics of the various
+\pilotjob implementations that exist, a sample of which have been analysed in
+detail in Section~\ref{sec:4}. \mtnote{Is this still the case? I think this
+has become one of the goals of this paper. How do you want to mention P* here?
+What do you want to say about it? Is the paragraph above sufficient?}
+Interestingly, the \pstar model was amenable and easily extensible to
+\pilotdata.  The consistent and symmetrical treatment of data and compute in
+the model led to the generalization of the model as the {\it P* Model of Pilot
+Abstractions}.
+
+% The \pilot paradigm... Why it is a independent distributed system abstraction?
+% Independent = unique characteristics and properties when compared to other
+% distributed system paradigms. What `other' paradigms should we consider? In what
+% sense the pilot paradigm is distributed? Why should we define the \pilot
+% paradigm an abstraction?
+
+\subsection{Myth Revisited}
+\label{sec:5.1}
+
+\begin{enumerate}
+
+\item PJs are just for HTC and they just circumvent job queuing delays; PJs
+unfairly game HPC queuing system;
+
+\item PJs are such a simple concept, it doesn't need more attention:
+Conversely, everyone should write their own PJ just because they can;
+
+\item PJs have to be tied to specific infrastructure and infrastructures have
+to be tied to specific pjs;
+
+\item PJs are stand-alone tools passive (system) tools, as opposed to user-
+space, active and extensible components of a CI;
+
+\item PJs have well defined semantics and model. PJs dont help with data
+intensive applications.
+
+\end{enumerate}
 
 The pilot paradigm alongside its abstractions offer the opportunity to overcome
-a common [cit? cit?] interpretation of \pilot systems as... Debunk the pilot
-myths.
+a common [cit? cit?] interpretation of \pilot systems as...
+
+
+\subsection{Pilot and Middleware Layer}
+\label{sec:5.2}
 
 The definition of the term `pilot' and the critical review of its
-implementations highlight the relation between \pilot systems and middleware as
-commonly defined in [cit, cit, cit]. Pilot as something more than a job,
-independent from the Grid paradigm.
+implementations highlight the relation between \pilot systems and middleware
+as commonly defined in [cit, cit, cit]. The notion of pilot as a resource
+placeholder is something more than a job as defined in the context of Grid-
+based middleware. For example, cloud-based DCIs \mtnote{Use of DCIs for plural
+needs to be consistent across the paper.} introduce notable exceptions and
+differences in the way in which pilots can be provisioned.[cit, cit] Within a
+IaaS [cit], Virtual Machines (VMs) and not jobs are used for their
+provisioning. VMs can often be instantiated without waiting into a queue  with
+a predictable instantiation time, usually minimal wnen compared to the queuing
+time often experinced on Grid-based DCIs [red Vishal paper]. Furthermore, the
+limitations on the execution time of a VM can be virtually absent, a
+limitation that on grid-based middleware is imposed by the queue walltime.
+Clearly, overheads are introduced by having to deal with VMs and not simple
+jobs and the model adopted within a IaaS-based DCI to assign resources to each
+VM can affect the flexibility of the whole \pilotjob system. [cit] A similar
+assessment could be done for a DCI deploying a PaaS model of cloud
+computing.[cit]
 
-\subsection{Myth Revisited}
-\label{sec:5.1}
-
-\subsection{Myth Revisited}
-\label{sec:5.1}
+% \mrnote{Though you avoid queue wait, you introduce VM start-up
+% time overhead as well}
 
 
+\subsection{Pilot and Application Layer}
+\label{sec:5.3}
+
+The current state of workflow (WF) systems~\cite{nsf-workflow,1196459}
+provides a motivating example for the P* Model and the Pilot-API: even though
+many WF systems exist (with significant duplicated effort), they provide
+limited means for extensibility and interoperability.  We are not naive enough
+to suggest a single reason, but assert that one important contributing fact is
+the lack of the right interface abstractions upon which to construct workflow
+systems; had those been available, many/most WF engines would have likely
+utilized them (or parts thereof), instead of proprietary solutions.
+Significant effort has been invested towards WF interoperability at different
+levels -- if nothing else, providing post-facto justification of its
+importance. The impact of missing interface abstractions on the WF world can
+be seen through the consequences of their absence: WF interoperability remains
+difficult if not infeasible. The Pilot-API in conjunction with the P* Model
+aims to prevent similar situation for \pilotjobs.\mtnote{To be abstracted from
+workflow to application.}
+
+\subsection{Pilot and Security}
+\label{sec:5.4}
+
+\mtnote{I know something about security but I do not feel qualified for
+writing even a superficial analysis of the security implications of the pilot
+paradigm :)}
+
+\subsection{Pilot and the Enterprise}
+\label{sec:5.5}
+
+\mtnote{Waiting for comments/text from AndreL.}
 
 \begin{itemize}
 
-\item \textbf{Pilot abstraction} as a well-defined, independent
-distributed system abstraction. \jhanote{state clearly how section 3 and
-4 help us define what a pilot is, the necessary and sufficient
-conditions (if possible), discuss the classifiers and apply/discuss them
-to the set of pilot systems here.} ``pilot-abstractions works!'' , p* as
-a model ok. Our initial investigation~\cite{Luckow:2008la} into \pilot-
-Abstractions was motivated by the desire to provide a single conceptual
-framework --- referred to as the P* Model, that would be used to
-understand and reason the plethora and myriad \pilotjob implementations
-that exist.
+% \item \textbf{Pilot abstraction} as a well-defined, independent
+% distributed system abstraction. \jhanote{state clearly how section 3 and
+% 4 help us define what a pilot is, the necessary and sufficient
+% conditions (if possible), discuss the classifiers and apply/discuss them
+% to the set of pilot systems here.} ``pilot-abstractions works!'' , p* as
+% a model ok. Our initial investigation~\cite{Luckow:2008la} into \pilot-
+% Abstractions was motivated by the desire to provide a single conceptual
+% framework --- referred to as the P* Model, that would be used to
+% understand and reason the plethora and myriad \pilotjob implementations
+% that exist.
 
-\item \textbf{Generality of the pilot abstraction} when compared to different
-types of resources. Is pilot useful only for compute resources? What about pilot
-data? Pilot network? Other types but compute, data, network? Another important
-detail to notice is that while the operations of a task performed by means of a
-\pilot are usually computational in nature, in principle, they might also
-operate on other type of resources such as data or network bandwidth, depending
-on the resources made available by an infrastructure to its users. In this
-context, it would be likely for some \pilotjob systems to use the terms `pilot
-data' or `pilot network'. Once a common and uniform conceptual model was
-available, the notion of \pilotdata was conceived using the power of symmetry,
-i.e., the notion of \pilotdata was as fundamental to dynamic data placement and
-scheduling as \pilotjobs was to computational tasks. As a measure of validity,
-the \pstar model was amenable and easily extensible to \pilotdata.  The
-consistent and symmetrical treatment of data and compute in the model led to the
-generalization of the model as the {\it P* Model of Pilot Abstractions}.
+% \item \textbf{Generality of the pilot abstraction} when compared to different
+% types of resources. Is pilot useful only for compute resources? What about pilot
+% data? Pilot network? Other types but compute, data, network?
 
-\item \textbf{Revisit the myths about pilot abstraction}: how they
-evolve from being a simple hack to get around queuing/scheduling
-policies to become a first class citizen of the abstractions for
-distrubuted systems. What are the characteristics/properties that make
-the pilot abstract a first class citizen? Do we notice a progressive
-evolution in the multiple implementations we introduced and described in
-Section 4? \aznote{From the e-mail chain: So the top 5 ``myths'' are: 1)
-PJs are just for HTC and they just circumvent job queuing delays; PJs
-unfairly game HPC queuing system; 2) PJs are such a simple concept, it
-doesn't need more attention: Conversely, everyone should write their own
-PJ just because they can;  3) PJs have to be tied to specific
-infrastructure and infrastructures have to be tied to specific pjs;  4)
-PJs are stand-alone tools passive (system) tools, as opposed to user-
-space, active and extensible components of a CI;  5) PJs have well
-defined semantics and model. PJs dont help with data intensive
-applications. }
+% \item \textbf{Revisit the myths about pilot abstraction}: how they
+% evolve from being a simple hack to get around queuing/scheduling
+% policies to become a first class citizen of the abstractions for
+% distrubuted systems. What are the characteristics/properties that make
+% the pilot abstract a first class citizen? Do we notice a progressive
+% evolution in the multiple implementations we introduced and described in
+% Section 4?
 
-\item \textbf{Relationship between pilot abstraction and different types
-of middleware}: grids, cloud, HPC. It should be noted that cloud-based
-DCIs introduce notable exceptions and differences in the way in which
-pilots can be provisioned.[cit, cit] Within a IaaS [cit], Virtual
-Machines (VMs) and not jobs are used for their provisioning. VMs can
-often be instantiated without waiting into a queue, and limitations on
-the execution time of a VM can be virtually absent. Clearly, overheads
-are introduced by having to deal with VMs and not simple jobs and the
-model adopted within a IaaS-based DCI to assign resources to each VM can
-affect the flexibility of the whole \pilotjob system. [cit] A similar
-assessment could be done for a DCI deploying a PaaS model of cloud
-computing.[cit] \mrnote{Though you avoid queue wait, you introduce VM
-start-up time overhead as well}
+% \item \textbf{Relationship between pilot abstraction and different types
+% of middleware}: grids, cloud, HPC.
 
-\item \textbf{Pilot abstraction and `lessons for the workflow systems'}.
-The current state of workflow (WF) systems~\cite{nsf-workflow,1196459}
-provides a motivating example for the P* Model and the Pilot-API: even
-though many WF systems exist (with significant duplicated effort), they
-provide limited means for extensibility and interoperability.  We are
-not naive enough to suggest a single reason, but assert that one
-important contributing fact is the lack of the right interface
-abstractions upon which to construct workflow systems; had those been
-available, many/most WF engines would have likely utilized them (or
-parts thereof), instead of proprietary solutions. Significant effort has
-been invested towards WF interoperability at different levels -- if
-nothing else, providing post-facto justification of its importance. The
-impact of missing interface abstractions on the WF world can be seen
-through the consequences of their absence: WF interoperability remains
-difficult if not infeasible. The Pilot-API in conjunction with the P*
-Model aims to prevent similar situation for \pilotjobs.\mtnote{Is this a
-bit too specific? Should be abstract to something like: pilot
-abstraction and application abstraction?}
+% \item \textbf{Pilot abstraction and `lessons for the workflow systems'}.
 
 \item \textbf{Take home messages}:
 
-\mtnote{Do we want to put this at the end of S4, in the analysis that we will
-have to write in 4.3?}
+% \mtnote{Do we want to put this at the end of S4, in the analysis that we will
+% have to write in 4.3?}
 
 \begin{itemize}
 
@@ -3728,67 +3775,67 @@ such as Workflow systems possibly}
 
 \end{itemize}
 
-\section*{Notes - to be commented out by their authors}
+% \section*{Notes - to be commented out by their authors}
 
-\jhanote{The question is what are the fundamental ``concepts''. It is
-  not necessary that the concepts have a specific implementation or
-  map to a component in \pilotjob system. As we know there are
-  different ways in which tasks get committed to the \pilotjob
-  system. One possible primary concept is that of logical grouping;
-  all tasks are committed to a logical grouping -- where the grouping
-  is such that all entities in this group will be executed
-  (disregrarding details of how this grouping will happen, or who will
-  perform the execution).  It appears that the concept of logical
-  grouping of tasks is a fundamental one, and avoids a requirement of
-  any further specification of of details of who/where/when; if so,
-  then the notion of a pool can be dispensed with, which will have the
-  advantage of liberating us from the requirement of imposing on the
-  the manager the need to push/pulling tasks from a pool.}
+% \jhanote{The question is what are the fundamental ``concepts''. It is
+%   not necessary that the concepts have a specific implementation or
+%   map to a component in \pilotjob system. As we know there are
+%   different ways in which tasks get committed to the \pilotjob
+%   system. One possible primary concept is that of logical grouping;
+%   all tasks are committed to a logical grouping -- where the grouping
+%   is such that all entities in this group will be executed
+%   (disregrarding details of how this grouping will happen, or who will
+%   perform the execution).  It appears that the concept of logical
+%   grouping of tasks is a fundamental one, and avoids a requirement of
+%   any further specification of of details of who/where/when; if so,
+%   then the notion of a pool can be dispensed with, which will have the
+%   advantage of liberating us from the requirement of imposing on the
+%   the manager the need to push/pulling tasks from a pool.}
 
-% \mtnote{The paragraph relative to this comment is gone --- no more
-% pool concept. I do like the idea of grouping though so I would suggest
-% to wait for the entire Section to stabilize further and then see
-% whether we can add/extend a paragraph by introducing the concept of
-% grouping.}
+% % \mtnote{The paragraph relative to this comment is gone --- no more
+% % pool concept. I do like the idea of grouping though so I would suggest
+% % to wait for the entire Section to stabilize further and then see
+% % whether we can add/extend a paragraph by introducing the concept of
+% % grouping.}
 
-\jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
-  capabilities?} \alnote{The question is: when is a \pilot a \pilot?
-  When the use the term \pilot and when \pilot-like? Apples has a
-  component -- the Actuator (Quote from paper: "... handles task
-  launching, polling, and cancellation ..."), which is quite similar
-  to a \pilot. But maybe AppLeS is something for the history section
-  or a separate category for Master/Worker frameworks...  PJ evolved
-  from the need to map master/worker style computations to
-  heterogeneous, dynamic distributed grid environments. Added a
-  pre-\pilot category to the history sub-section.}
+% \jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
+%   capabilities?} \alnote{The question is: when is a \pilot a \pilot?
+%   When the use the term \pilot and when \pilot-like? Apples has a
+%   component -- the Actuator (Quote from paper: "... handles task
+%   launching, polling, and cancellation ..."), which is quite similar
+%   to a \pilot. But maybe AppLeS is something for the history section
+%   or a separate category for Master/Worker frameworks...  PJ evolved
+%   from the need to map master/worker style computations to
+%   heterogeneous, dynamic distributed grid environments. Added a
+%   pre-\pilot category to the history sub-section.}
 
-\jhanote{I think all the functionality of PJs is predicated on the
-  following core capability: enable the decoupling between assigning a
-  workload from the spatial/temporal execution properties of its
-  execution. In condor, this is mentioned as ``separating between job
-  scheduling and resource''. This get mentioned somewhere in core
-  functionality?}
+% \jhanote{I think all the functionality of PJs is predicated on the
+%   following core capability: enable the decoupling between assigning a
+%   workload from the spatial/temporal execution properties of its
+%   execution. In condor, this is mentioned as ``separating between job
+%   scheduling and resource''. This get mentioned somewhere in core
+%   functionality?}
 
-\jhanote{deployment and provisioning are not the same in my
-  opinion: provisioning is about resources, i.e., provisioning is not
-  the same as scheduling, it is more like arranging. Deployment is
-  about ``setting up T=0 requirements, which could be software
-  environment, input/data dependencies, as well as resources.''}
+% \jhanote{deployment and provisioning are not the same in my
+%   opinion: provisioning is about resources, i.e., provisioning is not
+%   the same as scheduling, it is more like arranging. Deployment is
+%   about ``setting up T=0 requirements, which could be software
+%   environment, input/data dependencies, as well as resources.''}
 
-\aznote{Some additional thoughts for this section... 1) The early
-history of \pilotjobs seems to have a few ``independent'' \pilotjob
-approaches, where systems (eg MyCluster/AppLeS) incorporate \pilotjob
-techniques with sometimes wildly differing implementations/vocabulary
-but when boiled down, offering the same attempts at base/minimal
-functionality.  This helps push the value of the approach (multiple
-groups working on it independently helps imply its value), with
-increasingly complex \pilotjob systems coming out as time pushes on.
-Our review aids both in the construction of these increasingly complex
-systems by exposing their core functionality + allowing researchers/etc
-to push the field forward by reducing the apparent complexity to a set
-of common terms/comparisons/classifiers/etc.  I don't know if this is
-too prescriptive/hand-wavey -- feel free to ignore if so, but I feel
-that the essence of this is one potential contribution of our work.}
+% \aznote{Some additional thoughts for this section... 1) The early
+% history of \pilotjobs seems to have a few ``independent'' \pilotjob
+% approaches, where systems (eg MyCluster/AppLeS) incorporate \pilotjob
+% techniques with sometimes wildly differing implementations/vocabulary
+% but when boiled down, offering the same attempts at base/minimal
+% functionality.  This helps push the value of the approach (multiple
+% groups working on it independently helps imply its value), with
+% increasingly complex \pilotjob systems coming out as time pushes on.
+% Our review aids both in the construction of these increasingly complex
+% systems by exposing their core functionality + allowing researchers/etc
+% to push the field forward by reducing the apparent complexity to a set
+% of common terms/comparisons/classifiers/etc.  I don't know if this is
+% too prescriptive/hand-wavey -- feel free to ignore if so, but I feel
+% that the essence of this is one potential contribution of our work.}
 
 \section*{Acknowledgements}
 {\footnotesize{This work is funded by NSF CHE-1125332 (Cyber-enabled
