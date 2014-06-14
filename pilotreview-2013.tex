@@ -833,7 +833,7 @@ is to offer a paradigmatic description of a \pilot system and a well-
 defined vocabulary to reason about such a description and, eventually,
 about its multiple implementations.
 
-\subsection{Core Functionalities of \pilotjobs}
+\subsection{Logical Components and Functionalities}
 \label{subsec:3.1}
 
 All the \pilot systems introduced in \S\ref{sec:history} are engineered
@@ -873,7 +873,7 @@ significantly vary across \pilot system implementations (see
 functionalities both on application as well as infrastructure level.
 Nevertheless, these three logical components can be consistently
 distinguished across different \pilot systems. For example, looking at
-the systems mentioned in \S\ref{ssec:history}, \ldots \mtnote{I will
+the systems mentioned in \S\ref{sec:history}, \ldots \mtnote{I will
 wait for S2 and S4 to be final before picking the right
 examples/vocabulary.}
 
@@ -1083,7 +1083,7 @@ container.
 
 The capabilities exposed by the job submission system of the target
 infrastructure determine the submission process of pilots. A pilot
-indicates a container plus an executable --- usually called agent ---
+indicates a container plus an executable -- usually called agent --
 with  specific capabilities. For example, a grid middleware [cit, cit]
 exposed by a DCI's resource would require a `job' as the \pilot
 container, and  would also determine how and when the pilots could be
@@ -1096,8 +1096,8 @@ Showing that the way in which a pilot is provisioned depends on the
 capabilities exposed by the target DCI illustrates the limits of
 choosing the term `job' as a general identifier for \pilotjob systems.
 The use of that term is due to a historical contingency, viz., the
-targeting of a specific class of DCIs in which the term `job' was ---
-and still is --- meaningful. Nonetheless, with the development of new
+targeting of a specific class of DCIs in which the term `job' was --
+and still is -- meaningful. Nonetheless, with the development of new
 types of DCI, the term `job' has become too restrictive, a situation
 that can lead to terminological and conceptual confusion.
 
@@ -1179,6 +1179,14 @@ workload. This type of specification should not be confused with early
 binding as the latter requires for a pilot to have been already
 specified but not yet bound to a resource.
 
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/core_vocabulary.png}
+    \caption{Diagrammatic representation of the logical components,
+             capabilities, and core vocabulary of a \pilot system.
+             The terms of the core vocabulary are highlighted in red.}
+    \label{fig:core_vocabulary}
+\end{figure}
 
 %------------------------------------------------------------------------------
 % SECTION 4
