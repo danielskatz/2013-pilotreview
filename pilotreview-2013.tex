@@ -912,29 +912,28 @@ among competing user requirements.
 The procedures and mechanisms to provision resource placeholders depend
 on the capabilities exposed by the targeted DCI and on the
 implementation of each \pilot system. Typically, for a DCI adopting
-queues, batch and scheduling systems, provisioning a placeholder
-involves it being submitted as a job. A `job' on a Grid middleware is a
-type of logical container that wraps configuration and execution
-parameters alongside information on the kernel that will need to be
-executed by the operating system of the DCI compute nodes. Conversely,
-for infrastructures that do not adopt a job-based middleware, a resource
-placeholder would be executed by means of other types of logical
-container as, for example, a Virtual Machine (VM) or a Docker Engine
-(cit, cit).
+queues, batch system, and scheduler, provisioning a placeholder involves
+it being submitted as a job. A `job' on a Grid middleware is a type of
+logical container including configuration and execution parameters
+alongside information on the kernel that will be executed on the DCI
+compute nodes. Conversely, for infrastructures that do not adopt a
+job-based middleware, a resource placeholder would be executed by means
+of other types of logical container as, for example, a Virtual Machine
+(VM) or a Docker Engine (cit, cit).
 
 Once resource placeholders are bound to a DCI, tasks need to be
 dispatched to those placeholders for execution. Task dispatching does
-not depend on other functionalities provided by the DCI and can be
-implemented within the boundaries of the \pilot system. This
-independence shifts the control of the workload execution directly and
-exclusively to the \pilot system. Among the most relevant consequences
-of such a shift  is decoupling execution time from the queuing time
-imposed by the DCI. Equally relevant, complex execution patterns
-involving task and data interdependence can be utilized without having
-to deal with the constraints imposed by the DCI middleware. Ultimately,
-this is why \pilot systems allow for the parametrization of workload
-execution and the maximization and minimization of one or more execution
-metrics.
+not depend on functionalities provided by the DCI and can be implemented
+within the boundaries of the \pilot system. As a consequence, the
+control over the execution of a workload is shifted from the DCI
+middleware to the \pilot system.  This shift is fundamental because it
+decouples the execution of a workload from the need to submit its tasks
+via the DCI middlware.  The tasks of a workload will not wait on the DCI
+queues before being executed and complex execution patterns involving
+task and data interdependence will be available outside the boundaries
+of the DCI middleware. Ultimately, this is why \pilot systems allow for
+the parametrization of workload execution and the maximization, for
+example, of throughput.
 
 Communication and coordination are two distinguishing characteristics of
 distributed software tools and \pilot systems make no exception. The
@@ -942,21 +941,21 @@ Workload Manager, Pilot Manager, and the Task Executor need to
 communicate and coordinate in order to instantiate resource
 placeholders, place tasks, and, in case, move data. For example, the
 Workload Manager needs to communicate with the Task Executor to
-coordinate all the necessary steps needed to execute the given workload.
-Analogously, the workload and pilot managers need to communicate in
-order to coordinate the instantiation and utilization of resource
-placeholders. Nonetheless, \pilot systems are not defined by any
-specific communication patterns and coordination strategies. The logical
-components of a \pilotjob system may communicate with every suitable
-pattern --- point-to-point (i.e. one-to-one), many-to-one, or one-to-
-many (cit) --- and coordinate adopting any suitable strategy --- time
-synchronization, static or dynamic coordinator election, local or global
-information sharing. The same applies to specific network architectures
-or protocols as different network architectures and protocols may be
-leveraged within a \pilotjob implementation in order to achieve
-effective communication and coordination.
+coordinate the execution of the given workload. Analogously, the
+Workload and Pilot Managers need to communicate in order to coordinate
+the instantiation and utilization of resource placeholders. Nonetheless,
+\pilot systems are not defined by any specific communication pattern
+and coordination strategy. The logical components of a \pilot system may
+communicate with every suitable pattern -- point-to-point (i.e.
+one-to-one), many-to-one, or one-to- many (cit) -- and coordinate
+adopting any suitable strategy -- time synchronization, static or
+dynamic coordinator election, local or global information sharing. The
+same applies to specific network architectures and protocols. Different
+network architectures and protocols may be leveraged within a \pilot
+implementation in order to achieve effective communication and
+coordination.
 
-As seen in \S\ref{ssec:informal}, \MW is a very common coordination
+As seen in~\S\ref{ssec:informal}, \MW is a very common coordination
 strategy among \pilot systems. When the Master is identified with the
 Workload Manager, and the Worker with the Task Executor, the
 functionalities related to task description, scheduling, and monitoring
@@ -967,28 +966,27 @@ where a Task Executor directly coordinates the task scheduling, might
 require a functionally simpler Workload Manager but a comparatively
 feature-rick Task Executor. The former would require capabilities for
 submitting tasks, while the latter would require to coordinate with its
-neighbor executors leveraging, for example, an overlay network. Both
-these systems, adopting different coordination strategies, should be
-considered \pilotjob systems.
+neighbor executors leveraging, for example, a dedicated overlay network.
+Both these systems, adopting different coordination strategies, should
+be considered \pilot systems.
 
-Data management may have an important role within \pilotjob systems. For
-example, functionalities can be provided to support data staging for
-task execution or for managing task-related data according to the
-capabilities offered by specific DCI. \pilotjob systems can be devised
-in which tasks do not require any data management because they (i) do
-not necessitate input files, (ii) do not produce output files, (iii)
-data is already locally available or (iv) data management is left to the
-application itself. Even if such systems are conceivable, for every
-practical reasons, a minimal set of data-related capabilities should be
-consider a necessary functionality of a \pilotjob system. Therefore,
-while staging input files in and out a resource has to be considered a
-necessary capability of every \pilotjob systems, the same does not apply
-to more advanced and specific data capabilities like, for example, data
-replication, concurrent data transfers, data abstractions different from
-a file, or pilot data.
+Data management may have an important role within \pilot systems. For
+example, functionalities can be provided to support the local or remote
+data staging required to execute the tasks of a workload, or data might
+be managed according to the specific capabilities offered by the
+targeted DCI. \pilot systems can be devised in which tasks do not
+require any data management because they (i) do not necessitate input
+files, (ii) do not produce output files, (iii) data is already locally
+available or (iv) data management is left to the application itself.
+Therefore, being able to read and write files to a local filesystem
+should be considered the minimal capability related to data required by
+a \pilot system. More advanced and specific data capabilities like, for
+example, data replication, concurrent data transfers, data abstractions
+different from a file, or data placeholders should be considered
+special-purpose capabilities, not characteristic of a \pilot system.
 
 In the following subsection, a minimal set of terms related to the
-capabilities just described is defined.
+logical components and capabilities just described is defined.
 
 \subsection{Terms and Definitions}
 \label{subsec:3.2}
