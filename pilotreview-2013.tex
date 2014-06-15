@@ -833,6 +833,7 @@ is to offer a paradigmatic description of a \pilot system and a well-
 defined vocabulary to reason about such a description and, eventually,
 about its multiple implementations.
 
+%------------------------------------------------------------------------------
 \subsection{Logical Components and Functionalities}
 \label{subsec:3.1}
 
@@ -988,6 +989,7 @@ special-purpose capabilities, not characteristic of a \pilot system.
 In the following subsection, a minimal set of terms related to the
 logical components and capabilities just described is defined.
 
+%------------------------------------------------------------------------------
 \subsection{Terms and Definitions}
 \label{subsec:3.2}
 
@@ -1000,19 +1002,29 @@ logical components and capabilities just described is defined.
   \hline
     \textbf{Workload} & Task Dispatching & Workload Manager \\
   \hline
-    \textbf{Task} & Task Dispatching \newline Task Execution & Workload Manager \newline Task Executor \\
+    \textbf{Task} & Task Dispatching \newline
+    Task Execution & Workload Manager \newline
+    Task Executor \\
   \hline
     \textbf{Resource} & Pilot Provisioning & Pilot Manager \\
   \hline
     \textbf{Job} & Pilot Provisioning & Pilot Manager \\
   \hline
-    \textbf{Pilot} & Pilot Provisioning \newline Task Execution & Pilot Manager \newline Task Executor \\
+    \textbf{Pilot} & Pilot Provisioning \newline
+    Task Execution & Pilot Manager \newline
+    Task Executor \\
   \hline
-    \textbf{Multi-level scheduling} & Pilot Provisioning \newline Task Dispatching & Pilot Manager \newline Workload Manager \\
+    \textbf{Multi-level scheduling} & Pilot Provisioning \newline
+    Task Dispatching & Pilot Manager \newline
+    Workload Manager \\
   \hline
-    \textbf{Early binding} & Task Dispatching \newline Pilot Provisioning & Workload Manager  \newline Pilot Manager\\
+    \textbf{Early binding} & Task Dispatching \newline
+    Pilot Provisioning & Workload Manager \newline
+    Pilot Manager\\
   \hline
-    \textbf{Late binding} & Task Dispatching \newline Pilot Provisioning  & Workload Manager \newline Pilot Manager\\
+    \textbf{Late binding} & Task Dispatching \newline
+    Pilot Provisioning  & Workload Manager \newline
+    Pilot Manager\\
   \hline
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
@@ -1021,43 +1033,46 @@ logical components and capabilities just described is defined.
  \label{table:terminology}
 \end{table*}
 
-The name `\pilotjob' indicates the primary role played by the concepts
-of `pilot' and `job' in this type of system. The definition of both
-concepts is context-dependent and several other terms needs to be
-clarified in order to offer a coherent terminology. Both `job' and
-`pilot' need to be understood in the context of DCIs, the
-infrastructures where \pilotjobs systems are provisioned. DCIs offer
-compute, storage, and network resources and \pilotjobs allow for the
-users to utilize those resources to execute the tasks of one or more
+The terms `pilot' and `job' are among the most relevant when referring
+to \pilot systems. So much so that \pilot systems are commonly called
+\pilotjob systems (cit, cit, cit, cit), a clear indication of the
+primary role played by the concepts of `pilot' and `job' in this type of
+system. The definition of both concepts is context-dependent and several
+other terms needs to be clarified in order to offer a coherent
+terminology. Both `job' and `pilot' need to be understood in the context
+of DCIs, the infrastructures leveraged by \pilot systems. DCIs offer
+compute, storage, and network resources and \pilot allow for the users
+to utilize those resources to execute the tasks of one or more
 workloads.
 
 \begin{description}
 
+\item[Task.] A set of operations encoded so that they can be performed
+on a computing platoform. Implementations of a task may include
+wrappers, applications, scripts, and, more in general, any type of
+`application kernel'.
+
 \item[Workload.] A set of tasks, possibly correlated by a set of
 arbitrary complex relations.
 
-\item[Resource.] Finite, typed and physical quantity utilized when
-executing one or more workloads. Compute cores, data storage space, or
-bandwidth are all examples of resources commonly utilized by running
+\item[Resource.] Finite, typed, and physical quantity utilized when
+executing the tasks of a workload. Compute cores, data storage space, or
+bandwidth are all examples of resources commonly utilized when executing
 workloads.
 
-\item[Infrastructure.] Structured set of resources, possibly
+\item[Infrastructure or DCI.] Structured set of resources, possibly
 geographically and institutionally separated from the users   utilizing
-those resources to execute one or more workloads. [cit, cit]
+those resources to execute the tasks of a workload (cit, cit).
 Infrastructures can be logically partitioned, with a direct or indirect
-mapping onto individual pools of hardware. Commonly, Infrastructure can
-be used also to indicate a DCI.
-
-\item[Task.] A set of operations encoded so that they can be executed on
-the resources of a DCI. Implementations of a task may include wrappers,
-applications, scripts, and, more in general, any type of `application
-kernel'.
+mapping onto individual pools of hardware. In the context of \pilot
+systems, an infrastructure is usually to be assumed to be a distributed
+computed infrastructure, i.e., a DCI.
 
 \end{description}
 
-As seen in \S\ref{ssec:informal}, most of the DCIs where \pilotjobs
-systems are executed utilize `queues', `batch systems' and `schedulers'.
-In such DCIs, jobs are scheduled and then executed by a batch system.
+As seen in \S\ref{sec:history}, most of the DCIs leveraged by \pilot
+systems utilize `queues', `batch systems' and `schedulers'. In such
+DCIs, jobs are scheduled and then executed by a batch system.
 
 \begin{description}
 
@@ -1066,11 +1081,10 @@ their properties and indications on how they should be executed.
 
 \end{description}
 
-In the context of a \pilotjob system, jobs and tasks are functionally
-analogous but qualitatively different; it is therefore relevant to
-highlight their distinction. Functionally, both jobs and tasks are
-containers --- i.e. a metadata wrapper around one or more executable
-often called 'kernel', 'agent', 'application', 'script' --- but the term
+In the context of a \pilot system, jobs and tasks are functionally
+analogous but qualitatively different. Functionally, both jobs and tasks
+are containers -- i.e. a metadata wrapper around one or more executable
+often called 'kernel', 'agent', 'application', 'script' -- but the term
 `task' is used when reasoning about workloads while `job' is used in
 relation to a specific type of infrastructure where such a container can
 be executed. Accordingly, tasks are considered as the functional units
