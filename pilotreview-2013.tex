@@ -3595,7 +3595,41 @@ paradigm :)}
 \subsection{Pilot and the Enterprise}
 \label{sec:5.5}
 
-\mtnote{Waiting for comments/text from AndreL.}
+Over the past years, Hadoop~\cite{hadoop} emerged as distributed computing for
+data-intensive tasks in the enterprise space. While early versions of Hadoop
+were very monolithic tightly coupling the Map Reduce programming framework with
+the underlying infrastructure resource management. With Hadoop~2,
+YARN~\cite{yarn-paper} was introduced as a central resource manager supporting
+heterogenous workloads (and not only Map Reduce). YARN provides support
+multi-level scheduling enabling the application to deploy their own
+application-level scheduling routines on top of Hadoop-managed storage and
+compute resources. While YARN manages the lower resources, the higher-level
+runtimes typically use an application-level scheduler to optimize resource
+usage for the application. Applications need to initialize their so-called
+Application-Master via YARN; the Application Master is then responsible for
+allocating resources in form of so-called containers for the applications. It
+then can execute tasks in these containers.
+
+
+As in the HPC environment, the support for different application workloads and
+job types: long-lived vs. short-lived applications, homogeneous vs.
+heterogeneous tasks is a challenge. \pilots address many of these requirements
+in HPC and HTC environments. Similar frameworks are emerging for YARN:
+Llama~\cite{llama} offers a long-running application master for YARN
+application designed for the Impala SQL engine. TEZ~\cite{tez} is a DAG
+processing engine primarily designed to support the Hive SQL engine allowing
+the application to hold containers across multiple phases of the DAG execution
+without the need to de-/re-allocate resources.
+REEF~\cite{Chun:2013:RRE:2536274.2536318} is a similar runtime environment that
+provides applications a higher-level abstractions to YARN resources allowing it
+to retain memory and cores supporting heterogeneous workloads.
+
+
+
+
+
+
+
 
 \begin{itemize}
 
@@ -3735,7 +3769,7 @@ such as Workflow systems possibly}
 
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{abbrv}
-\bibliography{pilotjob,literatur,saga,saga-related,urls}
+\bibliography{pilotjob,literatur,saga,saga-related,urls,hadoop}
 
 
 
