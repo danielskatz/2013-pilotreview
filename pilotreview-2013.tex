@@ -204,10 +204,23 @@ of significant a posteriori effort on workflow system extensibility
 and interoperability (thus providing post-facto justification of its
 needs), these objectives remain difficult if not infeasible.
 
-The remainder of this paper is as follows yadayadayada.
-In section \ref{sec:history} we go back in time and look at how the concept of
-\pilotjobs has evolved by dissecting existing \pilotjob systems and systems
-with pilot-like characteristics.
+The remainder of this paper is divided into four Sections.
+In~\S\ref{sec:history} we go back in time and look at how the concept of
+\pilotjobs has evolved by analyzing existing \pilot systems and systems
+with pilot-like characteristics. In~\S\ref{sec:3}, the hetoregeneity
+described in~\S\ref{sec:history} is addressed by deriving the minimal
+set of capabilities and properties that has to characterize the design
+of a \pilot system. A vocabulary is then defined so that it can be used
+consistently across different designs and implmentations of a \pilot
+system. In~\S\ref{sec:4}, the focus shifts from analysing the design of
+a \pilot system to  leveraging the terminology defined in~\S\ref{sec:3}
+to critically reviewing the characteritics and functionalities of a
+relevant set of \pilot system implementations. Finally,~\S\ref{sec:5}
+closes the paper by outlining the \pilot paradigm and elaborating on how
+it impacts and relates to other middleware and the application layer.
+The generality and breath of the \pilot paradigm is underlined by
+showing how it is finding its way into the Enterprise, outside the
+boundaries of scientific research.
 
 \section{Functional Evolution of Pilot-Jobs}\label{sec:history}
 
@@ -3548,25 +3561,25 @@ Abstractions}.
 
 \begin{enumerate}
 
-\item PJs are just for HTC and they just circumvent job queuing delays; PJs
-unfairly game HPC queuing system;
+\item PJs are just for HTC and they just circumvent job queuing delays;
+PJs unfairly game HPC queuing system;
 
 \item PJs are such a simple concept, it doesn't need more attention:
 Conversely, everyone should write their own PJ just because they can;
 
-\item PJs have to be tied to specific infrastructure and infrastructures have
-to be tied to specific pjs;
+\item PJs have to be tied to specific infrastructure and infrastructures
+have to be tied to specific pjs;
 
-\item PJs are stand-alone tools passive (system) tools, as opposed to user-
-space, active and extensible components of a CI;
+\item PJs are stand-alone tools passive (system) tools, as opposed to
+user-space, active and extensible components of a CI;
 
 \item PJs have well defined semantics and model. PJs dont help with data
 intensive applications.
 
 \end{enumerate}
 
-The pilot paradigm alongside its abstractions offer the opportunity to overcome
-a common [cit? cit?] interpretation of \pilot systems as...
+The pilot paradigm alongside its abstractions offer the opportunity to
+overcome a common [cit? cit?] interpretation of \pilot systems as...
 
 
 \subsection{Pilot and Middleware Layer}
