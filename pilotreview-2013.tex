@@ -3457,69 +3457,91 @@ publications from either the developers or users of the various system.
 \label{sec:5}
 
 % \jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
-% state clearly how section 3 and 4 help us define what a pilot is,   the
-% necessary and sufficient conditions (if possible), discuss the
+% state clearly how section 3 and 4 help us define what a pilot is,
+% the necessary and sufficient conditions (if possible), discuss the
 % classifiers and apply/discuss them to the set of pilot systems here.
 % (iii) then we go on to say motivate P*/pilot for data, (iv) discuss
 % implications for WF systems and conclude with a summary for
-% tools/sustainability/etc. At some point, we discuss how/why pilots   are
-% more than just pilots, eg can be RM layer for middleware,   runtime
-% framework etc}\mtnote{I have organized the following items on the lines
-% you have traced, with some changes in the order and number of the
-% items.}
+% tools/sustainability/etc. At some point, we discuss how/why pilots
+% are more than just pilots, eg can be RM layer for middleware,
+% runtime framework etc}\mtnote{I have organized the following items on
+% the lines you have traced, with some changes in the order and number
+% of the items.}
 
-Sections~\ref{sec:3} and~\ref{sec:4} offered respectively a description of the
-minimal capabilities and properties of a \pilot \mtnote{In Section 3 we use
-\pilotjob. We will have to move to \pilot or decide to use the less correct
-\pilotjob here too.} system; a vocabulary defining `pilot' and its cognate
-concepts; a classification of the core and auxiliary properties of a
-paradigmatic pilot system implementation; and the analysis of an exemplar set
-of pilot system implementations. Considered altogether, these contributions
-show how the notion of \pilot indicates a paradigm for systems taking care of
-executing tasks on (distributed) resources.
+\mtnote{In Section 3 we use pilotjob. We will have to move to \pilot
+or decide to use the less correct pilotjob here too.}\mtnote{Following
+discussion, we decided to use \pilot. Section 3 has been updated, the
+other Sections will have to follow.}
 
-The \pilot paradigm identifies a specific pattern of middleware system with
-unique characteristics. Middleware because it operates above operating systems
-and, in case, other middleware interfaces, unique because it is defined by
-resource placeholding \mtnote{we use resource overlay in 3.1 but we should
-probably use placeholding seeing how we use overlays these days in OWMS},
-multi-level scheduling, and early/late binding. Every software system with
-these three characteristics, built upon the logical components and the
-functionalities described in Section~\ref{subsec:3.1} is an implementation of a
-\pilot system as seen in Section~\ref{sec:4}.
+Sections~\ref{sec:3} and~\ref{sec:4} offered respectively a description
+of the minimal capabilities and properties of a \pilot system; a
+vocabulary defining `pilot' and its cognate concepts; a classification
+of the core and auxiliary properties of a paradigmatic pilot system
+implementation; and the analysis of an exemplar set of pilot system
+implementations. Considered altogether, these contributions show how the
+notion of \pilot system indicates a paradigm for the execution of tasks
+on distributed resources by means of resource placeholders.
+
+The \pilot paradigm identifies a type of middleware system with unique
+characteristics. A \pilot system is a middleware because it operates
+above the operating systems and, in case, other middleware interfaces
+exposed by the target DCIs; unique because it is defined by resource
+placeholding, multi-level scheduling, and early or late binding. Every
+software system with these three characteristics, built upon the logical
+components and the functionalities described in~\S\ref{subsec:3.1} is an
+implementation of a \pilot system as seen in Section~\ref{sec:4}.
+
+\mtnote{we use resource overlay in 3.1 but we should probably use
+placeholding seeing how we use overlays these days in OWMS} \mtnote{This
+has been fixed in S3.}
 
 \jhanote{Need thinking: Following on from discussion yesterday, is
-  early/late binding a logical consequence of multi-level scheduling?
-  Can we absorb the latter into the former?}
+early/late binding a logical consequence of multi-level scheduling? Can
+we absorb the latter into the former?}\mtnote{Following the revision of
+S3, early/late binding seems to be related to having resource
+placeholder while multi-level scheduling seems to be the means to have
+place-holders. Both early and late binding referes to the same entities:
+tasks bound to pilots, i.e. place holders. Multi-level scheduling refers
+to two pairs of entities: container (i.e. jobs) scheduled to DCIs, and
+tasks scheduled to placeholders. This opens the issue of whether binding
+is a form of scheduling, whether binding and scheduling are the same. We
+may want to discuss about it.}
 
-It should be noted that the \pilot paradigm is also general. While the
-operations of a task performed by means of a \pilot are usually computational
-in nature, in principle, they might also operate on other type of resources
-such as data or networking, depending on the resources made available by an
-infrastructure to its users. In this context, it would be likely for some
-\pilotjob systems to use the terms `pilot data' or `pilot network'. In Ref.
-[pilot data], the notion of \pilotdata has been conceived using the power of
-symmetry, i.e., \pilotdata taken to be a notion as fundamental to dynamic data
-placement and scheduling as \pilotjobs is to computational tasks.
+The scope of the \pilot paradigm encompasses multiple types of resource.
+Usually, the tasks executed on pilots leverage mainly the cores of the
+compute nodes for which the pilot is a placeholder. Tasks may also use
+data or network resources but only as accessories to the utilization of
+computational resources for executing the tasks of the given workload.
+Local or shared filesystems may be used to read input and write output
+data while network connectivity may be required to download, for
+example, the code of the task executor. The focus on computational
+resources is not mandated by the \pilot paradigm. In principle, pilots
+can be placeholders also and exclusively for data or network resources
+depending on the capabilities exposed by the middleware of the target
+DCIs. In Ref. [pilot data], the notion of \pilotdata has been conceived
+using the power of symmetry, i.e., \pilotdata taken to be a notion as
+fundamental to dynamic data placement and scheduling as \pilot is to
+computational tasks.
 
-The unique characteristics and generality of the \pilot paradigm has been
-modeled in Ref.~\cite{Luckow:2008la}. This investigation was motivated by the
-desire to provide a single conceptual framework -- the so called $P*$ Model --
-that would be used to subsume the design characteristics of the various
-\pilotjob implementations that exist, a sample of which have been analysed in
-detail in Section~\ref{sec:4}. \mtnote{Is this still the case? I think this
-has become one of the goals of this paper. How do you want to mention P* here?
-What do you want to say about it? Is the paragraph above sufficient?}
-Interestingly, the \pstar model was amenable and easily extensible to
-\pilotdata.  The consistent and symmetrical treatment of data and compute in
-the model led to the generalization of the model as the {\it P* Model of Pilot
+The unique characteristics and generality of the \pilot paradigm has
+been modeled in Ref.~\cite{Luckow:2008la}. This investigation was
+motivated by the desire to provide a single conceptual framework -- the
+so called $P*$ Model -- that would be used to subsume the design
+characteristics of the various \pilot system implementations that exist,
+a sample of which have been analysed in detail in Section~\ref{sec:4}.
+\mtnote{Is this still the case? I think this has become one of the goals
+of this paper. How do you want to mention P* here? What do you want to
+say about it? Is the paragraph above sufficient?} Interestingly, the
+\pstar model was amenable and easily extensible to \pilotdata.  The
+consistent and symmetrical treatment of data and compute in the model
+led to the generalization of the model as the {\it P* Model of Pilot
 Abstractions}.
 
-% The \pilot paradigm... Why it is a independent distributed system abstraction?
-% Independent = unique characteristics and properties when compared to other
-% distributed system paradigms. What `other' paradigms should we consider? In what
-% sense the pilot paradigm is distributed? Why should we define the \pilot
-% paradigm an abstraction?
+% The \pilot paradigm... Why it is a independent distributed system
+% abstraction? Independent = unique characteristics and properties when
+% compared to other distributed system paradigms. What `other' paradigms
+% should we consider? In what sense the pilot paradigm is distributed?
+% Why should we define the \pilot paradigm an abstraction?
 
 \subsection{Myth Revisited}
 \label{sec:5.1}
