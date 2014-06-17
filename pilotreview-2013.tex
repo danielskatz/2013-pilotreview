@@ -863,16 +863,16 @@ among \pilot systems are defined along multiple dimensions: purpose,
 logical components, and functionalities.
 
 The purpose shared by every \pilot system is to improve performance of
-workload execution when compared to executing the same workload directly
-on one or more DCI. Performance in \pilot systems is usually associated
-to throughput and execution time-to-completion (cit), but other metrics
-could be also considered as, for example, energy efficiency, data
-transfer, scale of the workload executed or a mix of them. In order to
-maximize or minimize the chosen set of metrics, each \pilot system
-exhibits characteristics that are both common or specific to one or more
-implementations. Discerning these characteristics require isolating and
-defining the minimal set of logical components that has to characterize
-every \pilot system.
+workload execution when compared to executing the same workload
+directly on one or more DCI. Performance in \pilot systems is usually
+associated to throughput and execution time-to-completion (cit), but
+other metrics could be also considered as, for example, energy
+efficiency, data transfer, scale of the workload executed or a mix of
+them. In order to maximize or minimize the chosen set of metrics, each
+\pilot system exhibits characteristics that are both common or
+specific to one or more implementations. Discerning these
+characteristics requires isolating and defining the minimal set of
+logical components that has to characterize every \pilot system.
 
 At some level, all \pilot systems leverage three separate but
 coordinated logical components: a \textbf{Pilot Manager}, a
@@ -955,25 +955,26 @@ Ultimately, this is why \pilot systems allow for the parametrization of
 workload execution and the maximization, for example, of execution
 throughput.
 
-Communication and coordination are two distinguishing characteristics of
-distributed software tools and \pilot systems make no exception. The
-Workload Manager, Pilot Manager, and the Task Executor need to
-communicate and coordinate in order to instantiate resource
+Communication and coordination are two distinguishing characteristics
+of distributed software tools and \pilot systems make no
+exception. The Workload Manager, Pilot Manager, and the Task Executor
+need to communicate and coordinate in order to instantiate resource
 placeholders, place tasks, and, in case, move data. For example, the
 Workload Manager needs to communicate with the Task Executor to
 coordinate the execution of the given workload. Analogously, the
 Workload and Pilot Managers need to communicate in order to coordinate
-the instantiation and utilization of resource placeholders. Nonetheless,
-\pilot systems are not defined by any specific communication pattern
-and coordination strategy. The logical components of a \pilot system may
-communicate with every suitable pattern -- point-to-point (i.e.
-one-to-one), many-to-one, or one-to-many (cit) -- and coordinate
-adopting any suitable strategy -- time synchronization, static or
-dynamic coordinator election, local or global information sharing, or
-\MW. The same applies to specific network architectures and protocols.
-Different network architectures and protocols may be leveraged within a
-\pilot implementation in order to achieve effective communication and
-coordination.
+the instantiation and utilization of resource
+placeholders. Nonetheless, \pilot systems are not defined by any
+specific communication pattern and coordination strategy. The logical
+components of a \pilot system may communicate with every suitable
+pattern -- point-to-point (i.e.  one-to-one), many-to-one, or
+one-to-many (cit) -- and coordinate adopting any suitable strategy --
+time synchronization, static or dynamic coordinator election, local or
+global information sharing, or \MW. The same applies to specific
+network architectures and protocols.  Different network architectures
+and protocols may be leveraged within a \pilot implementation in order
+to achieve effective communication and coordination.  \jhanote{maybe
+  this is a good place to introduce pull vs push models}
 
 As seen in~\S\ref{ssec:informal}, \MW is a very common coordination
 strategy among \pilot systems. When the Master is identified with the
@@ -1164,9 +1165,10 @@ new types of DCI middleware as, for example, cloud-based infrastructures,
 the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion.
 
-Once clarified the meaning of `job' and `pilot', three more terms
-fundamentally associated to \pilot systems (cit, cit, cit) need to be
-defined: `Mulit-level scheduling' and `late/early binding'.
+To promote internal consistency, having clarified the meaning of `job'
+and `pilot', it is imperative that three more terms fundamentally
+associated with \pilot systems (cit, cit, cit) be explicitly defined:
+`Multi-level scheduling' and `late/early binding'.
 
 Pilot systems are said to implement multi-level scheduling because they
 require the scheduling of two types of entities: pilots and tasks. A
