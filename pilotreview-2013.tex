@@ -224,67 +224,66 @@ boundaries of scientific research.
 
 \section{Functional Evolution of Pilot-Jobs}\label{sec:history}
 
-%\subsection{A Functional Approach to Pilot-Jobs}
-%Many scientific communities began running into the same issues:
+% \subsection{A Functional Approach to Pilot-Jobs}
+% Many scientific communities began running into the same issues:
 
 % As distributed systems grew in capacity and capability, they also grew
 % in complexity and heterogeneity. For example, many machines
 % implemented their own batch queuing systems, and oftentimes these
-% systems varied from machine to machine.\msnote{The part after the comma is kind
-% of implicit by the part before}
-% The wide use of heterogenous
-% resources, resulted in the need for workload management across these
-% resources.  In order to harness the power of these heterogeneous
-% resources to run jobs, one particular solution proposed is that of
+% systems varied from machine to machine.\msnote{The part after the
+% comma is kind of implicit by the part before} The wide use of
+% heterogenous resources, resulted in the need for workload management
+% across these resources.  In order to harness the power of these
+% heterogeneous resources to run jobs, one particular solution proposed
+% is that of
 % \pilotjobs
 
 % , which have historically been used as a means of solving these
-% issues.
-% This gave rise to the the need for job submission management via batch
-% queuing systems and middleware access also grew.
-%We briefly discuss some specific uses of \pilotjobs below.
+% issues. This gave rise to the the need for job submission management
+% via batch queuing systems and middleware access also grew. We briefly
+% discuss some specific uses of \pilotjobs below.
 
 % \pilotjobs are most commonly used for the execution of many tasks
-% through the use of a container job. They are often measured by
-% their throughput, that is, the number of tasks that they can complete
-% per second (tps)\msnote{I dont think we use tps further in the paper},
-% or alternatively, by the total number of tasks
-% executed. As such, \pilotjobs are used to achieve
-% high-throughput, for example, when using genome sequencing techniques
-% \msnote{Arguably genome applications are not the most illustrative example of
-% high throughput tasks getting benefit out of pilot-jobs}
-% or ensemble-based applications. \pilotjobs have also been used for
-% parameter sweeps, chained tasks, and loosely-coupled but distinct
-% tasks. %note to self: cite these with papers
+% through the use of a container job. They are often measured by their
+% throughput, that is, the number of tasks that they can complete per
+% second (tps)\msnote{I dont think we use tps further in the paper}, or
+% alternatively, by the total number of tasks executed. As such,
+% \pilotjobs are used to achieve high-throughput, for example, when
+% using genome sequencing techniques \msnote{Arguably genome
+% applications are not the most illustrative example of high throughput
+% tasks getting benefit out of pilot-jobs} or ensemble-based
+% applications. \pilotjobs have also been used for parameter sweeps,
+% chained tasks, and loosely-coupled but distinct tasks. %note to self:
+% cite these with papers
 
 % Multi-scale simulations have also benefited from the use of
 % \pilotjobs. A framework for load balancing via dynamic resource
 % allocation for coupled multi-physics (MPI-based) simulations using
-% \pilotjobs was demonstrated in Ref.~\cite{ko-efficient}.
-% This was achieved by dynamically assigning more processors to
-% jobs with longer runtimes, so that these jobs could accomplish their workload
-% in the same amount of wall-clock time as those with shorter runtimes.
-% This led to an overall reduction of jobs that were waiting to communicate
+% \pilotjobs was demonstrated in Ref.~\cite{ko-efficient}. This was
+% achieved by dynamically assigning more processors to jobs with longer
+% runtimes, so that these jobs could accomplish their workload in the
+% same amount of wall-clock time as those with shorter runtimes. This
+% led to an overall reduction of jobs that were waiting to communicate
 % via MPI, and an overall reduction of the total simulation runtime.
 
-% \pilotjobs can be used for  simulations
-%  with varying numbers of tasks to complete, for example,
-% molecular dynamics simulations requiring task restart. These types of
-%  simulations may start with a fixed number of tasks but spawn
-%  more tasks in order to continue simulating. \pilotjobs can be
-% utilized for these types of dynamic simulations, because
-% new tasks can be fed to the \pilot at any time within a given
-% runtime. Without \pilotjobs, these simulations would have to
-% be resubmitted to the batch queue and wait for their time
-% to become active again~\cite{luckow2009adaptive}.
+% \pilotjobs can be used for  simulations with varying numbers of tasks
+%  to complete, for example, molecular dynamics simulations requiring
+%  task restart. These types of simulations may start with a fixed
+%  number of tasks but spawn more tasks in order to continue simulating.
+%  \pilotjobs can be utilized for these types of dynamic simulations,
+%  because new tasks can be fed to the \pilot at any time within a given
+%  runtime. Without \pilotjobs, these simulations would have to be
+%  resubmitted to the batch queue and wait for their time to become
+%  active again~\cite{luckow2009adaptive}.
 
 % \pilotjobs have also been used to avoid queue wait times for many jobs
 % \msnote{I think we just said this above in the high-throughput case}
 % as well as harness and utilize different resources (with different
-% batch queueing systems) to do \textit{scale-across} simulations.
-% As a fault tolerant mechanism, many \pilotjob systems monitor
-% failed jobs and have the ability to restart them within the given
-% time frame of the \pilotjob's total runtime~\cite{1742-6596-219-6-062049,condor-g,nilsson2011atlas}.
+% batch queueing systems) to do \textit{scale-across} simulations. As a
+% fault tolerant mechanism, many \pilotjob systems monitor failed jobs
+% and have the ability to restart them within the given time frame of
+% the \pilotjob's total
+% runtime~\cite{1742-6596-219-6-062049,condor-g,nilsson2011atlas}.
 
 
 % In order to appreciate \pilotjobs, we outline the evolution of
@@ -295,54 +294,62 @@ boundaries of scientific research.
 
 % \subsubsection*{The Evolution of \pilotjobs}\label{sssec:evolution}
 
-%\pilotjobs provide the ability to distribute workload across multiple systems and
-%offer an easy way to schedule many jobs at one time. This in turn improves the
-%utilization of resources\msnote{why?}, reduces the net wait time of a collection of tasks, and
-%also prevents saturation of resource batch queuing systems from high-throughput
-%simulations where many jobs need to be run at one time\msnote{I dont understand
-%the last claim}. While early \pilot-systems
-%solely provided this placeholder job mechanism, many of these system evolved to
-%more complex workload management systems. As applications began to utilize
-%distributed cyberinfrastructure, the workloads grew from small sets of short
-%running jobs to many jobs with either short or potentially long runtimes. There was
-%a need for more complex management of these workloads and additional capabilities
-%for user-level control of the tasks that would be executed within the placeholder
-%job. This drove the creation of the modern idea of \pilots \msnote{Kind of an
-%ambigous statement, like all statements that include the word "modern" :-)}
+% \pilotjobs provide the ability to distribute workload across multiple
+% systems and offer an easy way to schedule many jobs at one time. This
+% in turn improves the utilization of resources\msnote{why?}, reduces
+% the net wait time of a collection of tasks, and also prevents
+% saturation of resource batch queuing systems from high-throughput
+% simulations where many jobs need to be run at one time\msnote{I dont
+% understand the last claim}. While early \pilot-systems solely provided
+% this placeholder job mechanism, many of these system evolved to more
+% complex workload management systems. As applications began to utilize
+% distributed cyberinfrastructure, the workloads grew from small sets of
+% short running jobs to many jobs with either short or potentially long
+% runtimes. There was a need for more complex management of these
+% workloads and additional capabilities for user-level control of the
+% tasks that would be executed within the placeholder job. This drove
+% the creation of the modern idea of \pilots \msnote{Kind of an ambigous
+% statement, like all statements that include the word "modern" :-)}
 
-%\pilotjob systems differ in their focus and architecture. Our preliminary
-%survey of existing \pilotjobs helped to identify three major layers that
-%these systems exhibit: (i) core \pilotjob functionality - this provides the
-%minimally complete set of capabilities for a simple \pilotjob, (ii) advanced
-%\pilotjob functionality - a system that offers all of (i) plus a more sophisticated
-%resource management mechanism, and (iii) higher-level \pilot-based frameworks
-%- frameworks utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
+% \pilotjob systems differ in their focus and architecture. Our
+% preliminary survey of existing \pilotjobs helped to identify three
+% major layers that these systems exhibit: (i) core \pilotjob
+% functionality - this provides the minimally complete set of
+% capabilities for a simple \pilotjob, (ii) advanced \pilotjob
+% functionality - a system that offers all of (i) plus a more
+% sophisticated resource management mechanism, and (iii) higher-level
+% \pilot-based frameworks - frameworks utilize \pilots for a specific
+% use case, e.\,g.\ workflows or data analytics.
 
-%\onote{These are not necessarily 'layers'. The more I think about it, the whole
-%idea of 'layers' doesn't make so much sense if we want to distinguish between core and
-%advanced systems / frameworks. I think discussing these 'functionality' along
-%\textbf{orthogonal components} (that doesn't necessarily build upon each other)
-%would make more sense. My (and ALs) comment w.r.t Figure 1 is related to this.}
-%\msnote{I'm tempted to at this stage in the paper use a very high level figure
-%to simply support the explanation of the pilotjob concept.}
+% \onote{These are not necessarily 'layers'. The more I think about it,
+% the whole idea of 'layers' doesn't make so much sense if we want to
+% distinguish between core and advanced systems / frameworks. I think
+% discussing these 'functionality' along \textbf{orthogonal components}
+% (that doesn't necessarily build upon each other) would make more
+% sense. My (and ALs) comment w.r.t Figure 1 is related to this.}
+% \msnote{I'm tempted to at this stage in the paper use a very high
+% level figure to simply support the explanation of the pilotjob
+% concept.}
 
-%As one can intuit from the above descriptions, existing \pilotjob systems maybe
-%overlap and overflow into these different layers, and each layer builds upon the
-%previous one. Therefore, we use these classification layers only as a means
-%to explain the basic progression of a \pilotjob system from simple scheduling
-%reservation mechanisms to more complete job management systems. A
-%more semantically-rich terminology and classification scheme will be presented
-%in Sections \ref{sec:vocab} and \ref{sec:4}.\msnote{I think the whole layering
-%discussion can go.}
+% As one can intuit from the above descriptions, existing \pilotjob
+% systems maybe overlap and overflow into these different layers, and
+% each layer builds upon the previous one. Therefore, we use these
+% classification layers only as a means to explain the basic progression
+% of a \pilotjob system from simple scheduling reservation mechanisms to
+% more complete job management systems. A more semantically-rich
+% terminology and classification scheme will be presented in Sections
+% \ref{sec:vocab} and \ref{sec:4}.\msnote{I think the whole layering
+% discussion can go.}
 
 
-%Figure~\ref{fig:figures_classification} categorized \pilotjob systems into three
-%layers: (i) core \pilotjob systems that solely provide a simple \pilot capability,
-%(ii) advanced \pilotjob systems that offer sophisticated resource management
-%capabilities based on \pilots, and (iii) higher level \pilot-based frameworks
-%that utilize \pilots for a specific use case, e.\,g.\ workflows or data analytics.
-%One of the important aspects of these layers is that they often overlap or
-%have evolved from one another. Therefore, it is hard to classify
+% Figure~\ref{fig:figures_classification} categorized \pilotjob systems
+% into three layers: (i) core \pilotjob systems that solely provide a
+% simple \pilot capability, (ii) advanced \pilotjob systems that offer
+% sophisticated resource management capabilities based on \pilots, and
+% (iii) higher level \pilot-based frameworks that utilize \pilots for a
+% specific use case, e.\,g.\ workflows or data analytics. One of the
+% important aspects of these layers is that they often overlap or have
+% evolved from one another. Therefore, it is hard to classify
 
 
 % \begin{figure}[t]
@@ -369,51 +376,47 @@ boundaries of scientific research.
 %	\label{fig:figures_classification}
 %\end{figure}
 
-%In this section, we give a brief overview of different \pilotjob systems. As
-%grid computing advanced in its size and capabilities, the need for
-%job scheduling and time-sharing became more prevalent. Batch
-%queuing systems were installed to solve this problem, wherein a login
-%node accepted all job submissions and then the queuing system
-%divided the work to the worker nodes.
-%The requirements of distributed applications, such as efficient load
-%balancing and resource utilization across multiple resources, drove
-%the need for user-level control of tasks and ease of use of job
-%descriptions for data driven
-%applications~\cite{ko-efficient}~\cite{DBLP:conf/hpdc/KimHMAJ10}, but
-%the concept of a \pilot was not the first type of application-level scheduling
-%introduced.
-
-
-
+% In this section, we give a brief overview of different \pilotjob
+% systems. As grid computing advanced in its size and capabilities, the
+% need for job scheduling and time-sharing became more prevalent. Batch
+% queuing systems were installed to solve this problem, wherein a login
+% node accepted all job submissions and then the queuing system divided
+% the work to the worker nodes. The requirements of distributed
+% applications, such as efficient load balancing and resource
+% utilization across multiple resources, drove the need for user-level
+% control of tasks and ease of use of job descriptions for data driven
+% applications~\cite{ko-efficient}~\cite{DBLP:conf/hpdc/KimHMAJ10}, but
+% the concept of a \pilot was not the first type of application-level
+% scheduling introduced.
 
 As established in the introduction, \pilotjobs have proven to be an
-effective tool for task-level parallelism.
-(Note that the current term \textit{\pilotjob} is not as old as the concept
-itself, and the word \pilot for this concept was likely introduced around 2004
-in the context of the LHC data challenge.\alnote{the concept or the name? figure 2 goes back way further than 2004} It's first written appearance is in a
-2005 LHCb report\cite{lhcb2005}). \msnote{find a nice place for this line}
-One common use for the \pilotjob paradigm is to enable the Master-Worker (M-W)
-scheme and its associated frameworks for
+effective tool for task-level parallelism. (Note that the current term
+\textit{\pilotjob} is not as old as the concept itself, and the word
+\pilot for this concept was likely introduced around 2004 in the context
+of the LHC data challenge.\alnote{the concept or the name? figure 2 goes
+back way further than 2004} It's first written appearance is in a 2005
+LHCb report\cite{lhcb2005}). \msnote{find a nice place for this line}
+One common use for the \pilotjob paradigm is to enable the Master-Worker
+(M-W) scheme and its associated frameworks for
 applications~\cite{Shao:2000:masterslave}.
 
-\jhanote{Mark: I propose the following:
-One common use for the M-W scheme is to serve as the coordination substrate for
-PJs. I know its a bit nebulous, but it connects the two concepts directly,
-which is the goal here.}
+\jhanote{Mark: I propose the following: One common use for the M-W
+scheme is to serve as the coordination substrate for PJs. I know its a
+bit nebulous, but it connects the two concepts directly, which is the
+goal here.}
 \msnote{Interesting contrast. Do we see M/W as a communication pattern to
 implement PJs or do PJs enable the M/W pattern to applicatons?}
+\mtnote{Please see~\S\ref{subsec:3.1}, 10th paragraph: "As see in..."}
 
-When Lewis Fry Richardson in 1922 devised his \textit{Forecast Factory} (Figure
-\ref{fig:figures_forecast-factory}), it was an early mentioning of large scale
-parallel computing.
-In determining the necessary processing power for weather forecasting, he
-estimated that 64000 \textit{computers} (humans in this case) would be required
-for solving the equations.
-These \textit{computers} would all be assigned a part of the globe by a central
-\textit{senior clerk}.
-The \textit{computers} would perform their calculations and the results would
-be collected by the clerk.
-This was in effect a Master-Worker pattern.
+When Lewis Fry Richardson in 1922 devised his \textit{Forecast Factory}
+(Figure~\ref{fig:figures_forecast-factory}), it was an early mentioning
+of large scale parallel computing. In determining the necessary
+processing power for weather forecasting, he estimated that 64000
+\textit{computers} (humans in this case) would be required for solving
+the equations. These \textit{computers} would all be assigned a part of
+the globe by a central \textit{senior clerk}. The \textit{computers}
+would perform their calculations and the results would be collected by
+the clerk. This was in effect a Master-Worker pattern.
 
 \begin{figure}[t]
 	\centering
@@ -423,9 +426,9 @@ This was in effect a Master-Worker pattern.
 	\label{fig:figures_forecast-factory}
 \end{figure}
 
-Figure~\ref{fig:timeline} shows the introduction of the discussed systems and
-terms. When available we use the date of first mention in a publication or
-otherwise release date of software.
+Figure~\ref{fig:timeline} shows the introduction of the discussed
+systems and terms. When available, we use the date of first mention in a
+publication or otherwise the release date of software implementation.
 
 In the context of present distributed systems, the M-W scheme was initially
 used for farming tasks from a master to a various number of workers, and could
