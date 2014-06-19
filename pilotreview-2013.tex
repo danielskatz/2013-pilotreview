@@ -3500,6 +3500,20 @@ implementations. Considered altogether, these contributions show how the
 notion of \pilot system indicates a paradigm for the execution of tasks
 on distributed resources by means of resource placeholders.
 
+In this Section we critically assess the properties of the \pilot
+paradigm. The goal is to show the generality of this paradigm and how
+\pilot systems goes beyond the implementation of a special purpose
+trikery to speed up the execution of a certain type of workload. Once
+understood the breath of the \pilot paradigm, we argue contextualize it
+by describing its relation with relevant domains such as middleware,
+applications, security, and enterprise. Finally, we close the Section
+with a look into the future of \pilot systems moving from the current
+state of the art and discussing the sociotechnical and engineering
+challenges that are being faced both by developers and target users.
+
+\subsection{The Pilot Paradigm}
+\label{sec:5.1}
+
 The \pilot paradigm identifies a type of middleware system with unique
 characteristics. A \pilot system is a middleware because it operates
 above the operating systems and, in case, other middleware interfaces
@@ -3561,9 +3575,6 @@ Abstractions}.
 % should we consider? In what sense the pilot paradigm is distributed?
 % Why should we define the \pilot paradigm an abstraction?
 
-\subsection{Myth Revisited}
-\label{sec:5.1}
-
 \begin{enumerate}
 
 \item PJs are just for HTC and they just circumvent job queuing delays;
@@ -3587,140 +3598,95 @@ The pilot paradigm alongside its abstractions offer the opportunity to
 overcome a common [cit? cit?] interpretation of \pilot systems as...
 
 
-\subsection{Pilot and Middleware Layer}
+\subsection{Pilot Paradigm in Context}
 \label{sec:5.2}
 
-The definition of the term `pilot' and the critical review of its
-implementations highlight the relation between \pilot systems and middleware
-as commonly defined in [cit, cit, cit]. The notion of pilot as a resource
-placeholder is something more than a job as defined in the context of Grid-
-based middleware. For example, cloud-based DCIs \mtnote{Use of DCIs for plural
-needs to be consistent across the paper.} introduce notable exceptions and
-differences in the way in which pilots can be provisioned.[cit, cit] Within a
-IaaS [cit], Virtual Machines (VMs) and not jobs are used for their
-provisioning. VMs can often be instantiated without waiting into a queue  with
-a predictable instantiation time, usually minimal wnen compared to the queuing
-time often experinced on Grid-based DCIs [red Vishal paper]. Furthermore, the
-limitations on the execution time of a VM can be virtually absent, a
-limitation that on grid-based middleware is imposed by the queue walltime.
-Clearly, overheads are introduced by having to deal with VMs and not simple
-jobs and the model adopted within a IaaS-based DCI to assign resources to each
-VM can affect the flexibility of the whole \pilotjob system. [cit] A similar
-assessment could be done for a DCI deploying a PaaS model of cloud
-computing.[cit]
+\paragraph{Pilot and Middleware Layer} The definition of the term
+`pilot' and the critical review of its implementations highlight the
+relation between \pilot systems and middleware as commonly defined in
+[cit, cit, cit]. The notion of pilot as a resource placeholder is
+something more than a job as defined in the context of Grid- based
+middleware. For example, cloud-based DCIs \mtnote{Use of DCIs for plural
+needs to be consistent across the paper.} introduce notable exceptions
+and differences in the way in which pilots can be provisioned.[cit, cit]
+Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for
+their provisioning. VMs can often be instantiated without waiting into a
+queue  with a predictable instantiation time, usually minimal wnen
+compared to the queuing time often experinced on Grid-based DCIs [red
+Vishal paper]. Furthermore, the limitations on the execution time of a
+VM can be virtually absent, a limitation that on grid-based middleware
+is imposed by the queue walltime. Clearly, overheads are introduced by
+having to deal with VMs and not simple jobs and the model adopted within
+a IaaS-based DCI to assign resources to each VM can affect the
+flexibility of the whole \pilotjob system. [cit] A similar assessment
+could be done for a DCI deploying a PaaS model of cloud computing.[cit]
 
 % \mrnote{Though you avoid queue wait, you introduce VM start-up
 % time overhead as well}
 
 
-\subsection{Pilot and Application Layer}
-\label{sec:5.3}
-
-The current state of workflow (WF) systems~\cite{nsf-workflow,1196459}
-provides a motivating example for the P* Model and the Pilot-API: even though
-many WF systems exist (with significant duplicated effort), they provide
-limited means for extensibility and interoperability.  We are not naive enough
-to suggest a single reason, but assert that one important contributing fact is
-the lack of the right interface abstractions upon which to construct workflow
-systems; had those been available, many/most WF engines would have likely
-utilized them (or parts thereof), instead of proprietary solutions.
-Significant effort has been invested towards WF interoperability at different
-levels -- if nothing else, providing post-facto justification of its
-importance. The impact of missing interface abstractions on the WF world can
-be seen through the consequences of their absence: WF interoperability remains
-difficult if not infeasible. The Pilot-API in conjunction with the P* Model
-aims to prevent similar situation for \pilotjobs.\mtnote{To be abstracted from
+\paragraph{Pilot and Application Layer} The current state of workflow
+(WF) systems~\cite{nsf-workflow,1196459} provides a motivating example
+for the P* Model and the Pilot-API: even though many WF systems exist
+(with significant duplicated effort), they provide limited means for
+extensibility and interoperability.  We are not naive enough to suggest
+a single reason, but assert that one important contributing fact is the
+lack of the right interface abstractions upon which to construct
+workflow systems; had those been available, many/most WF engines would
+have likely utilized them (or parts thereof), instead of proprietary
+solutions. Significant effort has been invested towards WF
+interoperability at different levels -- if nothing else, providing
+post-facto justification of its importance. The impact of missing
+interface abstractions on the WF world can be seen through the
+consequences of their absence: WF interoperability remains difficult if
+not infeasible. The Pilot-API in conjunction with the P* Model aims to
+prevent similar situation for \pilotjobs.\mtnote{To be abstracted from
 workflow to application.}
 
-\subsection{Pilot and Security}
-\label{sec:5.4}
+\paragraph{Pilot and Security} \mtnote{I know something about security
+but I do not feel qualified for writing even a superficial analysis of
+the security implications of the pilot paradigm :)}
 
-\mtnote{I know something about security but I do not feel qualified for
-writing even a superficial analysis of the security implications of the pilot
-paradigm :)}
-
-\subsection{Pilot and the Enterprise}
-\label{sec:5.5}
-
-Over the past years, Hadoop~\cite{hadoop} emerged as distributed computing for
-data-intensive tasks in the enterprise space. While early versions of Hadoop
-were very monolithic tightly coupling the Map Reduce programming framework with
+\paragraph{Pilot and the Enterprise} Over the past years,
+Hadoop~\cite{hadoop} emerged as distributed computing for data-intensive
+tasks in the enterprise space. While early versions of Hadoop were very
+monolithic tightly coupling the Map Reduce programming framework with
 the underlying infrastructure resource management. With Hadoop~2,
-YARN~\cite{yarn-paper} was introduced as a central resource manager supporting
-heterogenous workloads (and not only Map Reduce). YARN provides support
-multi-level scheduling enabling the application to deploy their own
-application-level scheduling routines on top of Hadoop-managed storage and
-compute resources. While YARN manages the lower resources, the higher-level
-runtimes typically use an application-level scheduler to optimize resource
-usage for the application. Applications need to initialize their so-called
-Application-Master via YARN; the Application Master is then responsible for
-allocating resources in form of so-called containers for the applications. It
-then can execute tasks in these containers.
+YARN~\cite{yarn-paper} was introduced as a central resource manager
+supporting heterogenous workloads (and not only Map Reduce). YARN
+provides support multi-level scheduling enabling the application to
+deploy their own application-level scheduling routines on top of
+Hadoop-managed storage and compute resources. While YARN manages the
+lower resources, the higher-level runtimes typically use an
+application-level scheduler to optimize resource usage for the
+application. Applications need to initialize their so-called
+Application-Master via YARN; the Application Master is then responsible
+for allocating resources in form of so-called containers for the
+applications. It then can execute tasks in these containers.
 
+As in the HPC environment, the support for different application
+workloads and job types: long-lived vs. short-lived applications,
+homogeneous vs. heterogeneous tasks is a challenge. \pilots address many
+of these requirements in HPC and HTC environments. Similar frameworks
+are emerging for YARN: Llama~\cite{llama} offers a long-running
+application master for YARN application designed for the Impala SQL
+engine. TEZ~\cite{tez} is a DAG processing engine primarily designed to
+support the Hive SQL engine allowing the application to hold containers
+across multiple phases of the DAG execution without the need to
+de-/re-allocate resources. REEF~\cite{Chun:2013:RRE:2536274.2536318} is
+a similar runtime environment that provides applications a higher-level
+abstractions to YARN resources allowing it to retain memory and cores
+supporting heterogeneous workloads.
 
-As in the HPC environment, the support for different application workloads and
-job types: long-lived vs. short-lived applications, homogeneous vs.
-heterogeneous tasks is a challenge. \pilots address many of these requirements
-in HPC and HTC environments. Similar frameworks are emerging for YARN:
-Llama~\cite{llama} offers a long-running application master for YARN
-application designed for the Impala SQL engine. TEZ~\cite{tez} is a DAG
-processing engine primarily designed to support the Hive SQL engine allowing
-the application to hold containers across multiple phases of the DAG execution
-without the need to de-/re-allocate resources.
-REEF~\cite{Chun:2013:RRE:2536274.2536318} is a similar runtime environment that
-provides applications a higher-level abstractions to YARN resources allowing it
-to retain memory and cores supporting heterogeneous workloads.
+\subsection{Future Directions and Challenges}
+\label{sec:5.3}
 
-
-
-
-
-
-
-
-\begin{itemize}
-
-% \item \textbf{Pilot abstraction} as a well-defined, independent
-% distributed system abstraction. \jhanote{state clearly how section 3 and
-% 4 help us define what a pilot is, the necessary and sufficient
-% conditions (if possible), discuss the classifiers and apply/discuss them
-% to the set of pilot systems here.} ``pilot-abstractions works!'' , p* as
-% a model ok. Our initial investigation~\cite{Luckow:2008la} into \pilot-
-% Abstractions was motivated by the desire to provide a single conceptual
-% framework --- referred to as the P* Model, that would be used to
-% understand and reason the plethora and myriad \pilotjob implementations
-% that exist.
-
-% \item \textbf{Generality of the pilot abstraction} when compared to different
-% types of resources. Is pilot useful only for compute resources? What about pilot
-% data? Pilot network? Other types but compute, data, network?
-
-% \item \textbf{Revisit the myths about pilot abstraction}: how they
-% evolve from being a simple hack to get around queuing/scheduling
-% policies to become a first class citizen of the abstractions for
-% distrubuted systems. What are the characteristics/properties that make
-% the pilot abstract a first class citizen? Do we notice a progressive
-% evolution in the multiple implementations we introduced and described in
-% Section 4?
-
-% \item \textbf{Relationship between pilot abstraction and different types
-% of middleware}: grids, cloud, HPC.
-
-% \item \textbf{Pilot abstraction and `lessons for the workflow systems'}.
-
-\item \textbf{Take home messages}:
-
-% \mtnote{Do we want to put this at the end of S4, in the analysis that we will
-% have to write in 4.3?}
-
-\begin{itemize}
-
-\item \textbf{Sociotechnical}. \jhanote{What is the future of PJ?};
+\paragraph{Sociotechnical}. \jhanote{What is the future of PJ?};
 \jhanote{\pilotjobs have potential, but it is not being realized due to
 ad hoc nature of theory and practise,}; Fragmentation/balkanization of
 the pilot landscape.
 
-\item \textbf{Engineering}. \jhanote{Why should we do to enhance the
+\paragraph{Engineering}. \jhanote{Why should we do to enhance the
 usability?}; \aznote{I would argue that our work is important to
 \pilotjobs because by expressing a common model, we enable researchers
 to 1) understand the commonalities between existing \pilotjob approaches
@@ -3730,15 +3696,45 @@ system) + understand where the boundaries/unexplored territory is
 without having to first completely understand all 15+ existing \pilotjob
 systems and their unique vocabulary.}
 
-\end{itemize}
+\paragraph{Contributions}. \jhanote{(i) we provide first comprehensive
+historical and technical analysis, (ii) set the stage for a common
+conceptual model and implementation framework, and (iii) provide insight
+and lessons for other tools and higher-level frameworks, such as
+Workflow systems possibly}
 
-\item \textbf{Contributions}. \jhanote{(i) we provide first
-comprehensive historical and technical analysis, (ii) set the stage for
-a common conceptual model and implementation framework, and (iii)
-provide insight and lessons for other tools and higher-level frameworks,
-such as Workflow systems possibly}
+%-------------------------------------------------------------------------------
+% \item \textbf{Pilot abstraction} as a well-defined, independent
+% distributed system abstraction. \jhanote{state clearly how section 3
+% and 4 help us define what a pilot is, the necessary and sufficient
+% conditions (if possible), discuss the classifiers and apply/discuss
+% them to the set of pilot systems here.} ``pilot-abstractions works!''
+% , p* as a model ok. Our initial investigation~\cite{Luckow:2008la}
+% into \pilot- Abstractions was motivated by the desire to provide a
+% single conceptual framework --- referred to as the P* Model, that
+% would be used to understand and reason the plethora and myriad
+% \pilotjob implementations that exist.
 
-\end{itemize}
+% \item \textbf{Generality of the pilot abstraction} when compared to
+% different types of resources. Is pilot useful only for compute
+% resources? What about pilot data? Pilot network? Other types but
+% compute, data, network?
+
+% \item \textbf{Revisit the myths about pilot abstraction}: how they
+% evolve from being a simple hack to get around queuing/scheduling
+% policies to become a first class citizen of the abstractions for
+% distrubuted systems. What are the characteristics/properties that make
+% the pilot abstract a first class citizen? Do we notice a progressive
+% evolution in the multiple implementations we introduced and described
+% in Section 4?
+
+% \item \textbf{Relationship between pilot abstraction and different
+% types of middleware}: grids, cloud, HPC.
+
+% \item \textbf{Pilot abstraction and `lessons for the workflow
+% systems'}.
+
+% \mtnote{Do we want to put this at the end of S4, in the analysis that
+% we will have to write in 4.3?}
 
 % \section*{Notes - to be commented out by their authors}
 
