@@ -3502,9 +3502,9 @@ on distributed resources by means of resource placeholders.
 
 In this Section we critically assess the properties of the \pilot
 paradigm. The goal is to show the generality of this paradigm and how
-\pilot systems goes beyond the implementation of a special purpose
+\pilot systems go beyond the implementation of a special purpose
 trickery to speed up the execution of a certain type of workload. Once
-understood the breath of the \pilot paradigm, we argue contextualize it
+understood the breath of the \pilot paradigm, we contextualize it
 by describing its relation with relevant domains such as middleware,
 applications, security, and enterprise. Finally, we close the Section
 with a look into the future of \pilot systems moving from the current
@@ -3514,26 +3514,44 @@ challenges that are being faced both by developers and target users.
 \subsection{The Pilot Paradigm}
 \label{sec:5.1}
 
-The \pilot paradigm identifies a type of middleware system with general
-and unique characteristics. A \pilot system is a middleware because it
-operates above the operating systems and, in case, other middleware
-interfaces exposed by the target DCIs. The \pilot paradigm, of which a
-\pilot system is an implementation, is general because, in principle is
-not dependent on a single type of workload, a specific infrastructure,
-or a unique performance metric. The \pilot paradigm is also unique
-because it is defined by resource placeholding, multi-level scheduling,
-and early or late binding. A \pilot system does not offer just an
+The \pilot paradigm identifies a type of software system with both
+general and unique characteristics. This paradigm is general because, in
+principle, it does not depend on a single type of workload, a specific
+infrastructure, or a unique performance metric. Systems implementing the
+\pilot paradigm can execute workloads composed by any number of
+tasks with disparate requirements. For example, as seen
+in~\S\ref{sec:4}, different \pilot systems can execute homogeneous or
+heterogeneous bags of independent or intercommunicating tasks with
+arbitrary duration, data or computation requirements.
+
+The same generality applies to the type of resource on which a \pilot
+system can execute given workloads. As seen in~\S\ref{sec:3}, the
+\pilot paradigm demands resource placeholders but does not specify the
+type of resource container that should be exposed by the target
+resource. HPC, Grid, or Cloud resources all expose type of containers
+that are currently leveraged by \pilot systems to create resource
+placeholders.
+
+Finally, while usually \pilot systems are designed to maximize the
+throughput of task execution, the \pilot paradigm is independent from
+any performance metric. Depending on the given workload and the target
+resource, a \pilot system implementing the \pilot paradigm can be design
+to maximize or minimize a specific element of task execution.
+
+The \pilot paradigm is unique because of three distinctive
+characteristics: resource placeholding, multi-level scheduling, and
+early or late binding. A \pilot system does not offer just an
 alternative implementation of a scheduler, of a workload manager, of a
-batch system, or of any other middleware component. A \pilot system
-implements a specific patterns of workload execution based on
-multi-level scheduling and distributed task execution. Every software
+batch system, or of any other special-purpose software component. A
+\pilot system implements a specific patterns of workload execution based
+on multi-level scheduling and distributed task execution. Every software
 system with these three characteristics, built upon the logical
 components and the functionalities described in~\S\ref{subsec:3.1} is an
 implementation of a \pilot system as seen in Section~\ref{sec:4}.
 
-\mtnote{we use resource overlay in 3.1 but we should probably use
-placeholding seeing how we use overlays these days in OWMS} \mtnote{This
-has been fixed in S3.}
+% \mtnote{we use resource overlay in 3.1 but we should probably use
+% placeholding seeing how we use overlays these days in OWMS} \mtnote{This
+% has been fixed in S3.}
 
 \jhanote{Need thinking: Following on from discussion yesterday, is
 early/late binding a logical consequence of multi-level scheduling? Can
