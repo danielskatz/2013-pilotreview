@@ -2094,58 +2094,34 @@ every 4.2 subsection}
 
 \mtnote{Introduction to the subsection.}
 
-
 \subsubsection{MyCluster}
-\begin{itemize}
-  \item
-    Pilot Characteristics - User-defined (choose \# cores, etc)?
-  \item
-    Resource Dependences - Condor/SGE resources
-  \item
-    Workload Semantics - ``Virtual Login'', CLI user-driven task submission
-  \item
-    Task Binding Characteristics - Late-binding, pilots must be up before submitting
-  \item
-    Deployment Strategies - Task manager/slave-node manager
-  \item
-    Architecture - Client-server, agent manager server proxy manager clients, etc
-  \item
-    Interfaces - CLI-user-driven
-  \item
-    Interoperability - Condor/SGE, uni-pilot
-  \item
-    Multitenancy - Single-user
-  \item
-    Robustness - Each proxy at gateway maintains pilots in cases of network outage, gateway proxies
-    may go up/down in isolation
-  \item
-    Security - GSI-Authenticated TCP, 64-bit key checking
-  \item
-    Usage Modes - HPC/Grid
-\end{itemize}
 
-\paragraph{Rationale}
 MyCluster was developed to allow users to submit and manage
 jobs across heterogeneous NSF TeraGrid resources in a uniform,
 on-demand manner.  TeraGrid existed as a group of compute clusters
 connected by high-bandwidth links facilitating the movement
 of data, but with many different job deployment middlewares
 requiring cluster-specific submission scripts.  MyCluster
-allowed all cluster resources to be submitted to via a
-\pilotjob-based approach, reducing the complexity of
-multi-cluster submission and increasing scheduling flexibility.
-%  in this case,
-%the resources are spread across a national DCI.
+allowed all cluster resources to be aggregated into one personal cluster with
+a unified interface, being either SGE, OpenPBS or Condor.
+
+%% Additional features above and beyond the \textit{basic \pilotjob system}
+%% concept include: the inclusion of a MyCluster
+%% \texttt{virtual login session}, which
+%% is commandline interface designed to allow users to interactively
+%% monitor the status of their \textit{placeholders} and \textit{\cus};
+%% the automatic recovery of placeholders after loss due to exceeding wallclock
+%% limitations or node reboots; and authentication of all TCP
+%% connections used in the system via 64-bit key encryption and
+%% GSI authentication mechanisms.
 
 \paragraph{Design Goals}
-The authors describe their system
-as a ``personal cluster'' with the goal of achieving on-demand,
-user-schedulable computing resources aligning closely with what is
-provided by our formal definition of \pilotjobs.  This enhancement
-to user control was envisioned as a means of allowing
-users to submit and manage thousands of jobs at once
-across heterogeneous distributed computing infrastructures, while
-providing an familiar interface for submission.
+The authors describe their system as a ``personal cluster'' with the goal of
+achieving on-demand, user-schedulable computing resources
+This enhancement to user control was envisioned as a means of allowing users to
+submit and manage thousands of jobs at once across heterogeneous distributed
+computing infrastructures, while providing an familiar interface for
+submission.
 
 \paragraph{Applications}
 Applications are launched via MyCluster in a ``traditional''
@@ -2155,11 +2131,6 @@ and manage jobs.  This means that applications do not need
 to be explicitly rewritten to make use of MyCluster functionality;
 rather, MyCluster provides user-level \pilotjob capabilities
 which users can then use to schedule their applications with.
-%% \aznote{There appear to only be synthetic benchmarks
-%% in cited paper; spent some time going through
-%% papers which reference MyCluster and did not find
-%% any specific applications/papers which explicitly used
-%% MyCluster.  Is this a problem?}
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
 MyCluster is designed for a single-user.  A MyCluster
@@ -2178,27 +2149,49 @@ to individual TeraGrid resources, users allow the virtual grid
 overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
 presented as a single cohesive, unified resource.
 
-\paragraph{Architecture \& Interface}
-MyCluster implements several \pilotjob analogues: the \texttt{Master
-  Node Manager}, which acts as a \textit{\pilotjob Manager}, the
-\texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
-\texttt{Job Proxies}, which act as \textit{placeholders}, and
-\texttt{Slave Node Managers}, which handle \textit{\pilotjob Tasks}
-Both resource provisioning and job-to-resource \textit{bindings}
-are handled manually by the end user.
-The end result is a complete \textit{basic \pilotjob system}, despite the
-authors of the system being constructed not having used the word ``pilot''
-once!~\cite{1652061}
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/mycluster.png}
+    \caption{MyCluster Architecture}
+    \label{fig:mycluster_arch}
+\end{figure}
+
+When the user starts a session via the \texttt{vo-login} command a
+\texttt{Agent Manager} is instantiated.
+The \texttt{Agent Manager} on its turn starts a \texttt{Proxy Manager} at every
+resource site gateway host through Globus GRAM and a \texttt{Master Node
+Manager} at the local client machine.
+The \texttt{Proxy Manager} has an accompanying \texttt{Submission Agent} that
+also runs on the resource gateway.
+The \texttt{Submission Agent} interacts with the local queuing systems and
+submits the \texttt{Job Proxy} that will launch a \texttt{Task Manager} process
+on a compute host.
+The \texttt{Task Manager} will start one or more \texttt{Slave Node Manager}
+processes on all the allocates compute hosts.
+Ultimately, the \texttt{Slave Node Manager} is now in control of the worker
+node.
+Depending on the configuration, the \texttt{Slave Node Manager} will now start
+the Condor, SGE or OpenPBS job-starter daemons, which on their turn will
+connect back to their master daemon started earlier on the local client
+machine by the \texttt{Master Node Manager}.
+
+
+The \texttt{Master Node Manager}, which acts as a \textit{\pilotjob Manager},
+the \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
+\texttt{Job Proxies}, which act as \textit{placeholders}, and \texttt{Slave
+Node Managers}, which handle \textit{\pilotjob Tasks} Both resource
+provisioning and job-to-resource \textit{bindings} are handled manually by the
+end user.  The end result is a complete \textit{basic \pilotjob system},
+despite the authors of the system being constructed not having used the word
+``pilot'' once!~\cite{1652061}
 
 Additional features above and beyond the \textit{basic \pilotjob system}
-concept include: the inclusion of a MyCluster
-\texttt{virtual login session}, which
-is a commandline interface designed to allow users to interactively
-monitor the status of their \textit{placeholders} and \textit{tasks},
-the automatic recovery of placeholders after loss due to exceeding wallclock
-limitations or node reboots; and authentication of all TCP
-connections used in the system via 64-bit key encryption and
-GSI authentication mechanisms.
+concept include: the inclusion of a MyCluster \texttt{virtual login session},
+which is a commandline interface designed to allow users to interactively
+monitor the status of their \textit{placeholders} and \textit{tasks}, the
+automatic recovery of placeholders after loss due to exceeding wallclock
+limitations or node reboots; and authentication of all TCP connections used in
+the system via 64-bit key encryption and GSI authentication mechanisms.
 
 \paragraph{MyCluster Conclusion}
 MyCluster illustrates how an approach aimed at \textit{multi-level
@@ -2207,32 +2200,12 @@ itself perfectly to a \pilotjob-based approach.  The fact that
 the researchers behind it formed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems.
-
-%% \subsubsection{MyCluster}
-
-%% \textcolor{red}
-%% {
-%% \textbf{Mapping to section 3:}
-%% \begin{itemize}
-%% \item Term 1 =
-%% \item Term 2 =
-%% \end{itemize}
-%% }
-
-%% \textcolor{blue}
-%% {
-%% \textbf{Mapping to table 1:}
-%% \begin{itemize}
-%% \item Pilot (Resource) Provisioning:
-%% \item Job-to-Resource (Pilot) Binding:
-%% \item Singe-/Multi-User pilots:
-%% \end{itemize}
-%% }
+MyCluster is no longer developed and supported.
 
 %% %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% %% ``Our system delegates the responsibility of submitting the
 %% %% job proxies to a single semi-autonomous agent spawned,
-%% %% through Globus, at each Te raGrid site during a virtual login
+%% %% through Globus, at each TeraGrid site during a virtual login
 %% %% session. This agent translates the job proxy submission to the
 %% %% local batch submission syntax, maintains some number of job
 %% %% proxies throughout the lifetime of a login session, and may
@@ -2254,80 +2227,6 @@ to the usefulness of \pilotjobs in attacking these problems.
 %% %% in what we consider vital to be a full-fledged Pilot-Job system.  Would
 %% %% welcome discussion here.}
 
-%% MyCluster is a \textit{basic \pilotjob system} which is a direct
-%% abstraction of cluster-based distributed computing systems.
-%% %% The stated goal of the project is to
-%% %% ``build personal [...] clusters on demand''
-%% %% \aznote{from webpage} and in doing so
-%% %% inadvertantly implements \pilotjob functionality to accomplish
-%% %% its aims.
-%% The authors describe their system
-%% as a ``personal cluster'' with the goal of achieving on-demand,
-%% user-schedulable computational resources aligning closely with what is
-%% provided by our more formal definition of \pilotjobs.
-
-%% MyCluster implements several \pilotjob analogues: the \texttt{Master
-%%   Node Manager}, which acts as a \textit{\pilotjob Manager}, the
-%% \texttt{Task Manager}, which acts as an \textit{\pilotjob Agent},
-%% \texttt{Job Proxies}, which act as \textit{placeholders}, and
-%% \texttt{Slave Node Managers}, which handle (are?) \textit{\pilotjob
-%%   \cus}.  Both resource provisioning and job-to-resource \textit{bindings}
-%% are handled manually by the end user.
-%% The end result is a complete \textit{basic \pilotjob system}, despite the
-%% authors of the system being constructed not having used the word ``pilot''
-%% once!~\cite{1652061}
-
-%% Additional features above and beyond the \textit{basic \pilotjob system}
-%% concept include: the inclusion of a MyCluster
-%% \texttt{virtual login session}, which
-%% is commandline interface designed to allow users to interactively
-%% monitor the status of their \textit{placeholders} and \textit{\cus};
-%% the automatic recovery of placeholders after loss due to exceeding wallclock
-%% limitations or node reboots; and authentication of all TCP
-%% connections used in the system via 64-bit key encryption and
-%% GSI authentication mechanisms.
-
-%% MyCluster was designed for and successfully executed on NSF TeraGrid
-%% resources, enabling large-scale cross-site submission of ensemble
-%% job submissions via its virtualized cluster interface.
-%% This approach makes the \textit{multi-level scheduling} abilities
-%% of \pilotjobs explicit; rather than directly \textit{binding}
-%% to individual TeraGrid resources, users allow the virtual grid
-%% overlay to \textit{schedule} tasks to multiple allocated TeraGrid sites
-%% as a whole.
-
-%% %\textit{Manager} functionality is handled by MyCluster's
-%% %\texttt{Master Node Manager}.
-
-%% %% Shortcomings include ...  (lack of heterogenous support?)
-
-%% %% \begin{itemize}
-%% %% \item Master Node Manager = Manager \aznote{Master Node
-%% %% Manager process within a GNU Screen session that then
-%% %% starts the Condor/SGE master daemons in user space if
-%% %% needed.}
-%% %% \item Agent Manager \aznote{ The
-%% %% agent manager remotely executes a Proxy Manager process at
-%% %% each participating site using Globus GRAM}
-%% %% \item Submission Agent -- \aznote{Wrapper for GridShell, wraps
-%% %%   multiple grid resources to a single ``virtual'' cluster
-%% %% \url{https://www.opensciencegrid.org/bin/view/Interoperability/GridShellEvaluation}}
-%% %% \item Proxy Manager = one at each site, reports back to central
-%% %%   agent manager w/ heartbeat to keep awareness of resource state
-%% %% \item Task Manager = \textit{agent}
-%% %% \item Slave-node managers = compute units (?) (probably not,
-%% %%   barely mentioned in the paper)
-%% %%   \aznote{The slave node managers are responsible for starting the
-%% %%     Condor or SGE job-starter daemons. These daemons connect
-%% %%     back to the master processes on the client workstation, or to a
-%% %%     pre-existing departmental cluster, depending on the virtual
-%% %%     login configuration.
-%% %%   }
-%% %% \item Job proxy (?)
-%% %% \end{itemize}
-
-%% % -----------------------------------------------------------------------------
-%% %
 
 \subsubsection{\panda}
 
@@ -2341,9 +2240,11 @@ to the usefulness of \pilotjobs in attacking these problems.
     Workload Semantics - job type, priority, input data/locality,
   \item
     Task Binding Characteristics - Late-binding (?)
-%When the pilot is launched, it collects information about the worker node and sends it to
-%the job dispatcher. If a matching job does not exist, the pilot will end. If a job does exist, the pilot will
-%fork a separate thread for the job and start monitoring its execution.
+%When the pilot is launched, it collects information about the worker node and
+%sends it to the job dispatcher.
+%If a matching job does not exist, the pilot will end. If a job does exist, the
+%pilot will fork a separate thread for the job and start monitoring its
+%execution.
   \item
     Deployment Strategies - DDM handles data transfer, must have database access,
     file stage-in/out + cleanup
@@ -2365,15 +2266,13 @@ to the usefulness of \pilotjobs in attacking these problems.
 \end{itemize}
 
 \paragraph{Rationale}
-\panda was developed to provide a multi-user
-\pilotjob system for ATLAS~\cite{aad2008atlas}, which is
-a particle detector at the Large Hadron Collider
-which could
-handle large numbers
-of jobs for data-driven processing workloads.
+\panda was developed to provide a multi-user \pilotjob system for
+ATLAS~\cite{aad2008atlas}, which is a particle detector at the Large Hadron
+Collider which could handle large numbers of jobs for data-driven processing
+workloads.
 In addition to the logistics of handling large-scale job submission, there was
-a need for integrated monitoring for analysis of system state and a high
-degree of automation to reduce the need for user/administrative intervention.
+a need for integrated monitoring for analysis of system state and a high degree
+of automation to reduce the need for user/administrative intervention.
 
 \paragraph{Design Goals}
 \panda was designed as an advanced \pilotjob system,
@@ -2393,27 +2292,25 @@ The ATLAS experiment itself produces several petabytes of data a year
 which must be processed and analyzed.
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
-\panda has been initially deployed as an HTC-oriented
-multi-user
-WMS system for ATLAS, consisting
-of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
-Recent improvements to \panda have been designed to extend
-the range of deployment scenarios to non-ATLAS infrastructures
-making \panda a general-use \pilotjob~\cite{nilsson2012recent}.
+\panda has been initially deployed as an HTC-oriented multi-user WMS system for
+ATLAS, consisting of ~100 heterogeneous computing
+sites~\cite{maeno_pd2p:_2012}.
+Recent improvements to \panda have been designed to extend the range of
+deployment scenarios to non-ATLAS infrastructures making \panda a general-use
+\pilotjob~\cite{nilsson2012recent}.
 %% \aznote{Per-user/per-working group reference made in slides, follow-up
 %% with actual papers}
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-\panda began as a specialized \pilotjob for the ATLAS grid, and has been extended
-into a generalized \pilotjob which is capable of working across other grids
-as well as HPC and cloud resources.
-Cloud capabilities have been used as part
-of Helix Nebula (CloudSigma, T-Systems, ATOS),
-the FutureGrid and Synnefo clouds, and the commercial
-Google and EC2 cloud offerings as well~\cite{pandapresentation2013-06},
-extending the reach of \panda to
-cloud resources as well.  Future \panda developments seek
-to interoperate with HPC resources~\cite{pandapresentation2013-06}.
+\panda began as a specialized \pilotjob for the ATLAS grid, and has been
+extended into a generalized \pilotjob which is capable of working across other
+grids as well as HPC and cloud resources.
+Cloud capabilities have been used as part of Helix Nebula (CloudSigma,
+T-Systems, ATOS), the FutureGrid and Synnefo clouds, and the commercial Google
+and EC2 cloud offerings as well~\cite{pandapresentation2013-06}, extending the
+reach of \panda to cloud resources as well.
+Future \panda developments seek to interoperate with HPC
+resources~\cite{pandapresentation2013-06}.
 
 \paragraph{Architecture \& Interface}
 \panda's \textit{manager} is called a \texttt{\panda server}, and matches
@@ -2427,10 +2324,9 @@ user-controllable, whereas job-to-resource \textit{binding} is handled
 manually by users.
 A central job queue allows users to submit jobs
 to distributed resources in a uniform manner.
-%%  \aznote{Not required for
-%% \pilotjob -- put later or remove?}
-This basic functionality (pilot creation and management) provides
-\panda with all of the baseline capabilities required for a \pilotjob.
+%%  \aznote{Not required for \pilotjob -- put later or remove?}
+This basic functionality (pilot creation and management) provides \panda with
+all of the baseline capabilities required for a \pilotjob.
 
 As \panda is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
@@ -2450,11 +2346,11 @@ already exists.
 
 
 \paragraph{\panda Conclusion}
-\panda has extended beyond its origins at the ATLAS experiment, and has also been used for other projects such
-as the Open Science Grid.  This illustrates the importance of designing
-\pilotjobs which are easily adaptable such that \pilots are not tied
-to any particular DCI; in this manner, their advantages can be made
-available beyond their original design scope.
+\panda has extended beyond its origins at the ATLAS experiment, and has also
+been used for other projects such as the Open Science Grid.
+This illustrates the importance of designing \pilotjobs which are easily
+adaptable such that \pilots are not tied to any particular DCI; in this manner,
+their advantages can be made available beyond their original design scope.
 
 \textcolor{red}
 {
@@ -2545,9 +2441,6 @@ At the heart of it, HTCondor is a high-throughput distributed batch computing
 system.
 It accepts user tasks and executes them on one or more resources called an
 HTCondor \textbf{pool}.
-%A pool consists of multiple loosely coupled, usually distributed  components
-%that together implement the functionality of Workload Manager and Task Executor
-%in a PilotJob system.
 
 In a pool, user tasks (\textbf{jobs}) are represented through job description
 files and submitted to a (user-)\textbf{agent} via command-line tools. Agents
@@ -2583,14 +2476,14 @@ matchmakers outside their own pool for compatible resources.
 Flocking is used to implement load-balancing between multiple pools but also to
 provide a broader set of heterogeneous resources to user communities.
 
-%The components described above, jobs, agent, matchmaker, resource, shadow and
-%sandboxes are sometimes collectively referred to as the \textbf{HTCondor
-%Kernel} and satisfy the requirements for a \pilotjob system as outlined in
-%Section \ref{subsec:vocab_core_functionalities}.
-%However, the provisioning, allocation and usage of resources within a pool can
-%differentiate between different pools and multiple different approaches and
-%software systems have emerged over time, all under the umbrella of the wider
-%HTCondor project.
+The components described above, jobs, agent, matchmaker, resource, shadow and
+sandboxes are sometimes collectively referred to as the \textbf{HTCondor
+Kernel} and satisfy the requirements for a \pilotjob system as outlined in
+Section \ref{subsec:vocab_core_functionalities}.
+However, the provisioning, allocation and usage of resources within a pool can
+differentiate between different pools and multiple different approaches and
+software systems have emerged over time, all under the umbrella of the wider
+HTCondor project.
 
 % -----------------------------------------------------------------------------
 %
@@ -2626,6 +2519,28 @@ of an HTCondor pool.
 %
 \paragraph{BoSCO}
 
+%\onote{It seems that BOSCO is some sort of a user-space version of Condor.
+%It can interface with single clusters as well as complex HTC grids (GlideinWMS).
+%Multiple resource-scanrios are possible. There is a bosco-submit node which
+%holds the user jobs. Bosco uses Condor glidein (-agents) internally as a
+%resource overlay. The glideins pull data from the bosco-submit node. The
+%main difference between BOSCO and Condor (even though both expose the same
+%user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
+%complex setup. In that regard, BOSCO is somehwat similar to BigJob.
+%This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
+
+%\subsubsection{Bosco}
+%% \\
+%% \begin{itemize}
+%% \item Condor used as batch system/user interface
+%% \item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
+%% \item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs,
+%%   enforces submission policies
+%% \item Bosco = ``BLAHPD Over SSH Condor Overlay''
+%% \item Workstation-based (run Bosco client locally)
+%% \item Multi-user (Bosco workstation install can be used by multiple researchers)
+%% \item Supports multiple cluster submission (but what about coordination...)
+
 BoSCO is a user-space job submission system based on HTCondor. BoSCO was
 designed to allow individual users to utilize heterogeneous HPC and grid
 computing resources through a uniform interface. Supported backends include
@@ -2654,38 +2569,6 @@ shared among multiple users. The client-side tools to submit, control and
 monitor BoSCO jobs are the same as in Condor (\texttt{condor\_submit},
 \texttt{condor\_q}, etc).
 
-
-%\textit{Collectors} are the managers, with one collector per
-%GlideinWMS system.
-%\textit{Glidein factory daemon}s are responsible for
-%submitting pilot jobs to grid pools\aznote{Use diff vocab for grid pool?}.
-%They therefore correspond to pilot managers.
-%\textit{VO frontend daemons} are the schedulers, which map jobs
-%to pilots.  GlideinWMS takes advantage of late-binding, as
-%jobs are not selected for resources until the pilots start.\aznote{This
-%should be true of all systems described in this section -- do we
-%need to explicitly say so for each pilot system?}
-%\textit{WMS collector machine} manages communication between the glidein
-%factory daemons(pilot managers) and VO frontend daemons(schedulers)
-%and so corresponds to \aznote{We don't have anything for this.  This
-%sounds like what REDIS/etc do for BJ though.  Should we incorporate this
-%into our vocabulary?}
-%\textit{User jobs} correspond to compute units \aznote{Right?}
-
-\begin{itemize}
-%Unlisted things \\
-\item Workflow (doesn't seem to be explicit support)
-\item Workload (is this just a list of user jobs that are queued up)
-\item Placeholder (isn't this the same kind of deal as a Pilot-Job/PJ
-waiting in a queue?)
-\item Pilot framework (The entire GlideinWMS qualifies as a ``pilot
-framework'', correct?)
-\item Ensemble \aznote{How to tie this in}
-\item Platform \aznote{Ditto}
-\item Master-Worker \aznote{Likewise, we could say that the
-VO factory daemons are the masters with the pilots the workers,
-but this seems overly pedantic?}
-\end{itemize}
 
 \textbf{CorralWMS:} CorralWMS is an alternative front-end for GlideinWMS-based
 infrastructures. It replaces or complements the regular GlideinWMS front-end
@@ -2733,11 +2616,6 @@ national cyberinfrastructure (e.g., XSEDE).
 %\item Placeholder - handled by multislot requests
 %  \aznote{multislot request requests a single large
 %    GRAM job, and then starts glideins within this container}
-%\item Job
-%\item Compute unit
-%\item Workload
-%\item Will fill this in later...
-%\end{itemize}
 
 
 % -----------------------------------------------------------------------------
@@ -2814,9 +2692,30 @@ national cyberinfrastructure (e.g., XSEDE).
 %
 %\paragraph{Coasters Conclusion}
 %\mrnote{WIP}
+% \subsection{Swift-Coaster\upp\upp}
+%
+% Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
+% rest of this cut, but making a note of this in case we want
+% to bring swift into the discussion later that i can find more info in 2011 paper
+%\aznote{Much of what I was thinking of doing is similar to the 2011 IPDPS paper
+%in the 2012-PStar directory.  Is this along the right lines?}
+
+%\aznote{A bit confused about how to tie this into conclusion and discussion:
+%``The need for a common minimum model'' in particular.  I am guessing that
+%I should help to ``set up'' that section by providing plenty of material showing
+%that the pilot job systems are very similar at their core.  How far should I
+%go with this, however, to avoid hitting the ``conclusion'' material in this section?
+%}
 
 
 \subsubsection{Falkon}
+%% % Falkon
+%% % refers to \pilots as the so called provisioner, which are created using the
+%% % Globus GRAM service. The provisioner spawns a set of executor processes on the
+%% % allocated resources, which are then responsible for managing the execution of
+%% % SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
+%% % Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
+%% % query the dispatcher for new SUs. Web services are used for communication.
 
 \mrnote{Main Falkon ref: \url{http://dev.globus.org/images/7/78/Falkon_SC07_v42.pdf}}
 %\mrnote{Best Falkon ref: \url{http://dev.globus.org/wiki/Incubator/Falkon}}
@@ -2885,8 +2784,7 @@ Falkon was originally developed for use on large computer clusters
 in a grid environment, but has since been expanded to work on
 clouds and other
 
-Falkon has been
-shown to run on TeraGrid (now XSEDE), TeraPort, Amazon EC2, IBM
+Falkon has been shown to run on TeraGrid (now XSEDE), TeraPort, Amazon EC2, IBM
 Blue Gene/L, SiCortex, and Workspace Service~\cite{1362680}.
 \mrnote{GitHub Issue 23} Work has also been done on Falkon
 to expand its data capabilities. In addition to data caching and
@@ -2896,7 +2794,6 @@ both compute and data are acquire dynamically and compute
 is scheduled as close as possible to the data it requires.
 If necessary, the data diffusion approach replicates data
 in response to changing demands~\cite{raicu2008accelerating}.
-
 
 \paragraph{Architecture \& Interface}
 
@@ -2969,10 +2866,9 @@ jobs. It has also been used as the underlying job
 management layer in the release of an asynchronous replica-exchange
 software package~\cite{2013-xsede-cdi}.
 
-
 \begin{itemize}
-\item Application: a BigJob script that can also involve logic
-and algorithms external to PJ system communication
+\item Application: a BigJob script that can also involve logic and algorithms
+external to PJ system communication
 \item Workload: A set of CUs
 \item Task: CU
 \item Resource: The resource is whatever is user-specified in the PCD, provided it
@@ -3035,9 +2931,6 @@ allocations, etc).
 The \textbf{Coordination \& Communication} using redis is publically
 accessible.
 
-
-
-
 Multitenancy: No multitenancy. Single-user.
 BigJob is installable by a user onto the resource of his or her choice. It is capable of
 running only in ``single user'' mode; that is, a \pilot belongs to the user who
@@ -3094,8 +2987,6 @@ This work has extended BigJob from being a purely \pilotjob-based system to a
 more complete job and data management system.
 
 \subsubsection{DIANE}
-
-%\paragraph{Rationale}
 
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which follows
 the Master/Worker pattern.
@@ -3191,8 +3082,6 @@ The \textbf{Provisioning} of \pilots is done out-of-band by means of the
 \texttt{diane-submitter} script which can launch a \pilot on any infrastructure
 that is supported.
 
-
-
 %DIANE includes a simple capability matcher and FIFO-based task scheduler
 %to help facilitate the execution of jobs.
 
@@ -3202,7 +3091,6 @@ Also, only workload of this respective user can be executed by DIANE.
 However, \textbf{Multitenancy} with DIANE does happen when it is used as a
 backend for Science Gateways, where it serves multiple users on the same
 installation, but with a single credential.
-
 
 %DIANE utilizes a single hierarchy of worker agents as well as a PJ
 %\textit{manager} referred to as \texttt{RunMaster}.
@@ -3224,22 +3112,6 @@ installation, but with a single credential.
 %register with and receive jobs from the manager.
 
 
-%\paragraph{Applications}
-
-
-%\paragraph{Deployment Scenarios (Single User)}
-
-%\msnote{Whats our definition of single/multi user? Is it that multiple users
-%can make use of one pilot, or that the pilot runs as a different user on the
-%resource?}
-
-
-%\paragraph{Deployment Scenarios (Multi User/VO)}
-
-
-
-%\paragraph{Architecture \& Interface}
-
 %The workflow is then such that a user submits a parallel job to
 %the grid using a DIANE client.  The client then creates the Pilot manager
 %and remains in contact with it to control its \pilotjobs.  Results
@@ -3254,29 +3126,6 @@ installation, but with a single credential.
 %The implementation of GSI on TCP-level is possible, but currently not yet
 %implemented.
 
-
-%\paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
-
-
-%\paragraph{DIANE Conclusion}
-
-
-
-%\onote{OLE'S SECTION}
-
-%\onote{It seems that BOSCO is some sort of a user-space version of Condor.
-%It can interface with single clusters as well as complex HTC grids (GlideinWMS).
-%Multiple resource-scanrios are possible. There is a bosco-submit node which
-%holds the user jobs. Bosco uses Condor glidein (-agents) internally as a
-%resource overlay. The glideins pull data from the bosco-submit node. The
-%main difference between BOSCO and Condor (even though both expose the same
-%user API) is that BOSCO allows ad-hoc usage, while Condor requires a rather
-%complex setup. In that regard, BOSCO is somehwat similar to BigJob.
-%This page is somehwat insightful: http://bosco.opensciencegrid.org/about/}
-
-%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
-%% to use this general sort of information + reword using our spiffy
-%% vocabulary presented in this paper}
 %% % Coordination and Communication
 %% DIANE~\cite{Moscicki:908910} is a task coordination framework, which
 %% was originally designed for implementing master/worker applications,
@@ -3329,10 +3178,6 @@ installation, but with a single credential.
 %% propagation mechanisms are in place. Further, an automatic re-execution of WUs
 %% is possible.
 
-
-%% \aznote{Section copied and pasted from IPDPS paper for now -- plan
-%% to use this general sort of information + reword using our spiffy
-%% vocabulary presented in this paper}
 %% Swift~\cite{Wilde2011} is a scripting language designed for expressing
 %% abstract workflows and computations. The language provides, amongst many other
 %% things, capabilities for executing external applications, as well as the
@@ -3359,13 +3204,6 @@ installation, but with a single credential.
 %% load-aware scheduler. Additionally, Swift can be used in conjunction with
 %% Falkon~\cite{1362680}, which also provides \pilot-like functionality.
 
-%% % Falkon
-%% % refers to \pilots as the so called provisioner, which are created using the
-%% % Globus GRAM service. The provisioner spawns a set of executor processes on the
-%% % allocated resources, which are then responsible for managing the execution of
-%% % SUs. \cus are submitted via a so called dispatcher service. Similar to Coaster,
-%% % Falkon utilizes a M/W coordination model, i.\,e.\ the executors periodically
-%% % query the dispatcher for new SUs. Web services are used for communication.
 
 %\subsubsection{GWPilot}
 %% \aznote{Considering the new direction of the paper, I am not sure whether
@@ -3385,39 +3223,6 @@ installation, but with a single credential.
 %% \end{itemize}
 %% %\end{lstlisting}
 
-%\subsubsection{Bosco}
-%% \aznote{Given the modified direction we are taking the paper (``landmark''
-%% pilot-jobs reviewed as opposed to all-inclusive), I suggest nixing
-%% the inclusion of Bosco~\cite{bosco} in this section as Bosco appears
-%% to be mostly making strides with regards to user-accessibility
-%% of pilots.}
-%% \\
-%% \begin{itemize}
-%% \item Condor used as batch system/user interface
-%% \item Single submit model for different cluster types (LSF/PBS/SGE/etc) via SSH with \texttt{BLAHPD}
-%% \item Campus Factory (condor overlay generator) creates glideins, checks users queue for idle jobs,
-%%   enforces submission policies
-%% \item Bosco = ``BLAHPD Over SSH Condor Overlay''
-%% \item Workstation-based (run Bosco client locally)
-%% \item Multi-user (Bosco workstation install can be used by multiple researchers)
-%% \item Supports multiple cluster submission (but what about coordination...)
-
-%% \end{itemize}
-% \upp
-% \subsection{Swift-Coaster\upp\upp}
-%
-% Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
-% rest of this cut, but making a note of this in case we want
-% to bring swift into the discussion later that i can find more info in 2011 paper
-%\aznote{Much of what I was thinking of doing is similar to the 2011 IPDPS paper
-%in the 2012-PStar directory.  Is this along the right lines?}
-
-%\aznote{A bit confused about how to tie this into conclusion and discussion:
-%``The need for a common minimum model'' in particular.  I am guessing that
-%I should help to ``set up'' that section by providing plenty of material showing
-%that the pilot job systems are very similar at their core.  How far should I
-%go with this, however, to avoid hitting the ``conclusion'' material in this section?
-%}
 
 \subsubsection{DIRAC}
 
@@ -3435,7 +3240,6 @@ the side of the WMS.
 
 TasqQueueDirectors direct the workload from the TaskQueues for execution to the
 Job Agents.
-
 
 \subsection{Overall observations}
 
@@ -3467,6 +3271,15 @@ publications from either the developers or users of the various system.
  \caption{\textbf{Overview of largest (published) results with Pilot System}}
  \label{table:scale}
 \end{table*}
+
+Some of systems we have discussed, like DIRAC, X, are inherently service
+oriented, or exposed as a service.
+On the other side of the spectrum, systems like DIANE and BigJob take the form
+of a library or a framework.
+From a formal standpoint, services can be abstracted by a library and a library
+can be abstracted by a service, so the main distinction between these
+architectures if the default form they come in and how they are meant to be
+deployed.
 
 % -----------------------------------------------------------------------------
 % SECTION 5
