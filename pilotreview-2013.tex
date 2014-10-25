@@ -1313,15 +1313,12 @@ properties we discuss.
 %   are not a closed set of properties, unlike core}\mtnote{First go at
 %   it. Not sure what you mean exactly with 'closed' in this context.}
 % \jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
-\mrnote{Resource Dependences is used a lot here, but I am pretty sure
-dependence cannot be pluralized like that. It might be dependencies?
-PS Merriam-Webster agrees}\mtnote{Done for 4.1.}
 
 \begin{table}
 \centering
  \begin{tabular}{|l|l|}
   \hline
-    \textbf{Core Propriety} & \textbf{Functionality} \\ \hline
+    \textbf{Core Proprerty} & \textbf{Functionality} \\ \hline
   \hline
     Pilot Characteristics & Pilot Provisioning \\
   \hline
@@ -1563,9 +1560,7 @@ have anything to do with BigJob really}
 %   issue of control/implicit versus explicit?}\mtnote{I added a first
 %   try at an explanation. We can stop to the first sentence if you
 %   think it is sufficient otherwise we can leave also the following.}
-\mrnote{Deployment strategies sounds like you mean how can
-the pilot job system be deployed, but it turns out it is how the environment
-required by the task can be created.}
+
 \item \textbf{Deployment Strategies}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
   be set up.  \pilotjob implementations differ in whether and how they
@@ -2842,29 +2837,39 @@ certain scientific applications.
 
  -----------------------------------------------------------------------------
 
-\subsubsection{BigJob}
+\subsubsection{RADICAL Pilot/BigJob}
 
-BigJob was designed as a flexible and extensible \pilotjob to work on a variety
-of infrastructures.
-It was designed to natively support many scientific applications, including MPI
+The authors of this paper have (the RADICAL group) have been engaged
+in theoretical and practical aspects of \pilotjobs for the past five
+years. In addition to formulating the P* Model which by most accounts
+is the first complete conceptual model of \pilotjobs, the RADICAL
+group is responsible for RADICAL Pilot and BigJob -- an initial
+prototype and precursor to RADICAL Pilot. In this section we describe
+the core concepts underlying these related implementations the the P*
+Model.
+
+
+BigJob was designed as a flexible and extensible \pilotjob to work on
+a variety of infrastructures.  It was designed to natively support
+many scientific applications, including MPI
 jobs~\cite{saga_bigjob_condor_cloud}.
 
-BigJob supports the basic functionality required of a \pilotjob, with the added
-capability of interfacing with a number of different batch queuing systems and
-infrastructures (grids, clouds, clusters, etc.).
+BigJob supports the basic functionality required of a \pilotjob, with
+the added capability of interfacing with a number of different batch
+queuing systems and infrastructures (grids, clouds, clusters, etc.).
 BigJob was also designed to support MPI jobs without adding additional
-configuration requirements to the end-user.
-Lastly, the application-level programmability that BigJob offers was
-incorporated as a means of giving the end-user more flexibility and control
-over their job management.
+configuration requirements to the end-user.  Lastly, the
+application-level programmability that BigJob offers was incorporated
+as a means of giving the end-user more flexibility and control over
+their job management.
 
 BigJob has been used for many different ensemble-based or
-replica-exchange-based applications in both the computational chemistry
-and bioinformatics disciplines. It has been shown to work across multiple
-XSEDE~\cite{xsede_url} machines and scale up to thousands of concurrent
-jobs. It has also been used as the underlying job
-management layer in the release of an asynchronous replica-exchange
-software package~\cite{2013-xsede-cdi}.
+replica-exchange-based applications in both the computational
+chemistry and bioinformatics disciplines. It has been shown to work
+across multiple XSEDE~\cite{xsede_url} machines and scale up to
+thousands of concurrent jobs. It has also been used as the underlying
+job management layer in the release of an asynchronous
+replica-exchange software package~\cite{2013-xsede-cdi}.
 
 \begin{itemize}
 \item Application: a BigJob script that can also involve logic and algorithms
@@ -2886,9 +2891,12 @@ in which they run - i.e. the size and lifespan of a
 pilot may be limited by max number of cores
 that can be reserved or max time of a job in local queue
 
-\item Resource dependencies: Needs python >2.5 on remote resource. Supports submission to the following schedulers: SLURM, SGE, PBS/TORQUE, \mrnote{Other schedulers are eluding me at the moment}, also runs in fork:// or ssh:// mode. Submission to EC2, GCE, and Euca clouds. Here is an attempt.
-BigJob bootstraps itself into user-space on external targeted
-infrastructures, provided that the python version is greater than 2.5.
+\item Resource dependencies: Needs python >2.5 on remote
+  resource. Supports submission to the following schedulers: SLURM,
+  SGE, PBS/TORQUE, also runs in fork:// or ssh:// mode. Submission to
+  EC2, GCE, and Euca clouds. Here is an attempt.  BigJob bootstraps
+  itself into user-space on external targeted infrastructures,
+  provided that the python version is greater than 2.5.
 
 \item C\&C: Redis, centralized database approach. Communication from agents (pilots) to
 Redis to pull tasks.
@@ -2898,9 +2906,9 @@ can be given to pilots and tasks, so that if the user thinks a CU
 should run on a certain pilot, the ComputeDataService scheduler
 tries to place these together.
 
-\item Task Binding Characteristics: Late-binding only.
-Tasks cannot be bound to a Pilot before the Pilot switches to active mode on the target
-resource.  \mrnote{Ask someone if this is true.}
+\item Task Binding Characteristics: Late-binding only.  Tasks cannot
+  be bound to a Pilot before the Pilot switches to active mode on the
+  target resource.
 
 \item Deployment strategies: Allows for user to define env variables and input arguments.
 Can use file transfer to move input files around. Env variables are sourced
@@ -3485,9 +3493,6 @@ having to deal with VMs and not simple jobs and the model adopted within
 a IaaS-based DCI to assign resources to each VM can affect the
 flexibility of the whole \pilotjob system. [cit] A similar assessment
 could be done for a DCI deploying a PaaS model of cloud computing.[cit]
-
-% \mrnote{Though you avoid queue wait, you introduce VM start-up
-% time overhead as well}
 
 \paragraph*{Pilot and Application Layer} The current state of workflow
 (WF) systems~\cite{nsf-workflow,1196459} provides a motivating example
