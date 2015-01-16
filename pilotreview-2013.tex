@@ -1244,17 +1244,20 @@ of a \pilot system illustrated in~\S\ref{subsec:3.1}.
 %------------------------------------------------------------------------------
 % SECTION 4
 %------------------------------------------------------------------------------
-\section{Pilot-Job Systems: Analysis and Implementations}
+\section{Pilot Systems: Analysis and Implementations}
 \label{sec:4}
 
-Section \S\ref{sec:3} offered two main contributions: a minimal description
-of the logical components and the functionalities of \pilotjob systems, and a
-well-defined core terminology to support reasoning about such systems. The
-former sets the necessary and sufficient requirements for a distributed system
-to be a \pilotjob system, while the latter enables consistency when referring
-to different \pilotjob systems. Both these contributions are leveraged in this
-Section in order to review critically a set of relevant \pilotjob
+Section \S\ref{sec:3} offered two main contributions: a minimal description of
+the logical components and the functionalities of \pilot systems \footnote{
+From here on we will be internally consistent and use \pilot system instead of
+\pilotjob system.}, and a well-defined core terminology to support reasoning
+about such systems.
+The former sets the necessary and sufficient requirements for a distributed
+system to be a \pilot system, while the latter enables consistency when
+referring to different \pilot systems. Both these contributions are leveraged
+in this Section in order to review critically a set of relevant \pilot system
 implementations.
+
 
 % \jhanote{More than twofold? I think we are missing the contributions
 %   of section 4.1 and 4.2}\mtnote{I would suggest to develop further
@@ -1264,11 +1267,11 @@ The goal of this Section is twofold.  Initially, the set of
 functionalities presented in \S\ref{sec:3} are used as the basis
 to infer a set of core implementation properties. A set of auxiliary
 properties is also defined when useful for a critical comparison among
-different \pilotjob implementations. Subsequently, several \pilotjob
+different \pilot system implementations. Subsequently, several \pilot system
 implementations are analyzed and then clustered around the properties
 previously defined. In this way, insight is offered about how to
-choose a \pilotjob system based on functional requirements, how
-\pilotjob systems are designed and engineered, and the theoretical
+choose a \pilot system based on functional requirements, how
+\pilot systems are designed and engineered, and the theoretical
 properties that underly such systems.
 
 % \jhanote{Matteo: I think the order of 4 differs from the message conveyed in
@@ -1290,24 +1293,23 @@ properties that underly such systems.
 % The set of frameworks we use for the analysis is chosen because of criteria x
 % and y.
 
-% Logical: Workload Manager / Task Executor
-% Functionalities: Pilot Provisioning / Task dispatching
 
 \subsection{Core and Auxiliary Properties}
 
-This Section discusses the properties of diverse implementations of a \pilotjob
+This Section discusses the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: Core and auxiliary.
-\textit{Core} properties are common to all \pilotjob implementations while the
-auxiliaries characterize specific \pilotjob systems. Therefore, auxiliary
-properties are not shared among all \pilotjob implementations.
+\textit{Core} properties are common to all \pilot system implementations while
+the auxiliaries characterize specific \pilot systems. Therefore, auxiliary
+properties are not shared among all \pilot system implementations.
 
 As shown in Table \ref{table:core_properties}, the set of Core Properties is
 derived consistently with the set of functionalities presented in
 \S\ref{sec:3} - Pilot Provisioning, Task Dispatching, and Task Execution.
+\msnote{I dont see how it is derived or consistent ;-)}
 As such, Core Properties are both necessary and sufficient for an
-implementation of a distributed system to be classified as a \pilotjob. On the
-contrary, auxiliary properties are not defining of a \pilotjob system but they
-are implementation details that further characterize a \pilotjob system.  The
+implementation of a distributed system to be classified as a \pilot system.
+On the contrary, auxiliary properties are not defining of a \pilot system but
+they are implementation details that further characterize a \pilot system.  The
 set of auxillary properties we discuss is not closed, i.e., the complete set of
 auxillary properties includes, but is not limited to the set of auxillary
 properties we discuss.
@@ -1320,34 +1322,55 @@ properties we discuss.
 %   it. Not sure what you mean exactly with 'closed' in this context.}
 % \jhanote{Matteo, please see last sentence. Make sense?}\mtnote{Yep.}
 
-\begin{table}
+\begin{table*}
 \centering
- \begin{tabular}{|l|l|}
-  \hline
-    \textbf{Core Proprerty} & \textbf{Functionality} \\ \hline
-  \hline
-    Pilot Characteristics & Pilot Provisioning \\
-  \hline
-    Resource Dependencies & Pilot Provisioning \\
-  \hline
-    Workload Semantics & Task Dispatching \\
-  \hline
-    Task Binding Characteristics & Task Dispatching \\
-  \hline
-    Deployment Strategies & Task Execution \\ \hline
- \end{tabular}
- \caption{\textbf{Mapping of the Core Properties of \pilotjob system
-                  implementations into the functionalities described in
-                  \S\ref{subsec:3.1}.}\up}
- \label{table:core_properties}
-\end{table}
+\begin{tabular}{c|c|c|c|}
+\cline{2-4}
+& \textbf{Property} & \textbf{Component} & \textbf{Description} \\
+\hline
+\multirow{5}{*}{\textit{Core}}
+  & Pilot Characteristics & Pilot Manager & What pilots to start \\
+  \cline{2-4}
+  & Resource Dependencies & Pilot Manager & How to start pilots \\
+  \cline{2-4}
+  & Workload Semantics & Workload Manager & How to dispatch tasks \\
+  \cline{2-4}
+  & Task Binding Characteristics & Workload Manager & When to dispatch tasks \\
+  \cline{2-4}
+  & Deployment Strategies & Task Executor & How to execute tasks \\
+\hline
+\multirow{7}{*}{\textit{Auxiliary}}
+  & \multirow{3}{*}{Architecture}
+    & Pilot Manager & d \\
+    \cline{3-4}
+    & & Workload Manager & d \\
+    \cline{3-4}
+    & & Task Executor & d \\
+  \cline{2-4}
+  & Interfaces & c & d \\
+  \cline{2-4}
+  & Interoperability & c & d \\
+  \cline{2-4}
+  & Multitenancy & c & d \\
+  \cline{2-4}
+  & Robustness & c & d \\
+  \cline{2-4}
+  & Security & c & d \\
+  \cline{2-4}
+  & Usage Modes & c & d \\
+\hline
+\end{tabular}
+\caption{\textbf{Mapping of the Properties of \pilot system implementations
+onto the components described in \S\ref{subsec:3.1}.}}
+\label{table:property_component_mapping}
+\end{table*}
 
 Implementations of Pilot Provisioning are analyzed by focusing on two specific
-properties: the requirements and dependencies between the \pilotjob system and
+properties: the requirements and dependencies between the \pilot system and
 the underlying distributed resources; and the type of resources the pilot
 system exposes in terms of computing, data and networking. For example, in
-order to schedule a pilot onto a specific resource, the \pilotjob system will
-need to know what type of container to use (e.g. pilot, virtual machine), what
+order to schedule a pilot onto a specific resource, the \pilot system will
+need to know what type of container to use (e.g. job, virtual machine), what
 type of scheduler the resource exposes, but also what kind of functionalities
 will be available on the nodes of the resource in terms of compute, data and
 networking.
@@ -1380,11 +1403,11 @@ and scheduling decisions.
 %   mentioning binding explicitly.}
 
 Finally, implementations of Task Execution are analyzed by reviewing different
-strategies for task scheduling and by describing how \pilotjob systems support
-task execution. \pilotjob implementations may offer multiple scheduling
+strategies for task scheduling and by describing how \pilot systems support
+task execution. \pilot implementations may offer multiple scheduling
 strategies depending on varying factors related to the nature of the workload,
 the state of the resources, or the capabilities exposed by the underlying
-middleware. Furthermore, \pilotjob systems often are responsible for setting up
+middleware. Furthermore, \pilot systems often are responsible for setting up
 the execution environment for the tasks of the given workload. While each task
 can be seen as a self-contained and self-sufficient unit with a kernel ready to
 be executed on the underlying architecture, often tasks require their
@@ -1392,15 +1415,15 @@ environment to be set up so that some libraries, data or accessory programs
 are made available.
 
 Several auxiliary properties play a fundamental role in distinguishing
-among \pilotjob systems implementations, as well as address, set and
+among \pilot systems implementations, as well as address, set and
 provide constraints on their usability.  Programming and user
 interfaces; interoperability across differing middleware and other
-\pilotjob systems; multitenancy; strategies and abstractions for data
+\pilot systems; multitenancy; strategies and abstractions for data
 management; security including policies alongside authentication and
 authorization; support for multiple usage modes like HPC or HTC; or
 robustness in terms of fault-tolerance and high-availability; are all
-examples of properties that might characterize a \pilotjob
-implementation but in of themselves, would not distinguish a \pilotjob
+examples of properties that might characterize a \pilot
+implementation but in of themselves, would not distinguish a \pilot
 as a unique system.
 
 % \mtnote{I have been assuming that a \pilotjob is always a type of distributed
@@ -1415,13 +1438,13 @@ as a unique system.
 % the pilot belongs and, as such, not a very interesting one.}
 
 Both core and auxiliary properties have a direct impact on the multiple use
-cases for which \pilotjob systems are currently engineered and deployed. For
-example, while every \pilotjob system offers the opportunity to schedule the
+cases for which \pilot systems are currently engineered and deployed. For
+example, while every \pilot system offers the opportunity to schedule the
 tasks of a workload on a pilot, the degree of support of specific workloads
-varies vastly across implementations. Furthermore, some \pilotjob systems
+varies vastly across implementations. Furthermore, some \pilot systems
 support Virtual Organizations and running tasks from multiple users on a single
 pilot while others support jobs leveraging a Message Passing Interface (MPI).
-Analogously, every \pilotjob systems, support the execution of one or more type
+Analogously, all \pilot systems, support the execution of one or more type
 of workload but they differ when considering execution modalities that maximize
 throughput (HTC), computing (HPC) or container-based high scalability (Cloud).
 
@@ -1432,7 +1455,7 @@ case?}\mtnote{I did not think about this distinction. I meant 'use cases'
 because I think we need some explanation on how these systems are used when we
 will show that some are tailored around a specific community while others are
 general-purpose. It should also be useful when arguing about the limitations of
-the \pilotjob paradigm - we do not want to give the impression that \pilotjobs
+the \pilot paradigm - we do not want to give the impression that \pilots
 are the solution for every possible user.} \jhanote{I need to think, but there
 is the issue of internal versus external constraints on the   usability.
 Auxiliary properties seem to me be about responding to   external factors; core
@@ -1440,7 +1463,7 @@ properties seem to determine usability from   internal properties. I do not
 know if this additional qualifications   or helps, but needs thinking and
 discussion}\mtnote{I need to think too, happy to discuss about this
 one.}\mtnote{We decided to integrate, discourselvely, use cases references in
-S2 when \pilotjob systems are introduced.}
+S2 when \pilot systems are introduced.}
 
 % \jhanote{(i) A workflow-based application and MPI are   not mutually exclusive.
 % (ii) Agree/Disagree: A workflow-based   application by the time it is supported
@@ -1471,33 +1494,21 @@ S2 when \pilotjob systems are introduced.}
 % and pilot dispatching.}
 
 \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
-is sufficient and necessary in order to discriminate between \pilotjob and
-not-\pilotjob systems; 2. Extend the `model' so to include a logical element
+is sufficient and necessary in order to discriminate between \pilot and
+not-\pilot systems; 2. Extend the `model' so to include a logical element
 and one or more functionalities related to Task Execution, and possibly another
 one relative to overlay enacting as distinguished from task dispatching; 3.
 Clean up Table 1 removing 'Infrastructure'.}
 
-% \mtnote{As a general note, I see the current Subsections 4.1 and 4.2 as a
-% brainstorming for refining the current Subsections 4.5 and 4.6. I would not
-% want to rewrite them from scratch as I think there is a lot of substance in
-% them as they are at the moment.}
-
 \subsubsection{Core properties}
 
-\mrnote{I didn't have a problem with the below paragraph
-until I tried to revise 4.2. As it turns out, Pilot characteristics
-are not core properties of the PJ system but actually of the
-Pilots themselves. Like, number of cores... how would I answer that?
-The number of cores you can request is system-limited. Lifespan,
-again this depends on wall clock time given to the job. It is hard
-to say okay a core property of BigJob is the characteristics of
-its Pilots - but I can't go on to say BigJob pilots have X size,
-Y lifespan, etc. because its individual pilot-dependent, and doesn't
-have anything to do with BigJob really}
+Following is the list of core properties. This list of properties is minimal
+and complete. Note that these are the properties of \pilot implementations, and
+not of (individual) instantiations of \pilots.
 
 \begin{itemize}
 
-\item \textbf{Pilot Characteristics}: In~\S\ref{sec:3} pilots
+\item \textbf{Pilot Resource Capabilities}: In~\S\ref{sec:3} pilots
   have been defined as placeholders for resources. As such, the
   characteristics of each pilot depends upon the type and capabilities
   of the resource it exposes.  Pilots usually expose computing
@@ -1509,9 +1520,18 @@ have anything to do with BigJob really}
   intercommunication (e.g. low-latency or inter-domain), computing
   platforms (e.g. x86, Cray, or CUDA), file systems (e.g. local,
   shared, or distributed).
-  \msnote{Possibly try to split this in more concrete properties to make it
-  easier to use in 4.2. To be decided once MS does more of the pilot section in
-  4.2}
+% \jhanote{General comment: I can't remember if we distinguish
+%   explicitly resources: compute, data and/or network; infrastructure:
+%   specific physical realization of a resource. If not, we should
+%   mention upstream}\mtnote{Yes, we define them along these lines in S3.}
+
+% \subsubsection{Space: Pilot Provisioning}
+% "How to create a resource overlay."
+% \begin{itemize}
+% \item Pilot Instantiation (Core)
+% \item Placeholder characteristics (Core)
+% \item Resource/Pilot granularity (Auxiliary)
+% \end{itemize}
 
   % \jhanote{Opening clause, needs revision.  Sorry I can't proffer
   %   something, as I'm not sure of the intent}\jhanote{I'm a bit
@@ -1519,15 +1539,14 @@ have anything to do with BigJob really}
   %   general remark at the end of Core Properties. Does that help
   %   refine this paragraph?}\mtnote{I tried to make it more
   %   consistent with the definitions we gave in S3.}
-\mrnote{dependences vs dependencies}
-\item \textbf{Resource Dependencies}: The provisioning of pilots
-  depends on how the \pilotjob system interfaces with one or more
+\item \textbf{Resource Interaction}: The provisioning of pilots
+  depends on how the \pilot system interfaces with one or more
   targeted infrastructure(s). In this context, the degree of coupling
-  between the \pilotjob system and the infrastructure can vary,
-  depending on how the \pilotjob system is deployed, how much it is
+  between the \pilot system and the infrastructure can vary,
+  depending on how the \pilot system is deployed, how much it is
   integrated with the middleware used within the targeted
-  infrastructure, whether the \pilotjob system is interoperable across
-  multiple types of middleware, and how much information the \pilotjob
+  infrastructure, whether the \pilot system is interoperable across
+  multiple types of middleware, and how much information the \pilot
   system needs about the states and capabilities of the targeted
   infrastructure.
 
@@ -1541,24 +1560,44 @@ have anything to do with BigJob really}
   dispatching decisions depends on the relationship held by a task
   with the other tasks belonging to the workload, the affinity they
   require between data and compute resources, and the type of
-  capabilities they require in order to be executed.  \pilotjob
+  capabilities they require in order to be executed.  \pilot
   implementations support a varying degree of semantic richness for
   the workload and its tasks.
+% \item \textit{Workload description}: How are workloads described, e.g.,
+% ClassAdd. JSDL...?
+
+% \item \textit{Supported ``logical'' workload types}: What types of workload
+% are supported, e.g.      single tasks, workflows, ...? (here ``logical'' as
+% opposed to ``physical'' task types in the next category)     \msnote{It seems
+% this is a special case of the above item}
 
 \item \textbf{Task Binding Characteristics}: One of the core
   functionalities implied by Task Dispatching is the binding of tasks
   to pilots. Without such capability, it would not be possible to know
   where to dispatch tasks, pilots could not be used to run tasks and,
-  as such, the whole \pilotjob system would not be usable. As seen in
-  \S\ref{sec:3}, \pilotjob systems may allow for two main types of
+  as such, the whole \pilot system would not be usable. As seen in
+  \S\ref{sec:3}, \pilot systems may allow for two main types of
   binding between tasks and pilots: early binding and late
-  binding. \pilotjob implementations differ in whether and how they
+  binding. \pilot system implementations differ in whether and how they
   support these two types of binding. Specifically, while there might
   be implementations that only support a single type of binding
   behavior, they might also differ in whether they allow for the users
   to control directly what type of binding is performed, and in
   whether both types of binding are available on an heterogeneous pool
   of resources.
+% \item \textit{Resource/Pilot granularity:} How is the slicing and dicing of a
+% resource exposed to the \textbf{pilot} and how much control is there on the
+% granularity? How does this effect the suitability for HTC and/or HPC?
+
+% \item \textit{Task-to-pilot assignment}: How are tasks assigned to pilots and
+% at which level of     granularity can this be controlled by which entity
+% (system/user)?
+
+% (iv) how is the workload managed and scheduled (supported
+% algorithms, support for application-level scheduling, data-compute scheduling,
+% resource acquisition/release policies, dispatch policies, number of scheduling
+% levels) and
+
 
 % \jhanote{I agree with the discussion above, but there is case to be
 %   made that at some stage, we will have to argue why this is a core
@@ -1567,31 +1606,60 @@ have anything to do with BigJob really}
 %   try at an explanation. We can stop to the first sentence if you
 %   think it is sufficient otherwise we can leave also the following.}
 
-\item \textbf{Deployment Strategies}: Once the tasks are dispatched to
+\item \textbf{Task Execution modes}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
-  be set up.  \pilotjob implementations differ in whether and how they
-  offer such a capability. \pilotjob implementations may adopt
+  be set up.  \pilot system implementations differ in whether and how they
+  offer such a capability. \pilot system implementations may adopt
   dedicated components for managing execution environments, or they
   may relay an ad hoc configuration of the pilots. Furthermore,
   execution environments can be of varying complexity, depending on
-  whether the \pilotjob implementation allows for data retrieval,
+  whether the \pilot system implementation allows for data retrieval,
   dedicated software and library installations, communication and
   coordination among multiple execution environment and, in case,
   pilots.
   \msnote{Maybe this is more about task execution?}
+% \item \textit{Supported Middleware:} What middleware does the system connect with? Is it
+% tightly coupled or flexible/extensible?
+
+% \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots
+% instantiated where and which entity (system/user) has control over it at
+% which level?
+
+% \item \textit{Supported DCI systems/services}: What are the type of systems
+% (middlewares, services) that can be interfaced by the \pilotjob system to
+% launch pilots?
+
+% \item \textit{Pilot Granularity (spatial)}: What unit of resource is
+% controlled by a single pilot? A core, a node, multiple nodes, a cluster, ...?
+
+% %Does the \pilotjob system provide interoperability support?
+% % does the framework support advanced workload management capabilities
+% % (e.g. the automatic provisioning of \pilots).
+
+% \paragraph{Task Execution}
+% \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of a
+% pilot in relation to the length of a task or workload? \msnote{What kind
+% of answers to you expect here in section 4.3?}
+% \item textit{Task-pilot relationship (spatial)}: Does a pilot execute one or
+% more tasks concurrently?
+% \item textit{Supported ``physical'' task types}: What types of (physical) tasks
+% are supported, e.g., single-core, MPI, ...?
+% (v) does the framework have dependencies to other third-party
+% components/services?
+
+% \item Supported Middleware (Auxiliary)
+
+% (iii) the % deployment model: hosted service versus tool/library, application vs.
+% system-level,
 
 \end{itemize}
 
-% \jhanote{General comment: I can't remember if we distinguish
-%   explicitly resources: compute, data and/or network; infrastructure:
-%   specific physical realization of a resource. If not, we should
-%   mention upstream}\mtnote{Yes, we define them along these lines in S3.}
 
 \subsubsection{Auxiliary properties}
 
 \begin{itemize}
 
-\item \textbf{Architecture}: \pilotjob systems may be implemented by
+\item \textbf{Architecture}: \pilot systems may be implemented by
   means of different type of architectures (e.g service-oriented,
   client-server, or peer- to-peer). For example, it is conceivable
   that architectural choices influence if not preclude certain
@@ -1599,6 +1667,8 @@ have anything to do with BigJob really}
   choices is limited to the trade-offs implied by such a choice,
   especially when considering how they affect the Core Properties
   listed in the previous Subsection.
+% \item \textit{Transfer Protocols}: What network protocols that are used to
+% connect the individual component of the \pilot system?
 
 % \jhanote{A simple/quick example would help appreciate the latter
 %   sentence; currently not sure. What about the following?: ``For
@@ -1610,21 +1680,32 @@ have anything to do with BigJob really}
 %   ``core properties''. Can ignore for now, but please converge/keep
 %   in mind.}\mtnote{Done.}
 
-\item \textbf{Interfaces}: The implementations of \pilotjob systems
+% Further non-functional aspects describe the internals of a \pilotjob system,
+% e.\,g.: (i) the architecture of the system (layers, sub-systems,
+% communication \& coordination, central vs. decentral architectures; push vs.
+% pull model, agent-based; number of supported resource types), 
+
+\item \textbf{Interfaces}: The implementations of \pilot systems
   may present several types of interfaces. For example, there are
   interface considerations between the main components of the
-  \pilotjob system, between the application and pilot layer, between
-  end users and the \pilotjob system, and for one or more programming
+  \pilot system, between the application and pilot layer, between
+  end users and the \pilot system, and for one or more programming
   languages.
+% \item \textit{Interfaces:} How does the \textbf{application} (responsible for
+% definition of the \textbf{workload} and consumer of the pilot-job system)
+% interact/interface with the pilot-job system? (API / CLI / Service / etc).
+
+% \item \textit{Programming Language:} In the case of an API, what language is bindings are
+% available?
 
 \item \textbf{Interoperability}: Two types of interoperability are
-  relevant when analyzing different \pilotjob implementations:
+  relevant when analyzing different \pilot system implementations:
   Interoperability with multiple type of resources and
-  interoperability across diverse \pilotjob systems. The former allows
-  for the \pilotjob to provision pilots and execute workloads on
+  interoperability across diverse \pilot systems. The former allows
+  for the \pilot systems to provision pilots and execute workloads on
   different type of resources and systems (e.g. HTC, HPC, Cloud but
   also Condor, LSF, Slurm or Torque), while the latter becomes
-  relevant when considering a landscape where multiple \pilotjob
+  relevant when considering a landscape where multiple \pilot system
   implementations are available with diversified characteristics and
   capabilities.\mrnote{Note from meeting with SJ: May want to
   change to discuss one first (including descriptive text), then
@@ -1634,340 +1715,18 @@ have anything to do with BigJob really}
   but I think its a good idea). Especially since the second
   type of interoperability is very much less-common to a
   single PJ system (except in cases like PANDA)}
+% (ii) resource
+% access layer: What low-level infrastructures/middleware are supported? How
+% interoperable is the framework (vertically, horizontally)?,
 
-\item \textbf{Multitenancy}: A \pilotjob system may offer multitenancy
+\item \textbf{Multitenancy}: A \pilot system may offer multitenancy
   at both system and local level. When offered at system level,
-  multiple users are allow to utilize the same instance of a \pilotjob
+  multiple users are allow to utilize the same instance of a \pilot
   system, while when available at local level, multiple users may use
   the same pilot instance or any other component implemented within the
-  \pilotjob system.
-
-  % \jhanote{Editorial/Minor note: I think I know what you mean by
-  %   ``service within the PJS'', but it is not explained or detailed
-  %   somewhere. Maybe use vocabulary/terminology already
-  %   defined?}\mtnote{Thanks. I went for components alone because
-  %   services would still be components of a \pilotjob
-  %   system. Service are a way to implement its components.}
-
-\item \textbf{Robustness}: Used to identify those properties that
-  contribute towards the resilience and the reliability of a \pilotjob
-  implementation. In this Section, the analysis focuses on
-  fault-tolerance, high-availability and state persistence. These
-  properties are considered indicators of both the maturity of the
-  development stage of the \pilotjob implementation, and the type of
-  support offered to the paradigmatic use cases introduced in Section
-  2.
-
-\item \textbf{Security}: While the properties of \pilotjob
-  implementations related to security would require a dedicated
-  analysis, we limit the discussion to authentication, authorization
-  and policies. The scope of the analysis is further constrained by
-  focusing the analysis only on those elements of these properties
-  that impact the Core Functionalities as defined in
-  \S\ref{sec:3}.
-
-\item \textbf{Usage Modes}: As shown in \S\ref{sec:history} and
-\ref{sec:3}, \pilotjob systems support many different use cases involving
-diversified usage modes - e.g. HPC, HTC and Cloud.
-\msnote{This can go if we make sure that there is a "context" paragraph in
-every 4.2 subsection}
-
-% \item \textit{Interfaces:} How does the \textbf{application} (responsible for
-% definition of the \textbf{workload} and consumer of the pilot-job system)
-% interact/interface with the pilot-job system? (API / CLI / Service / etc).
-
-% \item \textit{Programming Language:} In the case of an API, what language is bindings are
-% available?
-
+  \pilot system.
 % \item \textit{Multi-user support:} Does the pilot job system allows \textbf{\pilots} to
 % be used by multiple users?
-
-% \item \textit{Resource/Pilot granularity:} How is the slicing and dicing of a
-% resource exposed to the \textbf{pilot} and how much control is there on the
-% granularity? How does this effect the suitability for HTC and/or HPC?
-
-% \item \textit{Supported Middleware:} What middleware does the system connect with? Is it
-% tightly coupled or flexible/extensible?
-
-% \item \textit{Data management:} Does the framework provide data management
-% capabilities or should that be done out of band? If so, what does it offer?
-
-\end{itemize}
-
-% \subsection{Organizing properties in space}
-
-% \mtnote{TODO: Move all this under the following subsection and normalize
-% following the revised list and definition of both types of properties.
-% Eliminate the use of the term 'Space' if not needed.}
-
-% \subsubsection{Space: Workload Management}
-% "How to express the workload."
-% \begin{itemize}
-% \item Task semantics (Core)
-% \item Workload semantics (Core)
-% \item Data Management (Auxiliary)
-% \end{itemize}
-
-% \subsubsection{Space: Pilot Provisioning}
-% "How to create a resource overlay."
-% \begin{itemize}
-% \item Pilot Instantiation (Core)
-% \item Placeholder characteristics (Core)
-% \item Resource/Pilot granularity (Auxiliary)
-% \end{itemize}
-
-% \subsubsection{Space: Scheduling}
-% "How \pilots and \cus are scheduled."
-% \begin{itemize}
-% \item Binding behavior (Core)
-% \item Resource exposure (Core)
-% \end{itemize}
-
-% \subsubsection{Space: Ecosystem}
-% "How the system interacts with its environment."
-% \begin{itemize}
-% \item Usage Interface (Auxiliary)
-% \item Programming Language (Auxiliary)
-% \item Supported Middleware (Auxiliary)
-% \item Multi-user support (Auxiliary)
-% \end{itemize}
-
-
-% \subsection{Old section 4 from here}
-
-
-% Despite the apparent diversity in existing \pilotjobs,
-% they can be reduced to a set of common functionality and
-% discussed as such via use of the the terminology presented
-% in \S\ref{sec:vocab}.
-% %has implications
-% %for the interoperability of existing and future \pilotjobs, and
-% %lends insight into the design and usage of \pilotjob systems.
-% % application design to enhance job/data(?)
-% %mobility, management, and potential run-time responsiveness via
-% %late-binding/etc.
-
-
-% \textcolor{red}
-% {
-% \textbf{Ideas 4.1.X structure}
-% \begin{itemize}
-% \item CHECK OVERLAP WITH 2.1
-% \item Why did we pick this specific PJ? - already described in section 2?
-% \item What was this PJ designed for (motivates architecture)
-% \item What applications are using this PJ (if any?)
-% \item (deployment assumptions) What is the typical deployment and usage
-% scenario (e.g., VO. multi-user)
-% \item (resource landscape assumptions) What is the resource landscape it
-%  assumes (Clouds, HPC, 'Grid', single machines,... )
-% \item Architecture
-%   \begin{itemize}
-%     \item Components (mapping to 3)
-%     \item How do components communicate? (e.g., push/pull propr. TCP
-%      protocol, REST)
-%     \item Interface (how is it accessed)
-%   \end{itemize}
-% \end{itemize}
-% }
-
-% %\subsection{Comparing \pilotjobs via a Common Framework \& Vocabulary}
-
-% In light of the common vocabulary discussion in \S\ref{sec:vocab}, a
-% representative set of \pilotjobs has been chosen for further analysis.
-% Examining these \pilotjobs using the common vocabulary exposes their
-% core similarities, and allows a detailed analysis of their
-% differences.
-
-% We will see that throughout the evolution of the \pilotjob concept,
-% several core concepts have remained stable while new additions enhance
-% cross-platform interoperability, ease of usage and deployment, and
-% incorporate the ability to schedule data as well as jobs.  These
-% additions illustrate the flexibility and power of \pilotjobs, and
-% emphasize the need for a common vocabulary/treatment to describe the
-% developing landscape.
-
-
-% % At least one \pilotjob from each categorization in \S\ref{sec:history}
-% % is analyzed via a common vocabulary, allowing for a standard
-% % ``baseline'' of each \pilotjob categorization to be examined.
-
-% \jhanote{this might go to the section where we begin describing
-%   pilotjobs.. also will need an updated description of the methodology
-%   employed to choose} ....such that ``exemplars'' were chosen; these
-% are \pilotjobs which either laid foundational \pilotjob concept or
-% incorporated strides in interoperability, usability, architecture or
-% otherwise to advance the understanding and usage of \pilotjobs.
-
-% \jhanote{We need to provide an overview/outline of this section}
-
-% %Representative \pilotjobs from each \pilotjob category
-% %in Section~\ref{sec:survey} are chosen and compared within
-% %the bounds of that category, illustrating the core similarities
-% %between the Pilot-Jobs in a given category.
-
-% % \textit{Finally, we perform
-% % a cross-cutting analysis, demonstrating that across the categorical
-% % distinctions all approaches remain true ``\pilotjobs'' with regard
-% % to their base functionality.  The segmentation between categories
-% % is exposed to reveal why \pilotjobs have evolved to have
-% % differing capabilities, with the end-goal being a
-% % complete understanding of the \pilotjob ecosystem via a common
-% % vocabulary.}
-
-% \subsection{Evaluation Criteria}\label{ssec:evaluation}
-% \jhanote{I think we agreed to rename this sub-section, but can't
-%   remember to what! yikes..}
-
-% \begin{figure}[t]
-% 	\centering
-% 		\includegraphics[width=0.45\textwidth]{figures/pilot-criteria}
-%                 \caption{\jhanote{This is by no means complete.. but
-%                     just a way to help start thinking/organizing
-%                     criteria}..}
-% \end{figure}
-
-% % \jhanote{Andre L: these need elaboration and explanation. A possible
-% %   consideration might be whether to remove bullet points and use
-% %   regular prose}\alnote{work in progress}
-
-% % \pilotjob systems can be described and compared using a set of
-% % functional and non-functional criteria.
-
-% %\alnote{use functional/non-functional properties}
-
-% Section 2 and 3 discussed how \pilotjobs have evolved functionally, as
-% well discussed the different ways in which \pilotjobs have been
-% used and developed. It follows that there exist multiple aspects and
-% attributes of \pilotjobs that need to be kept in consideration when
-% trying to determine an appropriate implementation.  Here we try to
-% gather the broad set of criteria, most but not all of which follows
-% from earlier discussions.
-
-% In order to understand the landscape of \pilotjobs it is important to
-% understand the types of workflows and workloads they can support, the
-% types of resources they can be used with and how, what middleware
-% dependencies they have, the type, level and granularity of scheduling
-% control they expose and the algorithms they use, control on the
-% workload placement they provide and the
-% constraints on the workload they impose.
-
-% Whereas the answers to some of the above influence the usability and
-% usefulness of a \pilotjob, not all of the above attributes influence
-% their functional or performance capabilities.  \jhanote{the following
-%   might/should go} No rigid classification of the attributes of
-% \pilotjobs is possible, as an attribute that influences the
-% performance or functional capability of one \pilotjob may not
-% influence or even exist for another \pilotjob. Mindful of these
-% limitations, we propose the following features that provide a fair
-% coverage of the attributes required to understand the usability (which
-% correlates with non-functionional properties etc.)  and usefulness
-% (performance constraints, functional capabilities etc.)  of any given
-% \pilotjob. \jhanote{need consistency: we use attribute,
-%   characteristics, features to describe the same thing}
-
-% What use cases (application workloads, MPI/ensembles, workflow types)
-% and use modes are supported (natively or via extensions) by the core
-% \pilotjob system?  How is the \pilotjob system used deployed, viz.,
-% what abstraction and user interfaces are provided to the user (e.g.,
-% CLI, web-service, web portal?). Does the \pilotjob system support
-% distribution? What middleware dependencies does the \pilotjob system
-% have?  What execution strategies are supported? (HTC, HPC, cloud)?
-% What type of security contexts are supported?  Once a \pilotjob is
-% usable, attributes that influence whether a \pilotjob is useful include
-% the scalability (number of tasks, number of distributed resources,
-% number of cores that can be marshalled, task throughput, number
-% resources/slots) properties of the \pilotjob, interoperability and
-% fault tolerance.
-
-% %Does the \pilotjob system provide interoperability support?
-% % does the framework support advanced workload management capabilities
-% % (e.g. the automatic provisioning of \pilots).
-
-% % \emph{Functional Features:} The functional criteria describe the
-% % capabilities of the \pilotjob system: (i) What use cases are
-% % targeted by the PJ system? What applications types and usage modes
-% % are supported (MPI, ensembles, workflows)?, (ii) What abstraction
-% % and user interface is provided to the developer: API, CLI, web
-% % service, web portal?, (iii) Does the \pilotjob system support
-% % distribution?, (iv) Are there any higher-level tools available for
-% % \pilotjob system (e.g. workflow systems, data analysis systems)?,
-% % (v) Does the \pilotjob system support data?, (vi) What types of
-% % infrastructure are supported (HTC, HPC, cloud)? Does the \pilotjob
-% % system provide interoperability support? and (vii) does the
-% % framework support advanced workload management capabilities
-% % (e.g. the automatic provisioning of \pilots).
-
-
-% % \emph{Non-Functional Features:} Non-functional features describe the
-% % characteristics and behavior of a \pilotjob system and are not
-% % directly related to a specific function or capability of the \pilotjob
-% % system. Non-functional properties include:
-
-% % \jhanote{I think performance and scalability should be moved into
-% %   functional attributes. I think performance and scalability (as
-% %   measured by tps, resources/slots) are in deed capabilities of a
-% %   \pilotjob. Also, I think, ``What abstraction and user interface is
-% %   provided to the developer: API, CLI, web service, web portal?'', as
-% %   well as ``Are there any higher level tools'', should be moved to
-% %   non-functional features. If functional and non-functional is not a
-% %   good enough classification, then we might further sub-divide
-% %   functional attributed; having already discussed core, advanced and
-% %   higher-level pilot, I think we are losing the opportunity to connect
-% %   to and utilize that discussion}
-
-% \msnote{Formally performance, etc. are non-functional attributes. But
-%   performance / scalability is often a reason to use pilot-jobs, so
-%   what I think you are asking for is a more prominent place to discuss
-%   performance? Does that tell us that functional vs non-func is not a
-%   useful distinction here?  (func/non-func normally belongs to
-%   requirements, and thats not what we are talking about here
-%   anyway}\jhanote{Mark: mostly addressed in discussions, comments
-%   (removal) and reworking}
-
-% \jhanote{the following needs to be refined, as it is a very narrow
-%   definition of performance} Performance and scalability define the
-% response times and size of the workload a user can expect to be
-% supported.  Security describes the security mechanisms used by the
-% framework, e.\,g.\ for authentication of the user, for securing the
-% communication protocol and for sandboxing the application.  Further,
-% some \pilotjobs solely support single users, while more complex
-% \pilot-based workload managers commonly support multiple users
-% (e.\,g.\ using glexec).
-
-% Further non-functional aspects describe the internals of a \pilotjob system,
-% e.\,g.: (i) the architecture of the system (layers, sub-systems,
-% communication \& coordination, central vs. decentral architectures; push vs.
-% pull model, agent-based; number of supported resource types), (ii) resource
-% access layer: What low-level infrastructures/middleware are supported? How
-% interoperable is the framework (vertically, horizontally)?, (iii) the
-% deployment model: hosted service versus tool/library, application vs.
-% system-level, (iv) how is the workload managed and scheduled (supported
-% algorithms, support for application-level scheduling, data-compute scheduling,
-% resource acquisition/release policies, dispatch policies, number of scheduling
-% levels) and (v) does the framework have dependencies to other third-party
-% components/services?
-
-% \subsection{Comparing \pilot Systems via Classifiers}
-
-% Along with the common framework and vocabulary, we have identified a set of  key
-% classifiers along which we discuss the functional and non-functional properties
-% of \pilot systems.  While these classifiers are by no means meant to be
-% exhaustive or complete, they are a useful tool to highlight and discuss the
-% differences in  usage-modes, deployment and capabilities between different
-% \pilotjob systems. We divide our classifiers into three functional high-level
-% categories: \textit{Resource Interaction}, \textit{Workload Execution and
-% Management} and \textit{Data Handling and Management}. In each category we
-% define classifiers that give further information about (1) if and how a
-% capability is implemented, and (2) if and on which level a capability is
-% controllable. A fourth set of classifiers covers the non-functional properties
-% of \pilot systems.
-
-
-% \paragraph{Pilot Provisioning}
-
-% \mtnote{Integrate 4.2/4.3 in this subsection.}
-
-% \begin{itemize}
 
 % \item \textit{Pilot ownership}: Who owns the pilot (job) -- the user or the
 % \pilotjob system? Or in other words, in which security context does the pilot
@@ -1984,75 +1743,51 @@ every 4.2 subsection}
 % instantiated?  So, maybe a ``security'' item as Mark suggested, but I'm not
 % entirely sure if ``deployment'' should be part of this as well...  they do seem
 % connected to me though...}
-
-% \item \textit{Supported DCI systems/services}: What are the type of systems
-% (middlewares, services) that can be interfaced by the \pilotjob system to
-% launch pilots?
-
-% \item \textit{Pilot Granularity (spatial)}: What unit of resource is controlled
-% by a single pilot? A core, a node, multiple nodes, a cluster, ...?
-
-% \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots
-% instantiated where and which entity (system/user) has control over it at
-% which level?
-
-% \end{itemize}
+% Further,
+% some \pilotjobs solely support single users, while more complex
+% \pilot-based workload managers commonly support multiple users
+% (e.\,g.\ using glexec).
 
 
-% \paragraph{Workload Management}
-
-% \begin{itemize}
-
-% \item \textit{Workload description}: How are workloads described, e.g.,
-% ClassAdd. JSDL...?
-
-% \item \textit{Supported ``logical'' workload types}: What types of workload
-% are supported, e.g.      single tasks, workflows, ...? (here ``logical'' as
-% opposed to ``physical'' task types in the next category)     \msnote{It seems
-% this is a special case of the above item}
-
-% \item \textit{Task-to-pilot assignment}: How are tasks assigned to pilots and
-% at which level of     granularity can this be controlled by which entity
-% (system/user)?
-
-% \end{itemize}
-
-% \paragraph{Task Execution}
-
-% \begin{itemize}
-
-% \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of a
-% pilot in relation to the length of a task or workload? \msnote{What kind
-% of answers to you expect here in section 4.3?}
-
-% \item textit{Task-pilot relationship (spatial)}: Does a pilot execute one or
-% more tasks concurrently?
-
-% \item textit{Supported ``physical'' task types}: What types of (physical) tasks
-% are supported, e.g., single-core, MPI, ...?
-
-% \end{itemize}
-
-
-% \paragraph{Qualitative Properties}
-
-% As qualitative properties we define the properties that are not specifically
-% related to \pilot systems but rather describe general concepts commonly found
-% in distributed applications, frameworks and tools. The classifiers we have
-% picked are:
-
-% \begin{itemize}
-
+\item \textbf{Robustness}: Used to identify those properties that
+  contribute towards the resilience and the reliability of a \pilot system
+  implementation. In this Section, the analysis focuses on
+  fault-tolerance, high-availability and state persistence. These
+  properties are considered indicators of both the maturity of the
+  development stage of the \pilot system implementation, and the type of
+  support offered to the paradigmatic use cases introduced in Section
+  2.
 % \item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
 % system from component failures?
 
+\item \textbf{Security}: While the properties of \pilot system
+  implementations related to security would require a dedicated
+  analysis, we limit the discussion to authentication, authorization
+  and policies. The scope of the analysis is further constrained by
+  focusing the analysis only on those elements of these properties
+  that impact the Core Functionalities as defined in
+  \S\ref{sec:3}.
 % \item \textit{Security}: How is a user identified in the system and how are
 % identities and access credentials delegated to individual resources / pilots?
 
-% \item \textit{Transfer Protocols}: What network protocols that are used to
-% connect the individual component of the \pilot system?
 
-% \end{itemize}
+\item \textbf{Usage Modes}: As shown in \S\ref{sec:history} and
+\ref{sec:3}, \pilot systems support many different use cases involving
+diversified usage modes - e.g. HPC, HTC and Cloud.
+\msnote{This can go if we make sure that there is a "context" paragraph in
+every 4.2 subsection}
+
+\item \textbf{Data management:} Does the framework provide data management
+capabilities or should that be done out of band? If so, what does it offer?
+
+\item \textbf{Performance:} 
+% Performance and scalability define the
+% response times and size of the workload a user can expect to be
+% supported.  Security describes the security mechanisms used by the
+% framework, e.\,g.\ for authentication of the user, for securing the
+% communication protocol and for sandboxing the application.
+
+\end{itemize}
 
 
 \begin{table*}[t]
@@ -2085,15 +1820,21 @@ every 4.2 subsection}
  \label{table:implementations-comparison}
 \end{table*}
 
- \jhanote{I think the set of core properties are fine. There may be a
-   need to refine the discussion of each property, but that can be
-   deferred for now.}  \jhanote{Based upon the empirical knowledge
-   acquired during saga-pilot implementation, is there some thing we
-   can add to auxilary properties}
+\subsection{Analysis of \pilot system Implementations}
 
-\subsection{Analysis of \pilotjob Implementations}
+In light of the common vocabulary discussion in \S\ref{sec:vocab}, a
+representative set of \pilotjobs has been chosen for further analysis.
+Examining these \pilotjobs using the common vocabulary exposes their
+core similarities, and allows a detailed analysis of their
+differences.
 
-\mtnote{Introduction to the subsection.}
+% \jhanote{this might go to the section where we begin describing
+%   pilotjobs.. also will need an updated description of the methodology
+%   employed to choose} ....such that ``exemplars'' were chosen; these
+% are \pilotjobs which either laid foundational \pilotjob concept or
+% incorporated strides in interoperability, usability, architecture or
+% otherwise to advance the understanding and usage of \pilotjobs.
+
 
 \subsubsection{MyCluster}
 
@@ -3255,6 +2996,8 @@ the side of the WMS.
 TasqQueueDirectors direct the workload from the TaskQueues for execution to the
 Job Agents.
 
+\subsection{Other systems}
+
 \subsection{Overall observations}
 
 Although we previously described many \pilot systems in detail, their
@@ -3690,7 +3433,4 @@ Workflow systems possibly}
 \bibliography{pilotjob,literatur,saga,saga-related,urls,hadoop}
 
 
-
-
 \end{document}
-
