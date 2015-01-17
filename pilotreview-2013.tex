@@ -1166,6 +1166,18 @@ new types of DCI middleware as, for example, cloud-based infrastructures,
 the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion.
 
+We have now defined resources, DCIs and \pilots.
+We have established that \pilots are a placeholder for a set of resources.
+The combined resources represented by \pilots that are available for the
+execution of a workload together form an resource overlay.
+This set of \pilots can potentially be distributed over multiple resources
+and/or DCIs. The details of this aggregation or federation is outside the scope
+of this paper.
+
+\begin{description}
+\item[Resource Overlay.] The set of resources that are represented by one or more \pilots.
+\end{description}
+
 To promote internal consistency, having clarified the meaning of `job'
 and `pilot', it is imperative that three more terms fundamentally
 associated with \pilot systems (cit, cit, cit) be explicitly defined:
@@ -1246,12 +1258,6 @@ of a \pilot system illustrated in~\S\ref{subsec:3.1}.
   not-\pilot systems; [\ldots], and possibly another one relative to overlay
   enacting as distinguished from task dispatching; 3.  Clean up Table 1
 removing 'Infrastructure'.}
-
-\msnote{I'm indeed leaning towards the introduction of (something like)
-Overlay. The rationale is that we current have DCI(a set of resource(physical
-quantity)) but no term to refer to the set of resources provisioned through
-pilots. I also need some term to describe the property related to pilot
-provisioning.}
 
 %------------------------------------------------------------------------------
 % SECTION 4
