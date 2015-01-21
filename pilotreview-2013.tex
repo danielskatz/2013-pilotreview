@@ -1314,18 +1314,24 @@ properties we discuss.
 \cline{2-4}
 & \textbf{Property} & \textbf{Component} & \textbf{Description} \\
 \hline
+% Core
 \multirow{5}{*}{\textit{Core}}
-  & Pilot Characteristics & Pilot Manager & What pilots to start \\
+  & Pilot Resource Capabilities & Pilot Manager & What pilots to start? \\
   \cline{2-4}
-  & Resource Dependencies & Pilot Manager & How to start pilots \\
+  & Resource Interaction & Pilot Manager & How to start pilots? \\
   \cline{2-4}
-  & Workload Semantics & Workload Manager & How to dispatch tasks \\
+  & Overlay Management & Workload Manager & Which tasks to dispatch? \\
+  \cline{2-4}
+  & Workload Semantics & Workload Manager & When to dispatch tasks \\
   \cline{2-4}
   & Task Binding Characteristics & Workload Manager & When to dispatch tasks \\
   \cline{2-4}
-  & Deployment Strategies & Task Executor & How to execute tasks \\
+  & Task Execution Modes & Task Executor & How to execute tasks \\
 \hline
+% Auxiliary
 \multirow{7}{*}{\textit{Auxiliary}}
+  & Coordination and Communicatuon & c & d \\
+  \cline{2-4}
   & \multirow{3}{*}{Architecture}
     & Pilot Manager & d \\
     \cline{3-4}
@@ -1333,7 +1339,7 @@ properties we discuss.
     \cline{3-4}
     & & Task Executor & d \\
   \cline{2-4}
-  & Interfaces & c & d \\
+  & Interface & c & d \\
   \cline{2-4}
   & Interoperability & c & d \\
   \cline{2-4}
@@ -1343,7 +1349,11 @@ properties we discuss.
   \cline{2-4}
   & Security & c & d \\
   \cline{2-4}
-  & Usage Modes & c & d \\
+  & Files and Data & c & d \\
+  \cline{2-4}
+  & Performance and Scalability & c & d \\
+  \cline{2-4}
+  & Development Model & c & d \\
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
@@ -1434,6 +1444,7 @@ not of (individual) instantiations of \pilots.
   notion of granularity, e.g. is there one \pilot for a set of resources within
   on infrastructure or is there a more fine grained coupling between \pilot and
   resource and how does this effect the suitability for HTC and/or HPC?
+  \msnote{This should not overlap with Task Execution Modes}
 % \item \textit{Pilot Granularity (spatial)}: What unit of resource is
 % controlled by a single pilot? A core, a node, multiple nodes, a cluster, ...?
 
@@ -1450,6 +1461,7 @@ not of (individual) instantiations of \pilots.
   multiple types of middleware, and how much information the \pilot
   system needs about the states and capabilities of the targeted
   infrastructure.
+  \msnote{This should not overlap with Task Execution Modes}
 % \item \textit{Supported DCI systems/services}: What are the type of systems
 % (middlewares, services) that can be interfaced by the \pilotjob system to
 % launch pilots?
@@ -1501,7 +1513,7 @@ not of (individual) instantiations of \pilots.
 
 % core because: its the only property of the task executor
 % component/functionality
-\item \textbf{Task Execution modes}: Once the tasks are dispatched to
+\item \textbf{Task Execution Modes}: Once the tasks are dispatched to
   a pilot, their execution may require for a specific environment to
   be set up.  \pilot system implementations differ in whether and how they
   offer such a capability. \pilot system implementations may adopt
@@ -1656,7 +1668,7 @@ not of (individual) instantiations of \pilots.
 % framework, e.\,g.\ for authentication of the user, for securing the
 % communication protocol and for sandboxing the application.
 
-\item \textbf{Development model:} Is this a community effort?
+\item \textbf{Development Model:} Is this a community effort?
 
 \end{itemize}
 
