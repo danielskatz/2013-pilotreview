@@ -1288,6 +1288,7 @@ choose a \pilot system based on functional requirements, how
 properties that underly such systems.
 
 \subsection{Core and Auxiliary Properties}
+\label{subsec:4.1}
 
 This Section discusses the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: Core and auxiliary.
@@ -1310,50 +1311,67 @@ properties we discuss.
 
 \begin{table*}
 \centering
-\begin{tabular}{c|c|c|c|}
+\begin{tabular}{c|c|p{3cm}|p{5cm}|}
 \cline{2-4}
 & \textbf{Property} & \textbf{Component} & \textbf{Description} \\
 \hline
 % Core
-\multirow{5}{*}{\textit{Core}}
+\multirow{6}{*}{\textit{Core}}
   & Pilot Resource Capabilities & Pilot Manager & What pilots to start? \\
   \cline{2-4}
   & Resource Interaction & Pilot Manager & How to start pilots? \\
   \cline{2-4}
   & Overlay Management & Workload Manager & Which tasks to dispatch? \\
   \cline{2-4}
-  & Workload Semantics & Workload Manager & When to dispatch tasks \\
+  & Workload Semantics & Workload Manager & When to dispatch tasks? \\
   \cline{2-4}
-  & Task Binding Characteristics & Workload Manager & When to dispatch tasks \\
+  & Task Binding Characteristics & Workload Manager & When to dispatch tasks? \\
   \cline{2-4}
-  & Task Execution Modes & Task Executor & How to execute tasks \\
+  & Task Execution Modes & Task Executor & How to execute tasks? \\
 \hline
 % Auxiliary
-\multirow{7}{*}{\textit{Auxiliary}}
-  & Coordination and Communicatuon & c & d \\
+\multirow{10}{*}{\textit{Auxiliary}}
+  & Coordination and Communicatuon &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    The interaction between the components.\\
   \cline{2-4}
-  & \multirow{3}{*}{Architecture}
-    & Pilot Manager & d \\
-    \cline{3-4}
-    & & Workload Manager & d \\
-    \cline{3-4}
-    & & Task Executor & d \\
+  & Architecture &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    Frameworks and archicture that the components and their whole are build
+    with.\\
   \cline{2-4}
-  & Interface & c & d \\
+  & Interface &
+    Pilot Manager\newline Workload Manager &
+    Interface that the user can use to interact with the system.\\
   \cline{2-4}
-  & Interoperability & c & d \\
+  & Interoperability &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    Interopability between \pilots on multiple DCIs.\\
   \cline{2-4}
-  & Multitenancy & c & d \\
+  & Multitenancy &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    The usage of compontents by multiple (concurrent) users.\\
   \cline{2-4}
-  & Robustness & c & d \\
+  & Robustness &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    The measures in place to increase the robustness of the components and the
+    whole.\\
   \cline{2-4}
-  & Security & c & d \\
+  & Security &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    AAA considerations for the components and the whole.\\
   \cline{2-4}
-  & Files and Data & c & d \\
+  & Files and Data &
+    Pilot Manager\newline Workload Manager &
+    Do the Managers deal with data?\\
   \cline{2-4}
-  & Performance and Scalability & c & d \\
+  & Performance and Scalability &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    What means are in place to reach performance?\\
   \cline{2-4}
-  & Development Model & c & d \\
+  & Development Model &
+    Pilot Manager\newline Workload Manager\newline Task Executor &
+    What is the development and support model for the software as a whole.\\
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
@@ -1676,45 +1694,105 @@ not of (individual) instantiations of \pilots.
 \begin{table*}[t]
  \up
  \centering
- \begin{tabular}{|p{3cm}|p{3.2cm}|p{3cm}|p{3cm}|p{3cm}|}
+ \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
   \hline
-  \textbf{Pilot-Job System} &\textbf{Pilot (Resource) Provisioning}    &\textbf{Job-to-Resource (Pilot) Binding}  &\textbf{Single-/Multi-User Pilots} &\textbf{Classifier IV}  \\
+    \textbf{Pilot\newline System} &
+    \textit{Pilot\newline Resource\newline Capabilities} &
+    \textit{Resource\newline Interaction} &
+    \textit{Overlay\newline Management} &
+    \textit{Workload\newline Semantics} &
+    \textit{Task\newline Binding\newline Characteristics} &
+    \textit{Task\newline Execution\newline Modes} \\
   \hline
-          AppLeS            & N/A                                      & Automatic (algorithmic/profiling)  & Single (?) & --                     \\
   \hline
-          MyCluster         & Manual, Explicitly User-controllable     & Manual                             & Single (?)                  & --                     \\
+    DIANE &
+    HTC &
+    GANGA &
+    Out-of-Band &
+    Programmable &
+    Late &
+    Serial \\
   \hline
-          PanDA             & Automatic, Not user-controllable         & Manual(?)                          & Single (?)  \aznote{\url{http://indico.cern.ch/getFile.py/access?contribId=2&sessionId=6&resId=0&materialId=slides&confId=45473} says otherwise, but I don't think so...}    & --                     \\
+    DIRAC &
+    &
+    &
+    &
+    &
+    &
+    \\
   \hline
-          GlideinWMS        & Automatic, Not user-controllable         & Manual (rule-driven) / Automatic   & Multi / Single (via Corral) & --                     \\
-  \hline
-          Swift/Coaster     & --                                       & --                                 & --                          & --                     \\
+    BigJob &
+    &
+    &
+    &
+    &
+    &
+    \\
  \hline
-          BoSCO             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Multi / Single              & --                     \\
+    MyCluster & 
+    &
+    &
+    &
+    &
+    &
+    \\
+  \hline
+    PanDA &
+    &
+    &
+    &
+    &
+    &
+    \\
+  \hline
+    GlideinWMS & 
+    &
+    &
+    &
+    &
+    &
+    \\
+  \hline
+    Swift/Coaster &
+    &
+    &
+    &
+    &
+    &
+    \\
  \hline
-          BigJob             & Manual, Explicitly User-controllable     & Manual (rule-driven) / Automatic   & Single              & --                     \\
+    BoSCO & 
+    &
+    &
+    &
+    &
+    &
+    \\
  \hline
  \end{tabular}
- \caption{\textbf{Different pilot-job systems and their key.
- \onote{Possible classifiers:
- user/system space: can pilots be controlled from system / user space. TODO:
- discuss why we chose specific classifiers!}}
- \up}
- \label{table:implementations-comparison}
+ \caption{\textbf{Overview of \pilot systems and a summary their core properties.}}
+ \label{table:implementations-properties}
 \end{table*}
 
 \subsection{Analysis of \pilot system Implementations}
+\label{subsec:4.2}
 
-In light of the common vocabulary discussion in \S\ref{sec:vocab}, a
+\newcommand{\vocab}[1]{\textbf{#1}\xspace}
+\newcommand{\prop}[1]{\textit{#1}\xspace}
+\newcommand{\impterm}[1]{\texttt{#1}\xspace}
+
+In light of the common vocabulary discussion in \S\ref{sec:3}, a
 representative set of \pilot systems has been chosen for further analysis.
 Examining these \pilot systems using the common vocabulary exposes their core
 similarities, and allows a detailed analysis of their differences.
 
-The now following discussion of \pilot systems is ordered alphabetically.
-To assist the reader, we make use of textual conventions: in \textbf{Bold} are
-the terminologies from \S\ref{sec:vocab}, in \textit{Italic} we express the
-components of our model and in \texttt{Typewriter} we display terminology from
-the respective \pilot system.
+The now following discussion of \pilot systems is ordered alphabetically.  To
+assist the reader, we make use of textual conventions: in \vocab{Bold} we
+express the \vocab{Logical Components} and \vocab{Functionalities} of our model
+from \S\ref{subsec:3.1} and the \vocab{Terms and Definitions} from
+\S\ref{subsec:3.2}, in \prop{Italic} we refer to the \prop{Properties} from
+\S\ref{subsec:4.1} and in \impterm{Typewriter} we display terminology from the
+respective \pilot system under discussion.
 
 % \jhanote{this might go to the section where we begin describing
 %   pilotjobs.. also will need an updated description of the methodology
@@ -1894,71 +1972,71 @@ been used in various other domains, though mainly in the Life Sciences.
 As DIANE is a software framework, some of its semantics are not fixed, as they
 can be implemented in various ways.
 
-The central component of DIANE is the \texttt{RunMaster}.
-It consists of a \texttt{TaskScheduler} and an \texttt{ApplicationManager}.
+The central component of DIANE is the \impterm{RunMaster}.
+It consists of a \impterm{TaskScheduler} and an \impterm{ApplicationManager}.
 Both are abstract classes that need to be implemented for the specific purpose
 at hand. Example and/or default implementations are provided for the user to
 use or build upon.
-Together the \texttt{TaskScheduler} and \texttt{ApplicationManager} implement
-the \textit{Workload Manager} component.
+Together the \impterm{TaskScheduler} and \impterm{ApplicationManager} implement
+the \vocab{Workload Manager} component.
 
-The \texttt{TaskScheduler} keeps track of the task entries and is responsible
-for \textbf{Binding Tasks} to the \texttt{ApplicationWorkers}.
-The implementation of the \texttt{ApplicationManager} is as its name suggest,
-responsible for defining the application \textbf{Workload} and the creating
-\textbf{Tasks} that are passed to the \textit{TaskScheduler}.
-As the \texttt{ApplicationWorker} asks for \textbf{Tasks} from the
-\texttt{TaskScheduler} the natural way of implementing the scheduler is in a
-\textbf{Late Binding} approach.
+The \impterm{TaskScheduler} keeps track of the task entries and is responsible
+for \vocab{Binding Tasks} to the \impterm{ApplicationWorkers}.
+The implementation of the \impterm{ApplicationManager} is as its name suggest,
+responsible for defining the application \vocab{Workload} and the creating
+\vocab{Tasks} that are passed to the \vocab{TaskScheduler}.
+As the \impterm{ApplicationWorker} asks for \vocab{Tasks} from the
+\impterm{TaskScheduler} the natural way of implementing the scheduler is in a
+\vocab{Late Binding} approach.
 
-The \pilot in DIANE is the \textit{WorkerAgent}.
-The core component of the \textit{WorkerAgent} is the
-\texttt{ApplicationWorker}, which is an abstract class that defines three
+The \vocab{\pilot} in DIANE is the \impterm{WorkerAgent}.
+The core component of the \impterm{WorkerAgent} is the
+\impterm{ApplicationWorker}, which is an abstract class that defines three
 methods that every implementation needs to implement.
-Two of these methods are for initialization and cleanup and the last
-\texttt{do\_work()} is the method that actually receives the task description
-and executes the work, thereby being a close resemblance of the \textit{Task
+Two of these methods are for initialization and cleanup and the last,
+\impterm{do\_work()}, is the method that actually receives the task description
+and executes the work, thereby being a close resemblance of the \vocab{Task
 Executor}.
 
 As expected from the fact that DIANE is in essence a Master/Worker framework,
-the \textbf{Tasks} have no relationships inside the framework, thereby
-the \textbf{Workload Semantics} are that of a Bag-of-Tasks.
-The \textbf{Workload} that is managed by the application specific part can
+the \vocab{Tasks} have no relationships inside the framework, thereby
+the \vocab{Workload Semantics} are that of a Bag-of-Tasks.
+The \vocab{Workload} that is managed by the application specific part can
 maintain any type of workload structure, as long as it can be translated to
 individual tasks\cite{diane-dag, diane-etc}.
 Plugins for other workloads, e.\,g.\ DAGs or for data-intensive
 application, exist or are under development. The framework is extensible:
 applications can implement a custom application-level scheduler.
 
-The \textbf{Coordination \& Communication} in DIANE is based on CORBA using
+The \prop{Coordination \& Communication} in DIANE is based on CORBA using
 TCP/IP.
 CORBA itself is invisible to the application.
 Networking-wise, the workers are clients of the master server.
 On low-level, communication is always uni-directionally from the
-\textit{WorkerAgent} to the \textit{RunMaster}.
-\textbf{Security} is provided by a secret token that the \textit{WorkerAgent}
-needs to communicate back to the \textit{RunMaster}.
+\impterm{WorkerAgent} to the \impterm{RunMaster}.
+\prop{Security} is provided by a secret token that the \impterm{WorkerAgent}
+needs to communicate back to the \impterm{RunMaster}.
 This implies that the network requirements are such that the
-\textit{WorkerAgent} needs to be able to reach the \textit{RunMaster} through
+\impterm{WorkerAgent} needs to be able to reach the \impterm{RunMaster} through
 TCP/IP.
 Bi-directional communication is achieved by periodic polling through
-heartbeats by the \textit{WorkerAgent}, where the \textit{RunMaster} responds
+heartbeats by the \impterm{WorkerAgent}, where the \impterm{RunMaster} responds
 with feedback.
 The authors report that in first instance they had implemented full
 bi-directional communication, but that turned out to be difficult to correctly
 implement and created scalability limitations.
 
-DIANE's \textbf{Architecture} is based on the \textit{Inversion of Control}
+DIANE's \prop{Architecture} is based on the \impterm{Inversion of Control}
 design pattern.
 It is a python framework, that formulates certain hooks that an
-\textbf{Application} can be programmed against. The aforementioned abstract
+\vocab{Application} can be programmed against. The aforementioned abstract
 classes need to be implement to provide the application-specific semantics.
-The \textbf{Interface} to these "DIANE-\textbf{Applications}" is to start them
-through the \texttt{diane-run} command.
+The \prop{Interface} to these "DIANE-\vocab{Applications}" is to start them
+through the \impterm{diane-run} command.
 
-The \textbf{Robustness} in DIANE comes from the mature CORBA communication
-layer, and from custom task-failure policies in the \textit{TaskScheduler}.
-Dealing with \textbf{Robustness} in DIANE is twofold.
+The \prop{Robustness} in DIANE comes from the mature CORBA communication
+layer, and from custom task-failure policies in the \impterm{TaskScheduler}.
+Dealing with \prop{Robustness} in DIANE is twofold.
 At one hand DIANE offers the mechanisms to supports fault tolerance: basic
 error detection and propagation mechanisms are in place.
 Further, an automatic re-execution of tasks is possible.
@@ -1967,22 +2045,22 @@ On the other hand, DIANE also leaves room for application specific strategies.
 DIANE is primarily designed with respect to HTC environments (such as
 EGI~\cite{egi}), i.\,e.\ one \pilot consists of a single worker agent with the
 typical size of 1 core.
-There is however no tight coupling with or \textbf{Resource Dependencies} on
+There is however no tight coupling with or \prop{Resource Interaction} on
 the infrastructures where DIANE can be deployed.
-One of the DIANE \pilot \textbf{Characteristics} is that it has the notition of
+One of the DIANE \prop{Pilot Resource Capabilities} is that it has the notition of
 "capacity" and applications can make use of that property do diverge from the
 "1 worker = 1 core" mode.
 The CORBA communiation channel between the Master and the Worker also allows
 for file transfers, meaning that the \pilot not only exposes cores, but also
 the file system on the worker node.
 
-\textbf{Interoperability} to various various middleware security mechanisms
+\prop{Interoperability} to various various middleware security mechanisms
 (e.\,g.\ GSI, X509 authentication) and backends is achieved through its
 integration with GANGA.
 The \pilot provisioning with GANGA provides a unified interface for job
 submissions to various resource types.
-The \textbf{Provisioning} of \pilots is done out-of-band by means of the
-\texttt{diane-submitter} script which can launch a \pilot on any infrastructure
+The \prop{Overlay Management} of \pilots is done out-of-band by means of the
+\impterm{diane-submitter} script which can launch a \pilot on any infrastructure
 that is supported.
 
 %DIANE includes a simple capability matcher and FIFO-based task scheduler
@@ -1991,7 +2069,7 @@ that is supported.
 DIANE is in principle a single-user PJ, i.\,e.\ each PJ is executed with the
 privileges of the respective user.
 Also, only workload of this respective user can be executed by DIANE.
-However, \textbf{Multitenancy} with DIANE does happen when it is used as a
+However, \prop{Multitenancy} with DIANE does happen when it is used as a
 backend for Science Gateways, where it serves multiple users on the same
 installation, but with a single credential.
 
