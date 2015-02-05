@@ -1379,14 +1379,15 @@ onto the components described in \S\ref{subsec:3.1}.}}
 \label{table:property_component_mapping}
 \end{table*}
 
-Implementations of Pilot Provisioning are analyzed by focusing on two specific
-properties: the requirements and dependencies between the \pilot system and
-the underlying distributed resources; and the type of resources the pilot
-system exposes in terms of computing, data and networking. For example, in
-order to schedule a pilot onto a specific resource, the \pilot system will
-need to know what type of container to use (e.g. job, virtual machine), what
-type of scheduler the resource exposes, but also what kind of functionalities
-will be available on the nodes of the resource in terms of compute, data and
+Implementations of Pilot Provisioning are analyzed by focusing on two
+specific properties: the requirements and dependencies between the
+\pilot system and the underlying distributed resources; and the type
+of resources the pilot system exposes in terms of computing, data and
+networking. For example, in order to schedule a pilot onto a specific
+resource, the \pilot system will need to know what type of container
+to use (e.g. job, virtual machine), what type of scheduler the
+resource exposes, but also what kind of functionalities will be
+available on the nodes of the resource in terms of compute, data and
 networking.
 
 Two properties are also used to analyze the implementations of Task
@@ -1417,16 +1418,16 @@ environment to be set up so that some libraries, data or accessory programs
 are made available.
 
 Several auxiliary properties play a fundamental role in distinguishing
-among \pilot systems implementations, as well as address, set and
-provide constraints on their usability.  Programming and user
-interfaces; interoperability across differing middleware and other
-\pilot systems; multitenancy; strategies and abstractions for data
-management; security including policies alongside authentication and
+\pilot systems implementations, as well as address, set and provide
+constraints on their usability.  Programming and user interfaces;
+interoperability across differing middleware and other \pilot systems;
+multitenancy; strategies and abstractions for data management;
+security including policies alongside authentication and
 authorization; support for multiple usage modes like HPC or HTC; or
 robustness in terms of fault-tolerance and high-availability; are all
-examples of properties that might characterize a \pilot
-implementation but in of themselves, would not distinguish a \pilot
-as a unique system.
+examples of properties that might characterize a \pilot implementation
+but in of themselves, would not distinguish a \pilot as a unique
+system.
 
 Both core and auxiliary properties have a direct impact on the multiple use
 cases for which \pilot systems are currently engineered and deployed. For
@@ -1434,7 +1435,7 @@ example, while every \pilot system offers the opportunity to schedule the
 tasks of a workload on a pilot, the degree of support of specific workloads
 varies vastly across implementations. Furthermore, some \pilot systems
 support Virtual Organizations and running tasks from multiple users on a single
-pilot while others support jobs leveraging a Message Passing Interface (MPI).
+pilot while others support jobs using a Message Passing Interface (MPI).
 Analogously, all \pilot systems, support the execution of one or more type
 of workload but they differ when considering execution modalities that maximize
 throughput (HTC), computing (HPC) or container-based high scalability (Cloud).
@@ -1560,11 +1561,12 @@ not of (individual) instantiations of \pilots.
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
-\item \textbf{Coordination and Communication}: Earlier in \ref{subsec:3.1} we
-  discussed extensively on the importance of Coordination and Communication,
-  but also declared it a non-defining function of a \pilot system.
-  The details of Communication and Coordination between its components do
-  distinguish various \pilot systems from each other.
+\item \textbf{Coordination and Communication}: Earlier in
+  \ref{subsec:3.1} we discussed extensively the importance of
+  Coordination and Communication, but also suggested it as a
+  non-defining function of a \pilot system.  The details of
+  Communication and Coordination between its components do distinguish
+  various \pilot systems from each other.
 
 % aux because: its an implementation detail
 \item \textbf{Architecture}: \pilot systems may be implemented by
