@@ -2209,20 +2209,75 @@ installation, but with a single credential.
 
 \subsubsection{DIRAC}
 
-DIRAC (Distributed Infrastructure with Remote Agent Control) is product that
-grew out of the CERN LHCb project\cite{diracgrid2004}.
-The DIRAC ecosystem consists of the DIRAC Pilot framework and the DIRAC
-Workload Management System.
+DIRAC (Distributed Infrastructure with Remote Agent Control) is a software
+product that grew out of the CERN LHCb project\cite{diracgrid2004}.
+DIRAC implements a community-wide \impterm{Workload Management System}(WMS) to
+manage the computational payload of its community members.
+The complete DIRAC ecosystem consists of the DIRAC Pilot framework and the WMS.
 
-DIRAC Job Agents are empty resource reservation containers that perform sanity checks
-on the resources and if succesful in that, contribute to the creation of an
-overlay network.
+% We would like to note that the LHCb data production run in summer 2004 was
+% the first successful demonstration of the massive usage of the LCG grid
+% resources. This was largely due to the use of the DIRAC Workload Management
+% System, which boosted significantly the efficiency of the production jobs. 
+% \cite{Tsaregorodtsev:2010cj}
 
-DIRAC uses the notion of TaskQueues to organize the application's payload at
-the side of the WMS.
 
-TasqQueueDirectors direct the workload from the TaskQueues for execution to the
-Job Agents.
+The user \vocab{Workload} (in DIRAC terminology: \impterm{payloads}),
+consisting of independent \vocab{Tasks}  have varying levels of priorities for
+LHCb as a whole, as well as a variety of requirements for them to execute.
+
+When \vocab{Tasks} come into the realm of the \impterm{WMS}, a consistency
+check is performed and optional input data requirements are translated to
+resource candidates.
+Once this is done, \vocab{Tasks} are then organized into \impterm{TaskQueues}.
+\impterm{TaskQueues} are sorted groups of \impterm{Payloads} with identical
+requirements (e.g., user identity, number of cores, etc.) that are ready to run.
+% In order to efficiently determine the most appropriate payload to be handled
+% for execution to a Pilot Job at any given time, pending tasks are organized
+% into TaskQueues.
+
+The design of DIRAC relies on three main components: the \impterm{DIRAC Agent}
+\impterm{TaskQueue}, and \impterm{TaskQueue Director}.
+
+The \impterm{DIRAC Agent} is responsible for sending the \impterm{payload}
+request to the central DIRAC WMS server and for the subsequent execution of the
+received \impterm{payload}.
+
+The bootstrapping of the \impterm{DIRAC Agent} performs a full DIRAC
+installation including a download of the most current version of the
+configuration.
+After completion of the DIRAC installation, the job checks for the working
+conditions (e.g. where execution takes place, available resources, etc.) a
+\impterm{DIRAC Agent} is started.
+
+Once the \vocab{Task} has been pulled, it is executed through means of a
+\impterm{Job Wrapper}.
+The \impterm{Job Wrapper} creates a uniform environment to execute
+\vocab{Tasks} indepent of the \vocab{DCI} where they run.
+Furthermore, it retrieves the input sandbox, checks availability of required
+input data and software, executes the payload, reports success or failure of
+the execution, and finally uploads output sandbox and output data if required.
+
+At the same time it also instantiates a \impterm{Watchdog} to monitor the
+proper behaviour of the \impterm{Job Wrapper}.
+The watchdog checks periodically the situation of the \impterm{Job Wrapper},
+takes actions in case the disk or available cpu is about to be exhausted or the
+payload stalls, and reports to the central \impterm{WMS}.
+It can also execute management commands received from the central service, e.g.
+to kill the \impterm{Payload}.
+
+ 
+\impterm{DIRAC WMS}
+
+
+\impterm{TasqQueue Directors} direct the workload from the \impterm{TaskQueues}
+for execution to the Job Agents.
+
+
+Pilots allow an effective implementation of the pull scheduling paradigm. Once
+they are safely running in the final computing resource, they contact central
+WMS servers for a late binding of the resource to the payload.
+
 
 
 \subsubsection{Falkon}
