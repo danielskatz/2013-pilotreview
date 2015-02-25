@@ -192,7 +192,7 @@ scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 A variety of PJ frameworks have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011},
 DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
-PanDA~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
+\panda~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
 Nimrod/G~\cite{10.1109/HPC.2000.846563}, Falkon~\cite{1362680} and
 MyCluster~\cite{1652061} to name a few. Although they are all, for the
 most part, functionally equivalent -- they support the decoupling of
@@ -677,14 +677,14 @@ GlideinWMS is currently deployed in production on the Open Science Grid
 (OSG)~\cite{url_osg} and is the recommended mode for new users wanting to
 access OSG resources.
 
-PanDA (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} is
+\panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} is
 the workload management system of the ATLAS experiment, used to run managed
 production and user analysis jobs on the grid.
 The ATLAS Computing Facility operates the pilot submission systems.
-This is done using the PanDA “AutoPilot” scheduler component which submits
+This is done using the \panda “AutoPilot” scheduler component which submits
 pilot jobs via Condor-G.
-PanDA also provides the ability to manage data associated the jobs managed by
-the PanDA workload manager.
+\panda also provides the ability to manage data associated the jobs managed by
+the \panda workload manager.
 
 In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides
 the ability to tightly integrate storage and compute resources and is also able
@@ -704,7 +704,7 @@ storage elements (e.\,g.\ based on SRM).
 Another interesting \pilot that is used in the LHC context is
 Co-Pilot~\cite{copilot-tr}.
 Co-Pilot serves as an integration point between different grid \pilotjob systems
-(such as AliEn and PanDA), clouds and volunteer computing resources.
+(such as AliEn and \panda), clouds and volunteer computing resources.
 Co-Pilot provides components for building a framework for seamless and
 transparent integration of these resources into existing Grid and batch
 computing infrastructures exploited by the High Energy Physics community.
@@ -1616,7 +1616,7 @@ not of (individual) instantiations of \pilots.
   this detracts from the mathematical/proof language of it,
   but I think its a good idea). Especially since the second
   type of interoperability is very much less-common to a
-  single PJ system (except in cases like PANDA)}
+  single PJ system (except in cases like \panda)}
 % (ii) resource access layer: What low-level infrastructures/middleware are
 % supported? How interoperable is the framework (vertically, horizontally)?,
 
@@ -1739,7 +1739,7 @@ not of (individual) instantiations of \pilots.
     &
     \\
   \hline
-    PanDA &
+    \panda &
     &
     &
     &
@@ -2839,7 +2839,16 @@ MyCluster is no longer developed and supported.
 %% %% welcome discussion here.}
 
 
+% PanDA
 \subsubsection{\panda}
+
+
+AutoPyFactory
+
+AutoPyFactory\cite{Caballero:2012ka} - Pilot submission, management and
+monitoring system. Supersedes first generation PandaJobScheduler, as well we
+the second generation system, the AutoPilot. 
+
 
 \begin{itemize}
   \item
@@ -3054,7 +3063,7 @@ publications from either the developers or users of the various system.
   \hline
     Falkon & HPC & X cores & MTC \cite{} \\
   \hline
-    Panda & OSG & X cores & Atlas \cite{} \\
+    \panda & OSG & X cores & Atlas \cite{} \\
   \hline
  \end{tabular}
  \caption{\textbf{Overview of largest (published) results with Pilot System}}
@@ -3216,7 +3225,7 @@ considering the most common requirement that motivates its
 implementations. Leveraging multi-level scheduling so to increase the
 execution throughput of large workloads made of short running tasks has
 been achieved without devising a new paradigm. For example, as seen
-in~\S\ref{sec:4} PANDA, Falkon, or DIRAC were initially developed as
+in~\S\ref{sec:4} \panda, Falkon, or DIRAC were initially developed as
 single-point solutions, focusing on either a type of workload, a
 specific infrastructure, or the optimization of a single performance
 metric. Appreciating the properties of the \pilot paradigm becomes
