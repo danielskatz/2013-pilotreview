@@ -497,7 +497,7 @@ parameter sweep and moldable parallel applications
 \begin{figure}[t]
   \centering
     \includegraphics[width=0.45\textwidth]{figures/timeline}
-    \caption{Introduction of terms and systems over time.}
+    \caption{Introduction of systems over time.}
     \label{fig:timeline}
 \end{figure}
 
@@ -1710,26 +1710,26 @@ not of (individual) instantiations of \pilots.
     DIANE &
     HTC &
     GANGA &
-    Out-of-Band &
+    Out-of-Band / explicit &
     Programmable &
     Late &
     Serial \\
   \hline
     DIRAC &
-    &
-    &
-    &
-    &
-    &
-    \\
+    HTC &
+    Custom &
+    Community Service / implicit &
+    None (Data dependencies?) &
+    Late &
+    Serial, some MPI \\
   \hline
     BigJob &
-    &
-    &
-    &
-    &
-    &
-    \\
+    HPC &
+    SAGA &
+    Programmable / explicit &
+    Programmable &
+    Early \& Late &
+    Serial, some MPI \\
  \hline
     MyCluster & 
     &
@@ -1740,12 +1740,12 @@ not of (individual) instantiations of \pilots.
     \\
   \hline
     \panda &
-    &
-    &
-    &
-    &
-    &
-    \\
+    HTC &
+    Custom, SAGA &
+    Community Service / implicit &
+    Task type, priority &
+    Late &
+    Serial, some MPI \\
   \hline
     GlideinWMS & 
     &
@@ -1815,7 +1815,6 @@ group is responsible for RADICAL Pilot and BigJob -- an initial
 prototype and precursor to RADICAL Pilot. In this section we describe
 the core concepts underlying these related implementations the the P*
 Model.
-
 
 BigJob was designed as a flexible and extensible \pilotjob to work on
 a variety of infrastructures.  It was designed to natively support
@@ -2841,68 +2840,37 @@ MyCluster is no longer developed and supported.
 
 % PanDA
 \subsubsection{\panda}
+\label{sec:panda}
 
-
-AutoPyFactory
-
-AutoPyFactory\cite{Caballero:2012ka} - Pilot submission, management and
-monitoring system. Supersedes first generation PandaJobScheduler, as well we
-the second generation system, the AutoPilot. 
-
-
-\begin{itemize}
-  \item
-    Pilot Characteristics - ? (User-specifiable, varied, analysis re: others,
-    supports distributed data, etc)
-  \item
-    Resource Dependences - Condor Glide-in, supports PBS/LSF/others through this, plugin support
-  \item
-    Workload Semantics - job type, priority, input data/locality,
-  \item
-    Task Binding Characteristics - Late-binding (?)
-%When the pilot is launched, it collects information about the worker node and
-%sends it to the job dispatcher.
-%If a matching job does not exist, the pilot will end. If a job does exist, the
-%pilot will fork a separate thread for the job and start monitoring its
-%execution.
-  \item
-    Deployment Strategies - DDM handles data transfer, must have database access,
-    file stage-in/out + cleanup
-  \item
-    Architecture - Client-server
-  \item
-    Interfaces - Python/HTTP Client
-  \item
-    Interoperability - Condor/SGE, uni-pilot
-  \item
-    Multitenancy - Multi-user
-  \item
-    Robustness - Disk space monitoring, job recovery of failed jobs from restarting
-    from crash if possible
-  \item
-    Security - GSI Certificate-based security, HTTPS, glExec to run as given user
-  \item
-    Usage Modes - HTC, Cloud, HPC WIP(?)
-\end{itemize}
-
-\paragraph{Rationale}
-\panda was developed to provide a multi-user \pilotjob system for
+\panda was developed to provide a multi-user workload management system for
 ATLAS~\cite{aad2008atlas}, which is a particle detector at the Large Hadron
-Collider which could handle large numbers of jobs for data-driven processing
-workloads.
+Collider at CERN which could handle large numbers of jobs for data-driven
+processing workloads.
 In addition to the logistics of handling large-scale job submission, there was
 a need for integrated monitoring for analysis of system state and a high degree
 of automation to reduce the need for user/administrative intervention.
+As \panda is a multi-stakeholder project that is active for many years, it
+naturally went through many iterations.
+We try to refer to the current state as much as possible.
+
+The core component of \panda responsible for the \pilot aspects is
+AutoPyFactory\cite{Caballero:2012ka}.
+It is handles \pilot submission, management and monitoring system.
+(AutoPyFactory supersedes the initial generation PandaJobScheduler, as well we
+the second generation system, the AutoPilot.)
 
 \paragraph{Design Goals}
-\panda was designed as an advanced \pilotjob system,
+\panda was designed as an advanced workload management system,
 satisfying requirements such as the ability
 to manage data, monitor job/disk space, and recover from failures.
+It hereto adopted the \pilot paradigm.
 A modular approach allowing the use of plug-ins was chosen in order
 to incorporate additional features in the future.
 \panda was designed from the ground-up to meet these requirements
 while scaling to handle the large scale of jobs and data produced
 by the ATLAS experiment.
+%\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
+%work for this, or is this out-of scope?}
 
 \paragraph{Applications}
 \panda has been used to process data and jobs relating to ATLAS.  Approximately
@@ -2910,6 +2878,11 @@ a million jobs a day are managed~\cite{pandapresentation2013-06}
 which handle simulation, analysis, and other work~\cite{maeno_pd2p:_2012}.
 The ATLAS experiment itself produces several petabytes of data a year
 which must be processed and analyzed.
+Current funding for \panda enables the project to reach out to new user
+communities.
+
+\paragraph{Workload Semantics}
+job type, priority, input data/locality,
 
 \paragraph{Deployment Scenarios (VO/multiuser)}
 \panda has been initially deployed as an HTC-oriented multi-user WMS system for
@@ -2920,6 +2893,13 @@ deployment scenarios to non-ATLAS infrastructures making \panda a general-use
 \pilotjob~\cite{nilsson2012recent}.
 %% \aznote{Per-user/per-working group reference made in slides, follow-up
 %% with actual papers}
+When the pilot is launched, it collects information about the worker node and
+sends it to the job dispatcher.
+If a matching job does not exist, the pilot will end. If a job does exist, the
+pilot will fork a separate thread for the job and start monitoring its
+execution.
+The DDM(?) handles data transfer, must have database access, file stage-in/out
+and takes care of cleanup.
 
 \paragraph{Resource Landscape (e.g. grid/cloud/hpc/etc)}
 \panda began as a specialized \pilotjob for the ATLAS grid, and has been
@@ -2931,6 +2911,11 @@ and EC2 cloud offerings as well~\cite{pandapresentation2013-06}, extending the
 reach of \panda to cloud resources as well.
 Future \panda developments seek to interoperate with HPC
 resources~\cite{pandapresentation2013-06}.
+
+\paragraph{Interoperability}
+\panda traditionally relies on Condor (and SGE?) for its interaction with DCIs.
+For recent endeavours in HPC they are using SAGA to interface with the queuing
+systems.
 
 \paragraph{Architecture \& Interface}
 \panda's \textit{manager} is called a \texttt{\panda server}, and matches
@@ -2950,50 +2935,26 @@ all of the baseline capabilities required for a \pilotjob.
 
 As \panda is an \textit{Advanced \pilotjob System}, it enables functionality
 beyond that of a \textit{Basic \pilotjob}.
-\panda contains some additional backend features such as \texttt{AutoPilot}, which
-tracks site statuses via a database, \texttt{Bamboo} which adds
-ATLAS database interfacing, and automatic error handling and recovery.
-\panda contains support for queues in clouds, including EC2, Helix Nebula,
-and FutureGrid~\cite{pandapresentation2013-06}.
+\panda contains some additional backend features such as \texttt{AutoPilot},
+which tracks site statuses via a database, \texttt{Bamboo} which adds ATLAS
+database interfacing, and automatic error handling and recovery.
+\panda contains support for queues in clouds, including EC2, Helix Nebula, and
+FutureGrid~\cite{pandapresentation2013-06}.
 %% \aznote{Have to find a good cite for this}
-Enhancements to the userspace include
-\texttt{Monitor}, for web-based monitoring, and the \texttt{\panda client}.
-\texttt{\panda Dynamic Data Placement} \cite{maeno_pd2p:_2012}
-allows for additional, automatic data
-management by replicating popular or backlogged input data to underutilized resources
-for later computations and enables jobs to be placed where the data
+Enhancements to the userspace include \texttt{Monitor}, for web-based
+monitoring, and the \texttt{\panda client}.  \texttt{\panda Dynamic Data
+Placement} \cite{maeno_pd2p:_2012} allows for additional, automatic data
+management by replicating popular or backlogged input data to underutilized
+resources for later computations and enables jobs to be placed where the data
 already exists.
 
+\paragraph{Robustness}
+The wrapper of the \pilot takes care of disk space monitoring, and enables job
+recovery of failed jobs and restarting from crash whenever possible.
 
-\paragraph{\panda Conclusion}
-\panda has extended beyond its origins at the ATLAS experiment, and has also
-been used for other projects such as the Open Science Grid.
-This illustrates the importance of designing \pilotjobs which are easily
-adaptable such that \pilots are not tied to any particular DCI; in this manner,
-their advantages can be made available beyond their original design scope.
-
-\textcolor{red}
-{
-\textbf{Mapping to section 3:}
-\begin{itemize}
-\item Term 1 =
-\item Term 2 =
-\end{itemize}
-}
-
-\textcolor{blue}
-{
-\textbf{Mapping to table 1:}
-\begin{itemize}
-\item Pilot (Resource) Provisioning:
-\item Job-to-Resource (Pilot) Binding:
-\item Singe-/Multi-User pilots:
-\end{itemize}
-}
-
-%\aznote{Discussion on PanDA's design for LHC data processing and why \pilotjobs
-%work for this, or is this out-of scope?}
-
+\paragraph{Security}
+\panda on HTC grids mainly depends on GSI Certificate-based security and glExec
+to run as given user.
 
 %% \textbf{job, task, resource, infrastructure, scheduling, pilot, pool, manager,
 %%   agent, Pilot-Job, placeholder, multi-level scheduling, binding, early/late
@@ -3262,7 +3223,45 @@ infrastructure middlware stack.
 % Why should we define the \pilot paradigm an abstraction?
 
 \subsection{Pilot Paradigm in Context}
-\label{sec:5.2}
+\label{sec:context}
+
+\paragraph*{HTC vs HPC} We have identified that the Pilot Paradigm in itself is
+very common and on an abstract level applies to all \pilot systems we have
+discussed. This is also illustrated by the mapping to the \pstar model.
+While arguably not a fundamental difference in the application of \pilots,
+there certainly are structural practical differences in using \pilots on HPC vs
+HTC.
+While in the \textit{temporal} dimension the ratio of \vocab{Tasks} and \pilots might
+be similar for both type of infrastructures (i.e. \pilots run for 12 hours and
+tasks for 1 hour), the \textit{spatial} dimension is a different story.
+Let's define HPC as O(10) sites with a tightly coupled system.
+These systems typically have a head/login/service node where the \pilot will
+operate from.
+For one site, the ratio of \pilots vs compute resources will typically be
+O(1):O(Nodes) and therefore the ratio of \pilots vs \vocab{Tasks} will be
+O(1):O(Tasks).
+With the given O(10) sites this leaves us with a \pilot:\vocab{Tasks} ratio of at most
+O(10):O(Tasks)
+On the other hand, if we define HTC as O(100) sites of lousely coupled systems,
+without a central node to foster these resources, the ratio of \pilots to
+compute resources will typically be closer to O(1):O(Cores).
+These differences have not only implications on the type of applications that
+can be run, but also on the nature of the multi-level scheduling. In the HPC
+case there is a large degree of freedom for the \pilot layer scheduling while
+in HTC the scheduling on that level is much more pre-determined.
+
+\paragraph*{MPI, OpenMP, etc.} In the \pstar model and in the discussion so far
+we have mainly been concerned about the abstract notion of \vocab{Task}, i.e.
+the application payload to be run on the DCI.
+While this abstraction is very natural it does pose challenges in practice when
+we are operating in a real-life heterogeneous environment, i.e. what does
+``run'' mean \ldots. And if we are able to define what it means, how do we pass
+that information down the stack?
+
+\paragraph*{Generality or optimisation} The existence of many \pilot systems
+is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
+Workload management. [this has a clear link to the pilot and application layer
+paragraph]
 
 \paragraph*{Pilot and Middleware Layer} The definition of the term
 `pilot' and the critical review of its implementations highlight the
@@ -3274,8 +3273,8 @@ needs to be consistent across the paper.} introduce notable exceptions
 and differences in the way in which pilots can be provisioned.[cit, cit]
 Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for
 their provisioning. VMs can often be instantiated without waiting into a
-queue  with a predictable instantiation time, usually minimal wnen
-compared to the queuing time often experinced on Grid-based DCIs [red
+queue  with a predictable instantiation time, usually minimal when
+compared to the queuing time often experinced on Grid-based DCIs [ref
 Vishal paper]. Furthermore, the limitations on the execution time of a
 VM can be virtually absent, a limitation that on grid-based middleware
 is imposed by the queue walltime. Clearly, overheads are introduced by
@@ -3302,9 +3301,15 @@ not infeasible. The Pilot-API in conjunction with the P* Model aims to
 prevent similar situation for \pilotjobs.\mtnote{To be abstracted from
 workflow to application.}
 
-\paragraph*{Pilot and Security} \mtnote{I know something about security
-but I do not feel qualified for writing even a superficial analysis of
-the security implications of the pilot paradigm :)}
+\paragraph*{Pilot and AAA} Because the \pilot can run as a different ``user''
+than the ``owner'' of the \vocab{Task} there are challenges for many aspects of
+Authentication, Authorization and Accounting (AAA).
+The issue mainly arrises because of the fact that multi-level scheduling
+decouples the \vocab{DCI} user from the \vocab{Task} owner. 
+While technically one could make the choice not to be concerned about this
+decoupling and only be concerned with the DCI credential of the Pilot, in
+practice this does not hold true.
+[ref glexec].
 
 \paragraph*{Pilot and the Enterprise} Over the past years,
 Hadoop~\cite{hadoop} emerged as distributed computing for data-intensive
@@ -3344,6 +3349,16 @@ supporting heterogeneous workloads.
 \jhanote{\pilotjobs have potential, but it is not being realized due to
 ad hoc nature of theory and practise,}; Fragmentation/balkanization of
 the pilot landscape.
+While in this paper we also talk about HTC and HPC and their differences and
+commonalities, we have refered to an existing and growing demand for
+convergence between the two from an application perspective.
+[ref MTC?]
+HPC users are no longer exclusively interested in running one large job, but
+applications become more versatile and dynamic and are conflicting with the
+conventional thougths and operational realities on how to ``use'' HPC
+resources. [ref cray, cram, etc.]
+If the HPC world is going to accept this mode of operation, then recognizing,
+embracing and investing in the \pilot Paradigm is inevatable.
 
 \paragraph*{Engineering} \jhanote{Why should we do to enhance the
 usability?}; \aznote{I would argue that our work is important to
@@ -3354,6 +3369,15 @@ in order to 2) motivate innovation + construction of ``next-gen''
 system) + understand where the boundaries/unexplored territory is
 without having to first completely understand all 15+ existing \pilotjob
 systems and their unique vocabulary.}
+
+While we are in no way to argue for a one-size-fits-all \pilot we do believe
+that our work has shown that there is enough common ground that establishing a
+new recognized layer in the stack would not only help conceptually, but would
+also pay-off from a practical engineering standpoint.
+There are many intricate details for example in the runtime environment, that
+sharing efforts on that layer would allow the various systems to focus their
+attention where there is less overlap and more tailored to their own
+communities. [ref Open RunTime Environment] Standardisation?
 
 \paragraph*{Contributions} \jhanote{(i) we provide first comprehensive
 historical and technical analysis, (ii) set the stage for a common
