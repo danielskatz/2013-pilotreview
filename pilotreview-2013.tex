@@ -1317,23 +1317,28 @@ properties we discuss.
 \hline
 % Core
 \multirow{6}{*}{\textit{Core}}
-  & Pilot Resource Capabilities & Pilot Manager & What pilots to start? \\
+  & Pilot Resource Capabilities & Pilot Manager & The resources that the \pilot
+  represents. \\
   \cline{2-4}
-  & Resource Interaction & Pilot Manager & How to start pilots? \\
+  & Resource Interaction & Pilot Manager & The software and protocols of the
+  interaction with the DCI. \\
   \cline{2-4}
-  & Overlay Management & Workload Manager & Which tasks to dispatch? \\
+  & Overlay Management & Workload Manager & The construction of the Overlay. \\
   \cline{2-4}
-  & Workload Semantics & Workload Manager & When to dispatch tasks? \\
+  & Workload Semantics & Workload Manager & The specification of the semantics
+  (between tasks) captured in the workload description. \\
   \cline{2-4}
-  & Task Binding Characteristics & Workload Manager & When to dispatch tasks? \\
+  & Task Binding Characteristics & Workload Manager & The techniques and
+  policies of binding tasks to \pilots. \\
   \cline{2-4}
-  & Task Execution Modes & Task Executor & How to execute tasks? \\
+  & Task Execution Modes & Task Executor & The types of tasks and the
+  mechanisms to execute tasks. \\
 \hline
 % Auxiliary
 \multirow{10}{*}{\textit{Auxiliary}}
   & Coordination and Communicatuon &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    The interaction between the components.\\
+    The interaction between the components of the system.\\
   \cline{2-4}
   & Architecture &
     Pilot Manager\newline Workload Manager\newline Task Executor &
@@ -1350,7 +1355,7 @@ properties we discuss.
   \cline{2-4}
   & Multitenancy &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    The usage of compontents by multiple (concurrent) users.\\
+    The usage of components by multiple (simultaneous) users.\\
   \cline{2-4}
   & Robustness &
     Pilot Manager\newline Workload Manager\newline Task Executor &
@@ -1363,15 +1368,16 @@ properties we discuss.
   \cline{2-4}
   & Files and Data &
     Pilot Manager\newline Workload Manager &
-    Do the Managers deal with data?\\
+    The mechanisms that the system offers to explicitly deal with files and
+    data.\\
   \cline{2-4}
   & Performance and Scalability &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    What means are in place to reach performance?\\
+    A description of scale and limitations and measures to reach that.\\
   \cline{2-4}
   & Development Model &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    What is the development and support model for the software as a whole.\\
+    The development- and support model for the software.\\
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
@@ -1707,6 +1713,14 @@ not of (individual) instantiations of \pilots.
     \textit{Task\newline Execution\newline Modes} \\
   \hline
   \hline
+    BigJob &
+    HPC &
+    SAGA &
+    Programmable / explicit &
+    Programmable &
+    Early \& Late &
+    Serial, some MPI \\
+ \hline
     DIANE &
     HTC &
     GANGA &
@@ -1723,21 +1737,29 @@ not of (individual) instantiations of \pilots.
     Late &
     Serial, some MPI \\
   \hline
-    BigJob &
+    Falkon & 
     HPC &
-    SAGA &
-    Programmable / explicit &
-    Programmable &
-    Early \& Late &
-    Serial, some MPI \\
- \hline
+    Unspecified &
+    Web Service &
+    None &
+    Late (mixed push/pull) &
+    Serial \\
+  \hline
+    HTCondor & 
+    HTC (and to some degree HPC) &
+    Condor-G &
+    Explicit in Glidein case &
+    Graph &
+    Late &
+    All \\
+  \hline
     MyCluster & 
-    &
-    &
-    &
-    &
-    &
-    \\
+    HPC &
+    Custom (SGE / PBS / HTCondor) &
+    CLI tools from respective LRMS &
+    Workload semantics from respective LRMS &
+    Agnostic &
+    All \\
   \hline
     \panda &
     HTC &
@@ -1746,30 +1768,6 @@ not of (individual) instantiations of \pilots.
     Task type, priority &
     Late &
     Serial, some MPI \\
-  \hline
-    GlideinWMS & 
-    &
-    &
-    &
-    &
-    &
-    \\
-  \hline
-    Swift/Coaster &
-    &
-    &
-    &
-    &
-    &
-    \\
- \hline
-    BoSCO & 
-    &
-    &
-    &
-    &
-    &
-    \\
  \hline
  \end{tabular}
  \caption{\textbf{Overview of \pilot systems and a summary their core properties.}}
@@ -1802,7 +1800,6 @@ respective \pilot system under discussion.
 % are \pilotjobs which either laid foundational \pilotjob concept or
 % incorporated strides in interoperability, usability, architecture or
 % otherwise to advance the understanding and usage of \pilotjobs.
-
 
 
 \subsubsection{RADICAL Pilot/BigJob}
@@ -2410,6 +2407,7 @@ to be in the millisecond range. Falkon has extended its capabilities
 to encompass advanced data-scheduling and caching. Falkon does
 not support MPI jobs, however - a limiting factor in its adoption to
 certain scientific applications.
+The Falkon project ran from 2006 to 2011, source code is not available. 
 
  -----------------------------------------------------------------------------
 
@@ -2428,6 +2426,12 @@ the HTCondor \textit{software} and HTCondor \textit{grids}. But even if we only
 look at the software parts of the landscape, we are faced with a
 \textit{plethora} of concepts, components and services that have been grown and
 curated opportunistically for the past 20 years.
+
+Pilot concept is in its heart centered around Condor Glideins. Many WMS make
+use of the core functionality, ranging from many specific WMS's to the
+``generic`` GlideinWMS.
+Main HTCondor distribution provided command line utils to setup these Glideins.
+These are now replaced by Bosco.
 
 % -----------------------------------------------------------------------------
 %
@@ -2811,6 +2815,8 @@ the researchers behind it formed a complete \pilotjob system
 while working toward interoperability/uniform access is a testament
 to the usefulness of \pilotjobs in attacking these problems.
 MyCluster is no longer developed and supported.
+
+% Make link to MySGE?
 
 %% %% \aznote{NOT EVEN SURE THIS IS A ``BASIC PILOT-JOB SYSTEM'' right now:
 %% %% ``Our system delegates the responsibility of submitting the
