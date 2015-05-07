@@ -2379,34 +2379,42 @@ The Falkon project ran from 2006 to 2011, source code is not available.
 \label{sec:htcondor}
 
 HTCondor can be considered one of the most prevalent distributed computing
-project of all time in terms of its pervasiveness and size of its  user
+projects of all time in terms of its pervasiveness and size of its user
 community.
-Is often cited as the project that introduced the \pilotjob concept.
+Is often cited as the project that introduced the \pilotjob concept.\cite{}
+Similar in many respects to other batch queuing systems, HTCondor puts special
+emhphasis on high-throughput computing (HTC) and opportunistic computing.
+HTC is defined as providing large scale computational power on a long term
+scale.
+Opportunistic computing is about making pragmatic use of computing resources
+whenever they are available, without requiring full availability.
+HTC can be achieved by applying opportunistic computing.
 
 % But despite this fact, describing HTCondor along the lines of a \pilotjob
 % system has turned out to be difficult, if not partly impossible for several
 % reasons.
 
-The \pilot concept is in its heart centered around Condor Glideins.
-Many Workload Management Systems make use of the core functionality, ranging
-from many specific WMS's to the ``generic`` GlideinWMS.
+% The \pilot concept is in its heart centered around Condor Glideins.
+% Many Workload Management Systems make use of the core functionality, ranging
+% from many specific WMS's to the ``generic`` GlideinWMS.
 
 
 \paragraph{Architecture}
 
 At the heart of it, HTCondor is a high-throughput distributed batch computing
 system.
-It accepts user tasks and executes them on one or more resources called an
+It accepts user tasks and executes them on one or more resources gathered in an
 HTCondor \impterm{pool}.
 
-In a pool, user tasks (\textbf{jobs}) are represented through job description
-files and submitted to a (user-)\impterm{agent} via command-line tools. Agents
-are deployed as system services (\impterm{schedd}) on so-called \impterm{gateway
-machines} (user front-ends of an HTCondor pool) and accept tasks from multiple
-users. Agents implement three different aspects of the overall architecture:
+In a pool, user tasks are represented through job description files and
+submitted to a (user-)\impterm{agent} via command-line tools.
+Agents are deployed as (\impterm{schedd}) system services on so-called
+\impterm{gateway machines} (user front-ends of an HTCondor pool) and accept
+tasks from multiple users.
+Agents implement three different aspects of the overall architecture:
 (1) they provide persistent storage for user jobs, (2) they find resource for
 a task to execute by contacting the \impterm{matchmaker} and (3) they marshal
-task execution via a so- called \impterm{shadow}.
+task execution via a so-called \impterm{shadow}.
 
 The matchmaker, also called the \impterm{central manager}, is another system
 service that realizes the concept of late binding by matching user tasks with
@@ -2420,9 +2428,9 @@ The \impterm{startd} services are deployed on the pool's compute resources.
 They report resource state and  capabilities back to the matchmaker and start
 tasks submitted by agents on the resource in encapsulated \impterm{sandboxes}.
 
-Resources in a pool can span a wide spectrum of system. While some pools are
-comprised of regular desktop PCs (sometimes called a campus grid), other pools
-incorporate large HPC clusters and cloud resources.
+Resources in a pool can span a wide spectrum of system.
+While some pools are comprised of regular desktop PCs (sometimes called a
+campus grid), other pools incorporate large HPC clusters and cloud resources.
 Hybrid pools with heterogeneous sets of resources are also common.
 
 It is possible for two or more HTCondor pools to ``collaborate'' so that one
@@ -2444,6 +2452,10 @@ HTCondor project.
 
 %\paragraph{Pilot Resource Capabilities}
 \paragraph{Resource Interaction}
+
+In its native mode, HTCondor is the middleware, and therefore the discussion of
+resource interaction doesn't apply.
+
 
 %\paragraph{Condor-G -- Condor via Globus}
 Condor-G is an alternative (user-)agent for HTCondor that can ``speak'' the
