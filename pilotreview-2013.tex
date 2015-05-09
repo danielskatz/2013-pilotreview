@@ -450,6 +450,15 @@ Enterprise, outside the boundaries of scientific research.
 % another machine. Clearly, there was a need for managing these heterogeneous,
 % dynamic grid environments, especially in terms of dynamic scheduling.
 
+% \ldots
+
+% This pattern was implemented with manageable overheads and could easily be
+% adapted to run in a platform-independent way across potentially heterogeneous
+% resources~\cite{masterworker, Goux00anenabling}. M-W based frameworks could
+% respond to dynamically changing resources by adapting the number of workers to
+% match the resource availability.\mtnote{To be aggregated in the new version}
+
+% \ldots
 
 % -----------------------------------------------------------------------------
 % Version 0.3
@@ -458,11 +467,10 @@ Enterprise, outside the boundaries of scientific research.
 The origin and motivations for devising the \pilot abstraction and developing
 its many implementations can be traced back to five main notions: task-level
 distribution and parallelism, Master-Worker (M-W) pattern, multi-tenancy,
-multi-level scheduling, and placeholder. This section offers an analysis of the
-relationships between the \pilot abstraction and these four notions. A
-chronological perspective is taken so to contextualize the inception and
-evolution of the
-\pilot abstraction.
+multi-level scheduling, and resource placeholder. This section offers an
+overview of these five notions and an analysis of their relationship with the
+\pilot abstraction. A chronological perspective is taken so to contextualize
+the inception and evolution of the \pilot abstraction.
 
 At the best of the authors' knowledge, the term `\pilotjob' was first
 introduced around 2004 in the context of the Large Hadron Collider (LHC)
@@ -497,9 +505,9 @@ nor about the states of any other worker. The master is the only one possessing
 a global view both of the overall problem to compute and of its progress
 towards a solution. As such, the M-W is a coordination pattern allowing for the
 structured distribution of tasks so to orchestrate their parallel execution.
-Clearly, this directly translates into a better time to completion (TTC) of the
-overall computation when compared to a coordination pattern in which each
-equation is sequentially solved by a single worker.
+This directly translates into a better time to completion (TTC) of the overall
+computation when compared to a coordination pattern in which each equation is
+sequentially solved by a single worker.
 
 \jhanote{Mark: I propose the following: One common use for the M-W
 scheme is to serve as the coordination substrate for PJs. I know its a
@@ -510,12 +518,14 @@ implement PJs or do PJs enable the M/W pattern to applicatons?}
 \mtnote{Please see~\S\ref{sec:compsandfuncs}, 10th paragraph: "As see in..."}
 
 The development and deployment of modern silicon-based supercomputers brought
-two key differences when compared to the carbon-based Forecast Factory devised
-by Richardson. Most of modern supercomputers are meant to be used by multiple
-users, i.e. they imply and support multi-tenancy. Furthermore, multiple
-supercomputers were made available to the scientific community, each with
-distinctive and homogeneous properties in terms of architecture, capacity,
-capabilities, and interfaces.
+at least three key differences when compared to the carbon-based Forecast
+Factory devised by Richardson. Most of modern supercomputers are meant to be
+used by multiple users, i.e. they imply and support multi-tenancy. Furthermore,
+diverse supercomputers were made available to the scientific community, each
+with both distinctive and homogeneous properties in terms of architecture,
+capacity, capabilities, and interfaces. Finally, supercomputers supported
+different types of applications, depending on the applications' communication
+and coordination models.
 
 Multi-tenancy has been shaping the way in which high performance computing
 resources are exposed to each user. Leveraging the batch processing concept,
@@ -551,38 +561,90 @@ resource access across multiple supercomputers. The idea is to hide the
 scheduling point of each supercomputer behind a single (meta) scheduler. The
 users or the applications submit their tasks to the single scheduler that
 negotiates and orchestrates the distribution of the tasks via the scheduler of
-each available supercomputer. While this approach promise an increase in both
-scale and usability, it introduces diverse types of complexity at multiple
-levels across resources, middleware, and applications.
+each available supercomputer. While this approach promises an increase in both
+scale and usability of applications, it also introduces diverse types of
+complexity across resources, middleware, and applications.
 
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches like for example those developed under
 the umbrella name of grid computing or cloud computing targeted the resource
-layer, others the application layer as seeing, for example, with the
-proliferation of workflow frameworks. All these approaches offered and still
-offer some degree of success for specific applications and use cases but a
-general solution based on well-defined and robust abstractions has still to be
-found and implemented.
+layer, others the application layer as, for example, with workflow frameworks.
+All these approaches offered and still offer some degree of success for
+specific applications and use cases but a general solution based on
+well-defined and robust abstractions has still to be devised and implemented.
 
-\mtnote{Time to bring all together and start discussing pilots.}
+One of the persistent issues besetting resource management across multiple
+supercomputers is the increase of the implementation complexity imposed on the
+application layer. Even with solutions like grid computing aiming at
+effectively and, to some extent, transparently integrating diverse resources,
+most of the requirements involving the coordination of task execution still
+lays with the application layer. This translates into single-point solutions,
+extensive redesign and redevelopment of existing applications when they need to
+be adapted to new use cases or new resources, and lack of portability and
+interoperability.
 
-\ldots
+Consider for example a simple distributed application implementing a M-W
+pattern. With a single supercomputer, the application requires the capability
+of concurrently submitting tasks to the queue of the supercomputer scheduler,
+and retrieve and aggregate their outputs. When multiple supercomputers are
+available the application requires directly managing submissions to several
+queues or the capability to leverage a third-party meta-scheduler and its
+specific execution model. In both scenarios, the application requires a large
+amount of development and capabilities that are not specific to the given
+scientific problem but to the coordination and management of its computation.
 
-This pattern was implemented with manageable overheads and could easily be
-adapted to run in a platform-independent way across potentially heterogeneous
-resources~\cite{masterworker, Goux00anenabling}. M-W based frameworks could
-respond to dynamically changing resources by adapting the number of workers to
-match the resource availability.\mtnote{To be aggregated in the new version}
+The notion of resource placeholder was devised as a pragmatic and relatively
+easy to implement attempt to reduce or at least better manage the complexity of
+executing distributed applications. A resource placeholder decouples the
+acquisition of remote compute resource from their use to execute the tasks of a
+distributed application. Resources are acquired by scheduling a job onto the
+remote supercomputer. Once executed, the job runs an agent capable of
+retrieving and executing application tasks.
 
-\ldots
+Resource placeholders bring together multi-level scheduling and M-W pattern to
+enable parallel execution of the tasks of distributed applications. Multi-level
+scheduling is achieved by scheduling the agent and then by enabling direct
+scheduling of application tasks to that agent. The M-W pattern is a natural
+choice to manage the coordination of tasks execution on the available
+agent(s).
 
-This drove the creation of AppLeS~\cite{Berman:1996:apples}, a framework for
-application-level scheduling. For this purpose, AppLeS provides an agent that
-can be embedded into an application enabling the application to acquire
-resources% (e.\,g.\ via Globus, SSH or Legion)
-and efficiently schedule tasks onto these. Besides M-W, AppLeS provides also
-different application templates, e.\,g.\ for parameter sweep and moldable
-parallel applications ~\cite{Berman:2003:ACG:766629.766632}.\mtnote{To be aggregated in the new version}
+It should be noted that resource placeholders have the potential to  to
+mitigate the side-effects introduced by multi-tenancy and to facilitate
+execution across multiple supercomputers. Multi-tenancy affects only the
+scheduling of the agent as it needs to be executed by the batch system of the
+remote supercomputer. Once the agent is executed, the user -- or the master
+process of the distributed application -- may hold total control of the
+resource placeholder. In this way, tasks are directly scheduled on the agent
+without competing with other users for the supercomputer scheduler.
+
+The progressive definition and implementation of the \pilot abstraction can be
+seen as the process of evolving both the understanding and implementation
+complexity of the notion of resource placeholder.
+
+\begin{figure}[t]
+  \centering
+    \includegraphics[width=0.45\textwidth]{figures/timeline}
+    \caption{Introduction of systems over time. When available, the date of
+    first mention in a publication or otherwise the release date of software
+    implementation is used.}
+    \label{fig:timeline}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+    \includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
+  \caption{Pilot-Job Clustering}
+  \label{fig:pilotjob_clustering}
+\end{figure}
+
+AppLeS~\cite{Berman:1996:apples} is a framework for application-level
+scheduling and offers an example of an early implementation of resource
+placeholder. AppLeS provides an agent that can be embedded into an application
+enabling the application to acquire resources and efficiently schedule tasks
+onto these. Besides M-W, AppLeS provides also different application templates,
+e.\,g.\ for parameter sweep and moldable parallel
+applications~\cite{Berman:2003:ACG:766629.766632}.\mtnote{To be aggregated in
+the new version}
 
 
 %
@@ -615,22 +677,6 @@ parallel applications ~\cite{Berman:2003:ACG:766629.766632}.\mtnote{To be aggreg
 % BigJob: 200X
 % etc.
 %
-\begin{figure}[t]
-  \centering
-    \includegraphics[width=0.45\textwidth]{figures/timeline}
-    \caption{Introduction of systems over time. When available, the date of
-    first mention in a publication or otherwise the release date of software
-    implementation is used.}
-    \label{fig:timeline}
-\end{figure}
-
-\begin{figure}[t]
-	\centering
-		\includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
-	\caption{Pilot-Job Clustering}
-	\label{fig:pilotjob_clustering}
-\end{figure}
-
 
 Although systems such as AppLeS gave user-level control of scheduling, the way
 it was designed it required changes to the application itself. For obvious
