@@ -470,6 +470,99 @@ Enterprise, outside the boundaries of scientific research.
 
 % \ldots
 
+% \msnote{\cite{Gehring:1996:mars} looks just as relevant and predates apples:
+% "... Note: AppLeS more active than MARS now MARS uses accumulated statistical
+% data on previous execution runs of the same application to derive an improved
+% task-to-process mapping"}.
+
+% Commented out GHS for now.
+%
+% The rise of application-level scheduling, as in AppLeS, opened new
+% possibilities to Grid environments. The concept of application-level
+% scheduling was extended to include long-term performance prediction in
+% heterogenous Grid environments via the Grid Harvest Service (GHS)
+% system~\cite{ghs}. GHS provides a prediction model that was derived by
+% probability analysis and simulation and useful for large-scale applications
+% in shared environments. Its prediction models and task scheduling algorithms
+% are utilized in the placement of tasks across Grid resources. GHS supports
+% three classes of task scheduling: (i) single task, (ii) parallel processing,
+% and (iii) meta-task. The performance evaluation and modeling in conjunction
+% with task-specific management (such as placement, scheduling, and execution)
+% allows the utilization of many heterogenous resources in an efficient manner.
+
+% Put real dates in the comment here.
+% Boinc: X
+% BigJob: 200X
+% etc.
+
+% complexities of task management and coordination to the application layer.
+% In order to isolate the application itself from the scheduling of resource
+% placeholders,
+
+% , due to its design it required changes to the application itself. For
+% obvious reasons this is not always a desired situation and there was a need
+% to have user-level control of scheduling without altering the original
+% application. This brought about the idea of placeholder scheduling.
+
+
+%  in that it was an abstraction layer above the various batch
+% queuing systems available on different resources. It held a \textit{place} in
+% the regular batch queue, and when it became active, it could pull tasks to
+% execute.
+
+%Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
+%provisioning of the placeholder job capability. Various Master-Worker systems
+%that provide such a mechanism (e.\,g.\
+%Nimrod-G~\cite{10.1109/HPC.2000.846563}). Condor-G/Glide-In is the most
+%well-known \pilotjob system.  \msnote{Im tempted to not make claims like this,
+%especially not without backing up.}
+
+%Further examples for lightweight \pilotjob systems are: ToPoS~\cite{topos},
+%MyCluster~\cite{Walker:2007:PAC:1285840.1285848}, MySGE~\cite{mysge},
+%GridBot~\cite{Silberstein:2009:GEB:1654059.1654071} and LGI~\cite{lgi}.
+
+%Nimrod-G~\cite{10.1109/HPC.2000.846563}, DIANE~\cite{diane-thesis} and Work
+%Queue~\cite{workqueue-pyhpc2011} are examples of Master-Worker systems that
+%utilize a placeholder agent that dispatches and manages tasks. For example,
+%Nimrod-G utilizes a Job Wrapper that is responsible for pulling a task and its
+%associated data and then manages the execution of this task. While modern
+%\pilotjobs often acquire resources opportunistically and then distribute tasks
+%to resources they were able to acquire, Nimrod-G utilizes a central,
+%cost-based scheduler.\msnote{Is this really a distinction, arent most of the
+%systems centrally controlled?}
+
+% Applications can be built on top of BOINC for their own scientific endeavors.
+% \mrnote{As just an end reader, it is really unclear how this relates to
+% anything. Is this supposed to follow from the previous para?}
+% \aznote{Yes -- perhaps combine this + last para?  maybe even next para
+% too...}
+
+% A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
+% distinctive feature? Arent the universes just labels anyway?}. On the remote
+% resource a set of Condor daemons is started, which then registers the
+% available job slots with the central Condor pool. The resources added are
+% available only for the user who added the resource to the pool, thus giving
+% complete control over the resources for managing jobs without any queue
+% waiting time. Glide-in installs and executes necessary Condor daemons and
+% configuration on the remote resource, such that the resource reports to and
+% joins the local Condor pool. Various systems that built on the \pilot
+% capabilities of Condor-G/GlideIn have been developed, e.\,g.\
+
+% Glide-in is limited in that the daemons must be running on a given resource,
+% meaning that this process must be approved by resource owners or system
+% administrators.
+
+% Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like capability on
+% Microsoft Azure clouds called a Generic Worker. The Generic Worker creates a
+% layer of abstraction above the inner workings of the cloud.  The idea behind
+% the Generic Worker is to allow scientists to do their science without
+% requiring knowledge of backend HPC systems by offering e-Science as a
+% service. Venus-C has not been shown to work with grids, because its main
+% objective is to motivate scientists to use cloud infrastructures.  While the
+% notion of moving to the cloud for data-driven science is an important one,
+% many existing cyberinfrastructures still have powerful grid computers that
+% can also be leveraged to assist with the data-driven computations.
+
 % -----------------------------------------------------------------------------
 % Version 0.3
 % -----------------------------------------------------------------------------
@@ -618,18 +711,23 @@ scheduling of application tasks to that agent. The M-W pattern is a natural
 choice to manage the coordination of tasks execution on the available
 agent(s).
 
-It should be noted that resource placeholders have the potential to  to
-mitigate the side-effects introduced by multi-tenancy and to facilitate
-execution across multiple supercomputers. Multi-tenancy affects only the
-scheduling of the agent as it needs to be executed by the batch system of the
-remote supercomputer. Once the agent is executed, the user -- or the master
-process of the distributed application -- may hold total control of the
+It should be noted that resource placeholders mitigate the side-effects
+introduced by multi-tenancy, they do not require special super-user privileges
+on the remote machines, and have the potential to load balance the execution of
+distributed applications across multiple supercomputers. Multi-tenancy affects
+only the scheduling of the agent as it needs to be executed by the batch system
+of the remote supercomputer. Once the agent is executed, the user -- or the
+master process of the distributed application -- may hold total control of the
 resource placeholder. In this way, tasks are directly scheduled on the agent
 without competing with other users for the supercomputer scheduler.
 
-The progressive definition and implementation of the \pilot abstraction can be
-seen as the process of evolving both the understanding and implementation
-complexity of the notion of resource placeholder.
+Resource placeholders and their
+scheduling~\cite{Pinchak02practicalheterogeneous} were early \pilot mechanisms.
+As placeholder scheduling evolved, it came to include dynamic monitoring and
+throttling of the different placeholders based on the queue times on the remote
+machines. The progressive definition and implementation of the \pilot
+abstraction can be seen as the process of evolving both the understanding and
+implementation complexity of the notion of resource placeholder.
 
 \begin{figure}[t]
   \centering
@@ -650,153 +748,90 @@ complexity of the notion of resource placeholder.
 AppLeS~\cite{Berman:1996:apples} is a framework for application-level
 scheduling and offers an example of an early implementation of resource
 placeholder. AppLeS provides an agent that can be embedded into an application
-enabling the application to acquire resources and efficiently schedule tasks
+enabling the application to acquire resources and to schedule efficiently tasks
 onto these. Besides M-W, AppLeS provides also different application templates,
 e.\,g.\ for parameter sweep and moldable parallel
-applications~\cite{Berman:2003:ACG:766629.766632}.\mtnote{To be aggregated in
-the new version}
+applications~\cite{Berman:2003:ACG:766629.766632}.
 
-
-%
-% \msnote{\cite{Gehring:1996:mars} looks just as relevant and predates apples: "...
-% Note: AppLeS more active than MARS now
-% MARS uses accumulated statistical data on previous execution runs of the same
-% application to derive an improved task-to-process mapping"}.
-
-
-%
-% Commented out GHS for now.
-%
-% The rise of application-level scheduling, as in AppLeS, opened new
-% possibilities to Grid environments. The concept of application-level
-% scheduling was extended to include long-term performance prediction in
-% heterogenous Grid environments via the Grid Harvest Service (GHS)
-% system~\cite{ghs}. GHS provides a prediction model that was derived by
-% probability analysis and simulation and useful for large-scale
-% applications in shared environments. Its prediction models and task
-% scheduling algorithms are utilized in the placement of tasks across
-% Grid resources. GHS supports three classes of task scheduling: (i)
-% single task, (ii) parallel processing, and (iii) meta-task. The
-% performance evaluation and modeling in conjunction with task-specific
-% management (such as placement, scheduling, and execution) allows the
-% utilization of many heterogenous resources in an efficient manner.
-
-%
-% Put real dates in the comment here.
-% Boinc: X
-% BigJob: 200X
-% etc.
-%
-
-Although systems such as AppLeS gave user-level control of scheduling, the way
-it was designed it required changes to the application itself. For obvious
-reasons this is not always a desired situation and there was a need to have
-user-level control of scheduling without altering the original application.
-This brought about the idea of placeholder
-scheduling~\cite{Pinchak02practicalheterogeneous}. A placeholder was an early
-\pilot mechanism in that it was an abstraction layer above the various batch
-queuing systems available on different resources. It held a \textit{place} in
-the regular batch queue, and when it became active, it could pull tasks to
-execute.  Placeholder scheduling was advantageous in that it did not require
-any special super-user privileges on the machines, which was something most
-grid users did not have access to.  It also provided a means of load balancing
-across the different resources.  As placeholder scheduling evolved, it came to
-include dynamic monitoring and throttling of the different placeholders based
-on the queue times on the machines.
-
-%Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
-%provisioning of the placeholder job capability. Various Master-Worker systems
-%that provide such a mechanism (e.\,g.\
-%Nimrod-G~\cite{10.1109/HPC.2000.846563}). Condor-G/Glide-In is the most
-%well-known \pilotjob system.  \msnote{Im tempted to not make claims like this,
-%especially not without backing up.}
-
-%Further examples for lightweight \pilotjob systems are: ToPoS~\cite{topos},
-%MyCluster~\cite{Walker:2007:PAC:1285840.1285848}, MySGE~\cite{mysge},
-%GridBot~\cite{Silberstein:2009:GEB:1654059.1654071} and LGI~\cite{lgi}.
-
-
-%Nimrod-G~\cite{10.1109/HPC.2000.846563}, DIANE~\cite{diane-thesis} and Work
-%Queue~\cite{workqueue-pyhpc2011} are examples of Master-Worker systems that
-%utilize a placeholder agent that dispatches and manages tasks. For example,
-%Nimrod-G utilizes a Job Wrapper that is responsible for pulling a task and its
-%associated data and then manages the execution of this task. While modern
-%\pilotjobs often acquire resources opportunistically and then distribute tasks
-%to resources they were able to acquire, Nimrod-G utilizes a central,
-%cost-based scheduler.\msnote{Is this really a distinction, arent most of the
-%systems centrally controlled?}
-
+AppLeS gave user-level control of scheduling but did not isolate the
+application layer from the management and coordination of task execution. Any
+change in the coordination mechanisms translated directly into a change of the
+application code. The next evolutionary step was to create a dedicated
+abstraction layer between those of the application and of the various batch
+queuing systems available at different remote systems.
 
 Around the same time as AppLeS was introduced, volunteer computing projects
-started using the M-W approach to achieve high-throughput calculations for a
-wide range of problems.
-%This also used a pull based model, as there was no central control of these
-%resources.
-These volunteer (desktop) resources could potentially be distributed around the
-world, users only had to download a client program that ran in the background
-on their computer. The volunteer workers were essentially heterogeneous and the
-pool of workers more dynamic, as opposed to essentially homogeneous and static
-in AppLeS. The idea of farming out tasks in a distributed environment including
-personal computers was powerful in that it essentially made a computing grid
-out of many less powerful machines. The first public volunteer computing
-projects were The Great Internet Mersenne Prime Search
-effort\cite{woltman:2004:gimps}, shortly followed by
-distributed.net~\cite{Lawton:2000:distributednet} in 1997 to attack the RC5-56
-secret-key challenge, and the SETI@Home project, which set out to analyze radio
-telescope data. Out of this last project, the generic BOINC distributed
-master-worker framework grew \cite{Anderson:2004:BSP:1032646.1033223}.%Applications can be built on top of BOINC for their own scientific endeavors.
-%\mrnote{As just an end reader, it is really unclear how this relates to
-%anything. Is this supposed to follow from the previous para?}
-%\aznote{Yes -- perhaps combine this + last para?  maybe even next para too...}
+started using the M-W coordination pattern to achieve high-throughput
+calculations for a wide range of scientific problems. These volunteer workers
+could potentially be distributed at global scale, users only had to download a
+client program on their laptops and workstations and the workers would have
+taken care of pulling the computation tasks and executing on the local machine
+when CPU cycles were available.
 
-While in the AppLes and placeholder job scenarios the resources were planned
-from a central place, the resources in the volunteer computing were of an
-ad-hoc nature. The central master would in the latter case not know in advance
-which resources could come available at any given time, and therefore there was
-no advance allocation of work to a specific worker. This in contrast with when
-there is an orchestrated set of resources requested by the master, where the
-master can e.g. equally divide the tasks over the allocated workers.
+The volunteer workers were essentially heterogeneous and dynamic as opposed to
+the homogeneous and static nature of the AppLeS workers. The idea of farming
+out tasks in a distributed environment including personal computers promised to
+lower the complexity barrier associated to distributed applications design and
+implementation. Furthermore, volunteering computing was consistent with the
+resource placeholder abstraction, and as such represented an evolutionary step
+of the notion of \pilot.
 
-Condor is a high-throughput distributed batch computing system. Originally
-Condor was created for systems within one administrative domain. With
-Flocking~\cite{Epema:1996:flocking}, it was possible to group multiple Condor
-systems (pools) together so that their resources could be used in an
-aggregative manner. However, this mode of operation required system level
-software configuration by the owners of the individual Condor resources and
-thus required administrator cooperation, and could not simply be done on
-application level by a user. Condor-G/GlideIn~\cite{condor-g} is one of the
-pioneers of the \pilotjob concept. GlideIn is a mechanism by which a user can
-add remote grid resources to the local condor pool and run their jobs on the
-added remote resource in the same way that local condor jobs are submitted.
-% A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
-% distinctive feature? Arent the universes just labels anyway?}. On the remote
-% resource a set of Condor daemons is started, which then registers the
-% available job slots with the central Condor pool.
-The resources added are available only for the user who added the resource to
-the pool, thus giving complete control over the resources for managing jobs
-without any queue waiting time.
-%Glide-in installs and executes necessary Condor daemons and configuration on
-%the remote resource, such that the resource reports to and joins the local
-%Condor pool.
-Various systems that built on the \pilot capabilities of Condor-G/GlideIn have
-been developed, e.\,g.\ Bosco~\cite{bosco}.
+The first public volunteer computing projects were The Great Internet Mersenne
+Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
+distributed.net~\cite{Lawton:2000:distributednet} in 1997 to compete in the
+RC5-56 secret-key challenge, and the SETI@Home project, which set out to
+analyze radio telescope data. The generic BOINC distributed master-worker
+framework grew our of SETI@Home, becoming the {\it de facto} standard framework
+for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
-%Glide-in is limited in that the daemons must be running on a given resource,
-%meaning that this process must be approved by resource owners or system
-%administrators.
+It should be noted that process of resource acquisition is different in AppLes
+and voluntary computing. The former has complete knowledge of the available
+resources while the latter has none. As a consequence, AppLes can request an
+orchestrated set of resource, allocates in advance tasks to specific workers
+(i.e. resources placeholders), and implement load balancing among resources. In
+voluntary computing tasks are polled by the clients when they become active
+and, as such, resource availability is unknown in advance. This potential
+drawback is mitigated by the scale that voluntary computing can reach and by a
+distributed paradigm that does not have to rely heavily on a master process.
 
-% Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like capability on
-% Microsoft Azure clouds called a Generic Worker. The Generic Worker creates a
-% layer of abstraction above the inner workings of the cloud.  The idea behind
-% the Generic Worker is to allow scientists to do their science without
-% requiring knowledge of backend HPC systems by offering e-Science as a
-% service. Venus-C has not been shown to work with grids, because its main
-% objective is to motivate scientists to use cloud infrastructures.  While the
-% notion of moving to the cloud for data-driven science is an important one,
-% many existing cyberinfrastructures still have powerful grid computers that
-% can also be leveraged to assist with the data-driven computations.
+The opportunistic use of geographically distributed resources championed by
+voluntary computing offers several advantages. The resource landscape available
+for scientific research is fragmented across multiple institutions, managed
+with different policies and protocols, and heterogeneous both in quantity and
+quality. Once aggregated, the sum of resources can support very large
+distributed computations and an large amount of multi-tenancy while large
+parallel applications can still be run on the few large resources offering
+low-latency networking.
 
-%BigJob
+Condor is a high-throughput distributed batch computing system that leverages
+diverse and possibly geographically distributed resources. Originally, Condor
+was created for systems within one administrative domain but
+Flocking~\cite{Epema:1996:flocking} made possible to group multiple Condor
+resource pools in an aggregative manner. However, resource management could not
+be done on application level by the user: Flocking required system level
+software configurations that had to be made by the administrator of each
+individual resource of each Condor resource pool.
+
+This limitation was overcame by integrating the notion of resource placeholder
+within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
+remote grid resources to Condor resource pools. In this way, users can execute
+jobs uniformly on resource pools composed by diverse resources. Thanks to its
+use of resource placeholders, GladeIn has been one of the systems pioneering
+the \pilot abstraction, enabling \pilot capabilities also for third parties
+systems like Bosco~\cite{bosco}.
+
+The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
+enable scientific computation at scale on heterogeneous resources. The
+implementation of GlideIn also highlighted at least two limitations:
+user/system layer isolation, and application development model. While GlideIn
+allows for the user to manage resource placeholder directly, daemons must still
+be running on the remote resources. This means that GlideIn cannot be deployed
+without involving the resource owners and system administrators. Implemented as
+a service, GlideIn support integration with distributed application frameworks
+but does not programmatically support the development of distributed
+applications by means of dedicated APIs and libraries.
+
+% BigJob
 
 BigJob was designed as a flexible and extensible Pilot-Job to work on a variety
 of infrastructures through the use of the Simple API for Grid Applications
