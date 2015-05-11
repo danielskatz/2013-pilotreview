@@ -527,6 +527,32 @@ Enterprise, outside the boundaries of scientific research.
 % \aznote{Yes -- perhaps combine this + last para?  maybe even next para
 % too...}
 
+% A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
+% distinctive feature? Arent the universes just labels anyway?}. On the remote
+% resource a set of Condor daemons is started, which then registers the
+% available job slots with the central Condor pool. The resources added are
+% available only for the user who added the resource to the pool, thus giving
+% complete control over the resources for managing jobs without any queue
+% waiting time. Glide-in installs and executes necessary Condor daemons and
+% configuration on the remote resource, such that the resource reports to and
+% joins the local Condor pool. Various systems that built on the \pilot
+% capabilities of Condor-G/GlideIn have been developed, e.\,g.\
+
+% Glide-in is limited in that the daemons must be running on a given resource,
+% meaning that this process must be approved by resource owners or system
+% administrators.
+
+% Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like capability on
+% Microsoft Azure clouds called a Generic Worker. The Generic Worker creates a
+% layer of abstraction above the inner workings of the cloud.  The idea behind
+% the Generic Worker is to allow scientists to do their science without
+% requiring knowledge of backend HPC systems by offering e-Science as a
+% service. Venus-C has not been shown to work with grids, because its main
+% objective is to motivate scientists to use cloud infrastructures.  While the
+% notion of moving to the cloud for data-driven science is an important one,
+% many existing cyberinfrastructures still have powerful grid computers that
+% can also be leveraged to assist with the data-driven computations.
+
 % -----------------------------------------------------------------------------
 % Version 0.3
 % -----------------------------------------------------------------------------
@@ -754,51 +780,46 @@ resources while the latter has none. As a consequence, AppLes can request an
 orchestrated set of resource, allocates in advance tasks to specific workers
 (i.e. resources placeholders), and implement load balancing among resources. In
 voluntary computing tasks are polled by the clients when they become active
-and, as such, resource availability is {\i de facto} unpredictable.
+and, as such, resource availability is unknown in advance. This potential
+drawback is mitigated by the scale that voluntary computing can reach and by a
+distributed paradigm that does not have to rely heavily on a master process.
 
-\mtnote{Connect Condor to static/dynamic resource placeholder allocation}
+The opportunistic use of geographically distributed resources championed by
+voluntary computing offers several advantages. The resource landscape available
+for scientific research is fragmented across multiple institutions, managed
+with different policies and protocols, and heterogeneous both in quantity and
+quality. Once aggregated, the sum of resources can support very large
+distributed computations and an large amount of multi-tenancy while large
+parallel applications can still be run on the few large resources offering
+low-latency networking.
 
-Condor is a high-throughput distributed batch computing system. Originally
-Condor was created for systems within one administrative domain. With
-Flocking~\cite{Epema:1996:flocking}, it was possible to group multiple Condor
-systems (pools) together so that their resources could be used in an
-aggregative manner. However, this mode of operation required system level
-software configuration by the owners of the individual Condor resources and
-thus required administrator cooperation, and could not simply be done on
-application level by a user.
+Condor is a high-throughput distributed batch computing system that leverages
+diverse and possibly geographically distributed resources. Originally, Condor
+was created for systems within one administrative domain but
+Flocking~\cite{Epema:1996:flocking} made possible to group multiple Condor
+resource pools in an aggregative manner. However, resource management could not
+be done on application level by the user: Flocking required system level
+software configurations that had to be made by the administrator of each
+individual resource of each Condor resource pool.
 
-Condor-G/GlideIn~\cite{condor-g} is one of the pioneers of the \pilotjob
-concept. GlideIn is a mechanism by which a user can add remote grid resources
-to the local condor pool and run their jobs on the added remote resource in the
-same way that local condor jobs are submitted.
+This limitation was overcame by integrating the notion of resource placeholder
+within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
+remote grid resources to Condor resource pools. In this way, users can execute
+jobs uniformly on resource pools composed by diverse resources. Thanks to its
+use of resource placeholders, GladeIn has been one of the systems pioneering
+the \pilot abstraction, enabling \pilot capabilities also for third parties
+systems like Bosco~\cite{bosco}.
 
-% A Glide-in is submitted using the Condor-G grid universe \msnote{Is this a
-% distinctive feature? Arent the universes just labels anyway?}. On the remote
-% resource a set of Condor daemons is started, which then registers the
-% available job slots with the central Condor pool.
-The resources added are available only for the user who added the resource to
-the pool, thus giving complete control over the resources for managing jobs
-without any queue waiting time.
-% Glide-in installs and executes necessary Condor daemons and configuration on
-% the remote resource, such that the resource reports to and joins the local
-% Condor pool.
-Various systems that built on the \pilot capabilities of Condor-G/GlideIn have
-been developed, e.\,g.\ Bosco~\cite{bosco}.
-
-% Glide-in is limited in that the daemons must be running on a given resource,
-% meaning that this process must be approved by resource owners or system
-% administrators.
-
-% Venus-C~\cite{venusc-generic-worker} provides a \pilotjob-like capability on
-% Microsoft Azure clouds called a Generic Worker. The Generic Worker creates a
-% layer of abstraction above the inner workings of the cloud.  The idea behind
-% the Generic Worker is to allow scientists to do their science without
-% requiring knowledge of backend HPC systems by offering e-Science as a
-% service. Venus-C has not been shown to work with grids, because its main
-% objective is to motivate scientists to use cloud infrastructures.  While the
-% notion of moving to the cloud for data-driven science is an important one,
-% many existing cyberinfrastructures still have powerful grid computers that
-% can also be leveraged to assist with the data-driven computations.
+The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
+enable scientific computation at scale on heterogeneous resources. The
+implementation of GlideIn also highlighted at least two limitations:
+user/system layer isolation, and application development model. While GlideIn
+allows for the user to manage resource placeholder directly, daemons must still
+be running on the remote resources. This means that GlideIn cannot be deployed
+without involving the resource owners and system administrators. Implemented as
+a service, GlideIn support integration with distributed application frameworks
+but does not programmatically support the development of distributed
+applications by means of dedicated APIs and libraries.
 
 % BigJob
 
