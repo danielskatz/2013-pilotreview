@@ -1233,50 +1233,52 @@ logical components and capabilities just described is defined.
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
   the functionalities and logical components described in
-  \S\ref{subsec:compsandfuncs}.}\msnote{What are the considerations for the mapping?}}
+  \S\ref{subsec:compsandfuncs}.}\msnote{What are the considerations for the
+  mapping?}\mtnote{I am not sure I properly understand the comment but should
+  we say common sense? We are defining the vocabulary and the logical model so
+  I would assume we are fairly unbounded in our mapping choices.}}
  \label{table:terminology}
 \end{table*}
 
-The terms `pilot' and `job' are arguably among the most prominent when
-referring to \pilot systems. It is the case that \pilot systems are
-commonly referred to as `\pilotjob systems' (cit, cit, cit, cit), a
-clear indication of the primary role played by the concepts of `pilot'
-and `job' in this type of system. The definition of both concepts is
-context-dependent and several other terms need to be clarified in order
-to offer a coherent terminology. Both `job' and `pilot' need to be
-understood in the context of DCIs, the infrastructures leveraged by
-\pilot systems. DCIs offer compute, storage, and network resources and
-\pilot allow for the users to utilize those resources to execute the
-tasks of one or more workload.
+The terms `pilot' and `job' are arguably among the most relevant when referring
+to \pilot systems. It is the case that \pilot systems are commonly referred to
+as `\pilotjob systems' [ref, ref], a clear indication of the primary role
+played by the concepts of `pilot' and `job' in this type of system. The
+definition of both concepts is context-dependent and several other terms need
+to be clarified in order to offer a coherent terminology. Both `job' and
+`pilot' need to be understood in the context of DCIs, the infrastructures used
+by \pilot systems. DCIs offer compute, storage, and network resources and
+\pilot allow for the users to utilize those resources to execute the tasks of
+one or more workload.
 
 \begin{description}
 
 \item[Task.] A container for operations to be performed on a computing
-platform, alongside a description of the properties of those operations,
-and indications on how they should be executed. Implementations of a
-task may include wrappers, scripts, or applications.
+platform, alongside a description of the properties of those operations, and
+indications on how they should be executed. Implementations of a task may
+include wrappers, scripts, or applications.
 
-\item[Workload.] A set of tasks, possibly related by a set of arbitrary
-complex relations.
+\item[Workload.] A set of tasks, possibly related by a set of arbitrary complex
+relations.
 
-\item[Resource.] Finite, typed, and physical quantity utilized when
-executing the tasks of a workload. Compute cores, data storage space, or
-network bandwidth are all examples of resources commonly utilized when
-executing workloads.
+\item[Resource.] Finite, typed, and physical quantity utilized when executing
+the tasks of a workload. Compute cores, data storage space, or network
+bandwidth between a source and a destination are all examples of resources
+commonly utilized when executing workloads.
 
 \item[Infrastructure or DCI.] Structured set of resources, possibly
-geographically and institutionally separated from the users that utilize
-those resources to execute the tasks of a workload (cit, cit).
-Infrastructures can be logically partitioned, with a direct or indirect
-mapping onto individual pools of hardware. In the context of \pilot
-systems, an infrastructure is usually to be assumed to be a distributed
+geographically and institutionally separated from the users that utilize those
+resources to execute the tasks of a workload [ref]. Infrastructures can be
+logically partitioned, with a direct or indirect mapping onto individual pools
+of hardware (i.e. clusters, systems, and supercomputers). In the context of
+\pilot systems, an infrastructure is usually to be assumed to be a distributed
 computed infrastructure, i.e., a DCI.
 
 \end{description}
 
-As seen in~\S\ref{sec:history}, most of the DCIs leveraged by \pilot
-systems utilize `queues', `batch systems' and `schedulers'. In such
-DCIs, jobs are scheduled and then executed by a batch system.
+As seen in~\S\ref{sec:history}, most of the DCIs leveraged by \pilot systems
+utilize `queues', `batch systems' and `schedulers'. In such DCIs, jobs are
+scheduled and then executed by a batch system.
 
 \begin{description}
 
@@ -1286,100 +1288,95 @@ specific infrastructure.
 
 \end{description}
 
-When considering \pilot systems, jobs and tasks are functionally
-analogous but qualitatively different. Functionally, both jobs and tasks
-are containers -- i.e. metadata wrappers around one or more executable
-often called 'kernel', 'application', or 'script'. Qualitatively, the
-term `task' is used when reasoning about workloads while `job' is used
-in relation to a specific type of infrastructure where such a container
-can be executed. Accordingly, tasks are considered as the functional
-units of a workload, while jobs as a way to execute executables on a
-certain infrastructure. It should be noted that, given their functional
-equivalence, the two terms can be adopted interchangeably when
-considered outside the context of \pilot systems. Indeed, workloads are
-encoded into jobs when they have to be directly executed on
-infrastructures that support or require that type of container.
+When considering \pilot systems, jobs and tasks are functionally analogous but
+qualitatively different. Functionally, both jobs and tasks are containers --
+i.e. metadata wrappers around one or more executable often called `kernel',
+`application', or `script'. Qualitatively, the term `task' is used when
+reasoning about workloads while `job' is used in relation to a specific type of
+infrastructure where such a container can be executed. Accordingly, tasks are
+considered as the functional units of a workload, while jobs as a way to
+execute executables on a certain infrastructure. It should be noted that, given
+their functional equivalence, the two terms can be adopted interchangeably when
+considered outside the context of \pilot systems. Indeed, workloads are encoded
+into jobs when they have to be directly executed on infrastructures that
+support or require that type of container.
 
 As described in~\S\ref{sec:compsandfuncs}, a resource placeholder needs to be
-submitted to the target DCI wrapped in the type of container supported
-by that specific DCI. For example, for a DCI exposing a HPC or Grid
-middleware [cit, cit], a resource placeholder needs to be wrapped within
-a `job'. For other type of DCIs, the same resource placeholder will need
-to be wrapped within a different type of container as, for example, a VM
-or a Docker Engine. For this reason, the capabilities exposed by the job
-submission system of the target DCI determine the submission process of
-resource placeholders and how or for how long they can be used. For
-example, when wrapped within a `job', placeholders are provisioned by
-submitting a job to the DCI queuing system, become available only once
-the job is scheduled on the resources out of the queue, and is
+submitted to the target DCI wrapped in the type of container supported by that
+specific DCI. For example, for a DCI exposing a HPC or Grid middleware [cit,
+cit], a resource placeholder needs to be wrapped within a `job'. For other type
+of DCIs, the same resource placeholder will need to be wrapped within a
+different type of container as, for example, a VM or a Docker Engine. For this
+reason, the capabilities exposed by the job submission system of the target DCI
+determine the submission process of resource placeholders and how or for how
+long they can be used. For example, when wrapped within a `job', placeholders
+are provisioned by submitting a job to the DCI queuing system, become available
+only once the job is scheduled on the resources out of the queue, and is
 available only for the duration of the job walltime.
 
-A `pilot' is a resource placeholder. As a resource placeholder, a pilot
-holds portion of a DCI's resources for a user or a group of users,
-depending on implementation details. A \pilot system is a software
-capable of creating pilots so to gain exclusive control over a set of
-resources on one or more DCIs and then to execute the tasks of
-one or more workload on those pilots.
+A `pilot' is a resource placeholder. As a resource placeholder, a pilot holds
+portion of a DCI's resources for a user or a group of users, depending on
+implementation details. A \pilot system is a software capable of creating
+pilots so to gain exclusive control over a set of resources on one or more DCIs
+and then to execute the tasks of one or more workload on those pilots.
 
 \begin{description}
 
-\item[Pilot.] The sum of a container -- e.g., a job -- plus a set of
-executables functioning as a resource placeholder on a given
-infrastructure and capable of executing tasks of a workload.
+\item[Pilot.] The sum of a container (e.g., a job) and a set of executables.
+Together, the container and executables function as a resource placeholder on a
+given infrastructure and are capable of executing tasks of a workload.
 
 \end{description}
 
-It should be noted that the term `pilot' as defined here is named
-differently across \pilot systems. Depending upon context, in addition
-to the term `placeholder', pilot is also named `agent' and, in some
-cases, `\pilotjob' [cit]. All these terms are, in practice, used as
-synonyms without properly distinguishing between the type of container
-and the type of executable that compose a \pilot. This is a clear
-indication of how necessary the minimal and consistent vocabulary
-offered in this Subsection is when reasoning analytically about multiple
-implementations of a \pilotjob system.
+It should be noted that the term `pilot' as defined here is named differently
+across \pilot systems. Depending upon context, in addition to the term
+`placeholder', pilot is also named `agent' and, in some cases, `\pilotjob'
+[cit]. All these terms are, in practice, used as synonyms without properly
+distinguishing between the type of container and the type of executable that
+compose a \pilot. This is a clear indication of how necessary the minimal and
+consistent vocabulary offered here is when reasoning analytically about
+multiple implementations of a \pilotjob system.
 
-The term `pilotjob' is often used to identify a \pilot system. This is
-an unfortunate choice as the term `job' identifies just the way in which
-a pilot is provisioned on a DCI exposing specific capabilities, not a
-general properties of all the \pilot systems. The use of the term
-`\pilotjob system' should therefore be regarded as a historical
-artifact, viz., the targeting of a specific class of DCIs in which
-the term `job' was, and still is, meaningful. With the development of
-new types of DCI middleware as, for example, cloud-based infrastructures,
-the term `job' has become too restrictive, a situation that can lead to
-terminological and conceptual confusion.
+The term `pilotjob' is often used to identify a \pilot system. This is an
+unfortunate choice as the term `job' identifies just the way in which a pilot
+is provisioned on a DCI exposing specific capabilities, not a general
+properties of all the \pilot systems. The use of the term `\pilotjob system'
+should therefore be regarded as a historical artifact, viz., the targeting of a
+specific class of DCIs in which the term `job' was, and still is, meaningful.
+With the development of new types of DCI middleware as, for example, cloud
+infrastructures, the term `job' has become too restrictive, a situation that
+can lead to terminological and conceptual confusion.
 
-We have now defined resources, DCIs and \pilots.
-We have established that \pilots are a placeholder for a set of resources.
-The combined resources represented by \pilots that are available for the
-execution of a workload together form an resource overlay.
-This set of \pilots can potentially be distributed over multiple resources
-and/or DCIs. The details of this aggregation or federation is outside the scope
-of this paper.
+We have now defined resources, DCIs and \pilots. We have established that a
+\pilot is a placeholder for a set of resources. When combined, the resources of
+multiple \pilots form a resource overlay. The \pilots of a resource overlay can
+potentially be distributed over multiple resources and/or DCIs.
+
+% The details of this aggregation or federation is outside the scope of this
+% paper.
 
 \begin{description}
-\item[Resource Overlay.] The set of resources that are represented by one or more \pilots.
+\item[Resource Overlay.] The aggregated set of resources of multiple \pilots.
 \end{description}
 
-To promote internal consistency, having clarified the meaning of `job'
-and `pilot', it is imperative that three more terms fundamentally
-associated with \pilot systems (cit, cit, cit) be explicitly defined:
-`Multi-level scheduling' and `late/early binding'.
+Three more terms associated with \pilot systems (cit, cit, cit) need to be
+explicitly defined: `Multi-level scheduling', `early binding', and `late
+binding'.
 
-Pilot systems are said to implement multi-level scheduling because they
-require the scheduling of two types of entities: pilots and tasks. A
-portion of the resources of a DCI is scheduled to one or more pilots in
-the form of containers supported by that DCI, and the tasks of a
-workload are dispatched to those pilots. This is a fundamental feature of
-\pilot systems because (i) a faster and more flexible execution of
-workloads is achieved by avoiding the overhead and lack of control
-imposed by a centralized job management system shared among multiple
-users; and (ii) the tasks of a workload can be bound to a set of
-pilots before of after it becomes available on a remote resource.
-\msnote{There is another (sub)level arguably, where the 'agent' makes
-scheduling decisions about task placement within the pilot's resource pool.
-Although this is an implementation detail, it might be worth mentioning?}
+Pilot systems are said to implement multi-level scheduling because they require
+the scheduling of two types of entities: pilots and tasks. A portion of the
+resources of a DCI is scheduled to one or more pilots in the form of containers
+supported by that DCI, and the tasks of a workload are dispatched to those
+pilots. This is a fundamental feature of \pilot systems because (i) a faster
+and more flexible execution of workloads is achieved by avoiding the overhead
+imposed by a centralized job management system shared among multiple users; and
+(ii) the tasks of a workload can be bound to a set of pilots before of after it
+becomes available on a remote resource. \msnote{There is another (sub)level
+arguably, where the 'agent' makes scheduling decisions about task placement
+within the pilot's resource pool. Although this is an implementation detail, it
+might be worth mentioning?}\mtnote{I agree. I will write a small paragraph
+connecting it also to resource overlays or I will add a sentence at the end of
+the next paragraph. Would you agree?}
 
 The simplification obtained by bypassing the job submission system of
 the DCI is one of the main reasons for the success of the \pilot
@@ -1400,19 +1397,19 @@ useful to increase the flexibility with which pilots are deployed. By
 knowing in advance the properties of the tasks that are bound to a
 pilot, specific deployment decisions can be made for that pilot.
 \msnote{This can also be done without pilots. We probably need a better (if
-any) argument for early binding on pilots.}
-Late binding is critical in assuring the aforementioned high throughput by
-allowing task execution without additional queuing time or container
-instantiation time.
+any) argument for early binding on pilots.}\mtnote{We may want to discuss this
+comment briefly by voice at our next meeting.} Late binding is critical in
+assuring the aforementioned high throughput by allowing task execution without
+additional queuing time or container instantiation time.
 
 \begin{description}
+
+\item[Multi-level scheduling.] Scheduling pilots onto resources and tasks onto
+active or inactive pilots.
 
 \item[Early binding.] Binding one or more tasks to an inactive pilot.
 
 \item[Late binding.] Binding one or more tasks to an active pilot.
-
-\item[Multi-level scheduling.] Scheduling pilots onto resources and
-tasks onto active or inactive pilots.
 
 \end{description}
 
