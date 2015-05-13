@@ -1046,157 +1046,147 @@ description and, eventually, about its multiple implementations.
 \subsection{Logical Components and Functionalities}
 \label{sec:compsandfuncs}
 
-All the \pilot systems introduced in~\S\ref{sec:history} are engineered
-to allow for the execution of multiple types of workloads on Distributed
-Computing Infrastructures (DCIs) such as Grids, Clouds, or HPC
-facilities. This is achieved differently, depending on use cases, design
-and implementation choices, but also on the constraints imposed by the
-middleware and policies of the targeted DCIs. The common denominators
-among \pilot systems are defined along multiple dimensions: purpose,
-logical components, and functionalities.
+All the \pilot systems introduced in~\S\ref{sec:history} are engineered to
+allow for the execution of multiple types of workloads on Distributed Computing
+Infrastructures (DCIs) such as Grids, Clouds, or HPC facilities. This is
+achieved differently, depending on use cases, design and implementation
+choices, but also on the constraints imposed by the middleware and policies of
+the targeted DCIs. The common denominators among \pilot systems are defined
+along multiple dimensions: purpose, logical components, and functionalities.
 
 The purpose shared by every \pilot system is to improve the (performance of)
 workload execution when compared to executing the same workload directly on one
 or more DCI. Performance in \pilot systems is usually associated to throughput
-and execution time-to-completion (cit), but other metrics could be also
+and execution time to completion (TTC), but other metrics could be also
 considered as, for example, energy efficiency, data transfer, scale of the
-workload executed or a mix of them. In order to maximize or minimize the chosen
-set of metrics, each \pilot system exhibits characteristics that are both
-common or specific to one or more implementations. Discerning these
-characteristics requires isolating and defining the minimal set of logical
-components that has to characterize every \pilot system.
+workload executed or a mix of them. In order to optimize the chosen set of
+metrics, each \pilot system exhibits characteristics that are both common or
+specific to one or more implementations. Discerning these characteristics
+requires isolating and defining the minimal set of logical components that has
+to characterize every \pilot system.
 
-At some level, all \pilot systems leverage three separate but
-coordinated logical components: a \textbf{Pilot Manager}, a
-\textbf{Workload Manager}, and a \textbf{Task Executor} (see
-Table~\ref{table:terminology}). The Pilot Manager handles the
-definition, instantiation, and use of one or more resource placeholders
--- called `pilot' -- on single or multiple DCIs. The Workload Manager
-handles the inspection and submission of one or more workload on the
-available resource placeholders. Finally, the Task Executor takes
-care of executing the tasks of each workload by means of the
-resources held by the placeholders.
+At some level, all \pilot systems leverage three separate but coordinated
+logical components: a \textbf{Pilot Manager}, a \textbf{Workload Manager}, and
+a \textbf{Task Executor} (see Table~\ref{table:terminology}). The Pilot Manager
+handles the description, instantiation, and use of one or more resource
+placeholders (i.e. `pilots') on single or multiple DCIs. The Workload Manager
+handles the scheduling of one or more given workload on the available resource
+placeholders. Finally, the Task Executor takes care of executing the tasks of
+each workload by means of the resources held by the placeholders.
 
-The implementation details of these three logical components
-significantly vary across \pilot system implementations
-(see~\S\ref{sec:analysis}). One or more components may be responsible for
-specific functionalities, both on application as well as infrastructure
-level, two or more components may be implemented in a single module, or
-additional components may be integrated into the managers and executor.
-Nevertheless, the Pilot and Workload Managers and the Task Executor can
-always be distinguished across different \pilot systems. For example,
+The implementation details of these three logical components significantly vary
+across \pilot systems (see~\S\ref{sec:analysis}). One or more components may be
+responsible for specific functionalities, both on application as well as
+infrastructure level, two or more components may be implemented in a single
+module, or additional components may be integrated into the managers and
+executor. Nevertheless, the Pilot and Workload Managers and the Task Executor
+can always be distinguished across different \pilot systems. For example,
 looking at the systems mentioned in~\S\ref{sec:history}, \ldots
 \mtnote{I will wait for S2 and S4 to be final before picking the right
 examples/vocabulary.}
 
-The logical components that characterize a \pilot system support a
-minimal set of functionalities that allow for the execution of
-workloads: \textbf{Pilot Provisioning}, \textbf{Task Dispatching}, and
-\textbf{Task Execution} (see Table~\ref{table:terminology}). Every
-\pilot system needs to schedule resource placeholders on the targeted
-resources, schedule tasks on the available placeholders and then
-leverage these placeholders to execute the tasks of the given workload.
-Clearly, many more functionalities are needed in order to implement a
-production-grade \pilot system. For example, authentication,
-authorization, and accounting (AAA) are fundamental when exposing a
-\pilot system on a public network infrastructure, complex data
-management is required by specific type of workloads, and
-fault-tolerance and load-balancing play an important role on specific
-type of DCIs. While these functionalities are critical implementation
-details, they depend on the specific characteristics of the given user,
-workload, or targeted resources and, as such, they should not be
-considered a necessary trait of all the \pilot systems.
+Each \pilot system support a minimal set of functionalities that allow for the
+execution of workloads: \textbf{Pilot Provisioning}, \textbf{Task Dispatching},
+and \textbf{Task Execution} (see Table~\ref{table:terminology}). \pilot systems
+need to schedule resource placeholders on the targeted resources, schedule
+tasks on the available placeholders, and then use these placeholders to execute
+the tasks of the given workload.
 
-Among the core functionalities that characterize every \pilot system,
-Pilot Provisioning is essential because it allows for the creation of
-resource placeholders. This type of placeholder enables tasks to utilize
-resources without directly depending on the capabilities exposed by the
-targeted DCI. Resource placeholders are scheduled to the DCI resources
-by means of the DCI capabilities but, once scheduled and then executed,
-these placeholders make their resources directly available for the
-execution of the tasks of a workload. Resource placeholders belong to
-the user(s) that created them and they can be tailored and used so to
-satisfy the user's specific requirements. Furthermore, resource
-placeholders are logical partitions of resources that do not need to
-leverage trade-offs among competing user requirements as needed instead
-with large pools of resources adopting multi-tenancy.
+More functionalities might be needed to implement a production-grade \pilot
+system: authentication, authorization, accounting, data management,
+fault-tolerance, or load-balancing. While these functionalities may be critical
+implementation details, they depend on the specific characteristics of the
+given use cases, workloads, or targeted resources. As such, these
+functionalities should not be considered a necessary characteristic of every
+\pilot system.
 
-The procedures and mechanisms to provision resource placeholders depend
-on the capabilities exposed by the targeted DCI and on the
-implementation of each \pilot system. Typically, for DCIs adopting
-queues, batch systems, and schedulers, provisioning a placeholder involves
-it being submitted as a job. A `job' on this kind of DCIs is a type of
-logical container including configuration and execution parameters
-alongside information on the executable that will be executed on the DCIs
-compute nodes. Conversely, for infrastructures that do not adopt a
-job-based middleware, a resource placeholder would be executed by means
-of other types of logical container as, for example, a Virtual Machine
-(VM) or a Docker Engine (cit, cit).
+Among the core functionalities that characterize every \pilot system, Pilot
+Provisioning is essential because it allows for the creation of resource
+placeholders. As seen in \S\ref{sec:history}, this type of placeholder enables
+tasks to utilize resources without directly depending on the capabilities
+exposed by the targeted DCI. Resource placeholders are scheduled to the DCI
+resources by means of the DCI capabilities but, once scheduled and then
+executed, these placeholders make their resources directly available for the
+execution of the tasks of a workload. Resource placeholders belong to the
+user(s) that created them and they can be tailored to satisfy the specific use
+cases. \mtnote{Currently, this is a bit of repetition of what we wrote already
+in Section 2 but seeing the importance of the concept we might want to keep
+it.}
 
-Once resource placeholders are bound to a DCI, tasks need to be
-dispatched to those placeholders for execution. Task dispatching does
-not depend on the functionalities of the DCI middleware so it can be
-implemented as part of the \pilot system. In this way, the control over
-the execution of a workload is shifted from the DCI to the \pilot
-system. This shift is fundamental because it decouples the execution of
-a workload from the need to submit its tasks via the DCI middleware. The
-tasks of a workload will not wait on the DCI queues before being
-executed, and complex execution patterns involving task and data
-interdependence will be available outside the boundaries of the DCI.
-Ultimately, this is why \pilot systems allow for the parametrization of
-workload execution and the maximization, for example, of execution
-throughput.
+% Furthermore, resource placeholders are logical partitions of resources that
+% do not need to leverage trade-offs among competing user requirements as
+% needed instead with large pools of resources adopting multi-tenancy.
 
-Communication and coordination are two distinguishing characteristics
-of distributed software tools and \pilot systems make no
-exception. The Workload Manager, Pilot Manager, and the Task Executor
-need to communicate and coordinate in order to instantiate resource
-placeholders, place tasks, and, in case, move data. For example, the
-Workload Manager needs to communicate with the Task Executor to
-coordinate the execution of the given workload. Analogously, the
-Workload and Pilot Managers need to communicate in order to coordinate
-the instantiation and utilization of resource
-placeholders. Nonetheless, \pilot systems are not defined by any
-specific communication pattern and coordination strategy. The logical
-components of a \pilot system may communicate with every suitable
-pattern -- point-to-point (i.e.  one-to-one), many-to-one, or
-one-to-many (cit) -- and coordinate adopting any suitable strategy --
-time synchronization, static or dynamic coordinator election, local or
-global information sharing, or \MW. The same applies to specific
-network architectures and protocols.  Different network architectures
-and protocols may be leveraged within a \pilot implementation in order
-to achieve effective communication and coordination.  \jhanote{maybe
-  this is a good place to introduce pull vs push models}
+The provision of resource placeholders depends on the capabilities exposed by
+the targeted DCI and on the implementation of each \pilot system. Typically,
+for DCIs adopting queues, batch systems, and schedulers, provisioning a
+placeholder involves it being submitted as a job. A `job' on this kind of DCIs
+is a type of logical container that includes configuration and execution
+parameters alongside information on the executable that will be executed on the
+DCIs compute nodes. Conversely, for infrastructures that do not adopt a
+job-based middleware, a resource placeholder would be executed by means of
+other types of logical container as, for example, a Virtual Machine (VM) or a
+Docker Engine [cit, cit].
 
-As seen in~\S\ref{ssec:informal}, \MW is a very common coordination
-strategy among \pilot systems. When the Master is identified with the
-Workload Manager, and the Worker with the Task Executor, the
-functionalities related to task description, scheduling, and monitoring
+Once resource placeholders are bound to a DCI, tasks need to be dispatched to
+those placeholders for execution. Task dispatching does not depend on the
+functionalities of the DCI middleware so it can be implemented as part of the
+\pilot system. In this way, the control over the execution of a workload is
+shifted from the DCI to the \pilot system. This shift is a defining
+characteristic of the \pilot abstraction \mtnote{I do not think it is too
+disruptive to speak about abstraction but, in case, we can just use \pilot
+system instead of \pilot abstraction} as it decouples the execution of a
+workload from the need to submit its tasks via the DCI middleware. The tasks of
+a workload will not wait on the DCI queues before being executed, and complex
+execution patterns involving task and data interdependence can be implemented
+outside the boundaries of the DCI capabilities. Ultimately, this is why \pilot
+systems allow for the parametrization of workload execution and the
+optimization, for example, of execution throughput.
+
+Communication and coordination are two distinguishing characteristics of
+distributed applications and \pilot systems make no exception. The Workload
+Manager, Pilot Manager, and the Task Executor need to communicate to coordinate
+the execution of the given workload on the instantiated resource placeholders.
+Nonetheless, \pilot systems are not defined by any specific communication
+pattern and coordination strategy. The logical components of a \pilot system
+may communicate with every suitable pattern (e.g. one-to-one, many-to-one,
+one-to-many (cit) with a push or pull model) and coordinate adopting any
+suitable strategy (e.g. time synchronization, static or dynamic coordinator
+election, local or global information sharing, or \MW). The same applies to
+network architectures and protocols: different network architectures and
+protocols may be leveraged to achieve effective communication and coordination.
+\jhanote{maybe this is a good place to introduce pull vs push
+models}\mtnote{Done.}
+
+As seen in~\S\ref{ssec:history}, \MW is a very common coordination pattern
+among \pilot systems. When the Master\mtnote{Should we use the capitalization?}
+is identified with the Workload Manager, and the Worker with the Task Executor,
+the functionalities related to task description, scheduling, and monitoring
 will generally be implemented within the Workload Manager, while the
-functionalities needed to execute each task will be implemented into the
-Task Executor. Alternative coordination strategies, for example the one
-where a Task Executor directly coordinates the task scheduling, might
-require a functionally simpler Workload Manager but a comparatively
-feature-rich Task Executor. The former would require capabilities for
-submitting tasks, while the latter would require to coordinate with its
-neighbor executors leveraging, for example, a dedicated overlay network.
-Both these systems, adopting different coordination strategies, should
-be considered \pilot systems.
+functionalities needed to execute each task will be implemented into the Task
+Executor. Alternative coordination strategies, for example the one where a Task
+Executor directly coordinates the task scheduling, might require a functionally
+simpler Workload Manager but a comparatively feature-rich Task Executor. The
+former would require capabilities for submitting tasks, while the latter would
+require to coordinate with its neighbor executors leveraging, for example, a
+dedicated overlay network. Both these systems, adopting different coordination
+strategies, should be considered \pilot systems.\mtnote{I am happy with calling
+\MW a pattern and then generalizing using the term strategies when speaking of
+coordination in general. Do you agree?}
 
-Data management may have an important role within \pilot systems. For
-example, functionalities can be provided to support the local or remote
-data staging required to execute the tasks of a workload, or data might
-be managed according to the specific capabilities offered by the
-targeted DCI. \pilot systems can be devised in which tasks do not
-require any data management because they (i) do not necessitate input
-files, (ii) do not produce output files, (iii) data is already locally
-available or (iv) data management is left to the application itself.
-Being able to read and write files to a local filesystem should then be
-considered the minimal capability related to data required by a \pilot
-system. More advanced and specific data capabilities like, for example,
-data replication, concurrent data transfers, data abstractions other
-than files and folders, or data placeholders should be considered
-special-purpose capabilities, not characteristic of every \pilot system.
+Data management may have an important role within \pilot systems. For example,
+functionalities can be provided to support the local or remote data staging
+required to execute the tasks of a workload, or data might be managed according
+to the specific capabilities offered by the targeted DCI. \pilot systems can be
+devised in which tasks do not require any data management because they (i) do
+not necessitate input files, (ii) do not produce output files, (iii) data is
+already locally available or (iv) data management is outsourced to third-party
+systems. Being able to read and write files to a local filesystem should then
+be considered the minimal capability related to data required by a \pilot
+system. More advanced and specific data capabilities like, for example, data
+replication, (concurrent) data transfers, data abstractions other than files
+and folders, or data placeholders should be considered special-purpose
+capabilities, not characteristic of every \pilot system.
 
 In the following Subsection, a minimal set of terms related to the
 logical components and capabilities just described is defined.
