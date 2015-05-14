@@ -141,6 +141,16 @@
 \section{Introduction}
 \label{sec:intro}
 
+\jhanote{Building tools and components that have well-defined and well-characterized
+behavior, including performance. This leads to descriptive models of pilot-jobs,
+which while pervasive in distributed computing, are conspicuous by their absence
+in high-performance and data-intensive computing. By providing a firm
+theoretical underpinning to pilot-jobs [3], one can provide a more
+“programmable” and flexible yet common pilot-job for different types of
+distributed infrastructure, and also extend the concept of pilot-jobs to
+high-performance and data-intensive computing [4]}
+
+
 % \jhanote{Generally not good style to begin new subsection immediately
 %   after section starting}
 % \jhanote{Now develop the following paragraph along the lines of: Why
@@ -221,7 +231,7 @@ Enterprise, outside the boundaries of scientific research.
 % -----------------------------------------------------------------------------
 % SECTION 2
 %
-\section{Functional Evolution of Pilot-Jobs}
+\section{Functional Underpinnings and Evolution of Pilot Abstraction}
 \label{sec:history}
 
 % -----------------------------------------------------------------------------
@@ -652,7 +662,7 @@ overview of these five notions and an analysis of their relationship with the
 the inception and evolution of the \pilot abstraction into its implementation
 systems.
 
-At the best of the authors' knowledge, the term `\pilotjob' was first
+To the best of the authors' knowledge, the term `\pilotjob' was first
 introduced around 2004 in the context of the Large Hadron Collider (LHC)
 challenge [ref] and then used in a 2005 LHCb report\cite{lhcb2005}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
@@ -1155,8 +1165,6 @@ suitable strategy (e.g. time synchronization, static or dynamic coordinator
 election, local or global information sharing, or \MW). The same applies to
 network architectures and protocols: different network architectures and
 protocols may be leveraged to achieve effective communication and coordination.
-\jhanote{maybe this is a good place to introduce pull vs push
-models}\mtnote{Done.}
 
 As seen in~\S\ref{ssec:history}, \MW is a very common coordination pattern
 among \pilot systems. When the Master\mtnote{Should we use the capitalization?}
@@ -1440,55 +1448,73 @@ of a \pilot system illustrated in~\S\ref{sec:compsandfuncs}.
   enacting as distinguished from task dispatching; 3.  Clean up Table 1
 removing 'Infrastructure'.}
 
+
 %------------------------------------------------------------------------------
 % SECTION 4
 %------------------------------------------------------------------------------
 \section{Pilot Systems: Analysis and Implementations}
 \label{sec:analysis}
 
-Section \S\ref{sec:understanding} offered two main contributions: a minimal description of
-the logical components and the functionalities of \pilot systems \footnote{
-From here on we will be internally consistent and use \pilot system instead of
-\pilotjob system.}, and a well-defined core terminology to support reasoning
-about such systems.
-The former sets the necessary and sufficient requirements for a distributed
-system to be a \pilot system, while the latter enables consistency when
-referring to different \pilot systems. Both these contributions are leveraged
-in this Section in order to review critically a set of relevant \pilot system
-implementations.
+Section \S\ref{sec:understanding} offered two main contributions: (i) the
+minimal sets of logical components and functionalities of \pilot systems
+\footnote{ From here on we will be internally consistent and use \pilot system
+instead of \pilotjob system.}; (ii) and a well-defined core terminology to
+support reasoning about such systems. The former defines the necessary and
+sufficient requirements for a distributed system to be a \pilot system, while
+the latter enables consistency when referring to different \pilot systems. Both
+these contributions are used in this Section to review critically a selection
+of \pilot systems.
 
-The goal of this Section is twofold.  Initially, the set of
-functionalities presented in \S\ref{sec:3} are used as the basis
-to infer a set of core implementation properties. A set of auxiliary
-properties is also defined when useful for a critical comparison among
-different \pilot system implementations. Subsequently, several \pilot system
-implementations are analyzed and then clustered around the properties
-previously defined. In this way, insight is offered about how to
-choose a \pilot system based on functional requirements, how
-\pilot systems are designed and engineered, and the theoretical
-properties that underly such systems.
+The goal of this Section is twofold. Initially, the \pilot functionalities
+presented in \S\ref{sec:history} are used as the basis to infer core \pilot
+implementation properties. Auxiliary properties are also defined when useful
+for a critical comparison among different \pilot systems. Subsequently, several
+\pilot systems are analyzed and then clustered around the properties previously
+defined. In this way, insight is offered about how to choose a \pilot system
+based on functional requirements, how \pilot systems are designed and
+engineered, and the design principles that underly such systems.
 
+% -----------------------------------------------------------------------------
+% 4.1
+%
 \subsection{Core and Auxiliary Properties}
 \label{sec:properties}
 
-This Section discusses the properties of diverse implementations of a \pilot
-system. Two sets of properties are introduced: Core and auxiliary.
-\textit{Core} properties are common to all \pilot system implementations while
-the auxiliaries characterize specific \pilot systems. Therefore, auxiliary
-properties are not shared among all \pilot system implementations.
+This section defines and analyzes the properties of diverse implementations of
+a \pilot system. Two sets of properties are introduced: core and auxiliary (see
+Table~\ref{table:property_component_mapping}). Both sets of properties are
+chosen by considering the implementation requirements of the \pilot
+capabilities as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.
+A property belongs to the set of core properties if it is required by the
+implementation of one or more of the \pilot functionalities. Auxiliary
+properties are instead required only when added functionalities needs to be
+implemented for a specific \pilot system. As such, auxiliary properties are not
+necessarily shared among all \pilot systems.
 
-As shown in Table \ref{table:core_properties}, the set of Core Properties is
-derived consistently with the set of functionalities presented in
-\S\ref{sec:3} - Pilot Provisioning, Task Dispatching, and Task Execution.
+% As shown in Table~\ref{table:core_properties}, the core properties are
+% derived consistently with the functionalities presented in \S\ref{sec:3} -
+% Pilot Provisioning, Task Dispatching, and Task Execution.
 \msnote{I dont see how it is derived or consistent ;-)}
-As such, Core Properties are both necessary and sufficient for an
-implementation of a distributed system to be classified as a \pilot system.
-On the contrary, auxiliary properties are not defining of a \pilot system but
-they are implementation details that further characterize a \pilot system.  The
-set of auxillary properties we discuss is not closed, i.e., the complete set of
-auxillary properties includes, but is not limited to the set of auxillary
-properties we discuss.
-\msnote{todo: Fix/merge the two non-compatible definitions of aux props}
+
+\mtnote{Derived and consistent: they are required by (every: core, at least an:
+auxiliary) implementation of those functionalities. I rewrote the paragraph
+avoiding the two terms but keeping the semantic just explained.}
+
+\mtnote{I have changed and shortened the names of the core properties. After
+many months, they made less sense for me that they use to. This is currently
+just a suggestion that I would like to discuss during our next call. Once
+reached an agreement I will take care of revert/iterate/change naming across
+the whole 4.1 (and, in case, 4.2).}
+
+% As such, Core Properties are both necessary and sufficient for an
+% implementation of a distributed system to be classified as a
+% \pilot system. On the contrary, auxiliary properties are not defining of a
+% \pilot system but they are implementation details that further characterize a
+% \pilot system.  The set of auxillary properties we discuss is not closed,
+% i.e., the complete set of auxillary properties includes, but is not limited
+% to the set of auxillary properties we discuss.
+
+\msnote{todo: Fix/merge the two non-compatible definitions of aux props}\mtnote{Not sure it is still the case. Will address once we will have decided whether to keep the changes I made.}
 
 \begin{table*}
 \centering
@@ -1498,31 +1524,31 @@ properties we discuss.
 \hline
 % Core
 \multirow{6}{*}{\textit{Core}}
-  & Pilot Resource Capabilities & Pilot Manager & The resources that the \pilot
-  represents. \\
+  & Pilot Resources & Pilot Manager & Types and capabilities of the resources
+  held by the pilot. \\
   \cline{2-4}
-  & Resource Interaction & Pilot Manager & The software and protocols of the
-  interaction with the DCI. \\
+  & Pilot Management & Workload Manager & Modalities and protocols for
+  scheduling and aggregation of pilots. \\
   \cline{2-4}
-  & Overlay Management & Workload Manager & The construction of the Overlay. \\
+  & Workload Semantics & Workload Manager & The specification of the
+  semantics (between tasks) captured in the workload description. \\
   \cline{2-4}
-  & Workload Semantics & Workload Manager & The specification of the semantics
-  (between tasks) captured in the workload description. \\
+  & Task Binding & Workload Manager & Modalities and policies for binding
+  tasks to pilots. \\
   \cline{2-4}
-  & Task Binding Characteristics & Workload Manager & The techniques and
-  policies of binding tasks to \pilots. \\
+  & Task Execution & Task Executor & Types of tasks and the mechanisms to
+  execute tasks. \\
   \cline{2-4}
-  & Task Execution Modes & Task Executor & The types of tasks and the
-  mechanisms to execute tasks. \\
+  & Infrastructure Interaction & Pilot Manager & Modalities and protocols used to coordinate the pilot system/infrastructure interaction. \\
 \hline
 % Auxiliary
 \multirow{10}{*}{\textit{Auxiliary}}
   & Architecture &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    Frameworks and archicture that the components and their whole are build
+    Frameworks and architecture that the components and their whole are build
     with.\\
   \cline{2-4}
-  & Coordination and Communicatuon &
+  & Coordination and Communication &
     Pilot Manager\newline Workload Manager\newline Task Executor &
     The interaction between the components of the system.\\
   \cline{2-4}
@@ -1532,7 +1558,7 @@ properties we discuss.
   \cline{2-4}
   & Interoperability &
     Pilot Manager\newline Workload Manager\newline Task Executor &
-    Interopability between \pilots on multiple DCIs.\\
+    Interoperability between \pilots on multiple DCIs.\\
   \cline{2-4}
   & Multitenancy &
     Pilot Manager\newline Workload Manager\newline Task Executor &
@@ -1566,66 +1592,70 @@ onto the components described in \S\ref{sec:compsandfuncs}.}}
 \label{table:property_component_mapping}
 \end{table*}
 
-Implementations of Pilot Provisioning are analyzed by focusing on two
-specific properties: the requirements and dependencies between the
-\pilot system and the underlying distributed resources; and the type
-of resources the pilot system exposes in terms of computing, data and
-networking. For example, in order to schedule a pilot onto a specific
-resource, the \pilot system will need to know what type of container
-to use (e.g. job, virtual machine), what type of scheduler the
-resource exposes, but also what kind of functionalities will be
-available on the nodes of the resource in terms of compute, data and
-networking.
+Implementations of the Pilot Provisioning functionality are analyzed by
+focusing on two properties: (i) the type of resources the pilot system exposes
+such as compute, data, and networking
+(Table~\ref{table:property_component_mapping}, Pilot Resources); and (ii) the
+modalities and protocols used by the \pilot system and required by the target
+infrastructure(s) to schedule, utilize, and aggregate pilots
+(Table~\ref{table:property_component_mapping}, Pilot Management and
+Infrastructure Interaction). For example, to schedule a pilot onto a specific
+infrastructure \pilot systems need to know what type of container to use (e.g.
+job, virtual machine), what type of scheduler the resource exposes, but also
+the amount of cores and for how long they can be asked for, whether a
+low-latency interconnect is available, or specific filesystems can be accessed.
 
 Two properties are also used to analyze the implementations of Task
-Dispatching: The semantics of workloads, and how the tasks of a given workload
-can be bound to single or multiple pilots. Semantically, a workload description
-contains all the information necessary for it to be dispatched to the
-appropriate resource. For example, information related to both space and time
-should be available when deciding how many resources of a specific type should
-be used to execute the given workload but also for how long such resources
-should be available. Executing a workload requires for its tasks to be bound to
-the resources. Both the temporal and spatial dimensions of the binding
-operations are relevant for the implementation of Task Dispatching. Depending
-on the concurrency of a given workload, tasks could be dispatched to one or
-more pilots for an efficient execution. Furthermore, tasks could be bound to
-pilots before or after its instantiation, depending on resource availability
-and scheduling decisions.
+Dispatching: (i) the semantics of workloads
+(Table~\ref{table:property_component_mapping}, Workload Semantics); and (ii)
+how the tasks of a given workload can be bound to single or multiple pilots
+(Table~\ref{table:property_component_mapping}, Task Binding). Semantically, a
+workload description contains all the information necessary for it to be
+dispatched to the appropriate resource. For example, type, number, size,
+duration of tasks alongside their grouping into stages or their data
+dependences need to be known when deciding how many resources of a specific
+type should be used to execute the given workload but also for how long such
+resources should be available. Executing a workload requires for its tasks to
+be bound to the resources. Both the temporal and spatial dimensions of the
+binding operations are relevant for the implementation of Task Dispatching.
+Depending on the concurrency of a given workload, tasks could be dispatched to
+one or more pilots for an efficient execution. Furthermore, tasks could be
+bound to pilots before or after its instantiation, depending on resource
+availability and scheduling decisions.
 
 Finally, implementations of Task Execution are analyzed by reviewing different
 strategies for task scheduling and by describing how \pilot systems support
-task execution. \pilot implementations may offer multiple scheduling
-strategies depending on varying factors related to the nature of the workload,
-the state of the resources, or the capabilities exposed by the underlying
-middleware. Furthermore, \pilot systems often are responsible for setting up
-the execution environment for the tasks of the given workload. While each task
-can be seen as a self-contained and self-sufficient unit with a kernel ready to
-be executed on the underlying architecture, often tasks require their
-environment to be set up so that some libraries, data or accessory programs
-are made available.
+task execution (Table~\ref{table:property_component_mapping}, Task Execution).
+\pilot implementations may offer multiple scheduling strategies depending on
+varying factors related to the nature of the workload, the state of the
+resources, or the capabilities exposed by the underlying middleware.
+Furthermore, \pilot systems often are responsible for setting up the execution
+environment for the tasks of the given workload. While each task can be seen as
+a self-contained and self-sufficient unit with a kernel ready to be executed on
+the underlying architecture, often tasks require their environment to be set up
+so that some libraries, data, or accessory programs are made available.
 
 Several auxiliary properties play a fundamental role in distinguishing
-\pilot systems implementations, as well as address, set and provide
-constraints on their usability.  Programming and user interfaces;
-interoperability across differing middleware and other \pilot systems;
-multitenancy; strategies and abstractions for data management;
-security including policies alongside authentication and
-authorization; support for multiple usage modes like HPC or HTC; or
-robustness in terms of fault-tolerance and high-availability; are all
-examples of properties that might characterize a \pilot implementation
-but in of themselves, would not distinguish a \pilot as a unique
-system.
+\pilot systems implementations, as well as addressing, setting and providing
+constraints on their usability (Table~\ref{table:property_component_mapping},
+Auxiliary). Programming and user interfaces; interoperability across differing
+middleware and other \pilot systems; multitenancy; strategies and abstractions
+for data management; security including policies alongside authentication and
+authorization; support for multiple usage modes like HPC or HTC; or robustness
+in terms of fault-tolerance and high-availability; are all examples of
+properties that might characterize a \pilot implementation but that, in of
+themselves, would not distinguish a \pilot as a unique system.
 
 Both core and auxiliary properties have a direct impact on the multiple use
 cases for which \pilot systems are currently engineered and deployed. For
-example, while every \pilot system offers the opportunity to schedule the
-tasks of a workload on a pilot, the degree of support of specific workloads
-varies vastly across implementations. Furthermore, some \pilot systems
-support Virtual Organizations and running tasks from multiple users on a single
-pilot while others support jobs using a Message Passing Interface (MPI).
-Analogously, all \pilot systems, support the execution of one or more type
-of workload but they differ when considering execution modalities that maximize
-throughput (HTC), computing (HPC) or container-based high scalability (Cloud).
+example, while every \pilot system offers the opportunity to schedule the tasks
+of a workload on a pilot, the degree of support of specific workloads varies
+vastly across implementations. Furthermore, some \pilot systems support Virtual
+Organizations and running tasks from multiple users on a single pilot while
+others support jobs using a Message Passing Interface (MPI). Analogously, all
+\pilot systems support the execution of one or more type of workload but they
+differ when considering execution modalities that maximize throughput (HTC),
+computing (HPC) or container-based high scalability (Cloud).
 
 \subsubsection{Core properties}
 \label{sec:coreprops}
@@ -1636,105 +1666,112 @@ not of (individual) instantiations of \pilots.
 
 \begin{itemize}
 
-%core because: it says something elementatary about the principle element
-\item \textbf{Pilot Resource Capabilities}: In~\S\ref{sec:3} pilots have been
-  defined as placeholders for resources. As such, the resource capabilities of
-  each pilot depends upon the type and capabilities of the resource it exposes.
-  Pilots usually expose computing resources but, depending on the capabilities
-  offered by the infrastructure where the pilot is instantiated, they might
-  also expose data and network capabilities. Within the domain of each type of
-  resource and infrastructure, some of the typical characteristics of pilots
-  are: Size (e.g. number of cores), lifespan, intercommunication (e.g.
-  low-latency or inter-domain), computing platforms (e.g. x86, or GPU),
-  file systems (e.g. local, shared, or distributed).
-  Another consideration in discussing \pilot resource capabilities is the
-  notion of granularity, e.g. is there one \pilot for a set of resources within
-  on infrastructure or is there a more fine grained coupling between \pilot and
-  resource and how does this effect the suitability for HTC and/or HPC?
-  \msnote{This should not overlap with Task Execution Modes}
-% \item \textit{Pilot Granularity (spatial)}: What unit of resource is
-% controlled by a single pilot? A core, a node, multiple nodes, a cluster, ...?
+%core because: it says something elementary about the principle element
+\item \textbf{Pilot Resources}. Usually, pilots expose compute resources but,
+  depending on the capabilities offered by the infrastructure where the pilot
+  is instantiated, pilots might also expose data and network resources. Some of
+  the typical characteristics of pilots resources are: size (e.g. number of
+  cores), lifespan, intercommunication (e.g. low-latency or inter-domain),
+  computing platforms (e.g. x86, or GPU), file systems (e.g. local, shared, or
+  distributed). The coupling between pilot and the resources that it holds may
+  vary depending on the architecture of the resources in which it is
+  instantiated. For example, a pilot may bind multiple compute nodes, single
+  nodes, or portion of the cores of each node. The same applies to file systems
+  and its partitions or to software defined or physical network resources.
 
+  % Another consideration in discussing \pilot resource capabilities is the
+  % notion of granularity, e.g. is there one \pilot for a set of resources
+  % within an infrastructure or is there a more fine grained coupling between
+  % \pilot and resource and how does this effect the suitability for HTC and/or
+  % HPC?
 
-% core because: its a must-have to do pilot provisiong
-% (alternative view: aux because its an implementation detail \ldots)
-\item \textbf{Resource Interaction}: The provisioning of pilots
-  depends on how the \pilot system interfaces with one or more
-  targeted infrastructure(s). In this context, the degree of coupling
-  between the \pilot system and the infrastructure can vary,
-  depending on how the \pilot system is deployed, how much it is
-  integrated with the middleware used within the targeted
-  infrastructure, whether the \pilot system is interoperable across
-  multiple types of middleware, and how much information the \pilot
-  system needs about the states and capabilities of the targeted
-  infrastructure.
   \msnote{This should not overlap with Task Execution Modes}
-% \item \textit{Supported DCI systems/services}: What are the type of systems
-% (middlewares, services) that can be interfaced by the \pilotjob system to
-% launch pilots?
-% \item \textit{Supported Middleware:} What middleware does the system connect with? Is it tightly coupled or flexible/extensible?
-% \item Supported Middleware (Auxiliary)
+
+  % \item \textit{Pilot Granularity (spatial)}: What unit of resource is
+  % controlled by a single pilot? A core, a node, multiple nodes, a cluster,
+  % ...?
 
 % core because: its fundamental to our model
-\item \textbf{Overlay Management}: The total set of resources fostered by
+\item \textbf{Pilot Management}. The total set of resources fostered by
   \pilots together form the overlay onto which a workload can be dispatched.
   Whether this overlay is left to chance or careful crafting by the \pilot
-  system is a major implication.
-  % resource acquisition/release policies,
-% % (e.g. the automatic provisioning of \pilots).
+  system is a major implication.\mtnote{We may want to expand this to
+  scheduling and aggregation of pilots. This would overlap with Infrastructure
+  Interaction though. Maybe eliminate Infrastructure Interaction absorbing it
+  into Pilot Management? Should we argue that Infrastructure Interaction (e.g.
+  SAGA) can also be used to coordinate Task Binging/Execution?}
 
-% \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots
-% instantiated where and which entity (system/user) has control over it at
-% which level?
+  % resource acquisition/release policies, (e.g. the automatic provisioning of
+  % \pilots).
+  % \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots
+  % instantiated where and which entity (system/user) has control over it at
+  % which level?
 
 % core because: both tasks and workload are core components
-\item \textbf{Workload Semantics}: The tasks of a workload are dispatched to
+\item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
   pilots depending on their semantics. Specifically, dispatching decisions
-  depends on the relationship held by a task with the other tasks belonging to
-  the workload, the affinity they require between data and compute resources,
-  and the type of capabilities they require in order to be executed. \pilot
-  implementations support a varying degree of semantic richness for the
-  workload and its tasks.  Additionally of interest is the (standard) format or
-  language in which the workloads are described.
+  depends on the relationships among tasks, the affinity between data and
+  compute resources required by the tasks, and the type of capabilities needed
+  for their execution. \pilot systems support a varying degree of semantic
+  richness for the workload and its tasks. Additionally of interest is the
+  (standard) format or language in which the workloads are described.
 
 % core because: this is of the heart of pilot systems
-\item \textbf{Task Binding Characteristics}: One of the core functionalities
-  implied by Task Dispatching is the binding of tasks to pilots. Without such
-  capability, it would not be possible to know where to dispatch tasks, \pilots
-  could not be used to execute tasks and, as such, the whole \pilot system
-  would not be usable. As seen in \S\ref{sec:3}, \pilot systems may allow for
-  two types of binding between tasks and \pilots: early binding and late
-  binding. \pilot system implementations differ in whether and how they support
-  these two types of binding. Specifically, while there might be
-  implementations that only support a single type of binding behavior, they
-  might also differ in whether they allow for the users to control directly
-  what type of binding is performed, and in whether both types of binding are
-  available on an heterogeneous pool of resources.
-  Besides the binary decision between early and late binding, the \pilot system
-  can expose more detailed application-level scheduling decisions, dispatch
-  policies, etc., and might even include more levels of scheduling.
-% % does the framework support advanced workload management capabilities
-% \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of a
-% pilot in relation to the length of a task or workload? \msnote{What kind
-% of answers to you expect here in section 4.3?}
-% \item textit{Task-pilot relationship (spatial)}: Does a pilot execute one or
-% more tasks concurrently?
+\item \textbf{Task Binding}. The Task Dispatching functionality implies the
+  capability of binding tasks to pilots. Without such a capability, it would
+  not be possible to know where to dispatch tasks, \pilots could not be used to
+  execute tasks and, as such, the whole \pilot system would not be usable. As
+  seen in \S\ref{sec:understanding}, \pilot systems may allow for two types of
+  binding between tasks and \pilots: early binding and late binding. \pilot
+  system implementations differ in whether and how they support these two types
+  of binding. Specifically, while there might be implementations that only
+  support a single type of binding, they might also differ in whether they
+  allow for the users to control directly what type of binding is performed,
+  and in whether both types of binding are available on an heterogeneous pool
+  of resources. Besides the binary decision between early and late binding, the
+  \pilot system can expose, for example, more detailed application-level
+  scheduling decisions, dispatch policies, or even include more levels of
+  scheduling.
+
+  % does the framework support advanced workload management capabilities
+  % \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of
+  % a pilot in relation to the length of a task or workload? \msnote{What kind
+  % of answers to you expect here in section 4.3?}
+  % \item textit{Task-pilot relationship (spatial)}: Does a pilot execute one
+  % or more tasks concurrently?
 
 % core because: its the only property of the task executor
 % component/functionality
-\item \textbf{Task Execution Modes}: Once the tasks are dispatched to
-  a pilot, their execution may require for a specific environment to
-  be set up.  \pilot system implementations differ in whether and how they
-  offer such a capability. \pilot system implementations may adopt
-  dedicated components for managing execution environments, or they
-  may rely on ad hoc configuration of the pilots. Furthermore,
-  execution environments can be of varying complexity, depending on
-  whether the \pilot system implementation allows for data retrieval,
-  dedicated software and library installations, communication and
-  coordination among multiple execution environment and, in case,
-  pilots.
-% \item textit{Supported ``physical'' task types}: What types of (physical)
-% tasks are supported, e.g., single-core, MPI, ...?
+\item \textbf{Task Execution}. Once the tasks are dispatched to a pilot, their
+  execution may require for a specific environment to be set up. \pilot systems
+  differ in whether and how they offer such a capability. \pilot systems may
+  adopt dedicated components for managing execution environments, or they may
+  rely on ad hoc configuration of the pilots. Furthermore, execution
+  environments can be of varying complexity, depending on whether the \pilot
+  system allows for data retrieval, dedicated software and library
+  installations, communication and coordination among multiple execution
+  environment and, in case, pilots.
+
+  % \item textit{Supported ``physical'' task types}: What types of (physical)
+  % tasks are supported, e.g., single-core, MPI, ...?
+
+% core because: its a must-have to do pilot provision
+% (alternative view: aux because its an implementation detail \ldots)
+\item \textbf{Infrastructure Interaction}. The provisioning of pilots
+  depends on how the \pilot system interfaces with one or more target
+  infrastructure(s). In this context, the degree of coupling between the \pilot
+  system and the infrastructure can vary, depending on how the \pilot system is
+  deployed, how much it is integrated with the middleware used within the
+  targeted infrastructure, whether the \pilot system operates across multiple
+  types of middleware, and how much information the \pilot system needs about
+  the states and capabilities of the targeted infrastructure.
+  \msnote{This should not overlap with Task Execution Modes}
+  % \item \textit{Supported DCI systems/services}: What are the type of systems
+  % (middlewares, services) that can be interfaced by the \pilotjob system to
+  % launch pilots?
+  % \item \textit{Supported Middleware:} What middleware does the system
+  % connect with? Is it tightly coupled or flexible/extensible?
+  % \item Supported Middleware (Auxiliary)
 
 \end{itemize}
 
@@ -1955,6 +1992,9 @@ not of (individual) instantiations of \pilots.
  \label{table:implementations-properties}
 \end{table*}
 
+
+% -----------------------------------------------------------------------------
+% 4.2
 \subsection{Analysis of \pilot system Implementations}
 \label{sec:implementations}
 
