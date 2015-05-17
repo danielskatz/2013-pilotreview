@@ -2599,14 +2599,14 @@ The Falkon project ran from 2006 to 2011, source code is not available.
 HTCondor can be considered one of the most prevalent distributed computing
 projects of all time in terms of its pervasiveness and size of its user
 community.
-Is often cited as the project that introduced the \pilotjob concept.\cite{}
+Is often cited as the project that introduced the \pilot concept\cite{}.
 Similar in many respects to other batch queuing systems, HTCondor puts special
-emhphasis on high-throughput computing (HTC) and opportunistic computing.
+emphasis on high-throughput computing (HTC) and opportunistic computing.
 HTC is defined as providing large scale computational power on a long term
 scale.
 Opportunistic computing is about making pragmatic use of computing resources
 whenever they are available, without requiring full availability.
-HTC can be achieved by applying opportunistic computing.
+The former can be can be achieved by applying the latter.
 
 % But despite this fact, describing HTCondor along the lines of a \pilotjob
 % system has turned out to be difficult, if not partly impossible for several
@@ -2740,7 +2740,7 @@ GRAM.
 %
 % Condor-G and Gliding In (ca 2001)
 %
-To overcome this coupling again, all ingredients were already available to
+To undo this coupling again, all ingredients were already available to
 construct a personal Condor \impterm{Pool} out of these GRAM enabled resources.
 In a three-step concept coined \impterm{Gliding In}, i) a Condor-G agents uses
 the GRAM protocol to launch HTCondor servers ad hoc via a GRAM endpoint service
@@ -2750,14 +2750,13 @@ thereby form a personal Condor \impterm{Pool}, and, iii) \impterm{Jobs}
 submitted by the user to the \impterm{Agent} which are then matched to and
 executed on the \impterm{Resources} within the \impterm{Pool}.
 
-
-
 %\paragraph{Pilot Resource Capabilities}
 \paragraph{Resource Interaction}
 
-In its native mode, HTCondor is the middleware, and therefore the discussion of
-resource interaction doesn't apply.
-
+In its native mode as a batch queuing system, HTCondor is the middleware, and
+therefore the discussion of resource interaction does not apply.
+With the advent of Condor-G, Condor can be deployed to any site that offers a
+GRAM interface.
 
 \paragraph{Overlay Management}
 
@@ -2781,7 +2780,6 @@ of an HTCondor pool.
 %effectively decouples resource allocation (\impterm{startd} scheduling through
 %GRAM) and task assignment.
 
-
 None of the details of the \impterm{Job} are made known outside of the
 \impterm{Agent} (\impterm{Shadow}) until the actual moment of execution.
 This allows the \impterm{agent} to defer placement decisions until the last
@@ -2790,9 +2788,19 @@ If the \impterm{Agent} submits requests for resources to several matchmakers,
 it may award the highest priority job to the first resource that becomes
 available, without breaking any previous commitments.
 
-%\paragraph{Task Execution Modes}
-%Universes (Java, etc.)
-
+\paragraph{Task Execution Modes}
+A \impterm{universe} in HTCondor defines an execution environment.
+There are distinct implementations of these universes available: the
+\impterm{Standard Universe} provides checkpointing (relevant because of the
+opportunistic mode of Condor) and remote system calls, which requires
+special compilation of the application though, the \impterm{Java
+Universe} hides the details of setting up the remote JVM, the \impterm{Vanilla
+Universe} for applications that can't be modified, the \impterm{Grid Universe}
+is the mode for Condor-G, the \impterm{VM Universe} for exploiting VMware and
+XEN virtual machines, and the \impterm{Parallel Universe} for executing MPI
+applications.
+It should be noted that these \impterm{Universes} don't mix, and that, e.g.
+there is no (real) support for MPI jobs in the Condor-G mode.
 
 %\paragraph{Coordination and Communication}
 
