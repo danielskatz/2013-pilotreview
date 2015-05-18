@@ -2032,7 +2032,7 @@ not of (individual) instantiations of \pilots.
 \newcommand{\prop}[1]{\textit{#1}\xspace}
 \newcommand{\impterm}[1]{\texttt{#1}\xspace}
 
-In light of the common vocabulary discussion in \S\ref{sec:3}, a
+In light of the common vocabulary discussion in \S\ref{sec:3.2}, a
 representative set of \pilot systems has been chosen for further analysis.
 Examining these \pilot systems using the common vocabulary exposes their core
 similarities, and allows a detailed analysis of their differences.
@@ -2124,149 +2124,138 @@ the respective \pilot system under discussion.
 \label{sec:diane}
 
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which follows
-the Master/Worker pattern.
-It was developed at CERN for data analysis in the LHC experiment, but has since
-been used in various other domains, though mainly in the Life Sciences.
-As DIANE is a software framework, some of its semantics are not pre-determined,
-as they can be implemented in various ways as the user sees them.
-In that way it also provides \pilot functionality for job-style executions.
+the Master/Worker pattern. It was developed at CERN for data analysis in the
+LHC experiment, but has since been used in various other domains, though mainly
+in the Life Sciences. As DIANE is a software framework, some of its semantics
+are not predetermined, as they can be implemented in various ways depending on
+the user requirements. In this way, DIANE also provides \pilot functionality
+for job-style executions.\mtnote{I am not sure I understand what a `job-style'
+execution is. Do we need to make it explicit as we did not define the term
+before?}
 
 \paragraph{Resource Interaction}
 The \pilot provisioning with GANGA~\cite{Moscicki20092303} provides a unified
-interface for job submissions to various resource types.
-In this way, DCI specifics are hidden from other parts of DIANE as well as the
-from user.
+interface for job submissions to various resource types\mtnote{do we need
+examples of these types of resource?}. In this way, DCI specifics are hidden
+from other components of DIANE as well as from the user.
 
 \paragraph{Overlay Management}
 The \prop{Overlay Management} of \pilots is done out-of-band by means of the
-\impterm{diane-submitter} script which can launch a \pilot on any infrastructure
-that is supported.
+\impterm{diane-submitter} script which can launch a \pilot on any supported
+infrastructure.
 
 \paragraph{Workload Semantics}
-As expected from the fact that DIANE is in essence a Master/Worker framework,
-the \vocab{Tasks} have no relationships inside the framework, thereby
-the \vocab{Workload Semantics} are that of a Bag-of-Tasks.
-The \vocab{Workload} that is managed by the application specific part can
-maintain any type of workload structure, as long as it can be translated to
-individual tasks\cite{diane-dag, diane-etc}.
-Plugins for other workloads, e.\,g.\ DAGs or for data-intensive application,
-exist or are under development.
-The framework is extensible: applications can implement a custom
+DIANE is mainly a Master/Worker framework and, as such, the \vocab{Tasks} are
+fully independent, consistently with a Bag-of-Tasks \vocab{Workload Semantics}.
+The \vocab{Workload} that is managed by the application-specific component of
+DIANE can freely structured, as long as it can be translated to independent
+tasks\cite{diane-dag, diane-etc}. Plugins for other types of workload (e.\,g.\
+DAGs or for data-intensive applications) exist or are under development. The
+framework is extensible: for example, applications can implement a custom
 application-level scheduler.
 
 \paragraph{Coordination and Communication}
 The \prop{Coordination \& Communication} in DIANE is based on
-CORBA~\cite{OMG-CORBA303:2004} using TCP/IP.
-The CORBA layer itself is invisible to the application.
-Networking-wise, the workers are clients of the master server.
-On TCP/IP level, communication is always uni-directionally from the
-\impterm{WorkerAgent} to the \impterm{RunMaster}.
-\prop{Security} is provided by a secret token that the \impterm{WorkerAgent}
-needs to communicate back to the \impterm{RunMaster}.
-This implies that the network requirements are such that the
-\impterm{WorkerAgent} needs to be able to reach the \impterm{RunMaster} through
-TCP/IP but not the other way around.
-Bi-directional communication is achieved by periodic polling through
+CORBA~\cite{OMG-CORBA303:2004} and uses TCP/IP. The CORBA layer is invisible to
+the application layer. Networking-wise, the workers are clients of the master
+server. On TCP/IP level, communication is always unidirectional from the
+\impterm{WorkerAgent} to the \impterm{RunMaster}. \prop{Security} is provided
+by a secret token that the \impterm{WorkerAgent} needs to communicate back to
+the \impterm{RunMaster}. This implies that the \impterm{WorkerAgent} needs to
+be able to reach the \impterm{RunMaster} via TCP/IP but not the other way
+around. Bidirectional communication is achieved by periodic polling through
 heartbeats by the \impterm{WorkerAgent}, where the \impterm{RunMaster} responds
 with feedback.
 
-\paragraph{Task Binding Characteristics}
-DIANE is primarily designed with respect to HTC environments (such as
-EGI~\cite{egi}), i.\,e.\ one \pilot consists of a single worker agent with the
-size of 1 core.
+\paragraph{Task Binding}
+DIANE is primarily designed for HTC environments (such as EGI~\cite{egi}),
+i.\,e.\ one \pilot consists of a single worker agent with the size of 1 core.
 Although the semantics of the binding are ultimately controllable by the
-user-programmable scheduler, the general architecture is that of a pull model.
-The pull model naturally implements the late-binding paradigm as the worker
-will only pull a new task once it is available and has free resources.
+user-programmable scheduler, the general architecture is consistent with a pull
+model. The pull model naturally implements the late-binding paradigm as every
+worker pulls a new task once it is available and has free resources.
 
 \paragraph{Task Execution Modes}
-DIANE is primarily designed with respect to HTC environments (such as
-EGI~\cite{egi}), i.\,e.\ one \pilot consists of a single worker agent with the
-typical size of 1 core/node, and thus, by default is not able to run (widely)
-parallel applications (e.\,g.\ based on MPI).
+DIANE is primarily designed for HTC environments (such as EGI~\cite{egi}),
+i.\,e.\ one \pilot consists of a single worker agent with the typical size of 1
+core/node. As such, DIANA is not able by default to run (widely) parallel
+applications as those based, for example, on MPI.
 
 \paragraph{Pilot Resource Capabilities}
-One of the DIANE \prop{Pilot Resource Capabilities} is that it has the notition
-of "capacity" and applications can make use of that property do diverge from
-the "1 worker = 1 core" mode.
+DIANE implements the notion of \mtnote{resource?} ``capacity'', a property that
+applications can use to diverge from the ``1 worker = 1 core''
+mode.\mtnote{Should we make explicit what this divergence is and implies?}
 
 \paragraph{Architecture}
-The central component of DIANE is the \impterm{RunMaster}.
-It consists of a \impterm{TaskScheduler} and an \impterm{ApplicationManager}.
-Both are abstract classes that need to be implemented for the specific purpose
-at hand. Example and/or default implementations are provided for the user to
-use or build upon.
-Together the \impterm{TaskScheduler} and \impterm{ApplicationManager} implement
-the \vocab{Workload Manager} component.
+The central component of DIANE is the \impterm{RunMaster}, consisting of a
+\impterm{TaskScheduler} and an \impterm{ApplicationManager} module. Both
+modules are abstract classes that need to be implemented for the specific
+purpose at hand. Examples and/or default implementations are provided to the
+user as guidelines and initial code stubs. Together the \impterm{TaskScheduler}
+and \impterm{ApplicationManager} implement the \vocab{Workload Manager}
+component.
 
 The \impterm{TaskScheduler} keeps track of the task entries and is responsible
-for \vocab{Binding Tasks} to the \impterm{ApplicationWorkers}.
-The implementation of the \impterm{ApplicationManager} is as its name suggest,
-responsible for defining the application \vocab{Workload} and the creating
-\vocab{Tasks} that are passed to the \vocab{TaskScheduler}.
-As the \impterm{ApplicationWorker} asks for \vocab{Tasks} from the
-\impterm{TaskScheduler} the natural way of implementing the scheduler is in a
-\vocab{Late Binding} approach.
+for \vocab{Binding Tasks} to the \impterm{ApplicationWorkers}. The
+implementation of the \impterm{ApplicationManager} is responsible for defining
+the application \vocab{Workload} and for describing the \vocab{Tasks} that are
+passed to the \vocab{TaskScheduler}. As the \impterm{ApplicationWorker} asks
+the \impterm{TaskScheduler} for new \vocab{Tasks}, the natural way of
+implementing the scheduler is by following a \vocab{Late Binding} approach.
 
-The \vocab{\pilot} in DIANE is the \impterm{WorkerAgent}.
-The core component of the \impterm{WorkerAgent} is the
-\impterm{ApplicationWorker}, which is an abstract class that defines three
-methods that every implementation needs to implement.
-Two of these methods are for initialization and cleanup and the last,
-\impterm{do\_work()}, is the method that actually receives the task description
-and executes the work, thereby being a close resemblance of the \vocab{Task
-Executor}.
+\vocab{\pilots} in DIANE are \impterm{WorkerAgents}. The core component of a
+\impterm{WorkerAgent} is the \impterm{ApplicationWorker}, an abstract class
+that defines three methods that need to be implemented by every implementation.
+Two of these methods are for initialization and cleanup while the third method,
+(\impterm{do\_work()}) receives the task description and executes the work.
+\impterm{do\_work()} is therefore an implementation of the
+\vocab{Task Executor} component.
 
 \paragraph{Interface}
 DIANE's \prop{Architecture} is based on the \impterm{Inversion of Control}
-design pattern.
-It is a Python framework, that formulates certain hooks that an
-\vocab{Application} can be programmed against. The aforementioned abstract
-classes need to be implement to provide the application-specific semantics.
-The \prop{Interface} to these "DIANE-\vocab{Applications}" is to start them
-through the \impterm{diane-run} command.
-As discussed in the \prop{Overlay Management} section, the creation of \pilots
-is done out-of-band.
+design pattern. Implemented in Python, it exposes well-defined hooks for
+\vocab{Application} programming. The aforementioned abstract classes need to be
+implemented to provide the application-specific semantics. The \prop{Interface}
+to these ``DIANE-\vocab{Applications}'' is to start them through the
+\impterm{diane-run} command\mtnote{I am not sure I understand this sentence}.
+As discussed in the \prop{Overlay Management}, the creation of \pilots is done
+out-of-band.
 
 \paragraph{Performance and Scalability}
 The authors report that in first instance they had implemented full
 bi-directional communication, but that turned out to be difficult to correctly
-implement and created scalability limitations.
+implement and created scalability limitations.\mtnote{In absence of more precise data about the performance profile of DIANE and it scalability boundaries, I would delete this paragraph.}
 
 \paragraph{Robustness}
-The \prop{Robustness} in DIANE comes from the mature CORBA communication
-layer, and from custom task-failure policies in the \impterm{TaskScheduler}.
-Dealing with \prop{Robustness} in DIANE is twofold.
-At one hand DIANE offers the mechanisms to supports fault tolerance: basic
-error detection and propagation mechanisms are in place.
-Further, an automatic re-execution of tasks is possible.
-On the other hand, DIANE also leaves room for application specific strategies.
+The \prop{Robustness} in DIANE comes from the mature CORBA communication layer,
+and from the custom task-failure policies implemented in the
+\impterm{TaskScheduler}. \prop{Robustness} is achieved in DIANE by: (i)
+offering mechanisms to supports fault tolerance: basic error detection and
+propagation mechanisms are in place; (ii) implementing an automatic
+re-execution of tasks; and (iii) leaving room for application specific
+strategies.
 
 \paragraph{Files and Data}
-The CORBA communiation channel between the Master and the Worker also allows
+The CORBA communication channel between the Master and the Worker also allows
 for file transfers, meaning that the \pilot not only exposes cores, but also
-the file system on the worker node.
+the file system on the worker nodes.
 
-\paragraph{Interoperability}
+\paragraph{Interoperability and Security}
 \prop{Interoperability} to various middleware security mechanisms
 (e.\,g.\ GSI, X509 authentication) and backends is achieved through its
 integration with GANGA.
 
-\paragraph{Security}
-Access to various middleware security mechanisms (e.\,g.\ GSI, X509
-authentication) is achieved through its integration with GANGA.
-
 \paragraph{Multitenancy}
-DIANE is in principle a single-user \pilot system, i.\,e.\ each \pilot is
-executed with the privileges of the respective user.
-Also, only workload of this respective user can be executed by DIANE.
-However, \prop{Multitenancy} with DIANE does happen when it is used as a
-backend for Science Gateways, where it serves multiple users on the same
-installation, but with a single credential.
+DIANE is a single-user \pilot system, i.\,e.\ each \pilot is executed with the
+privileges of the respective user. Also, only workload of this respective user
+can be executed by DIANE. However, \prop{Multitenancy} with DIANE does happen
+when it is used as a backend for Science Gateways, where it serves multiple
+users on the same installation, but with a single credential.\mtnote{I would
+argue that multitenancy is achieved by the application layer and not by DIANE.}
 
 \paragraph{Development Model}
-Used, maintained and developed by CERN with external contributions and users.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DIANE is developed, maintained, and used by the CERN community with external
+contributions and users.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -2685,7 +2674,7 @@ same time protecting the \impterm{Resource} from a mishaving \impterm{Job} (the
 \impterm{Box}).
 
 Following on from this, an \impterm{Agent}, \impterm{Matchmaker} and a (set of)
-\impterm{Resources} together form a \impterm{Pool}. 
+\impterm{Resources} together form a \impterm{Pool}.
 \vocab{Resources} in a pool can span a wide spectrum of systems.
 While some \impterm{Pools} are comprised of regular desktop PCs (sometimes
 called a campus grid), other \impterm{Pools} incorporate large HPC clusters and
@@ -2733,7 +2722,7 @@ could not join multiple (at the same time).
 % Direct Flocking (ca 1998)
 %
 This limit was overcome by introducing \impterm{direct flocking} in which an
-\impterm{Agent} can report itself to multiple \impterm{Matchmakers} 
+\impterm{Agent} can report itself to multiple \impterm{Matchmakers}
 While both forms of \impterm{flocking} had their raison d'\^{e}tre, and they
 could even be mixed, \impterm{gateway} flocking did not stand the test of time
 as with scaling up, both technical overhead and organisational burden became
