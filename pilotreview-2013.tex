@@ -2629,14 +2629,14 @@ The Falkon project ran from 2006 to 2011, source code is not available.
 HTCondor can be considered one of the most prevalent distributed computing
 projects of all time in terms of its pervasiveness and size of its user
 community.
-Is often cited as the project that introduced the \pilotjob concept.\cite{}
+Is often cited as the project that introduced the \pilot concept\cite{}.
 Similar in many respects to other batch queuing systems, HTCondor puts special
-emhphasis on high-throughput computing (HTC) and opportunistic computing.
+emphasis on high-throughput computing (HTC) and opportunistic computing.
 HTC is defined as providing large scale computational power on a long term
 scale.
 Opportunistic computing is about making pragmatic use of computing resources
 whenever they are available, without requiring full availability.
-HTC can be achieved by applying opportunistic computing.
+The former can be can be achieved by applying the latter.
 
 % But despite this fact, describing HTCondor along the lines of a \pilotjob
 % system has turned out to be difficult, if not partly impossible for several
@@ -2651,78 +2651,149 @@ HTC can be achieved by applying opportunistic computing.
 
 At the heart of it, HTCondor is a high-throughput distributed batch computing
 system.
-It accepts user tasks and executes them on one or more resources gathered in an
-HTCondor \impterm{pool}.
 
-In a pool, user tasks are represented through job description files and
-submitted to a (user-)\impterm{agent} via command-line tools.
-Agents are deployed as (\impterm{schedd}) system services on so-called
-\impterm{gateway machines} (user front-ends of an HTCondor pool) and accept
-tasks from multiple users.
-Agents implement three different aspects of the overall architecture:
-(1) they provide persistent storage for user jobs, (2) they find resource for
-a task to execute by contacting the \impterm{matchmaker} and (3) they marshal
-task execution via a so-called \impterm{shadow}.
+%
+% Core HTCondor (ca 1988)
+%
+The core components of HTCondor are collectively named the \impterm{Condor
+Kernel}: \impterm{Agent} (also referred to as \impterm{schedd}),
+\impterm{Resource} (also referred to as \impterm{startd}), \impterm{Shadow},
+\impterm{Sandbox} (also referred to as \impterm{starter}) and
+\impterm{Matchmaker} (also referred to as \impterm{central manager}).
 
-The matchmaker, also called the \impterm{central manager}, is another system
-service that realizes the concept of late binding by matching user tasks with
-one or more of the resources available to an HTCondor pool. The matchmaking
-process is based on \impterm{ClassAds} a description language that can capture
-both, resource capabilities as well as task requirements.
+The user submits \vocab{Tasks} (in HTCondor called \impterm{Jobs}) to the
+\impterm{Agent}.
+\impterm{Agents} provide persistent storage for the user's \impterm{Jobs} and
+tries to find computing \vocab{resources} \impterm{Resource} to execute them.
 
-\vocab{Resources} are tied into an HTCondor pool by \impterm{startd} system
-services.
-The \impterm{startd} services are deployed on the pool's compute resources.
-They report resource state and  capabilities back to the matchmaker and start
-tasks submitted by agents on the resource in encapsulated \impterm{sandboxes}.
+Both \impterm{Agents} and \impterm{Resources} advertise themselves to the
+\impterm{Matchmaker}, which is then responsible for bringing potential pairs
+together. The \impterm{Matchmaker} will notify the \impterm{Agent} of these
+potential matches, and the \impterm{Agent} is on its turn responsible to
+contact the \impterm{Resource} and validate the suggested match.
 
-Resources in a pool can span a wide spectrum of system.
-While some pools are comprised of regular desktop PCs (sometimes called a
-campus grid), other pools incorporate large HPC clusters and cloud resources.
-Hybrid pools with heterogeneous sets of resources are also common.
+Once the match is confirmed by the \impterm{Resource}, both \impterm{Resource}
+and \impterm{Agent} have to start a new process to make the execution of the
+\impterm{Job} happen.
+The \impterm{Agent} will start a \impterm{Shadow} which is responsible for
+providing all the details required to execute a \impterm{Job} (the
+executable, the arguments, the environment, the input files).
 
-It is possible for two or more HTCondor pools to ``collaborate'' so that one
-pool has access to the resources of another pool and vice versa.
-In HTCondor, this concept is called
-\impterm{flocking}~\cite{Epema:1996:flocking} and allows agents to query
-matchmakers outside their own pool for compatible resources.
-Flocking is used to implement load-balancing between multiple pools but also to
-provide a broader set of heterogeneous resources to user communities.
+The \impterm{Resource} creates a \impterm{Sandbox} which is a appropiate
+execution environment (the \impterm{Sand} for the \vocab{Task} while at the
+same time protecting the \impterm{Resource} from a mishaving \impterm{Job} (the
+\impterm{Box}).
 
-The components described above, jobs, agent, matchmaker, resource, shadow and
-sandboxes are sometimes collectively referred to as the \impterm{HTCondor
-Kernel} and satisfy the requirements for a \pilot system as outlined in
-Section \ref{subsec:vocab_core_functionalities}.
-However, the provisioning, allocation and usage of resources within a pool can
-differentiate between different pools and multiple different approaches and
-software systems have emerged over time, all under the umbrella of the wider
-HTCondor project.
+Following on from this, an \impterm{Agent}, \impterm{Matchmaker} and a (set of)
+\impterm{Resources} together form a \impterm{Pool}. 
+\vocab{Resources} in a pool can span a wide spectrum of systems.
+While some \impterm{Pools} are comprised of regular desktop PCs (sometimes
+called a campus grid), other \impterm{Pools} incorporate large HPC clusters and
+cloud resources.  Hybrid pools with heterogeneous sets of resources are also
+possible.
+
+Within the \impterm{Pool} the \impterm{Matchmaker} is responsible for enforcing
+the policies defined by the \impterm{Community}.
+
+%The matchmaker, also called the \impterm{central manager}, is another system
+%service that realizes the concept of late binding by matching user tasks with
+%one or more of the resources available to an HTCondor pool.
+%The matchmaking process is based on \impterm{ClassAds} a description language
+%that can capture both, resource capabilities as well as task requirements.
+
+%
+% Gateway Flocking (ca 1994)
+%
+While technically a \impterm{Pool} could grow as big as needed, reality was
+that (which was also only natural) many indepedent \impterm{Pools} were created
+.
+As a user (or \impterm{Agent} could only belong to one \impterm{Matchmater},
+the \impterm{Resources} that a user could access were therefore limited to one
+\impterm{Pool}.
+This lead to the concept of \impterm{gateway
+flocking}~\cite{Epema:1996:flocking}.
+With this, an individual \impterm{Pool} would be interfaced to another
+\impterm{Pool} by letting associated \impterm{gateway} machines expose
+information about the \impterm{Pool's} partipants to another \impterm{Pool},
+e.g. about idle \impterm{Resources} or \impterm{Agents}.
+These \impterm{gateway} nodes can be configured to adhere to policies and are
+not necessarily bi-directional.
+%It is possible for two or more HTCondor pools to ``collaborate'' so that one
+%pool has access to the resources of another pool and vice versa.
+%In HTCondor, this concept is called
+%and allows agents to query
+%matchmakers outside their own pool for compatible resources.
+%Flocking is used to implement load-balancing between multiple pools but also to
+%provide a broader set of heterogeneous resources to user communities.
+
+In this model, however, \impterm{flocking} is still bounded to single
+\impterm{organisations}/\impterm{communities}, and a user (or \impterm{Agent})
+could not join multiple (at the same time).
+%
+% Direct Flocking (ca 1998)
+%
+This limit was overcome by introducing \impterm{direct flocking} in which an
+\impterm{Agent} can report itself to multiple \impterm{Matchmakers} 
+While both forms of \impterm{flocking} had their raison d'\^{e}tre, and they
+could even be mixed, \impterm{gateway} flocking did not stand the test of time
+as with scaling up, both technical overhead and organisational burden became
+too high.
+
+%
+% Condor-G (ca 2000)
+%
+Around that time (1998) the vision of the Grid began to surface.
+One of the initial activities was a uniform interface for batch execution.
+This was achieved by the Globus project with the design of the Grid
+Resource Access and Management (GRAM) protocol.
+
+The HTCondor \impterm{Agent} was extended to speak GRAM and Condor-G
+\cite{condor-g} was born.
+GRAM services are deployed as remote job submission endpoints on top of HPC
+cluster batch queuing systems.
+Condor-G allows a user (an \impterm{Agent} to incorporate those HPC resources
+temporarily to an HTCondor pool.
+
+Although Condor-G opened up the execution of Condor \impterm{Jobs} at any
+GRAM-enabled computing resource, the drawback of this approach was that
+resource allocation and job execution became coupled again, i.e. the
+\impterm{Agent} has to direct the \impterm{Job} to a specific GRAM endpoint
+without (potentially) knowing about the availability of resources on that
+endpoint.
+Because GRAM was an abstraction of so many batch queuing systems, it could
+obviously only implement the greatest common denominator of all the
+functionality in these various implementations.
+This implied that in this mode of operation there was no \impterm{Matchmaker}
+as the required functionality at the endpoints for that was not provided by
+GRAM.
+
+%
+% Condor-G and Gliding In (ca 2001)
+%
+To undo this coupling again, all ingredients were already available to
+construct a personal Condor \impterm{Pool} out of these GRAM enabled resources.
+In a three-step concept coined \impterm{Gliding In}, i) a Condor-G agents uses
+the GRAM protocol to launch HTCondor servers ad hoc via a GRAM endpoint service
+on a remote system, ii) the Condor servers once they get through the batch
+queue connect to the \impterm{Matchmaker} started by the \impterm{Agent} and
+thereby form a personal Condor \impterm{Pool}, and, iii) \impterm{Jobs}
+submitted by the user to the \impterm{Agent} which are then matched to and
+executed on the \impterm{Resources} within the \impterm{Pool}.
 
 %\paragraph{Pilot Resource Capabilities}
 \paragraph{Resource Interaction}
 
-In its native mode, HTCondor is the middleware, and therefore the discussion of
-resource interaction doesn't apply.
-
-
-%\paragraph{Condor-G -- Condor via Globus}
-Condor-G is an alternative (user-)agent for HTCondor that can ``speak'' the
-Globus GRAM (Grid Resource Access and Management) protocol. GRAM services are
-often deployed as remote job submission endpoints on top of HPC cluster
-queuing systems. Condor-G allows users to incorporate those HPC resources
-temporarily to an HTCondor pool.
-
-Condor-G agents use the GRAM protocol to launch HTCondor \impterm{startd}
-\pilots ad hoc via a GRAM endpoint service on a remote system. Tasks submitted
-through the Condor-G (user-)agent are then assigned by a local matchmaker to
-these ad-hoc provisioned \pilots. This concept is called \impterm{gliding-in}
-or \impterm{GlideIn}. It implements \vocab{late-binding} on top of GRAM/HPC
-systems: the (user-)agent can assign tasks to \impterm{startd}s after
-they have been scheduled and started through the HPC queueing system. This
-effectively decouples resource allocation (\impterm{startd} scheduling through
-GRAM) and task assignment.
+In its native mode as a batch queuing system, HTCondor is the middleware, and
+therefore the discussion of resource interaction does not apply.
+With the advent of Condor-G, Condor can be deployed to any site that offers a
+GRAM interface.
 
 \paragraph{Overlay Management}
+
+%However, the provisioning, allocation and usage of resources within a pool can
+%differentiate between different pools and multiple different approaches and
+%software systems have emerged over time, all under the umbrella of the wider
+%HTCondor project.
 
 % \paragraph{glideinWMS -- Automated \pilot Provisioning}
 glideinWMS, a workload management system (WMS)~\cite{1742-6596-119-6-062044}
@@ -2731,11 +2802,42 @@ by providing automated \pilot (\impterm{startd}) provisioning based on the state
 of an HTCondor pool.
 
 %\paragraph{Workload Semantics}
-%\paragraph{Task Binding Characteristics}
-%\paragraph{Task Execution Modes}
+\paragraph{Task Binding Characteristics}
+
+%Gliding-In implements \vocab{late-binding} on top of GRAM/HPC
+%systems: the (user-)agent can assign tasks to \impterm{startd}s after
+%they have been scheduled and started through the HPC queueing system. This
+%effectively decouples resource allocation (\impterm{startd} scheduling through
+%GRAM) and task assignment.
+
+None of the details of the \impterm{Job} are made known outside of the
+\impterm{Agent} (\impterm{Shadow}) until the actual moment of execution.
+This allows the \impterm{agent} to defer placement decisions until the last
+possible moment.
+If the \impterm{Agent} submits requests for resources to several matchmakers,
+it may award the highest priority job to the first resource that becomes
+available, without breaking any previous commitments.
+
+\paragraph{Task Execution Modes}
+A \impterm{universe} in HTCondor defines an execution environment.
+There are distinct implementations of these universes available: the
+\impterm{Standard Universe} provides checkpointing (relevant because of the
+opportunistic mode of Condor) and remote system calls, which requires
+special compilation of the application though, the \impterm{Java
+Universe} hides the details of setting up the remote JVM, the \impterm{Vanilla
+Universe} for applications that can't be modified, the \impterm{Grid Universe}
+is the mode for Condor-G, the \impterm{VM Universe} for exploiting VMware and
+XEN virtual machines, and the \impterm{Parallel Universe} for executing MPI
+applications.
+It should be noted that these \impterm{Universes} don't mix, and that, e.g.
+there is no (real) support for MPI jobs in the Condor-G mode.
+
 %\paragraph{Coordination and Communication}
 
 \paragraph{Interface}
+
+In a pool, user tasks are represented through job description files and
+submitted to a (user-)\impterm{agent} via command-line tools.
 
 The main HTCondor distribution provided command line utils to setup these
 Glideins. These are now replaced by Bosco.
