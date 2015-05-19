@@ -2677,7 +2677,7 @@ the policies defined by the \impterm{Community}.
 While technically a \impterm{Pool} could grow as big as needed, reality was
 that (which was also only natural) many indepedent \impterm{Pools} were created
 .
-As a user (or \impterm{Agent} could only belong to one \impterm{Matchmater},
+As a user (or \impterm{Agent} could only belong to one \impterm{Matchmaker},
 the \impterm{Resources} that a user could access were therefore limited to one
 \impterm{Pool}.
 This lead to the concept of \impterm{gateway
@@ -2751,6 +2751,7 @@ submitted by the user to the \impterm{Agent} which are then matched to and
 executed on the \impterm{Resources} within the \impterm{Pool}.
 
 %\paragraph{Pilot Resource Capabilities}
+
 \paragraph{Resource Interaction}
 
 In its native mode as a batch queuing system, HTCondor is the middleware, and
@@ -2772,6 +2773,7 @@ by providing automated \pilot (\impterm{startd}) provisioning based on the state
 of an HTCondor pool.
 
 %\paragraph{Workload Semantics}
+
 \paragraph{Task Binding Characteristics}
 
 %Gliding-In implements \vocab{late-binding} on top of GRAM/HPC
@@ -2802,7 +2804,16 @@ applications.
 It should be noted that these \impterm{Universes} don't mix, and that, e.g.
 there is no (real) support for MPI jobs in the Condor-G mode.
 
-%\paragraph{Coordination and Communication}
+\paragraph{Coordination and Communication}
+
+The various kernel elements can be deployed in multiple configurations and can
+all be run on a single machine but also fully distributed.
+The HTCondor system has their history in instituational environments and assume
+not too many network restrictions. The communication between the kernel
+components consist of both UDP and TCP based proprietary protocols that uses an
+array of dynamically allocated ports.
+With Condor-G the requirements were significantly reduced and the main
+communication is with the GRAM service.
 
 \paragraph{Interface}
 
@@ -2906,6 +2917,7 @@ alone version of Corral, the underlying pilot (glidein) provisioning is
 now handled by the GlideinWMS factory.
 
 %\paragraph{Interoperability}
+
 \paragraph{Multitenancy}
 
 The main differences between the GlideinWMS and the CorralWMS front-ends lie in
@@ -2918,9 +2930,34 @@ which includes many of the HPC clusters that are part of U.S. national
 cyberinfrastructure (e.g., XSEDE).
 
 %\paragraph{Robustness}
-%\paragraph{Security}
-%\paragraph{Files and Data}
+
+\paragraph{Security}
+
+HTCondor inter-component communication is based on the home grown CEDAR
+message-based communication library. It allows client and servers to negotiate
+an appriopriate security protocol.
+Regarding the execution of tasks, there is a level of trust assumed between
+resource and application.
+
+\paragraph{Files and Data}
+
+The handling of files and data was initially not a primary design principle and
+did not extend well beyond facilities to stage relatively small data into the
+sandbox. The \impterm{Standard Universe} offers the ability to re-route file
+I/O back to the \impterm{Shadow} of the \impterm{Agent}.
+Over the years, HTCondor has been integrated with various data tools.
+Out of the same stable as HTCondor comes NeST\cite{}. NeST is a software-only
+storage appliance that supports a miriad of storage protocols and integrates
+with the \impterm{Matchmaker} to announce its availability.
+With storage systems like NeST being available, one can then use a system like
+Stork\cite{} to manage the transfers to and from this storage resources.
+In concordence with the \impterm{Matchmaker}, Stork can make educated decisions
+about data placement.
+Finally, Parrot\cite{} is a mechanism that offers a POSIX I/O interface to
+applications to files that are otherwise only available remotely.
+
 %\paragraph{Performance and Scalability}
+
 \paragraph{Development Model}
 
 HTCondor is used in multiple different contexts: the HTCondor project,
