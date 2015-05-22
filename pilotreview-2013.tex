@@ -2752,7 +2752,10 @@ form a personal Condor \impterm{Pool}; and (iii) \impterm{Jobs} submitted by
 the user to the \impterm{Agent} which are then matched to and executed on the
 \impterm{Resources} within the \impterm{Pool}.
 
-%\paragraph{Pilot Resource Capabilities}
+\paragraph{Pilot Resource Capabilities}
+
+The resources managed by a single \pilot are generally limited to compute
+resources only and more specifically to single compute nodes.
 
 \paragraph{Resource Interaction}
 
@@ -2774,7 +2777,15 @@ based on Condor GlideIns, introduces advanced \pilot capabilities to HTCondor
 by providing automated \pilot (\impterm{startd}) provisioning based on the
 state of an HTCondor pool.
 
-%\paragraph{Workload Semantics}
+\paragraph{Workload Semantics}
+
+The upper most layer of the Condor stack is the \impterm{problem solver}.
+A \impterm{problem solver} is a application layer structure built on top of the
+Condor agent. Two problem solvers are supplied in the distribution:
+master-worker and the directed acyclic graph manager (DAGMan).
+Other problem solvers can be built using the public interfaces of the agent.
+The task dependencies that are defined e.g. with DAGMAN are managed outside of
+the Agent and the lower layers are not aware of the workload semantics.
 
 \paragraph{Task Binding Characteristics}
 
@@ -2928,7 +2939,14 @@ personal X.509 certificates. This enables explicit resource provisioning in
 non-VO centric environments, which includes many of the HPC clusters that are
 part of U.S. national cyberinfrastructure (e.g., XSEDE).
 
-%\paragraph{Robustness}
+\paragraph{Robustness}
+
+As stated before, one of the initial drivers for Condor was the heterogenuous
+environments and the need to provide a robust runtime environment for the
+application by means of the sandbox.
+Additionally, for applications that support it, Condor provides checkpointing
+which allows applications to be restarted in case of failure or migrated to
+another resource.
 
 \paragraph{Security}
 
