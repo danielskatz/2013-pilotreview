@@ -3536,8 +3536,59 @@ conceptualization; implementation: the implementation of the model; paradigm:
 methods, tools, and procedures pertaining to/enabled by the use of pilots. What
 do you think? Happy to refine/change/abandon if you think it does not work.}
 
+% -----------------------------------------------------------------------------
+% 5.1
+%
 \subsection{The Pilot Paradigm}
 \label{sec:5.1}
+
+% \jhanote{Need thinking: Following on from discussion yesterday, is early/late
+% binding a logical consequence of multi-level scheduling? Can we absorb the
+% latter into the former?}\mtnote{Following the revision of S3, early/late
+% binding seems to be related to having resource placeholder while multi-level
+% scheduling seems to be the means to have placeholders. Both early and late
+% binding refers to the same entities: tasks bound to pilots, i.e. place
+% holders. Multi-level scheduling refers to two pairs of entities: container
+% (i.e. jobs) scheduled to DCIs, and tasks scheduled to placeholders. This
+% opens the issue of whether binding is a form of scheduling, whether binding
+% and scheduling are the same. We may want to discuss about it.}
+
+% \mtnote{The following paragraphs address: PJs have well defined semantics and
+% model. PJs dont help with data intensive applications.}
+
+% The scope of the \pilot paradigm encompasses multiple types of resource.
+
+% Usually, the tasks executed on pilots leverage mainly the cores of the
+% compute nodes for which the pilot is a placeholder. Tasks may also use
+% data or network resources but mostly as accessories to their execution
+% on computational resources.
+
+% Local or shared filesystems may be used to
+% read input and write output data while network connectivity may be
+% required to download, for example, the code of the task executor.
+
+% The elements of generality of the \pilot paradigm have been modeled in
+% Ref.~\cite{Luckow:2008la}. This investigation was motivated by the desire to
+% provide a single conceptual framework -- the so called \pstar Model -- that
+% would be used to subsume the design characteristics of the various \pilot
+% system implementations, a sample of which have been analyzed in detail in
+% Section~\ref{sec:analysis}. \mtnote{Is this still the case? I think this has
+% become one of the goals of this paper. How do you want to mention P* here?
+% What do you want to say about it? Is the paragraph above sufficient?}
+% Interestingly, the \pstar model was amenable and easily extensible to
+% \pilotdata.  The consistent and symmetrical treatment of data and compute in
+% the model led to the generalization of the model as the {\it P* Model of
+% Pilot Abstractions}.
+
+% \mtnote{The following paragraphs address: (i) PJs are just for HTC and they
+% just circumvent job queuing delays; PJs unfairly game HPC queuing system;
+% (ii) PJs have to be tied to specific infrastructure and infrastructures have
+% to be tied to specific pjs; (iii) PJs are such a simple concept, it doesn't
+% need more attention: Conversely, everyone should write their own PJ just
+% because they can; Note: the second part of this statement is better addressed
+% when discussing the fragmentation of the pilot landscape. (iv) PJs are
+% stand-alone tools passive (system) tools, as opposed to user-space, active
+% and extensible components of a CI;}
 
 The \pilot paradigm identifies a type of software system with both general and
 unique characteristics. This paradigm is general because, in principle, it does
@@ -3619,54 +3670,6 @@ necessary responsible for an efficient resource utilization. A \pilot system
 can be implemented as a middleware component, as seen with HTCondor and its
 role as an integral part of the infrastructure middlware stack.
 
-% \jhanote{Need thinking: Following on from discussion yesterday, is early/late
-% binding a logical consequence of multi-level scheduling? Can we absorb the
-% latter into the former?}\mtnote{Following the revision of S3, early/late
-% binding seems to be related to having resource placeholder while multi-level
-% scheduling seems to be the means to have placeholders. Both early and late
-% binding refers to the same entities: tasks bound to pilots, i.e. place
-% holders. Multi-level scheduling refers to two pairs of entities: container
-% (i.e. jobs) scheduled to DCIs, and tasks scheduled to placeholders. This
-% opens the issue of whether binding is a form of scheduling, whether binding
-% and scheduling are the same. We may want to discuss about it.}
-
-% \mtnote{The following paragraphs address: PJs have well defined semantics and
-% model. PJs dont help with data intensive applications.}
-
-% The scope of the \pilot paradigm encompasses multiple types of resource.
-
-% Usually, the tasks executed on pilots leverage mainly the cores of the
-% compute nodes for which the pilot is a placeholder. Tasks may also use
-% data or network resources but mostly as accessories to their execution
-% on computational resources.
-
-% Local or shared filesystems may be used to
-% read input and write output data while network connectivity may be
-% required to download, for example, the code of the task executor.
-
-% The elements of generality of the \pilot paradigm have been modeled in
-% Ref.~\cite{Luckow:2008la}. This investigation was motivated by the desire to
-% provide a single conceptual framework -- the so called \pstar Model -- that
-% would be used to subsume the design characteristics of the various \pilot
-% system implementations, a sample of which have been analyzed in detail in
-% Section~\ref{sec:analysis}. \mtnote{Is this still the case? I think this has
-% become one of the goals of this paper. How do you want to mention P* here?
-% What do you want to say about it? Is the paragraph above sufficient?}
-% Interestingly, the \pstar model was amenable and easily extensible to
-% \pilotdata.  The consistent and symmetrical treatment of data and compute in
-% the model led to the generalization of the model as the {\it P* Model of
-% Pilot Abstractions}.
-
-\mtnote{The following paragraphs address: (i) PJs are just for HTC and they
-just circumvent job queuing delays; PJs unfairly game HPC queuing system; (ii)
-PJs have to be tied to specific infrastructure and infrastructures have to be
-tied to specific pjs; (iii) PJs are such a simple concept, it doesn't need more
-attention: Conversely, everyone should write their own PJ just because they
-can; Note: the second part of this statement is better addressed when
-discussing the fragmentation of the pilot landscape. (iv) PJs are stand-alone
-tools passive (system) tools, as opposed to user-space, active and extensible
-components of a CI;}
-
 The generality of the \pilot paradigm may come as a surprise when considering
 the most common requirement that motivates its implementations. Leveraging
 multi-level scheduling so to increase the execution throughput of large
@@ -3690,6 +3693,9 @@ the \pilot paradigm.
 % should we consider? In what sense the pilot paradigm is distributed?
 % Why should we define the \pilot paradigm an abstraction?
 
+% -----------------------------------------------------------------------------
+% 5.2
+%
 \subsection{Pilot Paradigm in Context}
 \label{sec:context}
 
@@ -3810,6 +3816,9 @@ a similar runtime environment that provides applications a higher-level
 abstractions to YARN resources allowing it to retain memory and cores
 supporting heterogeneous workloads.
 
+% -----------------------------------------------------------------------------
+% 5.3
+%
 \subsection{Future Directions and Challenges}
 \label{sec:5.3}
 
@@ -3853,7 +3862,7 @@ conceptual model and implementation framework, and (iii) provide insight
 and lessons for other tools and higher-level frameworks, such as
 Workflow systems possibly}
 
-%-------------------------------------------------------------------------------
+% -----------------------------------------------------------------------------
 % \item \textbf{Pilot abstraction} as a well-defined, independent
 % distributed system abstraction. \jhanote{state clearly how section 3
 % and 4 help us define what a pilot is, the necessary and sufficient
@@ -3904,11 +3913,11 @@ Workflow systems possibly}
 %   advantage of liberating us from the requirement of imposing on the
 %   the manager the need to push/pulling tasks from a pool.}
 
-% % \mtnote{The paragraph relative to this comment is gone --- no more
-% % pool concept. I do like the idea of grouping though so I would suggest
-% % to wait for the entire Section to stabilize further and then see
-% % whether we can add/extend a paragraph by introducing the concept of
-% % grouping.}
+% \mtnote{The paragraph relative to this comment is gone --- no more
+% pool concept. I do like the idea of grouping though so I would suggest
+% to wait for the entire Section to stabilize further and then see
+% whether we can add/extend a paragraph by introducing the concept of
+% grouping.}
 
 % \jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
 %   capabilities?} \alnote{The question is: when is a \pilot a \pilot?
