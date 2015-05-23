@@ -3150,19 +3150,13 @@ allows for the user to provision a personal SGE cluster on Hopper.
 % \paragraph{Pilot Resource Capabilities}
 % \paragraph{Resource Interaction}
 % \paragraph{Overlay Management}
-% \paragraph{Workload Semantics}
 % \paragraph{Task Binding Characteristics}
 % \paragraph{Task Execution Modes}
 % \paragraph{Coordination and Communication}
-% \paragraph{Architecture}
-% \paragraph{Interface}
 % \paragraph{Interoperability}
 % \paragraph{Multitenancy}
-% \paragraph{Robustness}
-% \paragraph{Security}
 % \paragraph{Files and Data}
 % \paragraph{Performance and Scalability}
-% \paragraph{Development Model}
 
 \panda \mtnote{Need expansion} was developed to provide a multi-user workload
 management system for ATLAS~\cite{aad2008atlas}. ATLAS is a particle detector
@@ -3233,7 +3227,7 @@ interoperate with HPC resources~\cite{pandapresentation2013-06}.
 For recent endeavors in HPC they are using SAGA to interface with the queuing
 systems.
 
-\paragraph{Architecture \& Interface}
+\paragraph{Architecture}
 
 \panda's \textit{manager} is called a \texttt{\panda server}. It matches jobs
 with \pilots and handles data management. \panda's \textit{\pilot} is called,
@@ -3259,6 +3253,8 @@ the user space include \texttt{Monitor}, for web-based monitoring, and the
 replicating popular or backlogged input data to underutilized resources for
 later computations and enables jobs to be placed where the data already exists.
 
+% \paragraph{Interface}
+
 \paragraph{Robustness}
 
 The wrapper of the \pilot takes care of disk space monitoring, and enables job
@@ -3268,6 +3264,8 @@ recovery of failed jobs and restarting from crash whenever possible.
 
 \panda on HTC grids mainly depends on GSI Certificate-based security and glExec
 to run as given user.
+
+% \paragraph{Development Model}
 
 % \textbf{job, task, resource, infrastructure, scheduling, pilot, pool,
 %   manager, agent, Pilot-Job, placeholder, multi-level scheduling, binding,
