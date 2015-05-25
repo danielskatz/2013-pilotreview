@@ -3289,7 +3289,6 @@ to run as given user.
 %   sites) and monitors pilot status, basically enables use of glideins with
 %   PanDA (?)
 % \end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -3469,7 +3468,6 @@ development is public and takes place on a public Github repository. The
 project is under active funding and development and has a number of external
 projects that use it as a foundation layer for job execution.
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Section 4's concluding remarks
@@ -3485,6 +3483,8 @@ like DIANE and RADICAL-Pilot take the form of a library or a framework. From a
 formal standpoint, services can be abstracted by a library and a library can be
 abstracted by a service, so the main distinction between these architectures if
 the default form they come in and how they are meant to be deployed.
+
+\mtnote{Should we avoid this subsection altogether?}
 
 
 % -----------------------------------------------------------------------------
@@ -3699,125 +3699,245 @@ the \pilot paradigm.
 \subsection{Pilot Paradigm in Context}
 \label{sec:context}
 
-\paragraph*{HTC vs HPC} We have identified that the Pilot Paradigm in itself is
-very common and on an abstract level applies to all \pilot systems we have
-discussed. This is also illustrated by the mapping to the \pstar model.
-While arguably not a fundamental difference in the application of \pilots,
-there certainly are structural practical differences in using \pilots on HPC vs
-HTC.
-While in the \textit{temporal} dimension the ratio of \vocab{Tasks} and \pilots might
-be similar for both type of infrastructures (i.e. \pilots run for 12 hours and
-tasks for 1 hour), the \textit{spatial} dimension is a different story.
-Let's define HPC as O(10) sites with a tightly coupled system.
-These systems typically have a head/login/service node where the \pilot will
-operate from.
-For one site, the ratio of \pilots vs compute resources will typically be
-O(1):O(Nodes) and therefore the ratio of \pilots vs \vocab{Tasks} will be
-O(1):O(Tasks).
-With the given O(10) sites this leaves us with a \pilot:\vocab{Tasks} ratio of at most
-O(10):O(Tasks)
-On the other hand, if we define HTC as O(100) sites of lousely coupled systems,
-without a central node to foster these resources, the ratio of \pilots to
-compute resources will typically be closer to O(1):O(Cores).
-These differences have not only implications on the type of applications that
-can be run, but also on the nature of the multi-level scheduling. In the HPC
-case there is a large degree of freedom for the \pilot layer scheduling while
-in HTC the scheduling on that level is much more pre-determined.
+The adoption of the \pilot paradigm in a scientific computing environment
+brings to the fore a richer, more granular set of details about its
+specification, requirements, and functionalities.
 
-\paragraph*{MPI, OpenMP, etc.} In the \pstar model and in the discussion so far
-we have mainly been concerned about the abstract notion of \vocab{Task}, i.e.
-the application payload to be run on the DCI.
-While this abstraction is very natural it does pose challenges in practice when
-we are operating in a real-life heterogeneous environment, i.e. what does
-``run'' mean \ldots. And if we are able to define what it means, how do we pass
-that information down the stack?
+% \paragraph*{HTC and HPC}
 
-\paragraph*{Generality or optimisation} The existence of many \pilot systems
-is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
-Workload management. [this has a clear link to the pilot and application layer
-paragraph]
+The analysis offered in~\S\ref{sec:analysis} shows how the large adoption of
+the \pilot paradigm with multiple implementations serving diverse use cases.
+While the paradigm remains the same, its application varies depending on the
+characteristic of the computing considered. These differences are well
+illustrated by looking at how \pilot systems support the execution of parallel
+and distributed applications.
 
-\paragraph*{Pilot and Middleware Layer} The definition of the term
-`pilot' and the critical review of its implementations highlight the
-relation between \pilot systems and middleware as commonly defined in
-[cit, cit, cit]. The notion of pilot as a resource placeholder is
-something more than a job as defined in the context of Grid- based
-middleware. For example, cloud-based DCIs \mtnote{Use of DCIs for plural
-needs to be consistent across the paper.} introduce notable exceptions
-and differences in the way in which pilots can be provisioned.[cit, cit]
-Within a IaaS [cit], Virtual Machines (VMs) and not jobs are used for
-their provisioning. VMs can often be instantiated without waiting into a
-queue  with a predictable instantiation time, usually minimal when
-compared to the queuing time often experinced on Grid-based DCIs [ref
-Vishal paper]. Furthermore, the limitations on the execution time of a
-VM can be virtually absent, a limitation that on grid-based middleware
-is imposed by the queue walltime. Clearly, overheads are introduced by
-having to deal with VMs and not simple jobs and the model adopted within
-a IaaS-based DCI to assign resources to each VM can affect the
-flexibility of the whole \pilotjob system. [cit] A similar assessment
-could be done for a DCI deploying a PaaS model of cloud computing.[cit]
+Both types of applications may have similar temporal dimensions for the
+\pilot and task durations but their spatial dimension varies sensibly.
+Typically, parallel applications require tightly-coupled computations [ref]. As
+a consequence, \pilots supporting the execution of that kind of application
+need to be instantiated on infrastructures offering potentially large-core,
+large-memory compute nodes. These pilots are usually submitted by means of the
+infrastructure headnode, each pilot having at least as many core as those
+offered by a node of the target infrastructure.
 
-\paragraph*{Pilot and Application Layer} The current state of workflow
-(WF) systems~\cite{nsf-workflow,1196459} provides a motivating example
-for the P* Model and the Pilot-API: even though many WF systems exist
-(with significant duplicated effort), they provide limited means for
-extensibility and interoperability.  We are not naive enough to suggest
-a single reason, but assert that one important contributing fact is the
-lack of the right interface abstractions upon which to construct
-workflow systems; had those been available, many/most WF engines would
-have likely utilized them (or parts thereof), instead of proprietary
-solutions. Significant effort has been invested towards WF
-interoperability at different levels -- if nothing else, providing
-post-facto justification of its importance. The impact of missing
-interface abstractions on the WF world can be seen through the
-consequences of their absence: WF interoperability remains difficult if
-not infeasible. The Pilot-API in conjunction with the P* Model aims to
-prevent similar situation for \pilotjobs.\mtnote{To be abstracted from
-workflow to application.}
+Differently from parallel applications, distributed applications usually
+require loosely coupled or fully independent computations. Consequently,
+\pilots supporting their execution depend less from the size of the nodes of
+the target infrastructure and more on the overall number of possibly
+independent cores they can hold. These \pilots be instantiated also by means of
+decentralized services (e.g. WMS) aggregating resources from possibly
+heterogeneous infrastructures.
 
-\paragraph*{Pilot and AAA} Because the \pilot can run as a different ``user''
-than the ``owner'' of the \vocab{Task} there are challenges for many aspects of
-Authentication, Authorization and Accounting (AAA).
-The issue mainly arrises because of the fact that multi-level scheduling
-decouples the \vocab{DCI} user from the \vocab{Task} owner.
-While technically one could make the choice not to be concerned about this
-decoupling and only be concerned with the DCI credential of the Pilot, in
-practice this does not hold true.
-[ref glexec].
+% to HPC and HTC presents practical differences. The ratio of tasks and \pilots
+% might be similar for both type of infrastructures in the temporal dimension
+% (i.e., the walltime of the \pilots and the duration of tasks execution) but
+% the spatial dimension varies sensibly. Consider HPC as a system with $O(10)$
+% tightly coupled sites. Typically, this system has a head/login/service node
+% where the \pilot will operate from. For one site, the ratio of \pilots vs
+% compute resources will typically be $O(1):O(Nodes)$ and therefore the ratio
+% of \pilots vs tasks will be $O(1):O(Tasks)$. With the given $O(10)$ sites
+% this leaves us with a \pilot:tasks ratio of at most $O(10):O(Tasks)$. When
+% HTC is defined as a system with O(100) loosely coupled sites without a
+% central node to foster these resources, the ratio of \pilots to compute
+% resources will typically be closer to $O(1):O(Cores)$. These differences have
+% not only implications on the type of applications that can be run, but also
+% on the nature of the multi-level scheduling. In the HPC case there is a large
+% degree of freedom for the \pilot layer scheduling while in HTC the scheduling
+% on that level is much more predetermined.
 
-\paragraph*{Pilot and the Enterprise} Over the past years,
-Hadoop~\cite{hadoop} emerged as distributed computing for data-intensive
-tasks in the enterprise space. While early versions of Hadoop were very
-monolithic tightly coupling the Map Reduce programming framework with
-the underlying infrastructure resource management. With Hadoop~2,
-YARN~\cite{yarn-paper} was introduced as a central resource manager
-supporting heterogenous workloads (and not only Map Reduce). YARN
-provides support multi-level scheduling enabling the application to
-deploy their own application-level scheduling routines on top of
-Hadoop-managed storage and compute resources. While YARN manages the
-lower resources, the higher-level runtimes typically use an
-application-level scheduler to optimize resource usage for the
-application. Applications need to initialize their so-called
-Application-Master via YARN; the Application Master is then responsible
-for allocating resources in form of so-called containers for the
+% \paragraph*{MPI, OpenMP, etc.}
+
+The notion of task as defined in~\S\ref{sec:understanding} and then utilized
+in~\S\ref{sec:analysis} shapes both the conceptualization and implementation of
+the \pilot paradigm. Conceptually, wrapping the executables of a distributed or
+parallel application means creating a well-defined space for their
+localization. This may involve not only the specification of program switches,
+data locations, or library dependences but also loading modules, downloading
+supporting code, or on-the-fly compilations and execution of supporting
+applications. Implementation-wise the process of localization requires tight
+coupling with the target infrastructure, its capabilities, policies, and
+specific configurations.
+
+The implementation of the localization process becomes challenging in presence
+of heterogeneous infrastructures. The same executable may require different
+localization operations depending on where it will be executed. More
+importantly, different types of localizations may or may not be available or
+allowed in some infrastructures imposing decision capabilities on the task
+scheduler modules and the development of a robust interoperability layer
+between the \pilot system and the heterogeneous target infrastructures.
+
+Interoperable localization offers the opportunity to execute heterogeneous
+executables via \pilot systems. As seen in~\S\ref{sec:history}, the abstraction
+of \pilot was progressively developed in a distributed context leaving
+under-explored the executing of parallel applications by means of \pilot
+systems. This is merely a historical byproduct, not an intrinsic limitation of
+the \pilot abstraction. For example, by leveraging conceptualization, different
+flavors of MPI libraries can be loaded and specific execution commands may be
+used to run MPI applications via a task wrapper and a \pilot agent.
+
+The benefits of executing tightly-coupled parallel code via \pilot systems are
+especially evident when considering workloads involving homogeneous tasks and
+possibly diverse computational phases. For example, applications involving
+distinguished simulation and analysis phases [cit], or applications integrating
+multiple types of analysis [cit], \ldots.\mtnote{To be expanded with
+better/further examples of why we want to run MPI with pilots.}
+
+% In the \pstar model and in the discussion so far we have mainly been
+% concerned about the abstract notion of task, i.e., the application payload to
+% be run on the DCI. While this abstraction is very natural, it does pose
+% challenges in practice when we are operating in a real-life heterogeneous
+% environment, i.e. what does ``run'' mean \ldots. And if we are able to define
+% what it means, how do we pass that information down the stack?\mtnote{How
+% this relate to MPI, OpenMP?}
+
+% \paragraph*{Pilot and Middleware Layer}
+
+The definition of the term `pilot' as a resource placeholder
+in~\S\ref{sec:understanding} and the review of its implementations
+in~\S\ref{sec:analysis} helps to explore the relation between
+\pilot systems and middleware. The notion of pilot as a resource placeholder is
+more general than that of a job as defined in the context of HPC and Grid
+middleware. This is exemplified when considering cloud-based DCIs.
+
+Within a IaaS [cit], the instantiation of virtual machines (VMs) introduces
+overheads due to the bootstrapping of an operating system, including data and
+networking subsystems. Nonetheless, VMs are instantiated without waiting into a
+queue and, having as a consequence largely bounded instantiation time,
+especially when compared to job execution time and its (un)predictability in
+HPC and grid infrastructures [ref Vishal paper, AIMES paper].
+
+\pilot can benefit from the more predictable and overall reduced time of VM
+instantiation because VMs can be used as resource placeholders. A pilot agent
+can be executed within a VM, retrieve and execute tasks on the resources of
+(one or more) VM. Conceptually, the the role and functionalities of the \pilot
+agent are the same when used in a IaaS, HPC, or grid infrastructure. The
+implementation details are isolated within the agent code itself and have no
+bearing on the overall design of the \pilot system.
+
+This analysis highlights not only the generality of the notion of resource
+placeholder but it also shows the independence of the \pilot paradigm from the
+specificities of the infrastructure middleware. The \pilot paradigm abstracts
+the notion of resources, alongside that of scheduling and task execution,
+creating a well-defined and isolated logical space for the management of the
+application execution.
+
+% usually minimal when compared to the queuing time averagely experienced on
+% Grid-based DCIs. Furthermore, the limitations on the execution time of a VM
+% can be virtually absent, a limitation that on job-based middleware is imposed
+% by the queue walltime. Clearly, overheads are introduced by instantiating VMs
+% including their data and networking subsystems, and the model adopted within
+% a IaaS-based DCI to assign resources to each VM can affect the flexibility of
+% the \pilot system. A similar assessment could be done for a DCI deploying a
+% PaaS model of cloud computing.
+
+\mtnote{Use of DCIs for plural needs to be consistent across the paper.}
+
+% \paragraph*{Pilot and Application Layer}
+
+Importantly, an analogous degree of isolation is offered by the \pilot paradigm
+to the application layer. The scientific application landscape is diverse and
+fragmented, especially when considering distributed applications [cit]. The
+current state of the workflow (WF) systems is a paradigmatic example of this
+situation.
+
+Many WF systems have been implemented with significant duplicated effort and
+limited means for extensibility and interoperability. One important
+contributing factor to these limitations is the lack of suitable, open, and
+possibly standard-based interface abstractions for the resource layer. Most WF
+engines are developed with proprietary solutions to access the resource layer,
+solutions that cannot be shared with other engines and that often serve
+specific requirements, use cases, and infrastructures.
+
+The \pilot paradigm and a open \pilot APIs like the one specified in [ref
+Pilot-API] offer the missing layer on which WF and, more generally, distributed
+applications could be built upon. As with the resource layer, also in this case
+the \pilot paradigm offers a well-defined and well-isolate layer between
+applications and resources. This foster extensibility, interoperability, and
+modularity by separating the application description and logic, from its
+execution management, and resource provisioning and aggregation. In turn, this
+avoids the need to develop special-purpose, vertical, and end-to-end
+applications, the main source of duplication and fragmentation.
+
+% \paragraph*{Pilot and AAA}
+
+The multi-level scheduling and the heterogeneity of the target infrastructures
+of \pilot systems present several challenges for the authentication,
+authorization, and accounting processes (AAA). As seen in~\S\ref{sec:analysis},
+AAA requirements for \pilot systems are limited to the multitenancy of the
+instantiated \pilots, and to the credentials used to submit \pilots to the
+remote infrastructure and to use them to execute the application tasks.
+
+\pilot systems that do not implement multitenancy for each pilot instance have
+no need to implement shared authentication systems as those used for the AAA of
+virtual organizations. The AAA used by the user to access her own \pilots is a
+well-isolated implementation detail while the credential used for \pilot
+deployment depends on the target infrastructure.
+
+The requirements of the target infrastructures are a diverse and often
+inconsistent array of mechanisms and policies. These affect the deployment of
+\pilots and, possibly, the binding of tasks to pilots. This is especially the
+case when HPC, grid, and cloud systems are targeted by the same \pilot system
+implementation. The \pilot paradigm is gregarious In the face of such a
+diversity: it imposes no AAA requirements on the resource layer but just the
+need to present the required credentials consistently with the required
+policies; and it transparently passes these requirements to the application
+layer.
+
+% Because the \pilot can run as a different ``user'' than the ``owner'' of the
+% \vocab{Task} there are challenges for many aspects of Authentication,
+% Authorization, and Accounting (AAA). The issue mainly arises because
+% multi-level scheduling decouples the DCI user from the task} owner. While
+% technically one could make the choice not to be concerned about this
+% decoupling and only be concerned with the DCI credential of the Pilot, in
+% practice this does not hold true. [ref glexec].\mtnote{Need to be discussed
+% and then extended.}
+
+% \paragraph*{Pilot and the Enterprise}
+
+Moving away for the relationship between the \pilot paradigm and critical
+implementation details associated with its use in a scientific production
+context, the \pilot paradigm has relevant implications also for the Enterprise
+sector. This connection can be traced back to the increasing adoption of
+distributed computed paradigm into the private sector.
+
+Over the past years, Hadoop~\cite{hadoop} emerged as distributed computing for
+data-intensive tasks in the enterprise space. While early versions of Hadoop
+were very monolithic, tightly coupling the Map Reduce programming framework to
+the underlying infrastructure resource management, Hadoop~2,
+YARN~\cite{yarn-paper} was introduced as a central resource manager supporting
+not only Map Reduce but also heterogeneous workloads.
+
+YARN provides support multi-level scheduling enabling the application to deploy
+their own application-level scheduling routines on top of Hadoop-managed
+storage and compute resources. With YARN managing the lower resources, the
+higher-level runtimes typically use an application-level scheduler to optimize
+resource usage for the application. Applications need to initialize their
+so-called Application-Master via YARN; the Application Master is then
+responsible for allocating resources in form of so called containers for the
 applications. It then can execute tasks in these containers.
 
-As in the HPC environment, the support for different application
-workloads and job types: long-lived vs. short-lived applications,
-homogeneous vs. heterogeneous tasks is a challenge. \pilots address many
-of these requirements in HPC and HTC environments. Similar frameworks
-are emerging for YARN: Llama~\cite{llama} offers a long-running
-application master for YARN application designed for the Impala SQL
-engine. TEZ~\cite{tez} is a DAG processing engine primarily designed to
-support the Hive SQL engine allowing the application to hold containers
-across multiple phases of the DAG execution without the need to
-de-/re-allocate resources. REEF~\cite{Chun:2013:RRE:2536274.2536318} is
-a similar runtime environment that provides applications a higher-level
-abstractions to YARN resources allowing it to retain memory and cores
-supporting heterogeneous workloads.
+As with the HPC environment, the support for different application workloads
+and job types as long-lived vs. short-lived applications, or homogeneous vs.
+heterogeneous tasks is challenging. \pilot-like frameworks are emerging for
+YARN to address such a challenge. Llama~\cite{llama} offers a long-running
+application master for YARN designed for the Impala SQL engine. TEZ~\cite{tez}
+is a DAG processing engine primarily designed to support the Hive SQL engine
+allowing the application to hold containers across multiple phases of the DAG
+execution without the need to de/reallocate resources.
+REEF~\cite{Chun:2013:RRE:2536274.2536318} is a similar runtime environment that
+provides applications a higher-level abstractions to YARN resources allowing it
+to retain memory and cores supporting heterogeneous workloads.
 
 \paragraph*{Performance and Scalability} TODO as per discussion of last
 meeting.
+
+\paragraph*{Generality or Optimization} The existence of many \pilot systems
+is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
+Workload management. [this has a clear link to the pilot and application layer
+paragraph]\mtnote{Happy to write this after discussing what was the original
+idea. Should we move this to future trends?}
+
 
 % -----------------------------------------------------------------------------
 % 5.3
