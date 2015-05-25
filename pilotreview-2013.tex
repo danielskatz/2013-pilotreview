@@ -82,56 +82,47 @@
 \maketitle
 
 \begin{abstract}
-  There is no agreed upon definition of \pilotjobs; however a
-  functional attribute of \pilotjobs that is generally agreed upon is
-  they are tools/services that support multi-level and/or
-  application-level scheduling by providing a scheduling overlay on
-  top of the system-provided schedulers.
-  Nearly everything else is either specific to an
-  implementation, open to interpretation or not agreed upon. For
-  example, are \pilotjobs part of the application space, or part of
-  the services provided by an infrastructure? We will see that
-  close-formed answers to questions such as whether \pilotjobs are
+  There is no agreed upon definition of \pilotjobs; however a functional
+  attribute of \pilotjobs that is generally agreed upon is they are
+  tools/services that support multi-level and/or application-level scheduling by
+  providing a scheduling overlay on top of the system-provided schedulers.
+  Nearly everything else is either specific to an implementation, open to
+  interpretation or not agreed upon. For example, are \pilotjobs part of the
+  application space, or part of the services provided by an infrastructure? We
+  will see that close-formed answers to questions such as whether \pilotjobs are
   system-level or application-level capabilities are likely to be
-  elusive. Hence, this paper does not make an attempt to provide
-  close-formed answers, but aims to provide appropriate context,
-  insight and analysis of a large number of \pilotjobs, and thereby
-  bring about a hitherto missing consilience in the community's
-  appreciation of \pilotjobs.  Specifically this paper aims to provide
-  a comprehensive survey of \pilotjobs, or more generically of
-  \pilotjob like capabilities.  A primary motivation for this work stems
-  from our experience when looking for an interoperable, extensible
-  and general-purpose \pilotjob; in the process, we realized that
-  such a capability did not exist. The situation was however even more
-  unsatisfactory: in fact there was no agreed upon definition or
-  conceptual framework of \pilotjobs.  To substantiate these points of
-  view, we begin by sampling (as opposed to a comprehensive survey)
-  ~\onote{a few lines above we say that we're doing a comprehensive
-    survey!} some existing \pilotjobs and the different aspects of
-  these \pilotjobs, such as the applications scenarios that they have
-  been used and how they have been used. The limited but sufficient
-  sampling highlights the variation, and also provides both a
-  motivation and the basis for developing an implementation agnostic
-  terminology and vocabulary to understand \pilotjobs; Section \S3
-  attempts to survey the landscape/eco-system of \pilotjobs.  With an
-  agreed common framework/vocabulary to discuss and describe
-  \pilotjobs, we proceed to analyze the most commonly utilized
-  \pilotjobs and in the process provide a comprehensive survey of
-  \pilotjobs, insight into their implementations, the infrastructure
-  that they work on, the applications and application execution modes
-  they support, and a frank assessment of their strengths and
-  limitations.  An inconvenient but important question -- both
-  technically and from a sustainability perspective that must be
-  asked: why are there so many similar seeming, but partial and
-  slightly differing implementations of \pilotjobs, yet with very
-  limited interoperability amongst them?  Examining the reasons for
-  this state-of-affairs provides a simple yet illustrative case-study
-  to understand the state of the art and science of tools, services
-  and middleware development.  Beyond the motivation to understand the
-  current landscape of \pilotjobs from both a technical and a
-  historical perspective, we believe a survey of \pilotjobs is a
-  useful and timely undertaking as it provides interesting insight
-  into understanding issues of software sustainability.
+  elusive. Hence, this paper does not make an attempt to provide close-formed
+  answers, but aims to provide appropriate context, insight and analysis of a
+  large number of \pilotjobs, and thereby bring about a hitherto missing
+  consilience in the community's appreciation of \pilotjobs.  Specifically this
+  paper aims to provide a comprehensive perspective of \pilotjobs. A primary
+  motivation for this work stems from our experience when looking for an
+  interoperable, extensible and general-purpose \pilotjob; in the process, we
+  realized that such a capability did not exist. The situation was however even
+  more unsatisfactory: in fact there was no agreed upon definition or conceptual
+  framework of \pilotjobs.  To substantiate these points of view, we begin by
+  discussing some existing \pilotjobs and the different aspects of these
+  \pilotjobs, such as the applications scenarios that they have been used and
+  how they have been used. The limited but sufficient sampling highlights the
+  variation, and also provides both a motivation and the basis for developing an
+  implementation agnostic terminology and vocabulary to understand \pilotjobs;
+  Section \S3 attempts to survey the landscape/eco-system of \pilotjobs.  With
+  an agreed common framework/vocabulary to discuss and describe \pilotjobs, we
+  proceed to analyze the most commonly utilized \pilotjobs and in the process
+  provide a comprehensive survey of \pilotjobs, insight into their
+  implementations, the infrastructure that they work on, the applications and
+  application execution modes they support, and a frank assessment of their
+  strengths and limitations.  An inconvenient but important question -- both
+  technically and from a sustainability perspective that must be asked: why are
+  there so many similar seeming, but partial and slightly differing
+  implementations of \pilotjobs, yet with very limited interoperability amongst
+  them?  Examining the reasons for this state-of-affairs provides a simple yet
+  illustrative case-study to understand the state of the art and science of
+  tools, services and middleware development.  Beyond the motivation to
+  understand the current landscape of \pilotjobs from both a technical and a
+  historical perspective, we believe a survey of \pilotjobs is a useful and
+  timely undertaking as it provides interesting insight into understanding
+  issues of software sustainability.
   % believe that a survey of \pilotjobs provides and appreciation for
   % the richness of the \pilotjobs landscape.  is
   % not to discuss the \pstar conceptual framework, but That led to
@@ -163,23 +154,24 @@ The seamless uptake of distributed infrastructures by scientific applications
 has been limited by the lack of pervasive and simple-to-use abstractions at the
 development, deployment, and execution level. Of all the abstractions proposed
 to support effective distributed resource utilization, a survey of actual usage
-suggested that \pilotjob \mtnote{Should we use just `pilot'} is arguably one of
-the most widely-used distributed computing abstractions - as measured by the
-number and types of applications that use them, as well as the number of
-production distributed cyberinfrastructures that support them. \msnote{ref?}
+suggested that \pilotjob \mtnote{Should we use just `pilot'}\jhanote{I think you
+  have proposed a graceful transition: from pilotjobs to pilotsystems? If so,
+  should we stick with pilotjobs here?}is arguably one of the most widely-used
+distributed computing abstractions - as measured by the number and types of
+applications that use them, as well as the number of production distributed
+cyberinfrastructures that support them. \msnote{ref?}
 
 The fundamental reason for the success of the \pilotjob abstraction is that
-\pilotjobs facilitate the oterwise challenging mapping of specific tasks
-onto explicit heterogeneous and dynamic resource pools. \pilotjobs decouple the
-workload specification from the task management improving the efficiency of
-task assignment while shielding applications from having to manage tasks across
-such resources.\onote{not sure if 'load-balance' is appropriate
-here}\mtnote{Changed into the more generic `manage'} Another concern often
-addressed by \pilotjobs is fault tolerance which commonly refers to the ability
-of the \pilotjob system to verify the execution environment before executing
-jobs. The \pilotjob abstraction is also a promising route to address specific
-requirements of distributed scientific applications, such as coupled-execution
-and application-level scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+\pilotjobs facilitate the oterwise challenging mapping of specific tasks onto
+explicit heterogeneous and dynamic resource pools. \pilotjobs decouple the
+workload specification from the task management improving the efficiency of task
+assignment while shielding applications from having to manage tasks across such
+resources.  Another concern often addressed by \pilotjobs is fault tolerance
+which commonly refers to the ability of the \pilotjob system to verify the
+execution environment before executing jobs. The \pilotjob abstraction is also a
+promising route to address specific requirements of distributed scientific
+applications, such as coupled-execution and application-level
+scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -209,7 +201,7 @@ interoperability, %(thus providing {\it post-facto} justification of its needs)
 these objectives remain difficult if not infeasible.
 
 \mtnote{Should we have a paragraph explaining the core contribution offered by
-this paper?}
+this paper?}\jhanote{yes}
 
 The remainder of this paper is divided into four Sections. \S\ref{sec:history}
 offers a critical review of how the concept of \pilotjobs has evolved by
@@ -2752,7 +2744,10 @@ form a personal Condor \impterm{Pool}; and (iii) \impterm{Jobs} submitted by
 the user to the \impterm{Agent} which are then matched to and executed on the
 \impterm{Resources} within the \impterm{Pool}.
 
-%\paragraph{Pilot Resource Capabilities}
+\paragraph{Pilot Resource Capabilities}
+
+The resources managed by a single \pilot are generally limited to compute
+resources only and more specifically to single compute nodes.
 
 \paragraph{Resource Interaction}
 
@@ -2774,7 +2769,15 @@ based on Condor GlideIns, introduces advanced \pilot capabilities to HTCondor
 by providing automated \pilot (\impterm{startd}) provisioning based on the
 state of an HTCondor pool.
 
-%\paragraph{Workload Semantics}
+\paragraph{Workload Semantics}
+
+The upper most layer of the Condor stack is the \impterm{problem solver}.
+A \impterm{problem solver} is a application layer structure built on top of the
+Condor agent. Two problem solvers are supplied in the distribution:
+master-worker and the directed acyclic graph manager (DAGMan).
+Other problem solvers can be built using the public interfaces of the agent.
+The task dependencies that are defined e.g. with DAGMAN are managed outside of
+the Agent and the lower layers are not aware of the workload semantics.
 
 \paragraph{Task Binding Characteristics}
 
@@ -2928,7 +2931,14 @@ personal X.509 certificates. This enables explicit resource provisioning in
 non-VO centric environments, which includes many of the HPC clusters that are
 part of U.S. national cyberinfrastructure (e.g., XSEDE).
 
-%\paragraph{Robustness}
+\paragraph{Robustness}
+
+As stated before, one of the initial drivers for Condor was the heterogenuous
+environments and the need to provide a robust runtime environment for the
+application by means of the sandbox.
+Additionally, for applications that support it, Condor provides checkpointing
+which allows applications to be restarted in case of failure or migrated to
+another resource.
 
 \paragraph{Security}
 
@@ -3132,19 +3142,13 @@ allows for the user to provision a personal SGE cluster on Hopper.
 % \paragraph{Pilot Resource Capabilities}
 % \paragraph{Resource Interaction}
 % \paragraph{Overlay Management}
-% \paragraph{Workload Semantics}
 % \paragraph{Task Binding Characteristics}
 % \paragraph{Task Execution Modes}
 % \paragraph{Coordination and Communication}
-% \paragraph{Architecture}
-% \paragraph{Interface}
 % \paragraph{Interoperability}
 % \paragraph{Multitenancy}
-% \paragraph{Robustness}
-% \paragraph{Security}
 % \paragraph{Files and Data}
 % \paragraph{Performance and Scalability}
-% \paragraph{Development Model}
 
 \panda \mtnote{Need expansion} was developed to provide a multi-user workload
 management system for ATLAS~\cite{aad2008atlas}. ATLAS is a particle detector
@@ -3215,7 +3219,7 @@ interoperate with HPC resources~\cite{pandapresentation2013-06}.
 For recent endeavors in HPC they are using SAGA to interface with the queuing
 systems.
 
-\paragraph{Architecture \& Interface}
+\paragraph{Architecture}
 
 \panda's \textit{manager} is called a \texttt{\panda server}. It matches jobs
 with \pilots and handles data management. \panda's \textit{\pilot} is called,
@@ -3241,6 +3245,8 @@ the user space include \texttt{Monitor}, for web-based monitoring, and the
 replicating popular or backlogged input data to underutilized resources for
 later computations and enables jobs to be placed where the data already exists.
 
+% \paragraph{Interface}
+
 \paragraph{Robustness}
 
 The wrapper of the \pilot takes care of disk space monitoring, and enables job
@@ -3250,6 +3256,8 @@ recovery of failed jobs and restarting from crash whenever possible.
 
 \panda on HTC grids mainly depends on GSI Certificate-based security and glExec
 to run as given user.
+
+% \paragraph{Development Model}
 
 % \textbf{job, task, resource, infrastructure, scheduling, pilot, pool,
 %   manager, agent, Pilot-Job, placeholder, multi-level scheduling, binding,
@@ -3486,6 +3494,9 @@ the default form they come in and how they are meant to be deployed.
 
 \mtnote{Should we avoid this subsection altogether?}
 
+
+\jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
+  systems that we don't discuss}
 
 % -----------------------------------------------------------------------------
 % SECTION 5
@@ -3928,6 +3939,9 @@ execution without the need to de/reallocate resources.
 REEF~\cite{Chun:2013:RRE:2536274.2536318} is a similar runtime environment that
 provides applications a higher-level abstractions to YARN resources allowing it
 to retain memory and cores supporting heterogeneous workloads.
+
+\jhanote{We should briefly discuss cluster management and container advances
+  (e.g. Docker) and their relation to pilots}
 
 \paragraph*{Performance and Scalability} TODO as per discussion of last
 meeting.
