@@ -489,11 +489,6 @@ Enterprise, outside the boundaries of scientific research.
 % with task-specific management (such as placement, scheduling, and execution)
 % allows the utilization of many heterogenous resources in an efficient manner.
 
-% Put real dates in the comment here.
-% Boinc: X
-% BigJob: 200X
-% etc.
-
 % complexities of task management and coordination to the application layer.
 % In order to isolate the application itself from the scheduling of resource
 % placeholders,
@@ -647,7 +642,7 @@ Enterprise, outside the boundaries of scientific research.
 
 The origin and motivations for devising the \pilot abstraction and developing
 its many implementations can be traced back to five main notions: task-level
-distribution and parallelism, Master-Worker pattern, multi-tenancy,
+distribution and parallelism, \MW pattern, multi-tenancy,
 multi-level scheduling, and resource placeholder. This section offers an
 overview of these five notions and an analysis of their relationship with the
 \pilot abstraction. A chronological perspective is taken so to contextualize
@@ -670,7 +665,7 @@ forecast the weather of specific regions of the globe. The computers would
 perform their calculations and then send the results back to the clerk. The
 Forecast Factory was not only an early conceptualization of what is called
 today a ``supercomputer'' but also of the coordination pattern for distributed
-and parallel computation called ``Master-Worker'' (M-W).
+and parallel computation called ``\MW''.
 
 \begin{figure}[t]
   \centering
@@ -806,6 +801,10 @@ scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
 % complexity of the notion of resource placeholder.
 
 \begin{figure}[t]
+% Put real dates in the comment here.
+% Boinc: X
+% BigJob: 200X
+% etc.
   \centering
     \includegraphics[width=0.45\textwidth]{figures/timeline}
     \caption{Introduction of systems over time. When available, the date of
@@ -1028,6 +1027,10 @@ commonalities and differences.
 % SECTION 3
 %------------------------------------------------------------------------------
 
+\newcommand{\vocab}[1]{\textbf{#1}\xspace}
+\newcommand{\prop}[1]{\textit{#1}\xspace}
+\newcommand{\impterm}[1]{\texttt{#1}\xspace}
+
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:understanding}
 
@@ -1049,9 +1052,9 @@ description and, eventually, about its multiple implementations.
 \label{sec:compsandfuncs}
 
 All the \pilot systems introduced in~\S\ref{sec:history} are engineered to
-allow for the execution of multiple types of workloads on Distributed Computing
-Infrastructures (DCIs) such as Grids, Clouds, or HPC facilities. This is
-achieved differently, depending on use cases, design and implementation
+allow for the execution of (multiple types of) workloads on Distributed
+Computing Infrastructures (DCIs) such as Grids, Clouds, or HPC facilities. This
+is achieved differently, depending on use cases, design and implementation
 choices, but also on the constraints imposed by the middleware and policies of
 the targeted DCIs. The common denominators among \pilot systems are defined
 along multiple dimensions: purpose, logical components, and functionalities.
@@ -1059,40 +1062,41 @@ along multiple dimensions: purpose, logical components, and functionalities.
 The purpose shared by every \pilot system is to improve the (performance of)
 workload execution when compared to executing the same workload directly on one
 or more DCI. Performance in \pilot systems is usually associated to throughput
-and execution time to completion (TTC), but other metrics could be also
-considered as, for example, energy efficiency, data transfer, scale of the
-workload executed or a mix of them. In order to optimize the chosen set of
-metrics, each \pilot system exhibits characteristics that are both common or
+and execution time to completion (TTC), but other metrics could also be
+considered, for example, energy efficiency, data transfer minimisation, scale
+of the workload executed or a mix of them. In order to optimize the chosen set
+of metrics, each \pilot system exhibits characteristics that are both common or
 specific to one or more implementations. Discerning these characteristics
 requires isolating and defining the minimal set of logical components that has
 to characterize every \pilot system.
 
 At some level, all \pilot systems leverage three separate but coordinated
-logical components: a \textbf{Pilot Manager}, a \textbf{Workload Manager}, and
-a \textbf{Task Executor} (see Table~\ref{table:terminology}). The Pilot Manager
-handles the description, instantiation, and use of one or more resource
-placeholders (i.e. `pilots') on single or multiple DCIs. The Workload Manager
-handles the scheduling of one or more given workload on the available resource
-placeholders. Finally, the Task Executor takes care of executing the tasks of
-each workload by means of the resources held by the placeholders.
+logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
+\vocab{Task Executor}. The Pilot Manager handles the description,
+instantiation, and use of one or more resource placeholders (i.e. `\pilots`) on
+single or multiple DCIs. The Workload Manager handles the scheduling of one or
+more given workloads on the available resource placeholders. Finally, the Task
+Executor takes care of executing the tasks of each workload by means of the
+resources held by the placeholders.
 
 The implementation details of these three logical components significantly vary
-across \pilot systems (see~\S\ref{sec:analysis}). One or more components may be
-responsible for specific functionalities, both on application as well as
-infrastructure level, two or more components may be implemented in a single
-module, or additional components may be integrated into the managers and
-executor. Nevertheless, the Pilot and Workload Managers and the Task Executor
-can always be distinguished across different \pilot systems. For example,
-looking at the systems mentioned in~\S\ref{sec:history}, \ldots
-\mtnote{I will wait for S2 and S4 to be final before picking the right
-examples/vocabulary.}
+across \pilot systems (see~\S\ref{sec:analysis}). One or more logical
+components may be responsible for specific functionalities, both on application
+as well as infrastructure level, two or more logical components may be
+implemented in a single software module, or additional components may be
+integrated into the Managers and Task Executor. Nevertheless, the Pilot and
+Workload Managers and the Task Executor can always be distinguished across
+different \pilot systems. For example, looking at the systems mentioned
+in~\S\ref{sec:history}, \ldots \mtnote{I will wait for S2 and S4 to be final
+before picking the right examples/vocabulary.} \msnote{How about not having an
+example here? In a way it will cut short what we do in S4}
 
-Each \pilot system support a minimal set of functionalities that allow for the
-execution of workloads: \textbf{Pilot Provisioning}, \textbf{Task Dispatching},
-and \textbf{Task Execution} (see Table~\ref{table:terminology}). \pilot systems
-need to schedule resource placeholders on the targeted resources, schedule
-tasks on the available placeholders, and then use these placeholders to execute
-the tasks of the given workload.
+Each \pilot system supports a minimal set of functionalities that allow for the
+execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching},
+and \vocab{Task Execution}. \pilot systems need to schedule resource
+placeholders on the targeted resources, schedule tasks on the available
+placeholders, and then use these placeholders to execute the tasks of the given
+workload.
 
 More functionalities might be needed to implement a production-grade \pilot
 system: authentication, authorization, accounting, data management,
@@ -1106,21 +1110,25 @@ Among the core functionalities that characterize every \pilot system, Pilot
 Provisioning is essential because it allows for the creation of resource
 placeholders. As seen in \S\ref{sec:history}, this type of placeholder enables
 tasks to utilize resources without directly depending on the capabilities
-exposed by the targeted DCI. Resource placeholders are scheduled to the DCI
-resources by means of the DCI capabilities but, once scheduled and then
+exposed by the targeted DCI. Resource placeholders are scheduled onto the DCI
+resources by means of the DCI capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
 execution of the tasks of a workload. Resource placeholders belong to the
 user(s) that created them and they can be tailored to satisfy the specific use
-cases. \mtnote{Currently, this is a bit of repetition of what we wrote already
-in Section 2 but seeing the importance of the concept we might want to keep
-it.}
+cases.\msnote{Regarding the "belonging", this becomes fuzzy in multi-user
+systems, I would suggest to drop the last line} \mtnote{Currently, this is a
+bit of repetition of what we wrote already in Section 2 but seeing the
+importance of the concept we might want to keep it.}
 
+% MS: I would move this comment to section 5 I think, as multi-tenant pilot
+% systems do have to make these trade-offs, and it would be good to point that
+% out. (not doing it now because of MT lock in 5)
 % Furthermore, resource placeholders are logical partitions of resources that
 % do not need to leverage trade-offs among competing user requirements as
 % needed instead with large pools of resources adopting multi-tenancy.
 
-The provision of resource placeholders depends on the capabilities exposed by
-the targeted DCI and on the implementation of each \pilot system. Typically,
+The provisioning of resource placeholders depends on the capabilities exposed
+by the targeted DCI and on the implementation of each \pilot system. Typically,
 for DCIs adopting queues, batch systems, and schedulers, provisioning a
 placeholder involves it being submitted as a job. A `job' on this kind of DCIs
 is a type of logical container that includes configuration and execution
@@ -1136,14 +1144,17 @@ functionalities of the DCI middleware so it can be implemented as part of the
 \pilot system. In this way, the control over the execution of a workload is
 shifted from the DCI to the \pilot system. This shift is a defining
 characteristic of the \pilot abstraction \mtnote{I do not think it is too
-disruptive to speak about abstraction but, in case, we can just use \pilot
-system instead of \pilot abstraction} as it decouples the execution of a
+  disruptive to speak about abstraction but, in case, we can just use \pilot
+system instead of \pilot abstraction} \msnote{How about paradigm? I would not
+be in favour of talking about systems here} as it decouples the execution of a
 workload from the need to submit its tasks via the DCI middleware. The tasks of
-a workload will not wait on the DCI queues before being executed, and complex
-execution patterns involving task and data interdependence can be implemented
-outside the boundaries of the DCI capabilities. Ultimately, this is why \pilot
-systems allow for the parametrization of workload execution and the
-optimization, for example, of execution throughput.
+a workload will not individually have to wait on the DCI queues, but rather on
+the availability of the placeholder before being executed. More elaborate
+execution patterns involving task and data interdependence can thus be
+implemented outside the boundaries of the DCI capabilities. Ultimately, this is
+why \pilot systems allow for the parametrization of workload execution and the
+optimization, for example, of execution throughput. \msnote{I dont understand
+the bit about parametrization ..}
 
 Communication and coordination are two distinguishing characteristics of
 distributed applications and \pilot systems make no exception. The Workload
@@ -1157,24 +1168,24 @@ suitable strategy (e.g. time synchronization, static or dynamic coordinator
 election, local or global information sharing, or \MW). The same applies to
 network architectures and protocols: different network architectures and
 protocols may be leveraged to achieve effective communication and coordination.
+\msnote{The paragraph above is more ammunition for the argument that the
+division between core and aux props is at least fuzzy, or potentially
+arbitrary, or C\&C is just a core prop. This needs further discussion.}
+As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
+\pilot systems. When the master is identified with the Workload Manager, and
+the worker with the Task Executor, the functionalities related to task
+description, scheduling, and monitoring will generally be implemented within
+the Workload Manager, while the functionalities needed to execute each task
+will be implemented into the Task Executor. Alternative coordination
+strategies, for example where a Task Executor directly coordinates the
+task scheduling, might require a functionally simpler Workload Manager but a
+comparatively feature-rich Task Executor. The former would require capabilities
+for submitting tasks, while the latter would require to coordinate with its
+neighbor executors leveraging, for example, a dedicated overlay network. Both
+these systems, adopting different coordination strategies, should be considered
+\pilot systems.
 
-As seen in~\S\ref{ssec:history}, \MW is a very common coordination pattern
-among \pilot systems. When the Master\mtnote{Should we use the capitalization?}
-is identified with the Workload Manager, and the Worker with the Task Executor,
-the functionalities related to task description, scheduling, and monitoring
-will generally be implemented within the Workload Manager, while the
-functionalities needed to execute each task will be implemented into the Task
-Executor. Alternative coordination strategies, for example the one where a Task
-Executor directly coordinates the task scheduling, might require a functionally
-simpler Workload Manager but a comparatively feature-rich Task Executor. The
-former would require capabilities for submitting tasks, while the latter would
-require to coordinate with its neighbor executors leveraging, for example, a
-dedicated overlay network. Both these systems, adopting different coordination
-strategies, should be considered \pilot systems.\mtnote{I am happy with calling
-\MW a pattern and then generalizing using the term strategies when speaking of
-coordination in general. Do you agree?}
-
-Data management may have an important role within \pilot systems. For example,
+Data management can have an important role within a \pilot system. For example,
 functionalities can be provided to support the local or remote data staging
 required to execute the tasks of a workload, or data might be managed according
 to the specific capabilities offered by the targeted DCI. \pilot systems can be
@@ -1189,7 +1200,7 @@ and folders, or data placeholders should be considered special-purpose
 capabilities, not characteristic of every \pilot system.
 
 In the following Subsection, a minimal set of terms related to the
-logical components and capabilities just described is defined.
+logical components and capabilities so far described is defined.
 
 %------------------------------------------------------------------------------
 \subsection{Terms and Definitions}
@@ -2020,10 +2031,6 @@ not of (individual) instantiations of \pilots.
 \subsection{Analysis of \pilot system Implementations}
 \label{sec:implementations}
 
-\newcommand{\vocab}[1]{\textbf{#1}\xspace}
-\newcommand{\prop}[1]{\textit{#1}\xspace}
-\newcommand{\impterm}[1]{\texttt{#1}\xspace}
-
 In light of the common vocabulary discussion in \S\ref{sec:3.2}, a
 representative set of \pilot systems has been chosen for further analysis.
 Examining these \pilot systems using the common vocabulary exposes their core
@@ -2118,7 +2125,7 @@ they make the text a bit `heavy' for me.}
 \label{sec:diane}
 
 DIANE~\cite{Moscicki:908910} is a task coordination framework, which follows
-the Master/Worker pattern. It was developed at CERN for data analysis in the
+the \MW pattern. It was developed at CERN for data analysis in the
 LHC experiment, but has since been used in various other domains, though mainly
 in the Life Sciences. As DIANE is a software framework, some of its semantics
 are not predetermined, as they can be implemented in various ways depending on
@@ -2139,7 +2146,7 @@ The \prop{Overlay Management} of \pilots is done out-of-band by means of the
 infrastructure.
 
 \paragraph{Workload Semantics}
-DIANE is mainly a Master/Worker framework and, as such, the \vocab{Tasks} are
+DIANE is mainly a \MW framework and, as such, the \vocab{Tasks} are
 fully independent, consistently with a Bag-of-Tasks \vocab{Workload Semantics}.
 The \vocab{Workload} that is managed by the application-specific component of
 DIANE can freely structured, as long as it can be translated to independent
