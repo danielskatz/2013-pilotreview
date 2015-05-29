@@ -1088,7 +1088,8 @@ Workload Managers and the Task Executor can always be distinguished across
 different \pilot systems. For example, looking at the systems mentioned
 in~\S\ref{sec:history}, \ldots \mtnote{I will wait for S2 and S4 to be final
 before picking the right examples/vocabulary.} \msnote{How about not having an
-example here? In a way it will cut short what we do in S4}
+example here? In a way it will cut short what we do in S4} \mtnote{I see hwat
+you mean. Let's see how does it look like once we have a full draft.}
 
 Each \pilot system supports a minimal set of functionalities that allow for the
 execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching},
@@ -1112,12 +1113,13 @@ tasks to utilize resources without directly depending on the capabilities
 exposed by the targeted DCI. Resource placeholders are scheduled onto the DCI
 resources by means of the DCI capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
-execution of the tasks of a workload. Resource placeholders belong to the
-user(s) that created them and they can be tailored to satisfy the specific use
-cases.\msnote{Regarding the "belonging", this becomes fuzzy in multi-user
-systems, I would suggest to drop the last line} \mtnote{Currently, this is a
-bit of repetition of what we wrote already in Section 2 but seeing the
-importance of the concept we might want to keep it.}
+execution of the tasks of a workload.
+% Resource placeholders belong to the user(s) that created them and they can be
+% tailored to satisfy the specific use cases.
+\msnote{Regarding the "belonging", this becomes fuzzy in multi-user
+systems, I would suggest to drop the last line} \mtnote{Done.}
+\mtnote{Currently, this is a bit of repetition of what we wrote already in
+Section 2 but seeing the importance of the concept we might want to keep it.}
 
 % MS: I would move this comment to section 5 I think, as multi-tenant pilot
 % systems do have to make these trade-offs, and it would be good to point that
@@ -1142,18 +1144,19 @@ those placeholders for execution. Task dispatching does not depend on the
 functionalities of the DCI middleware so it can be implemented as part of the
 \pilot system. In this way, the control over the execution of a workload is
 shifted from the DCI to the \pilot system. This shift is a defining
-characteristic of the \pilot abstraction \mtnote{I do not think it is too
-  disruptive to speak about abstraction but, in case, we can just use \pilot
+characteristic of the \pilot paradigm \mtnote{I do not think it is too
+disruptive to speak about abstraction but, in case, we can just use \pilot
 system instead of \pilot abstraction} \msnote{How about paradigm? I would not
-be in favour of talking about systems here} as it decouples the execution of a
-workload from the need to submit its tasks via the DCI middleware. The tasks of
-a workload will not individually have to wait on the DCI queues, but rather on
-the availability of the placeholder before being executed. More elaborate
-execution patterns involving task and data interdependence can thus be
-implemented outside the boundaries of the DCI capabilities. Ultimately, this is
-why \pilot systems allow for the parametrization of workload execution and the
-optimization, for example, of execution throughput. \msnote{I dont understand
-the bit about parametrization ..}
+be in favor of talking about systems here} \mtnote{Done.} as it decouples the
+execution of a workload from the need to submit its tasks via the DCI
+middleware. The tasks of a workload will not individually have to wait on the
+DCI queues, but rather on the availability of the placeholder before being
+executed. More elaborate execution patterns involving task and data
+interdependence can thus be implemented outside the boundaries of the DCI
+capabilities. Ultimately, this is why \pilot systems allow for the direct
+control of workload execution and the optimization, for example, of execution
+throughput. \msnote{I don't understand the bit about parametrization
+..} \mtnote{Better?}
 
 Communication and coordination are two distinguishing characteristics of
 distributed applications and \pilot systems make no exception. The Workload
@@ -1170,6 +1173,9 @@ protocols may be leveraged to achieve effective communication and coordination.
 \msnote{The paragraph above is more ammunition for the argument that the
 division between core and aux props is at least fuzzy, or potentially
 arbitrary, or C\&C is just a core prop. This needs further discussion.}
+\mtnote{In the agenda for next Tuesday? Otherwise, please feel free to propose
+the changes in 4.1 and we can discuss via comments.}
+
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 \pilot systems. When the master is identified with the Workload Manager, and
 the worker with the Task Executor, the functionalities related to task
@@ -3191,7 +3197,7 @@ the \impterm{monitor}.
 
 An independent component, AutoPyFactory\cite{Caballero:2012ka}, manages the
 delivery of \pilots to worker nodes via a number of schedulers (\impterm{pilot
-factories}) serving the sites at which \panda operates. 
+factories}) serving the sites at which \panda operates.
 This component handles \pilot submission, management, and monitoring.
 AutoPyFactory supersedes the first generation component called
 \impterm{PandaJobScheduler}, as well the second generation one called
@@ -3238,7 +3244,7 @@ Jobs are submitted to \panda via a simple Python client.
 The client needs to define job sets, their associated datasets as well as
 the input and output files at submission.
 The client API has been used to implement the PanDA front ends for ATLAS
-production, distributed analysis and US regional production. 
+production, distributed analysis and US regional production.
 
 \paragraph{Multitenancy}
 
