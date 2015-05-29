@@ -214,7 +214,7 @@ designs and implmentations of a \pilot system. In~\S\ref{sec:analysis}, the
 focus shifts from analysing the design of a \pilot system to  leveraging the
 terminology defined in~\S\ref{sec:understanding} to critically reviewing the
 characteritics and functionalities of a relevant set of \pilot system
-implementations. Finally,~\S\ref{sec:5} closes the paper by outlining the
+implementations. Finally,~\S\ref{sec:discussion} closes the paper by outlining the
 \pilot paradigm and elaborating on how it impacts and relates to other
 middleware and the application layer. The generality and breath of the
 \pilot paradigm is underlined by showing its adoption by the
@@ -1034,13 +1034,12 @@ commonalities and differences.
 \section{Understanding the Landscape: Developing a Vocabulary}
 \label{sec:understanding}
 
-The overview presented in \S\ref{sec:history} shows a degree of
-heterogeneity both in the functionalities and the vocabulary adopted by
-different \pilot systems. Implementation details sometimes hide the
-functional commonalities and differences among \pilot systems while
-features and capabilities tend to be named inconsistently, often with
-the same terms referring to multiple concepts or the same concept named
-in different ways.
+The overview presented in \S\ref{sec:history} shows a degree of heterogeneity
+both in the functionalities and the vocabulary adopted by different \pilot
+systems. Implementation details sometimes hide the functional commonalities and
+differences among \pilot systems while features and capabilities tend to be
+named inconsistently, often with the same terms referring to multiple concepts
+or the same concept named in different ways.
 
 This section offers an analysis of the logical components and functionalities
 shared by every \pilot system. The goal is to offer a paradigmatic description
@@ -1204,7 +1203,7 @@ logical components and capabilities so far described is defined.
 
 %------------------------------------------------------------------------------
 \subsection{Terms and Definitions}
-\label{subsec:3.2}
+\label{sec:termsdefs}
 
 \begin{table*}
  \centering
@@ -1244,7 +1243,7 @@ logical components and capabilities so far described is defined.
  \end{tabular}
  \caption{\textbf{Mapping of the core terminology of \pilot systems into
   the functionalities and logical components described in
-  \S\ref{subsec:compsandfuncs}.}\msnote{What are the considerations for the
+  \S\ref{sec:compsandfuncs}.}\msnote{What are the considerations for the
   mapping?}\mtnote{I am not sure I properly understand the comment but should
   we say common sense? We are defining the vocabulary and the logical model so
   I would assume we are fairly unbounded in our mapping choices.}}
@@ -2031,7 +2030,7 @@ not of (individual) instantiations of \pilots.
 \subsection{Analysis of \pilot system Implementations}
 \label{sec:implementations}
 
-In light of the common vocabulary discussion in \S\ref{sec:3.2}, a
+In light of the common vocabulary discussion in \S\ref{sec:termsdefs}, a
 representative set of \pilot systems has been chosen for further analysis.
 Examining these \pilot systems using the common vocabulary exposes their core
 similarities, and allows a detailed analysis of their differences.
@@ -2040,7 +2039,7 @@ The now following discussion of \pilot systems is ordered alphabetically.
 To assist the reader, we make use of textual conventions: in \vocab{Bold} we
 express the \vocab{Logical Components} and \vocab{Functionalities} of our model
 from \S\ref{sec:compsandfuncs} and the \vocab{Terms and Definitions} from
-\S\ref{subsec:3.2}, in \prop{Italic} we refer to the \prop{Properties} from
+\S\ref{sec:termsdefs}, in \prop{Italic} we refer to the \prop{Properties} from
 \S\ref{sec:properties} and in \impterm{Typewriter} we display terminology from
 the respective \pilot system under discussion.\mtnote{Do we need this
 formatting devices? They are not always added to every use of the terms and
@@ -2491,8 +2490,8 @@ are two main components of Falkon: (i) the Dispatcher for farming out tasks and
 (ii) the Provisioner for acquiring resources.
 
 The overall task submission mechanism can be considered a 2-tier architecture;
-the Dispatcher (using the terminology defined in Section~\ref{sec:3.2}, this is
-the \pilot Manager) and the Executor (the \pilot Agent).
+the Dispatcher (using the terminology defined in Section~\ref{sec:termsdefs},
+this is the \pilot Manager) and the Executor (the \pilot Agent).
 
 The Dispatcher is a GRAM4 web service whose primary function is to take task
 submission as input and farm out these tasks to the executors. The Executor
@@ -3510,7 +3509,7 @@ the default form they come in and how they are meant to be deployed.
 % -----------------------------------------------------------------------------
 %
 \section{Discussion and Conclusion}
-\label{sec:5}
+\label{sec:discussion}
 
 % \jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
 % state clearly how section 3 and 4 help us define what a pilot is,
@@ -3558,7 +3557,7 @@ do you think? Happy to refine/change/abandon if you think it does not work.}
 % 5.1
 %
 \subsection{The Pilot Paradigm}
-\label{sec:5.1}
+\label{sec:paradigm}
 
 % \jhanote{Need thinking: Following on from discussion yesterday, is early/late
 % binding a logical consequence of multi-level scheduling? Can we absorb the
@@ -3961,7 +3960,7 @@ technologies.}
 % 5.3
 %
 \subsection{Future Directions and Challenges}
-\label{sec:5.3}
+\label{sec:future}
 
 The \pilot landscape is currently fragmented with a high degree of duplicated
 effort and capabilities. The reasons for such a balkanization are to be traced
