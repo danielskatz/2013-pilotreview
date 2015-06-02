@@ -1072,12 +1072,16 @@ to characterize every \pilot system.
 
 At some level, all \pilot systems leverage three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
-\vocab{Task Executor}. The Pilot Manager handles the description,
-instantiation, and use of one or more resource placeholders (i.e. `\pilots`) on
-single or multiple DCIs. The Workload Manager handles the scheduling of one or
-more given workloads on the available resource placeholders. Finally, the Task
-Executor takes care of executing the tasks of each workload by means of the
-resources held by the placeholders.
+\vocab{Task Executor}. The Pilot Manager handles the description, instantiation,
+and use of one or more resource placeholders (i.e. `\pilots`) on single or
+multiple DCIs. The Workload Manager handles the scheduling of one or more given
+workloads on the available resource placeholders. Finally, the Task Executor
+takes care of executing the tasks of each workload by means of the resources
+held by the placeholders.  \jhanote{does the task executor just execute, or does
+  it have some decision making capacity? if the latter, then purely for naming
+  consistency, should we consider calling the third component ``task manager''
+  or ``Task execution manager'' ? Also we go on to discuss task dispatching and
+  execution as functionalities, which leaves current name a bit limiting.}
 
 The implementation details of these three logical components significantly vary
 across \pilot systems (see~\S\ref{sec:analysis}). One or more logical
@@ -1205,7 +1209,7 @@ replication, (concurrent) data transfers, data abstractions other than files
 and folders, or data placeholders should be considered special-purpose
 capabilities, not characteristic of every \pilot system.
 
-In the following Subsection, a minimal set of terms related to the
+In the following subsection, a minimal set of terms related to the
 logical components and capabilities so far described is defined.
 
 %------------------------------------------------------------------------------
@@ -1249,12 +1253,16 @@ logical components and capabilities so far described is defined.
     Pilot Manager\\
   \hline
  \end{tabular}
- \caption{\textbf{Mapping of the core terminology of \pilot systems into
-  the functionalities and logical components described in
-  \S\ref{sec:compsandfuncs}.}\msnote{What are the considerations for the
-  mapping?}\mtnote{I am not sure I properly understand the comment but should
-  we say common sense? We are defining the vocabulary and the logical model so
-  I would assume we are fairly unbounded in our mapping choices.}}
+ \caption{\textbf{Mapping of the core terminology of \pilot systems into the
+     functionalities and logical components described in
+     \S\ref{sec:compsandfuncs}.}\msnote{What are the considerations for the
+     mapping?}\mtnote{I am not sure I properly understand the comment but should
+     we say common sense? We are defining the vocabulary and the logical model
+     so I would assume we are fairly unbounded in our mapping choices.}
+   \jhanote{The mapping is implicit and the reader will be confused by the
+     purpose and will struggle to see the intent other than a listing of all
+     terms encountered. I think this table will benefit from a more detailed
+     caption.}}
  \label{table:terminology}
 \end{table*}
 
@@ -1387,20 +1395,21 @@ those \pilots. This is a fundamental feature of \pilot systems because (i) a
 potentially faster and more flexible execution of workloads is achieved by
 avoiding the overhead imposed by a centralized job management system shared
 among multiple users; and (ii) the tasks of a workload can be bound to a set of
-\pilots before of after it becomes available on a remote resource.  (Depending
+\pilots before or after it becomes available on a remote resource.  (Depending
 on the implementation of a \pilot system, there can be another level of
 scheduling, where the \pilot makes scheduling decisions about task placement
 within the \pilot's resource allocation.)
 
-The simplification obtained by bypassing the job submission system of the DCI
-is one of the main reasons for the success of \pilot systems. As mentioned
-in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be executed on a
-\pilot without waiting in the queueing system of the given infrastructure, and
-as a result, increasing the throughput of the workload execution. Moreover,
-\pilots can be reused to execute multiple workloads until the \pilots' walltime
-expire.  It should be noted that how tasks are actually assigned to \pilots is
-a matter of implementation. For example, a dedicated scheduler could be
-adopted, or tasks might be directly assigned to a \pilot by the user.
+The simplification obtained as a consequence of bypassing the job submission
+system of the DCI is one of the main reasons for the success of \pilot
+systems. As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a workload can
+be executed on a \pilot without waiting in the queueing system of the given
+infrastructure, and as a result, increasing the throughput of the workload
+execution. Moreover, \pilots can be reused to execute multiple workloads until
+the \pilots' walltime expire.  It should be noted that how tasks are actually
+assigned to \pilots is a matter of implementation. For example, a dedicated
+scheduler could be adopted, or tasks might be directly assigned to a \pilot by
+the user.
 
 The binding of tasks to \pilots depends on the state of the \pilot. A \pilot is
 inactive until it is executed on a DCI, is active thereafter, until it
@@ -1457,6 +1466,10 @@ of a \pilot system illustrated in~\S\ref{sec:compsandfuncs}.
   not-\pilot systems; [\ldots], and possibly another one relative to overlay
   enacting as distinguished from task dispatching; 3.  Clean up Table 1
 removing 'Infrastructure'.}
+
+\jhanote{Given that we've introduced Figure 4, a paragraph that summarised this
+  section by way of explaining Figure 4 would be useful to the reader as well as
+  provide a soft transition to next section. Thoughts?}
 
 
 %------------------------------------------------------------------------------
