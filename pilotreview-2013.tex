@@ -220,6 +220,7 @@ middleware and the application layer. The generality and breath of the
 \pilot paradigm is underlined by showing its adoption by the
 Enterprise, outside the boundaries of scientific research.
 
+
 % -----------------------------------------------------------------------------
 % SECTION 2
 %
@@ -1503,16 +1504,20 @@ engineered, and the design principles that underly such systems.
 \subsection{Core and Auxiliary Properties}
 \label{sec:properties}
 
-This section defines and analyzes the properties of diverse implementations of
-a \pilot system. Two sets of properties are introduced: core and auxiliary (see
+This section \jhanote{do we mean subsection or section? also, we should be
+  consistent with UC or LC for section and subsection. FWIW, I prefer LC when
+  saying ``this section'' but upper case when we reference a section,
+  i.e. Section 2.} defines and analyzes \jhanote{I don't think we define, we
+  analyze..?} the properties of diverse implementations of a \pilot system. Two
+sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
-chosen by considering the implementation requirements of the \pilot
-capabilities as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.
-A property belongs to the set of core properties if it is required by the
-implementation of one or more of the \pilot functionalities. Auxiliary
-properties are instead required only when added functionalities needs to be
-implemented for a specific \pilot system. As such, auxiliary properties are not
-necessarily shared among all \pilot systems.
+chosen by considering the implementation requirements of the \pilot capabilities
+as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.  A property
+belongs to the set of core properties if it is required by the implementation of
+one or more of the \pilot functionalities. Auxiliary properties are instead
+required only when added functionalities needs to be implemented for a specific
+\pilot system. As such, auxiliary properties are not necessarily shared among
+all \pilot systems.
 
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
@@ -1622,18 +1627,26 @@ onto the components described in \S\ref{sec:compsandfuncs}.}}
 \label{table:property_component_mapping}
 \end{table*}
 
-Implementations of the Pilot Provisioning functionality are analyzed by
-focusing on two properties: (i) the type of resources the pilot system exposes
-such as compute, data, and networking
-(Table~\ref{table:property_component_mapping}, Pilot Resources); and (ii) the
-modalities and protocols used by the \pilot system and required by the target
-infrastructure(s) to schedule, utilize, and aggregate pilots
-(Table~\ref{table:property_component_mapping}, Pilot Management and
-Infrastructure Interaction). For example, to schedule a pilot onto a specific
-infrastructure \pilot systems need to know what type of container to use (e.g.
-job, virtual machine), what type of scheduler the resource exposes, but also
-the amount of cores and for how long they can be asked for, whether a
-low-latency interconnect is available, or specific filesystems can be accessed.
+\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
+  general style: too many break outs into parenthesis etc. That should be easy
+  to fix. Second and more important: We're forward referencing Table 2 and
+  thereby core and auxillary properties without having discussed either. One
+  temporary solution -- I am sure it has its own drawbacks is to move these 3
+  paragraphs to the end of 4.1.1. Lets discuss.}
+
+
+Implementations of the Pilot Provisioning functionality are analyzed by focusing
+on two properties: (i) the type of resources the pilot system exposes such as
+compute, data, and networking (Table~\ref{table:property_component_mapping},
+Pilot Resources); and (ii) the modalities and protocols used by the \pilot
+system and required by the target infrastructure(s) to schedule, utilize, and
+aggregate pilots (Table~\ref{table:property_component_mapping}, Pilot Management
+and Infrastructure Interaction \jhanote{there is no pilot management in
+  properties}). For example, to schedule a pilot onto a specific infrastructure
+\pilot systems need to know what type of container to use (e.g.  job, virtual
+machine), what type of scheduler the resource exposes, but also the amount of
+cores and for how long they can be asked for, whether a low-latency interconnect
+is available, or specific filesystems can be accessed.
 
 Two properties are also used to analyze the implementations of Task
 Dispatching: (i) the semantics of workloads
@@ -3531,6 +3544,12 @@ the default form they come in and how they are meant to be deployed.
 %
 \section{Discussion and Conclusion}
 \label{sec:discussion}
+
+\jhanote{Mark: We need 1-2 paragraphs describing the relationship of section 3
+  to the P* model/paper. Else we are going to get dinged by reviewer or cause
+  confusion to the reader. Where this paragraph goes is open for discussion, but 
+  please draft a paragraph.}
+
 
 % \jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
 % state clearly how section 3 and 4 help us define what a pilot is,
