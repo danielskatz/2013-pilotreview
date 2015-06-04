@@ -1707,6 +1707,15 @@ Following is the list of core properties. This list of properties is minimal
 and complete. Note that these are the properties of \pilot implementations, and
 not of (individual) instantiations of \pilots.
 
+\amnote{I don't think this list is 'minimal and complete', there are
+    many properties of any software which are 'core' in the definition
+    given above.  Programming language.  Code license.  Year of
+    implementation.  Those are properties needed to implement one or
+    more functionalities, obviously.  I guess that those (and other)
+    properties are not interesting in this context?  Can you motivate
+    why the chosen properties are intersting?  Possibly they mostly
+    apply *only* to pilot systems?}
+
 \begin{itemize}
 
 %core because: it says something elementary about the principle element
@@ -1760,6 +1769,11 @@ not of (individual) instantiations of \pilots.
   for their execution. \pilot systems support a varying degree of semantic
   richness for the workload and its tasks. Additionally of interest is the
   (standard) format or language in which the workloads are described.
+
+  \amnote{why are task dependencies (which seems to be what you call
+      'workload semantics') a core property?  A pilot system is still
+      a pilot system if it does not implement task dependencies (ahem!
+      ;-).}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
