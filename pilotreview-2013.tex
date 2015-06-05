@@ -1421,10 +1421,16 @@ can be deployed. By knowing in advance the properties of the tasks that are
 bound to a \pilot, specific deployment decisions can be made for that \pilot.
 Additionally, in case of early binding, other type of decisions related to the
 workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still queued or busy. Late binding is critical in assuring the
+the \pilot is still queued or busy.\amnote{what does 'busy' mean in early
+    binding?} Late binding is critical in assuring the
 aforementioned high throughput by allowing task execution without additional
-queuing time or container instantiation time.  It should be noted that some
-aspects of early binding can also be achieved without a \pilot, but the
+queuing time or container instantiation time.\amnote{that gives fast startup of
+    tasks, but not high throughput.  Also, the pilot must start up, late binding
+    won't change thart.  I know we can pick the first pilot which becomes active
+    -- but that is not what is being said here...} It should be noted that some
+aspects of early binding can also be achieved without a \pilot,\amnote{I don't
+    understand what can be achieved w/o a pilot, and what 'both' means in the
+    next sentence.} but the
 important thing to realize is that the \pilot paradigm allows to do both, even
 within the confinements of a single workload. \msnote{I would think parts of
 this paragraph also have their place in S5 (if its not already there)}
@@ -1446,7 +1452,7 @@ consideration the properties of (the tasks of) a workload. This type of
 specification should not be confused with early binding as the latter requires
 for a \pilot to have been already bound to a resource. \msnote{I think this
 paragraph is orthogonal to what we write earlier. I suggest to remove this
-paragraph altogether.}
+paragraph altogether.}\amnote{+1, this confuses more than it clarifies...}
 
 Figure~\ref{fig:core_vocabulary} offers a diagrammatic representation of
 how the minimal and consistent vocabulary proposed in this Subsection
@@ -1458,7 +1464,12 @@ of a \pilot system illustrated in~\S\ref{sec:compsandfuncs}.
         \includegraphics[width=.48\textwidth]{figures/core_vocabulary.png}
     \caption{Diagrammatic representation of the logical components,
              capabilities, and core vocabulary of a \pilot system.
-             The terms of the core vocabulary are highlighted in red.}
+             The terms of the core vocabulary are highlighted in red.
+             \amnote{the application also defines the pilots, right?}
+             \amnote{what is red vs. black; bold lines vs. non-bold?}
+             \amnote{'schedule tasks' should move to the 'early/late binding'
+                 arrow}
+         }
     \label{fig:core_vocabulary}
 \end{figure}
 
@@ -1773,7 +1784,7 @@ not of (individual) instantiations of \pilots.
   \amnote{why are task dependencies (which seems to be what you call
       'workload semantics') a core property?  A pilot system is still
       a pilot system if it does not implement task dependencies (ahem!
-      ;-).}
+      ;-).Ú}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
