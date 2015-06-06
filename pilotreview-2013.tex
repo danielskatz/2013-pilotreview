@@ -1376,13 +1376,13 @@ workload could be made, e.g., the transfer of data to a certain resource while
 the \pilot is still inactive.\amnote{what does 'busy' mean in early binding?}
 \mtnote{Better?} Late binding is critical in assuring the aforementioned high
 throughput by allowing task execution without additional queuing time or
-container instantiation time.\amnote{that gives fast startup of tasks, but not
+container instantiation time. \amnote{that gives fast startup of tasks, but not
 high throughput.  Also, the pilot must start up, late binding won't change
 that.  I know we can pick the first pilot which becomes active -- but that is
 not what is being said here...} \mtnote{I think this does not refer to
-backfilling but to scheduling tasks to an _active_ pilot. There is no queuing
-time for the _tasks_ and tasks are executed as soon as they are scheduled into
-the pilot (barring resource exhaustion of the pilot itself) i.e. hight
+backfilling but to scheduling tasks to an active pilot. There is no queuing
+time for the tasks and tasks are executed as soon as they are scheduled into
+the pilot (barring resource exhaustion of the pilot itself) i.e. high
 throughput.} It should be noted that some aspects of early binding can also be
 achieved without a \pilot, but, importantly, the \pilot paradigm allows to do
 both, even within the confinements of a single workload. \msnote{I would think
@@ -1795,13 +1795,14 @@ and complete. Note that these are the properties of \pilot implementations, and
 not of (individual) instantiations of \pilots.
 
 \amnote{I don't think this list is 'minimal and complete', there are
-    many properties of any software which are 'core' in the definition
-    given above.  Programming language.  Code license.  Year of
-    implementation.  Those are properties needed to implement one or
-    more functionalities, obviously.  I guess that those (and other)
-    properties are not interesting in this context?  Can you motivate
-    why the chosen properties are intersting?  Possibly they mostly
-    apply *only* to pilot systems?}
+    many properties of any software which are 'core' in the definition given
+    above.  Programming language.  Code license.  Year of implementation.
+    Those are properties needed to implement one or more functionalities,
+    obviously.  I guess that those (and other) properties are not interesting
+    in this context?  Can you motivate why the chosen properties are
+    intersting?  Possibly they mostly apply *only* to pilot systems?}
+    \mtnote{Correct. This is not a minimal and complete list of software
+    properties but of \pilot system implementations.}
 
 \begin{itemize}
 
@@ -1858,9 +1859,12 @@ not of (individual) instantiations of \pilots.
   (standard) format or language in which the workloads are described.
 
   \amnote{why are task dependencies (which seems to be what you call
-      'workload semantics') a core property?  A pilot system is still
-      a pilot system if it does not implement task dependencies (ahem!
-      ;-).Ú}
+  'workload semantics') a core property?  A pilot system is still a pilot
+  system if it does not implement task dependencies (ahem! ;-).}
+  \mtnote{A pilot system implementation without tasks is a useless pilot
+  system. In this section we are not modeling (that was done in 3) but
+  reviewing/analyzing existing, real world implementations designed and used to
+  run tasks.}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
@@ -1911,7 +1915,7 @@ not of (individual) instantiations of \pilots.
   infrastructure, and may have to mediate task binding and execution by means
   of remote interfaces and protocols.
 
-  \msnote{This should not overlap with Task Execution Modes}\mtnote{Is this
+  \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
   still valid?}
 
   % \item \textit{Supported DCI systems/services}: What are the type of systems
