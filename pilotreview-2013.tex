@@ -1373,15 +1373,22 @@ can be deployed. By knowing in advance the properties of the tasks that are
 bound to a \pilot, specific deployment decisions can be made for that \pilot.
 Additionally, in case of early binding, other type of decisions related to the
 workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still queued or busy. Late binding is critical in assuring the
-aforementioned high throughput by allowing task execution without additional
-queuing time or container instantiation time.  It should be noted that some
-aspects of early binding can also be achieved without a \pilot, but,
-importantly, the \pilot paradigm allows to do both, even within the
-confinements of a single workload. \msnote{I would think parts of this
-paragraph also have their place in S5 (if its not already there)} \mtnote{The
-notion of binding needs to be fully understood before getting into 4. I would
-leave this as it is here but I am open to discuss about it.}
+the \pilot is still inactive.\amnote{what does 'busy' mean in early binding?}
+\mtnote{Better?} Late binding is critical in assuring the aforementioned high
+throughput by allowing task execution without additional queuing time or
+container instantiation time.\amnote{that gives fast startup of tasks, but not
+high throughput.  Also, the pilot must start up, late binding won't change
+that.  I know we can pick the first pilot which becomes active -- but that is
+not what is being said here...} \mtnote{I think this does not refer to
+backfilling but to scheduling tasks to an _active_ pilot. There is no queuing
+time for the _tasks_ and tasks are executed as soon as they are scheduled into
+the pilot (barring resource exhaustion of the pilot itself) i.e. hight
+throughput.} It should be noted that some aspects of early binding can also be
+achieved without a \pilot, but, importantly, the \pilot paradigm allows to do
+both, even within the confinements of a single workload. \msnote{I would think
+parts of this paragraph also have their place in S5 (if its not already there)}
+\mtnote{The notion of binding needs to be fully understood before getting into
+4. I would leave this as it is here but I am open to discuss about it.}
 
 \begin{description}
 
@@ -1394,13 +1401,14 @@ active or inactive \pilots.
 
 \end{description}
 
-Depending on the specific capabilities implemented in the Workload Manager
-component, some \pilot systems allow for \pilots to be specified by taking into
-consideration the properties of (the tasks of) a workload. This type of
-specification should not be confused with early binding as the latter requires
-for a \pilot to have been already bound to a resource. \msnote{I think this
-paragraph is orthogonal to what we write earlier. I suggest to remove this
-paragraph altogether.} \mtnote{I am not sure I see why it is orthogonal.}
+% Depending on the specific capabilities implemented in the Workload Manager
+% component, some \pilot systems allow for \pilots to be specified by taking
+% into consideration the properties of (the tasks of) a workload. This type of
+% specification should not be confused with early binding as the latter
+% requires for a \pilot to have been already bound to a resource. \msnote{I
+% think this paragraph is orthogonal to what we write earlier. I suggest to
+% remove this paragraph altogether.} \amnote{+1, this confuses more than it
+% clarifies...}
 
 \definecolor{term}{RGB}{153,39,38}
 \definecolor{funct}{RGB}{0,128,64}
@@ -1471,7 +1479,7 @@ paragraph altogether.} \mtnote{I am not sure I see why it is orthogonal.}
      \jhanote{The mapping is implicit and the reader will be confused by the
      purpose and will struggle to see the intent other than a listing of all
      terms encountered. I think this table will benefit from a more detailed
-     caption.}\mtnote{Done in the text.}}
+     caption.}\mtnote{Done in the text. Is it enough?}}
  \label{table:terminology}
 \end{table*}
 
@@ -1518,7 +1526,16 @@ The wide spectrum of available implementations of the logical components of a
              capabilities, and core vocabulary of a \pilot system. The terms of
              the core vocabulary are highlighted in red, those of the logical
              components of a \pilot system in green, and those of their
-             functionalities in blue.}
+             functionalities in blue.
+             \amnote{the application also defines the pilots, right?} \mtnote{I
+             think this is a detail below the level of abstraction of this
+             diagram. We do not have `pilot description' functionality.}
+             \amnote{what is red vs. black; bold lines vs. non-bold?}
+             \mtnote{This has been changed in a refined version of diagram made
+             before I saw your comment. Any better?}
+             \amnote{'schedule tasks' should move to the 'early/late binding'
+             arrow} \mtnote{Also this was altered before me seeing your
+             comment. Any better?}}
     \label{fig:core_vocabulary}
 \end{figure}
 
@@ -1777,6 +1794,15 @@ Following is the list of core properties. This list of properties is minimal
 and complete. Note that these are the properties of \pilot implementations, and
 not of (individual) instantiations of \pilots.
 
+\amnote{I don't think this list is 'minimal and complete', there are
+    many properties of any software which are 'core' in the definition
+    given above.  Programming language.  Code license.  Year of
+    implementation.  Those are properties needed to implement one or
+    more functionalities, obviously.  I guess that those (and other)
+    properties are not interesting in this context?  Can you motivate
+    why the chosen properties are intersting?  Possibly they mostly
+    apply *only* to pilot systems?}
+
 \begin{itemize}
 
 %core because: it says something elementary about the principle element
@@ -1830,6 +1856,11 @@ not of (individual) instantiations of \pilots.
   for their execution. \pilot systems support a varying degree of semantic
   richness for the workload and its tasks. Additionally of interest is the
   (standard) format or language in which the workloads are described.
+
+  \amnote{why are task dependencies (which seems to be what you call
+      'workload semantics') a core property?  A pilot system is still
+      a pilot system if it does not implement task dependencies (ahem!
+      ;-).Ú}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
