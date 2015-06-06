@@ -1373,8 +1373,8 @@ can be deployed. By knowing in advance the properties of the tasks that are
 bound to a \pilot, specific deployment decisions can be made for that \pilot.
 Additionally, in case of early binding, other type of decisions related to the
 workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still inactive.\amnote{what does 'busy' mean in early binding?}
-\mtnote{Better?} Late binding is critical in assuring the aforementioned high
+the \pilot is still inactive. 
+Late binding is critical in assuring the aforementioned high
 throughput by allowing task execution without additional queuing time or
 container instantiation time. \amnote{that gives fast startup of tasks, but not
 high throughput.  Also, the pilot must start up, late binding won't change
@@ -1383,7 +1383,14 @@ not what is being said here...} \mtnote{I think this does not refer to
 backfilling but to scheduling tasks to an active pilot. There is no queuing
 time for the tasks and tasks are executed as soon as they are scheduled into
 the pilot (barring resource exhaustion of the pilot itself) i.e. high
-throughput.} It should be noted that some aspects of early binding can also be
+throughput.}\amnote{All else being equal, isn't the difference then that 
+the pilot is submitted earlier rather then the effect of early vs. late 
+binding?  Assume a pilot is submitted a $T_0$, tasks are submitted at $T_1$, 
+the pilot becomes active at $T_2 > T_1$.  On both early an late binding, the
+tasks can only start execution after $T_2$ -- what shifts is time of
+scheduling, not time of task execution.  For a single pilot, it should not 
+make a difference.} 
+It should be noted that some aspects of early binding can also be
 achieved without a \pilot, but, importantly, the \pilot paradigm allows to do
 both, even within the confinements of a single workload. \msnote{I would think
 parts of this paragraph also have their place in S5 (if its not already there)}
@@ -1527,15 +1534,15 @@ The wide spectrum of available implementations of the logical components of a
              the core vocabulary are highlighted in red, those of the logical
              components of a \pilot system in green, and those of their
              functionalities in blue.
-             \amnote{the application also defines the pilots, right?} \mtnote{I
-             think this is a detail below the level of abstraction of this
-             diagram. We do not have `pilot description' functionality.}
-             \amnote{what is red vs. black; bold lines vs. non-bold?}
-             \mtnote{This has been changed in a refined version of diagram made
-             before I saw your comment. Any better?}
              \amnote{'schedule tasks' should move to the 'early/late binding'
              arrow} \mtnote{Also this was altered before me seeing your
-             comment. Any better?}}
+             comment. Any better?}
+             \amnote{I still think that 'Task Dispatching' is not
+                 related to 'Multilevel Scheduling', dispatching
+                 follows after scheduling.  The 'Multilevel
+                 Scheduling' term should go to the 'Task Binding'
+                 functionality, IMHO?}
+     }
     \label{fig:core_vocabulary}
 \end{figure}
 
