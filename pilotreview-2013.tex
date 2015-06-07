@@ -1379,29 +1379,34 @@ scheduler could be adopted, or tasks might be directly assigned to a \pilot by
 the user.
 
 The binding of tasks to \pilots depends on the state of the \pilot. A \pilot is
-inactive until it is executed on a DCI, is active thereafter, until it
-completes (or fails).  Early binding indicates the binding of a task to an
-inactive \pilot; late binding the binding of a task to an active \pilot. Early
-binding is potentially useful to increase the information about which \pilots
-can be deployed. By knowing in advance the properties of the tasks that are
-bound to a \pilot, specific deployment decisions can be made for that \pilot.
-Additionally, in case of early binding, other type of decisions related to the
-workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still inactive. Late binding is critical in assuring the
-aforementioned high throughput by allowing task execution without additional
-queuing time or container instantiation time. \amnote{that gives fast startup
-of tasks, but not high throughput.  Also, the pilot must start up, late binding
-won't change that.  I know we can pick the first pilot which becomes active --
-but that is not what is being said here...} \mtnote{I think this does not refer
-to backfilling but to scheduling tasks to an active pilot. There is no queuing
-time for the tasks and tasks are executed as soon as they are scheduled into
-the pilot (barring resource exhaustion of the pilot itself) i.e. high
-throughput.}\amnote{All else being equal, isn't the difference then that the
-pilot is submitted earlier rather then the effect of early vs. late binding?
-Assume a pilot is submitted a $T_0$, tasks are submitted at $T_1$, the pilot
-becomes active at $T_2 > T_1$.  On both early an late binding, the tasks can
-only start execution after $T_2$ -- what shifts is time of scheduling, not time
-of task execution.  For a single pilot, it should not make a difference.}
+inactive until it is executed on a DCI, is active thereafter, until it completes
+(or fails).  Early binding indicates the binding of a task to an inactive
+\pilot; late binding the binding of a task to an active \pilot. Early binding is
+potentially useful to increase the information about which \pilots can be
+deployed. By knowing in advance the properties of the tasks that are bound to a
+\pilot, specific deployment decisions can be made for that \pilot. Additionally,
+in case of early binding, other type of decisions related to the workload could
+be made, e.g., the transfer of data to a certain resource while the \pilot is
+still inactive. Late binding is critical in assuring the aforementioned high
+throughput of the distributed application by allowing sustained task execution
+without additional queuing time or container instantiation time.
+
+\amnote{that gives fast startup of tasks, but not high throughput.  Also, the
+pilot must start up, late binding won't change that.  I know we can pick the
+first pilot which becomes active -- but that is not what is being said here...}
+
+\mtnote{I think this does not refer to backfilling but to scheduling tasks to an
+active pilot. There is no queuing time for the tasks and tasks are executed as
+soon as they are scheduled into the pilot (barring resource exhaustion of the
+pilot itself) i.e. high throughput.}
+
+\amnote{All else being equal, isn't the difference then that the pilot is
+submitted earlier rather then the effect of early vs. late binding? Assume a
+pilot is submitted a $T_0$, tasks are submitted at $T_1$, the pilot becomes
+active at $T_2 > T_1$.  On both early an late binding, the tasks can only start
+execution after $T_2$ -- what shifts is time of scheduling, not time of task
+execution.  For a single pilot, it should not make a difference.}
+
 \mtnote{Consider a system where pilots are routinely submitted independently
 from the availability of a workload on an array of resources. Or a system where
 pilots always ask for the maximum walltime serving a VO instead of a single
@@ -1413,22 +1418,26 @@ alternative explicative paragraph, please fell free to contribute them and I
 will be more than happy to integrate them with/instead of the current
 definitions and explanation. I ask this because I am struggling to understand
 what you are concretely proposing to change to the paragraph and to the
-definition(s). } 
-\amnote{I absolutely agree with the definition (early binding:
-    scheduling tasks to a not-yet-active pilot; late binding: schedule
-    tasks to an active pilot).  What puzzles me is the motivation used
-    for late binding (high throughput of tasks).  I may have a
-    different definition of 'throughput' in mind though: for me this
-    refers to tasks/second.  Both a pilot used with early and a pilot
-    used with late binding can be very efficient, and achieve the same
-    throughput of tasks.  In fact, for a single pilot (and an ideal
-    pilot system implementation), there should be no performance
-    difference in early vs. late binding.  It is only in the
-    multi-pilot case where it makes a difference -- but not in
-    throughput, but in total TTC.  I thought this is also what your
-    experiments showed?  If that is something your data disagree with,
-    then please disregard, and feel free to remove that discussion as
-    'solved' :)}
+definition(s). }
+
+\amnote{I absolutely agree with the definition (early binding: scheduling tasks
+    to a not-yet-active pilot; late binding: schedule tasks to an active pilot).
+    What puzzles me is the motivation used for late binding (high throughput of
+    tasks).  I may have a different definition of 'throughput' in mind though:
+    for me this refers to tasks/second.  Both a pilot used with early and a
+    pilot used with late binding can be very efficient, and achieve the same
+    throughput of tasks.  In fact, for a single pilot (and an ideal pilot system
+    implementation), there should be no performance difference in early vs. late
+    binding.  It is only in the multi-pilot case where it makes a difference --
+    but not in throughput, but in total TTC.  I thought this is also what your
+    experiments showed?  If that is something your data disagree with, then
+    please disregard, and feel free to remove that discussion as 'solved' :)}
+
+\mtnote{Thank you for clarifying Andre. It is indeed about distinguishing
+between throughput of the pilot and that of the distributed application. Here we
+refer to the latter. About the one of the former, we are in agreement. I
+modified the paragraph accordingly. Any better?}
+
 It should be noted that some aspects of early binding can also
 be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
 do both, even within the confinements of a single workload. \msnote{I would
@@ -1643,7 +1652,7 @@ all \pilot systems.
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
 % Pilot Provisioning, Task Dispatching, and Task Execution.
-\msnote{I dont see how it is derived or consistent ;-)}
+\msnote{I don't see how it is derived or consistent ;-)}
 
 \mtnote{Derived and consistent: they are required by (every: core, at least an:
 auxiliary) implementation of those functionalities. I rewrote the paragraph
@@ -1888,22 +1897,24 @@ not of (individual) instantiations of \pilots.
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
   pilots depending on their semantics. Specifically, dispatching decisions
-  depends on the relationships among tasks, the affinity between data and
-  compute resources required by the tasks, and the type of capabilities needed
-  for their execution. \pilot systems support a varying degree of semantic
-  richness for the workload and its tasks. Additionally of interest is the
-  (standard) format or language in which the workloads are described.
+  depends on the temporal and spatial relationships among tasks, the affinity
+  between data and compute resources required by the tasks, and the type of
+  capabilities needed for their execution. \pilot systems support a varying
+  degree of semantic richness for the workload and its tasks. The (standard)
+  format or language in which the workloads are described may also be relevant.
 
   \amnote{why are task dependencies (which seems to be what you call
   'workload semantics') a core property?  A pilot system is still a pilot
   system if it does not implement task dependencies (ahem! ;-).}
+
   \mtnote{A pilot system implementation without tasks is a useless pilot
   system. In this section we are not modeling (that was done in 3) but
   reviewing/analyzing existing, real world implementations designed and used to
   run tasks.}
+
   \amnote{sure, tasks are necessary.  But the paragraph explicitly
       refers to 'relationships among tasks'.  More to the point, the
-      paragraph says: 'tasks ... are dispatched to pilots depending on 
+      paragraph says: 'tasks ... are dispatched to pilots depending on
       their semantics' -- I disagree with that: a pilot system does
       not care about task semantics, ie. does not care if the task is
       /bin/sleep or mdrun.  One \textit{can} implement schedulers
@@ -1912,6 +1923,16 @@ not of (individual) instantiations of \pilots.
       round-robin scheduler (which does not care about any workload
       semantics, neither in tasks not task dependencies) is perfectly
       viable for a pilot system...}
+
+  \mtnote{I agree. Indeed the kernel of the task is not mentioned among the semantic properties taken into consideration for the scheduling decision. Pilot systems that are not capable of ``dispatching decisions
+  depends on the temporal and spatial relationships among tasks'', or ``the
+  affinity between data and compute resources required by the tasks'', or ``and
+  the type of capabilities needed for their execution'' are toy systems or mere
+  conceptual possibilities that are not relevant in a section dedicated to pilot
+  systems used to run real-life scientific workloads. Do you feel we should add
+  a sentence specifying that we are not speaking about the intrinsic properties
+  of the kernel of a task? Consider that we do not have the word `kernel'
+  defined in 3, so in case of affirmative answer I may have to add that too. Not a problem if you consider this necessary.}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
@@ -2039,9 +2060,9 @@ not of (individual) instantiations of \pilots.
   system and local level. When offered at system level, multiple users are
   allow to utilize the same instance of a \pilot system. When available at
   local level, multiple users may share the same pilot.
-  \msnote{Alternative names: deployment, service model}\mtnote{Any better? I
-  think `deployment' is now covered by the homonymous core property and
-  `service model' is part of the `architecture' auxiliary property.}
+  \msnote{Alternative names: deployment, service model} \mtnote{Any better? I
+  think `deployment' is now covered by the homonymous core property and `service
+  model' is part of the `architecture' auxiliary property.}
 
   % \item \textit{Multi-user support:} Does the pilot job system allows
   % \textbf{\pilots} to
