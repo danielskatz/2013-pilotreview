@@ -224,7 +224,8 @@ boundaries of scientific research.
 % -----------------------------------------------------------------------------
 % SECTION 2
 %
-\section{Functional Underpinnings and Evolution of Pilot Abstraction}
+%\section{Functional Underpinnings and Evolution of Pilot Abstraction}
+\section{Evolution of Pilot Abstraction and Systems}
 \label{sec:history}
 
 % -----------------------------------------------------------------------------
@@ -641,32 +642,39 @@ boundaries of scientific research.
 % Version 0.3
 % -----------------------------------------------------------------------------
 
-The origin and motivations for devising the \pilot abstraction and developing
-its many implementations can be traced back to five main notions: task-level
-distribution and parallelism, \MW pattern, multi-tenancy,
-multi-level scheduling, and resource placeholder. This section offers an
-overview of these five notions and an analysis of their relationship with the
-\pilot abstraction. A chronological perspective is taken so to contextualize
-the inception and evolution of the \pilot abstraction into its implementation
-systems.
+The origin and motivations for devising the \pilot abstraction, developing its
+many implementations and realize a full-fledge \pilot paradigm can be traced
+back to five main notions: task-level distribution and parallelism, \MW pattern,
+multi-tenancy, multi-level scheduling, and resource placeholder. This section
+offers an overview of these five notions and an analysis of their relationship
+with the \pilot abstraction. A chronological perspective is taken so to
+contextualize the inception and evolution of the \pilot abstraction into its
+implementation systems.
 
-To the best of the authors' knowledge, the term `\pilotjob' was first
-introduced around 2004 in the context of the Large Hadron Collider (LHC)
-challenge [ref] and then used in a 2005 LHCb report\cite{lhcb2005}. Despite its
-relatively recent explicit naming, the \pilot abstraction addresses a problem
-already well-known at the beginning of the twentieth century: task-level
-distribution and parallelism on diverse, multi-tenant resources.
+\mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of \pilot systems as described in Subsection 2.2.}
+
+% ------------------------------------------------------------------------------
+% 2.1
+\subsection{Functional Underpinnings of the Pilot Abstraction}
+\label{sec:histabstr}
+
+To the best of the authors' knowledge, the term `\pilotjob' was first introduced
+around 2004 in the context of the Large Hadron Collider (LHC) challenge [ref],
+and then used in a 2005 LHCb report\cite{lhcb2005}. Despite its relatively
+recent explicit naming, the \pilot abstraction addresses a problem already
+well-known at the beginning of the twentieth century: task-level distribution
+and parallelism on multiple resources.
 
 Lewis Fry Richardson devised in 1922 a Forecast Factory
 (Figure~\ref{fig:figures_forecast-factory}) to solve systems of differential
-equations for weather forecasting. This factory required 64,000 human
-\textit{computers} supervised by a senior clerk. The clerk would distribute
-portions of the differential equations to the `computers' so that they could
-forecast the weather of specific regions of the globe. The computers would
-perform their calculations and then send the results back to the clerk. The
-Forecast Factory was not only an early conceptualization of what is called
-today a ``supercomputer'' but also of the coordination pattern for distributed
-and parallel computation called ``\MW''.
+equations for weather forecasting. This factory required 64,000 `human
+computers' supervised by a senior clerk. The clerk would distribute portions of
+the differential equations to the computers so that they could forecast the
+weather of specific regions of the globe. The computers would perform their
+calculations and then send the results back to the clerk. The Forecast Factory
+was not only an early conceptualization of what is called today a
+``supercomputer'' but also of the coordination pattern for distributed and
+parallel computation called ``\MW''.
 
 \begin{figure}[t]
   \centering
@@ -680,10 +688,10 @@ The clerk of the Forecast Factory is the `master' while the human computers are
 her `workers'. Requests and responses go back and forth between the master and
 all its workers. Each worker has no information about the overall computation
 nor about the states of any other worker. The master is the only one possessing
-a global view both of the overall problem to compute and of its progress
-towards a solution. As such, the M-W is a coordination pattern allowing for the
+a global view both of the overall problem to compute and of its progress towards
+a solution. As such, the \MW is a coordination pattern allowing for the
 structured distribution of tasks so to orchestrate their parallel execution.
-This directly translates into a better time to completion (TTC) of the overall
+This directly translates into a better time to completion of the overall
 computation when compared to a coordination pattern in which each equation is
 sequentially solved by a single worker.
 
@@ -742,59 +750,61 @@ robust abstractions has still to be devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
 supercomputers is the increase of the implementation complexity imposed on the
-application layer. Even with solutions like grid computing aiming at
-effectively and, to some extent, transparently integrating diverse resources,
-most of the requirements involving the coordination of task execution still
-lays with the application layer. This translates into single-point solutions,
-extensive redesign and redevelopment of existing applications when they need to
-be adapted to new use cases or new resources, and lack of portability and
-interoperability.
+application layer. Even with solutions like grid computing aiming at effectively
+and, to some extent, transparently integrating diverse resources, most of the
+requirements involving the coordination of task execution still lays with the
+application layer. This translates into single-point solutions, extensive
+redesign and redevelopment of existing applications when they need to be adapted
+to new use cases or new resources, and lack of portability and interoperability.
 
-Consider for example a simple distributed application implementing a M-W
-pattern. With a single supercomputer, the application requires the capability
-of concurrently submitting tasks to the queue of the supercomputer scheduler,
-and retrieve and aggregate their outputs. When multiple supercomputers are
+Consider for example a simple distributed application implementing the \MW
+pattern. With a single supercomputer, the application requires the capability of
+concurrently submitting tasks to the queue of the supercomputer scheduler, and
+retrieve and aggregate their outputs. When multiple supercomputers are
 available, the application requires directly managing submissions to several
 queues or the capability to leverage a third-party meta-scheduler and its
 specific execution model. In both scenarios, the application requires a large
 amount of development and capabilities that are not specific to the given
-scientific problem but pertain instead to the coordination and management of
-its computation.
+scientific problem but pertain instead to the coordination and management of its
+computation.
 
 The notion of resource placeholder was devised as a pragmatic and relatively
-cheap to implement attempt to reduce or at least better manage the complexity
-of executing distributed applications. A resource placeholder decouples the
+cheap to implement attempt to reduce or at least better manage the complexity of
+executing distributed applications. A resource placeholder decouples the
 acquisition of remote compute resource from their use to execute the tasks of a
 distributed application. Resources are acquired by scheduling a job onto the
-remote supercomputer. Once executed, the job runs an agent capable of
-retrieving and executing application tasks.
+remote supercomputer. Once executed, the job runs an agent capable of retrieving
+and executing application tasks.
 
-Resource placeholders bring together multi-level scheduling and, when useful,
-the M-W pattern to enable parallel execution of the tasks of distributed
-applications. Multi-level scheduling is achieved by scheduling the agent and
-then by enabling direct scheduling of application tasks to that agent. The M-W
-pattern is often an effective choice to manage the coordination of tasks
-execution on the available agent(s). Multi-level scheduling can be extended to
-multiple resources by instantiating resource placeholders on diverse
-supercomputing and then using a meta-scheduler to schedule tasks across all the
-placeholders.
+Resource placeholders bring together multi-level scheduling to enable parallel
+execution of the tasks of distributed applications. Multi-level scheduling is
+achieved by scheduling the agent and then by enabling direct scheduling of
+application tasks to that agent. The \MW pattern is often an effective choice to
+manage the coordination of tasks execution on the available agent(s).
+Multi-level scheduling can be extended to multiple resources by instantiating
+resource placeholders on diverse supercomputing and then using a meta-scheduler
+to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
-introduced by multi-tenancy. Multi-tenancy affects only the scheduling of the
-resource placeholder as it needs to be executed by the batch system of the
-remote supercomputer. Once the placeholder is executed, the user -- or the
-master process of the distributed application -- may hold total control of the
-resource placeholder. In this way, tasks are directly scheduled on the
-placeholder without competing with other users for the supercomputer scheduler.
+introduced by a multi-tenant scheduling of resource placeholders. A placeholder
+still spends a variable amount of time waiting to be executed by the batch
+system of the remote supercomputer, but, once executed, the user -- or the
+master process of the distributed application -- may hold total control over its
+resources. In this way, tasks are directly scheduled on the placeholder without
+competing with other users for the supercomputer scheduler.
+
+% ------------------------------------------------------------------------------
+% 2.2
+\subsection{Evolution of Pilot System Implementations}
+\label{sec:histimpl}
 
 As seen in Ref.~\cite{pstar-2012}, the \pilot abstraction has a rich set of
 properties and its implementations offer a vast array of capabilities including
-multiple scheduling algorithms, data and compute placeholders, and late or
-early binding. Nonetheless, the capability of acquiring remote resources and
-directly utilizing them, independently from the supercomputer resource
-management, is a necessary property of the \pilot abstraction. As such,
-resource placeholders and their
-scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
+multiple scheduling algorithms, data and compute placeholders, and late or early
+binding. Nonetheless, the capability of acquiring remote resources and directly
+utilizing them, independently from the supercomputer resource management, is a
+necessary property of the \pilot abstraction. As such, resource placeholders and
+their scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
 \pilot system implementations.
 
 % The progressive definition and implementation of the \pilot abstraction can
@@ -821,13 +831,12 @@ scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
   \label{fig:pilotjob_clustering}
 \end{figure}
 
-AppLeS~\cite{Berman:1996:apples} is a framework for application-level
-scheduling and offers an example of an early implementation of resource
-placeholder. AppLeS provides an agent that can be embedded into an application
-thus enabling the application to acquire resources and to schedule tasks onto
-these. Besides M-W, AppLeS also provides application templates, e.\,g.\ for
-parameter sweep and moldable parallel
-applications~\cite{Berman:2003:ACG:766629.766632}.
+AppLeS~\cite{Berman:1996:apples} is a framework for application-level scheduling
+and offers an example of an early implementation of resource placeholder. AppLeS
+provides an agent that can be embedded into an application thus enabling the
+application to acquire resources and to schedule tasks onto these. Besides \MW,
+AppLeS also provides application templates, e.\,g.\ for parameter sweep and
+moldable parallel applications~\cite{Berman:2003:ACG:766629.766632}.
 
 AppLeS offered user-level control of scheduling but did not isolate the
 application layer from the management and coordination of task execution. Any
@@ -837,7 +846,7 @@ abstraction layer between those of the application and of the various batch
 queuing systems available at different remote systems.
 
 Around the same time as AppLeS was introduced, volunteer computing projects
-started using the M-W coordination pattern to achieve high-throughput
+started using the \MW coordination pattern to achieve high-throughput
 calculations for a wide range of scientific problems. The workers of these
 systems could be downloaded and installed on the user laptop and workstation.
 With an installation base potentially distributed across the globe, workers
@@ -853,28 +862,27 @@ such, an implementation of the core functionality of the \pilot abstraction.
 The first public volunteer computing projects were The Great Internet Mersenne
 Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
 distributed.net~\cite{Lawton:2000:distributednet} in 1997 to compete in the
-RC5-56 secret-key challenge, and the SETI@Home project, which set out to
-analyze radio telescope data. The generic BOINC distributed master-worker
-framework grew our of SETI@Home, becoming the {\it de facto} standard framework
-for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
+RC5-56 secret-key challenge, and the SETI@Home project, which set out to analyze
+radio telescope data. The generic BOINC distributed master-worker framework grew
+our of SETI@Home, becoming the {\it de facto} standard framework for voluntary
+computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has complete knowledge of the available
 resources while the latter has none. As a consequence, AppLes can request and
-orchestrate a set of resource, allocates tasks in advance to specific workers
+orchestrate a set of resource, allocate tasks in advance to specific workers
 (i.e. resources placeholders), and implement load balancing among resources. In
-voluntary computing tasks are polled by the clients when they become active
-and, as such, resource availability is unknown in advance. This potential
-drawback is mitigated by the redundancy offered by the large scale that
-voluntary computing can reach thanks to its simpler model of worker
-distribution and installation.
+voluntary computing tasks are polled by the clients when they become active and,
+as such, resource availability is unknown in advance. This potential drawback is
+mitigated by the redundancy offered by the large scale that voluntary computing
+can reach thanks to its simpler model of worker distribution and installation.
 
 The opportunistic use of geographically distributed resources championed by
 voluntary computing offers several advantages. The resource landscape available
-for scientific research is fragmented across multiple institutions, managed
-with different policies and protocols, and heterogeneous both in quantity and
+for scientific research is fragmented across multiple institutions, managed with
+different policies and protocols, and heterogeneous both in quantity and
 quality. Once aggregated, the sum of otherwise limited resources can support
-very large distributed computations and an great amount of multi-tenancy. Note
+very large distributed computations and a great amount of multi-tenancy. Note
 that given the required capabilities, this model of resource provisioning can
 still support the execution of parallel applications on the few resources that
 offer low-latency network interconnect.
@@ -884,28 +892,28 @@ diverse and possibly geographically distributed resources. Originally, Condor
 was created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management could not
-be done on application level by the user: Flocking required system level
+be done on application level by the user: flocking required system level
 software configurations that had to be made by the administrator of each
 individual resource of each Condor resource pool.
 
 This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
-remote grid resources to Condor resource pools. In this way, users can
-uniformly execute jobs on resource pools composed by diverse resources. Thanks
-to its use of resource placeholders, GladeIn has been one of the systems
-pioneering the \pilot abstraction implementation, enabling \pilot capabilities
-also for third parties systems like Bosco~\cite{bosco}.
+remote grid resources to Condor resource pools. In this way, users can uniformly
+execute jobs on resource pools composed by diverse resources. Thanks to its use
+of resource placeholders, GladeIn has been one of the systems pioneering the
+\pilot abstraction implementation, enabling \pilot capabilities also for third
+parties systems like Bosco~\cite{bosco}.
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
-implementation of GlideIn also highlighted at least two limitations:
-user/system layer isolation, and application development model. While GlideIn
-allows for the user to manage resource placeholders directly, daemons must
-still be running on the remote resources. This means that GlideIn cannot be
-deployed without involving the resource owners and system administrators.
-Implemented as a service, GlideIn support integration with distributed
-application frameworks but does not programmatically support the development of
-distributed applications by means of dedicated APIs and libraries.
+implementation of GlideIn also highlighted at least two limitations: user/system
+layer isolation, and application development model. While GlideIn allows for the
+user to manage resource placeholders directly, daemons must still be running on
+the remote resources. This means that GlideIn cannot be deployed without
+involving the resource owners and system administrators. Implemented as a
+service, GlideIn support integration with distributed application frameworks but
+does not programmatically support the development of distributed applications by
+means of dedicated APIs and libraries.
 
 The BigJob \pilot system [ref] was designed to address these limitations, to
 broaden the type of applications supported by the \pilot-based execution model,
@@ -913,96 +921,93 @@ and to extend the \pilot abstraction beyond the boundaries of compute tasks.
 BigJob offers an application-level programmability to provide the end-user with
 more flexibility and control over the design of distributed application and the
 isolation of the management of their execution. BigJob is flexible and
-extensible and uses the Simple API for Grid Applications (SAGA)
-interoperability library [ref] to work on a variety of infrastructures.
-Furthermore, BigJob supports both MPI and non-MPI jobs without adding
-additional configuration requirements to the end-user. Finally, BigJob has also
-been extended to work with data and, analogous to compute \pilots, to abstract
-away direct user communication between different storage systems.
+extensible and uses the Simple API for Grid Applications (SAGA) interoperability
+library [ref] to work on a variety of infrastructures. Furthermore, BigJob
+supports both MPI and non-MPI jobs without adding additional configuration
+requirements to the end-user. Finally, BigJob has also been extended to work
+with data and, analogous to compute \pilots, to abstract away direct user
+communication between different storage systems.
 
-BigJob, recently redesigned as a pre-production system named RADICAL Pilot
+BigJob, recently redesigned as a pre-production system named ``RADICAL Pilot''
 [ref], represents one of the latest evolutionary stages of the \pilot
 abstraction. From an initial phase in which \pilot were implemented as ad hoc
 place holder machinery for a specific application, to the integration of \pilot
-systems within the middleware of remote resources, PilotJob implements the
+systems within the middleware of remote resources, RADICAL Pilot implements the
 \pilot abstraction as an interoperable compute and data management system that
 can be programmatically integrated into end-user applications.
 
 Another ongoing evolutionary trend of the \pilot abstraction is to be
-implemented into \pilot-based workload managers, thus moving away from
-providing simple \pilot capabilities in application space. These higher-level
-systems which are often centrally hosted, move critical functionality from the
-client to the server (i.e. a service model). These systems usually deploy
-\pilot factories that automatically start new \pilots on demand and integrate
-security mechanisms to support multiple users simultaneously.
+implemented into \pilot-based workload managers, thus moving away from providing
+simple \pilot capabilities in application space. These higher-level systems
+which are often centrally hosted, move critical functionality from the client to
+the server (i.e. a service model). These systems usually deploy \pilot factories
+that automatically start new \pilots on demand and integrate security mechanisms
+to support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of \pilots, e.\,g.\ GlideInWMS, DIRAC~\cite{1742-6596-219-6-062049},
 PanDa~\cite{1742-6596-331-7-072069}, AliEn~\cite{1742-6596-119-6-062012} and
 Co-Pilot~\cite{copilot-tr}. Each of these \pilots serves a particular user
-community and experiment. Interestingly, we observe that these \pilots are
-functionally very similar, work on almost the same underlying infrastructure,
-and serve applications with very similar (if not identical) characteristics.
+community and experiment. Interestingly, these \pilots are functionally very
+similar, work on almost the same underlying infrastructure, and serve
+applications with very similar (if not identical) characteristics.
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
-can, based on the current and expected number of jobs in the pool,
-automatically increase or decrease the number of active Glide-ins (\pilots)
-available to the pool. GlideinWMS is a multi-user \pilotjob system commonly
-deployed as a hosted service. GlideinWMS attempts to hide the \pilot
-capabilities rather than exposing them to the user. GlideinWMS is currently
-deployed in production on the Open Science Grid (OSG)~\cite{url_osg} and is the
-recommended mode for new users wanting to access OSG resources.
+can, based on the current and expected number of jobs in the pool, automatically
+increase or decrease the number of active Glide-ins (\pilots) available to the
+pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
+service. GlideinWMS attempts to hide the \pilot capabilities rather than
+exposing them to the user. GlideinWMS is currently deployed in production on the
+Open Science Grid (OSG)~\cite{url_osg} and is the recommended mode for new users
+wanting to access OSG resources.
 
 \panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} is
 the workload management system of the ATLAS experiment, used to run managed
 production and user analysis jobs on the grid. The ATLAS Computing Facility
-operates the pilot submission systems. This is done using the \panda
-`AutoPilot' scheduler component which submits pilot jobs via Condor-G. \panda
-also provides the ability to manage data associated the jobs managed by the
-\panda workload manager.
+operates the pilot submission systems. This is done using the \panda `AutoPilot'
+scheduler component which submits pilot jobs via Condor-G. \panda also provides
+the ability to manage data associated the jobs managed by the \panda workload
+manager.
 
-In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides
-the ability to tightly integrate storage and compute resources and is also able
-to manage file replicas. While all data can be accessed from anywhere, the
+In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
+ability to tightly integrate storage and compute resources and is also able to
+manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
 the data. AliEn deploys a pull-based model~\cite{Saiz:2003:alien} assuming that
-the resource pool is dynamic and that a pull model doesn't require the broker
-to keep detailed track of all resources, which leads to a more simple
+the resource pool is dynamic and that a pull model doesn't require the broker to
+keep detailed track of all resources, which leads to a more simple
 implementation.
 
-DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload
-management system built on top of \pilots. It supports the management of data,
-which can be placed in different kinds of storage elements (e.\,g.\ based on
-SRM).
+DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload management
+system built on top of \pilots. It supports the management of data, which can be
+placed in different kinds of storage elements (e.\,g.\ based on SRM).
 
-Another interesting \pilot that is used in the LHC context is
+Another interesting \pilot system that is used in the LHC context is
 Co-Pilot~\cite{copilot-tr}. Co-Pilot serves as an integration point among
-different grid \pilotjob systems (such as AliEn and \panda), clouds and
-volunteer computing resources. Co-Pilot provides components for building a
-framework for seamless and transparent integration of these resources into
-existing Grid and batch computing infrastructures exploited by the High Energy
-Physics community.
+different grid \pilot systems (such as AliEn and \panda), clouds, and volunteer
+computing resources. Co-Pilot provides components for building a framework for
+seamless and transparent integration of these resources into existing Grid and
+batch computing infrastructures exploited by the High Energy Physics community.
 
 The \pilot abstraction has also been integrated into scientific workflow
-systems. \pilot systems have proven an effective tool for managing the
-workloads executed in the various stages of a workflow. For the Pegasus
-project, the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
-to support the requirements of the Pegasus workflow system in particular to
-optimize the placements of \pilots with respect to their workload. It did this
-by serving as a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral
-provides more explicit control over the placement and start of \pilots to the
-end-user. Corral was later extended to also serve as a possible front end to
-GlideinWMS.
+systems. \pilot systems have proven an effective tool for managing the workloads
+executed in the various stages of a workflow. For the Pegasus project [ref], the
+Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
+requirements of the Pegasus workflow system in particular to optimize the
+placements of \pilots with respect to their workload. It did this by serving as
+a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral provides more
+explicit control over the placement and start of \pilots to the end-user. Corral
+was later extended to also serve as a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language provides also capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
 ``Coaster''~\cite{coasters}, developed to address workload management
-requirements by supporting various types of infrastructure, including clouds
-and grids.
+requirements by supporting various types of infrastructure, including clouds and
+grids.
 
 % Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon
 % was engineered for executing many small tasks on HPC systems and shows high
@@ -1010,18 +1015,27 @@ and grids.
 % example of how the \pilot abstraction can be implemented to support very
 % specific workload.
 
-\mtnote{Needs a better closing}
+The proliferation of \pilot systems underlines not only a progressive
+appreciation for the \pilot abstraction but also the emergence of a \pilot
+paradigm to support the execution of distributed and increasingly of parallel
+applications. The brief description of the many \pilot system implementations
+introduced in this subsection helps to identify some distinctions in terms of
+design, usage and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
+graphical representation of this rough clustering.
 
-Based on the descriptions in this section we can identify some distinctions in
-terms of design, usage and operation of pilot(-based) systems.
-Figure~\ref{fig:pilotjob_clustering} is a graphical representation of this
-rough clustering.
+The evolutionary trend of the \pilot paradigm has been largely organic and
+uncoordinated leading to a largely inconsistent terminology related to the
+\pilot abstraction, its implementations and usages. Furthermore, a coherent
+understanding of the \pilot components and functionalities is still missing
+leading to a blurred definition of \pilot and how it should be distinguished
+from other abstractions and middleware and application software.
 
-The evolution of \pilotjobs attests to their usefulness across a wide range of
+The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
 specific functionality and inconsistent terminology calls for a standard
 vocabulary to assist in understanding the varied approaches and their
-commonalities and differences.
+commonalities and differences. This is what is offered in the next section of
+this paper.
 
 
 %------------------------------------------------------------------------------
