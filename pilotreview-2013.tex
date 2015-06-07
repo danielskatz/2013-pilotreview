@@ -1373,29 +1373,39 @@ can be deployed. By knowing in advance the properties of the tasks that are
 bound to a \pilot, specific deployment decisions can be made for that \pilot.
 Additionally, in case of early binding, other type of decisions related to the
 workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still inactive. 
-Late binding is critical in assuring the aforementioned high
-throughput by allowing task execution without additional queuing time or
-container instantiation time. \amnote{that gives fast startup of tasks, but not
-high throughput.  Also, the pilot must start up, late binding won't change
-that.  I know we can pick the first pilot which becomes active -- but that is
-not what is being said here...} \mtnote{I think this does not refer to
-backfilling but to scheduling tasks to an active pilot. There is no queuing
+the \pilot is still inactive. Late binding is critical in assuring the
+aforementioned high throughput by allowing task execution without additional
+queuing time or container instantiation time. \amnote{that gives fast startup
+of tasks, but not high throughput.  Also, the pilot must start up, late binding
+won't change that.  I know we can pick the first pilot which becomes active --
+but that is not what is being said here...} \mtnote{I think this does not refer
+to backfilling but to scheduling tasks to an active pilot. There is no queuing
 time for the tasks and tasks are executed as soon as they are scheduled into
 the pilot (barring resource exhaustion of the pilot itself) i.e. high
-throughput.}\amnote{All else being equal, isn't the difference then that 
-the pilot is submitted earlier rather then the effect of early vs. late 
-binding?  Assume a pilot is submitted a $T_0$, tasks are submitted at $T_1$, 
-the pilot becomes active at $T_2 > T_1$.  On both early an late binding, the
-tasks can only start execution after $T_2$ -- what shifts is time of
-scheduling, not time of task execution.  For a single pilot, it should not 
-make a difference.} 
-It should be noted that some aspects of early binding can also be
-achieved without a \pilot, but, importantly, the \pilot paradigm allows to do
-both, even within the confinements of a single workload. \msnote{I would think
-parts of this paragraph also have their place in S5 (if its not already there)}
-\mtnote{The notion of binding needs to be fully understood before getting into
-4. I would leave this as it is here but I am open to discuss about it.}
+throughput.}\amnote{All else being equal, isn't the difference then that the
+pilot is submitted earlier rather then the effect of early vs. late binding?
+Assume a pilot is submitted a $T_0$, tasks are submitted at $T_1$, the pilot
+becomes active at $T_2 > T_1$.  On both early an late binding, the tasks can
+only start execution after $T_2$ -- what shifts is time of scheduling, not time
+of task execution.  For a single pilot, it should not make a difference.}
+\mtnote{Consider a system where pilots are routinely submitted independently
+from the availability of a workload on an array of resources. Or a system where
+pilots always ask for the maximum walltime serving a VO instead of a single
+user. Or a pilot system using VMs. The case you present looks radical-pilot
+dependent and probably too near to implementation details. This subsection is
+about a set of definitions that need to fit every possible pilot system. Said
+that, if you have an alternative definition of late/early binding and an
+alternative explicative paragraph, please fell free to contribute them and I
+will be more than happy to integrate them with/instead of the current
+definitions and explanation. I ask this because I am struggling to understand
+what you are concretely proposing to change to the paragraph and to the
+definition(s). } It should be noted that some aspects of early binding can also
+be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
+do both, even within the confinements of a single workload. \msnote{I would
+think parts of this paragraph also have their place in S5 (if its not already
+there)} \mtnote{The notion of binding needs to be fully understood before
+getting into 4. I would leave this as it is here but I am open to discuss about
+it.}
 
 \begin{description}
 
@@ -1542,6 +1552,7 @@ The wide spectrum of available implementations of the logical components of a
                  follows after scheduling.  The 'Multilevel
                  Scheduling' term should go to the 'Task Binding'
                  functionality, IMHO?}
+             \mtnote{Better?}
      }
     \label{fig:core_vocabulary}
 \end{figure}
