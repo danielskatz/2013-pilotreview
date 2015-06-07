@@ -1569,9 +1569,9 @@ anymore. If you agree please delete this comment.}
 problem with having infrastructure in the table but please let me know whether
 you think differently.}
 
-\jhanote{Given that we've introduced Figure 4, a paragraph that summarized this
-section by way of explaining Figure 4 would be useful to the reader as well
-as provide a soft transition to next section. Thoughts?} \mtnote{Done.}
+%\jhanote{Given that we've introduced Figure 4, a paragraph that summarized this
+%section by way of explaining Figure 4 would be useful to the reader as well
+%as provide a soft transition to next section. Thoughts?} \mtnote{Done.}
 
 
 %------------------------------------------------------------------------------
@@ -1609,18 +1609,16 @@ engineered, and the design principles that underly such systems.
 subsection. FWIW, I prefer LC when saying ``this section'' but upper case when
 we reference a section, i.e. Section 2.}
 
-This subsection \jhanote{do we mean subsection or section?} \mtnote{Done.}
-analyzes \jhanote{I don't think we define, we analyze..?} \mtnote{Done.} the
-properties of diverse implementations of a \pilot system. Two sets of
-properties are introduced: core and auxiliary (see
+This subsection analyzes the properties of diverse implementations of a \pilot
+system. Two sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
-chosen by considering the implementation requirements of the \pilot
-capabilities as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.
-A property belongs to the set of core properties if it is required by the
-implementation of one or more of the \pilot functionalities. Auxiliary
-properties are instead required only when added functionalities needs to be
-implemented for a specific \pilot system. As such, auxiliary properties are not
-necessarily shared among all \pilot systems.
+chosen by considering the implementation requirements of the \pilot capabilities
+as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.  A property
+belongs to the set of core properties if it is required by the implementation of
+one or more of the \pilot functionalities. Auxiliary properties are instead
+required only when added functionalities needs to be implemented for a specific
+\pilot system. As such, auxiliary properties are not necessarily shared among
+all \pilot systems.
 
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
@@ -1998,14 +1996,7 @@ not of (individual) instantiations of \pilots.
   and execute workloads on different types of infrastructure (e.g. HTC, HPC,
   Cloud but also Condor, LSF, Slurm, or Torque). The latter is relevant when
   multiple \pilot systems are available with diversified characteristics and
-  capabilities.\mrnote{Note from meeting with SJ: May want to change to discuss
-  one first (including descriptive text), then change tracks to discuss the
-  second - they are two very different concepts to grasp in the first sentence
-  (I know this detracts from the mathematical/proof language of it, but I think
-  its a good idea). Especially since the second type of interoperability is
-  very much less-common to a single PJ system (except in cases like \panda)}
-  \mtnote{Any better?}
-
+  capabilities.
 
   % (ii) resource access layer: What low-level infrastructures/middleware are
   % supported? How interoperable is the framework (vertically, horizontally)?,
