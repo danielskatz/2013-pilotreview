@@ -1413,7 +1413,23 @@ alternative explicative paragraph, please fell free to contribute them and I
 will be more than happy to integrate them with/instead of the current
 definitions and explanation. I ask this because I am struggling to understand
 what you are concretely proposing to change to the paragraph and to the
-definition(s). } It should be noted that some aspects of early binding can also
+definition(s). } 
+\amnote{I absolutely agree with the definition (early binding:
+    scheduling tasks to a not-yet-active pilot; late binding: schedule
+    tasks to an active pilot).  What puzzles me is the motivation used
+    for late binding (high throughput of tasks).  I may have a
+    different definition of 'throughput' in mind though: for me this
+    refers to tasks/second.  Both a pilot used with early and a pilot
+    used with late binding can be very efficient, and achieve the same
+    throughput of tasks.  In fact, for a single pilot (and an ideal
+    pilot system implementation), there should be no performance
+    difference in early vs. late binding.  It is only in the
+    multi-pilot case where it makes a difference -- but not in
+    throughput, but in total TTC.  I thought this is also what your
+    experiments showed?  If that is something your data disagree with,
+    then please disregard, and feel free to remove that discussion as
+    'solved' :)}
+It should be noted that some aspects of early binding can also
 be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
 do both, even within the confinements of a single workload. \msnote{I would
 think parts of this paragraph also have their place in S5 (if its not already
@@ -1557,17 +1573,7 @@ The wide spectrum of available implementations of the logical components of a
              capabilities, and core vocabulary of a \pilot system. The terms of
              the core vocabulary are highlighted in red, those of the logical
              components of a \pilot system in green, and those of their
-             functionalities in blue.
-             \amnote{'schedule tasks' should move to the 'early/late binding'
-             arrow} \mtnote{Also this was altered before me seeing your
-             comment. Any better?}
-             \amnote{I still think that 'Task Dispatching' is not
-                 related to 'Multilevel Scheduling', dispatching
-                 follows after scheduling.  The 'Multilevel
-                 Scheduling' term should go to the 'Task Binding'
-                 functionality, IMHO?}
-             \mtnote{Better?}
-     }
+             functionalities in blue.}
     \label{fig:core_vocabulary}
 \end{figure}
 
@@ -1824,15 +1830,15 @@ Following is the list of core properties. This list of properties is minimal
 and complete. Note that these are the properties of \pilot implementations, and
 not of (individual) instantiations of \pilots.
 
-\amnote{I don't think this list is 'minimal and complete', there are
-    many properties of any software which are 'core' in the definition given
-    above.  Programming language.  Code license.  Year of implementation.
-    Those are properties needed to implement one or more functionalities,
-    obviously.  I guess that those (and other) properties are not interesting
-    in this context?  Can you motivate why the chosen properties are
-    intersting?  Possibly they mostly apply *only* to pilot systems?}
-    \mtnote{Correct. This is not a minimal and complete list of software
-    properties but of \pilot system implementations.}
+% \amnote{I don't think this list is 'minimal and complete', there are
+%     many properties of any software which are 'core' in the definition given
+%     above.  Programming language.  Code license.  Year of implementation.
+%     Those are properties needed to implement one or more functionalities,
+%     obviously.  I guess that those (and other) properties are not interesting
+%     in this context?  Can you motivate why the chosen properties are
+%     intersting?  Possibly they mostly apply *only* to pilot systems?}
+% \mtnote{Correct. This is not a minimal and complete list of software
+%         properties but of \pilot system implementations.}
 
 \begin{itemize}
 
@@ -1895,6 +1901,17 @@ not of (individual) instantiations of \pilots.
   system. In this section we are not modeling (that was done in 3) but
   reviewing/analyzing existing, real world implementations designed and used to
   run tasks.}
+  \amnote{sure, tasks are necessary.  But the paragraph explicitly
+      refers to 'relationships among tasks'.  More to the point, the
+      paragraph says: 'tasks ... are dispatched to pilots depending on 
+      their semantics' -- I disagree with that: a pilot system does
+      not care about task semantics, ie. does not care if the task is
+      /bin/sleep or mdrun.  One \textit{can} implement schedulers
+      which respect task dependencies (which are part of the workload
+      semantics, but I don't see that as a core property: a stupid
+      round-robin scheduler (which does not care about any workload
+      semantics, neither in tasks not task dependencies) is perfectly
+      viable for a pilot system...}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
