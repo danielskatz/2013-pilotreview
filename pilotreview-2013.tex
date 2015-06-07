@@ -1391,53 +1391,6 @@ still inactive. Late binding is critical in assuring the aforementioned high
 throughput of the distributed application by allowing sustained task execution
 without additional queuing time or container instantiation time.
 
-\amnote{that gives fast startup of tasks, but not high throughput.  Also, the
-pilot must start up, late binding won't change that.  I know we can pick the
-first pilot which becomes active -- but that is not what is being said here...}
-
-\mtnote{I think this does not refer to backfilling but to scheduling tasks to an
-active pilot. There is no queuing time for the tasks and tasks are executed as
-soon as they are scheduled into the pilot (barring resource exhaustion of the
-pilot itself) i.e. high throughput.}
-
-\amnote{All else being equal, isn't the difference then that the pilot is
-submitted earlier rather then the effect of early vs. late binding? Assume a
-pilot is submitted a $T_0$, tasks are submitted at $T_1$, the pilot becomes
-active at $T_2 > T_1$.  On both early an late binding, the tasks can only start
-execution after $T_2$ -- what shifts is time of scheduling, not time of task
-execution.  For a single pilot, it should not make a difference.}
-
-\mtnote{Consider a system where pilots are routinely submitted independently
-from the availability of a workload on an array of resources. Or a system where
-pilots always ask for the maximum walltime serving a VO instead of a single
-user. Or a pilot system using VMs. The case you present looks radical-pilot
-dependent and probably too near to implementation details. This subsection is
-about a set of definitions that need to fit every possible pilot system. Said
-that, if you have an alternative definition of late/early binding and an
-alternative explicative paragraph, please fell free to contribute them and I
-will be more than happy to integrate them with/instead of the current
-definitions and explanation. I ask this because I am struggling to understand
-what you are concretely proposing to change to the paragraph and to the
-definition(s). }
-
-\amnote{I absolutely agree with the definition (early binding: scheduling tasks
-    to a not-yet-active pilot; late binding: schedule tasks to an active pilot).
-    What puzzles me is the motivation used for late binding (high throughput of
-    tasks).  I may have a different definition of 'throughput' in mind though:
-    for me this refers to tasks/second.  Both a pilot used with early and a
-    pilot used with late binding can be very efficient, and achieve the same
-    throughput of tasks.  In fact, for a single pilot (and an ideal pilot system
-    implementation), there should be no performance difference in early vs. late
-    binding.  It is only in the multi-pilot case where it makes a difference --
-    but not in throughput, but in total TTC.  I thought this is also what your
-    experiments showed?  If that is something your data disagree with, then
-    please disregard, and feel free to remove that discussion as 'solved' :)}
-
-\mtnote{Thank you for clarifying Andre. It is indeed about distinguishing
-between throughput of the pilot and that of the distributed application. Here we
-refer to the latter. About the one of the former, we are in agreement. I
-modified the paragraph accordingly. Any better?}
-
 It should be noted that some aspects of early binding can also
 be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
 do both, even within the confinements of a single workload. \msnote{I would
