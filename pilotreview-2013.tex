@@ -1567,10 +1567,10 @@ minimal sets of logical components and functionalities of \pilot systems
 \footnote{ From here on we will be internally consistent and use \pilot system
 instead of \pilotjob system.}; (ii) and a well-defined core terminology to
 support reasoning about such systems. The former defines the necessary and
-sufficient requirements for a distributed system to be a \pilot system, while
-the latter enables consistency when referring to different \pilot systems. Both
-these contributions are used in this Section to review critically a selection
-of \pilot systems.
+sufficient requirements for a software system to be a \pilot system, while the
+latter enables consistency when referring to different \pilot systems. Both
+these contributions are used in this section to review critically a selection of
+\pilot systems implemented to execute real-life scientific workloads.
 
 The goal of this Section is twofold. Initially, the \pilot functionalities
 presented in \S\ref{sec:history} are used as the basis to infer core \pilot
@@ -1580,6 +1580,8 @@ for a critical comparison among different \pilot systems. Subsequently, several
 defined. In this way, insight is offered about how to choose a \pilot system
 based on functional requirements, how \pilot systems are designed and
 engineered, and the design principles that underly such systems.
+
+\mtnote{The promises made at the end of these paragraph need to the fulfilled by offering remarks about: (i) choosing a pilot system; (ii) critical notes on the design and engineering of pilot systems; (iii) shared design principles. Should we do at the end of 4.2 or in 5?}
 
 % -----------------------------------------------------------------------------
 % 4.1
@@ -1626,85 +1628,276 @@ the whole 4.1 (and, in case, 4.2).}
 % to the set of auxillary properties we discuss.
 
 \msnote{TODO: Fix/merge the two non-compatible definitions of aux props}
+
 \mtnote{Not sure it is still the case. Will address once we will have decided
-whether to keep the changes I made.}
+  whether to keep the changes I made.}
+
+\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
+  general style: too many break outs into parenthesis etc. That should be easy
+  to fix.} \mtnote{Done (never say easy).}
+
+\jhanote{Second and more important: We're forward referencing Table 2 and
+  thereby core and auxillary properties without having discussed either. One
+  temporary solution -- I am sure it has its own drawbacks is to move these 3
+  paragraphs to the end of 4.1.1. Lets discuss.}
+
+\mtnote{These three paragraphs are now connected to the following two and become
+  a summarizing description/introduction to Table 2. 4.1.1 and 4.1.2 are now
+  further specifications of these paragraphs. Does it work better?}
+
+Table~\ref{table:property_component_mapping} offers a brief description for each
+core and auxiliary property alongside their mapping to the required components
+and functionalities of a \pilot system as described
+in~\S\ref{sec:compsandfuncs}.
+
+The core implementation properties of the Pilot Manager and its Pilot
+Provisioning functionality are Pilot Resources, Pilot Deployment, and
+Infrastructure Interaction. Pilot Resources identifies the type of resources
+that the \pilot system exposes, e.g. compute, data, or networking. Pilot
+Deployment describes the modalities of scheduling, utilization, and aggregation
+of pilots. Infrastructure Interactions singles out the protocols and policies
+required for the \pilot system to interact with the remote infrastructure(s).
+For example, to schedule a pilot onto a specific infrastructure \pilot systems
+need to know what type of container to use (e.g. job, virtual machine), what
+type of scheduler the resource exposes, the amount of cores and for how long
+they can be asked for, what filesystems can be accessed, how to contact the
+remote resource, but possibly also the type of cores, the amount of available
+memory and storage and whether a low-latency interconnect is available.
+
+% Implementations of the Pilot Provisioning functionality are analyzed by
+% focusing on two properties: (i) the type of resources the pilot system exposes
+% such as compute, data, and networking
+% (Table~\ref{table:property_component_mapping}, Pilot Resources); and (ii) the
+% modalities and protocols used by the \pilot system and required by the target
+% infrastructure(s) to schedule, utilize, and aggregate pilots
+% (Table~\ref{table:property_component_mapping}, Pilot Management and
+% Infrastructure Interaction \jhanote{there is no pilot management in
+% properties}).
+
+The core implementation properties of a Workload Manager and the Task
+Dispatching functionality are Workload Semantics and Workload Binding.
+Semantically, a workload description contains all the information necessary for
+it to be dispatched to the appropriate resource. For example, type, number,
+size, and duration of tasks alongside their grouping into stages or their data
+dependences need to be known when deciding how many resources of a specific type
+should be used to execute the given workload but also for how long such
+resources should be available. Executing a workload requires for its tasks to be
+bound to the resources. Both the temporal and spatial dimensions of the binding
+operations are relevant for the implementation of Task Dispatching. Depending on
+the concurrency of a given workload, tasks could be dispatched to one or more
+pilots for an efficient execution. Furthermore, tasks could be bound to pilots
+before or after its instantiation, depending on resource availability and
+scheduling decisions.
+
+% Two properties are also used to analyze the implementations of Task
+% Dispatching: (i) the semantics of workloads
+% (Table~\ref{table:property_component_mapping}, Workload Semantics); and (ii)
+% how the tasks of a given workload can be bound to single or multiple pilots
+% (Table~\ref{table:property_component_mapping}, Task Binding).
+
+Finally, the core implementation properties of a Task Manager and its Task
+Execution functionality are Workload Execution and Infrastructure Interaction.
+Workload Execution identifies the process of task dispatching and the modalities
+with which the execution environment is set up for each task. The dispatching
+process may also depend on the capabilities exposed by the target infrastructure
+and its policies. As such, the execution of the workload may depend on how the
+\pilot systems has to interact with the remote infrastructure.
+
+% are analyzed by reviewing different strategies for task scheduling and by
+% describing how \pilot systems support task execution
+% (Table~\ref{table:property_component_mapping}, Task Execution). \pilot
+% implementations may offer multiple scheduling strategies depending on varying
+% factors related to the nature of the workload, the state of the resources, or
+% the capabilities exposed by the underlying middleware. \pilot systems often
+% are responsible for setting up the execution environment for the tasks of the
+% given workload. While each task can be seen as a self-contained and
+% self-sufficient unit with a kernel ready to be executed on the underlying
+% architecture, often tasks require their environment to be set up so that some
+% libraries, data, or accessory programs are made available.
+
+Several auxiliary properties play a fundamental role in distinguishing \pilot
+systems implementations, as well as in defining their usability. Programming and
+user interfaces; interoperability across differing middleware and other \pilot
+systems; multitenancy; strategies and abstractions for data management; security
+including authentication, authorization, and accounting; support for multiple
+usage modes like HPC or HTC; or robustness in terms of fault-tolerance and
+high-availability; are all examples of properties that might characterize a
+\pilot implementation but that, in of themselves, would not distinguish a \pilot
+as a unique system.
+
+Both core and auxiliary properties have a direct impact on the multiple use
+cases for which \pilot systems are currently engineered and deployed. For
+example, while every \pilot system offers the opportunity to schedule the tasks
+of a workload on a pilot, the degree of support of specific workloads vastly
+varies across implementations. Furthermore, some \pilot systems support Virtual
+Organizations and running tasks from multiple users on a single pilot while
+others support jobs using a Message Passing Interface (MPI). Analogously, all
+\pilot systems support the execution of one or more type of workload but they
+differ when considering execution modalities that maximize application
+throughput (HTC), task computing performance (HPC), or container-based high
+scalability (Cloud).
 
 \begin{table*}
 \centering
-\begin{tabular}{c|c|p{3cm}|p{5cm}|}
-\cline{2-4}
-& \textbf{Property} & \textbf{Component} & \textbf{Description} \\
+\begin{tabular}{c|p{3.6cm}|p{2.7cm}|p{2.7cm}|p{5cm}|}
+% header
+\cline{2-5}
+                       &
+\textbf{Property}      &
+\textbf{Component}     &
+\textbf{Functionality} &
+\textbf{Description} \\
 \hline
 % Core
-\multirow{6}{*}{\textit{Core}}
-  & Pilot Resources & Pilot Manager &
-  Types and capabilities of the resources held by the pilot. \\
-  \cline{2-4}
-  & Pilot Deployment & Pilot Manager &
-  Modalities and protocols for scheduling and aggregation of pilots. \\
-  \cline{2-4}
-  & Workload Semantics & Workload Manager &
-  The specification of the semantics (between tasks) captured in the workload
-  description. \\
-  \cline{2-4}
-  & Task Binding & Workload Manager &
-  Modalities and policies for binding tasks to pilots. \\
-  \cline{2-4}
-  & Task Execution & Task Manager &
-  Types of tasks and the mechanisms to execute tasks. \\
-  \cline{2-4}
-  & Infrastructure Interaction & Pilot Manager &
-  Modalities and protocols used to coordinate the pilot system/infrastructure
-  interaction. \\
+\multirow{6}{*}{\textit{Core}}  &
+Pilot Resources                 &
+Pilot Manager                   &
+Pilot Provisioning              &
+Types and capabilities of the resources held by the pilot. \\
+\cline{2-5}
+                                &
+Pilot Deployment                &
+Pilot Manager                   &
+Pilot Provisioning              &
+Modalities and protocols for pilot scheduling, utilization, and aggregation. \\
+\cline{2-5}
+                                &
+Workload Semantics              &
+Workload Manager                &
+Task Dispatching                &
+The specification of the semantics among tasks captured in the workload
+description. \\
+\cline{2-5}
+                                &
+Workload Binding                &
+Workload Manager                &
+Task Dispatching                &
+Modalities and policies for binding tasks to pilots. \\
+\cline{2-5}
+                                &
+Workload Execution              &
+Task Manager                    &
+Task Execution                  &
+Types of tasks and the mechanisms to execute tasks. \\
+\cline{2-5}
+                                &
+Infrastructure     \newline
+  Interaction                   &
+Pilot Manager      \newline
+  Task Manager                  &
+Pilot Provisioning \newline
+  Task Execution                &
+Modalities and protocols used to coordinate the pilot system/infrastructure
+interaction. \\
 \hline
 % Auxiliary
-\multirow{10}{*}{\textit{Auxiliary}}
-  & Architecture &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    Frameworks and architecture that the components and their whole are build
-    with.\\
-  \cline{2-4}
-  & Coordination and Communication &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    The interaction between the components of the system.\\
-  \cline{2-4}
-  & Interface &
-    Pilot Manager\newline Workload Manager &
-    Interface that the user can use to interact with the system.\\
-  \cline{2-4}
-  & Interoperability &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    Interoperability between \pilots on multiple DCIs.\\
-  \cline{2-4}
-  & Multitenancy &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    The use of components by multiple (simultaneous) users.\\
-  \cline{2-4}
-  & Resource Overlay &
-    Pilot Manager\newline Workload Manager &
-    The aggregation of resources from multiple pilots into overlays.\\
-  \cline{2-4}
-  & Robustness &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    The measures in place to increase the robustness of the components and the
-    whole.\\
-  \cline{2-4}
-  & Security &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    AAA considerations for the components and the whole.\\
-  \cline{2-4}
-  & Files and Data &
-    Pilot Manager\newline Workload Manager &
-    The mechanisms that the system offers to explicitly deal with files and
-    data.\\
-  \cline{2-4}
-  & Performance and Scalability &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    A description of scale and limitations and measures to reach that.\\
-  \cline{2-4}
-  & Development Model &
-    Pilot Manager\newline Workload Manager\newline Task Manager &
-    The development- and support model for the software.\\
+\multirow{10}{*}{\textit{Auxiliary}} &
+Architecture                         &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+Frameworks and architecture that the components and their whole are build
+with.\\
+\cline{2-5}
+                                     &
+Coordination~and   \newline
+  Communication                      &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The interaction between the components of the system.\\
+\cline{2-5}
+                                     &
+Interface                            &
+Pilot Manager      \newline
+  Workload Manager                   &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+Interface that the user can use to interact with the system.\\
+\cline{2-5}
+                                     &
+Interoperability                     &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+Interoperability between \pilots on multiple DCIs.\\
+\cline{2-5}
+                                     &
+Multitenancy                         &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The use of components by multiple (simultaneous) users.\\
+\cline{2-5}
+                                     &
+Resource Overlay                     &
+Pilot Manager      \newline
+  Workload Manager                   &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+The aggregation of resources from multiple pilots into overlays.\\
+\cline{2-5}
+                                     &
+Robustness                           &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The measures in place to increase the robustness of the components and the
+whole.\\
+\cline{2-5}
+                                     &
+Security                             &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+AAA considerations for the components and the whole.\\
+\cline{2-5}
+                                     &
+Files and Data                       &
+Pilot Manager      \newline
+   Workload Manager                  &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+The mechanisms that the system offers to explicitly deal with files and data.\\
+\cline{2-5}
+                                     &
+Performance~and    \newline
+  Scalability                        &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+A description of scale and limitations and measures to reach that.\\
+\cline{2-5}
+                                     &
+Development Model                    &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The development and support model for the software.\\
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
@@ -1712,85 +1905,13 @@ onto the components described in \S\ref{sec:compsandfuncs}.}}
 \label{table:property_component_mapping}
 \end{table*}
 
-\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
-  general style: too many break outs into parenthesis etc. That should be easy
-  to fix. Second and more important: We're forward referencing Table 2 and
-  thereby core and auxillary properties without having discussed either. One
-  temporary solution -- I am sure it has its own drawbacks is to move these 3
-  paragraphs to the end of 4.1.1. Lets discuss.}
-
-
-Implementations of the Pilot Provisioning functionality are analyzed by focusing
-on two properties: (i) the type of resources the pilot system exposes such as
-compute, data, and networking (Table~\ref{table:property_component_mapping},
-Pilot Resources); and (ii) the modalities and protocols used by the \pilot
-system and required by the target infrastructure(s) to schedule, utilize, and
-aggregate pilots (Table~\ref{table:property_component_mapping}, Pilot Management
-and Infrastructure Interaction \jhanote{there is no pilot management in
-  properties}). For example, to schedule a pilot onto a specific infrastructure
-\pilot systems need to know what type of container to use (e.g.  job, virtual
-machine), what type of scheduler the resource exposes, but also the amount of
-cores and for how long they can be asked for, whether a low-latency interconnect
-is available, or specific filesystems can be accessed.
-
-Two properties are also used to analyze the implementations of Task
-Dispatching: (i) the semantics of workloads
-(Table~\ref{table:property_component_mapping}, Workload Semantics); and (ii)
-how the tasks of a given workload can be bound to single or multiple pilots
-(Table~\ref{table:property_component_mapping}, Task Binding). Semantically, a
-workload description contains all the information necessary for it to be
-dispatched to the appropriate resource. For example, type, number, size,
-duration of tasks alongside their grouping into stages or their data
-dependences need to be known when deciding how many resources of a specific
-type should be used to execute the given workload but also for how long such
-resources should be available. Executing a workload requires for its tasks to
-be bound to the resources. Both the temporal and spatial dimensions of the
-binding operations are relevant for the implementation of Task Dispatching.
-Depending on the concurrency of a given workload, tasks could be dispatched to
-one or more pilots for an efficient execution. Furthermore, tasks could be
-bound to pilots before or after its instantiation, depending on resource
-availability and scheduling decisions.
-
-Finally, implementations of Task Execution are analyzed by reviewing different
-strategies for task scheduling and by describing how \pilot systems support
-task execution (Table~\ref{table:property_component_mapping}, Task Execution).
-\pilot implementations may offer multiple scheduling strategies depending on
-varying factors related to the nature of the workload, the state of the
-resources, or the capabilities exposed by the underlying middleware.
-Furthermore, \pilot systems often are responsible for setting up the execution
-environment for the tasks of the given workload. While each task can be seen as
-a self-contained and self-sufficient unit with a kernel ready to be executed on
-the underlying architecture, often tasks require their environment to be set up
-so that some libraries, data, or accessory programs are made available.
-
-Several auxiliary properties play a fundamental role in distinguishing
-\pilot systems implementations, as well as addressing, setting and providing
-constraints on their usability (Table~\ref{table:property_component_mapping},
-Auxiliary). Programming and user interfaces; interoperability across differing
-middleware and other \pilot systems; multitenancy; strategies and abstractions
-for data management; security including policies alongside authentication and
-authorization; support for multiple usage modes like HPC or HTC; or robustness
-in terms of fault-tolerance and high-availability; are all examples of
-properties that might characterize a \pilot implementation but that, in of
-themselves, would not distinguish a \pilot as a unique system.
-
-Both core and auxiliary properties have a direct impact on the multiple use
-cases for which \pilot systems are currently engineered and deployed. For
-example, while every \pilot system offers the opportunity to schedule the tasks
-of a workload on a pilot, the degree of support of specific workloads varies
-vastly across implementations. Furthermore, some \pilot systems support Virtual
-Organizations and running tasks from multiple users on a single pilot while
-others support jobs using a Message Passing Interface (MPI). Analogously, all
-\pilot systems support the execution of one or more type of workload but they
-differ when considering execution modalities that maximize throughput (HTC),
-computing (HPC) or container-based high scalability (Cloud).
-
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-Following is the list of core properties. This list of properties is minimal
-and complete. Note that these are the properties of \pilot implementations, and
-not of (individual) instantiations of \pilots.
+Following is an in depth description of core properties characterizing each
+implementation of a \pilot system. This list of properties is minimal and
+complete. Note that these are the properties of \pilot implementations, and not
+of individual instantiations of \pilots.
 
 % \amnote{I don't think this list is 'minimal and complete', there are
 %     many properties of any software which are 'core' in the definition given
@@ -1823,7 +1944,8 @@ not of (individual) instantiations of \pilots.
   % \pilot and resource and how does this effect the suitability for HTC and/or
   % HPC?
 
-  \msnote{This should not overlap with Task Execution Modes}
+  \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
+  comment still valid?}
 
   % \item \textit{Pilot Granularity (spatial)}: What unit of resource is
   % controlled by a single pilot? A core, a node, multiple nodes, a cluster,
