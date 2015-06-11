@@ -132,12 +132,12 @@
 \section{Introduction}
 \label{sec:intro}
 
-\jhanote{Building tools and components that have well-defined and well-characterized
-behavior, including performance. This leads to descriptive models of pilot-jobs,
-which while pervasive in distributed computing, are conspicuous by their absence
-in high-performance and data-intensive computing. By providing a firm
-theoretical underpinning to pilot-jobs [3], one can provide a more
-“programmable” and flexible yet common pilot-job for different types of
+\jhanote{Building tools and components that have well-defined and
+well-characterized behavior, including performance. This leads to descriptive
+models of pilot-jobs, which while pervasive in distributed computing, are
+conspicuous by their absence in high-performance and data-intensive computing.
+By providing a firm theoretical underpinning to pilot-jobs [3], one can provide
+a more “programmable” and flexible yet common pilot-job for different types of
 distributed infrastructure, and also extend the concept of pilot-jobs to
 high-performance and data-intensive computing [4]}
 
@@ -154,9 +154,9 @@ The seamless uptake of distributed infrastructures by scientific applications
 has been limited by the lack of pervasive and simple-to-use abstractions at the
 development, deployment, and execution level. Of all the abstractions proposed
 to support effective distributed resource utilization, a survey of actual usage
-suggested that \pilotjob \mtnote{Should we use just `pilot'}\jhanote{I think you
-  have proposed a graceful transition: from pilotjobs to pilotsystems? If so,
-  should we stick with pilotjobs here?}is arguably one of the most widely-used
+suggested that \pilotjob \mtnote{Should we use just `pilot'}\jhanote{I think
+you have proposed a graceful transition: from pilotjobs to pilotsystems? If so,
+should we stick with pilotjobs here?}is arguably one of the most widely-used
 distributed computing abstractions - as measured by the number and types of
 applications that use them, as well as the number of production distributed
 cyberinfrastructures that support them. \msnote{ref?}
@@ -164,14 +164,14 @@ cyberinfrastructures that support them. \msnote{ref?}
 The fundamental reason for the success of the \pilotjob abstraction is that
 \pilotjobs facilitate the oterwise challenging mapping of specific tasks onto
 explicit heterogeneous and dynamic resource pools. \pilotjobs decouple the
-workload specification from the task management improving the efficiency of task
-assignment while shielding applications from having to manage tasks across such
-resources.  Another concern often addressed by \pilotjobs is fault tolerance
-which commonly refers to the ability of the \pilotjob system to verify the
-execution environment before executing jobs. The \pilotjob abstraction is also a
-promising route to address specific requirements of distributed scientific
-applications, such as coupled-execution and application-level
-scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+workload specification from the task management improving the efficiency of
+task assignment while shielding applications from having to manage tasks across
+such resources.  Another concern often addressed by \pilotjobs is fault
+tolerance which commonly refers to the ability of the \pilotjob system to
+verify the execution environment before executing jobs. The \pilotjob
+abstraction is also a promising route to address specific requirements of
+distributed scientific applications, such as coupled-execution and
+application-level scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -214,17 +214,18 @@ designs and implmentations of a \pilot system. In~\S\ref{sec:analysis}, the
 focus shifts from analysing the design of a \pilot system to  leveraging the
 terminology defined in~\S\ref{sec:understanding} to critically reviewing the
 characteritics and functionalities of a relevant set of \pilot system
-implementations. Finally,~\S\ref{sec:discussion} closes the paper by outlining the
-\pilot paradigm and elaborating on how it impacts and relates to other
-middleware and the application layer. The generality and breath of the
-\pilot paradigm is underlined by showing its adoption by the
-Enterprise, outside the boundaries of scientific research.
+implementations. Finally,~\S\ref{sec:discussion} closes the paper by outlining
+the \pilot paradigm and elaborating on how it impacts and relates to other
+middleware and the application layer. The generality and breath of the \pilot
+paradigm is underlined by showing its adoption by the Enterprise, outside the
+boundaries of scientific research.
 
 
 % -----------------------------------------------------------------------------
 % SECTION 2
 %
-\section{Functional Underpinnings and Evolution of Pilot Abstraction}
+%\section{Functional Underpinnings and Evolution of Pilot Abstraction}
+\section{Evolution of Pilot Abstraction and Systems}
 \label{sec:history}
 
 % -----------------------------------------------------------------------------
@@ -641,32 +642,39 @@ Enterprise, outside the boundaries of scientific research.
 % Version 0.3
 % -----------------------------------------------------------------------------
 
-The origin and motivations for devising the \pilot abstraction and developing
-its many implementations can be traced back to five main notions: task-level
-distribution and parallelism, \MW pattern, multi-tenancy,
-multi-level scheduling, and resource placeholder. This section offers an
-overview of these five notions and an analysis of their relationship with the
-\pilot abstraction. A chronological perspective is taken so to contextualize
-the inception and evolution of the \pilot abstraction into its implementation
-systems.
+The origin and motivations for devising the \pilot abstraction, developing its
+many implementations and realize a full-fledge \pilot paradigm can be traced
+back to five main notions: task-level distribution and parallelism, \MW pattern,
+multi-tenancy, multi-level scheduling, and resource placeholder. This section
+offers an overview of these five notions and an analysis of their relationship
+with the \pilot abstraction. A chronological perspective is taken so to
+contextualize the inception and evolution of the \pilot abstraction into its
+implementation systems.
 
-To the best of the authors' knowledge, the term `\pilotjob' was first
-introduced around 2004 in the context of the Large Hadron Collider (LHC)
-challenge [ref] and then used in a 2005 LHCb report\cite{lhcb2005}. Despite its
-relatively recent explicit naming, the \pilot abstraction addresses a problem
-already well-known at the beginning of the twentieth century: task-level
-distribution and parallelism on diverse, multi-tenant resources.
+\mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of \pilot systems as described in Subsection 2.2.}
+
+% ------------------------------------------------------------------------------
+% 2.1
+\subsection{Functional Underpinnings of the Pilot Abstraction}
+\label{sec:histabstr}
+
+To the best of the authors' knowledge, the term `\pilotjob' was first introduced
+around 2004 in the context of the Large Hadron Collider (LHC) challenge [ref],
+and then used in a 2005 LHCb report\cite{lhcb2005}. Despite its relatively
+recent explicit naming, the \pilot abstraction addresses a problem already
+well-known at the beginning of the twentieth century: task-level distribution
+and parallelism on multiple resources.
 
 Lewis Fry Richardson devised in 1922 a Forecast Factory
 (Figure~\ref{fig:figures_forecast-factory}) to solve systems of differential
-equations for weather forecasting. This factory required 64,000 human
-\textit{computers} supervised by a senior clerk. The clerk would distribute
-portions of the differential equations to the `computers' so that they could
-forecast the weather of specific regions of the globe. The computers would
-perform their calculations and then send the results back to the clerk. The
-Forecast Factory was not only an early conceptualization of what is called
-today a ``supercomputer'' but also of the coordination pattern for distributed
-and parallel computation called ``\MW''.
+equations for weather forecasting. This factory required 64,000 `human
+computers' supervised by a senior clerk. The clerk would distribute portions of
+the differential equations to the computers so that they could forecast the
+weather of specific regions of the globe. The computers would perform their
+calculations and then send the results back to the clerk. The Forecast Factory
+was not only an early conceptualization of what is called today a
+``supercomputer'' but also of the coordination pattern for distributed and
+parallel computation called ``\MW''.
 
 \begin{figure}[t]
   \centering
@@ -680,10 +688,10 @@ The clerk of the Forecast Factory is the `master' while the human computers are
 her `workers'. Requests and responses go back and forth between the master and
 all its workers. Each worker has no information about the overall computation
 nor about the states of any other worker. The master is the only one possessing
-a global view both of the overall problem to compute and of its progress
-towards a solution. As such, the M-W is a coordination pattern allowing for the
+a global view both of the overall problem to compute and of its progress towards
+a solution. As such, the \MW is a coordination pattern allowing for the
 structured distribution of tasks so to orchestrate their parallel execution.
-This directly translates into a better time to completion (TTC) of the overall
+This directly translates into a better time to completion of the overall
 computation when compared to a coordination pattern in which each equation is
 sequentially solved by a single worker.
 
@@ -742,59 +750,61 @@ robust abstractions has still to be devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
 supercomputers is the increase of the implementation complexity imposed on the
-application layer. Even with solutions like grid computing aiming at
-effectively and, to some extent, transparently integrating diverse resources,
-most of the requirements involving the coordination of task execution still
-lays with the application layer. This translates into single-point solutions,
-extensive redesign and redevelopment of existing applications when they need to
-be adapted to new use cases or new resources, and lack of portability and
-interoperability.
+application layer. Even with solutions like grid computing aiming at effectively
+and, to some extent, transparently integrating diverse resources, most of the
+requirements involving the coordination of task execution still lays with the
+application layer. This translates into single-point solutions, extensive
+redesign and redevelopment of existing applications when they need to be adapted
+to new use cases or new resources, and lack of portability and interoperability.
 
-Consider for example a simple distributed application implementing a M-W
-pattern. With a single supercomputer, the application requires the capability
-of concurrently submitting tasks to the queue of the supercomputer scheduler,
-and retrieve and aggregate their outputs. When multiple supercomputers are
+Consider for example a simple distributed application implementing the \MW
+pattern. With a single supercomputer, the application requires the capability of
+concurrently submitting tasks to the queue of the supercomputer scheduler, and
+retrieve and aggregate their outputs. When multiple supercomputers are
 available, the application requires directly managing submissions to several
 queues or the capability to leverage a third-party meta-scheduler and its
 specific execution model. In both scenarios, the application requires a large
 amount of development and capabilities that are not specific to the given
-scientific problem but pertain instead to the coordination and management of
-its computation.
+scientific problem but pertain instead to the coordination and management of its
+computation.
 
 The notion of resource placeholder was devised as a pragmatic and relatively
-cheap to implement attempt to reduce or at least better manage the complexity
-of executing distributed applications. A resource placeholder decouples the
+cheap to implement attempt to reduce or at least better manage the complexity of
+executing distributed applications. A resource placeholder decouples the
 acquisition of remote compute resource from their use to execute the tasks of a
 distributed application. Resources are acquired by scheduling a job onto the
-remote supercomputer. Once executed, the job runs an agent capable of
-retrieving and executing application tasks.
+remote supercomputer. Once executed, the job runs an agent capable of retrieving
+and executing application tasks.
 
-Resource placeholders bring together multi-level scheduling and, when useful,
-the M-W pattern to enable parallel execution of the tasks of distributed
-applications. Multi-level scheduling is achieved by scheduling the agent and
-then by enabling direct scheduling of application tasks to that agent. The M-W
-pattern is often an effective choice to manage the coordination of tasks
-execution on the available agent(s). Multi-level scheduling can be extended to
-multiple resources by instantiating resource placeholders on diverse
-supercomputing and then using a meta-scheduler to schedule tasks across all the
-placeholders.
+Resource placeholders bring together multi-level scheduling to enable parallel
+execution of the tasks of distributed applications. Multi-level scheduling is
+achieved by scheduling the agent and then by enabling direct scheduling of
+application tasks to that agent. The \MW pattern is often an effective choice to
+manage the coordination of tasks execution on the available agent(s).
+Multi-level scheduling can be extended to multiple resources by instantiating
+resource placeholders on diverse supercomputing and then using a meta-scheduler
+to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
-introduced by multi-tenancy. Multi-tenancy affects only the scheduling of the
-resource placeholder as it needs to be executed by the batch system of the
-remote supercomputer. Once the placeholder is executed, the user -- or the
-master process of the distributed application -- may hold total control of the
-resource placeholder. In this way, tasks are directly scheduled on the
-placeholder without competing with other users for the supercomputer scheduler.
+introduced by a multi-tenant scheduling of resource placeholders. A placeholder
+still spends a variable amount of time waiting to be executed by the batch
+system of the remote supercomputer, but, once executed, the user -- or the
+master process of the distributed application -- may hold total control over its
+resources. In this way, tasks are directly scheduled on the placeholder without
+competing with other users for the supercomputer scheduler.
+
+% ------------------------------------------------------------------------------
+% 2.2
+\subsection{Evolution of Pilot System Implementations}
+\label{sec:histimpl}
 
 As seen in Ref.~\cite{pstar-2012}, the \pilot abstraction has a rich set of
 properties and its implementations offer a vast array of capabilities including
-multiple scheduling algorithms, data and compute placeholders, and late or
-early binding. Nonetheless, the capability of acquiring remote resources and
-directly utilizing them, independently from the supercomputer resource
-management, is a necessary property of the \pilot abstraction. As such,
-resource placeholders and their
-scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
+multiple scheduling algorithms, data and compute placeholders, and late or early
+binding. Nonetheless, the capability of acquiring remote resources and directly
+utilizing them, independently from the supercomputer resource management, is a
+necessary property of the \pilot abstraction. As such, resource placeholders and
+their scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
 \pilot system implementations.
 
 % The progressive definition and implementation of the \pilot abstraction can
@@ -821,13 +831,12 @@ scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
   \label{fig:pilotjob_clustering}
 \end{figure}
 
-AppLeS~\cite{Berman:1996:apples} is a framework for application-level
-scheduling and offers an example of an early implementation of resource
-placeholder. AppLeS provides an agent that can be embedded into an application
-thus enabling the application to acquire resources and to schedule tasks onto
-these. Besides M-W, AppLeS also provides application templates, e.\,g.\ for
-parameter sweep and moldable parallel
-applications~\cite{Berman:2003:ACG:766629.766632}.
+AppLeS~\cite{Berman:1996:apples} is a framework for application-level scheduling
+and offers an example of an early implementation of resource placeholder. AppLeS
+provides an agent that can be embedded into an application thus enabling the
+application to acquire resources and to schedule tasks onto these. Besides \MW,
+AppLeS also provides application templates, e.\,g.\ for parameter sweep and
+moldable parallel applications~\cite{Berman:2003:ACG:766629.766632}.
 
 AppLeS offered user-level control of scheduling but did not isolate the
 application layer from the management and coordination of task execution. Any
@@ -837,7 +846,7 @@ abstraction layer between those of the application and of the various batch
 queuing systems available at different remote systems.
 
 Around the same time as AppLeS was introduced, volunteer computing projects
-started using the M-W coordination pattern to achieve high-throughput
+started using the \MW coordination pattern to achieve high-throughput
 calculations for a wide range of scientific problems. The workers of these
 systems could be downloaded and installed on the user laptop and workstation.
 With an installation base potentially distributed across the globe, workers
@@ -853,28 +862,27 @@ such, an implementation of the core functionality of the \pilot abstraction.
 The first public volunteer computing projects were The Great Internet Mersenne
 Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
 distributed.net~\cite{Lawton:2000:distributednet} in 1997 to compete in the
-RC5-56 secret-key challenge, and the SETI@Home project, which set out to
-analyze radio telescope data. The generic BOINC distributed master-worker
-framework grew our of SETI@Home, becoming the {\it de facto} standard framework
-for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
+RC5-56 secret-key challenge, and the SETI@Home project, which set out to analyze
+radio telescope data. The generic BOINC distributed master-worker framework grew
+our of SETI@Home, becoming the {\it de facto} standard framework for voluntary
+computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has complete knowledge of the available
 resources while the latter has none. As a consequence, AppLes can request and
-orchestrate a set of resource, allocates tasks in advance to specific workers
+orchestrate a set of resource, allocate tasks in advance to specific workers
 (i.e. resources placeholders), and implement load balancing among resources. In
-voluntary computing tasks are polled by the clients when they become active
-and, as such, resource availability is unknown in advance. This potential
-drawback is mitigated by the redundancy offered by the large scale that
-voluntary computing can reach thanks to its simpler model of worker
-distribution and installation.
+voluntary computing tasks are polled by the clients when they become active and,
+as such, resource availability is unknown in advance. This potential drawback is
+mitigated by the redundancy offered by the large scale that voluntary computing
+can reach thanks to its simpler model of worker distribution and installation.
 
 The opportunistic use of geographically distributed resources championed by
 voluntary computing offers several advantages. The resource landscape available
-for scientific research is fragmented across multiple institutions, managed
-with different policies and protocols, and heterogeneous both in quantity and
+for scientific research is fragmented across multiple institutions, managed with
+different policies and protocols, and heterogeneous both in quantity and
 quality. Once aggregated, the sum of otherwise limited resources can support
-very large distributed computations and an great amount of multi-tenancy. Note
+very large distributed computations and a great amount of multi-tenancy. Note
 that given the required capabilities, this model of resource provisioning can
 still support the execution of parallel applications on the few resources that
 offer low-latency network interconnect.
@@ -884,28 +892,28 @@ diverse and possibly geographically distributed resources. Originally, Condor
 was created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management could not
-be done on application level by the user: Flocking required system level
+be done on application level by the user: flocking required system level
 software configurations that had to be made by the administrator of each
 individual resource of each Condor resource pool.
 
 This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
-remote grid resources to Condor resource pools. In this way, users can
-uniformly execute jobs on resource pools composed by diverse resources. Thanks
-to its use of resource placeholders, GladeIn has been one of the systems
-pioneering the \pilot abstraction implementation, enabling \pilot capabilities
-also for third parties systems like Bosco~\cite{bosco}.
+remote grid resources to Condor resource pools. In this way, users can uniformly
+execute jobs on resource pools composed by diverse resources. Thanks to its use
+of resource placeholders, GladeIn has been one of the systems pioneering the
+\pilot abstraction implementation, enabling \pilot capabilities also for third
+parties systems like Bosco~\cite{bosco}.
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
-implementation of GlideIn also highlighted at least two limitations:
-user/system layer isolation, and application development model. While GlideIn
-allows for the user to manage resource placeholders directly, daemons must
-still be running on the remote resources. This means that GlideIn cannot be
-deployed without involving the resource owners and system administrators.
-Implemented as a service, GlideIn support integration with distributed
-application frameworks but does not programmatically support the development of
-distributed applications by means of dedicated APIs and libraries.
+implementation of GlideIn also highlighted at least two limitations: user/system
+layer isolation, and application development model. While GlideIn allows for the
+user to manage resource placeholders directly, daemons must still be running on
+the remote resources. This means that GlideIn cannot be deployed without
+involving the resource owners and system administrators. Implemented as a
+service, GlideIn support integration with distributed application frameworks but
+does not programmatically support the development of distributed applications by
+means of dedicated APIs and libraries.
 
 The BigJob \pilot system [ref] was designed to address these limitations, to
 broaden the type of applications supported by the \pilot-based execution model,
@@ -913,96 +921,93 @@ and to extend the \pilot abstraction beyond the boundaries of compute tasks.
 BigJob offers an application-level programmability to provide the end-user with
 more flexibility and control over the design of distributed application and the
 isolation of the management of their execution. BigJob is flexible and
-extensible and uses the Simple API for Grid Applications (SAGA)
-interoperability library [ref] to work on a variety of infrastructures.
-Furthermore, BigJob supports both MPI and non-MPI jobs without adding
-additional configuration requirements to the end-user. Finally, BigJob has also
-been extended to work with data and, analogous to compute \pilots, to abstract
-away direct user communication between different storage systems.
+extensible and uses the Simple API for Grid Applications (SAGA) interoperability
+library [ref] to work on a variety of infrastructures. Furthermore, BigJob
+supports both MPI and non-MPI jobs without adding additional configuration
+requirements to the end-user. Finally, BigJob has also been extended to work
+with data and, analogous to compute \pilots, to abstract away direct user
+communication between different storage systems.
 
-BigJob, recently redesigned as a pre-production system named RADICAL Pilot
+BigJob, recently redesigned as a pre-production system named ``RADICAL Pilot''
 [ref], represents one of the latest evolutionary stages of the \pilot
 abstraction. From an initial phase in which \pilot were implemented as ad hoc
 place holder machinery for a specific application, to the integration of \pilot
-systems within the middleware of remote resources, PilotJob implements the
+systems within the middleware of remote resources, RADICAL Pilot implements the
 \pilot abstraction as an interoperable compute and data management system that
 can be programmatically integrated into end-user applications.
 
 Another ongoing evolutionary trend of the \pilot abstraction is to be
-implemented into \pilot-based workload managers, thus moving away from
-providing simple \pilot capabilities in application space. These higher-level
-systems which are often centrally hosted, move critical functionality from the
-client to the server (i.e. a service model). These systems usually deploy
-\pilot factories that automatically start new \pilots on demand and integrate
-security mechanisms to support multiple users simultaneously.
+implemented into \pilot-based workload managers, thus moving away from providing
+simple \pilot capabilities in application space. These higher-level systems
+which are often centrally hosted, move critical functionality from the client to
+the server (i.e. a service model). These systems usually deploy \pilot factories
+that automatically start new \pilots on demand and integrate security mechanisms
+to support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of \pilots, e.\,g.\ GlideInWMS, DIRAC~\cite{1742-6596-219-6-062049},
 PanDa~\cite{1742-6596-331-7-072069}, AliEn~\cite{1742-6596-119-6-062012} and
 Co-Pilot~\cite{copilot-tr}. Each of these \pilots serves a particular user
-community and experiment. Interestingly, we observe that these \pilots are
-functionally very similar, work on almost the same underlying infrastructure,
-and serve applications with very similar (if not identical) characteristics.
+community and experiment. Interestingly, these \pilots are functionally very
+similar, work on almost the same underlying infrastructure, and serve
+applications with very similar (if not identical) characteristics.
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
-can, based on the current and expected number of jobs in the pool,
-automatically increase or decrease the number of active Glide-ins (\pilots)
-available to the pool. GlideinWMS is a multi-user \pilotjob system commonly
-deployed as a hosted service. GlideinWMS attempts to hide the \pilot
-capabilities rather than exposing them to the user. GlideinWMS is currently
-deployed in production on the Open Science Grid (OSG)~\cite{url_osg} and is the
-recommended mode for new users wanting to access OSG resources.
+can, based on the current and expected number of jobs in the pool, automatically
+increase or decrease the number of active Glide-ins (\pilots) available to the
+pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
+service. GlideinWMS attempts to hide the \pilot capabilities rather than
+exposing them to the user. GlideinWMS is currently deployed in production on the
+Open Science Grid (OSG)~\cite{url_osg} and is the recommended mode for new users
+wanting to access OSG resources.
 
 \panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} is
 the workload management system of the ATLAS experiment, used to run managed
 production and user analysis jobs on the grid. The ATLAS Computing Facility
-operates the pilot submission systems. This is done using the \panda
-`AutoPilot' scheduler component which submits pilot jobs via Condor-G. \panda
-also provides the ability to manage data associated the jobs managed by the
-\panda workload manager.
+operates the pilot submission systems. This is done using the \panda `AutoPilot'
+scheduler component which submits pilot jobs via Condor-G. \panda also provides
+the ability to manage data associated the jobs managed by the \panda workload
+manager.
 
-In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides
-the ability to tightly integrate storage and compute resources and is also able
-to manage file replicas. While all data can be accessed from anywhere, the
+In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
+ability to tightly integrate storage and compute resources and is also able to
+manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
 the data. AliEn deploys a pull-based model~\cite{Saiz:2003:alien} assuming that
-the resource pool is dynamic and that a pull model doesn't require the broker
-to keep detailed track of all resources, which leads to a more simple
+the resource pool is dynamic and that a pull model doesn't require the broker to
+keep detailed track of all resources, which leads to a more simple
 implementation.
 
-DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload
-management system built on top of \pilots. It supports the management of data,
-which can be placed in different kinds of storage elements (e.\,g.\ based on
-SRM).
+DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload management
+system built on top of \pilots. It supports the management of data, which can be
+placed in different kinds of storage elements (e.\,g.\ based on SRM).
 
-Another interesting \pilot that is used in the LHC context is
+Another interesting \pilot system that is used in the LHC context is
 Co-Pilot~\cite{copilot-tr}. Co-Pilot serves as an integration point among
-different grid \pilotjob systems (such as AliEn and \panda), clouds and
-volunteer computing resources. Co-Pilot provides components for building a
-framework for seamless and transparent integration of these resources into
-existing Grid and batch computing infrastructures exploited by the High Energy
-Physics community.
+different grid \pilot systems (such as AliEn and \panda), clouds, and volunteer
+computing resources. Co-Pilot provides components for building a framework for
+seamless and transparent integration of these resources into existing Grid and
+batch computing infrastructures exploited by the High Energy Physics community.
 
 The \pilot abstraction has also been integrated into scientific workflow
-systems. \pilot systems have proven an effective tool for managing the
-workloads executed in the various stages of a workflow. For the Pegasus
-project, the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed
-to support the requirements of the Pegasus workflow system in particular to
-optimize the placements of \pilots with respect to their workload. It did this
-by serving as a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral
-provides more explicit control over the placement and start of \pilots to the
-end-user. Corral was later extended to also serve as a possible front end to
-GlideinWMS.
+systems. \pilot systems have proven an effective tool for managing the workloads
+executed in the various stages of a workflow. For the Pegasus project [ref], the
+Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
+requirements of the Pegasus workflow system in particular to optimize the
+placements of \pilots with respect to their workload. It did this by serving as
+a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral provides more
+explicit control over the placement and start of \pilots to the end-user. Corral
+was later extended to also serve as a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language provides also capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
 ``Coaster''~\cite{coasters}, developed to address workload management
-requirements by supporting various types of infrastructure, including clouds
-and grids.
+requirements by supporting various types of infrastructure, including clouds and
+grids.
 
 % Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon
 % was engineered for executing many small tasks on HPC systems and shows high
@@ -1010,18 +1015,27 @@ and grids.
 % example of how the \pilot abstraction can be implemented to support very
 % specific workload.
 
-\mtnote{Needs a better closing}
+The proliferation of \pilot systems underlines not only a progressive
+appreciation for the \pilot abstraction but also the emergence of a \pilot
+paradigm to support the execution of distributed and increasingly of parallel
+applications. The brief description of the many \pilot system implementations
+introduced in this subsection helps to identify some distinctions in terms of
+design, usage and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
+graphical representation of this rough clustering.
 
-Based on the descriptions in this section we can identify some distinctions in
-terms of design, usage and operation of pilot(-based) systems.
-Figure~\ref{fig:pilotjob_clustering} is a graphical representation of this
-rough clustering.
+The evolutionary trend of the \pilot paradigm has been largely organic and
+uncoordinated leading to a largely inconsistent terminology related to the
+\pilot abstraction, its implementations and usages. Furthermore, a coherent
+understanding of the \pilot components and functionalities is still missing
+leading to a blurred definition of \pilot and how it should be distinguished
+from other abstractions and middleware and application software.
 
-The evolution of \pilotjobs attests to their usefulness across a wide range of
+The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
 specific functionality and inconsistent terminology calls for a standard
 vocabulary to assist in understanding the varied approaches and their
-commonalities and differences.
+commonalities and differences. This is what is offered in the next section of
+this paper.
 
 
 %------------------------------------------------------------------------------
@@ -1054,7 +1068,7 @@ description and, eventually, about its multiple implementations.
 
 All the \pilot systems introduced in~\S\ref{sec:history} are engineered to
 allow for the execution of (multiple types of) workloads on Distributed
-Computing Infrastructures (DCIs) such as Grids, Clouds, or HPC facilities. This
+Computing Infrastructures (DCIs) such as grid, cloud, or HPC facilities. This
 is achieved differently, depending on use cases, design and implementation
 choices, but also on the constraints imposed by the middleware and policies of
 the targeted DCIs. The common denominators among \pilot systems are defined
@@ -1064,8 +1078,8 @@ The purpose shared by every \pilot system is to improve the (performance of)
 workload execution when compared to executing the same workload directly on one
 or more DCI. Performance in \pilot systems is usually associated to throughput
 and execution time to completion (TTC), but other metrics could also be
-considered, for example, energy efficiency, data transfer minimisation, scale
-of the workload executed or a mix of them. In order to optimize the chosen set
+considered, for example, energy efficiency, data transfer minimization, scale
+of the workload executed, or a mix of them. In order to optimize the chosen set
 of metrics, each \pilot system exhibits characteristics that are both common or
 specific to one or more implementations. Discerning these characteristics
 requires isolating and defining the minimal set of logical components that has
@@ -1073,28 +1087,29 @@ to characterize every \pilot system.
 
 At some level, all \pilot systems leverage three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
-\vocab{Task Executor}. The Pilot Manager handles the description, instantiation,
+\vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
 and use of one or more resource placeholders (i.e. `\pilots`) on single or
 multiple DCIs. The Workload Manager handles the scheduling of one or more given
-workloads on the available resource placeholders. Finally, the Task Executor
+workloads on the available resource placeholders. Finally, the Task Manager
 takes care of executing the tasks of each workload by means of the resources
-held by the placeholders.  \jhanote{does the task executor just execute, or does
-  it have some decision making capacity? if the latter, then purely for naming
-  consistency, should we consider calling the third component ``task manager''
-  or ``Task execution manager'' ? Also we go on to discuss task dispatching and
-  execution as functionalities, which leaves current name a bit limiting.}
+held by the placeholders.  \jhanote{does the task executor just execute, or
+does it have some decision making capacity? if the latter, then purely for
+naming consistency, should we consider calling the third component ``task
+manager'' or ``Task execution manager'' ? Also we go on to discuss task
+dispatching and execution as functionalities, which leaves current name a bit
+limiting.} \mtnote{Replaced `Task Executor' with `Task Manager'.}
 
 The implementation details of these three logical components significantly vary
 across \pilot systems (see~\S\ref{sec:analysis}). One or more logical
 components may be responsible for specific functionalities, both on application
 as well as infrastructure level, two or more logical components may be
 implemented in a single software module, or additional components may be
-integrated into the Managers and Task Executor. Nevertheless, the Pilot and
-Workload Managers and the Task Executor can always be distinguished across
+integrated into the Managers and Task Manager. Nevertheless, the Pilot and
+Workload Managers and the Task Manager can always be distinguished across
 different \pilot systems. For example, looking at the systems mentioned
 in~\S\ref{sec:history}, \ldots \mtnote{I will wait for S2 and S4 to be final
 before picking the right examples/vocabulary.} \msnote{How about not having an
-example here? In a way it will cut short what we do in S4} \mtnote{I see hwat
+example here? In a way it will cut short what we do in S4} \mtnote{I see what
 you mean. Let's see how does it look like once we have a full draft.}
 
 Each \pilot system supports a minimal set of functionalities that allow for the
@@ -1166,7 +1181,7 @@ throughput. \msnote{I don't understand the bit about parametrization
 
 Communication and coordination are two distinguishing characteristics of
 distributed applications and \pilot systems make no exception. The Workload
-Manager, Pilot Manager, and the Task Executor need to communicate to coordinate
+Manager, Pilot Manager, and the Task Manager need to communicate to coordinate
 the execution of the given workload on the instantiated resource placeholders.
 Nonetheless, \pilot systems are not defined by any specific communication
 pattern and coordination strategy. The logical components of a \pilot system
@@ -1184,13 +1199,13 @@ the changes in 4.1 and we can discuss via comments.}
 
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 \pilot systems. When the master is identified with the Workload Manager, and
-the worker with the Task Executor, the functionalities related to task
+the worker with the Task Manager, the functionalities related to task
 description, scheduling, and monitoring will generally be implemented within
 the Workload Manager, while the functionalities needed to execute each task
-will be implemented into the Task Executor. Alternative coordination
-strategies, for example where a Task Executor directly coordinates the
+will be implemented into the Task Manager. Alternative coordination
+strategies, for example where a Task Manager directly coordinates the
 task scheduling, might require a functionally simpler Workload Manager but a
-comparatively feature-rich Task Executor. The former would require capabilities
+comparatively feature-rich Task Manager. The former would require capabilities
 for submitting tasks, while the latter would require to coordinate with its
 neighbor executors leveraging, for example, a dedicated overlay network. Both
 these systems, adopting different coordination strategies, should be considered
@@ -1217,55 +1232,6 @@ logical components and capabilities so far described is defined.
 % 3.2
 \subsection{Terms and Definitions}
 \label{sec:termsdefs}
-
-\begin{table*}
- \centering
- \begin{tabular}{|p{4cm}|p{3.2cm}|p{3.2cm}|}
-  \hline
-    \textbf{Term} & \textbf{Functionality} & \textbf{Logical Component} \\
-  \hline
-  \hline
-    \textbf{Workload} & Task Dispatching & Workload Manager \\
-  \hline
-    \textbf{Task} & Task Dispatching \newline
-    Task Execution & Workload Manager \newline
-    Task Executor \\
-  \hline
-    \textbf{Resource} & Pilot Provisioning & Pilot Manager \\
-  \hline
-    \textbf{DCI} & Pilot Provisioning & Pilot Manager \\
-  \hline
-    \textbf{Job} & Pilot Provisioning & Pilot Manager \\
-  \hline
-    \textbf{Pilot} & Pilot Provisioning \newline
-    Task Execution & Pilot Manager \newline
-    Task Executor \\
-  \hline
-    \textbf{Multi-level scheduling} &
-    Pilot Provisioning \newline Task Dispatching \newline (Task Execution?) &
-    Pilot Manager \newline Workload Manager \newline (Task Executor?) \\
-  \hline
-    \textbf{Early binding} & Task Dispatching \newline
-    Pilot Provisioning & Workload Manager \newline
-    Pilot Manager\\
-  \hline
-    \textbf{Late binding} & Task Dispatching \newline
-    Pilot Provisioning  & Workload Manager \newline
-    Pilot Manager\\
-  \hline
- \end{tabular}
- \caption{\textbf{Mapping of the core terminology of \pilot systems into the
-     functionalities and logical components described in
-     \S\ref{sec:compsandfuncs}.}\msnote{What are the considerations for the
-     mapping?}\mtnote{I am not sure I properly understand the comment but should
-     we say common sense? We are defining the vocabulary and the logical model
-     so I would assume we are fairly unbounded in our mapping choices.}
-   \jhanote{The mapping is implicit and the reader will be confused by the
-     purpose and will struggle to see the intent other than a listing of all
-     terms encountered. I think this table will benefit from a more detailed
-     caption.}}
- \label{table:terminology}
-\end{table*}
 
 The terms `pilot' and `job' are arguably among the most relevant when referring
 to \pilot systems. It is the case that \pilot systems are commonly referred to
@@ -1404,7 +1370,7 @@ within the \pilot's resource allocation.)
 The simplification obtained as a consequence of bypassing the job submission
 system of the DCI is one of the main reasons for the success of \pilot
 systems. As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a workload can
-be executed on a \pilot without waiting in the queueing system of the given
+be executed on a \pilot without waiting in the queuing system of the given
 infrastructure, and as a result, increasing the throughput of the workload
 execution. Moreover, \pilots can be reused to execute multiple workloads until
 the \pilots' walltime expire.  It should be noted that how tasks are actually
@@ -1413,21 +1379,25 @@ scheduler could be adopted, or tasks might be directly assigned to a \pilot by
 the user.
 
 The binding of tasks to \pilots depends on the state of the \pilot. A \pilot is
-inactive until it is executed on a DCI, is active thereafter, until it
-completes (or fails).  Early binding indicates the binding of a task to an
-inactive \pilot; late binding the binding of a task to an active \pilot. Early
-binding is potentially useful to increase the information about which \pilots
-can be deployed. By knowing in advance the properties of the tasks that are
-bound to a \pilot, specific deployment decisions can be made for that \pilot.
-Additionally, in case of early binding, other type of decisions related to the
-workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still queued or busy. Late binding is critical in assuring the
-aforementioned high throughput by allowing task execution without additional
-queuing time or container instantiation time.  It should be noted that some
-aspects of early binding can also be achieved without a \pilot, but the
-important thing to realize is that the \pilot paradigm allows to do both, even
-within the confinements of a single workload. \msnote{I would think parts of
-this paragraph also have their place in S5 (if its not already there)}
+inactive until it is executed on a DCI, is active thereafter, until it completes
+(or fails).  Early binding indicates the binding of a task to an inactive
+\pilot; late binding the binding of a task to an active \pilot. Early binding is
+potentially useful to increase the information about which \pilots can be
+deployed. By knowing in advance the properties of the tasks that are bound to a
+\pilot, specific deployment decisions can be made for that \pilot. Additionally,
+in case of early binding, other type of decisions related to the workload could
+be made, e.g., the transfer of data to a certain resource while the \pilot is
+still inactive. Late binding is critical in assuring the aforementioned high
+throughput of the distributed application by allowing sustained task execution
+without additional queuing time or container instantiation time.
+
+It should be noted that some aspects of early binding can also
+be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
+do both, even within the confinements of a single workload. \msnote{I would
+think parts of this paragraph also have their place in S5 (if its not already
+there)} \mtnote{The notion of binding needs to be fully understood before
+getting into 4. I would leave this as it is here but I am open to discuss about
+it.}
 
 \begin{description}
 
@@ -1440,37 +1410,150 @@ active or inactive \pilots.
 
 \end{description}
 
-Depending on the specific capabilities implemented in the Workload Manager
-component, some \pilot systems allow for \pilots to be specified by taking into
-consideration the properties of (the tasks of) a workload. This type of
-specification should not be confused with early binding as the latter requires
-for a \pilot to have been already bound to a resource. \msnote{I think this
-paragraph is orthogonal to what we write earlier. I suggest to remove this
-paragraph altogether.}
+% Depending on the specific capabilities implemented in the Workload Manager
+% component, some \pilot systems allow for \pilots to be specified by taking
+% into consideration the properties of (the tasks of) a workload. This type of
+% specification should not be confused with early binding as the latter
+% requires for a \pilot to have been already bound to a resource. \msnote{I
+% think this paragraph is orthogonal to what we write earlier. I suggest to
+% remove this paragraph altogether.} \amnote{+1, this confuses more than it
+% clarifies...}
 
-Figure~\ref{fig:core_vocabulary} offers a diagrammatic representation of
-how the minimal and consistent vocabulary proposed in this Subsection
-should be used to describe the logical components and core capabilities
-of a \pilot system illustrated in~\S\ref{sec:compsandfuncs}.
+\definecolor{term}{RGB}{153,39,38}
+\definecolor{funct}{RGB}{0,128,64}
+\definecolor{lcomp}{RGB}{0,128,255}
+
+\begin{table*}
+ \centering
+ \begin{tabular}{|p{4cm}|p{3.2cm}|p{3.2cm}|}
+  \hline
+    \textbf{Term} &
+    \textbf{Functionality} &
+    \textbf{Logical Component} \\
+  \hline
+  \hline
+    \textcolor{term}{Workload} &
+    \textcolor{funct}{Task Dispatching} &
+    \textcolor{lcomp}{Workload Manager} \\
+  \hline
+    \textcolor{term}{Task} &
+    \textcolor{funct}{Task Dispatching} \newline
+      \textcolor{funct}{Task Execution} &
+    \textcolor{lcomp}{Workload Manager} \newline
+      \textcolor{lcomp}{Task Manager} \\
+  \hline
+    \textcolor{term}{Resource} &
+    \textcolor{funct}{Pilot Provisioning} &
+    \textcolor{lcomp}{Pilot Manager} \\
+  \hline
+    \textcolor{term}{Infrastructure} or \textcolor{term}{DCI} &
+    \textcolor{funct}{Pilot Provisioning} &
+    \textcolor{lcomp}{Pilot Manager} \\
+  \hline
+    \textcolor{term}{Job} &
+    \textcolor{funct}{Pilot Provisioning} &
+    \textcolor{lcomp}{Pilot Manager} \\
+  \hline
+    \textcolor{term}{Pilot} &
+    \textcolor{funct}{Pilot Provisioning} \newline
+      \textcolor{funct}{Task Execution} &
+    \textcolor{lcomp}{Pilot Manager} \newline
+      \textcolor{lcomp}{Task Manager} \\
+  \hline
+    \textcolor{term}{Multi-level scheduling} &
+    \textcolor{funct}{Pilot Provisioning} \newline
+      \textcolor{funct}{Task Dispatching} &
+    \textcolor{lcomp}{Pilot Manager} \newline
+      \textcolor{lcomp}{Workload Manager} \\
+  \hline
+    \textcolor{term}{Early binding} &
+    \textcolor{funct}{Task Dispatching} \newline
+      \textcolor{funct}{Pilot Provisioning} &
+    \textcolor{lcomp}{Workload Manager} \newline
+      \textcolor{lcomp}{Pilot Manager} \\
+  \hline
+    \textcolor{term}{Late binding} &
+    \textcolor{funct}{Task Dispatching} \newline
+      \textcolor{funct}{Pilot Provisioning} &
+    \textcolor{lcomp}{Workload Manager} \newline
+      \textcolor{lcomp}{Pilot Manager} \\
+  \hline
+ \end{tabular}
+ \caption{\textbf{Mapping of the core terminology of \pilot systems into the
+     functionalities and logical components described in
+     \S\ref{sec:compsandfuncs}.}\msnote{What are the considerations for the
+     mapping?}\mtnote{I am not sure I properly understand the comment but
+     should we say common sense? We are defining the vocabulary and the logical
+     model so I would assume we are fairly unbounded in our mapping choices.}
+     \jhanote{The mapping is implicit and the reader will be confused by the
+     purpose and will struggle to see the intent other than a listing of all
+     terms encountered. I think this table will benefit from a more detailed
+     caption.}\mtnote{Done in the text. Is it enough?}}
+ \label{table:terminology}
+\end{table*}
+
+Table~\ref{table:terminology} offers an overview of the defined minimal and
+consistent vocabulary alongside its mapping into both the logical components of
+a \pilot system and its required minimal set of functionalities as defined
+in~\S\ref{sec:compsandfuncs}. The same mapping is diagrammatically represented
+in Figure~\ref{fig:core_vocabulary}.
+
+Relevant to note how scheduling happens both at the infrastructure and at the
+pilot level. Accordingly, in Table~\ref{table:terminology} the term
+`multi-level scheduling' pertains to both the pilot and workload managers and
+their respective pilot provisioning and task dispatching functionalities. In
+Figure~\ref{fig:core_vocabulary}, scheduling clearly happens at the level of
+the resource pool of an infrastructure, for example by means of a cluster
+scheduler, and then of the pilot once it holds its resources.
+
+Table~\ref{table:terminology} and  Figure~\ref{fig:core_vocabulary} help also
+to appreciate the critical distinction between the container of a pilot and the
+pilot itself. A container, for example a job, is used by the pilot manager to
+provision the pilot. Once the pilot has been provisioned, it is the pilot and
+not the container to be responsible of both holding a set of resources and
+offering the functionalities of the task manager.
+
+Figure~\ref{fig:core_vocabulary} should not be confused with an architectural
+diagrams. No indications are given about the interfaces that should be used,
+how the logical component should be mapped into software modules, or what type
+of communication and coordination protocols should be used among such
+components. This is why no distinction is made diagrammatically between early
+and late binding. Their difference is temporal and, as such, it can be
+highlighted only when describing the succession of the states and operations of
+a \pilot system implementation. In the early case, the binding of the tasks to
+a pilot will happen before the submission of such a pilot to the remote
+infrastructure. In the late case, the binding will happen once the pilot has
+been instantiated and holds already its resources.
+
+The wide spectrum of available implementations of the logical components of a
+\pilot system is explored in the next section.
 
 \begin{figure}[t]
     \centering
-        \includegraphics[width=.48\textwidth]{figures/core_vocabulary.png}
+        \includegraphics[width=.48\textwidth]{figures/core_vocabulary.pdf}
     \caption{Diagrammatic representation of the logical components,
-             capabilities, and core vocabulary of a \pilot system.
-             The terms of the core vocabulary are highlighted in red.}
+             capabilities, and core vocabulary of a \pilot system. The terms of
+             the core vocabulary are highlighted in red, those of the logical
+             components of a \pilot system in green, and those of their
+             functionalities in blue.}
     \label{fig:core_vocabulary}
 \end{figure}
 
 \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
-  is sufficient and necessary in order to discriminate between \pilot and
-  not-\pilot systems; [\ldots], and possibly another one relative to overlay
-  enacting as distinguished from task dispatching; 3.  Clean up Table 1
-removing 'Infrastructure'.}
+is sufficient and necessary in order to discriminate between \pilot and
+not-\pilot systems;} \mtnote{This is still somewhat an open issue.}
 
-\jhanote{Given that we've introduced Figure 4, a paragraph that summarised this
-  section by way of explaining Figure 4 would be useful to the reader as well as
-  provide a soft transition to next section. Thoughts?}
+\mtnote{[\ldots], and possibly another one relative to overlay enacting as
+distinguished from task dispatching;} \mtnote{I think this is not relevant
+anymore. If you agree please delete this comment.}
+
+\mtnote{3. Clean up Table 1 removing 'Infrastructure'.} \mtnote{I see no
+problem with having infrastructure in the table but please let me know whether
+you think differently.}
+
+%\jhanote{Given that we've introduced Figure 4, a paragraph that summarized this
+%section by way of explaining Figure 4 would be useful to the reader as well
+%as provide a soft transition to next section. Thoughts?} \mtnote{Done.}
 
 
 %------------------------------------------------------------------------------
@@ -1484,10 +1567,10 @@ minimal sets of logical components and functionalities of \pilot systems
 \footnote{From here on we will be internally consistent and use \pilot system
 instead of \pilotjob system.}; (ii) and a well-defined core terminology to
 support reasoning about such systems. The former defines the necessary and
-sufficient requirements for a distributed system to be a \pilot system, while
-the latter enables consistency when referring to different \pilot systems. Both
-these contributions are used in this Section to review critically a selection
-of \pilot systems.
+sufficient requirements for a software system to be a \pilot system, while the
+latter enables consistency when referring to different \pilot systems. Both
+these contributions are used in this section to review critically a selection of
+\pilot systems implemented to execute real-life scientific workloads.
 
 The goal of this Section is twofold. Initially, the \pilot functionalities
 presented in \S\ref{sec:history} are used as the basis to infer core \pilot
@@ -1498,18 +1581,20 @@ defined. In this way, insight is offered about how to choose a \pilot system
 based on functional requirements, how \pilot systems are designed and
 engineered, and the design principles that underly such systems.
 
+\mtnote{The promises made at the end of these paragraph need to the fulfilled by offering remarks about: (i) choosing a pilot system; (ii) critical notes on the design and engineering of pilot systems; (iii) shared design principles. Should we do at the end of 4.2 or in 5?}
+
 % -----------------------------------------------------------------------------
 % 4.1
 %
 \subsection{Core and Auxiliary Properties}
 \label{sec:properties}
 
-This section \jhanote{do we mean subsection or section? also, we should be
-  consistent with UC or LC for section and subsection. FWIW, I prefer LC when
-  saying ``this section'' but upper case when we reference a section,
-  i.e. Section 2.} defines and analyzes \jhanote{I don't think we define, we
-  analyze..?} the properties of diverse implementations of a \pilot system. Two
-sets of properties are introduced: core and auxiliary (see
+\jhanote{We should be consistent with UC or LC for section and
+subsection. FWIW, I prefer LC when saying ``this section'' but upper case when
+we reference a section, i.e. Section 2.}
+
+This subsection analyzes the properties of diverse implementations of a \pilot
+system. Two sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
 chosen by considering the implementation requirements of the \pilot capabilities
 as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.  A property
@@ -1522,7 +1607,7 @@ all \pilot systems.
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
 % Pilot Provisioning, Task Dispatching, and Task Execution.
-\msnote{I dont see how it is derived or consistent ;-)}
+\msnote{I don't see how it is derived or consistent ;-)}
 
 \mtnote{Derived and consistent: they are required by (every: core, at least an:
 auxiliary) implementation of those functionalities. I rewrote the paragraph
@@ -1542,84 +1627,277 @@ the whole 4.1 (and, in case, 4.2).}
 % i.e., the complete set of auxillary properties includes, but is not limited
 % to the set of auxillary properties we discuss.
 
-\msnote{todo: Fix/merge the two non-compatible definitions of aux props}\mtnote{Not sure it is still the case. Will address once we will have decided whether to keep the changes I made.}
+\msnote{TODO: Fix/merge the two non-compatible definitions of aux props}
+
+\mtnote{Not sure it is still the case. Will address once we will have decided
+  whether to keep the changes I made.}
+
+\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
+  general style: too many break outs into parenthesis etc. That should be easy
+  to fix.} \mtnote{Done (never say easy).}
+
+\jhanote{Second and more important: We're forward referencing Table 2 and
+  thereby core and auxillary properties without having discussed either. One
+  temporary solution -- I am sure it has its own drawbacks is to move these 3
+  paragraphs to the end of 4.1.1. Lets discuss.}
+
+\mtnote{These three paragraphs are now connected to the following two and become
+  a summarizing description/introduction to Table 2. 4.1.1 and 4.1.2 are now
+  further specifications of these paragraphs. Does it work better?}
+
+Table~\ref{table:property_component_mapping} offers a brief description for each
+core and auxiliary property alongside their mapping to the required components
+and functionalities of a \pilot system as described
+in~\S\ref{sec:compsandfuncs}.
+
+The core implementation properties of the Pilot Manager and its Pilot
+Provisioning functionality are Pilot Resources, Pilot Deployment, and
+Infrastructure Interaction. Pilot Resources identifies the type of resources
+that the \pilot system exposes, e.g. compute, data, or networking. Pilot
+Deployment describes the modalities of scheduling, utilization, and aggregation
+of pilots. Infrastructure Interactions singles out the protocols and policies
+required for the \pilot system to interact with the remote infrastructure(s).
+For example, to schedule a pilot onto a specific infrastructure \pilot systems
+need to know what type of container to use (e.g. job, virtual machine), what
+type of scheduler the resource exposes, the amount of cores and for how long
+they can be asked for, what filesystems can be accessed, how to contact the
+remote resource, but possibly also the type of cores, the amount of available
+memory and storage and whether a low-latency interconnect is available.
+
+% Implementations of the Pilot Provisioning functionality are analyzed by
+% focusing on two properties: (i) the type of resources the pilot system exposes
+% such as compute, data, and networking
+% (Table~\ref{table:property_component_mapping}, Pilot Resources); and (ii) the
+% modalities and protocols used by the \pilot system and required by the target
+% infrastructure(s) to schedule, utilize, and aggregate pilots
+% (Table~\ref{table:property_component_mapping}, Pilot Management and
+% Infrastructure Interaction \jhanote{there is no pilot management in
+% properties}).
+
+The core implementation properties of a Workload Manager and the Task
+Dispatching functionality are Workload Semantics and Workload Binding.
+Semantically, a workload description contains all the information necessary for
+it to be dispatched to the appropriate resource. For example, type, number,
+size, and duration of tasks alongside their grouping into stages or their data
+dependences need to be known when deciding how many resources of a specific type
+should be used to execute the given workload but also for how long such
+resources should be available. Executing a workload requires for its tasks to be
+bound to the resources. Both the temporal and spatial dimensions of the binding
+operations are relevant for the implementation of Task Dispatching. Depending on
+the concurrency of a given workload, tasks could be dispatched to one or more
+pilots for an efficient execution. Furthermore, tasks could be bound to pilots
+before or after its instantiation, depending on resource availability and
+scheduling decisions.
+
+% Two properties are also used to analyze the implementations of Task
+% Dispatching: (i) the semantics of workloads
+% (Table~\ref{table:property_component_mapping}, Workload Semantics); and (ii)
+% how the tasks of a given workload can be bound to single or multiple pilots
+% (Table~\ref{table:property_component_mapping}, Task Binding).
+
+Finally, the core implementation properties of a Task Manager and its Task
+Execution functionality are Workload Execution and Infrastructure Interaction.
+Workload Execution identifies the process of task dispatching and the modalities
+with which the execution environment is set up for each task. The dispatching
+process may also depend on the capabilities exposed by the target infrastructure
+and its policies. As such, the execution of the workload may depend on how the
+\pilot systems has to interact with the remote infrastructure.
+
+% are analyzed by reviewing different strategies for task scheduling and by
+% describing how \pilot systems support task execution
+% (Table~\ref{table:property_component_mapping}, Task Execution). \pilot
+% implementations may offer multiple scheduling strategies depending on varying
+% factors related to the nature of the workload, the state of the resources, or
+% the capabilities exposed by the underlying middleware. \pilot systems often
+% are responsible for setting up the execution environment for the tasks of the
+% given workload. While each task can be seen as a self-contained and
+% self-sufficient unit with a kernel ready to be executed on the underlying
+% architecture, often tasks require their environment to be set up so that some
+% libraries, data, or accessory programs are made available.
+
+Several auxiliary properties play a fundamental role in distinguishing \pilot
+systems implementations, as well as in defining their usability. Programming and
+user interfaces; interoperability across differing middleware and other \pilot
+systems; multitenancy; strategies and abstractions for data management; security
+including authentication, authorization, and accounting; support for multiple
+usage modes like HPC or HTC; or robustness in terms of fault-tolerance and
+high-availability; are all examples of properties that might characterize a
+\pilot implementation but that, in of themselves, would not distinguish a \pilot
+as a unique system.
+
+Both core and auxiliary properties have a direct impact on the multiple use
+cases for which \pilot systems are currently engineered and deployed. For
+example, while every \pilot system offers the opportunity to schedule the tasks
+of a workload on a pilot, the degree of support of specific workloads vastly
+varies across implementations. Furthermore, some \pilot systems support Virtual
+Organizations and running tasks from multiple users on a single pilot while
+others support jobs using a Message Passing Interface (MPI). Analogously, all
+\pilot systems support the execution of one or more type of workload but they
+differ when considering execution modalities that maximize application
+throughput (HTC), task computing performance (HPC), or container-based high
+scalability (Cloud).
 
 \begin{table*}
 \centering
-\begin{tabular}{c|c|p{3cm}|p{5cm}|}
-\cline{2-4}
-& \textbf{Property} & \textbf{Component} & \textbf{Description} \\
+\begin{tabular}{c|p{3.6cm}|p{2.7cm}|p{2.7cm}|p{5cm}|}
+% header
+\cline{2-5}
+                       &
+\textbf{Property}      &
+\textbf{Component}     &
+\textbf{Functionality} &
+\textbf{Description} \\
 \hline
 % Core
-\multirow{6}{*}{\textit{Core}}
-  & Pilot Resources & Pilot Manager &
-  Types and capabilities of the resources held by the pilot. \\
-  \cline{2-4}
-  & Pilot Deployment & Pilot Manager &
-  Modalities and protocols for scheduling and aggregation of pilots. \\
-  \cline{2-4}
-  & Workload Semantics & Workload Manager &
-  The specification of the semantics (between tasks) captured in the workload
-  description. \\
-  \cline{2-4}
-  & Task Binding & Workload Manager &
-  Modalities and policies for binding tasks to pilots. \\
-  \cline{2-4}
-  & Task Execution & Task Executor &
-  Types of tasks and the mechanisms to execute tasks. \\
-  \cline{2-4}
-  & Infrastructure Interaction & Pilot Manager &
-  Modalities and protocols used to coordinate the pilot system/infrastructure
-  interaction. \\
+\multirow{6}{*}{\textit{Core}}  &
+Pilot Resources                 &
+Pilot Manager                   &
+Pilot Provisioning              &
+Types and capabilities of the resources held by the pilot. \\
+\cline{2-5}
+                                &
+Pilot Deployment                &
+Pilot Manager                   &
+Pilot Provisioning              &
+Modalities and protocols for pilot scheduling, utilization, and aggregation. \\
+\cline{2-5}
+                                &
+Workload Semantics              &
+Workload Manager                &
+Task Dispatching                &
+The specification of the semantics among tasks captured in the workload
+description. \\
+\cline{2-5}
+                                &
+Workload Binding                &
+Workload Manager                &
+Task Dispatching                &
+Modalities and policies for binding tasks to pilots. \\
+\cline{2-5}
+                                &
+Workload Execution              &
+Task Manager                    &
+Task Execution                  &
+Types of tasks and the mechanisms to execute tasks. \\
+\cline{2-5}
+                                &
+Infrastructure     \newline
+  Interaction                   &
+Pilot Manager      \newline
+  Task Manager                  &
+Pilot Provisioning \newline
+  Task Execution                &
+Modalities and protocols used to coordinate the pilot system/infrastructure
+interaction. \\
 \hline
 % Auxiliary
-\multirow{10}{*}{\textit{Auxiliary}}
-  & Architecture &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    Frameworks and architecture that the components and their whole are build
-    with.\\
-  \cline{2-4}
-  & Coordination and Communication &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    The interaction between the components of the system.\\
-  \cline{2-4}
-  & Interface &
-    Pilot Manager\newline Workload Manager &
-    Interface that the user can use to interact with the system.\\
-  \cline{2-4}
-  & Interoperability &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    Interoperability between \pilots on multiple DCIs.\\
-  \cline{2-4}
-  & Multitenancy &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    The use of components by multiple (simultaneous) users.\\
-  \cline{2-4}
-  & Resource Overlay &
-    Pilot Manager\newline Workload Manager &
-    The aggregation of resources from multiple pilots into overlays.\\
-  \cline{2-4}
-  & Robustness &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    The measures in place to increase the robustness of the components and the
-    whole.\\
-  \cline{2-4}
-  & Security &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    AAA considerations for the components and the whole.\\
-  \cline{2-4}
-  & Files and Data &
-    Pilot Manager\newline Workload Manager &
-    The mechanisms that the system offers to explicitly deal with files and
-    data.\\
-  \cline{2-4}
-  & Performance and Scalability &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    A description of scale and limitations and measures to reach that.\\
-  \cline{2-4}
-  & Development Model &
-    Pilot Manager\newline Workload Manager\newline Task Executor &
-    The development- and support model for the software.\\
+\multirow{10}{*}{\textit{Auxiliary}} &
+Architecture                         &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+Frameworks and architecture that the components and their whole are build
+with.\\
+\cline{2-5}
+                                     &
+Coordination~and   \newline
+  Communication                      &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The interaction between the components of the system.\\
+\cline{2-5}
+                                     &
+Interface                            &
+Pilot Manager      \newline
+  Workload Manager                   &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+Interface that the user can use to interact with the system.\\
+\cline{2-5}
+                                     &
+Interoperability                     &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+Interoperability between \pilots on multiple DCIs.\\
+\cline{2-5}
+                                     &
+Multitenancy                         &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The use of components by multiple (simultaneous) users.\\
+\cline{2-5}
+                                     &
+Resource Overlay                     &
+Pilot Manager      \newline
+  Workload Manager                   &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+The aggregation of resources from multiple pilots into overlays.\\
+\cline{2-5}
+                                     &
+Robustness                           &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The measures in place to increase the robustness of the components and the
+whole.\\
+\cline{2-5}
+                                     &
+Security                             &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+AAA considerations for the components and the whole.\\
+\cline{2-5}
+                                     &
+Files and Data                       &
+Pilot Manager      \newline
+   Workload Manager                  &
+Pilot Provisioning \newline
+  Task Dispatching                   &
+The mechanisms that the system offers to explicitly deal with files and data.\\
+\cline{2-5}
+                                     &
+Performance~and    \newline
+  Scalability                        &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+A description of scale and limitations and measures to reach that.\\
+\cline{2-5}
+                                     &
+Development Model                    &
+Pilot Manager      \newline
+  Workload Manager \newline
+  Task Manager                       &
+Pilot Provisioning \newline
+  Task Dispatching \newline
+  Task Execution                     &
+The development and support model for the software.\\
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
@@ -1627,85 +1905,23 @@ onto the components described in \S\ref{sec:compsandfuncs}.}}
 \label{table:property_component_mapping}
 \end{table*}
 
-\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
-  general style: too many break outs into parenthesis etc. That should be easy
-  to fix. Second and more important: We're forward referencing Table 2 and
-  thereby core and auxillary properties without having discussed either. One
-  temporary solution -- I am sure it has its own drawbacks is to move these 3
-  paragraphs to the end of 4.1.1. Lets discuss.}
-
-
-Implementations of the Pilot Provisioning functionality are analyzed by focusing
-on two properties: (i) the type of resources the pilot system exposes such as
-compute, data, and networking (Table~\ref{table:property_component_mapping},
-Pilot Resources); and (ii) the modalities and protocols used by the \pilot
-system and required by the target infrastructure(s) to schedule, utilize, and
-aggregate pilots (Table~\ref{table:property_component_mapping}, Pilot Management
-and Infrastructure Interaction \jhanote{there is no pilot management in
-  properties}). For example, to schedule a pilot onto a specific infrastructure
-\pilot systems need to know what type of container to use (e.g.  job, virtual
-machine), what type of scheduler the resource exposes, but also the amount of
-cores and for how long they can be asked for, whether a low-latency interconnect
-is available, or specific filesystems can be accessed.
-
-Two properties are also used to analyze the implementations of Task
-Dispatching: (i) the semantics of workloads
-(Table~\ref{table:property_component_mapping}, Workload Semantics); and (ii)
-how the tasks of a given workload can be bound to single or multiple pilots
-(Table~\ref{table:property_component_mapping}, Task Binding). Semantically, a
-workload description contains all the information necessary for it to be
-dispatched to the appropriate resource. For example, type, number, size,
-duration of tasks alongside their grouping into stages or their data
-dependences need to be known when deciding how many resources of a specific
-type should be used to execute the given workload but also for how long such
-resources should be available. Executing a workload requires for its tasks to
-be bound to the resources. Both the temporal and spatial dimensions of the
-binding operations are relevant for the implementation of Task Dispatching.
-Depending on the concurrency of a given workload, tasks could be dispatched to
-one or more pilots for an efficient execution. Furthermore, tasks could be
-bound to pilots before or after its instantiation, depending on resource
-availability and scheduling decisions.
-
-Finally, implementations of Task Execution are analyzed by reviewing different
-strategies for task scheduling and by describing how \pilot systems support
-task execution (Table~\ref{table:property_component_mapping}, Task Execution).
-\pilot implementations may offer multiple scheduling strategies depending on
-varying factors related to the nature of the workload, the state of the
-resources, or the capabilities exposed by the underlying middleware.
-Furthermore, \pilot systems often are responsible for setting up the execution
-environment for the tasks of the given workload. While each task can be seen as
-a self-contained and self-sufficient unit with a kernel ready to be executed on
-the underlying architecture, often tasks require their environment to be set up
-so that some libraries, data, or accessory programs are made available.
-
-Several auxiliary properties play a fundamental role in distinguishing
-\pilot systems implementations, as well as addressing, setting and providing
-constraints on their usability (Table~\ref{table:property_component_mapping},
-Auxiliary). Programming and user interfaces; interoperability across differing
-middleware and other \pilot systems; multitenancy; strategies and abstractions
-for data management; security including policies alongside authentication and
-authorization; support for multiple usage modes like HPC or HTC; or robustness
-in terms of fault-tolerance and high-availability; are all examples of
-properties that might characterize a \pilot implementation but that, in of
-themselves, would not distinguish a \pilot as a unique system.
-
-Both core and auxiliary properties have a direct impact on the multiple use
-cases for which \pilot systems are currently engineered and deployed. For
-example, while every \pilot system offers the opportunity to schedule the tasks
-of a workload on a pilot, the degree of support of specific workloads varies
-vastly across implementations. Furthermore, some \pilot systems support Virtual
-Organizations and running tasks from multiple users on a single pilot while
-others support jobs using a Message Passing Interface (MPI). Analogously, all
-\pilot systems support the execution of one or more type of workload but they
-differ when considering execution modalities that maximize throughput (HTC),
-computing (HPC) or container-based high scalability (Cloud).
-
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-Following is the list of core properties. This list of properties is minimal
-and complete. Note that these are the properties of \pilot implementations, and
-not of (individual) instantiations of \pilots.
+Following is an in depth description of core properties characterizing each
+implementation of a \pilot system. This list of properties is minimal and
+complete. Note that these are the properties of \pilot implementations, and not
+of individual instantiations of \pilots.
+
+% \amnote{I don't think this list is 'minimal and complete', there are
+%     many properties of any software which are 'core' in the definition given
+%     above.  Programming language.  Code license.  Year of implementation.
+%     Those are properties needed to implement one or more functionalities,
+%     obviously.  I guess that those (and other) properties are not interesting
+%     in this context?  Can you motivate why the chosen properties are
+%     intersting?  Possibly they mostly apply *only* to pilot systems?}
+% \mtnote{Correct. This is not a minimal and complete list of software
+%         properties but of \pilot system implementations.}
 
 \begin{itemize}
 
@@ -1728,7 +1944,8 @@ not of (individual) instantiations of \pilots.
   % \pilot and resource and how does this effect the suitability for HTC and/or
   % HPC?
 
-  \msnote{This should not overlap with Task Execution Modes}
+  \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
+  comment still valid?}
 
   % \item \textit{Pilot Granularity (spatial)}: What unit of resource is
   % controlled by a single pilot? A core, a node, multiple nodes, a cluster,
@@ -1755,11 +1972,45 @@ not of (individual) instantiations of \pilots.
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
   pilots depending on their semantics. Specifically, dispatching decisions
-  depends on the relationships among tasks, the affinity between data and
-  compute resources required by the tasks, and the type of capabilities needed
-  for their execution. \pilot systems support a varying degree of semantic
-  richness for the workload and its tasks. Additionally of interest is the
-  (standard) format or language in which the workloads are described.
+  depends on the temporal and spatial relationships among tasks, the affinity
+  between data and compute resources required by the tasks, and the type of
+  capabilities needed for their execution. \pilot systems support a varying
+  degree of semantic richness for the workload and its tasks. The (standard)
+  format or language in which the workloads are described may also be relevant.
+
+  \amnote{why are task dependencies (which seems to be what you call
+  'workload semantics') a core property?  A pilot system is still a pilot
+  system if it does not implement task dependencies (ahem! ;-).}
+
+  \mtnote{A pilot system implementation without tasks is a useless pilot
+  system. In this section we are not modeling (that was done in 3) but
+  reviewing/analyzing existing, real world implementations designed and used to
+  run tasks.}
+
+  \amnote{sure, tasks are necessary.  But the paragraph explicitly
+      refers to 'relationships among tasks'.  More to the point, the
+      paragraph says: 'tasks ... are dispatched to pilots depending on
+      their semantics' -- I disagree with that: a pilot system does
+      not care about task semantics, ie. does not care if the task is
+      /bin/sleep or mdrun.  One \textit{can} implement schedulers
+      which respect task dependencies (which are part of the workload
+      semantics, but I don't see that as a core property: a stupid
+      round-robin scheduler (which does not care about any workload
+      semantics, neither in tasks not task dependencies) is perfectly
+      viable for a pilot system...}
+
+  \mtnote{I agree. Indeed the kernel of the task is not mentioned among the
+  semantic properties taken into consideration for the scheduling decision.
+  Pilot systems that are not capable of ``dispatching decisions
+  depends on the temporal and spatial relationships among tasks'', or ``the
+  affinity between data and compute resources required by the tasks'', or ``and
+  the type of capabilities needed for their execution'' are toy systems or mere
+  conceptual possibilities that are not relevant in a section dedicated to pilot
+  systems used to run real-life scientific workloads. Do you feel we should add
+  a sentence specifying that we are not speaking about the intrinsic properties
+  of the kernel of a task? Consider that we do not have the word `kernel'
+  defined in 3, so in case of affirmative answer I may have to add that too.
+  Not a problem if you consider this necessary.}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
@@ -1810,7 +2061,7 @@ not of (individual) instantiations of \pilots.
   infrastructure, and may have to mediate task binding and execution by means
   of remote interfaces and protocols.
 
-  \msnote{This should not overlap with Task Execution Modes}\mtnote{Is this
+  \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
   still valid?}
 
   % \item \textit{Supported DCI systems/services}: What are the type of systems
@@ -1831,13 +2082,14 @@ not of (individual) instantiations of \pilots.
 % aux because: its an "implementation" detail
 \item \textbf{Architecture}. \pilot systems may be implemented by means of
   different type of architectures (e.g service-oriented, client-server, or
-  peer-to-peer). Architectural choices may depend on multiple factors,
-  including use cases, deployment strategies, or interoperability requirements.
-  % For example, it is conceivable that architectural choices influence if not
-  % preclude certain deployment strategies.
-  The analysis and comparison of architectural choices is here limited to the
+  peer-to-peer). Architectural choices may depend on multiple factors, including
+  use cases, deployment strategies, or interoperability requirements. The
+  analysis and comparison of architectural choices is here limited to the
   trade-offs implied by such a choice, especially when considering how they
   affect the Core Properties.
+
+  % For example, it is conceivable that architectural choices influence if not
+  % preclude certain deployment strategies.
 
   % \item \textit{Transfer Protocols}: What network protocols that are used to
   % connect the individual component of the \pilot system?
@@ -1846,43 +2098,36 @@ not of (individual) instantiations of \pilots.
 % components/services?
 
 % Further non-functional aspects describe the internals of a \pilotjob system,
-% e.\,g.: (i) the architecture of the system (layers, sub-systems,
-% communication \& coordination, central vs. decentral architectures; push vs.
-% pull model, agent-based; number of supported resource types),
+% e.\,g.: (i) the architecture of the system (layers, sub-systems, communication
+% \& coordination, central vs. decentral architectures; push vs. pull model,
+% agent-based; number of supported resource types),
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
 \item \textbf{Communication and Coordination}. Communication and coordination
-  are a features of every distributed system. In \ref{sec:compsandfuncs} it was
+  are features of every distributed system. In \ref{sec:compsandfuncs} it was
   suggested that \pilot systems are not defined by any specific communication
-  or coordination pattern or protocol. The details of communication and
+  and coordination pattern or protocol. The details of communication and
   coordination among the \pilot system components are distinguishing
   implementation properties.
 
 % aux because: its an implementation detail
 \item \textbf{Interface}. \pilot systems may present several types of
-  interfaces: among the components of the \pilot system; between the
-  application and the \pilot system; or between end users and one or more
-  programming language interfaces for the \pilot system. Here the focus is on
-  the interfaces exposed by the \pilot system instead of those justified by the
-  internal architectural choices.\mtnote{Why?}
+  private and public interfaces: among the components of the \pilot system;
+  between the application and the \pilot system; or between end users and one or
+  more programming language interfaces for the \pilot system.
+
+  % Here the focus is on the interfaces exposed by the \pilot system instead of
+  % those justified by the internal architectural choices.\mtnote{Why?}
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Interoperability}. Two types of interoperability are
-  relevant when analyzing different \pilot systems: interoperability with
-  heterogeneous infrastructures and interoperability across diverse
-  \pilot systems. The former allows for a \pilot system to provision pilots
-  and execute workloads on different types of infrastructure (e.g. HTC, HPC,
-  Cloud but also Condor, LSF, Slurm, or Torque). The latter is relevant when
-  multiple \pilot systems are available with diversified characteristics and
-  capabilities.\mrnote{Note from meeting with SJ: May want to change to discuss
-  one first (including descriptive text), then change tracks to discuss the
-  second - they are two very different concepts to grasp in the first sentence
-  (I know this detracts from the mathematical/proof language of it, but I think
-  its a good idea). Especially since the second type of interoperability is
-  very much less-common to a single PJ system (except in cases like \panda)}
-  \mtnote{Any better?}
-
+\item \textbf{Interoperability}. Two types of interoperability are relevant when
+  analyzing diverse \pilot systems: interoperability with heterogeneous
+  infrastructures, and interoperability across diverse \pilot systems. The
+  former allows for a \pilot system to provision pilots and execute workloads on
+  different types of infrastructure (e.g. HTC, HPC, Cloud but also Condor, LSF,
+  Slurm, or Torque). The latter is relevant when multiple \pilot systems are
+  available with diversified characteristics and capabilities.
 
   % (ii) resource access layer: What low-level infrastructures/middleware are
   % supported? How interoperable is the framework (vertically, horizontally)?,
@@ -1891,12 +2136,13 @@ not of (individual) instantiations of \pilots.
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Multitenancy}. \pilot systems may offer multitenancy at both
-  system and local level. When offered at system level, multiple users are
-  allow to utilize the same instance of a \pilot system. When available at
-  local level, multiple users may share the same pilot.
-  \msnote{Alternative names: deployment, service model}\mtnote{Any better? I
-  think `deployment' is now covered by the homonymous core property and
-  `service model' is part of the `architecture' auxiliary property.}
+  system and local level. When offered at system level, multiple users are allow
+  to utilize the same instance of a \pilot system. When available at local
+  level, multiple users may share the same pilot.
+
+  % \msnote{Alternative names: deployment, service model} \mtnote{Any better? I
+  % think `deployment' is now covered by the homonymous core property and
+  % `service model' is part of the `architecture' auxiliary property.}
 
   % \item \textit{Multi-user support:} Does the pilot job system allows
   % \textbf{\pilots} to
@@ -1927,29 +2173,29 @@ not of (individual) instantiations of \pilots.
 % aux because: not all the pilot systems offer an abstraction for multiple (at least two) pilots.
 \item \textbf{Resource Overlay}. The resources of multiple pilots may be
   aggregated into a resource overlay. Overlays may be directly exposed to the
-  application layer and to the the end-users depending on the exposed
-  interfaces and usability models. Overlays may abstract away the notion of
-  pilot or offer an explicit semantic for their aggregation, selection, and
-  management.
+  application layer and to the end-users depending on the public interfaces and
+  usability models. Overlays may abstract away the notion of pilot or offer an
+  explicit semantic for their aggregation, selection, and management.
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Robustness}. Used to identify those properties that contribute
   towards the resilience and the reliability of a \pilot system. In this
-  section, the analysis focuses on fault-tolerance, high-availability, and
-  state persistence. These properties are considered indicators of both the
-  maturity of the development stage of the \pilot system implementation, and
-  the type of support offered to the paradigmatic use cases introduced in
-  Section 2.\mtnote{I do not think use cases are presented in Section 2
-  anymore. Maybe in the introduction or should we add a subsection to 2?}
+  section, the analysis focuses on fault-tolerance, high-availability, and state
+  persistence. These properties are considered indicators of both the maturity
+  of the development stage of the \pilot system implementation, and the type of
+  support offered to the paradigmatic use cases introduced in~\S\ref{sec:intro}.
+  \mtnote{I do not think use cases are presented in Section 2 anymore. I think
+  we should have a high level review of the paradigmatic use cases for pilot
+  systems in the introduction.}
 
   % \item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
   % system from component failures?
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Security}. Security of \pilot system implementations related to
-  security would require a dedicated analysis, we limit the discussion to
-  authentication, authorization and policies. The scope of the analysis is
-  further constrained by focusing only on those elements that impact the Core
+\item \textbf{Security}. The properties of \pilot systems related to
+  security would require a dedicated analysis. The analysis here is limited to
+  authentication, authorization paradigms. The scope of the analysis is further
+  constrained by focusing only on those elements that impact the Core
   Functionalities as defined in \S\ref{sec:compsandfuncs}.
 
   % \item \textit{Security}: How is a user identified in the system and how are
@@ -1959,28 +2205,30 @@ not of (individual) instantiations of \pilots.
   % protocol and for sandboxing the application.
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Files and Data}. As seen in Section~\ref{sec:compsandfuncs}, only
+\item \textbf{Data}. As seen in Section~\ref{sec:compsandfuncs}, only
   basic data reading/writing functionalities are necessary for a \pilot system.
-  Nonetheless, most of the user cases require more advanced data management
+  Nonetheless, most of the use cases [ref] require more advanced data management
   functionalities that can be implemented within the \pilot system of delegated
-  to third party tools.\mtnote{Should this be just `Data'? A file is a specific example of data container, not necessarily the only one a pilot might support.}
+  to third party tools.
+
+  % \mtnote{Should this be just `Data'? A file is a specific example of data
+  % container, not necessarily the only one a pilot might support.}
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Performance and scalability}. \pilot systems varies both in
-  terms of overheads they add to the execution of a given workload and for the
+  terms of overheads they add to the execution of a given workload, and of the
   size and duration of the workloads a user can expect to be supported.
-  Furthermore, \pilot systems can be designed specifically for a performance
-  metric or for a type of workloads and/or community requirements.
+  Furthermore, \pilot systems can be designed to optimize one or more
+  performance metrics, depending on the reference use cases.
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Development Model}. The model used to develop \pilot systems is a
-  distinguishing element, especially when considering whether the development
-  is supported by a open community or by a specific project. Different
-  development models have an impact on the life span of the \pilot system, its
+  distinguishing element, especially when considering whether the development is
+  supported by a open community or by a specific project. Different development
+  models have an impact on the life span of the \pilot system, its
   maintainability and, in case, evolution path.
 
 \end{itemize}
-
 
 \begin{table*}[t]
  \up
@@ -2069,15 +2317,15 @@ representative set of \pilot systems has been chosen for further analysis.
 Examining these \pilot systems using the common vocabulary exposes their core
 similarities, and allows a detailed analysis of their differences.
 
-The now following discussion of \pilot systems is ordered alphabetically.
-To assist the reader, we make use of textual conventions: in \vocab{Bold} we
+The now following discussion of \pilot systems is ordered alphabetically. To
+assist the reader, we make use of textual conventions: in \vocab{Bold} we
 express the \vocab{Logical Components} and \vocab{Functionalities} of our model
 from \S\ref{sec:compsandfuncs} and the \vocab{Terms and Definitions} from
 \S\ref{sec:termsdefs}, in \prop{Italic} we refer to the \prop{Properties} from
 \S\ref{sec:properties} and in \impterm{Typewriter} we display terminology from
-the respective \pilot system under discussion.\mtnote{Do we need this
-formatting devices? They are not always added to every use of the terms and
-they make the text a bit `heavy' for me.}
+the respective \pilot system under discussion.\mtnote{Do we need this formatting
+devices? They are not always added to every use of the terms and they make the
+text a bit `heavy' for me.}
 
 % \jhanote{this might go to the section where we begin describing
 %   pilotjobs.. also will need an updated description of the methodology
@@ -2243,7 +2491,7 @@ that defines three methods that need to be implemented by every implementation.
 Two of these methods are for initialization and cleanup while the third method,
 (\impterm{do\_work()}) receives the task description and executes the work.
 \impterm{do\_work()} is therefore an implementation of the
-\vocab{Task Executor} component.
+\vocab{Task Manager} component.
 
 \paragraph{Interface}
 DIANE's \prop{Architecture} is based on the \impterm{Inversion of Control}
@@ -3547,7 +3795,7 @@ the default form they come in and how they are meant to be deployed.
 
 \jhanote{Mark: We need 1-2 paragraphs describing the relationship of section 3
   to the P* model/paper. Else we are going to get dinged by reviewer or cause
-  confusion to the reader. Where this paragraph goes is open for discussion, but 
+  confusion to the reader. Where this paragraph goes is open for discussion, but
   please draft a paragraph.}
 
 
@@ -3563,26 +3811,27 @@ the default form they come in and how they are meant to be deployed.
 % the lines you have traced, with some changes in the order and number
 % of the items.}
 
-\mtnote{In Section 3 we use pilotjob. We will have to move to \pilot
-or decide to use the less correct pilotjob here too.}\mtnote{Following
-discussion, we decided to use \pilot. Section 3 has been updated, the
-other Sections will have to follow.}
+% \mtnote{In Section 3 we use pilotjob. We will have to move to \pilot or decide
+% to use the less correct pilotjob here too.}\mtnote{Following discussion, we
+% decided to use \pilot. Section 3 has been updated, the other Sections will
+% have to follow.}
 
 Sections~\ref{sec:understanding} and~\ref{sec:analysis} offered respectively a
-description of the minimal capabilities and properties of every \pilot system;
-a vocabulary defining `pilot' and its cognate concepts; a classification of the
+description of the minimal capabilities and properties of every \pilot system; a
+vocabulary defining `pilot' and its cognate concepts; a classification of the
 core and auxiliary properties of pilot system implementations; and the analysis
-of an exemplar set of pilot system implementations. Considered altogether,
-these contributions show the notion of \pilot system as a paradigm for the
+of an exemplar set of pilot system implementations. Considered altogether, these
+contributions outline the characteristics and properties of a paradigm for the
 execution of tasks on distributed resources by means of resource placeholders.
+This is here referred to as `\pilot paradigm'.
 
-In this Section we critically assess the properties of the \pilot paradigm. The
-goal is to show the generality of this paradigm and how \pilot systems go
+In this section, the properties of the \pilot paradigm are critically assessed.
+The goal is to show the generality of this paradigm and how \pilot systems go
 beyond the implementation of a special purpose trickery to speed up the
 execution of a certain type of workload. Once understood the breath of the
-\pilot paradigm, we contextualize it by describing its relation with relevant
-domains such as middleware, applications, security, and enterprise. Finally, we
-close the Section with a look into the future of \pilot systems moving from the
+\pilot paradigm, it is contextualized by describing its relation with relevant
+domains such as middleware, applications, security, and enterprise. Finally, the
+section closes with a look into the future of \pilot systems moving from the
 current state of the art and discussing the sociotechnical and engineering
 challenges that are being faced both by developers and target users.
 
@@ -3650,33 +3899,33 @@ do you think? Happy to refine/change/abandon if you think it does not work.}
 The \pilot paradigm identifies a type of software system with both general and
 unique characteristics. This paradigm is general because, in principle, it does
 not depend on a single type of workload, a specific infrastructure, or a unique
-performance metric. Systems implementing the \pilot paradigm can execute
-workloads composed by any number of tasks with disparate requirements. For
-example, as seen in~\S\ref{sec:analysis}, \pilot systems can execute
-homogeneous or heterogeneous bags of independent or intercommunicating tasks
-with arbitrary duration, data or computation requirements.
+performance metric. In principle, systems implementing the \pilot paradigm can
+execute workloads composed by an arbitrary number of tasks with disparate
+requirements. For example, as seen in~\S\ref{sec:analysis}, \pilot systems can
+execute homogeneous or heterogeneous bags of independent or intercommunicating
+tasks with arbitrary duration, data, or computation requirements.
 
-The same generality applies to both the type of resource and infrastructure on
-which a \pilot system can execute given workloads. As seen in
+The same generality applies to both the type of resource and of infrastructure
+on which a \pilot system can execute given workloads. As seen in
 \S\ref{sec:understanding}, the \pilot paradigm demands resource placeholders
 but does not specify the type of resource that the placeholder should expose.
-Most of the \pilot systems illustrated in \S\ref{sec:analysis} are designed to
-expose only compute resources, i.e. the cores of the compute nodes for which
-the pilot is a placeholder. Tasks executed on these \pilots may also use data
-or network resources but mostly as accessories to their execution on
+Nonetheless, most of the \pilot systems illustrated in \S\ref{sec:analysis} are
+designed to expose only compute resources, i.e. the cores of the compute nodes
+for which the pilot is a placeholder. Tasks executed on these \pilots may also
+use data or network resources but mostly as accessories to their execution on
 computational resources.
 
 It is important to note that the focus on computational resources is not
 mandated by the \pilot paradigm. In principle, pilots can be placeholders also
 and exclusively for data or network resources, depending on the capabilities
-exposed by the middleware of the target DCIs. For example, in Ref.~[pilot
-data], the notion of \pilotdata has been conceived using the power of symmetry,
-i.e., \pilotdata taken to be a notion as fundamental to dynamic data placement
-and scheduling as \pilot is to computational tasks.
+exposed by the middleware of the target infrastructure. For example, in
+Ref.~[pilot data], the notion of \pilotdata has been conceived using the power
+of symmetry, i.e., \pilotdata taken to be a notion as fundamental to dynamic
+data placement and scheduling as \pilot is to computational tasks.
 
 Currently, no \pilot system exposes networking resources by means of
 placeholders but there is no theoretical limitation to the implementation of
-\pilot networks.
+what may be called `\pilot networks'.
 
 \pilot systems already operate on multiple platforms. Originally devised for
 Grid infrastructures, \pilot systems have been engineered to operate also on
@@ -3688,29 +3937,30 @@ infrastructural details, especially those concerning the type of container used
 to instantiate a placeholder.
 
 Usually, \pilots are thought as a means to optimize the throughput of
-single-core, short-lived, uncoupled tasks execution. The analysis presented in
-\S\ref{sec:analysis} showed how restrictive such a view is. The \pilot paradigm
-has been successfully integrated within workflow systems to support execution
-of workloads with articulated data and stage dependences. Furthermore, single
-and multi-core tasks can be executed by many existing \pilot system
-implementations, and BigJob and Radical-Pilot offer MPI support. As such,
+single-core, short-lived, uncoupled tasks execution [ref]. The analysis
+presented in~\S\ref{sec:analysis} showed how restrictive such a view is. The
+\pilot paradigm has been successfully integrated within workflow systems to
+support execution of workloads with articulated data and stage dependences.
+Furthermore, single and multi-core tasks can be executed by many existing \pilot
+systems, with BigJob and Radical-Pilot offering also MPI support. As such,
 depending on the type of the given workload, the \pilot paradigm can be
-implemented to optimize different metric of task execution other than
+implemented to optimize different metrics of task execution other than
 throughput.
 
-Characterized and defined by resource placeholding, multi-level scheduling, and
-late binding, \pilot systems represent a category of software in itself. \pilot
-systems are not just an alternative implementation of a scheduler, of a
-workload manager, of a batch system, or of any other special-purpose software
-component. This specific system is used when abstracting one or more type of
-physical resources with well-defined spatial and time properties can lead to
-the optimization of one of more parameters of the workload execution.
+Characterized and defined primarily by resource placeholding, multi-level
+scheduling, and late binding, \pilot systems represent a category of software in
+itself. \pilot systems are not just an alternative implementation of a
+scheduler, of a workload manager, of a batch system, or of any other
+special-purpose software component. This specific system is used when
+abstracting one or more type of physical resources with well-defined spatial and
+time properties can lead to the optimization of one of more parameters of the
+workload execution.
 
-Appreciating the generality of the \pilot paradigm and the independence its
-implementations from other types of software, helps also to misspell a
-potential misunderstanding involving \pilots and how multi-level scheduling
-works. \pilot systems are not circumventing the infrastructure middleware but
-simply abstracting away some of its properties in order to optimize one or more
+Appreciating the generality of the \pilot paradigm and the independence of its
+implementations from other types of software, helps also to misspell a potential
+misunderstanding involving \pilots and how multi-level scheduling works. \pilot
+systems are not circumventing the infrastructure middleware but simply
+abstracting away some of its properties in order to optimize one or more
 user-defined performance metric.
 
 Multi-level scheduling is not replacing the infrastructure-level scheduler. As
@@ -3725,7 +3975,7 @@ It should be noted that shifting the control over tasks scheduling away from
 the infrastructure middleware does not imply that the end-user will become
 necessary responsible for an efficient resource utilization. A \pilot system
 can be implemented as a middleware component, as seen with HTCondor and its
-role as an integral part of the infrastructure middlware stack.
+role as an integral part of the infrastructure middleware stack.
 
 The generality of the \pilot paradigm may come as a surprise when considering
 the most common requirement that motivates its implementations. Leveraging
@@ -3756,9 +4006,9 @@ the \pilot paradigm.
 \subsection{Pilot Paradigm in Context}
 \label{sec:context}
 
-The adoption of the \pilot paradigm in a scientific computing environment
-brings to the fore a richer, more granular set of details about its
-specification, requirements, and functionalities.
+The adoption of the \pilot paradigm in a scientific computing environment brings
+to the fore a richer, more granular set of details about its specification,
+requirements, and functionalities.
 
 % \paragraph*{HTC and HPC}
 
@@ -3773,17 +4023,17 @@ Both types of applications may have similar \pilot and task durations but their
 spatial dimension varies sensibly. Typically, parallel applications require
 tightly coupled computations [ref] that, in turn, need \pilots to be
 instantiated on infrastructures offering potentially large-core, large-memory
-compute nodes. These pilots are usually submitted by means of the
-infrastructure headnode, each pilot having at least as many core as those
-offered by a node of the target infrastructure.
+compute nodes. These pilots are usually submitted by means of the infrastructure
+headnode, each pilot having at least as many core as those offered by a node of
+the target infrastructure.
 
-Differently from parallel applications, distributed applications usually
-require loosely coupled or fully independent computations. Consequently,
-\pilots supporting their execution depend less from the size of the nodes of
-the target infrastructure and more on the overall number of possibly
-independent cores that they can hold. These \pilots can be instantiated also by
-means of decentralized services (e.g. WMS) aggregating resources from possibly
-heterogeneous infrastructures.
+Differently from parallel applications, distributed applications usually require
+loosely coupled or fully independent computations. Consequently, \pilots
+supporting their execution depend less from the size of the nodes of the target
+infrastructure and more on the overall number of possibly independent cores that
+they can hold. These \pilots can be instantiated also by means of decentralized
+services (e.g. WMS) aggregating resources from possibly heterogeneous
+infrastructures.
 
 % to HPC and HTC presents practical differences. The ratio of tasks and \pilots
 % might be similar for both type of infrastructures in the temporal dimension
@@ -3791,16 +4041,16 @@ heterogeneous infrastructures.
 % the spatial dimension varies sensibly. Consider HPC as a system with $O(10)$
 % tightly coupled sites. Typically, this system has a head/login/service node
 % where the \pilot will operate from. For one site, the ratio of \pilots vs
-% compute resources will typically be $O(1):O(Nodes)$ and therefore the ratio
-% of \pilots vs tasks will be $O(1):O(Tasks)$. With the given $O(10)$ sites
-% this leaves us with a \pilot:tasks ratio of at most $O(10):O(Tasks)$. When
-% HTC is defined as a system with O(100) loosely coupled sites without a
-% central node to foster these resources, the ratio of \pilots to compute
-% resources will typically be closer to $O(1):O(Cores)$. These differences have
-% not only implications on the type of applications that can be run, but also
-% on the nature of the multi-level scheduling. In the HPC case there is a large
-% degree of freedom for the \pilot layer scheduling while in HTC the scheduling
-% on that level is much more predetermined.
+% compute resources will typically be $O(1):O(Nodes)$ and therefore the ratio of
+% \pilots vs tasks will be $O(1):O(Tasks)$. With the given $O(10)$ sites this
+% leaves us with a \pilot:tasks ratio of at most $O(10):O(Tasks)$. When HTC is
+% defined as a system with O(100) loosely coupled sites without a central node
+% to foster these resources, the ratio of \pilots to compute resources will
+% typically be closer to $O(1):O(Cores)$. These differences have not only
+% implications on the type of applications that can be run, but also on the
+% nature of the multi-level scheduling. In the HPC case there is a large degree
+% of freedom for the \pilot layer scheduling while in HTC the scheduling on that
+% level is much more predetermined.
 
 % \paragraph*{MPI, OpenMP, etc.}
 
@@ -3817,28 +4067,27 @@ policies, and specific configurations.
 
 The implementation of the localization process becomes challenging in presence
 of heterogeneous infrastructures. The same executable may require different
-localization operations depending on where it will be executed. More
+localization procedures depending on where it will be executed. More
 importantly, different types of localizations may or may not be available or
-allowed in some infrastructures. This imposes decision capabilities on the task
-scheduler and the development of a robust interoperability layer between the
-\pilot system and the heterogeneous target infrastructures.
+allowed on all the target infrastructures. This imposes decision capabilities on
+the task scheduler and the development of a robust interoperability layer
+between the \pilot system and the heterogeneous target infrastructures.
 
 Interoperable localization offers the opportunity to execute heterogeneous
 executables via \pilot systems. As seen in~\S\ref{sec:history}, the abstraction
 of \pilot was progressively developed in a distributed context leaving
 under-explored the execution of parallel applications by means of \pilot
 systems. This is merely a historical byproduct, not an intrinsic limitation of
-the \pilot abstraction and its implementations. For example, by leveraging
-localization, different flavors of MPI libraries can be loaded and specific
-execution commands may be used to run MPI applications via a task wrapper and a
-\pilot agent.
+the \pilot paradigm. For example, by leveraging localization, different flavors
+of MPI libraries can be loaded and specific execution commands may be used to
+run MPI applications via a task wrapper and a \pilot agent.
 
 The benefits of executing tightly-coupled parallel code via \pilot systems are
 especially evident when considering workloads involving homogeneous tasks and
 possibly diverse computational phases. For example, applications with separated
-simulation and analysis phases [cit], or applications integrating multiple
-types of analysis [cit], \ldots.\mtnote{To be expanded with better/further
-examples of why we want to run MPI with pilots.}
+simulation and analysis phases [ref], or applications integrating multiple types
+of analysis [ref], \ldots. \mtnote{To be expanded with better/further examples
+of why we want to run MPI with pilots.}
 
 % In the \pstar model and in the discussion so far we have mainly been
 % concerned about the abstract notion of task, i.e., the application payload to
@@ -3852,31 +4101,30 @@ examples of why we want to run MPI with pilots.}
 
 The definition of the term `pilot' as a resource placeholder
 in~\S\ref{sec:understanding} and the review of its implementations
-in~\S\ref{sec:analysis} helps to explore the relation between \pilot systems
-and middleware. The notion of pilot as a resource placeholder is more general
-than that of a job as defined in the context of HPC and Grid middleware. This
-is exemplified when considering cloud-based DCIs.
+in~\S\ref{sec:analysis} helps also to explore the relation between \pilot
+systems and middleware. The notion of pilot as a resource placeholder is more
+general than that of a job as defined in the context of HPC and Grid middleware.
+This is exemplified when considering cloud-based DCIs.
 
 Within a IaaS [cit], the instantiation of virtual machines (VMs) introduces
 overheads due to the bootstrapping of an operating system, including data and
-networking subsystems. Nonetheless, VMs are instantiated without waiting into a
-queue and have, as a consequence, largely predictable instantiation time. This
-is relevant when compared to job queuing time and its unpredictability in HPC
-and grid infrastructures [ref Vishal paper, AIMES paper].
+networking subsystems. Nonetheless, queuing of VMs that need to be instantiated
+has a more predictable and consistent behavior compared to that of HPC
+queues~\cite{Mao2012,gong2010} [ref Vishal paper, AIMES paper].
 
 \pilot can benefit from the more predictable VM instantiation time because VMs
 can be used as resource placeholders. A pilot agent can be executed within a
 VM, retrieving and executing tasks on the resources of (one or more) VM.
 Conceptually, the role and functionalities of the \pilot agent are the same
-when used in a IaaS, HPC, or grid infrastructure. The implementation details
+when used in a IaaS, HPC, or grid infrastructures. The implementation details
 are isolated within the agent code itself and have no bearing on the overall
 design of the \pilot system.
 
 This analysis highlights not only the generality of the notion of resource
-placeholder but it also shows the independence of the \pilot paradigm from the
-specificities of the infrastructures and their middleware. The \pilot paradigm
-abstracts the notion of resources, alongside that of scheduling and task
-execution, creating a well-defined and isolated logical space for the
+placeholder but also the independence of the \pilot paradigm from the
+specificities of the target infrastructures and their middleware. The \pilot
+paradigm abstracts the notion of resources, alongside that of scheduling and
+task execution, creating a well-defined and isolated logical space for the
 management of the application execution.
 
 % usually minimal when compared to the queuing time averagely experienced on
@@ -3898,13 +4146,13 @@ fragmented, especially when considering distributed applications [cit]. The
 current state of the workflow (WF) systems (a type of distributed application)
 is a paradigmatic example of this situation.
 
-Many WF systems have been implemented with significant duplicated effort and
-limited means for extensibility and interoperability. One important
-contributing factor to these limitations is the lack of suitable, open, and
-possibly standard-based interfaces for the resource layer. Most WF engines are
-developed with proprietary solutions to access the resource layer, solutions
-that cannot be shared with other engines and that often serve specific
-requirements, use cases, and infrastructures.
+Many WF systems have been implemented with significant duplication of effort and
+limited means for extensibility and interoperability. One important contributing
+factor to these limitations is the lack of suitable, open, and possibly
+standard-based interfaces for the resource layer. Most WF engines are developed
+with proprietary solutions to access the resource layer, solutions that cannot
+be shared with other engines and that often serve specific requirements, use
+cases, and infrastructures.
 
 The \pilot paradigm and a open \pilot API like the one specified in [ref
 Pilot-API] offer the missing layer on which WF and, more generally, distributed
@@ -3920,29 +4168,29 @@ distributed application landscape.
 % \paragraph*{Pilot and AAA}
 
 The multi-level scheduling and the heterogeneity of the infrastructures used by
-\pilot systems present several challenges for the authentication,
-authorization, and accounting processes (AAA). As seen in~\S\ref{sec:analysis},
-AAA requirements for \pilot systems are limited to: (i) the multitenancy of the
-instantiated \pilots; and (ii) to the credentials used to submit \pilots to
-the remote infrastructure and to use them to execute the application tasks.
+\pilot systems present several challenges for the authentication, authorization,
+and accounting processes (AAA). As seen in~\S\ref{sec:analysis}, AAA
+requirements for \pilot systems are limited to: (i) the multitenancy of the
+instantiated \pilots; and (ii) to the credentials used to submit \pilots to the
+remote infrastructure and to use them to execute the application tasks.
 
 The authentication and authorization used by the user to access her own \pilots
 is a well-isolated implementation detail while the credential used for \pilot
 deployment depends on the target infrastructure. \pilot systems that do not
-implement multitenancy for each pilot instance have no need to implement shared
-AAA as it is instead required when virtual organizations need to share one or
-more pilots.
+implement multitenancy for each pilot instance have little need for pilot-level
+AAA while those implementing it may have to use advanced abstractions like those
+of virtual organization and federated certificate authority.
 
 The requirements of the target infrastructures are a diverse and often
-inconsistent array of mechanisms and policies. These affect the deployment of
+inconsistent array of mechanisms and policies. This affect the deployment of
 \pilots and, possibly, the binding of tasks to pilots. This is especially the
 case when HPC, grid, and cloud systems are targeted by the same \pilot system
 implementation. The \pilot paradigm is gregarious in the face of such a
 diversity as no AAA requirements are imposed on the resource layer. \pilot
-systems just need to present the credentials required by the resource layer
-consistently with the infrastructure policies. Such credential are supposed to
-be provided by the application layer therefore reducing to a minimum the AAA
-implementation requirements for the \pilot systems.
+systems need to present the credentials required by the resource layer
+consistently with the infrastructure policies. These credentials are supposed to
+be provided by the application layer therefore reducing to a minimum the
+requirements for AAA implementation within \pilot systems.
 
 % Because the \pilot can run as a different ``user'' than the ``owner'' of the
 % \vocab{Task} there are challenges for many aspects of Authentication,
@@ -3956,11 +4204,10 @@ implementation requirements for the \pilot systems.
 % \paragraph*{Pilot and the Enterprise}
 
 Moving away for the relationship between the \pilot paradigm and critical
-implementation details associated with its use in a scientific,
-production-grade computing environment, the \pilot paradigm has relevant
-implications also for the Enterprise sector. This connection can be traced back
-to the increased adoption of distributed computed paradigm into the private
-sector.
+implementation details associated with its use in a scientific, production-grade
+computing environment, the \pilot paradigm has relevant implications also for
+the Enterprise sector. This connection can be traced back to the increased
+adoption of distributed computing within the private sector.
 
 Over the past years, Hadoop~\cite{hadoop} emerged as distributed computing for
 data-intensive tasks in the enterprise sector. While early versions of Hadoop
@@ -3972,10 +4219,10 @@ heterogeneous workloads.
 YARN supports multi-level scheduling enabling the application to deploy their
 own application-level scheduling routines on top of Hadoop-managed storage and
 compute resources. With YARN managing the lower resources, the higher-level
-runtimes typically use an application-level scheduler to optimize resource
-usage for the application. Applications need to initialize their so-called
+runtimes typically use an application-level scheduler to optimize resource usage
+for the application. Applications need to initialize their so-called
 Application-Master via YARN; the Application Master is then responsible for
-allocating resources in form of so called containers for the applications. It
+allocating resources in form of so called containers for the applications. YARN
 then can execute tasks in these containers.
 
 As with the HPC environment, the support for different application workloads
@@ -4010,26 +4257,31 @@ within academic institutions.
 
 As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
 as a pragmatic solution for improving the throughput of distributed
-applications. \pilot systems were not thought from the beginning as an
+applications. \pilot systems were not thought from their inception as an
 independent class of middleware but, at best, as a module within a specific
 framework. This not only promoted duplication of development effort across
 frameworks but also hindered the appreciation for the breath of the \pilot
-abstraction, the underlying theoretical framework to the \pilot systems.
+abstraction, the underlying theoretical framework to the \pilot systems and the
+application execution paradigm they enable.
 
 \pilot systems inherited the development model of the scientific projects
 within which they were initially developed. Most of the early \pilot systems
 were developed to serve a specific use case, often within the remit of a
 specific research project. As a consequence, these systems were not engineered
 to promote (re)usability, modularity, well-defined interfaces, or long-term
-sustainability. Furthermore, code was not build around a community, following
-recognized and widely-accepted coding standards.
+sustainability. Furthermore, for the most part code was not build around a
+community, following recognized and widely-accepted coding standards.
 
 All this is likely to change with the progressive appreciation of the
-generality, richness, and versatility of the \pilot abstraction. The ongoing
+generality, richness, and versatility of the \pilot paradigm. The ongoing
 re-engineering of PANDA and the development of RADICAL-Pilot indicate that the
 \pilot paradigm is becoming the leading approach for large scale scientific
-applications.\mtnote{we may want to add some data here, showing the staggering
-amount of resources consumed by means of these two pilot systems.}
+applications. For example, PANDA supports the execution of 5 million jobs weekly
+for the ATLAS project~\cite{Aad2008} and in the past year RADICAL-pilot has be
+used to execute [...] milion jobs on XSEDE.
+
+% \mtnote{we may want to add some data here, showing the staggering amount of
+% resources consumed by means of these two pilot systems.}
 
 It should be noted that `large scale scientific applications' includes both
 distributed and parallel applications executed on diverse types of
@@ -4039,17 +4291,18 @@ provision and application execution by means of \pilot systems.
 
 As argued in the previous section, \pilot systems are agnostic towards the type
 of application that is executed. They need to be engineered so to support
-different types of applications but the \pilot abstraction and its underlying
+different types of applications but the \pilot paradigm and its underlying
 notions of resource placeholder and multi-level scheduling do not require for
 the application to be distributed, parallel, MPI, closed-coupled, or
 communication independent.
 
 Pilots holds resources and the properties of such resources can be arbitrarily
 specified. Analogously, pilots allow for tasks to be scheduled but the type of
-matching between the requirements of these tasks and the capabilities offered
-by the resources held by the pilot is not mandated by the \pilot paradigm
-itself. For this reason, supporting diverse types of resources and applications
-reduces to a set of implementation details when adopting the \pilot paradigm.
+matching between the requirements of these tasks and the capabilities offered by
+the resources held by the pilot is not mandated by the \pilot paradigm itself.
+For this reason, adopting the \pilot paradigm for the execution of increasingly
+diverse applications should be seen as a set of often challenging implementation
+details more than a foundational issue requiring new middleware paradigms.
 
 % It is relevant to stress how \pilot systems allow for the unification of the
 % execution process of diverse type of applications outside the remit of the
@@ -4061,22 +4314,24 @@ reduces to a set of implementation details when adopting the \pilot paradigm.
 
 Scalability and performance are two important elements that should see further
 development in the \pilot system landscape. The ongoing increase of the scale
-required by scientific applications [cit] poses new set of challenges to the
+required by scientific applications [cit] poses new challenges to the
 development of effective \pilot systems. Increase in scale brings the need to
 focus on federation of resources, integration of leadership machines, and
 scaling-out to cloud infrastructures. Furthermore, large scale executions make
-fault-tolerance and advance mechanisms for fault-recovery essential. \pilot
-systems need to be able to rerun those few tasks that failed among the millions
-that have been successfully executed. Analogously, the failure of a \pilot
-among the many instantiated must not be an unrecoverable event.
+fault-tolerance and advanced mechanisms for fault-recovery essential. For
+example, \pilot systems need to be able to rerun those few tasks that failed
+among the millions that have been successfully executed. Analogously, the
+failure of a \pilot among the many instantiated must not be an unrecoverable
+event. In this context, resource discovery and dynamic handling of application
+execution will probably play an increasingly important role.
 
-With scale, performance becomes an issue. Not only in terms of overall task
-throughput but, more subtly and yet not less relevant, also in terms of
-overheads imposed by the \pilot system on the tasks execution. Such overheads
-need to be quantifiable and accountable for. Especially in a context of
-heterogeneous types of applications, \pilot overheads may be relevant to decide
-what type of resource to target, how many pilots to instantiate, or whether a
-\pilot system should be used at all.
+With scale, performance becomes an increasingly relevant issue. Performance not
+only as in overall application throughput but, more subtly and yet not less
+relevant, also as in overheads imposed by the \pilot system on the application
+execution. Such overheads need to be quantifiable and accountable for.
+Especially in a context of heterogeneous types of applications, \pilot overheads
+may be relevant to decide what type of resource to target, how many pilots to
+instantiate, or whether a \pilot system should be used at all.
 
 % \paragraph*{Generality or Optimization} The existence of many \pilot systems
 % is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
@@ -4084,19 +4339,22 @@ what type of resource to target, how many pilots to instantiate, or whether a
 % layer paragraph]\mtnote{Happy to write this after discussing what was the
 % original idea. Should we move this to future trends?}
 
-While most of the analysis offered in this paper supports the conclusion that
-the number of \pilot systems should be reduced, it does not support the idea of
-one solution should fits all. As with other types of middleware software [cit]
-the problem is not to eliminate special purpose systems in favor of a single
-solution but it is, instead, to have both, depending on the application and use
-case requirements. A multi-purpose, functionally encompassing \pilot system is
-desirable for all those use cases in which applications are heterogeneous in
-the type of computation, time, or space. For specific applications designed to
-run on a single type of infrastructure, a special purpose system might still be
-more effective.
+The analysis offered in this paper indicates that the number of \pilot systems
+actively developed should be reduced so to avoid duplication while promoting
+consolidation, robustness, and overall capabilities. Nonetheless, this
+conclusion should not be brought to an extreme. A single \pilot system should
+not be elected as the only implementation worthy of development effort or
+adoption. As with other middleware [cit] the problem is not to eliminate special
+purpose systems in favor of a single encompassing solution but it is, instead,
+having both of them, depending on the application and use case requirements. A
+multi-purpose, functionally encompassing \pilot system is desirable for all
+those use cases in which applications are heterogeneous in the type of
+computation, time, or space. For specific applications designed to run on a
+single type of infrastructure, a special purpose system might still be more
+effective.
 
 \mtnote{Consider whether to add a paragraph about interoperability among \pilot
-systems. I would probably not do it as it does not seem of primary relevant to
+systems. I would probably not do it as it does not seem of primary relevance to
 me.}
 
 % \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
@@ -4240,14 +4498,14 @@ to write after the second pass and consolidation of the whole draft.}
 {\footnotesize{This work is funded by the Department of Energy Award
     (ASCR) DE-FG02-12ER26115 and NSF CAREER ACI-1253644. This work has
     also been made possible thanks to computer resources provided by
-    TeraGrid TRAC award TG-MCB090174 and BiG Grid.  This document was
+    TeraGrid TRAC award TG-MCB090174 and BiG Grid. This document was
     developed with support from the US NSF under Grant No. 0910812 to
     Indiana University for ``FutureGrid: An Experimental,
     High-Performance Grid Test-bed''.}}
 
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{abbrv}
-\bibliography{pilotjob,literatur,saga,saga-related,urls,hadoop}
+\bibliography{pilotreview,literatur,saga,saga-related,urls,hadoop,pilotjob}
 
 
 \end{document}
