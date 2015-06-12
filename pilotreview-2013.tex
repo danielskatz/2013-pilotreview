@@ -782,7 +782,7 @@ achieved by scheduling the agent and then by enabling direct scheduling of
 application tasks to that agent. The \MW pattern is often an effective choice to
 manage the coordination of tasks execution on the available agent(s).
 Multi-level scheduling can be extended to multiple resources by instantiating
-resource placeholders on diverse supercomputing and then using a meta-scheduler
+resource placeholders on diverse supercomputers and then using a meta-scheduler
 to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
@@ -792,6 +792,9 @@ system of the remote supercomputer, but, once executed, the user -- or the
 master process of the distributed application -- may hold total control over its
 resources. In this way, tasks are directly scheduled on the placeholder without
 competing with other users for the supercomputer scheduler.
+\msnote{I would like to either replace 'supercomputer' with i.e. 'cluster', or
+make it explicit in the beginning of 2.1 that we talk about multiple types of
+systems}
 
 % ------------------------------------------------------------------------------
 % 2.2
@@ -848,9 +851,9 @@ queuing systems available at different remote systems.
 Around the same time as AppLeS was introduced, volunteer computing projects
 started using the \MW coordination pattern to achieve high-throughput
 calculations for a wide range of scientific problems. The workers of these
-systems could be downloaded and installed on the user laptop and workstation.
-With an installation base potentially distributed across the globe, workers
-pulled and executed computation tasks when CPU cycles were available.
+systems could be downloaded and installed on the users workstation.
+With an installation base distributed across the globe, workers pulled and
+executed computation tasks when CPU cycles were available.
 
 The volunteer workers were essentially heterogeneous and dynamic as opposed to
 the homogeneous and static AppLeS workers. The idea of farming out tasks in a
@@ -862,30 +865,32 @@ such, an implementation of the core functionality of the \pilot abstraction.
 The first public volunteer computing projects were The Great Internet Mersenne
 Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
 distributed.net~\cite{Lawton:2000:distributednet} in 1997 to compete in the
-RC5-56 secret-key challenge, and the SETI@Home project, which set out to analyze
-radio telescope data. The generic BOINC distributed master-worker framework grew
-our of SETI@Home, becoming the {\it de facto} standard framework for voluntary
-computing~\cite{Anderson:2004:BSP:1032646.1033223}.
+RC5-56 secret-key challenge, and the SETI@Home project, which set out to
+analyze radio telescope data. The generic BOINC distributed master-worker
+framework grew out of SETI@Home, becoming the {\it de facto} standard framework
+for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has complete knowledge of the available
 resources while the latter has none. As a consequence, AppLes can request and
 orchestrate a set of resource, allocate tasks in advance to specific workers
 (i.e. resources placeholders), and implement load balancing among resources. In
-voluntary computing tasks are polled by the clients when they become active and,
-as such, resource availability is unknown in advance. This potential drawback is
-mitigated by the redundancy offered by the large scale that voluntary computing
-can reach thanks to its simpler model of worker distribution and installation.
+voluntary computing tasks are pulled by the clients when they become active
+and, as such, specific resource availability is unknown in advance. This
+potential drawback is mitigated by the redundancy offered by the large scale
+that voluntary computing can reach thanks to its simpler model of worker
+distribution and installation.
 
 The opportunistic use of geographically distributed resources championed by
 voluntary computing offers several advantages. The resource landscape available
-for scientific research is fragmented across multiple institutions, managed with
-different policies and protocols, and heterogeneous both in quantity and
+for scientific research is fragmented across multiple institutions, managed
+with different policies and protocols, and heterogeneous both in quantity and
 quality. Once aggregated, the sum of otherwise limited resources can support
 very large distributed computations and a great amount of multi-tenancy. Note
 that given the required capabilities, this model of resource provisioning can
 still support the execution of parallel applications on the few resources that
-offer low-latency network interconnect.
+offer low-latency network interconnect.\msnote{This paragraph is a good
+candidate for removal?}
 
 Condor is a high-throughput distributed batch computing system that leverages
 diverse and possibly geographically distributed resources. Originally, Condor
@@ -900,7 +905,7 @@ This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
 remote grid resources to Condor resource pools. In this way, users can uniformly
 execute jobs on resource pools composed by diverse resources. Thanks to its use
-of resource placeholders, GladeIn has been one of the systems pioneering the
+of resource placeholders, GlideIn has been one of the systems pioneering the
 \pilot abstraction implementation, enabling \pilot capabilities also for third
 parties systems like Bosco~\cite{bosco}.
 
@@ -921,37 +926,39 @@ and to extend the \pilot abstraction beyond the boundaries of compute tasks.
 BigJob offers an application-level programmability to provide the end-user with
 more flexibility and control over the design of distributed application and the
 isolation of the management of their execution. BigJob is flexible and
-extensible and uses the Simple API for Grid Applications (SAGA) interoperability
-library [ref] to work on a variety of infrastructures. Furthermore, BigJob
-supports both MPI and non-MPI jobs without adding additional configuration
-requirements to the end-user. Finally, BigJob has also been extended to work
-with data and, analogous to compute \pilots, to abstract away direct user
-communication between different storage systems.
+extensible and uses the Simple API for Grid Applications (SAGA)
+interoperability library [ref] to work on a variety of infrastructures.
+Additionally, BigJob has also been extended to work with data and, analogous to
+compute \pilots, to abstract away direct user communication between different
+storage systems.
 
-BigJob, recently redesigned as a pre-production system named ``RADICAL Pilot''
-[ref], represents one of the latest evolutionary stages of the \pilot
-abstraction. From an initial phase in which \pilot were implemented as ad hoc
-place holder machinery for a specific application, to the integration of \pilot
-systems within the middleware of remote resources, RADICAL Pilot implements the
-\pilot abstraction as an interoperable compute and data management system that
-can be programmatically integrated into end-user applications.
+BigJob (being a prototype), recently re-implemented as a production-level
+system named ``RADICAL-Pilot'' [ref], represents one of the latest evolutionary
+stages of the \pilot abstraction. From an initial phase in which \pilot were
+implemented as ad hoc place holder machinery for a specific application, to the
+integration of \pilot systems within the middleware of remote resources,
+RADICAL Pilot implements the \pilot abstraction as an interoperable compute and
+data management system that can be programmatically integrated into end-user
+applications.\msnote{The latter brings it back to the stage of apples, thats
+probably not what we want to say ...}
 
 Another ongoing evolutionary trend of the \pilot abstraction is to be
-implemented into \pilot-based workload managers, thus moving away from providing
-simple \pilot capabilities in application space. These higher-level systems
-which are often centrally hosted, move critical functionality from the client to
-the server (i.e. a service model). These systems usually deploy \pilot factories
-that automatically start new \pilots on demand and integrate security mechanisms
-to support multiple users simultaneously.
+implemented into \pilot-based workload managers, thus moving away from
+providing simple \pilot capabilities in application space. These higher-level
+systems which are often centrally hosted, move critical functionality from the
+client to the server (i.e. a service model). These systems usually deploy
+\pilot factories that automatically start new \pilots on demand and integrate
+security mechanisms to support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
-of \pilots, e.\,g.\ GlideInWMS, DIRAC~\cite{1742-6596-219-6-062049},
-PanDa~\cite{1742-6596-331-7-072069}, AliEn~\cite{1742-6596-119-6-062012} and
-Co-Pilot~\cite{copilot-tr}. Each of these \pilots serves a particular user
-community and experiment. Interestingly, these \pilots are functionally very
-similar, work on almost the same underlying infrastructure, and serve
-applications with very similar (if not identical) characteristics.
+of \pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
+DIRAC~\cite{1742-6596-219-6-062049}, PanDa~\cite{1742-6596-331-7-072069},
+AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
+these \pilots serves a particular user community and experiment. Interestingly,
+these \pilots are functionally very similar, work on almost the same underlying
+infrastructure, and serve applications with very similar (if not identical)
+characteristics.
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
@@ -992,22 +999,23 @@ seamless and transparent integration of these resources into existing Grid and
 batch computing infrastructures exploited by the High Energy Physics community.
 
 The \pilot abstraction has also been integrated into scientific workflow
-systems. \pilot systems have proven an effective tool for managing the workloads
-executed in the various stages of a workflow. For the Pegasus project [ref], the
-Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
-requirements of the Pegasus workflow system in particular to optimize the
-placements of \pilots with respect to their workload. It did this by serving as
-a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral provides more
-explicit control over the placement and start of \pilots to the end-user. Corral
-was later extended to also serve as a possible front end to GlideinWMS.
+systems. \pilot systems have proven an effective tool for managing the
+workloads executed in the various stages of a workflow. For the Pegasus project
+[ref], the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to
+support the requirements of the Pegasus workflow system in particular to
+optimize the placements of \pilots with respect to their workload. It did this
+by serving as a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral
+provides more explicit control over the placement and start of \pilots to the
+end-user. Corral was later extended to also serve as a possible front end to
+GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language provides also capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
 ``Coaster''~\cite{coasters}, developed to address workload management
-requirements by supporting various types of infrastructure, including clouds and
-grids.
+requirements by supporting various types of infrastructure, including clouds
+and grids.
 
 % Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon
 % was engineered for executing many small tasks on HPC systems and shows high
