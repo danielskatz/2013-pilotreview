@@ -794,7 +794,11 @@ resources. In this way, tasks are directly scheduled on the placeholder without
 competing with other users for the supercomputer scheduler.
 \msnote{I would like to either replace 'supercomputer' with i.e. 'cluster', or
 make it explicit in the beginning of 2.1 that we talk about multiple types of
-systems}
+systems} \mtnote{Here I used supercomputer in its general meaning as computing
+device with a lot of computational capacity. I am not sure the distinction
+between supercomputer and cluster is still useful these days but if you think it
+is, maybe we could add a note when we use `supercomputer' the first time few
+paragraphs above?}
 
 % ------------------------------------------------------------------------------
 % 2.2
@@ -932,15 +936,16 @@ Additionally, BigJob has also been extended to work with data and, analogous to
 compute \pilots, to abstract away direct user communication between different
 storage systems.
 
-BigJob (being a prototype), recently re-implemented as a production-level
-system named ``RADICAL-Pilot'' [ref], represents one of the latest evolutionary
-stages of the \pilot abstraction. From an initial phase in which \pilot were
+BigJob (being a prototype), recently re-implemented as a production-level system
+named ``RADICAL-Pilot'' [ref], represents one of the latest evolutionary stages
+of the \pilot abstraction. From an initial phase in which \pilot were
 implemented as ad hoc place holder machinery for a specific application, to the
-integration of \pilot systems within the middleware of remote resources,
-RADICAL Pilot implements the \pilot abstraction as an interoperable compute and
-data management system that can be programmatically integrated into end-user
+integration of \pilot systems within the middleware of remote resources, RADICAL
+Pilot implements the \pilot abstraction as an interoperable compute and data
+management system that can be programmatically integrated into end-user
 applications.\msnote{The latter brings it back to the stage of apples, thats
-probably not what we want to say ...}
+probably not what we want to say ...} \mtnote{Apologies, I am not sure I
+understand this comment.}
 
 Another ongoing evolutionary trend of the \pilot abstraction is to be
 implemented into \pilot-based workload managers, thus moving away from
