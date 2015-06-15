@@ -154,15 +154,17 @@ The seamless uptake of distributed infrastructures by scientific applications
 has been limited by the lack of pervasive and simple-to-use abstractions at the
 development, deployment, and execution level. Of all the abstractions proposed
 to support effective distributed resource utilization, a survey of actual usage
-suggested that \pilotjob \mtnote{Should we use just `pilot'}\jhanote{I think
-you have proposed a graceful transition: from pilotjobs to pilotsystems? If so,
-should we stick with pilotjobs here?}is arguably one of the most widely-used
+suggested that \pilotjob is arguably one of the most widely-used
 distributed computing abstractions - as measured by the number and types of
 applications that use them, as well as the number of production distributed
 cyberinfrastructures that support them. \msnote{ref?}
 
+% \mtnote{Should we use just `pilot'}\jhanote{I think you have proposed a
+% graceful transition: from pilotjobs to pilotsystems? If so, should we stick
+% with pilotjobs here?}
+
 The fundamental reason for the success of the \pilotjob abstraction is that
-\pilotjobs facilitate the oterwise challenging mapping of specific tasks onto
+\pilotjobs facilitate the otherwise challenging mapping of specific tasks onto
 explicit heterogeneous and dynamic resource pools. \pilotjobs decouple the
 workload specification from the task management improving the efficiency of
 task assignment while shielding applications from having to manage tasks across
@@ -172,6 +174,9 @@ verify the execution environment before executing jobs. The \pilotjob
 abstraction is also a promising route to address specific requirements of
 distributed scientific applications, such as coupled-execution and
 application-level scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}.
+
+\mtnote{We need to verify if all this is described in 4.2. For example, what
+\pilot systems offer fault-tolerance? Runs on heterogeneous resources? Dynamic?}
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -193,27 +198,31 @@ ToPoS~\cite{topos}, Nimrod/G~\cite{10.1109/HPC.2000.846563},
 Falkon~\cite{1362680} and MyCluster~\cite{1652061} to name a few. Although they
 are all, for the most part, functionally equivalent -- they support the
 decoupling of workload submission from resource assignment -- it is often
-impossible to use them interoperably or even just to compare them functionally
-or qualitatively. The situation is reminiscent of the proliferation of
-functionally similar yet incompatible workflow systems, where in spite of
-significant {\it a posteriori} effort on workflow system extensibility and
-interoperability, %(thus providing {\it post-facto} justification of its needs)
-these objectives remain difficult if not infeasible.
+impossible to use them interoperably, or even just to compare them functionally
+\mtnote{we opened the paragraph saying that they are mostly functionally
+equivalent. Should we better specify what do we mean with `compare'?} or
+qualitatively. The situation is reminiscent of the proliferation of functionally
+similar yet incompatible workflow systems, where in spite of significant {\it a
+posteriori} effort on workflow system extensibility and interoperability, these
+objectives remain difficult if not infeasible.
+
+ %(thus providing {\it post-facto} justification of its needs)
 
 \mtnote{Should we have a paragraph explaining the core contribution offered by
-this paper?}\jhanote{yes}
+this paper?} \jhanote{yes} \mtnote{Should I write a first draft of it?}
 
 The remainder of this paper is divided into four Sections. \S\ref{sec:history}
-offers a critical review of how the concept of \pilotjobs has evolved by
-analyzing existing \pilot systems and systems with pilot-like characteristics.
-In~\S\ref{sec:understanding}, the hetoregeneity described
-in~\S\ref{sec:history} is addressed by deriving the minimal set of capabilities
-and properties that has to characterize the design of a \pilot system. A
-vocabulary is then defined so that it can be used consistently across different
-designs and implmentations of a \pilot system. In~\S\ref{sec:analysis}, the
-focus shifts from analysing the design of a \pilot system to  leveraging the
-terminology defined in~\S\ref{sec:understanding} to critically reviewing the
-characteritics and functionalities of a relevant set of \pilot system
+offers a critical review of the functional underpinnings of the pilot
+abstraction and how it has been evolving into \pilot systems and systems with
+pilot-like characteristics. In~\S\ref{sec:understanding}, the minimal set of
+capabilities and properties that has to characterize the design of a \pilot
+system are derived. Furthermore, a vocabulary is defined so that it can be used
+consistently across different designs and implementations of a \pilot system.
+In~\S\ref{sec:analysis}, the focus shifts from analyzing the design of a \pilot
+system to critically reviewing the characteristics and functionalities of a
+representative set of \pilot system implementations. The core and auxiliary
+properties of a \pilot system are introduced and the terminology defined
+in~\S\ref{sec:understanding} is used to compare the diverse \pilot systems
 implementations. Finally,~\S\ref{sec:discussion} closes the paper by outlining
 the \pilot paradigm and elaborating on how it impacts and relates to other
 middleware and the application layer. The generality and breath of the \pilot
