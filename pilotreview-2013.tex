@@ -1,33 +1,34 @@
 \documentclass{sig-alternate}
-%\documentclass[conference]{IEEEtran}
-%\documentclass[conference,final]{IEEEtran}
 
 \input{head}
 \input{include}
-\usepackage{lscape}
 
 \usepackage{listings}
+\usepackage{paralist}
+\usepackage{multirow}
+\usepackage{flushend}
+\usepackage{lscape}
 
 \lstnewenvironment{code}[1][]%
 {
-\noindent
-%\minipage{0.98 \linewidth}
-\minipage{1.0 \linewidth}
-\vspace{0.5\baselineskip}
-\lstset{
-    language=Python,
-%    numbers=left,
-%    numbersep=4pt,
-    frame=single,
-    captionpos=b,
-    stringstyle=\ttfamily,
-    basicstyle=\scriptsize\ttfamily,
-    showstringspaces=false,#1}
+  \noindent
+  %\minipage{0.98 \linewidth}
+  \minipage{1.0 \linewidth}
+    \vspace{0.5\baselineskip}
+    \lstset{
+        language=Python,
+    %    numbers=left,
+    %    numbersep=4pt,
+        frame=single,
+        captionpos=b,
+        stringstyle=\ttfamily,
+        basicstyle=\scriptsize\ttfamily,
+        showstringspaces=false,#1}
 }
 {\endminipage}
 
 \begin{document}
-%\conferenceinfo{HPDC'13}{2013, New York, USA}
+% \conferenceinfo{HPDC'13}{2013, New York, USA}
 % \conferenceinfo{ECMLS'11,} {June 8, 2011, San Jose, California, USA.}
 \CopyrightYear{2015}
 % \crdata{978-1-4503-0702-4/11/06}
@@ -36,93 +37,118 @@
 
 \title{A Comprehensive Perspective on Pilot-Abstraction}
 
-% \alignauthor
-% Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
-%        \affaddr{Institute for Clarity in Documentation}\\
-%        \affaddr{1932 Wallamaloo Lane}\\
-%        \affaddr{Wallamaloo, New Zealand}\\
-%        \email{trovato@corporation.com}
-% % 2nd. author
-% \alignauthor
-% G.K.M. Tobin\titlenote{The secretary disavows
-% any knowledge of this author's actions.}\\
-%        \affaddr{Institute for Clarity in Documentation}\\
-%        \affaddr{P.O. Box 1212}\\
-%        \affaddr{Dublin, Ohio 43017-6221}\\
-%        \email{webmaster@marysville-ohio.com}
-% % 3rd. author
-% \alignauthor Lars Th{\o}rv{\"a}ld\titlenote{This author is the
-% one who did all the really hard work.}\\
-%        \affaddr{The Th{\o}rv{\"a}ld Group}\\
-%        \affaddr{1 Th{\o}rv{\"a}ld Circle}\\
-%        \affaddr{Hekla, Iceland}\\
-%        \email{larst@affiliation.org}
-% \and  % use '\and' if you need 'another row' of author names
-% % 4th. author
-% \alignauthor Lawrence P. Leipuner\\
-%        \affaddr{Brookhaven Laboratories}\\
-%        \affaddr{Brookhaven National Lab}\\
-%        \affaddr{P.O. Box 5000}\\
-%        \email{lleipuner@researchlabs.org}
-% % 5th. author
-% \alignauthor Sean Fogarty\\
-%        \affaddr{NASA Ames Research Center}\\
-%        \affaddr{Moffett Field}\\
-%        \affaddr{California 94035}\\
-%        \email{fogartys@amesres.org}
-% % 6th. author
-% \alignauthor Charles Palmer\\
-%        \affaddr{Palmer Research Laboratories}\\
-%        \affaddr{8600 Datapoint Drive}\\
-%        \affaddr{San Antonio, Texas 78229}\\
-%        \email{cpalmer@prl.com}
-% }
+\numberofauthors{3}
+
+\author{
+  \alignauthor
+  Matteo Turilli \\
+    \affaddr{RADICAL Laboratory, ECE}\\
+    \affaddr{Rutgers University}\\
+    % \email{}
+  % 2nd. author
+  \alignauthor
+  Mark Santcroos\\
+    \affaddr{RADICAL Laboratory, ECE}\\
+    \affaddr{Rutgers University}\\
+    % \email{}
+  % 3rd. author
+  \alignauthor
+  Shantenu Jha\titlenote{Corresponding author}\\
+    \affaddr{RADICAL Laboratory, ECE}\\
+    \affaddr{Rutgers University}\\
+    % \email{}
+  % use '\and' if you need 'another row' of author names
+  % \and
+  % % 4th. author
+  % \alignauthor Lawrence P. Leipuner\\
+  %   \affaddr{Brookhaven Laboratories}\\
+  %   \affaddr{Brookhaven National Lab}\\
+  %   \affaddr{P.O. Box 5000}\\
+  %   \email{lleipuner@researchlabs.org}
+  % % 5th. author
+  % \alignauthor Sean Fogarty\\
+  %   \affaddr{NASA Ames Research Center}\\
+  %   \affaddr{Moffett Field}\\
+  %   \affaddr{California 94035}\\
+  %   \email{fogartys@amesres.org}
+  % % 6th. author
+  % \alignauthor Charles Palmer\\
+  %   \affaddr{Palmer Research Laboratories}\\
+  %   \affaddr{8600 Datapoint Drive}\\
+  %   \affaddr{San Antonio, Texas 78229}\\
+  %   \email{cpalmer@prl.com}
+}
 
 \date{}
 \maketitle
 
 \begin{abstract}
-  There is no agreed upon definition of \pilotjobs; however a functional
-  attribute of \pilotjobs that is generally agreed upon is they are
-  tools/services that support multi-level and/or application-level scheduling by
-  providing a scheduling overlay on top of the system-provided schedulers.
-  Nearly everything else is either specific to an implementation, open to
-  interpretation or not agreed upon. For example, are \pilotjobs part of the
-  application space, or part of the services provided by an infrastructure? We
-  will see that close-formed answers to questions such as whether \pilotjobs are
-  system-level or application-level capabilities are likely to be
-  elusive. Hence, this paper does not make an attempt to provide close-formed
-  answers, but aims to provide appropriate context, insight and analysis of a
-  large number of \pilotjobs, and thereby bring about a hitherto missing
-  consilience in the community's appreciation of \pilotjobs.  Specifically this
-  paper aims to provide a comprehensive perspective of \pilotjobs. A primary
-  motivation for this work stems from our experience when looking for an
-  interoperable, extensible and general-purpose \pilotjob; in the process, we
-  realized that such a capability did not exist. The situation was however even
-  more unsatisfactory: in fact there was no agreed upon definition or conceptual
-  framework of \pilotjobs.  To substantiate these points of view, we begin by
-  discussing some existing \pilotjobs and the different aspects of these
-  \pilotjobs, such as the applications scenarios that they have been used and
-  how they have been used. The limited but sufficient sampling highlights the
-  variation, and also provides both a motivation and the basis for developing an
-  implementation agnostic terminology and vocabulary to understand \pilotjobs;
-  Section \S3 attempts to survey the landscape/eco-system of \pilotjobs.  With
-  an agreed common framework/vocabulary to discuss and describe \pilotjobs, we
-  proceed to analyze the most commonly utilized \pilotjobs and in the process
-  provide a comprehensive survey of \pilotjobs, insight into their
-  implementations, the infrastructure that they work on, the applications and
-  application execution modes they support, and a frank assessment of their
-  strengths and limitations.  An inconvenient but important question -- both
-  technically and from a sustainability perspective that must be asked: why are
-  there so many similar seeming, but partial and slightly differing
-  implementations of \pilotjobs, yet with very limited interoperability amongst
-  them?  Examining the reasons for this state-of-affairs provides a simple yet
-  illustrative case-study to understand the state of the art and science of
-  tools, services and middleware development.  Beyond the motivation to
-  understand the current landscape of \pilotjobs from both a technical and a
-  historical perspective, we believe a survey of \pilotjobs is a useful and
-  timely undertaking as it provides interesting insight into understanding
-  issues of software sustainability.
+
+This paper provides a comprehensive perspective of \pilotjobs. \pilotjobs are a
+type of middleware software that has been gaining rapid adoption among various
+scientific communities. For example, \pilotjobs systems are used to provide more
+than 700 million CPU hours a year to the Open Science Grid (OSG) communities and
+to process up to 5 million jobs a week for the ATLAS experiment. Notwithstanding
+the growing impact of \pilotjobs on scientific research, there is no agreement
+upon their definition, no clear understanding of the underlying abstraction and
+paradigm, no shared best practices or interoperability among their
+implementations. This lack of foundational understanding and of design
+convergence is hindering the full exploitation of the \pilotjobs potential
+dispersing the available resources across a fragmented development landscape.
+This paper offers the conceptual tools to promote shared understanding of the
+\pilot paradigm while critically reviewing the state of the art of \pilotjobs
+implementations. Five main contributions are provided: (i) an analysis of the
+motivations and evolution of the \pilotjob abstraction; (ii) an outline of the
+minimal set of distinguishing functionalities; (iii) the definition of a core
+vocabulary to reason consistently about \pilotjobs; (iv) the description of core
+and auxiliary properties of \pilotjobs systems; and (v) a critical review of the
+current state of the art of their implementations. These contributions are
+brought together to illustrate the defining characteristics of the \pilotjob
+paradigm, its generality, and the main opportunities and challenges posed by its
+support of distributed computing.
+
+  % There is no agreed upon definition of \pilotjobs; however a functional
+  % attribute of \pilotjobs that is generally agreed upon is they are
+  % tools/services that support multi-level and/or application-level scheduling
+  % by providing a scheduling overlay on top of the system-provided schedulers.
+  % Nearly everything else is either specific to an implementation, open to
+  % interpretation or not agreed upon. For example, are \pilotjobs part of the
+  % application space, or part of the services provided by an infrastructure? We
+  % will see that close-formed answers to questions such as whether \pilotjobs
+  % are system-level or application-level capabilities are likely to be elusive.
+  % Hence, this paper does not make an attempt to provide close-formed answers,
+  % but aims to provide appropriate context, insight and analysis of a large
+  % number of \pilotjobs, and thereby bring about a hitherto missing consistence
+  % in the community's appreciation of \pilotjobs.  Specifically this paper aims
+  % to provide a comprehensive perspective of \pilotjobs. A primary motivation
+  % for this work stems from our experience when looking for an interoperable,
+  % extensible and general-purpose \pilotjob; in the process, we realized that
+  % such a capability did not exist. The situation was however even more
+  % unsatisfactory: in fact there was no agreed upon definition or conceptual
+  % framework of \pilotjobs.  To substantiate these points of view, we begin by
+  % discussing some existing \pilotjobs and the different aspects of these
+  % \pilotjobs, such as the applications scenarios that they have been used and
+  % how they have been used. The limited but sufficient sampling highlights the
+  % variation, and also provides both a motivation and the basis for developing
+  % an implementation agnostic terminology and vocabulary to understand
+  % \pilotjobs; Section \S3 attempts to survey the landscape/eco-system of
+  % \pilotjobs.  With an agreed common framework/vocabulary to discuss and
+  % describe \pilotjobs, we proceed to analyze the most commonly utilized
+  % \pilotjobs and in the process provide a comprehensive survey of \pilotjobs,
+  % insight into their implementations, the infrastructure that they work on,
+  % the applications and application execution modes they support, and a frank
+  % assessment of their strengths and limitations.  An inconvenient but
+  % important question -- both technically and from a sustainability perspective
+  % that must be asked: why are there so many similar seeming, but partial and
+  % slightly differing implementations of \pilotjobs, yet with very limited
+  % interoperability amongst them?  Examining the reasons for this
+  % state-of-affairs provides a simple yet illustrative case-study to understand
+  % the state of the art and science of tools, services and middleware
+  % development.  Beyond the motivation to understand the current landscape of
+  % \pilotjobs from both a technical and a historical perspective, we believe a
+  % survey of \pilotjobs is a useful and timely undertaking as it provides
+  % interesting insight into understanding issues of software sustainability.
+  %
   % believe that a survey of \pilotjobs provides and appreciation for
   % the richness of the \pilotjobs landscape.  is
   % not to discuss the \pstar conceptual framework, but That led to
