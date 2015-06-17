@@ -1127,11 +1127,13 @@ workload execution when compared to executing the same workload directly on one
 or more DCI. Performance in \pilot systems is usually associated to throughput
 and execution time to completion (TTC), but other metrics could also be
 considered, for example, energy efficiency, data transfer minimization, scale
-of the workload executed, or a mix of them. In order to optimize the chosen set
-of metrics, each \pilot system exhibits characteristics that are both common or
-specific to one or more implementations. Discerning these characteristics
-requires isolating and defining the minimal set of logical components that has
-to characterize every \pilot system.
+of the workload executed, or a mix of them. Purposes that are not (directly)
+performance related include robustness and ease of application deployment.  In
+order to optimize the chosen set of metrics, each \pilot system exhibits
+characteristics that are both common or specific to one or more
+implementations. Discerning these characteristics requires isolating and
+defining the minimal set of logical components that has to characterize every
+\pilot system.
 
 At some level, all \pilot systems leverage three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
@@ -1140,18 +1142,13 @@ and use of one or more resource placeholders (i.e. `\pilots`) on single or
 multiple DCIs. The Workload Manager handles the scheduling of one or more given
 workloads on the available resource placeholders. Finally, the Task Manager
 takes care of executing the tasks of each workload by means of the resources
-held by the placeholders.  \jhanote{does the task executor just execute, or
-does it have some decision making capacity? if the latter, then purely for
-naming consistency, should we consider calling the third component ``task
-manager'' or ``Task execution manager'' ? Also we go on to discuss task
-dispatching and execution as functionalities, which leaves current name a bit
-limiting.} \mtnote{Replaced `Task Executor' with `Task Manager'.}
+held by the placeholders.
 
 The implementation details of these three logical components significantly vary
 across \pilot systems (see~\S\ref{sec:analysis}). One or more logical
 components may be responsible for specific functionalities, both on application
 as well as infrastructure level, two or more logical components may be
-implemented in a single software module, or additional components may be
+implemented in a single software module, or additional functionalities may be
 integrated into the Managers and Task Manager. Nevertheless, the Pilot and
 Workload Managers and the Task Manager can always be distinguished across
 different \pilot systems. For example, looking at the systems mentioned
@@ -1183,10 +1180,6 @@ exposed by the targeted DCI. Resource placeholders are scheduled onto the DCI
 resources by means of the DCI capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
 execution of the tasks of a workload.
-% Resource placeholders belong to the user(s) that created them and they can be
-% tailored to satisfy the specific use cases.
-\msnote{Regarding the "belonging", this becomes fuzzy in multi-user
-systems, I would suggest to drop the last line} \mtnote{Done.}
 \mtnote{Currently, this is a bit of repetition of what we wrote already in
 Section 2 but seeing the importance of the concept we might want to keep it.}
 
@@ -1213,10 +1206,7 @@ those placeholders for execution. Task dispatching does not depend on the
 functionalities of the DCI middleware so it can be implemented as part of the
 \pilot system. In this way, the control over the execution of a workload is
 shifted from the DCI to the \pilot system. This shift is a defining
-characteristic of the \pilot paradigm \mtnote{I do not think it is too
-disruptive to speak about abstraction but, in case, we can just use \pilot
-system instead of \pilot abstraction} \msnote{How about paradigm? I would not
-be in favor of talking about systems here} \mtnote{Done.} as it decouples the
+characteristic of the \pilot paradigm, as it decouples the
 execution of a workload from the need to submit its tasks via the DCI
 middleware. The tasks of a workload will not individually have to wait on the
 DCI queues, but rather on the availability of the placeholder before being
@@ -1224,11 +1214,10 @@ executed. More elaborate execution patterns involving task and data
 interdependence can thus be implemented outside the boundaries of the DCI
 capabilities. Ultimately, this is why \pilot systems allow for the direct
 control of workload execution and the optimization, for example, of execution
-throughput. \msnote{I don't understand the bit about parametrization
-..} \mtnote{Better?}
+throughput.
 
 Communication and coordination are two distinguishing characteristics of
-distributed applications and \pilot systems make no exception. The Workload
+distributed applications and \pilot systems are no exception. The Workload
 Manager, Pilot Manager, and the Task Manager need to communicate to coordinate
 the execution of the given workload on the instantiated resource placeholders.
 Nonetheless, \pilot systems are not defined by any specific communication
@@ -1250,16 +1239,16 @@ As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 the worker with the Task Manager, the functionalities related to task
 description, scheduling, and monitoring will generally be implemented within
 the Workload Manager, while the functionalities needed to execute each task
-will be implemented into the Task Manager. Alternative coordination
-strategies, for example where a Task Manager directly coordinates the
-task scheduling, might require a functionally simpler Workload Manager but a
-comparatively feature-rich Task Manager. The former would require capabilities
-for submitting tasks, while the latter would require to coordinate with its
-neighbor executors leveraging, for example, a dedicated overlay network. Both
-these systems, adopting different coordination strategies, should be considered
-\pilot systems.
+will be implemented into the Task Manager. Alternative coordination strategies,
+for example where a Task Manager directly coordinates the task scheduling,
+might require a functionally simpler Workload Manager but a comparatively more
+feature-rich Task Manager. The former would require capabilities for submitting
+tasks, while the latter would require to coordinate with its neighbor executors
+leveraging, for example, a dedicated overlay network. Both these systems,
+adopting different coordination strategies, should be considered \pilot
+systems.
 
-Data management can have an important role within a \pilot system. For example,
+Data management can play an important role within a \pilot system. For example,
 functionalities can be provided to support the local or remote data staging
 required to execute the tasks of a workload, or data might be managed according
 to the specific capabilities offered by the targeted DCI. \pilot systems can be
@@ -1270,7 +1259,7 @@ systems. Being able to read and write files to a local filesystem should then
 be considered the minimal capability related to data required by a \pilot
 system. More advanced and specific data capabilities like, for example, data
 replication, (concurrent) data transfers, data abstractions other than files
-and folders, or data placeholders should be considered special-purpose
+and directories, or data placeholders should be considered special-purpose
 capabilities, not characteristic of every \pilot system.
 
 In the following subsection, a minimal set of terms related to the
@@ -1322,8 +1311,8 @@ scheduled and then executed by a batch system.
 \begin{description}
 
 \item[Job.] Functionally defined as a `task' from the perspective of the DCI,
-but in the case of a \pilot indicative of the type of container required to
-acquire resources on a specific infrastructure.
+but in the case of a \pilot system indicative of the type of container required
+to acquire resources on a specific infrastructure.
 
 \end{description}
 
@@ -1353,7 +1342,7 @@ are provisioned by submitting a job to the DCI queuing system, become available
 only once the job is scheduled on the resources out of the queue, and is
 available only for the duration of the job lifetime.
 
-A `pilot' is a resource placeholder. As a resource placeholder, a \pilot holds
+A \pilot is a resource placeholder. As a resource placeholder, a \pilot holds
 portion of a DCI's resources for a user or a group of users, depending on
 implementation details. A \pilot system is a software capable of creating
 \pilots so to gain exclusive control over a set of resources on one or more DCIs
@@ -1361,22 +1350,22 @@ and then to execute the tasks of one or more workloads on those \pilots.
 
 \begin{description}
 
-\item[Pilot.] A container (e.g., a job) that functions as a resource
+\item[Pilot.] A container (e.g., a `job') that functions as a resource
 placeholder on a given infrastructure and is capable of executing tasks of a
 workload on that resource.
 
 \end{description}
 
-It should be noted that the term `pilot' as defined here is named differently
+It should be noted that the term `\pilot' as defined here is named differently
 across \pilot systems. Depending upon context, in addition to the term
 `placeholder', \pilot is also named `agent' and, in some cases, `\pilotjob'
 [cit]. All these terms are, in practice, used as synonyms without properly
 distinguishing between the type of container and the type of executable that
 compose a \pilot. This is a clear indication of how necessary the minimal and
 consistent vocabulary offered here is when reasoning analytically about
-multiple implementations of a \pilot system.
+multiple \pilot system implementations.
 
-The term `pilotjob' is often used to identify a \pilot system too. This is an
+The term `\pilotjob' is often used to identify a \pilot system too. This is an
 unfortunate choice as the term `job' identifies just the way in which a \pilot
 is provisioned on a DCI exposing specific capabilities, not a general
 property of all the \pilot systems. The use of the term `\pilotjob system'
@@ -1405,15 +1394,15 @@ binding'.
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: \pilots and tasks. A portion of the
 resources of a DCI is allocated to one or more \pilots in the form of
-containers supported by that DCI, and the tasks of a workload are dispatched to
-those \pilots. This is a fundamental feature of \pilot systems because (i) a
-potentially faster and more flexible execution of workloads is achieved by
-avoiding the overhead imposed by a centralized job management system shared
-among multiple users; and (ii) the tasks of a workload can be bound to a set of
-\pilots before or after it becomes available on a remote resource.  (Depending
-on the implementation of a \pilot system, there can be another level of
-scheduling, where the \pilot makes scheduling decisions about task placement
-within the \pilot's resource allocation.)
+containers supported by that DCI, and the tasks of a workload are dispatched
+for execution to those \pilots. This is a fundamental feature of \pilot systems
+because (i) a potentially faster and more flexible execution of workloads is
+achieved by avoiding the overhead imposed by a centralized job management
+system shared among multiple users; and (ii) the tasks of a workload can be
+bound to a set of \pilots before or after it becomes available on a remote
+resource.  (Depending on the implementation of a \pilot system, there can be
+another level of scheduling, where the \pilot makes scheduling decisions about
+task placement within the \pilot's resource allocation.)
 
 The simplification obtained as a consequence of bypassing the job submission
 system of the DCI is one of the main reasons for the success of \pilot
@@ -1426,46 +1415,38 @@ assigned to \pilots is a matter of implementation. For example, a dedicated
 scheduler could be adopted, or tasks might be directly assigned to a \pilot by
 the user.
 
-The binding of tasks to \pilots depends on the state of the \pilot. A \pilot is
-inactive until it is executed on a DCI, is active thereafter, until it completes
-(or fails).  Early binding indicates the binding of a task to an inactive
-\pilot; late binding the binding of a task to an active \pilot. Early binding is
-potentially useful to increase the information about which \pilots can be
-deployed. By knowing in advance the properties of the tasks that are bound to a
-\pilot, specific deployment decisions can be made for that \pilot. Additionally,
-in case of early binding, other type of decisions related to the workload could
-be made, e.g., the transfer of data to a certain resource while the \pilot is
-still inactive. Late binding is critical in assuring the aforementioned high
-throughput of the distributed application by allowing sustained task execution
-without additional queuing time or container instantiation time.
+The type of binding of tasks to \pilots depends on the state of the \pilot. A
+\pilot is inactive until it is executed on a DCI, is active thereafter, until
+it completes (or fails).  Early binding indicates the binding of a task to an
+inactive \pilot; late binding indicates the binding of a task to an active
+\pilot. Early binding is potentially useful to increase the information about
+which \pilots can be deployed. By knowing in advance the properties of the
+tasks that are bound to a \pilot, specific deployment decisions can be made for
+that \pilot.  Additionally, in case of early binding, other type of decisions
+related to the workload could be made, e.g., the transfer of data to a certain
+resource while the \pilot is still inactive. Late binding is critical in
+assuring the aforementioned high throughput of the distributed application by
+allowing sustained task execution without additional queuing time or container
+instantiation time.
 
-It should be noted that some aspects of early binding can also
-be achieved without a \pilot, but, importantly, the \pilot paradigm allows to
-do both, even within the confinements of a single workload. \msnote{I would
-think parts of this paragraph also have their place in S5 (if its not already
-there)} \mtnote{The notion of binding needs to be fully understood before
-getting into 4. I would leave this as it is here but I am open to discuss about
-it.}
+It should be noted that some aspects of early binding can also be achieved
+without a \pilot system, but, importantly, the \pilot paradigm allows to do
+both, even within the confinements of a single workload. \msnote{I would think
+parts of this paragraph also have their place in S5 (if its not already there)}
+\mtnote{The notion of binding needs to be fully understood before getting into
+4. I would leave this as it is here but I am open to discuss about it.}
+\msnote{Agreed, with 'also' I meant repeating, not moving}
 
 \begin{description}
 
-\item[Multi-level scheduling.] Scheduling \pilots onto resources and tasks onto
-active or inactive \pilots.
+\item[Multi-level scheduling.] Scheduling \pilots onto resources, and
+scheduling tasks onto (active or inactive) \pilots.
 
 \item[Early binding.] Binding one or more tasks to an inactive \pilot.
 
 \item[Late binding.] Binding one or more tasks to an active \pilot.
 
 \end{description}
-
-% Depending on the specific capabilities implemented in the Workload Manager
-% component, some \pilot systems allow for \pilots to be specified by taking
-% into consideration the properties of (the tasks of) a workload. This type of
-% specification should not be confused with early binding as the latter
-% requires for a \pilot to have been already bound to a resource. \msnote{I
-% think this paragraph is orthogonal to what we write earlier. I suggest to
-% remove this paragraph altogether.} \amnote{+1, this confuses more than it
-% clarifies...}
 
 \definecolor{term}{RGB}{153,39,38}
 \definecolor{funct}{RGB}{0,128,64}
@@ -1536,7 +1517,11 @@ active or inactive \pilots.
      \jhanote{The mapping is implicit and the reader will be confused by the
      purpose and will struggle to see the intent other than a listing of all
      terms encountered. I think this table will benefit from a more detailed
-     caption.}\mtnote{Done in the text. Is it enough?}}
+     caption.}\mtnote{Done in the text. Is it enough?}\msnote{Even with the
+     fancy colors ;-) I still fail to see the value of this table. Given that
+     I've become more appreciative of Fig4, I'm tempted to say that the figure
+     captures the multi-dimensionsionality much better than the table. Will
+     even volunteer to make it happen.}}
  \label{table:terminology}
 \end{table*}
 
@@ -1562,16 +1547,16 @@ not the container to be responsible of both holding a set of resources and
 offering the functionalities of the task manager.
 
 Figure~\ref{fig:core_vocabulary} should not be confused with an architectural
-diagrams. No indications are given about the interfaces that should be used,
-how the logical component should be mapped into software modules, or what type
-of communication and coordination protocols should be used among such
-components. This is why no distinction is made diagrammatically between early
-and late binding. Their difference is temporal and, as such, it can be
-highlighted only when describing the succession of the states and operations of
-a \pilot system implementation. In the early case, the binding of the tasks to
-a pilot will happen before the submission of such a pilot to the remote
-infrastructure. In the late case, the binding will happen once the pilot has
-been instantiated and holds already its resources.
+diagram. No indications are given about the interfaces that should be used, how
+the logical component should be mapped into software modules, or what type of
+communication and coordination protocols should be used among such components.
+This is why no distinction is made diagrammatically between early and late
+binding. Their difference is temporal and, as such, it can be highlighted only
+when describing the succession of the states and operations of a \pilot system
+implementation. In the early case, the binding of the tasks to a pilot will
+happen before the submission of such a \pilot to the remote infrastructure. In
+the late case, the binding will happen once the pilot has been instantiated and
+holds already its resources.
 
 The wide spectrum of available implementations of the logical components of a
 \pilot system is explored in the next section.
@@ -1580,29 +1565,15 @@ The wide spectrum of available implementations of the logical components of a
     \centering
         \includegraphics[width=.48\textwidth]{figures/core_vocabulary.pdf}
     \caption{Diagrammatic representation of the logical components,
-             capabilities, and core vocabulary of a \pilot system. The terms of
-             the core vocabulary are highlighted in red, those of the logical
-             components of a \pilot system in green, and those of their
-             functionalities in blue.}
+    functionalities, and core vocabulary of a \pilot system. The terms of the
+    core vocabulary are highlighted in red, those of the logical components of
+    a \pilot system in green, and those of their functionalities in blue.}
     \label{fig:core_vocabulary}
 \end{figure}
 
 \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
 is sufficient and necessary in order to discriminate between \pilot and
 not-\pilot systems;} \mtnote{This is still somewhat an open issue.}
-
-\mtnote{[\ldots], and possibly another one relative to overlay enacting as
-distinguished from task dispatching;} \mtnote{I think this is not relevant
-anymore. If you agree please delete this comment.}
-
-\mtnote{3. Clean up Table 1 removing 'Infrastructure'.} \mtnote{I see no
-problem with having infrastructure in the table but please let me know whether
-you think differently.}
-
-%\jhanote{Given that we've introduced Figure 4, a paragraph that summarized this
-%section by way of explaining Figure 4 would be useful to the reader as well
-%as provide a soft transition to next section. Thoughts?} \mtnote{Done.}
-
 
 %------------------------------------------------------------------------------
 % SECTION 4
