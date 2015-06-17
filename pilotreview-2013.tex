@@ -1228,11 +1228,6 @@ suitable strategy (e.g. time synchronization, static or dynamic coordinator
 election, local or global information sharing, or \MW). The same applies to
 network architectures and protocols: different network architectures and
 protocols may be leveraged to achieve effective communication and coordination.
-\msnote{The paragraph above is more ammunition for the argument that the
-division between core and aux props is at least fuzzy, or potentially
-arbitrary, or C\&C is just a core prop. This needs further discussion.}
-\mtnote{In the agenda for next Tuesday? Otherwise, please feel free to propose
-the changes in 4.1 and we can discuss via comments.}
 
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 \pilot systems. When the master is identified with the Workload Manager, and
@@ -1953,45 +1948,27 @@ of individual instantiations of \pilots.
   nodes, or portion of the cores of each node. The same applies to file systems
   and its partitions or to software defined or physical network resources.
 
-  % Another consideration in discussing \pilot resource capabilities is the
-  % notion of granularity, e.g. is there one \pilot for a set of resources
-  % within an infrastructure or is there a more fine grained coupling between
-  % \pilot and resource and how does this effect the suitability for HTC and/or
-  % HPC?
-
-  \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
-  comment still valid?}
-
-  % \item \textit{Pilot Granularity (spatial)}: What unit of resource is
-  % controlled by a single pilot? A core, a node, multiple nodes, a cluster,
-  % ...?
-
 % core because: its fundamental to our model
-\item \textbf{Pilot Deployment}. Pilots are scheduled and then bootstrapped on
+\item \textbf{Pilot Deployment}. \pilots are scheduled and then bootstrapped on
   the remote infrastructures. The characteristic of both operations varies
   depending on both the implementation details of the \pilot systems and the
   architecture, interfaces, and capabilities offered by the remote
-  infrastructures. For example, pilot scheduling may be fully automated or
+  infrastructures. For example, \pilot scheduling may be fully automated or
   directly controlled by applications and end-users. The bootstrapping can
   offer explicit or implicit localization by allowing to load specific
   libraries, compilers, and support software. Both scheduling and bootstrapping
   varies depending on whether the remote infrastructures expose HPC, grid, or
   cloud interfaces.
 
-  % resource acquisition/release policies, (e.g. the automatic provisioning of
-  % \pilots).
-  % \item \textit{Pilot instantiation (spatial+temporal)}: When are pilots
-  % instantiated where and which entity (system/user) has control over it at
-  % which level?
-
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
-  pilots depending on their semantics. Specifically, dispatching decisions
-  depends on the temporal and spatial relationships among tasks, the affinity
-  between data and compute resources required by the tasks, and the type of
-  capabilities needed for their execution. \pilot systems support a varying
-  degree of semantic richness for the workload and its tasks. The (standard)
-  format or language in which the workloads are described may also be relevant.
+  \pilots depending on the workload semantics. Specifically, dispatching
+  decisions depends on the temporal and spatial relationships among tasks, the
+  affinity between data and compute resources required by the tasks, and the
+  type of capabilities needed for their execution. \pilot systems support a
+  varying degree of semantic richness for the workload and its tasks. The
+  (standard) format or language in which the workloads are described may also
+  be relevant.
 
   \amnote{why are task dependencies (which seems to be what you call
   'workload semantics') a core property?  A pilot system is still a pilot
@@ -2027,9 +2004,14 @@ of individual instantiations of \pilots.
   defined in 3, so in case of affirmative answer I may have to add that too.
   Not a problem if you consider this necessary.}
 
+  \msnote{I get the feeling you are talking about different things. My
+  perception is that the miscommunication is caused by the ambiguous core/aux
+  distinction. More pragmatically I changed the "depending on task semantics"
+  into "depending on workload semantics".}
+
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
-  capability of binding tasks to pilots. Without such a capability, it would
+  capability of binding tasks to \pilots. Without such a capability, it would
   not be possible to know where to dispatch tasks, \pilots could not be used to
   execute tasks and, as such, the whole \pilot system would not be usable. As
   seen in \S\ref{sec:understanding}, \pilot systems may allow for two types of
@@ -2044,27 +2026,18 @@ of individual instantiations of \pilots.
   scheduling decisions, dispatch policies, or even include more levels of
   scheduling.
 
-  % does the framework support advanced workload management capabilities
-  % \item \textit{Task-pilot relationship (temporal)}: What is the lifetime of
-  % a pilot in relation to the length of a task or workload? \msnote{What kind
-  % of answers to you expect here in section 4.3?}
-  % \item textit{Task-pilot relationship (spatial)}: Does a pilot execute one
-  % or more tasks concurrently?
-
-% core because: its the only property of the task executor
+% core because: its the only property of the task executor 
 % component/functionality
-\item \textbf{Task Execution}. Once the tasks are dispatched to a pilot, their
-  execution may require for a specific environment to be set up. \pilot systems
-  differ in whether and how they offer such a capability. \pilot systems may
-  adopt dedicated components for managing execution environments, or they may
-  rely on ad hoc configuration of the pilots. Furthermore, execution
-  environments can be of varying complexity, depending on whether the \pilot
-  system allows for data retrieval, dedicated software and library
-  installations, communication and coordination among multiple execution
-  environment and, in case, pilots.
-
-  % \item textit{Supported ``physical'' task types}: What types of (physical)
-  % tasks are supported, e.g., single-core, MPI, ...?
+\item \textbf{Task Execution}. Once the tasks are dispatched to a \pilot, their
+  execution may require for a specific runtime environment to be set up (e.g.
+  MPI). \pilot systems differ in whether and how they offer such a capability.
+  \pilot systems may adopt dedicated components for managing execution
+  environments, or they may rely on ad hoc configuration of the \pilots.
+  Furthermore, execution environments can be of varying complexity, depending
+  on whether the \pilot system allows for data retrieval, dedicated software
+  and library installations, communication and coordination among multiple
+  execution environment and, in case, \pilots.\msnote{Are some words missing
+  here or does the "in case" refer to c and c between pilots?}
 
 % core because: its a must-have to do pilot provision
 % (alternative view: aux because its an implementation detail \ldots)
@@ -2078,13 +2051,8 @@ of individual instantiations of \pilots.
 
   \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
   still valid?}
-
-  % \item \textit{Supported DCI systems/services}: What are the type of systems
-  % (middlewares, services) that can be interfaced by the \pilotjob system to
-  % launch pilots?
-  % \item \textit{Supported Middleware:} What middleware does the system
-  % connect with? Is it tightly coupled or flexible/extensible?
-  % \item Supported Middleware (Auxiliary)
+  \msnote{I'm still not comfortable with the overlap of this with Task
+  Execution and Pilot Deployment}
 
 \end{itemize}
 
@@ -2097,25 +2065,11 @@ of individual instantiations of \pilots.
 % aux because: its an "implementation" detail
 \item \textbf{Architecture}. \pilot systems may be implemented by means of
   different type of architectures (e.g service-oriented, client-server, or
-  peer-to-peer). Architectural choices may depend on multiple factors, including
-  use cases, deployment strategies, or interoperability requirements. The
-  analysis and comparison of architectural choices is here limited to the
-  trade-offs implied by such a choice, especially when considering how they
-  affect the Core Properties.
-
-  % For example, it is conceivable that architectural choices influence if not
-  % preclude certain deployment strategies.
-
-  % \item \textit{Transfer Protocols}: What network protocols that are used to
-  % connect the individual component of the \pilot system?
-
-% (v) does the framework have dependencies to other third-party
-% components/services?
-
-% Further non-functional aspects describe the internals of a \pilotjob system,
-% e.\,g.: (i) the architecture of the system (layers, sub-systems, communication
-% \& coordination, central vs. decentral architectures; push vs. pull model,
-% agent-based; number of supported resource types),
+  peer-to-peer). Architectural choices may depend on multiple factors,
+  including application use cases, deployment strategies, or interoperability
+  requirements.  The analysis and comparison of architectural choices is here
+  limited to the trade-offs implied by such a choice, especially when
+  considering how they affect the Core Properties.
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
@@ -2126,28 +2080,24 @@ of individual instantiations of \pilots.
   coordination among the \pilot system components are distinguishing
   implementation properties.
 
-% aux because: its an implementation detail
-\item \textbf{Interface}. \pilot systems may present several types of
-  private and public interfaces: among the components of the \pilot system;
-  between the application and the \pilot system; or between end users and one or
-  more programming language interfaces for the \pilot system.
+% These comments were originally in section 3.
+\msnote{The paragraph above is more ammunition for the argument that the
+division between core and aux props is at least fuzzy, or potentially
+arbitrary, or C\&C is just a core prop. This needs further discussion.}
+\mtnote{In the agenda for next Tuesday? Otherwise, please feel free to propose
+the changes in 4.1 and we can discuss via comments.}
 
-  % Here the focus is on the interfaces exposed by the \pilot system instead of
-  % those justified by the internal architectural choices.\mtnote{Why?}
+% aux because: its an implementation detail
+\item \textbf{Interface}. \pilot systems may present several types of private
+  and public interfaces: among the components of the \pilot system, between the
+  application and the \pilot system, or between end users and one or more
+  programming language interfaces for the \pilot system.
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Interoperability}. Two types of interoperability are relevant when
-  analyzing diverse \pilot systems: interoperability with heterogeneous
-  infrastructures, and interoperability across diverse \pilot systems. The
-  former allows for a \pilot system to provision pilots and execute workloads on
-  different types of infrastructure (e.g. HTC, HPC, Cloud but also Condor, LSF,
-  Slurm, or Torque). The latter is relevant when multiple \pilot systems are
-  available with diversified characteristics and capabilities.
-
-  % (ii) resource access layer: What low-level infrastructures/middleware are
-  % supported? How interoperable is the framework (vertically, horizontally)?,
-
-  % Does the \pilotjob system provide interoperability support?
+\item \textbf{Interoperability}. Interoperability is defined as the capability
+  to deploy \pilots on heterogeneous infrastructures. It allows for a \pilot
+  system to provision pilots and execute workloads on different types of
+  infrastructure (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm, or Torque). 
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Multitenancy}. \pilot systems may offer multitenancy at both
@@ -2155,41 +2105,11 @@ of individual instantiations of \pilots.
   to utilize the same instance of a \pilot system. When available at local
   level, multiple users may share the same pilot.
 
-  % \msnote{Alternative names: deployment, service model} \mtnote{Any better? I
-  % think `deployment' is now covered by the homonymous core property and
-  % `service model' is part of the `architecture' auxiliary property.}
-
-  % \item \textit{Multi-user support:} Does the pilot job system allows
-  % \textbf{\pilots} to
-  % be used by multiple users? (iii) the
-  % deployment model: hosted service versus tool/library, application vs.
-  % system-level,
-
-  % \item \textit{Pilot ownership}: Who owns the pilot (job) -- the user or the
-  % \pilotjob system? Or in other words, in which security context does the
-  % pilot operate? \msnote{Dont think we have defined "user" by now, so thats
-  % ambiguous}
-  % \msnote{As there will be a wide spectrum of approaches in the various
-  % implementation, we might just want to call this as general as "security"}
-  % \aznote{I think this covers potentially multiple concepts: 1) security, as
-  % in the level of direct access users have to pilots (can they for instance
-  % force a kill directly?  Modify pilot configurations while it runs?) 2)
-  % Deployment, as in does the entire pilot-job system operate in user-space or
-  % is it part of the (admin/privileged) system stack? 3) I would argue that
-  % this could relate directly to pilot-instantiation... both from a security
-  % and deployment level. Who can instantiate pilots? What security level do
-  % they run on once instantiated?  So, maybe a ``security'' item as Mark
-  % suggested, but I'm not entirely sure if ``deployment'' should be part of
-  % this as well...  they do seem connected to me though...} Further, some
-  % \pilotjobs solely support single users, while more complex
-  % \pilot-based workload managers commonly support multiple users
-  % (e.\,g.\ using glexec).
-
 % aux because: not all the pilot systems offer an abstraction for multiple (at least two) pilots.
-\item \textbf{Resource Overlay}. The resources of multiple pilots may be
+\item \textbf{Resource Overlay}. The resources of multiple \pilots may be
   aggregated into a resource overlay. Overlays may be directly exposed to the
   application layer and to the end-users depending on the public interfaces and
-  usability models. Overlays may abstract away the notion of pilot or offer an
+  usability models. Overlays may abstract away the notion of \pilot or offer an
   explicit semantic for their aggregation, selection, and management.
 
 % aux because: its not directly coupled to one of the components/functions
@@ -2203,9 +2123,6 @@ of individual instantiations of \pilots.
   we should have a high level review of the paradigmatic use cases for pilot
   systems in the introduction.}
 
-  % \item \textit{Fault-Tolerance}: What mechanisms are in place to shield the
-  % system from component failures?
-
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Security}. The properties of \pilot systems related to
   security would require a dedicated analysis. The analysis here is limited to
@@ -2213,34 +2130,25 @@ of individual instantiations of \pilots.
   constrained by focusing only on those elements that impact the Core
   Functionalities as defined in \S\ref{sec:compsandfuncs}.
 
-  % \item \textit{Security}: How is a user identified in the system and how are
-  % identities and access credentials delegated to individual resources /
-  % pilots? Security describes the security mechanisms used by the framework,
-  % e.\,g.\ for authentication of the user, for securing the communication
-  % protocol and for sandboxing the application.
+% aux because: its not directly coupled to one of the components/functions
+\item \textbf{Data}. As discussed in Section~\ref{sec:compsandfuncs}, only
+  basic data reading/writing functionalities are minimally necessary for a
+  \pilot system.  Nonetheless, most of the use cases [ref] require more
+  advanced data management functionalities that can be implemented within the
+  \pilot system or delegated to third party tools.
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Data}. As seen in Section~\ref{sec:compsandfuncs}, only
-  basic data reading/writing functionalities are necessary for a \pilot system.
-  Nonetheless, most of the use cases [ref] require more advanced data management
-  functionalities that can be implemented within the \pilot system of delegated
-  to third party tools.
-
-  % \mtnote{Should this be just `Data'? A file is a specific example of data
-  % container, not necessarily the only one a pilot might support.}
-
-% aux because: its not directly coupled to one of the components/functions
-\item \textbf{Performance and scalability}. \pilot systems varies both in
+\item \textbf{Performance and scalability}. \pilot systems vary both in
   terms of overheads they add to the execution of a given workload, and of the
   size and duration of the workloads a user can expect to be supported.
   Furthermore, \pilot systems can be designed to optimize one or more
-  performance metrics, depending on the reference use cases.
+  performance metrics, depending on the targetted use cases.
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Development Model}. The model used to develop \pilot systems is a
-  distinguishing element, especially when considering whether the development is
-  supported by a open community or by a specific project. Different development
-  models have an impact on the life span of the \pilot system, its
+  distinguishing element, especially when considering whether the development
+  is supported by a open community or by a specific project. Different
+  development models have an impact on the life span of the \pilot system, its
   maintainability and, in case, evolution path.
 
 \end{itemize}
