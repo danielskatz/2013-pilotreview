@@ -3739,19 +3739,20 @@ the default form they come in and how they are meant to be deployed.
 % decided to use \pilot. Section 3 has been updated, the other Sections will
 % have to follow.}
 
-Sections~\ref{sec:understanding} and~\ref{sec:analysis} offered respectively a
-description of the minimal capabilities and properties of every \pilot system; a
-vocabulary defining `pilot' and its cognate concepts; a classification of the
-core and auxiliary properties of pilot system implementations; and the analysis
-of an exemplar set of pilot system implementations. Considered altogether, these
-contributions outline the characteristics and properties of a paradigm for the
-execution of tasks on distributed resources by means of resource placeholders.
-This is here referred to as `\pilot paradigm'.
+Section~\ref{sec:understanding} offered a description of the minimal
+capabilities and properties of every \pilot system, a vocabulary defining
+`\pilot' and its cognate concepts.
+The following section~\ref{sec:analysis} offered a classification of the core
+and auxiliary properties of \pilot system implementations, and the analysis of
+an exemplar set of \pilot system implementations.
+Considered altogether, these contributions outline the characteristics and
+properties of a paradigm for the execution of tasks on distributed resources by
+means of resource placeholders.  This is here referred to as `\pilot paradigm'.
 
 In this section, the properties of the \pilot paradigm are critically assessed.
 The goal is to show the generality of this paradigm and how \pilot systems go
 beyond the implementation of a special purpose trickery to speed up the
-execution of a certain type of workload. Once understood the breath of the
+execution of a certain type of workload. Once understood the breadth of the
 \pilot paradigm, it is contextualized by describing its relation with relevant
 domains such as middleware, applications, security, and enterprise. Finally, the
 section closes with a look into the future of \pilot systems moving from the
@@ -3848,57 +3849,59 @@ data placement and scheduling as \pilot is to computational tasks.
 
 Currently, no \pilot system exposes networking resources by means of
 placeholders but there is no theoretical limitation to the implementation of
-what may be called `\pilot networks'.
+what may be called `\pilot networks'. With the advent of Software-Defined
+Networking and User-Schedulable Network paths in mind, the concept was already
+hinted at in \cite{"Pilot abstractions for compute, data, and network"}.
 
 \pilot systems already operate on multiple platforms. Originally devised for
-Grid infrastructures, \pilot systems have been engineered to operate also on
-HPC and Cloud infrastructures. Important to note that many of the \pilot
-systems described in \S\ref{sec:analysis} have been adapted to work with
+HTC Grid infrastructures, \pilot systems have been (re-)engineered to operate
+also on HPC and Cloud infrastructures. Important to note that many of the
+\pilot systems described in \S\ref{sec:analysis} have been adapted to work with
 different infrastructures without undergoing major re-architecturing. This is
 further indication of the independence of the \pilot paradigm from
 infrastructural details, especially those concerning the type of container used
 to instantiate a placeholder.
 
 Usually, \pilots are thought as a means to optimize the throughput of
-single-core, short-lived, uncoupled tasks execution [ref]. The analysis
-presented in~\S\ref{sec:analysis} showed how restrictive such a view is. The
-\pilot paradigm has been successfully integrated within workflow systems to
-support execution of workloads with articulated data and stage dependences.
-Furthermore, single and multi-core tasks can be executed by many existing \pilot
-systems, with BigJob and Radical-Pilot offering also MPI support. As such,
-depending on the type of the given workload, the \pilot paradigm can be
-implemented to optimize different metrics of task execution other than
-throughput.
+single-core (or at least single-node), short-lived, uncoupled tasks execution
+[ref]. The analysis presented in~\S\ref{sec:analysis} showed how restrictive
+such a view is. The \pilot paradigm has been successfully integrated within
+workflow systems to support execution of workloads with articulated data and
+task dependencies.  Furthermore, both single and multi-core tasks can be
+executed by many existing \pilot systems, with some of them also offering
+resource-specific MPI support. As such, depending on the type of the given
+workload, the \pilot paradigm can be implemented to optimize different metrics
+of task execution other than throughput.
 
 Characterized and defined primarily by resource placeholding, multi-level
-scheduling, and late binding, \pilot systems represent a category of software in
-itself. \pilot systems are not just an alternative implementation of a
+scheduling, and late binding, \pilot systems represent a category of software
+in itself. \pilot systems are not just an alternative implementation of a
 scheduler, of a workload manager, of a batch system, or of any other
 special-purpose software component. This specific system is used when
-abstracting one or more type of physical resources with well-defined spatial and
-time properties can lead to the optimization of one of more parameters of the
-workload execution.
+abstracting one or more type of physical resources with well-defined spatial
+and time properties can lead to the optimization of one or more parameters of
+the workload execution.
 
 Appreciating the generality of the \pilot paradigm and the independence of its
-implementations from other types of software, helps also to misspell a potential
+implementations from other types of software, helps also to resolve a potential
 misunderstanding involving \pilots and how multi-level scheduling works. \pilot
 systems are not circumventing the infrastructure middleware but simply
 abstracting away some of its properties in order to optimize one or more
-user-defined performance metric.
+user-defined (performance) metrics.
 
-Multi-level scheduling is not replacing the infrastructure-level scheduler. As
-clearly illustrated in~\S\ref{sec:understanding}, resource containers are still
-created on the target infrastructure by means of that infrastructure
-capabilities and the second level of scheduling is completely contained within
-the boundaries of the resource container. Optimizing the usage of the resource
-containers, for example by minimizing idling time, is an implementation issue,
-not an intrinsic limitation of the \pilot paradigm.
+Multi-level scheduling is not replacing the infrastructure-level scheduler
+either. As clearly illustrated in~\S\ref{sec:understanding}, resource
+containers are still created on the target infrastructure by means of that
+infrastructure's capabilities and the second level of scheduling is completely
+contained within the boundaries of the resource container. Optimizing the usage
+of the resource containers, for example by minimizing idling time, is an
+implementation issue, not an intrinsic limitation of the \pilot paradigm.
 
 It should be noted that shifting the control over tasks scheduling away from
 the infrastructure middleware does not imply that the end-user will become
-necessary responsible for an efficient resource utilization. A \pilot system
+necessarily responsible for an efficient resource utilization. A \pilot system
 can be implemented as a middleware component, as seen with HTCondor and its
-role as an integral part of the infrastructure middleware stack.
+role as an integral part of the infrastructure middleware stack on some DCIs.
 
 The generality of the \pilot paradigm may come as a surprise when considering
 the most common requirement that motivates its implementations. Leveraging
@@ -3910,7 +3913,7 @@ on either a type of workload, a specific infrastructure, or the optimization of
 a single performance metric.
 
 Appreciating the properties of the \pilot paradigm becomes necessary once
-requirements of infrastructure interoperability, support from multiple types of
+requirements of infrastructure interoperability, support for multiple types of
 workloads, or flexibility in the optimization of execution are introduced.
 Satisfying those requirements requires abstracting the specificity of
 middleware, infrastructure architectures, and application patterns. As shown in
