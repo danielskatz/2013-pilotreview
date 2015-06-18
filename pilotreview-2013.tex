@@ -4216,10 +4216,10 @@ As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
 as a pragmatic solution for improving the throughput of distributed
 applications. \pilot systems were not thought from their inception as an
 independent class of middleware but, at best, as a module within a specific
-framework. This not only promoted duplication of development effort across
-frameworks but also hindered the appreciation for the breath of the \pilot
-abstraction, the underlying theoretical framework to the \pilot systems and the
-application execution paradigm they enable.
+framework. This not only did not prevent duplication of development effort
+across frameworks and projects but also hindered the appreciation for the
+generality of the \pilot abstraction and the underlying theoretical framework
+to the \pilot systems and the application execution paradigm they enable.
 
 \pilot systems inherited the development model of the scientific projects
 within which they were initially developed. Most of the early \pilot systems
@@ -4227,15 +4227,17 @@ were developed to serve a specific use case, often within the remit of a
 specific research project. As a consequence, these systems were not engineered
 to promote (re)usability, modularity, well-defined interfaces, or long-term
 sustainability. Furthermore, for the most part code was not build around a
-community, following recognized and widely-accepted coding standards.
+wider community, following recognized and widely-accepted coding standards.
 
 All this is likely to change with the progressive appreciation of the
 generality, richness, and versatility of the \pilot paradigm. The ongoing
-re-engineering of PANDA and the development of RADICAL-Pilot indicate that the
-\pilot paradigm is becoming the leading approach for large scale scientific
-applications. For example, PANDA supports the execution of 5 million jobs weekly
-for the ATLAS project~\cite{Aad2008} and in the past year RADICAL-pilot has be
-used to execute [...] milion jobs on XSEDE.
+re-engineering of PANDA and DIRAC and the development of RADICAL-Pilot indicate
+that the \pilot paradigm is becoming the leading approach for large scale
+scientific applications. For example, PANDA supports the execution of 5 million
+jobs weekly for the ATLAS project~\cite{Aad2008} and in the past year
+RADICAL-pilot has be used to execute [...] milion jobs on XSEDE.
+\msnote{This sounds biased. I would think there are better examples of
+production usage than that of RP ...}
 
 % \mtnote{we may want to add some data here, showing the staggering amount of
 % resources consumed by means of these two pilot systems.}
@@ -4244,7 +4246,7 @@ It should be noted that `large scale scientific applications' includes both
 distributed and parallel applications executed on diverse types of
 infrastructure. This shows how historical distinctions between, for example,
 HPC and HTC are progressively loosing their meaning when considering resource
-provision and application execution by means of \pilot systems.
+provisioning and application execution by means of \pilot systems.
 
 As argued in the previous section, \pilot systems are agnostic towards the type
 of application that is executed. They need to be engineered so to support
@@ -4253,8 +4255,8 @@ notions of resource placeholder and multi-level scheduling do not require for
 the application to be distributed, parallel, MPI, closed-coupled, or
 communication independent.
 
-Pilots holds resources and the properties of such resources can be arbitrarily
-specified. Analogously, pilots allow for tasks to be scheduled but the type of
+\pilots holds resources and the properties of such resources can be arbitrarily
+specified. Analogously, \pilots allow for tasks to be scheduled but the type of
 matching between the requirements of these tasks and the capabilities offered by
 the resources held by the pilot is not mandated by the \pilot paradigm itself.
 For this reason, adopting the \pilot paradigm for the execution of increasingly
@@ -4277,10 +4279,12 @@ focus on federation of resources, integration of leadership machines, and
 scaling-out to cloud infrastructures. Furthermore, large scale executions make
 fault-tolerance and advanced mechanisms for fault-recovery essential. For
 example, \pilot systems need to be able to rerun those few tasks that failed
-among the millions that have been successfully executed. Analogously, the
-failure of a \pilot among the many instantiated must not be an unrecoverable
-event. In this context, resource discovery and dynamic handling of application
-execution will probably play an increasingly important role.
+among the millions that have been successfully executed.\msnote{How do we want
+to draw the line between pilot systems and WMS? The restart of task can be done
+on multiple levels.} Analogously, the failure of a \pilot among the many
+instantiated must not be an unrecoverable event. In this context, resource
+discovery and dynamic handling of application execution will probably play an
+increasingly important role.
 
 With scale, performance becomes an increasingly relevant issue. Performance not
 only as in overall application throughput but, more subtly and yet not less
@@ -4301,18 +4305,19 @@ actively developed should be reduced so to avoid duplication while promoting
 consolidation, robustness, and overall capabilities. Nonetheless, this
 conclusion should not be brought to an extreme. A single \pilot system should
 not be elected as the only implementation worthy of development effort or
-adoption. As with other middleware [cit] the problem is not to eliminate special
-purpose systems in favor of a single encompassing solution but it is, instead,
-having both of them, depending on the application and use case requirements. A
-multi-purpose, functionally encompassing \pilot system is desirable for all
-those use cases in which applications are heterogeneous in the type of
-computation, time, or space. For specific applications designed to run on a
-single type of infrastructure, a special purpose system might still be more
-effective.
-
-\mtnote{Consider whether to add a paragraph about interoperability among \pilot
-systems. I would probably not do it as it does not seem of primary relevance to
-me.}
+adoption. As with other middleware [cit] the problem is not to eliminate
+special purpose systems in favor of a single encompassing solution but it is,
+instead, having both of them, depending on the application and use case
+requirements. A multi-purpose, functionally encompassing \pilot system is
+desirable for all those use cases in which applications are heterogeneous in
+the type of computation, time, or space. For specific applications designed to
+run on a single type of infrastructure, a special purpose system might still be
+more effective.\msnote{The previous sentence might undercut our story more than
+we wish, as all existing systems started as that, but consequently ran into
+trouble when trying to grow behond that} Another rationale against rigid
+consolidation is the diversity in programming languages used, the different
+deployment models required, and what that means for the interaction with
+existing applications.
 
 % \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
 % \jhanote{\pilotjobs have potential, but it is not being realized due to
