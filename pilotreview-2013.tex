@@ -540,7 +540,7 @@ paradigm.
 % The rise of application-level scheduling, as in AppLeS, opened new
 % possibilities to Grid environments. The concept of application-level
 % scheduling was extended to include long-term performance prediction in
-% heterogenous Grid environments via the Grid Harvest Service (GHS)
+% heterogeneous Grid environments via the Grid Harvest Service (GHS)
 % system~\cite{ghs}. GHS provides a prediction model that was derived by
 % probability analysis and simulation and useful for large-scale applications
 % in shared environments. Its prediction models and task scheduling algorithms
@@ -548,7 +548,7 @@ paradigm.
 % three classes of task scheduling: (i) single task, (ii) parallel processing,
 % and (iii) meta-task. The performance evaluation and modeling in conjunction
 % with task-specific management (such as placement, scheduling, and execution)
-% allows the utilization of many heterogenous resources in an efficient manner.
+% allows the utilization of many heterogeneous resources in an efficient manner.
 
 % complexities of task management and coordination to the application layer.
 % In order to isolate the application itself from the scheduling of resource
@@ -898,7 +898,7 @@ evolved including advanced capabilities like workload and data management.
     \includegraphics[width=0.45\textwidth]{figures/timeline}
     \caption{Introduction of systems over time. When available, the date of
     first mention in a publication or otherwise the release date of software
-    implementation is used.}
+    implementation is used. \mtnote{Missing from from both Section 3 and 4: WISDOM, ToPoS, Corral. Missing from Section 3 but present in Section 4: MyCluster.}}
     \label{fig:timeline}
 \end{figure}
 
@@ -1093,11 +1093,11 @@ between application tasks. Swift uses a \pilot implementation called
 requirements by supporting various types of infrastructure, including clouds
 and grids.
 
-% Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon
-% was engineered for executing many small tasks on HPC systems and shows high
-% performance compared to the native queuing systems. Falkon is a paradigmatic
-% example of how the \pilot abstraction can be implemented to support very
-% specific workload.
+Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon was
+engineered for executing many small tasks on HPC systems and shows high
+performance compared to the native queuing systems. Falkon is a paradigmatic
+example of how the \pilot abstraction can be implemented to support very
+specific workload.
 
 The proliferation of \pilot systems underlines not only a progressive
 appreciation for the \pilot abstraction but also the emergence of a \pilot
@@ -1187,11 +1187,13 @@ as well as infrastructure level, two or more logical components may be
 implemented in a single software module, or additional functionalities may be
 integrated into the Managers and Task Manager. Nevertheless, the Pilot and
 Workload Managers and the Task Manager can always be distinguished across
-different \pilot systems. For example, looking at the systems mentioned
-in~\S\ref{sec:history}, \ldots \mtnote{I will wait for S2 and S4 to be final
-before picking the right examples/vocabulary.} \msnote{How about not having an
-example here? In a way it will cut short what we do in S4} \mtnote{I see what
-you mean. Let's see how does it look like once we have a full draft.}
+different \pilot systems.
+
+% For example, looking at the systems mentioned in~\S\ref{sec:history}, \ldots
+% \mtnote{I will wait for S2 and S4 to be final before picking the right
+% examples/vocabulary.} \msnote{How about not having an example here? In a way
+% it will cut short what we do in S4} \mtnote{I see what you mean. Let's see how
+% does it look like once we have a full draft.}
 
 Each \pilot system supports a minimal set of functionalities that allow for the
 execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching},
@@ -1603,9 +1605,9 @@ The wide spectrum of available implementations of the logical components of a
     \label{fig:core_vocabulary}
 \end{figure}
 
-\mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
-is sufficient and necessary in order to discriminate between \pilot and
-not-\pilot systems;} \mtnote{This is still somewhat an open issue.}
+% \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
+% is sufficient and necessary in order to discriminate between \pilot and
+% not-\pilot systems;} \mtnote{This is still somewhat an open issue.}
 
 %------------------------------------------------------------------------------
 % SECTION 4
@@ -1654,34 +1656,37 @@ all \pilot systems.
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
 % Pilot Provisioning, Task Dispatching, and Task Execution.
-\msnote{I don't see how it is derived or consistent ;-)}
 
-\mtnote{Derived and consistent: they are required by (every: core, at least an:
-auxiliary) implementation of those functionalities. I rewrote the paragraph
-avoiding the two terms but keeping the semantic just explained.}
+% \msnote{I don't see how it is derived or consistent ;-)}
 
-\mtnote{I have changed and shortened the names of the core properties. After
-many months, they made less sense for me that they use to. This is currently
-just a suggestion that I would like to discuss during our next call. Once
-reached an agreement I will take care of revert/iterate/change naming across
-the whole 4.1 (and, in case, 4.2).}
+% \mtnote{Derived and consistent: they are required by (every: core, at least
+% an: auxiliary) implementation of those functionalities. I rewrote the
+% paragraph avoiding the two terms but keeping the semantic just explained.}
+
+% \mtnote{I have changed and shortened the names of the core properties. After
+% many months, they made less sense for me that they use to. This is currently
+% just a suggestion that I would like to discuss during our next call. Once
+% reached an agreement I will take care of revert/iterate/change naming across
+% the whole 4.1 (and, in case, 4.2).}
 
 % As such, Core Properties are both necessary and sufficient for an
 % implementation of a distributed system to be classified as a
 % \pilot system. On the contrary, auxiliary properties are not defining of a
 % \pilot system but they are implementation details that further characterize a
-% \pilot system.  The set of auxillary properties we discuss is not closed,
-% i.e., the complete set of auxillary properties includes, but is not limited
-% to the set of auxillary properties we discuss.
+% \pilot system.  The set of auxiliary properties we discuss is not closed,
+% i.e., the complete set of auxiliary properties includes, but is not limited to
+% the set of auxiliary properties we discuss.
 
-\msnote{TODO: Fix/merge the two non-compatible definitions of aux props}
+% \msnote{TODO: Fix/merge the two non-compatible definitions of aux props}
 
-\mtnote{Not sure it is still the case. Will address once we will have decided
-  whether to keep the changes I made.}
+% \mtnote{Not sure it is still the case. Will address once we will have decided
+%   whether to keep the changes I made.}
 
 \jhanote{I found it hard to read through the next three paragraphs. Two reasons:
   general style: too many break outs into parenthesis etc. That should be easy
-  to fix.} \mtnote{Done (never say easy).}
+  to fix.}
+
+\mtnote{Done (never say easy).}
 
 \jhanote{Second and more important: We're forward referencing Table 2 and
   thereby core and auxillary properties without having discussed either. One
@@ -2070,11 +2075,13 @@ of individual instantiations of \pilots.
   MPI). \pilot systems differ in whether and how they offer such a capability.
   \pilot systems may adopt dedicated components for managing execution
   environments, or they may rely on ad hoc configuration of the \pilots.
-  Furthermore, execution environments can be of varying complexity, depending
-  on whether the \pilot system allows for data retrieval, dedicated software
-  and library installations, communication and coordination among multiple
-  execution environment and, in case, \pilots.\msnote{Are some words missing
-  here or does the "in case" refer to c and c between pilots?}
+  Furthermore, execution environments can be of varying complexity, depending on
+  whether the \pilot system allows for data retrieval, software and library
+  installations, communication and coordination among execution environments and
+  \pilots.
+
+  % \msnote{Are some words missing here or does the "in case" refer to c and c
+  % between pilots?}
 
 % core because: its a must-have to do pilot provision
 % (alternative view: aux because its an implementation detail \ldots)
@@ -2090,6 +2097,7 @@ of individual instantiations of \pilots.
   still valid?}
   \msnote{I'm still not comfortable with the overlap of this with Task
   Execution and Pilot Deployment}
+  \mtnote{I am OK with it but if you offer an alternative I will see how to integrate it into the existing text.}
 
 \end{itemize}
 
@@ -2155,10 +2163,12 @@ the changes in 4.1 and we can discuss via comments.}
   section, the analysis focuses on fault-tolerance, high-availability, and state
   persistence. These properties are considered indicators of both the maturity
   of the development stage of the \pilot system implementation, and the type of
-  support offered to the paradigmatic use cases introduced in~\S\ref{sec:intro}.
-  \mtnote{I do not think use cases are presented in Section 2 anymore. I think
-  we should have a high level review of the paradigmatic use cases for pilot
-  systems in the introduction.}
+  support offered to the relevant use cases.
+
+  % introduced in~\S\ref{sec:intro}.
+  % \mtnote{I do not think use cases are presented in Section 2 anymore. I think
+  % we should have a high level review of the paradigmatic use cases for pilot
+  % systems in the introduction.}
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Security}. The properties of \pilot systems related to
@@ -3733,18 +3743,17 @@ projects that use it as a foundation layer for job execution.
 \msnote{Maybe this subsection should go and address it in the discussion and
 conclusion}
 
+\mtnote{Should we avoid this subsection altogether?}
+
+\jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
+  systems that we don't discuss}
+
 Some of systems we have discussed, like DIRAC, X, are inherently service
 oriented, or exposed as a service. On the other side of the spectrum, systems
 like DIANE and RADICAL-Pilot take the form of a library or a framework. From a
 formal standpoint, services can be abstracted by a library and a library can be
 abstracted by a service, so the main distinction between these architectures if
 the default form they come in and how they are meant to be deployed.
-
-\mtnote{Should we avoid this subsection altogether?}
-
-
-\jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
-  systems that we don't discuss}
 
 % -----------------------------------------------------------------------------
 % SECTION 5
@@ -3797,12 +3806,13 @@ moving from the current state of the art and discussing the sociotechnical and
 engineering challenges that are being faced both by developers and target
 users.
 
-\mtnote{Just an idea: Section 2 -- pilot abstraction; Section 3 --- pilot
-system; Section 4 --- Pilot implementation; Section 5 --- pilot paradigm.
-Abstraction: the conceptualization of pilot; system: the modeling of pilot
-conceptualization; implementation: the implementation of the model; paradigm:
-methods, tools, and procedures pertaining to/enabled by the use of pilots. What
-do you think? Happy to refine/change/abandon if you think it does not work.}
+% \mtnote{Just an idea: Section 2 -- pilot abstraction; Section 3 --- pilot
+% system; Section 4 --- Pilot implementation; Section 5 --- pilot paradigm.
+% Abstraction: the conceptualization of pilot; system: the modeling of pilot
+% conceptualization; implementation: the implementation of the model; paradigm:
+% methods, tools, and procedures pertaining to/enabled by the use of pilots.
+% What do you think? Happy to refine/change/abandon if you think it does not
+% work.}
 
 % -----------------------------------------------------------------------------
 % 5.1
@@ -4104,7 +4114,7 @@ management of the application execution.
 % the \pilot system. A similar assessment could be done for a DCI deploying a
 % PaaS model of cloud computing.
 
-\mtnote{Use of DCIs for plural needs to be consistent across the paper.}
+% \mtnote{Use of DCIs for plural needs to be consistent across the paper.}
 
 % \paragraph*{Pilot and Application Layer}
 
@@ -4378,14 +4388,61 @@ me.}
 % attention where there is less overlap and more tailored to their own
 % communities. [ref Open RunTime Environment] Standardisation?
 
+% -----------------------------------------------------------------------------
+% 5.4
+%
+\subsection{Contributions}
+\label{sec:contributions}
+
 \paragraph*{Contributions} \jhanote{(i) we provide first comprehensive
 historical and technical analysis, (ii) set the stage for a common conceptual
 model and implementation framework, and (iii) provide insight and lessons for
 other tools and higher-level frameworks, such as Workflow systems possibly}
-\mtnote{(iii) is probably already addressed. I think we will need to speak
-about (i) and (ii) as a form of conclusion to the paper adding also the
-contributions offered by Section 4 and 5. I leave these as the last paragraphs
-to write after the second pass and consolidation of the whole draft.}
+\mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added also contributions of 4 and 5. }
+
+This paper offers several contributions to support the understanding, design,
+and adoption of \pilot systems. \S\ref{sec:history} provided an overview of both
+the motivations that led to the development of the \pilot abstractions and its
+early implementations, and an analysis of the many \pilot systems that have been
+and still are used to support scientific computing. These systems were clustered
+on the base of their capabilities to show the progressive process of
+implementations of the \pilot abstraction.
+
+The analysis provided in \S\ref{sec:history} also showed the heterogeneity of
+the \pilot landscape and the need for a clarification of the basic components
+and functionalities that distinguish a \pilot system. These were described in
+\S\ref{sec:understanding} offering a way to identify \pilot systems and
+discriminate them from other type of middleware. \S\ref{sec:understanding}
+contributed also a well-defined vocabulary that can be used to reason
+consistently about different implementation of the \pilot abstraction.
+
+Both contributions offered in \S\ref{sec:understanding} were then leveraged in
+\S\ref{sec:analysis} to analyze a set of paradigmatic \pilot system
+implementations. The shift from understanding the minimal set of components and
+functionalities characterizing the \pilot abstraction to the comparison of
+actual \pilot implementations required to outline core and auxiliary
+implementation properties. Table~\ref{table:property_component_mapping}
+summarize these contributions by mapping both types of property into the \pilot
+system components and functionalities. This table can be used to analyze any
+middleware software, decide whether it is a \pilot system, and assess the
+richness of its functionalities.
+
+The work done in \S\ref{sec:history}, \S\ref{sec:understanding}, and
+\S\ref{sec:properties} supported the comparative analysis of \pilot system
+implementations offered in \S\ref{sec:implementations}. This contribution
+outlined differences and similarities among implementations, showing how they
+impact on the overall \pilot systems capabilities and their target use cases.
+Thanks to these insights, it was possible in \S\ref{sec:discussion} to highlight
+the properties of the \pilot paradigm.
+
+Generality along the types of workload, resource, and performance indicates the
+fundamental role that the \pilot paradigm can play to support distributed
+computing to higher scales and on diverse infrastructures. Among all the
+contributions of this paper, this indication is one of the most important. When
+understood, it would show to the user communities, DCIs managers, and developers
+that converging towards a robust, interoperable, openly available, community
+developed and maintained \pilot system is a privileged way to progress the
+computational-intense research of many scientific fields.
 
 % -----------------------------------------------------------------------------
 % \item \textbf{Pilot abstraction} as a well-defined, independent
