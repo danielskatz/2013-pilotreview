@@ -725,16 +725,29 @@ jobs.
 % Version 0.3
 % -----------------------------------------------------------------------------
 
-The origin and motivations for devising the \pilot abstraction, developing its
-many implementations and realize a full-fledge \pilot paradigm can be traced
-back to five main notions: task-level distribution and parallelism, \MW pattern,
-multi-tenancy, multi-level scheduling, and resource placeholder. This section
-offers an overview of these five notions and an analysis of their relationship
-with the \pilot abstraction. A chronological perspective is taken so to
-contextualize the inception and evolution of the \pilot abstraction into its
-implementation systems.
+% The origin and motivations for devising the \pilot abstraction, developing its
+% many implementations and realize a full-fledge \pilot paradigm can be traced
+% back to five main notions: 
 
-\mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of \pilot systems as described in Subsection 2.2.}
+To understand the full impact of the \pilot abstraction, there are at least five
+functional features that need elucidation: task-level distribution and
+parallelism, \MW pattern, multi-tenancy, multi-level scheduling, and resource
+placeholding.  \jhanote{I don't think the \MW pattern is a functional area..A
+  candidate for removal from detailed discussion in 2.1?}}  is it intrinsicThe
+variation in the scope, semantics and implementation of these functional areas
+is just one of the many underlying reasons for the multiple \pilot
+implementations.  None of these functional features are unique to, or initiated
+by the \pilot abstraction. The \pilot abstraction does however, bring these
+diverse functional features together towards an integrated and collective
+capability.
+
+This section offers an overview of these five notions and an analysis of their
+relationship with the \pilot abstraction. A chronological perspective is taken
+so to contextualize the inception and evolution of the \pilot abstraction into
+its implementation systems.
+
+\mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of
+  \pilot systems as described in Subsection 2.2.}
 
 % ------------------------------------------------------------------------------
 % 2.1
@@ -758,9 +771,9 @@ weather of specific regions of the globe. The computers would perform their
 calculations and then send the results back to the clerk. The Forecast Factory
 was not only an early conceptualization of what is called today a
 ``supercomputer''~\footnote{Supercomputer is here used as a general term
-indicating a system with a very large computing capacity. As such, this term
-makes no distinction among alternative supercomputer architectures.} but also of
-the coordination pattern for distributed and parallel computation called
+  indicating a system with a very large computing capacity. As such, this term
+  makes no distinction among alternative supercomputer architectures.} but also
+of the coordination pattern for distributed and parallel computation called
 ``\MW''.
 
 \begin{figure}[t]
@@ -799,7 +812,8 @@ promote efficient and fair resource sharing. Job schedulers implement a
 usability model where users submit computational tasks called ``jobs'' to a
 queue. The execution of these job is delayed waiting for the required amount of
 resources to be available. The amount of delay mostly depends on the size and
-duration of the submitted job, resource availability, and fair usage policies.
+duration of the submitted job, resource availability, and policies (such as fair
+usage).
 
 Supercomputers are often characterized by several types of heterogeneity and
 diversity. Users are faced with different job description languages, job
@@ -820,28 +834,32 @@ a continuous optimization of the management of each resource but also to the
 development of alternative strategies to expose and serve resources to the
 users.
 
-Multi-level or meta scheduling is one of the strategies devised to improve
-resource access across multiple supercomputers. The idea is to hide the
-scheduling point of each supercomputer behind a single (meta) scheduler. The
-users or the applications submit their tasks to the single scheduler that
-negotiates and orchestrates the distribution of the tasks via the scheduler of
-each available supercomputer. While this approach promises an increase in both
-scale and usability of applications, it also introduces diverse types of
-complexity across resources, middleware, and applications.
+Multi-level or meta scheduling \jhanote{I do not think the two are
+  equivalent. At least not in common usage. i.e., you can definitely do meta
+  scheduling without multilevel scheduling. Please argue otherwise, else I will
+  remove meta scheduling.} is one of the strategies devised to improve resource
+access across multiple supercomputers. The idea is to hide the scheduling point
+of each supercomputer behind a single (meta) scheduler. The users or the
+applications submit their tasks to the single scheduler that negotiates and
+orchestrates the distribution of the tasks via the scheduler of each available
+supercomputer. While this approach promises an increase in both scale and
+usability of applications, it also introduces diverse types of complexity across
+resources, middleware, and applications.
 
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
-umbrellas of grid computing or cloud computing, targeted the resource layer,
-others the application layer as, for example, with workflow frameworks. All
-these approaches offered and still offer some degree of success for specific
-applications and use cases but a general solution based on well-defined and
-robust abstractions has still to be devised and implemented.
+umbrellas of grid computing or cloud computing\jhanote{need to be more specific
+  than grid computing}, targeted the resource layer, others the application
+layer as, for example, with workflow frameworks. All these approaches offered
+and still offer some degree of success for specific applications and use cases
+but a general solution based on well-defined and robust abstractions has still
+to be devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
 supercomputers is the increase of the implementation complexity imposed on the
 application layer. Even with solutions like grid computing aiming at effectively
 and, to some extent, transparently integrating diverse resources, most of the
-requirements involving the coordination of task execution still lays with the
+requirements involving the coordination of task execution still resides with the
 application layer. This translates into single-point solutions, extensive
 redesign and redevelopment of existing applications when they need to be adapted
 to new use cases or new resources, and lack of portability and interoperability.
@@ -880,11 +898,13 @@ still spends a variable amount of time waiting to be executed by the batch
 system of the remote supercomputer, but, once executed, the user -- or the
 master process of the distributed application -- may hold total control over its
 resources. In this way, tasks are directly scheduled on the placeholder without
-competing with other users for the supercomputer scheduler.
-\msnote{I would like to either replace 'supercomputer' with i.e. 'cluster', or
-make it explicit in the beginning of 2.1 that we talk about multiple types of
-systems} \mtnote{Here I used supercomputer in its general meaning as computing
-device with a lot of computational capacity. I added a footnote, any better?}
+competing with other users for the supercomputer scheduler.  \msnote{I would
+  like to either replace 'supercomputer' with i.e. 'cluster', or make it
+  explicit in the beginning of 2.1 that we talk about multiple types of systems}
+\mtnote{Here I used supercomputer in its general meaning as computing device
+  with a lot of computational capacity. I added a footnote, any better?}
+\jhanote{I think we should use neither. the generally acceptable albeit equally
+  fuzzy term is high-performance machine or high-performance computing.}
 
 % ------------------------------------------------------------------------------
 % 2.2
