@@ -1197,21 +1197,22 @@ Section~\ref{sec:understanding}.
 The overview presented in \S\ref{sec:history} shows a degree of heterogeneity
 both in the functionalities and the vocabulary adopted by different \pilot
 systems. Implementation details sometimes hide the functional commonalities and
-differences among \pilot systems while features and capabilities tend to be
+differences among \pilot systems. Features and capabilities tend to be
 named inconsistently, often with the same terms referring to multiple concepts
 or the same concept named in different ways.
 
 This section offers an analysis of the logical components and functionalities
 shared by every \pilot system. The goal is to offer a paradigmatic description
 of a \pilot system and a well-defined vocabulary to reason about such a
-description and, eventually, about its multiple implementations.
+description and, eventually, about its multiple implementations. \jhanote{would
+  ``description'' be better than ``analysis'' in the first sentence?}
 
 %------------------------------------------------------------------------------
 % 3.1
 \subsection{Logical Components and Functionalities}
 \label{sec:compsandfuncs}
 
-All the \pilot systems introduced in~\S\ref{sec:history} are engineered to
+All \pilot systems introduced in~\S\ref{sec:history} are engineered to
 allow for the execution of (multiple types of) workloads on Distributed
 Computing Infrastructures (DCIs) such as grid, cloud, or HPC facilities. This
 is achieved differently, depending on use cases, design and implementation
@@ -1221,19 +1222,20 @@ along multiple dimensions: purpose, logical components, and functionalities.
 
 The purpose shared by every \pilot system is to improve the (performance of)
 workload execution when compared to executing the same workload directly on one
-or more DCI. Performance in \pilot systems is usually associated to throughput
-and execution time to completion (TTC), but other metrics could also be
-considered, for example, energy efficiency, data transfer minimization, scale
-of the workload executed, or a mix of them. Purposes that are not (directly)
-performance related include robustness and ease of application deployment.  In
-order to optimize the chosen set of metrics, each \pilot system exhibits
-characteristics that are both common or specific to one or more
-implementations. Discerning these characteristics requires isolating and
+or more DCI. Performance % in \pilot systems
+of workload execution is usually %associated to
+measured by throughput and execution time to completion (TTC), but other metrics
+could also be considered, for example, energy efficiency, data transfer
+minimization, scale of the workload executed, or a mix of them. Purposes that
+are not (directly) performance related include robustness and ease of
+application deployment.  In order to optimize the chosen set of metrics, each
+\pilot system exhibits characteristics that are both common or specific to one
+or more implementations. Discerning these characteristics requires isolating and
 defining the minimal set of logical components that has to characterize every
 \pilot system.
 
-At some level, all \pilot systems leverage three separate but coordinated
-logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
+At some level, all \pilot systems employ three separate but coordinated logical
+components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
 \vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
 and use of one or more resource placeholders (i.e. `\pilots`) on single or
 multiple DCIs. The Workload Manager handles the scheduling of one or more given
@@ -1241,7 +1243,7 @@ workloads on the available resource placeholders. Finally, the Task Manager
 takes care of executing the tasks of each workload by means of the resources
 held by the placeholders.
 
-The implementation details of these three logical components significantly vary
+The implementation details of these three logical components vary significantly
 across \pilot systems (see~\S\ref{sec:analysis}). One or more logical
 components may be responsible for specific functionalities, both on application
 as well as infrastructure level, two or more logical components may be
@@ -1278,9 +1280,13 @@ tasks to utilize resources without directly depending on the capabilities
 exposed by the targeted DCI. Resource placeholders are scheduled onto the DCI
 resources by means of the DCI capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
-execution of the tasks of a workload.
-\mtnote{Currently, this is a bit of repetition of what we wrote already in
-Section 2 but seeing the importance of the concept we might want to keep it.}
+execution of the tasks of a workload.  \mtnote{Currently, this is a bit of
+  repetition of what we wrote already in Section 2 but seeing the importance of
+  the concept we might want to keep it.} \jhanote{We should keep it. But more
+  importantly, we may want to introduce the vocabulary of resource/DCR/DCI that
+  we developed for the proposals here, and make it consistent throughout the
+  paper. In this para for example we use the term DCI resource, which is
+  inconsistent with developed vocabulary}
 
 % MS: I would move this comment to section 5 I think, as multi-tenant pilot
 % systems do have to make these trade-offs, and it would be good to point that
