@@ -728,12 +728,14 @@ jobs.
 % back to five main notions:
 
 To understand the full impact of the \pilot abstraction, there are at least five
-functional features that need elucidation: task-level distribution and
-parallelism, \MW pattern, multi-tenancy, multi-level scheduling, and resource
-placeholding.  \jhanote{I don't think the \MW pattern is a functional area..A
-  candidate for removal from detailed discussion in 2.1?}  is it intrinsicThe
+features that need elucidation: task-level distribution and parallelism, \MW
+pattern, multi-tenancy, multi-level scheduling, and resource placeholding.
+\jhanote{I don't think the \MW pattern is a functional area..A candidate for
+removal from detailed discussion in 2.1?}\mtnote{I would prefer to remove
+`functional' than \MW discussion from 2.1 as that serves as a base for the
+somewhat less extended discussion in 3. Would that work?}  is it intrinsicThe
 variation in the scope, semantics and implementation of these functional areas
-is just one of the many underlying reasons for the multiple \pilot
+is just one of the many underlying reasons for the multiple \pilotjob
 implementations.  None of these functional features are unique to, or initiated
 by the \pilot abstraction. The \pilot abstraction does however, bring these
 diverse functional features together towards an integrated and collective
