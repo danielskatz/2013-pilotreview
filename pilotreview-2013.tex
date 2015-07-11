@@ -1728,12 +1728,15 @@ The wide spectrum of available implementations of the logical components of a
 Section \S\ref{sec:understanding} offered two main contributions: (i) the
 minimal sets of logical components and functionalities of \pilot systems
 \footnote{From here on we will be internally consistent and use \pilot system
-instead of \pilotjob system.}; (ii) and a well-defined core terminology to
+  instead of \pilotjob system.}; (ii) and a well-defined core terminology to
 support reasoning about such systems. The former defines the necessary and
 sufficient requirements for a software system to be a \pilot system, while the
 latter enables consistency when referring to different \pilot systems. Both
-these contributions are used in this section to review critically a selection of
-\pilot systems implemented to execute real-life scientific workloads.
+these contributions are used in this section to investigate a limited selection
+of \pilot systems.
+
+%that have seen significant 
+%implemented to execute real-life scientific workloads.
 
 The goal of this section is twofold. Initially, the \pilot functionalities
 presented in \S\ref{sec:history} are used as the basis to infer core \pilot
@@ -1756,12 +1759,16 @@ This section analyzes the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
 chosen by considering the implementation requirements of the \pilot capabilities
-as defined in~\S\ref{sec:history}, Table~\ref{table:terminology}.  A property
-belongs to the set of core properties if it is required by the implementation of
-one or more of the \pilot functionalities. Auxiliary properties are instead
-required only when added functionalities needs to be implemented for a specific
-\pilot system. As such, auxiliary properties are not necessarily shared among
-all \pilot systems.
+as defined in~\S\ref{sec:history}.  A property belongs to the set of core
+properties if it is required by the implementation of one or more of the \pilot
+functionalities. Auxiliary properties are instead required only when added
+functionalities needs to be implemented for a specific \pilot system. As such,
+auxiliary properties are not necessarily shared among all \pilot systems.
+\jhanote{removed table reference..as a consequence of changes in 3, broken
+  reference here}\jhanote{there is a potential problem here: we define core
+  property based upon its requirement by a \pilot functionality. we define
+  auxiliary based upon its requirement by a \pilot system. can we not define
+  core simply as, ``... necessary for any \pilot system''?}
 
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
@@ -1792,20 +1799,20 @@ all \pilot systems.
 % \mtnote{Not sure it is still the case. Will address once we will have decided
 %   whether to keep the changes I made.}
 
-\jhanote{I found it hard to read through the next three paragraphs. Two reasons:
-  general style: too many break outs into parenthesis etc. That should be easy
-  to fix.}
+% \jhanote{I found it hard to read through the next three paragraphs. Two reasons:
+%   general style: too many break outs into parenthesis etc. That should be easy
+%   to fix.}
 
-\mtnote{Done (never say easy).}
+% \mtnote{Done (never say easy).}
 
-\jhanote{Second and more important: We're forward referencing Table 2 and
-  thereby core and auxillary properties without having discussed either. One
-  temporary solution -- I am sure it has its own drawbacks is to move these 3
-  paragraphs to the end of 4.1.1. Lets discuss.}
+% \jhanote{Second and more important: We're forward referencing Table 2 and
+%   thereby core and auxillary properties without having discussed either. One
+%   temporary solution -- I am sure it has its own drawbacks is to move these 3
+%   paragraphs to the end of 4.1.1. Lets discuss.}
 
-\mtnote{These three paragraphs are now connected to the following two and become
-  a summarizing description/introduction to Table 2. 4.1.1 and 4.1.2 are now
-  further specifications of these paragraphs. Does it work better?}
+% \mtnote{These three paragraphs are now connected to the following two and become
+%   a summarizing description/introduction to Table 2. 4.1.1 and 4.1.2 are now
+%   further specifications of these paragraphs. Does it work better?}
 
 Table~\ref{table:property_component_mapping} offers a brief description for each
 core and auxiliary property alongside their mapping to the required components
@@ -1819,7 +1826,7 @@ that the \pilot system exposes, e.g. compute, data, or networking. Pilot
 Deployment describes the modalities of scheduling, utilization, and aggregation
 of pilots. Infrastructure Interactions singles out the protocols and policies
 required for the \pilot system to interact with the remote infrastructure(s).
-For example, to schedule a pilot onto a specific infrastructure \pilot systems
+For example, to schedule a pilot onto a specific infrastructure, \pilot systems
 need to know what type of container to use (e.g. job, virtual machine), what
 type of scheduler the resource exposes, the amount of cores and for how long
 they can be asked for, what filesystems can be accessed, how to contact the
@@ -4650,14 +4657,10 @@ computational-intense research of many scientific fields.
 % too prescriptive/hand-wavey -- feel free to ignore if so, but I feel
 % that the essence of this is one potential contribution of our work.}
 
-\section*{Acknowledgements}
-{\footnotesize{This work is funded by the Department of Energy Award
-    (ASCR) DE-FG02-12ER26115 and NSF CAREER ACI-1253644. This work has
-    also been made possible thanks to computer resources provided by
-    TeraGrid TRAC award TG-MCB090174 and BiG Grid. This document was
-    developed with support from the US NSF under Grant No. 0910812 to
-    Indiana University for ``FutureGrid: An Experimental,
-    High-Performance Grid Test-bed''.}}
+\section*{Acknowledgements} {\footnotesize{This work is funded by the Department
+    of Energy Award (ASCR) DE-FG02-12ER26115 and NSF CAREER ACI-1253644. We
+    thank the many members of the RADICAL group -- former and current, for
+    helpful discussions, comments and criticisms.}}
 
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{abbrv}
@@ -4665,3 +4668,7 @@ computational-intense research of many scientific fields.
 
 
 \end{document}
+
+
+This work has also been made possible thanks to computer resources provided by
+TeraGrid TRAC award TG-MCB090174.
