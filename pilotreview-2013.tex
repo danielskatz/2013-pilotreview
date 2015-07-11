@@ -1680,7 +1680,7 @@ functionalities.
 Figure~\ref{fig:core_vocabulary} also helps to appreciate the critical
 distinction between the container of a pilot and the pilot itself. A container,
 for example a job, is used by the pilot manager to provision the pilot. Once the
-pilot has been provisioned, it is the pilot and not the container to be
+pilot has been provisioned, it is the pilot and not the container that is
 responsible of both holding a set of resources and offering the functionalities
 of the task manager.
 
@@ -1759,6 +1759,7 @@ engineered, and the design principles that underly such systems.
 \subsection{Core and Auxiliary Properties}
 \label{sec:properties}
 
+
 This section analyzes the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
@@ -1821,7 +1822,20 @@ auxiliary properties are not necessarily shared among all \pilot systems.
 Table~\ref{table:property_component_mapping} offers a brief description for each
 core and auxiliary property alongside their mapping to the required components
 and functionalities of a \pilot system as described
-in~\S\ref{sec:compsandfuncs}.
+in~\S\ref{sec:compsandfuncs}.\jhanote{the table structure is different to the
+  order presented here. See comments at the end of next paragraph.}
+
+\jhanote{the contents of this section are fine. my observation is that of style:
+  both internal to the text, and text vis-a-vis the table. Could we not (i)
+  identify and describe the properties, (ii) then mention the components and
+  functionality associated with the property. If we did so, then the
+  ``description'' column would move to be after the property, followed by
+  component and functionality. This is section on properties.  But the
+  properties are presented as subsidiary/secondary in importance to the
+  components. Also, i think current style makes is a tad bit harder to read as
+  one looks at the table.}
+
+
 
 The core implementation properties of the Pilot Manager and its Pilot
 Provisioning functionality are Pilot Resources, Pilot Deployment, and
@@ -2131,46 +2145,14 @@ of individual instantiations of \pilots.
   type of capabilities needed for their execution. \pilot systems support a
   varying degree of semantic richness for the workload and its tasks. The
   (standard) format or language in which the workloads are described may also
-  be relevant.
+  be relevant. 
 
-  \amnote{why are task dependencies (which seems to be what you call
-  'workload semantics') a core property?  A pilot system is still a pilot
-  system if it does not implement task dependencies (ahem! ;-).}
+  \jhanote{moved comment sequence to end of file, after end{document}}
 
-  \mtnote{A pilot system implementation without tasks is a useless pilot
-  system. In this section we are not modeling (that was done in 3) but
-  reviewing/analyzing existing, real world implementations designed and used to
-  run tasks.}
-
-  \amnote{sure, tasks are necessary.  But the paragraph explicitly
-      refers to 'relationships among tasks'.  More to the point, the
-      paragraph says: 'tasks ... are dispatched to pilots depending on
-      their semantics' -- I disagree with that: a pilot system does
-      not care about task semantics, ie. does not care if the task is
-      /bin/sleep or mdrun.  One \textit{can} implement schedulers
-      which respect task dependencies (which are part of the workload
-      semantics, but I don't see that as a core property: a stupid
-      round-robin scheduler (which does not care about any workload
-      semantics, neither in tasks not task dependencies) is perfectly
-      viable for a pilot system...}
-
-  \mtnote{I agree. Indeed the kernel of the task is not mentioned among the
-  semantic properties taken into consideration for the scheduling decision.
-  Pilot systems that are not capable of ``dispatching decisions
-  depends on the temporal and spatial relationships among tasks'', or ``the
-  affinity between data and compute resources required by the tasks'', or ``and
-  the type of capabilities needed for their execution'' are toy systems or mere
-  conceptual possibilities that are not relevant in a section dedicated to pilot
-  systems used to run real-life scientific workloads. Do you feel we should add
-  a sentence specifying that we are not speaking about the intrinsic properties
-  of the kernel of a task? Consider that we do not have the word `kernel'
-  defined in 3, so in case of affirmative answer I may have to add that too.
-  Not a problem if you consider this necessary.}
-
-  \msnote{I get the feeling you are talking about different things. My
-  perception is that the miscommunication is caused by the ambiguous core/aux
-  distinction. More pragmatically I changed the "depending on task semantics"
-  into "depending on workload semantics".}
+  % \msnote{I get the feeling you are talking about different things. My
+  % perception is that the miscommunication is caused by the ambiguous core/aux
+  % distinction. More pragmatically I changed the "depending on task semantics"
+  % into "depending on workload semantics".}
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
@@ -2215,10 +2197,13 @@ of individual instantiations of \pilots.
   of remote interfaces and protocols.
 
   \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
-  still valid?}
-  \msnote{I'm still not comfortable with the overlap of this with Task
-  Execution and Pilot Deployment}
-  \mtnote{I am OK with it but if you offer an alternative I will see how to integrate it into the existing text.}
+    still valid?}  \msnote{I'm still not comfortable with the overlap of this
+    with Task Execution and Pilot Deployment} \mtnote{I am OK with it but if you
+    offer an alternative I will see how to integrate it into the existing text.}
+  \jhanote{In my opinion, at least as currently written, infrastructure
+    interaction is NOT a core property but artifact of other decisions and
+    factors. Thus, possibly a candidate for movement into auxiliary properties?}
+
 
 \end{itemize}
 
@@ -3861,11 +3846,6 @@ projects that use it as a foundation layer for job execution.
 %
 \subsection{Overall observations}
 
-\msnote{Maybe this subsection should go and address it in the discussion and
-conclusion}
-
-\mtnote{Should we avoid this subsection altogether?}
-
 \jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
   systems that we don't discuss}
 
@@ -4678,5 +4658,37 @@ computational-intense research of many scientific fields.
 \end{document}
 
 
-This work has also been made possible thanks to computer resources provided by
-TeraGrid TRAC award TG-MCB090174.
+  \amnote{why are task dependencies (which seems to be what you call
+  'workload semantics') a core property?  A pilot system is still a pilot
+  system if it does not implement task dependencies (ahem! ;-).}
+
+  \mtnote{A pilot system implementation without tasks is a useless pilot
+  system. In this section we are not modeling (that was done in 3) but
+  reviewing/analyzing existing, real world implementations designed and used to
+  run tasks.}
+
+  \amnote{sure, tasks are necessary.  But the paragraph explicitly
+      refers to 'relationships among tasks'.  More to the point, the
+      paragraph says: 'tasks ... are dispatched to pilots depending on
+      their semantics' -- I disagree with that: a pilot system does
+      not care about task semantics, ie. does not care if the task is
+      /bin/sleep or mdrun.  One \textit{can} implement schedulers
+      which respect task dependencies (which are part of the workload
+      semantics, but I don't see that as a core property: a stupid
+      round-robin scheduler (which does not care about any workload
+      semantics, neither in tasks not task dependencies) is perfectly
+      viable for a pilot system...}
+
+  \mtnote{I agree. Indeed the kernel of the task is not mentioned among the
+  semantic properties taken into consideration for the scheduling decision.
+  Pilot systems that are not capable of ``dispatching decisions
+  depends on the temporal and spatial relationships among tasks'', or ``the
+  affinity between data and compute resources required by the tasks'', or ``and
+  the type of capabilities needed for their execution'' are toy systems or mere
+  conceptual possibilities that are not relevant in a section dedicated to pilot
+  systems used to run real-life scientific workloads. Do you feel we should add
+  a sentence specifying that we are not speaking about the intrinsic properties
+  of the kernel of a task? Consider that we do not have the word `kernel'
+  defined in 3, so in case of affirmative answer I may have to add that too.
+  Not a problem if you consider this necessary.}
+
