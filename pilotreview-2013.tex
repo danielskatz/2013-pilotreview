@@ -916,8 +916,8 @@ been progressively implemented into multiple \pilot systems.
 Figure~\ref{fig:timeline} shows the introduction of \pilot systems over time
 while Figure~\ref{fig:pilotjob_clustering} shows their clustering along the axes
 of workload management and pilot functionalities complexity. Starting from a set
-of core functionalities focused on acquiring remote resources and utilize them
-independently from the supercomputer management, \pilot systems progressively
+of core functionalities focused on acquiring remote resources and utilizing them
+independently from the resource management, \pilot systems progressively
 evolved including advanced capabilities like workload and data management.
 
 % As seen in Ref.~\cite{pstar-2012}, the \pilot abstraction has a rich set of
@@ -1001,33 +1001,40 @@ potential drawback is mitigated by the redundancy offered by the large scale
 that voluntary computing can reach thanks to its simpler model of worker
 distribution and installation.
 
-The opportunistic use of geographically distributed resources championed by
-voluntary computing offers several advantages. The resource landscape available
-for scientific research is fragmented across multiple institutions, managed
-with different policies and protocols, and heterogeneous both in quantity and
-quality. Once aggregated, the sum of otherwise limited resources can support
-very large distributed computations and a great amount of multi-tenancy. Note
-that given the required capabilities, this model of resource provisioning can
-still support the execution of parallel applications on the few resources that
-offer low-latency network interconnect.\msnote{This paragraph is a good
-candidate for removal?}
+% The opportunistic use of geographically distributed resources championed by
+% voluntary computing offers several advantages. The resource landscape available
+% for scientific research is fragmented across multiple institutions, managed
+% with different policies and protocols, and heterogeneous both in quantity and
+% quality. Once aggregated, the sum of otherwise limited resources can support
+% very large distributed computations and a great amount of multi-tenancy. Note
+% that given the required capabilities, this model of resource provisioning can
+% still support the execution of parallel applications on the few resources that
+% offer low-latency network interconnect.\msnote{This paragraph is a good
+% candidate for removal?}
 
 Condor is a high-throughput distributed batch computing system that leverages
 diverse and possibly geographically distributed resources. Originally, Condor
 was created for systems within one administrative domain but
-Flocking~\cite{Epema:1996:flocking} made possible to group multiple Condor
+Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management could not
 be done on application level by the user: flocking required system level
 software configurations that had to be made by the administrator of each
-individual resource of each Condor resource pool.
+individual resource of each Condor resource pool. \jhanote{resource management
+  could not be done on application level'' does not make sense to me. Are we
+  referring to aggregation?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
-within the Condor system. Condor-G/GlideIn~\cite{condor-g} allow users to add
-remote grid resources to Condor resource pools. In this way, users can uniformly
-execute jobs on resource pools composed by diverse resources. Thanks to its use
-of resource placeholders, GlideIn has been one of the systems pioneering the
-\pilot abstraction implementation, enabling \pilot capabilities also for third
-parties systems like Bosco~\cite{bosco}.
+within the Condor system. Condor-G/GlideIn~\cite{condor-g} allowed users to add
+remote grid resources to Condor resource pools. In this way, users could
+uniformly execute jobs on resource pools composed by diverse resources. Thanks
+to its use of resource placeholders, GlideIn has been one of the systems
+pioneering the \pilot abstraction implementation, enabling \pilot capabilities
+also for third parties systems like Bosco~\cite{bosco}. \jhanote{So we are sure
+  flocking came before glide-in? Also there is a bit of care needed: we're
+  implying glide-in is a resource placeholder -- which is part of a pilot, and
+  not necessarily a full pilot.} \jhanote{as this is historical evolution, some
+  parts need to be in the past tense. Care will be needed to get the tense
+  right.}
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
@@ -1038,30 +1045,38 @@ the remote resources. This means that GlideIn cannot be deployed without
 involving the resource owners and system administrators. Implemented as a
 service, GlideIn support integration with distributed application frameworks but
 does not programmatically support the development of distributed applications by
-means of dedicated APIs and libraries.
+means of dedicated APIs and libraries. 
 
-The BigJob \pilot system [ref] was designed to address these limitations, to
-broaden the type of applications supported by the \pilot-based execution model,
-and to extend the \pilot abstraction beyond the boundaries of compute tasks.
-BigJob offers an application-level programmability to provide the end-user with
-more flexibility and control over the design of distributed application and the
-isolation of the management of their execution. BigJob is flexible and
-extensible and uses the Simple API for Grid Applications (SAGA) interoperability
-library~\cite{goodale2006,luckow2010} to work on a variety of infrastructures.
-Additionally, BigJob has also been extended to work with data and, analogous to
-compute \pilots, to abstract away direct user communication between different
-storage systems.
+The BigJob \pilot system~\cite{luckow2010} was designed to address these
+limitations, to broaden the type of applications supported by the \pilot-based
+execution model, and to extend the \pilot abstraction beyond the boundaries of
+compute tasks.  BigJob offers an application-level programmability to provide
+the end-user with more flexibility and control over the design of distributed
+application and the isolation of the management of their execution. BigJob is
+flexible and extensible and uses the Simple API for Grid Applications (SAGA)
+interoperability library~\cite{goodale2006,luckow2010} to work on a variety of
+infrastructures.  Additionally, BigJob has also been extended to work with data
+and, analogous to compute \pilots, to abstract away direct user communication
+between different storage systems.
 
-BigJob (being a prototype), recently re-implemented as a production-level system
-named ``RADICAL-Pilot''~\cite{radical_pilot_paper}, represents one of the latest
-evolutionary stages of the \pilot abstraction. From an initial phase in which
+% was recently re-implemented as a production-level tool named
+%``RADICAL-Pilot''~\cite{radical_pilot_paper}.
+
+%rep- resents one of the latest evolutionary stages of the Pilot ab- straction. 
+
+
+BigJob was recently re-implemented as a production-level tool named
+`RADICAL-Pilot''~\cite{radical_pilot_paper}. BigJob/RADICAL-Pilot represent an
+evolution of the \pilot abstraction: from an initial phase in which
 \pilot were implemented as ad hoc place holder machinery for a specific
 application, to the integration of \pilot systems within the middleware of
 remote resources, RADICAL Pilot implements the \pilot abstraction as an
 interoperable compute and data management system that can be programmatically
-integrated into end-user applications.\msnote{The latter brings it back to the
-stage of apples, thats probably not what we want to say ...} \mtnote{Apologies,
-I am not sure I understand this comment.}
+integrated into end-user applications.
+
+\msnote{The latter brings it back to the stage of apples, thats probably not
+  what we want to say ...}  \mtnote{Apologies, I am not sure I understand this
+  comment.}
 
 Another ongoing evolutionary trend of the \pilot abstraction is to be
 implemented into \pilot-based workload managers, thus moving away from
