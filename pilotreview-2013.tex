@@ -176,49 +176,47 @@ support of distributed computing.
 
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
-abstractions at the development, deployment, and execution level. As suggested
-by the proliferation of \pilotjob systems used in production
-cyberinfrastructure, it is arguably one of the most widely-used distributed
-computing abstractions.
+abstractions at the development, deployment, and execution level. \pilotjob is
+arguably one of the most widely-used distributed computing abstractions, as
+suggested by the proliferation of \pilotjob systems used in production
+cyberinfrastructure.
 
-A variety of \pilotjob frameworks have emerged: Condor-G/
+A variety of \pilotjob systems have emerged: Condor-G/
 Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011}, DIANE~\cite{Moscicki:908910},
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-219-6-062041},
 ToPoS~\cite{topos}, Nimrod/G~\cite{10.1109/HPC.2000.846563},
 Falkon~\cite{1362680} and MyCluster~\cite{1652061} to name a few. These
-frameworks are for the most part functionally equivalent as they support the
+systems are for the most part functionally equivalent as they support the
 decoupling of workload submission from resource assignment. Nonetheless, their
 implementations often serve specific use cases, target specific resources, and
 lack in interoperability.
 
-% The situation is reminiscent of the proliferation of
-% functionally similar yet incompatible workflow systems, where in spite of
-% significant {\it a posteriori} effort on workflow system extensibility and
-% interoperability, these objectives remain difficult if not unfeasible.
+% The situation is reminiscent of the proliferation of functionally similar yet
+% incompatible workflow systems, where in spite of significant {\it a
+% posteriori} effort on workflow system extensibility and interoperability,
+% these objectives remain difficult if not unfeasible.
 
-% \pilotjobs excel in terms of the number and types of applications that use them,
-% as well as the number of production distributed cyberinfrastructures that
-% support them. \msnote{ref?}
+% \pilotjobs excel in terms of the number and types of applications that use
+% them, as well as the number of production distributed cyberinfrastructures
+% that support them. \msnote{ref?}
 
 % \mtnote{Should we use just `pilot'}\jhanote{I think you have proposed a
 % graceful transition: from pilotjobs to pilotsystems? If so, should we stick
 % with pilotjobs here?}
 
-The fundamental reason for the proliferation of \pilotjob systems is that it
-provides a simple solution to the rigid and static resource management
-historically found in high-performance and distributed (HPDC).  There are two
-ways in which \pilotjobs break free of the rigid resource utilization model: (i)
-through a process often referred to as late-binding~\cite{latebinding},
-\pilotjobs make the selection of heterogeneous and dynamic, resources easier and
-effective, and (ii) \pilotjobs decouple the workload specification from the task
-management.  The former results in the ability to utilize resources
-``dynamically''; the latter simplifies the placement of workloads on those
-resources.
+The fundamental reason for the proliferation of \pilotjob systems is that
+they provide a simple solution to the rigid and static resource management
+historically found in high-performance and distributed computing (HPDC).  There
+are two ways in which \pilotjobs break free of the rigid resource utilization
+model: (i) through a process often referred to as
+late-binding~\cite{latebinding}, \pilotjobs make the selection of heterogeneous
+and dynamic resources easier and effective; and (ii) \pilotjobs decouple the
+workload specification from the task management.  The former results in the
+ability to utilize resources ``dynamically'', the latter simplifies the
+placement of workloads on those resources.
 
 % management of improving the efficiency of task assignment while shielding
 % applications from having to manage tasks across such resources.
-
-
 
 %   \onote{I think the most important reasons why Pilot Jobs being so
 %     popular (and re-invented over and over again) is that they allow
@@ -233,7 +231,6 @@ resources.
 %     call, it is by no means the only reason. Need to get the different
 %     reasons down here.. then find a nice balance and description}
 
-
  %(thus providing {\it post-facto} justification of its needs)
 
 % \mtnote{Should we have a paragraph explaining the core contribution offered by
@@ -241,46 +238,47 @@ resources.
 
 Though mostly as a pragmatic solution to the need of improving throughput
 performance of distributed applications, \pilotjobs have been almost exclusively
-developed within preexisting frameworks and middleware dedicated to specific
-scientific needs. As a consequence, the development of \pilotjobs have not been
-grounded on a robust understanding of underpinning abstractions, or on a
-well-understood set of dedicated design principles. The functionalities and
+developed within preexisting systems and middleware dedicated to specific
+scientific requirements. As a consequence, the development of \pilotjobs have
+not been grounded on a robust understanding of underpinning abstractions, or on
+a well-understood set of dedicated design principles. The functionalities and
 properties of \pilotjobs have been understood mostly in relation to the needs of
-the containing software frameworks or of the user cases justifying their
+the containing software systems or of the user cases justifying their
 development.
 
 This approach is not problematic in itself and has led to effective
 implementations that serve many million jobs a year on diverse computing
-platforms. However, the lack of an explicit appreciation of the specific
+platforms~\cite{pj_stats}. However, the lack of an explicit appreciation of the
 computing paradigm underlying \pilotjobs has undermined the full development of
 dedicated designs and implementations. This limitation is well illustrated not
 only by the effort duplication but also by an overall immaturity of the
-available frameworks in terms of functionalities, flexibility, portability,
+available systems in terms of functionalities, flexibility, portability,
 interoperability, and, most often, robustness.
 
-This survey is motivated by the fact that in spite of the demonstrated potential
-and proliferation of \pilotjob systems there remains significant lack of clarity
-and understanding about the \pilotjob abstraction. We believe this results in
-unfulfilled and lost potential as well as significant overhead and repetition of
-effort.
- 
-This paper offer a critical analysis of the current state of the art providing
+This survey is motivated by the fact that, in spite of the demonstrated
+potential and proliferation of \pilotjob systemss, there remains significant
+lack of clarity and understanding about the \pilotjob abstraction. We believe
+this results in unfulfilled and lost potential as well as significant overhead
+and repetition of effort.
+
+This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
-paradigm. The remainder of this paper is divided into four sections.
+paradigm, i.e. the abstraction and the methodology underlying \pilotjobs
+systems. The remainder of this paper is divided into four sections.
 \S\ref{sec:history} offers a critical review of the functional underpinnings of
-the pilot abstraction and how it has been evolving into \pilot systems and
+the \pilot abstraction and how it has been evolving into \pilotjob systems and
 systems with pilot-like characteristics.
 
 In~\S\ref{sec:understanding}, the minimal set of capabilities and properties
-characterizing the design of a \pilot system are derived. A vocabulary is then
-defined to be consistently used across different designs and
+characterizing the design of a \pilotjob system are derived. A vocabulary is
+then defined to be consistently used across different designs and
 \pilot system implementations.
 
-In~\S\ref{sec:analysis}, the focus shifts from analyzing the design of a \pilot
-system to critically reviewing the characteristics of a representative set of
-its implementations. Core and auxiliary implementation properties are introduced
-and then used alongside the functionalities and terminology defined
-in~\S\ref{sec:understanding} to compare \pilot systems implementations.
+In~\S\ref{sec:analysis}, the focus shifts from analyzing the design of a
+\pilotjob system to critically reviewing the characteristics of a representative
+set of its implementations. Core and auxiliary implementation properties are
+introduced and then used alongside the functionalities and terminology defined
+in~\S\ref{sec:understanding} to compare \pilotjob systems implementations.
 
 Finally,~\S\ref{sec:discussion} closes the paper by outlining the \pilot
 paradigm, arguing for its generality, and elaborating on how it impacts and
@@ -727,15 +725,17 @@ jobs.
 
 % The origin and motivations for devising the \pilot abstraction, developing its
 % many implementations and realize a full-fledge \pilot paradigm can be traced
-% back to five main notions: 
+% back to five main notions:
 
 To understand the full impact of the \pilot abstraction, there are at least five
-functional features that need elucidation: task-level distribution and
-parallelism, \MW pattern, multi-tenancy, multi-level scheduling, and resource
-placeholding.  \jhanote{I don't think the \MW pattern is a functional area..A
-  candidate for removal from detailed discussion in 2.1?}}  is it intrinsicThe
+features that need elucidation: task-level distribution and parallelism, \MW
+pattern, multi-tenancy, multi-level scheduling, and resource placeholding.
+\jhanote{I don't think the \MW pattern is a functional area..A candidate for
+removal from detailed discussion in 2.1?}\mtnote{I would prefer to remove
+`functional' than \MW discussion from 2.1 as that serves as a base for the
+somewhat less extended discussion in 3. Would that work?}  is it intrinsicThe
 variation in the scope, semantics and implementation of these functional areas
-is just one of the many underlying reasons for the multiple \pilot
+is just one of the many underlying reasons for the multiple \pilotjob
 implementations.  None of these functional features are unique to, or initiated
 by the \pilot abstraction. The \pilot abstraction does however, bring these
 diverse functional features together towards an integrated and collective
