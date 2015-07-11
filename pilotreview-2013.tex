@@ -3913,13 +3913,12 @@ to as `\pilot paradigm'.
 In this section, the properties of the \pilot paradigm are critically assessed.
 The goal is to show the generality of this paradigm and how \pilot systems go
 beyond the implementation of a special purpose trickery to speed up the
-execution of a certain type of workload. Once understood the breadth of the
-\pilot paradigm, it is contextualized by describing its relation with relevant
-domains such as middleware, applications, security, and the enterprise.
-Finally, the section closes with a look into the future of \pilot systems
-moving from the current state of the art and discussing the sociotechnical and
-engineering challenges that are being faced both by developers and target
-users.
+execution of a certain type of workload. Once the breadth of the \pilot paradigm
+has been understood, it is contextualized by describing its relation with
+relevant domains such as middleware, applications, security, and the enterprise.
+Finally, the section closes with a look into the future of \pilot systems moving
+from the current state of the art and discussing the sociotechnical and
+engineering challenges that are being faced both by developers and target users.
 
 % \mtnote{Just an idea: Section 2 -- pilot abstraction; Section 3 --- pilot
 % system; Section 4 --- Pilot implementation; Section 5 --- pilot paradigm.
@@ -3934,6 +3933,11 @@ users.
 %
 \subsection{The Pilot Paradigm}
 \label{sec:paradigm}
+
+\jhanote{General note: (i) needs major reduction, (ii) needs 4.2 to be complete
+  before this section will get desired/needed punch, (iii) needs elaboration of
+  P*. Possibly a good point to introduce MPI workload discussion and enterprise
+  workload discussion.}
 
 % \jhanote{Need thinking: Following on from discussion yesterday, is early/late
 % binding a logical consequence of multi-level scheduling? Can we absorb the
@@ -4024,12 +4028,12 @@ what may be called `\pilot networks'. With the advent of Software-Defined
 Networking and User-Schedulable Network paths in mind, the concept was already
 hinted at in \cite{santcroos2012}.
 
-\pilot systems already operate on multiple platforms. Originally devised for
-HTC grid infrastructures, \pilot systems have been (re-)engineered to operate
-also on HPC and Cloud infrastructures. Important to note that many of the
+\pilot systems already operate on multiple platforms. Originally devised for HTC
+grid infrastructures, \pilot systems have been (re-)engineered to operate also
+on HPC and Cloud infrastructures. It is important to note that many of the
 \pilot systems described in \S\ref{sec:analysis} have been adapted to work with
 different infrastructures without undergoing major re-architecturing. This is
-further indication of the independence of the \pilot paradigm from
+a further indication of the independence of the \pilot paradigm from
 infrastructural details, especially those concerning the type of container used
 to instantiate a placeholder.
 
@@ -4181,9 +4185,12 @@ especially evident when considering workloads involving homogeneous tasks and
 possibly diverse computational phases. For example, applications with separated
 simulation and analysis phases [ref], or applications integrating multiple types
 of analysis [ref], \ldots. \mtnote{To be expanded with better/further examples
-of why we want to run MPI with pilots.}\msnote{Actually these situations are
-more challenging when running on \pilots, as the different phases often have
-different computational requirements.} \mtnote{So why we do it?}
+  of why we want to run MPI with pilots.}\jhanote{multiple possibly
+  tight-coupled components use a pilot to provide (i) single point of entry to
+  the scheduler for multiple components, (ii) growing/shrinking of resources
+  needed for (interacting) components i.e., a different type of dynamic resource
+  allocation}
+
 
 % In the \pstar model and in the discussion so far we have mainly been
 % concerned about the abstract notion of task, i.e., the application payload to
