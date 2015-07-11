@@ -1061,30 +1061,29 @@ between different storage systems.
 
 % was recently re-implemented as a production-level tool named
 %``RADICAL-Pilot''~\cite{radical_pilot_paper}.
-
 %rep- resents one of the latest evolutionary stages of the Pilot ab- straction. 
+%from an initial phase in which
 
+% \msnote{The latter brings it back to the stage of apples, thats probably not
+%   what we want to say ...}  \mtnote{Apologies, I am not sure I understand this
+%   comment.}
 
 BigJob was recently re-implemented as a production-level tool named
 `RADICAL-Pilot''~\cite{radical_pilot_paper}. BigJob/RADICAL-Pilot represent an
-evolution of the \pilot abstraction: from an initial phase in which
-\pilot were implemented as ad hoc place holder machinery for a specific
-application, to the integration of \pilot systems within the middleware of
-remote resources, RADICAL Pilot implements the \pilot abstraction as an
-interoperable compute and data management system that can be programmatically
-integrated into end-user applications.
+evolution of the \pilot abstraction: initially \pilot were implemented as ad hoc
+place holder machinery for a specific application but evolved to be integrated
+with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
+\pilot abstraction as an interoperable compute and data management system that
+can be programmatically integrated into end-user applications and thus provides
+both features.
 
-\msnote{The latter brings it back to the stage of apples, thats probably not
-  what we want to say ...}  \mtnote{Apologies, I am not sure I understand this
-  comment.}
-
-Another ongoing evolutionary trend of the \pilot abstraction is to be
-implemented into \pilot-based workload managers, thus moving away from
-providing simple \pilot capabilities in application space. These higher-level
-systems which are often centrally hosted, move critical functionality from the
-client to the server (i.e. a service model). These systems usually deploy
-\pilot factories that automatically start new \pilots on demand and integrate
-security mechanisms to support multiple users simultaneously.
+Another ongoing evolutionary trend has been to implement the \pilot abstractions
+into \pilot-based workload managers, thus moving away from providing simple
+\pilot capabilities in application space. These higher-level systems which are
+often centrally hosted, move critical functionality from the client to the
+server (i.e. a service model). These systems usually deploy \pilot factories
+that automatically start new \pilots on demand and integrate security mechanisms
+to support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
@@ -1094,7 +1093,8 @@ AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
 these \pilots serves a particular user community and experiment. Interestingly,
 these \pilots are functionally very similar, work on almost the same underlying
 infrastructure, and serve applications with very similar (if not identical)
-characteristics.
+characteristics. \jhanote{Need consistency between PanDA (two paras from now)
+  and PanDa}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
@@ -1119,13 +1119,14 @@ ability to tightly integrate storage and compute resources and is also able to
 manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
 the data. AliEn deploys a pull-based model~\cite{Saiz:2003:alien} assuming that
-the resource pool is dynamic and that a pull model doesn't require the broker to
-keep detailed track of all resources, which leads to a more simple
-implementation.
+the resource pool is dynamic, and that a pull model doesn't require the broker
+to keep detailed track of all resources, which leads to a more simple
+implementation. \jhanote{what is the broker here?}
 
-DIRAC~\cite{1742-6596-219-6-062049} is another comprehensive workload management
-system built on top of \pilots. It supports the management of data, which can be
-placed in different kinds of storage elements (e.\,g.\ based on SRM).
+DIRAC~\cite{1742-6596-219-6-062049} used by the LHCb experiment~\cite{lhcb} is
+another comprehensive \pilot based workload management system.
+It supports the management of data, which can be placed in different
+kinds of storage elements (e.\,g.\ based on SRM).
 
 Another interesting \pilot system that is used in the LHC context is
 Co-Pilot~\cite{copilot-tr}. Co-Pilot serves as an integration point among
@@ -1135,18 +1136,17 @@ seamless and transparent integration of these resources into existing grid and
 batch computing infrastructures exploited by the High Energy Physics community.
 
 The \pilot abstraction has also been integrated into scientific workflow
-systems. \pilot systems have proven an effective tool for managing the
-workloads executed in the various stages of a workflow. For the Pegasus project
-[ref], the Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to
-support the requirements of the Pegasus workflow system in particular to
-optimize the placements of \pilots with respect to their workload. It did this
-by serving as a front-end to Condor GlideIn. In contrast to GlideinWMS, Corral
-provides more explicit control over the placement and start of \pilots to the
-end-user. Corral was later extended to also serve as a possible front end to
-GlideinWMS.
+systems. \pilot systems have proven an effective tool for managing the workloads
+executed in the various stages of a workflow. For the Pegasus project [ref], the
+Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
+optimize the placements of \pilots with respect to their workload for the
+Pegasus workflow system. Corral serves as a front-end to Condor
+GlideIn. In contrast to GlideinWMS, Corral provides more explicit control over
+the placement and start of \pilots to the end-user. Corral was later extended to
+also serve as a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
-workflows and computations. The language provides also capabilities for
+workflows and computations. The language also provides capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
 ``Coaster''~\cite{coasters}, developed to address workload management
@@ -1167,19 +1167,20 @@ introduced in this section helps to identify some distinctions in terms of
 design, usage and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
 graphical representation of this rough clustering.
 
-The evolutionary trend of the \pilot paradigm has been largely organic and
-uncoordinated leading to a largely inconsistent terminology related to the
-\pilot abstraction, its implementations and usages. Furthermore, a coherent
-understanding of the \pilot components and functionalities is still missing
-leading to a blurred definition of \pilot and how it should be distinguished
-from other abstractions and middleware and application software.
+The evolution of the \pilot paradigm has been largely organic and uncoordinated
+leading to a largely inconsistent terminology related to the \pilot abstraction,
+its implementations and usage. Furthermore, a coherent understanding of the
+\pilot components and functionalities is still missing leading to a blurred
+definition of \pilot abstraction and how it should be distinguished from other
+abstractions and middleware and application software.
 
 The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
 specific functionality and inconsistent terminology calls for a standard
 vocabulary to assist in understanding the varied approaches and their
-commonalities and differences. This is what is offered in the next section of
-this paper.
+commonalities and differences. This is primary motivation of
+Section~\ref{sec:understanding}.
+
 
 
 %------------------------------------------------------------------------------
