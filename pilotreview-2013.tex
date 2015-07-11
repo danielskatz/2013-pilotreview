@@ -1311,42 +1311,46 @@ those placeholders for execution. Task dispatching does not depend on the
 functionalities of the DCI middleware so it can be implemented as part of the
 \pilot system. In this way, the control over the execution of a workload is
 shifted from the DCI to the \pilot system. This shift is a defining
-characteristic of the \pilot paradigm, as it decouples the
-execution of a workload from the need to submit its tasks via the DCI
-middleware. The tasks of a workload will not individually have to wait on the
-DCI queues, but rather on the availability of the placeholder before being
-executed. More elaborate execution patterns involving task and data
-interdependence can thus be implemented outside the boundaries of the DCI
-capabilities. Ultimately, this is why \pilot systems allow for the direct
-control of workload execution and the optimization, for example, of execution
-throughput.
+characteristic of the \pilot paradigm, as it decouples the execution of a
+workload from the need to submit its tasks via the DCI middleware. The tasks of
+a workload will not individually have to wait on the DCI queues, but rather on
+the availability of the placeholder before being executed. More elaborate
+execution patterns involving task and data interdependence can thus be
+implemented outside the boundaries of the DCI capabilities. Ultimately, this is
+why \pilot systems allow for the direct control of workload execution and the
+optimization, for example, of execution throughput. \jhanote{Based upon what is
+  written, I would substitute the ``why'' with ``how'' in the previous
+  sentence?}
 
-Communication and coordination are two distinguishing characteristics of
-distributed applications and \pilot systems are no exception. The Workload
-Manager, Pilot Manager, and the Task Manager need to communicate to coordinate
-the execution of the given workload on the instantiated resource placeholders.
-Nonetheless, \pilot systems are not defined by any specific communication
-pattern and coordination strategy. The logical components of a \pilot system
-may communicate with every suitable pattern (e.g. one-to-one, many-to-one,
-one-to-many (cit) with a push or pull model) and coordinate adopting any
-suitable strategy (e.g. time synchronization, static or dynamic coordinator
-election, local or global information sharing, or \MW). The same applies to
-network architectures and protocols: different network architectures and
-protocols may be leveraged to achieve effective communication and coordination.
+\jhanote{pilot system are being equated with applications. sloppy} Communication
+and coordination are two distinguishing characteristics of distributed
+applications and \pilot systems are no exception. The Workload Manager, Pilot
+Manager, and the Task Manager need to communicate to coordinate the execution of
+the given workload on the instantiated resource placeholders.  Nonetheless,
+\pilot systems are not defined by any specific communication pattern and
+coordination strategy. The logical components of a \pilot system may communicate
+using any suitable pattern (e.g. one-to-one, many-to-one, one-to-many (cit) with
+a push or pull model), or coordinate adopting any suitable mechanism (e.g. time
+synchronization, static or dynamic coordinator election, local or global
+information sharing, or \MW). The same applies to network architectures and
+protocols: different network architectures and protocols may be leveraged to
+achieve effective communication and coordination. \jhanote{is this a reference
+  to coordination or communication? unclear} \jhanote{in previous: mechanism or
+  approach, but I would not call them strategy}
+
 
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
-\pilot systems. When the master is identified with the Workload Manager, and
-the worker with the Task Manager, the functionalities related to task
-description, scheduling, and monitoring will generally be implemented within
-the Workload Manager, while the functionalities needed to execute each task
-will be implemented into the Task Manager. Alternative coordination strategies,
-for example where a Task Manager directly coordinates the task scheduling,
-might require a functionally simpler Workload Manager but a comparatively more
+\pilot systems. When the master is identified with the Workload Manager, and the
+worker with the Task Manager, the functionalities related to task description,
+scheduling, and monitoring will generally be implemented within the Workload
+Manager, while the functionalities needed to execute each task will be
+implemented into the Task Manager. Alternative coordination strategies, for
+example where a Task Manager directly coordinates the task scheduling, might
+require a functionally simpler Workload Manager but a comparatively more
 feature-rich Task Manager. The former would require capabilities for submitting
 tasks, while the latter would require to coordinate with its neighbor executors
-leveraging, for example, a dedicated overlay network. Both these systems,
-adopting different coordination strategies, should be considered \pilot
-systems.
+leveraging, for example, a dedicated overlay network. Both these systems, adopt
+different coordination strategies, but can be considered \pilot systems.
 
 Data management can play an important role within a \pilot system. For example,
 functionalities can be provided to support the local or remote data staging
