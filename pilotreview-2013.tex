@@ -729,24 +729,27 @@ jobs.
 % many implementations and realize a full-fledge \pilot paradigm can be traced
 % back to five main notions:
 
-To understand the full impact of the \pilot abstraction, there are at least five
-features that need elucidation: task-level distribution and parallelism, \MW
-pattern, multi-tenancy, multi-level scheduling, and resource placeholding.
+To understand the technical origins and motivations of the \pilot abstraction,
+there are at least five features that need elucidation: task-level distribution
+and parallelism, \MW pattern, multi-tenancy, multi-level scheduling, and
+resource placeholding. Even if these features are not unique to the \pilot
+abstraction, the \pilot abstraction brings them together towards an integrated
+and collective capability. This section offers an overview of these five
+features and an analysis of their relationship they hold with the \pilot
+abstraction. A chronological perspective is taken so to contextualize the
+inception and evolution of the \pilot abstraction into its multiple and diverse
+implementation systems.
+
+% the variation in their scope, semantics, and implementation is one of the
+% defining reasons for the multiplicity of this abstraction implementations.
+
 \jhanote{I don't think the \MW pattern is a functional area..A candidate for
 removal from detailed discussion in 2.1?}\mtnote{I would prefer to remove
 `functional' than \MW discussion from 2.1 as that serves as a base for the
-somewhat less extended discussion in 3. Would that work?}  is it intrinsicThe
-variation in the scope, semantics and implementation of these functional areas
-is just one of the many underlying reasons for the multiple \pilotjob
-implementations.  None of these functional features are unique to, or initiated
-by the \pilot abstraction. The \pilot abstraction does however, bring these
-diverse functional features together towards an integrated and collective
-capability.
-
-This section offers an overview of these five notions and an analysis of their
-relationship with the \pilot abstraction. A chronological perspective is taken
-so to contextualize the inception and evolution of the \pilot abstraction into
-its implementation systems.
+somewhat less extended discussion in 3. Would that work?} \mtnote{I am not sure
+what it means for an abstraction to `initiate' a feature so I removed that
+predicate.} \mtnote{I shortened the paragraph to make clearer the relationship
+between the five features and the \pilot abstraction.}
 
 \mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of
   \pilot systems as described in Subsection 2.2.}
@@ -804,20 +807,20 @@ capacity, capabilities, and interfaces. Furthermore, high-performance machines
 supported different types of applications, depending on the applications'
 communication and coordination models.
 
-Multi-tenancy has defined the way in which high performance computing resources
+Multi-tenancy has defined the way in which high-performance computing resources
 are exposed to their users. Job schedulers, often called ``batch queuing
 systems''~\cite{czajkowski1998} and first used in the time of punch
-cards~\cite{katz1966,silberschatz1998}, leverage the batch processing concept to
+cards~\cite{katz1966,silberschatz1998}, adopt the batch processing concept to
 promote efficient and fair resource sharing. Job schedulers implement a
 usability model where users submit computational tasks called ``jobs'' to a
 queue. The execution of these job is delayed waiting for the required amount of
 resources to be available. The amount of delay mostly depends on the size and
-duration of the submitted job, resource availability, and policies (such as fair
+duration of the submitted job, resource availability, and policies (e.g. fair
 usage).
 
 Supercomputers are often characterized by several types of heterogeneity and
 diversity. Users are faced with different job description languages, job
-submission commands, and job configuration options. Furthermore,  the number of
+submission commands, and job configuration options. Furthermore, the number of
 queues exposed to the users and their properties like walltime, duration, and
 compute-node sharing policies vary from resource to resource. Finally, each
 high-performance machine may be designed and configured to support only specific
@@ -840,32 +843,33 @@ users.
 
 Multi-level scheduling is one of the strategies devised to improve resource
 access across multiple high-performance machines. The idea is to hide the
-scheduling point of each high-performance machine behind a single (meta)
-scheduler. The users or the applications submit their tasks to the single
-scheduler that negotiates and orchestrates the distribution of the tasks via the
-scheduler of each available high-performance machine. While this approach
-promises an increase in both scale and usability of applications, it also
-introduces diverse types of complexity across resources, middleware, and
-applications.
+scheduling point of each high-performance machine behind a single scheduler. The
+users or the applications submit their tasks to the a scheduler that negotiates
+and orchestrates the distribution of the tasks via the scheduler of each
+available high-performance machine. While this approach promises an increase in
+both scale and usability of applications, it also introduces diverse types of
+complexity across resources, middleware, and applications.
 
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
 umbrellas of grid computing or cloud computing\jhanote{need to be more specific
-than grid computing}, targeted the resource layer, others the application layer
-as, for example, with workflow frameworks. All these approaches offered and
-still offer some degree of success for specific applications and use cases but a
-general solution based on well-defined and robust abstractions has still to be
-devised and implemented.
+than grid computing} \mtnote{Any insight in what kind of specificity you are
+thinking about? Grid and cloud computing are at the same level of generality so
+I will have to specify also the latter.}, targeted the resource layer, others
+the application layer as, for example, with workflow frameworks. All these
+approaches offered and still offer some degree of success for specific
+applications and use cases but a general solution based on well-defined and
+robust abstractions has still to be devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
-imposed on the application layer. Even with solutions like grid computing aiming
-at effectively and, to some extent, transparently integrating diverse resources,
-most of the requirements involving the coordination of task execution still
-resides with the application layer. This translates into single-point solutions,
-extensive redesign and redevelopment of existing applications when they need to
-be adapted to new use cases or new resources, and lack of portability and
-interoperability.
+imposed on \mtnote{to?} the application layer. Even with solutions like grid
+computing aiming at effectively and, to some extent, transparently integrating
+diverse resources, most of the requirements involving the coordination of task
+execution still resides with the application layer. This translates into
+single-point solutions, extensive redesign and redevelopment of existing
+applications when they need to be adapted to new use cases or new resources, and
+lack of portability and interoperability.
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
@@ -873,10 +877,10 @@ capability of concurrently submitting tasks to the queue of the high-performance
 machine scheduler, and retrieve and aggregate their outputs. When multiple
 high-performance machines are available, the application requires directly
 managing submissions to several queues or the capability to leverage a
-third-party meta-scheduler and its specific execution model. In both scenarios,
-the application requires a large amount of development and capabilities that are
-not specific to the given scientific problem but pertain instead to the
-coordination and management of its computation.
+third-party scheduler and its specific execution model. In both scenarios, the
+application requires a large amount of development and capabilities that are not
+specific to the given scientific problem but pertain instead to the coordination
+and management of its computation.
 
 The notion of resource placeholder was devised as a pragmatic and relatively
 cheap to implement attempt to reduce or at least better manage the complexity of
@@ -893,7 +897,7 @@ application tasks to that agent. The \MW pattern is often an effective choice to
 manage the coordination of tasks execution on the available agent(s).
 Multi-level scheduling can be extended to multiple resources by instantiating
 resource placeholders on diverse high-performance machines and then using a
-meta-scheduler to schedule tasks across all the placeholders.
+dedicated scheduler to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
 introduced by a multi-tenant scheduling of resource placeholders. A placeholder
@@ -949,7 +953,9 @@ evolved including advanced capabilities like workload and data management.
     \includegraphics[width=0.45\textwidth]{figures/timeline}
     \caption{Introduction of systems over time. When available, the date of
     first mention in a publication or otherwise the release date of software
-    implementation is used. \mtnote{Missing from from both Section 3 and 4: WISDOM, ToPoS, Corral. Missing from Section 3 but present in Section 4: MyCluster.}}
+    implementation is used. \mtnote{Missing from from both Section 3 and 4:
+    WISDOM, ToPoS, Corral. Missing from Section 3 but present in Section 4:
+    MyCluster.}}
     \label{fig:timeline}
 \end{figure}
 
@@ -1008,19 +1014,19 @@ that voluntary computing can reach thanks to its simpler model of worker
 distribution and installation.
 
 % The opportunistic use of geographically distributed resources championed by
-% voluntary computing offers several advantages. The resource landscape available
-% for scientific research is fragmented across multiple institutions, managed
-% with different policies and protocols, and heterogeneous both in quantity and
-% quality. Once aggregated, the sum of otherwise limited resources can support
-% very large distributed computations and a great amount of multi-tenancy. Note
-% that given the required capabilities, this model of resource provisioning can
-% still support the execution of parallel applications on the few resources that
-% offer low-latency network interconnect.\msnote{This paragraph is a good
-% candidate for removal?}
+% voluntary computing offers several advantages. The resource landscape
+% available for scientific research is fragmented across multiple institutions,
+% managed with different policies and protocols, and heterogeneous both in
+% quantity and quality. Once aggregated, the sum of otherwise limited resources
+% can support very large distributed computations and a great amount of
+% multi-tenancy. Note that given the required capabilities, this model of
+% resource provisioning can still support the execution of parallel applications
+% on the few resources that offer low-latency network interconnect.\msnote{This
+% paragraph is a good candidate for removal?}
 
-Condor is a high-throughput distributed batch computing system that leverages
-diverse and possibly geographically distributed resources. Originally, Condor
-was created for systems within one administrative domain but
+Condor is a high-throughput distributed batch computing system that uses diverse
+and possibly geographically distributed resources. Originally, Condor was
+created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management required
 system level software configurations that had to be made by the administrator of
@@ -1032,7 +1038,7 @@ This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allowed users to add
 remote grid resources to Condor resource pools. In this way, users could
 uniformly execute jobs on resource pools composed by diverse resources. Thanks
-to its use of resource placeholders, GlideIn has been one of the systems
+to its use of resource placeholders, GlideIn was one of the systems
 pioneering the \pilot abstraction implementation, enabling some \pilot
 capabilities also for third parties systems like Bosco~\cite{bosco}.
 
@@ -1043,7 +1049,7 @@ pilot.} \mtnote{We do not use \pilot system so I do not think we are implying
 that glideIn is a `full pilot' (even if I am not so sure what exactly a full
 pilot is). I slightly edited the sentence, any better?}
 \jhanote{as this is historical evolution, some parts need to be in the past
-tense. Care will be needed to get the tense right.}
+tense. Care will be needed to get the tense right.} \mtnote{Better?}
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
@@ -1052,9 +1058,9 @@ layer isolation, and application development model. While GlideIn allows for the
 user to manage resource placeholders directly, daemons must still be running on
 the remote resources. This means that GlideIn cannot be deployed without
 involving the resource owners and system administrators. Implemented as a
-service, GlideIn support integration with distributed application frameworks but
-does not programmatically support the development of distributed applications by
-means of dedicated APIs and libraries.
+service, GlideIn supports integration with distributed application frameworks
+but does not programmatically support the development of distributed
+applications by means of dedicated APIs and libraries.
 
 The BigJob \pilot system~\cite{luckow2010} was designed to address these
 limitations, to broaden the type of applications supported by the \pilot-based
@@ -1069,9 +1075,8 @@ and, analogous to compute \pilots, to abstract away direct user communication
 between different storage systems.
 
 % was recently re-implemented as a production-level tool named
-%``RADICAL-Pilot''~\cite{radical_pilot_paper}.
-%rep- resents one of the latest evolutionary stages of the Pilot ab- straction.
-%from an initial phase in which
+% ``RADICAL-Pilot''~\cite{radical_pilot_paper}. rep- resents one of the latest
+% evolutionary stages of the Pilot ab- straction. from an initial phase in which
 
 % \msnote{The latter brings it back to the stage of apples, thats probably not
 %   what we want to say ...}  \mtnote{Apologies, I am not sure I understand this
@@ -1097,21 +1102,23 @@ to support multiple users simultaneously.
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of \pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
-DIRAC~\cite{1742-6596-219-6-062049}, PanDA~\cite{1742-6596-331-7-072069},
+DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-331-7-072069},
 AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
-these \pilots serves a particular user community and experiment. Interestingly,
-these \pilots are functionally very similar, work on almost the same underlying
-infrastructure, and serve applications with very similar (if not identical)
-characteristics.
+these \pilot systems serves a particular user community and experiment.
+Interestingly, these systems are functionally very similar, work on almost the
+same underlying infrastructure, and serve applications with very similar (if not
+identical) characteristics.
 
 % \jhanote{Need consistency between PanDA (two paras from now) and PanDa}
+
+\mtnote{I would consider to cut the following 5 paragraphs. They are largely a repetition of what we have in 4.2 and historically they offer details that have been already summarized (or can be summarized) in the preceding, encompassing paragraph.}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
 can, based on the current and expected number of jobs in the pool, automatically
-increase or decrease the number of active Glide-ins (\pilots) available to the
-pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
-service. GlideinWMS attempts to hide the \pilot capabilities rather than
+increase or decrease the number of active Glide-ins (i.e. \pilots) available to
+the pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a
+hosted service. GlideinWMS attempts to hide the \pilot capabilities rather than
 exposing them to the user. GlideinWMS is currently deployed in production on the
 Open Science Grid (OSG)~\cite{url_osg} and is the recommended mode for new users
 wanting to access OSG resources.
@@ -1145,15 +1152,17 @@ computing resources. Co-Pilot provides components for building a framework for
 seamless and transparent integration of these resources into existing grid and
 batch computing infrastructures exploited by the High Energy Physics community.
 
+\mtnote{End of the suggested paragraph removal.}
+
 The \pilot abstraction has also been integrated into scientific workflow
 systems. \pilot systems have proven an effective tool for managing the workloads
-executed in the various stages of a workflow. For the Pegasus project [ref], the
-Corral system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
-optimize the placements of \pilots with respect to their workload for the
-Pegasus workflow system. Corral serves as a front-end to Condor
-GlideIn. In contrast to GlideinWMS, Corral provides more explicit control over
-the placement and start of \pilots to the end-user. Corral was later extended to
-also serve as a possible front end to GlideinWMS.
+executed in the various stages of a workflow. For the Pegasus
+project\cite{pegasus}, the Corral system~\cite{Rynge:2011:EUG:2116259.2116599}
+was developed to support the optimize the placements of \pilots with respect to
+their workload for the Pegasus workflow system. Corral serves as a front-end to
+Condor GlideIn. In contrast to GlideinWMS, Corral provides more explicit control
+over the placement and start of \pilots to the end-user. Corral was later
+extended to also serve as a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language also provides capabilities for
@@ -1177,12 +1186,12 @@ introduced in this section helps to identify some distinctions in terms of
 design, usage and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
 graphical representation of this rough clustering.
 
-The evolution of the \pilot paradigm has been largely organic and uncoordinated
-leading to a largely inconsistent terminology related to the \pilot abstraction,
-its implementations and usage. Furthermore, a coherent understanding of the
-\pilot components and functionalities is still missing leading to a blurred
-definition of \pilot abstraction and how it should be distinguished from other
-abstractions and middleware and application software.
+The evolution of the \pilot paradigm has been organic and uncoordinated leading
+to an inconsistent terminology related to the \pilot abstraction, its
+implementations and usage. A coherent understanding of the \pilot components and
+functionalities is still missing leading to a blurred definition of \pilot
+abstraction and how it should be distinguished from other abstractions and
+middleware and application software.
 
 The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
@@ -4052,7 +4061,7 @@ metrics.  Multi-level scheduling does not replace the infrastructure-level
 scheduler either. As clearly illustrated in~\S\ref{sec:understanding}, resource
 containers are still created on the target infrastructure by means of that
 infrastructure's capabilities and the second level of scheduling is completely
-contained within the boundaries of the resource container. 
+contained within the boundaries of the resource container.
 
 Optimizing the usage of the resource containers, for example by minimizing
 idling time, is an implementation issue, not an intrinsic limitation of the
@@ -4065,7 +4074,7 @@ as an integral part of the infrastructure middleware stack on some DCIs.
 The generality of the \pilot paradigm may come as a surprise when considering
 the requirement that has motivated most implementations, viz., leveraging
 multi-level scheduling so as to increase the execution throughput of large
-workloads made of short running tasks. 
+workloads made of short running tasks.
 %has been achieved without having to devise a new paradigm.
 For example, as seen in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were
 initially developed as single-point solutions, focusing on either a type of
