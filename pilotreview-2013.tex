@@ -1366,8 +1366,8 @@ replication, (concurrent) data transfers, data abstractions other than files
 and directories, or data placeholders should be considered special-purpose
 capabilities, not characteristic of every \pilot system.
 
-In the following section, a minimal set of terms related to the logical
-components and capabilities so far described is defined.
+In the following sub-section, a minimal set of terms related to the logical
+components and capabilities described so far is defined.
 
 %------------------------------------------------------------------------------
 % 3.2
@@ -1383,6 +1383,8 @@ order to offer a coherent terminology. Both `job' and `pilot' need to be
 understood in the context of DCIs, the infrastructures used by \pilot systems.
 DCIs offer compute, storage, and network resources and \pilots allow for the
 users to utilize those resources to execute the tasks of one or more workloads.
+\jhanote{needs to be updated and made consistent with terminology developed for
+  proposal}
 
 \begin{description}
 
@@ -1447,9 +1449,11 @@ available only for the duration of the job lifetime.
 
 A \pilot is a resource placeholder. As a resource placeholder, a \pilot holds
 portion of a DCI's resources for a user or a group of users, depending on
-implementation details. A \pilot system is a software capable of creating
-\pilots so to gain exclusive control over a set of resources on one or more DCIs
-and then to execute the tasks of one or more workloads on those \pilots.
+implementation details. A \pilot system is software capable of creating \pilots
+so as to gain exclusive control over a set of resources on one or more DCIs and
+then to execute the tasks of one or more workloads on those \pilots.
+\jhanote{another example for the need for definitional consistency}\jhanote{also
+  I would not use the word exclusive}
 
 \begin{description}
 
@@ -1465,18 +1469,20 @@ across \pilot systems. Depending upon context, in addition to the term
 [cit]. All these terms are, in practice, used as synonyms without properly
 distinguishing between the type of container and the type of executable that
 compose a \pilot. This is a clear indication of how necessary the minimal and
-consistent vocabulary offered here is when reasoning analytically about
-multiple \pilot system implementations.
+consistent vocabulary offered here is when reasoning analytically about multiple
+\pilot system implementations. 
 
 The term `\pilotjob' is often used to identify a \pilot system too. This is an
 unfortunate choice as the term `job' identifies just the way in which a \pilot
-is provisioned on a DCI exposing specific capabilities, not a general
-property of all the \pilot systems. The use of the term `\pilotjob system'
-should therefore be regarded as a historical artifact, viz., the targeting of a
+is provisioned on a DCI exposing specific capabilities, not a general property
+of all the \pilot systems. The use of the term `\pilotjob system' should
+therefore be regarded as a historical artifact, viz., the targeting of a
 specific class of DCIs in which the term `job' was, and still is, meaningful.
 With the development of new types of DCI middleware as, for example, cloud
-infrastructures, the term `job' has become too restrictive, a situation that
-can lead to terminological and conceptual confusion.
+infrastructures, the term `job' has become too restrictive, a situation that can
+lead to terminological and conceptual confusion. \jhanote{even by my standards
+  of repeating the main points, i think we are painfully belabouring the point
+  about ``jobs'' in pilot-jobs.}
 
 We have now defined resources, DCIs and \pilots. We have established that a
 \pilot is a placeholder for a set of resources. When combined, the resources of
@@ -1492,26 +1498,31 @@ potentially be distributed over multiple resources and/or DCIs.
 
 Three more terms associated with \pilot systems (cit, cit, cit) need to be
 explicitly defined: `Multi-level scheduling', `early binding', and `late
-binding'.
+binding'.  \jhanote{we should start completing the references. currently many
+  'cit' or 'ref'.}
 
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: \pilots and tasks. A portion of the
-resources of a DCI is allocated to one or more \pilots in the form of
-containers supported by that DCI, and the tasks of a workload are dispatched
-for execution to those \pilots. This is a fundamental feature of \pilot systems
-because (i) a potentially faster and more flexible execution of workloads is
-achieved by avoiding the overhead imposed by a centralized job management
-system shared among multiple users; and (ii) the tasks of a workload can be
-bound to a set of \pilots before or after it becomes available on a remote
-resource.  (Depending on the implementation of a \pilot system, there can be
-another level of scheduling, where the \pilot makes scheduling decisions about
-task placement within the \pilot's resource allocation.)
+resources of a DCI is allocated to one or more \pilots in the form of containers
+supported by that DCI, and the tasks of a workload are dispatched for execution
+to those \pilots. This is a fundamental feature of \pilot systems because (i) a
+potentially faster and more flexible execution of workloads is achieved by
+avoiding the overhead imposed by a centralized job management system shared
+among multiple users; and (ii) the tasks of a workload can be bound to a set of
+\pilots before or after it becomes available on a remote resource.  (Depending
+on the implementation of a \pilot system, there can be another level of
+scheduling, where the \pilot makes scheduling decisions about task placement
+within the \pilot's resource allocation.)\jhanote{full and self-contained
+  sentences are generally not good candidates for parenthetical
+  remarks. consider removing parenthesis?}
 
-The simplification obtained as a consequence of bypassing the job submission
-system of the DCI is one of the main reasons for the success of \pilot
-systems. As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a workload can
-be executed on a \pilot without waiting in the queuing system of the given
-infrastructure, and as a result, increasing the throughput of the workload
+\jhanote{I don't think it is about simplification (that is doubtful). It is
+  about greater control as a consequence} The simplification obtained as a
+consequence of bypassing the job submission system of the DCI is one of the main
+reasons for the success of \pilot systems. As mentioned
+in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be executed on a
+\pilot without waiting in the queuing system of the given infrastructure, and as
+a result, possibly increasing the throughput of the workload
 execution. Moreover, \pilots can be reused to execute multiple workloads until
 the \pilots' walltime expire.  It should be noted that how tasks are actually
 assigned to \pilots is a matter of implementation. For example, a dedicated
@@ -1519,18 +1530,18 @@ scheduler could be adopted, or tasks might be directly assigned to a \pilot by
 the user.
 
 The type of binding of tasks to \pilots depends on the state of the \pilot. A
-\pilot is inactive until it is executed on a DCI, is active thereafter, until
-it completes (or fails).  Early binding indicates the binding of a task to an
+\pilot is inactive until it is executed on a DCI, is active thereafter, until it
+completes (or fails).  Early binding indicates the binding of a task to an
 inactive \pilot; late binding indicates the binding of a task to an active
 \pilot. Early binding is potentially useful to increase the information about
-which \pilots can be deployed. By knowing in advance the properties of the
-tasks that are bound to a \pilot, specific deployment decisions can be made for
-that \pilot.  Additionally, in case of early binding, other type of decisions
-related to the workload could be made, e.g., the transfer of data to a certain
-resource while the \pilot is still inactive. Late binding is critical in
-assuring the aforementioned high throughput of the distributed application by
-allowing sustained task execution without additional queuing time or container
-instantiation time.
+which \pilots can be deployed. By knowing in advance the properties of the tasks
+that are bound to a \pilot, specific deployment decisions can be made for that
+\pilot.  Additionally, in case of early binding, other type of decisions related
+to the workload could be made, e.g., the transfer of data to a certain resource
+while the \pilot is still inactive. Late binding is critical in assuring the
+aforementioned high throughput of the distributed application by allowing
+sustained task execution without additional queuing time or container
+instantiation time. 
 
 It should be noted that some aspects of early binding can also be achieved
 without a \pilot system, but, importantly, the \pilot paradigm allows to do
