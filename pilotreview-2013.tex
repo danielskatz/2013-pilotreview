@@ -41,8 +41,10 @@
 % \clubpenalty=10000
 % \widowpenalty = 10000
 
-\title{A Comprehensive Perspective on the Pilot-Abstraction \jhanote{either
-    abstraction is singular and therefore ``the'', or we use the plural form}}
+\title{A Comprehensive Perspective on the Pilot-Abstraction}
+
+%\jhanote{either abstraction is singular and therefore ``the'', or we use the
+%plural form}}
 
 \numberofauthors{3}
 
@@ -755,9 +757,9 @@ its implementation systems.
 \label{sec:histabstr}
 
 To the best of the authors' knowledge, the term `\pilot' was first coined in
-2004 in the context of the Large Hadron Collider (LHC) Computing Grid (LCG)
-Data Challenge\footnote{Based on private communication.}, and then introduced
-in writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
+2004 in the context of the Large Hadron Collider (LHC) Computing Grid (LCG) Data
+Challenge\footnote{Based on private communication.}, and then introduced in
+writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
 already well-known at the beginning of the twentieth century: task-level
 distribution and parallelism on multiple resources.
@@ -770,11 +772,8 @@ the differential equations to the computers so that they could forecast the
 weather of specific regions of the globe. The computers would perform their
 calculations and then send the results back to the clerk. The Forecast Factory
 was not only an early conceptualization of what is called today a
-``supercomputer''~\footnote{Supercomputer is here used as a general term
-  indicating a system with a very large computing capacity. As such, this term
-  makes no distinction among alternative supercomputer architectures.} but also
-of the coordination pattern for distributed and parallel computation called
-``\MW''.
+``high-performance machine'' but also of the coordination pattern for
+distributed and parallel computation called ``\MW''.
 
 \begin{figure}[t]
   \centering
@@ -795,14 +794,15 @@ This directly translates into a better time to completion of the overall
 computation when compared to a coordination pattern in which each equation is
 sequentially solved by a single worker.
 
-Modern silicon-based supercomputers brought at least three key differences when
-compared to the carbon-based Forecast Factory devised by Richardson. Most of
-modern supercomputers are meant to be used by multiple users, i.e. they support
-multi-tenancy. Furthermore, diverse supercomputers were made available to the
-scientific community, each with both distinctive and homogeneous properties in
-terms of architecture, capacity, capabilities, and interfaces. Furthermore,
-supercomputers supported different types of applications, depending on the
-applications' communication and coordination models.
+Modern silicon-based high-performance machines brought at least three key
+differences when compared to the carbon-based Forecast Factory devised by
+Richardson. Most of modern high-performance machines are meant to be used by
+multiple users, i.e. they support multi-tenancy. Furthermore, diverse
+high-performance machines were made available to the scientific community, each
+with both distinctive and homogeneous properties in terms of architecture,
+capacity, capabilities, and interfaces. Furthermore, high-performance machines
+supported different types of applications, depending on the applications'
+communication and coordination models.
 
 Multi-tenancy has defined the way in which high performance computing resources
 are exposed to their users. Job schedulers, often called ``batch queuing
@@ -820,11 +820,11 @@ diversity. Users are faced with different job description languages, job
 submission commands, and job configuration options. Furthermore,  the number of
 queues exposed to the users and their properties like walltime, duration, and
 compute-node sharing policies vary from resource to resource. Finally, each
-supercomputer may be designed and configured to support only specific types of
-application.
+high-performance machine may be designed and configured to support only specific
+types of application.
 
-The resource provision of multi-tenant and heterogeneous supercomputers is
-limited, irregular, and largely
+The resource provision of multi-tenant and heterogeneous high-performance
+machines is limited, irregular, and largely
 unpredictable~\cite{downey1997,wolski2003,li2004,tsafrir2007}. By definition,
 the resources accessible and available at any given time can be less than those
 demanded by all the active users. Furthermore, the resource usage patterns are
@@ -834,54 +834,57 @@ a continuous optimization of the management of each resource but also to the
 development of alternative strategies to expose and serve resources to the
 users.
 
-Multi-level or meta scheduling \jhanote{I do not think the two are
-  equivalent. At least not in common usage. i.e., you can definitely do meta
-  scheduling without multilevel scheduling. Please argue otherwise, else I will
-  remove meta scheduling.} is one of the strategies devised to improve resource
-access across multiple supercomputers. The idea is to hide the scheduling point
-of each supercomputer behind a single (meta) scheduler. The users or the
-applications submit their tasks to the single scheduler that negotiates and
-orchestrates the distribution of the tasks via the scheduler of each available
-supercomputer. While this approach promises an increase in both scale and
-usability of applications, it also introduces diverse types of complexity across
-resources, middleware, and applications.
+% \jhanote{I do not think the two are equivalent. At least not in common usage.
+%   i.e., you can definitely do meta scheduling without multilevel scheduling.
+%   Please argue otherwise, else I will remove meta scheduling.}
+
+Multi-level scheduling is one of the strategies devised to improve resource
+access across multiple high-performance machines. The idea is to hide the
+scheduling point of each high-performance machine behind a single (meta)
+scheduler. The users or the applications submit their tasks to the single
+scheduler that negotiates and orchestrates the distribution of the tasks via the
+scheduler of each available high-performance machine. While this approach
+promises an increase in both scale and usability of applications, it also
+introduces diverse types of complexity across resources, middleware, and
+applications.
 
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
 umbrellas of grid computing or cloud computing\jhanote{need to be more specific
-  than grid computing}, targeted the resource layer, others the application
-layer as, for example, with workflow frameworks. All these approaches offered
-and still offer some degree of success for specific applications and use cases
-but a general solution based on well-defined and robust abstractions has still
-to be devised and implemented.
+than grid computing}, targeted the resource layer, others the application layer
+as, for example, with workflow frameworks. All these approaches offered and
+still offer some degree of success for specific applications and use cases but a
+general solution based on well-defined and robust abstractions has still to be
+devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
-supercomputers is the increase of the implementation complexity imposed on the
-application layer. Even with solutions like grid computing aiming at effectively
-and, to some extent, transparently integrating diverse resources, most of the
-requirements involving the coordination of task execution still resides with the
-application layer. This translates into single-point solutions, extensive
-redesign and redevelopment of existing applications when they need to be adapted
-to new use cases or new resources, and lack of portability and interoperability.
+high-performance machines is the increase of the implementation complexity
+imposed on the application layer. Even with solutions like grid computing aiming
+at effectively and, to some extent, transparently integrating diverse resources,
+most of the requirements involving the coordination of task execution still
+resides with the application layer. This translates into single-point solutions,
+extensive redesign and redevelopment of existing applications when they need to
+be adapted to new use cases or new resources, and lack of portability and
+interoperability.
 
 Consider for example a simple distributed application implementing the \MW
-pattern. With a single supercomputer, the application requires the capability of
-concurrently submitting tasks to the queue of the supercomputer scheduler, and
-retrieve and aggregate their outputs. When multiple supercomputers are
-available, the application requires directly managing submissions to several
-queues or the capability to leverage a third-party meta-scheduler and its
-specific execution model. In both scenarios, the application requires a large
-amount of development and capabilities that are not specific to the given
-scientific problem but pertain instead to the coordination and management of its
-computation.
+pattern. With a single high-performance machine, the application requires the
+capability of concurrently submitting tasks to the queue of the high-performance
+machine scheduler, and retrieve and aggregate their outputs. When multiple
+high-performance machines are available, the application requires directly
+managing submissions to several queues or the capability to leverage a
+third-party meta-scheduler and its specific execution model. In both scenarios,
+the application requires a large amount of development and capabilities that are
+not specific to the given scientific problem but pertain instead to the
+coordination and management of its computation.
 
 The notion of resource placeholder was devised as a pragmatic and relatively
 cheap to implement attempt to reduce or at least better manage the complexity of
 executing distributed applications. A resource placeholder decouples the
 acquisition of remote compute resource from their use to execute the tasks of a
 distributed application. Resources are acquired by scheduling a job onto the
-remote supercomputer. Once executed, the job runs an agent capable of retrieving
-and executing application tasks.
+remote high-performance machine. Once executed, the job runs an agent capable of
+retrieving and executing application tasks.
 
 Resource placeholders bring together multi-level scheduling to enable parallel
 execution of the tasks of distributed applications. Multi-level scheduling is
@@ -889,22 +892,25 @@ achieved by scheduling the agent and then by enabling direct scheduling of
 application tasks to that agent. The \MW pattern is often an effective choice to
 manage the coordination of tasks execution on the available agent(s).
 Multi-level scheduling can be extended to multiple resources by instantiating
-resource placeholders on diverse supercomputers and then using a meta-scheduler
-to schedule tasks across all the placeholders.
+resource placeholders on diverse high-performance machines and then using a
+meta-scheduler to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
 introduced by a multi-tenant scheduling of resource placeholders. A placeholder
 still spends a variable amount of time waiting to be executed by the batch
-system of the remote supercomputer, but, once executed, the user -- or the
-master process of the distributed application -- may hold total control over its
-resources. In this way, tasks are directly scheduled on the placeholder without
-competing with other users for the supercomputer scheduler.  \msnote{I would
-  like to either replace 'supercomputer' with i.e. 'cluster', or make it
-  explicit in the beginning of 2.1 that we talk about multiple types of systems}
-\mtnote{Here I used supercomputer in its general meaning as computing device
-  with a lot of computational capacity. I added a footnote, any better?}
-\jhanote{I think we should use neither. the generally acceptable albeit equally
-  fuzzy term is high-performance machine or high-performance computing.}
+system of the remote high-performance machine, but, once executed, the user --
+or the master process of the distributed application -- may hold total control
+over its resources. In this way, tasks are directly scheduled on the placeholder
+without competing with other users for the high-performance machine scheduler.
+
+% \msnote{I would like to either replace 'supercomputer' with i.e. 'cluster', or
+%   make it explicit in the beginning of 2.1 that we talk about multiple types
+%   of systems}
+% \mtnote{Here I used supercomputer in its general meaning as computing device
+%   with a lot of computational capacity. I added a footnote, any better?}
+% \jhanote{I think we should use neither. the generally acceptable albeit
+%   equally fuzzy term is high-performance machine or high-performance
+%   computing.}
 
 % ------------------------------------------------------------------------------
 % 2.2
@@ -1016,25 +1022,28 @@ Condor is a high-throughput distributed batch computing system that leverages
 diverse and possibly geographically distributed resources. Originally, Condor
 was created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
-resource pools in an aggregative manner. However, resource management could not
-be done on application level by the user: flocking required system level
-software configurations that had to be made by the administrator of each
-individual resource of each Condor resource pool. \jhanote{resource management
-  could not be done on application level'' does not make sense to me. Are we
-  referring to aggregation?}
+resource pools in an aggregative manner. However, resource management required
+system level software configurations that had to be made by the administrator of
+each individual resource of each Condor resource pool. \jhanote{resource
+management could not be done on application level'' does not make sense to me.
+Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allowed users to add
 remote grid resources to Condor resource pools. In this way, users could
 uniformly execute jobs on resource pools composed by diverse resources. Thanks
 to its use of resource placeholders, GlideIn has been one of the systems
-pioneering the \pilot abstraction implementation, enabling \pilot capabilities
-also for third parties systems like Bosco~\cite{bosco}. \jhanote{So we are sure
-  flocking came before glide-in? Also there is a bit of care needed: we're
-  implying glide-in is a resource placeholder -- which is part of a pilot, and
-  not necessarily a full pilot.} \jhanote{as this is historical evolution, some
-  parts need to be in the past tense. Care will be needed to get the tense
-  right.}
+pioneering the \pilot abstraction implementation, enabling some \pilot
+capabilities also for third parties systems like Bosco~\cite{bosco}.
+
+\jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
+\jhanote{Also there is a bit of care needed: we're implying glide-in is a
+resource placeholder -- which is part of a pilot, and not necessarily a full
+pilot.} \mtnote{We do not use \pilot system so I do not think we are implying
+that glideIn is a `full pilot' (even if I am not so sure what exactly a full
+pilot is). I slightly edited the sentence, any better?}
+\jhanote{as this is historical evolution, some parts need to be in the past
+tense. Care will be needed to get the tense right.}
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
@@ -1045,7 +1054,7 @@ the remote resources. This means that GlideIn cannot be deployed without
 involving the resource owners and system administrators. Implemented as a
 service, GlideIn support integration with distributed application frameworks but
 does not programmatically support the development of distributed applications by
-means of dedicated APIs and libraries. 
+means of dedicated APIs and libraries.
 
 The BigJob \pilot system~\cite{luckow2010} was designed to address these
 limitations, to broaden the type of applications supported by the \pilot-based
@@ -1061,7 +1070,7 @@ between different storage systems.
 
 % was recently re-implemented as a production-level tool named
 %``RADICAL-Pilot''~\cite{radical_pilot_paper}.
-%rep- resents one of the latest evolutionary stages of the Pilot ab- straction. 
+%rep- resents one of the latest evolutionary stages of the Pilot ab- straction.
 %from an initial phase in which
 
 % \msnote{The latter brings it back to the stage of apples, thats probably not
@@ -1088,13 +1097,14 @@ to support multiple users simultaneously.
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of \pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
-DIRAC~\cite{1742-6596-219-6-062049}, PanDa~\cite{1742-6596-331-7-072069},
+DIRAC~\cite{1742-6596-219-6-062049}, PanDA~\cite{1742-6596-331-7-072069},
 AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
 these \pilots serves a particular user community and experiment. Interestingly,
 these \pilots are functionally very similar, work on almost the same underlying
 infrastructure, and serve applications with very similar (if not identical)
-characteristics. \jhanote{Need consistency between PanDA (two paras from now)
-  and PanDa}
+characteristics.
+
+% \jhanote{Need consistency between PanDA (two paras from now) and PanDa}
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
 system that is based on the \pilot capabilities of Condor GlideIn. The system
@@ -1121,7 +1131,7 @@ scheduler is aware of data localities and attempts to schedule compute close to
 the data. AliEn deploys a pull-based model~\cite{Saiz:2003:alien} assuming that
 the resource pool is dynamic, and that a pull model doesn't require the broker
 to keep detailed track of all resources, which leads to a more simple
-implementation. \jhanote{what is the broker here?}
+implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
 
 DIRAC~\cite{1742-6596-219-6-062049} used by the LHCb experiment~\cite{lhcb} is
 another comprehensive \pilot based workload management system.
@@ -1201,11 +1211,13 @@ differences among \pilot systems. Features and capabilities tend to be
 named inconsistently, often with the same terms referring to multiple concepts
 or the same concept named in different ways.
 
-This section offers an analysis of the logical components and functionalities
+This section offers an description of the logical components and functionalities
 shared by every \pilot system. The goal is to offer a paradigmatic description
 of a \pilot system and a well-defined vocabulary to reason about such a
-description and, eventually, about its multiple implementations. \jhanote{would
-  ``description'' be better than ``analysis'' in the first sentence?}
+description and, eventually, about its multiple implementations.
+
+% \jhanote{would ``description'' be better than ``analysis'' in the first
+%   sentence?}
 
 %------------------------------------------------------------------------------
 % 3.1
@@ -1317,26 +1329,31 @@ a workload will not individually have to wait on the DCI queues, but rather on
 the availability of the placeholder before being executed. More elaborate
 execution patterns involving task and data interdependence can thus be
 implemented outside the boundaries of the DCI capabilities. Ultimately, this is
-why \pilot systems allow for the direct control of workload execution and the
-optimization, for example, of execution throughput. \jhanote{Based upon what is
-  written, I would substitute the ``why'' with ``how'' in the previous
-  sentence?}
+how \pilot systems allow for the direct control of workload execution and the
+optimization, for example, of execution throughput.
 
-\jhanote{pilot system are being equated with applications. sloppy} Communication
-and coordination are two distinguishing characteristics of distributed
-applications and \pilot systems are no exception. The Workload Manager, Pilot
-Manager, and the Task Manager need to communicate to coordinate the execution of
-the given workload on the instantiated resource placeholders.  Nonetheless,
-\pilot systems are not defined by any specific communication pattern and
-coordination strategy. The logical components of a \pilot system may communicate
-using any suitable pattern (e.g. one-to-one, many-to-one, one-to-many (cit) with
-a push or pull model), or coordinate adopting any suitable mechanism (e.g. time
-synchronization, static or dynamic coordinator election, local or global
-information sharing, or \MW). The same applies to network architectures and
-protocols: different network architectures and protocols may be leveraged to
-achieve effective communication and coordination. \jhanote{is this a reference
-  to coordination or communication? unclear} \jhanote{in previous: mechanism or
-  approach, but I would not call them strategy}
+% \jhanote{Based upon what is written, I would substitute the ``why'' with
+%   ``how'' in the previous sentence?}
+
+% \jhanote{pilot system are being equated with applications. sloppy}
+
+Communication and coordination are two distinguishing characteristics of
+distributed systems and \pilot systems are no exception. The Workload Manager,
+Pilot Manager, and the Task Manager need to communicate to coordinate the
+execution of the given workload on the instantiated resource placeholders.
+Nonetheless, \pilot systems are not defined by any specific communication
+pattern and coordination approach. The logical components of a \pilot system may
+communicate using any suitable pattern (e.g. one-to-one, many-to-one,
+one-to-many~\ref{comm_patterns} with a push or pull model), or coordinate
+adopting any suitable mechanism (e.g. time synchronization, static or dynamic
+coordinator election, local or global information sharing, or \MW). The same
+applies to network architectures and protocols: different network architectures
+and protocols may be effective to achieve effective communication and
+coordination.
+\jhanote{is this a reference to coordination or communication? unclear} \mtnote{'communication and coordination' so I would say to both.}
+
+% \jhanote{in previous: mechanism or approach, but I would not call them
+% strategy}
 
 
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
@@ -1405,7 +1422,7 @@ commonly utilized when executing workloads.
 geographically and institutionally separated from the users that utilize those
 resources to execute the tasks of a workload [ref]. Infrastructures can be
 logically partitioned, with a direct or indirect mapping onto individual pools
-of hardware (i.e. clusters, systems, and supercomputers).
+of hardware (i.e. clusters, systems, and high-performance machines).
 
 \end{description}
 
@@ -1452,8 +1469,8 @@ portion of a DCI's resources for a user or a group of users, depending on
 implementation details. A \pilot system is software capable of creating \pilots
 so as to gain exclusive control over a set of resources on one or more DCIs and
 then to execute the tasks of one or more workloads on those \pilots.
-\jhanote{another example for the need for definitional consistency}\jhanote{also
-  I would not use the word exclusive}
+\jhanote{another example for the need for definitional consistency}
+\jhanote{also I would not use the word exclusive} \mtnote{Why?}
 
 \begin{description}
 
@@ -1470,7 +1487,7 @@ across \pilot systems. Depending upon context, in addition to the term
 distinguishing between the type of container and the type of executable that
 compose a \pilot. This is a clear indication of how necessary the minimal and
 consistent vocabulary offered here is when reasoning analytically about multiple
-\pilot system implementations. 
+\pilot system implementations.
 
 The term `\pilotjob' is often used to identify a \pilot system too. This is an
 unfortunate choice as the term `job' identifies just the way in which a \pilot
@@ -1481,8 +1498,9 @@ specific class of DCIs in which the term `job' was, and still is, meaningful.
 With the development of new types of DCI middleware as, for example, cloud
 infrastructures, the term `job' has become too restrictive, a situation that can
 lead to terminological and conceptual confusion. \jhanote{even by my standards
-  of repeating the main points, i think we are painfully belabouring the point
-  about ``jobs'' in pilot-jobs.}
+of repeating the main points, i think we are painfully belabouring the point
+about ``jobs'' in pilot-jobs.} \mtnote{Maybe but I do not see where we
+explicitly say this before.}
 
 We have now defined resources, DCIs and \pilots. We have established that a
 \pilot is a placeholder for a set of resources. When combined, the resources of
@@ -1496,10 +1514,11 @@ potentially be distributed over multiple resources and/or DCIs.
 \item[Resource Overlay.] The aggregated set of resources of multiple \pilots.
 \end{description}
 
-Three more terms associated with \pilot systems (cit, cit, cit) need to be
-explicitly defined: `Multi-level scheduling', `early binding', and `late
-binding'.  \jhanote{we should start completing the references. currently many
-  'cit' or 'ref'.}
+Three more terms associated with \pilot systems need to be explicitly defined:
+`Multi-level scheduling', `early binding', and `late binding'.
+
+\jhanote{we should start completing the references. currently many 'cit' or
+'ref'.}
 
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: \pilots and tasks. A portion of the
@@ -1509,25 +1528,27 @@ to those \pilots. This is a fundamental feature of \pilot systems because (i) a
 potentially faster and more flexible execution of workloads is achieved by
 avoiding the overhead imposed by a centralized job management system shared
 among multiple users; and (ii) the tasks of a workload can be bound to a set of
-\pilots before or after it becomes available on a remote resource.  (Depending
+\pilots before or after it becomes available on a remote resource. Depending
 on the implementation of a \pilot system, there can be another level of
 scheduling, where the \pilot makes scheduling decisions about task placement
-within the \pilot's resource allocation.)\jhanote{full and self-contained
-  sentences are generally not good candidates for parenthetical
-  remarks. consider removing parenthesis?}
+within the \pilot's resource allocation.
 
-\jhanote{I don't think it is about simplification (that is doubtful). It is
-  about greater control as a consequence} The simplification obtained as a
-consequence of bypassing the job submission system of the DCI is one of the main
-reasons for the success of \pilot systems. As mentioned
-in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be executed on a
-\pilot without waiting in the queuing system of the given infrastructure, and as
-a result, possibly increasing the throughput of the workload
-execution. Moreover, \pilots can be reused to execute multiple workloads until
-the \pilots' walltime expire.  It should be noted that how tasks are actually
-assigned to \pilots is a matter of implementation. For example, a dedicated
-scheduler could be adopted, or tasks might be directly assigned to a \pilot by
-the user.
+% \jhanote{full and self-contained sentences are generally not good candidates
+%   for parenthetical remarks. consider removing parenthesis?}
+
+% \jhanote{I don't think it is about simplification (that is doubtful). It is
+%   about greater control as a consequence}
+
+The greater control obtained as a consequence of bypassing the job submission
+system of the DCI is one of the main reasons for the success of \pilot systems.
+As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be
+executed on a \pilot without waiting in the queuing system of the given
+infrastructure, and as a result, possibly increasing the throughput of the
+workload execution. Moreover, \pilots can be reused to execute multiple
+workloads until the \pilots' walltime expire.  It should be noted that how tasks
+are actually assigned to \pilots is a matter of implementation. For example, a
+dedicated scheduler could be adopted, or tasks might be directly assigned to a
+\pilot by the user.
 
 The type of binding of tasks to \pilots depends on the state of the \pilot. A
 \pilot is inactive until it is executed on a DCI, is active thereafter, until it
@@ -1541,12 +1562,13 @@ to the workload could be made, e.g., the transfer of data to a certain resource
 while the \pilot is still inactive. Late binding is critical in assuring the
 aforementioned high throughput of the distributed application by allowing
 sustained task execution without additional queuing time or container
-instantiation time. 
+instantiation time.
 
 It should be noted that some aspects of early binding can also be achieved
-without a \pilot system, but, importantly, the \pilot paradigm allows to do
-both, even within the confinements of a single workload. \jhanote{Is both a
-  reference to early and late binding?}
+without a \pilot system, but, importantly, the \pilot paradigm allows to do both
+types of binding, even within the confinements of a single workload. \jhanote{Is
+both a reference to early and late binding?} \mtnote{I would think so. Any
+better?}
 
 % \msnote{I would think parts of this paragraph also have their place in S5 (if
 % its not already there)}
@@ -1565,91 +1587,104 @@ scheduling tasks onto (active or inactive) \pilots.
 
 \end{description}
 
-\jhanote{everything after here till the end of section 3 needs work.}
+%\jhanote{everything after here till the end of section 3 needs work.}
 
-\definecolor{term}{RGB}{153,39,38}
-\definecolor{funct}{RGB}{0,128,64}
-\definecolor{lcomp}{RGB}{0,128,255}
+% \definecolor{term}{RGB}{153,39,38}
+% \definecolor{funct}{RGB}{0,128,64}
+% \definecolor{lcomp}{RGB}{0,128,255}
 
-\begin{table*}
- \centering
- \begin{tabular}{|p{4cm}|p{3.2cm}|p{3.2cm}|}
-  \hline
-    \textbf{Term} &
-    \textbf{Functionality} &
-    \textbf{Logical Component} \\
-  \hline
-  \hline
-    \textcolor{term}{Workload} &
-    \textcolor{funct}{Task Dispatching} &
-    \textcolor{lcomp}{Workload Manager} \\
-  \hline
-    \textcolor{term}{Task} &
-    \textcolor{funct}{Task Dispatching} \newline
-      \textcolor{funct}{Task Execution} &
-    \textcolor{lcomp}{Workload Manager} \newline
-      \textcolor{lcomp}{Task Manager} \\
-  \hline
-    \textcolor{term}{Resource} &
-    \textcolor{funct}{Pilot Provisioning} &
-    \textcolor{lcomp}{Pilot Manager} \\
-  \hline
-    \textcolor{term}{Infrastructure} or \textcolor{term}{DCI} &
-    \textcolor{funct}{Pilot Provisioning} &
-    \textcolor{lcomp}{Pilot Manager} \\
-  \hline
-    \textcolor{term}{Job} &
-    \textcolor{funct}{Pilot Provisioning} &
-    \textcolor{lcomp}{Pilot Manager} \\
-  \hline
-    \textcolor{term}{Pilot} &
-    \textcolor{funct}{Pilot Provisioning} \newline
-      \textcolor{funct}{Task Execution} &
-    \textcolor{lcomp}{Pilot Manager} \newline
-      \textcolor{lcomp}{Task Manager} \\
-  \hline
-    \textcolor{term}{Multi-level scheduling} &
-    \textcolor{funct}{Pilot Provisioning} \newline
-      \textcolor{funct}{Task Dispatching} &
-    \textcolor{lcomp}{Pilot Manager} \newline
-      \textcolor{lcomp}{Workload Manager} \\
-  \hline
-    \textcolor{term}{Early binding} &
-    \textcolor{funct}{Task Dispatching} \newline
-      \textcolor{funct}{Pilot Provisioning} &
-    \textcolor{lcomp}{Workload Manager} \newline
-      \textcolor{lcomp}{Pilot Manager} \\
-  \hline
-    \textcolor{term}{Late binding} &
-    \textcolor{funct}{Task Dispatching} \newline
-      \textcolor{funct}{Pilot Provisioning} &
-    \textcolor{lcomp}{Workload Manager} \newline
-      \textcolor{lcomp}{Pilot Manager} \\
-  \hline
- \end{tabular}
- \caption{\textbf{Mapping of the core terminology of \pilot systems into the
-     functionalities and logical components described in
-     \S\ref{sec:compsandfuncs}.}
-   \mtnote{Done in the text. Is it enough?}\msnote{Even with the
-     fancy colors ;-) I still fail to see the value of this table. Given that
-     I've become more appreciative of Fig4, I'm tempted to say that the figure
-     captures the multi-dimensionality much better than the table. Will
-     even volunteer to make it happen.}\jhanote{this table should either get a
-     major attention or it should simply be removed. It is unhelpful at best}}
- \label{table:terminology}
-\end{table*}
+% \begin{table*}
+%  \centering
+%  \begin{tabular}{|p{4cm}|p{3.2cm}|p{3.2cm}|}
+%   \hline
+%     \textbf{Term} &
+%     \textbf{Functionality} &
+%     \textbf{Logical Component} \\
+%   \hline
+%   \hline
+%     \textcolor{term}{Workload} &
+%     \textcolor{funct}{Task Dispatching} &
+%     \textcolor{lcomp}{Workload Manager} \\
+%   \hline
+%     \textcolor{term}{Task} &
+%     \textcolor{funct}{Task Dispatching} \newline
+%       \textcolor{funct}{Task Execution} &
+%     \textcolor{lcomp}{Workload Manager} \newline
+%       \textcolor{lcomp}{Task Manager} \\
+%   \hline
+%     \textcolor{term}{Resource} &
+%     \textcolor{funct}{Pilot Provisioning} &
+%     \textcolor{lcomp}{Pilot Manager} \\
+%   \hline
+%     \textcolor{term}{Infrastructure} or \textcolor{term}{DCI} &
+%     \textcolor{funct}{Pilot Provisioning} &
+%     \textcolor{lcomp}{Pilot Manager} \\
+%   \hline
+%     \textcolor{term}{Job} &
+%     \textcolor{funct}{Pilot Provisioning} &
+%     \textcolor{lcomp}{Pilot Manager} \\
+%   \hline
+%     \textcolor{term}{Pilot} &
+%     \textcolor{funct}{Pilot Provisioning} \newline
+%       \textcolor{funct}{Task Execution} &
+%     \textcolor{lcomp}{Pilot Manager} \newline
+%       \textcolor{lcomp}{Task Manager} \\
+%   \hline
+%     \textcolor{term}{Multi-level scheduling} &
+%     \textcolor{funct}{Pilot Provisioning} \newline
+%       \textcolor{funct}{Task Dispatching} &
+%     \textcolor{lcomp}{Pilot Manager} \newline
+%       \textcolor{lcomp}{Workload Manager} \\
+%   \hline
+%     \textcolor{term}{Early binding} &
+%     \textcolor{funct}{Task Dispatching} \newline
+%       \textcolor{funct}{Pilot Provisioning} &
+%     \textcolor{lcomp}{Workload Manager} \newline
+%       \textcolor{lcomp}{Pilot Manager} \\
+%   \hline
+%     \textcolor{term}{Late binding} &
+%     \textcolor{funct}{Task Dispatching} \newline
+%       \textcolor{funct}{Pilot Provisioning} &
+%     \textcolor{lcomp}{Workload Manager} \newline
+%       \textcolor{lcomp}{Pilot Manager} \\
+%   \hline
+%  \end{tabular}
+%  \caption{\textbf{Mapping of the core terminology of \pilot systems into the
+%      functionalities and logical components described in
+%      \S\ref{sec:compsandfuncs}.}
+%    \mtnote{Done in the text. Is it enough?}\msnote{Even with the
+%      fancy colors ;-) I still fail to see the value of this table. Given that
+%      I've become more appreciative of Fig4, I'm tempted to say that the figure
+%      captures the multi-dimensionality much better than the table. Will
+%      even volunteer to make it happen.}\jhanote{this table should either get a
+%      major attention or it should simply be removed. It is unhelpful at best}}
+%  \label{table:terminology}
+% \end{table*}
 
-Table~\ref{table:terminology} offers an overview of the defined minimal and
-consistent vocabulary. The terms are mapped into the logical components of a
-\pilot system based upon .... \jhanote{Matteo: please finish the sentence}.  The
-terms are also mapped onto minimal set of functionalities as defined
-in~\S\ref{sec:compsandfuncs} based upon .... \jhanote{Matteo: please finish the
-  sentence}.
+% Table~\ref{table:terminology} offers an overview of the defined minimal and
+% consistent vocabulary. The terms are mapped into the logical components of a
+% \pilot system based upon .... \jhanote{Matteo: please finish the sentence}.
+% The terms are also mapped onto minimal set of functionalities as defined
+% in~\S\ref{sec:compsandfuncs} based upon .... \jhanote{Matteo: please finish
+% the sentence}.
 
-The same mapping is diagrammatically represented in
-Figure~\ref{fig:core_vocabulary}. \jhanote{``The same mapping'' is unclear.}
-\jhanote{Please describe figure 4 using at least 1 paragraph. Its a complex
-  figure and without a detailed description it is not going to help the reader.}
+Figure~\ref{fig:core_vocabulary} offers an overview of the logical components of
+\pilot systems alongside their functionalities and the the defined minimal and
+consistent vocabulary. An application submits a workload composed of tasks to
+the \pilot system via an interface. The Pilot Manager is responsible for \pilot
+provisioning while the Workload Manager to dispatch tasks to the Task Manager
+once the pilot has been bootstrapped on the target DCI. Tasks are then executed
+on the resources held by the \pilot. Figure~\ref{fig:core_vocabulary} clearly
+shows the separation between the DCI and the \pilot system, and how the
+resources on which tasks are executed are contained within different logical and
+physical containers. Appreciating the characteristics and functionalities of a
+\pilot system depends upon understanding the inclusion relation among resources,
+pilots, jobs, clusters, and DCI.
+
+% \jhanote{``The same mapping'' is unclear.}
+% \jhanote{Please describe figure 4 using at least 1 paragraph. Its a complex
+%   figure and without a detailed description it is not going to help the
+%   reader.}
 
 Note how scheduling happens at both the infrastructure and at the pilot
 level. In Figure~\ref{fig:core_vocabulary}, scheduling clearly happens at the
@@ -1657,35 +1692,34 @@ level of the resource pool of an infrastructure, for example by means of a
 cluster scheduler, and then of the pilot once it holds its resources.
 In Table~\ref{table:terminology} the term `multi-level
 scheduling' pertains to both the pilot and workload managers and their
-respective pilot provisioning and task dispatching functionalities. 
+respective pilot provisioning and task dispatching functionalities.
 
 Figure~\ref{fig:core_vocabulary} also help to appreciate the critical
 distinction between the container of a pilot and the pilot itself. A container,
 for example a job, is used by the pilot manager to provision the pilot. Once the
 pilot has been provisioned, it is the pilot and not the container to be
 responsible of both holding a set of resources and offering the functionalities
-of the task manager. \jhanote{How Table 1 helps is not at all
-  clear/obvious. Hence I have removed a reference to Table 1 in the opening of
-  this sentence}.
+of the task manager.
+
+% \jhanote{How Table 1 helps is not at all clear/obvious. Hence I have removed a
+%   reference to Table 1 in the opening of this sentence}.
 
 Figure~\ref{fig:core_vocabulary} should not be confused with an architectural
 diagram. No indications are given about the interfaces that should be used, how
 the logical component should be mapped into software modules, or what type of
 communication and coordination protocols should be used among such components.
 This is why no distinction is made diagrammatically between early and late
-binding. 
+binding.
 
-\jhanote{this is not needed here. we have discussed the difference between early
-  versus later before. by having it here we are losing the opportunity to close
-  out section 3 with the main lessons learnt} Their difference is temporal and,
-as such, it can be highlighted only when describing the succession of the states
-and operations of a \pilot system implementation. In the early case, the binding
-of the tasks to a pilot will happen before the submission of such a \pilot to
-the remote infrastructure. In the late case, the binding will happen once the
-pilot has been instantiated and holds already its resources.
-
-The wide spectrum of available implementations of the logical components of a
-\pilot system is explored in the next section.
+% \jhanote{this is not needed here. we have discussed the difference between
+%   early versus later before. by having it here we are losing the opportunity
+%   to close out section 3 with the main lessons learnt} Their difference is
+%   temporal and, as such, it can be highlighted only when describing the
+%   succession of the states and operations of a \pilot system implementation.
+%   In the early case, the binding of the tasks to a pilot will happen before
+%   the submission of such a \pilot to the remote infrastructure. In the late
+%   case, the binding will happen once the pilot has been instantiated and holds
+%   already its resources.
 
 \begin{figure}[t]
     \centering
@@ -1696,6 +1730,11 @@ The wide spectrum of available implementations of the logical components of a
     a \pilot system in green, and those of their functionalities in blue.}
     \label{fig:core_vocabulary}
 \end{figure}
+
+\mtnote{Lessons learned to be discussed before writing them down here.}
+
+The wide spectrum of available implementations of the logical components of a
+\pilot system is explored in the next section.
 
 % \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
 % is sufficient and necessary in order to discriminate between \pilot and
