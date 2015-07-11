@@ -1531,8 +1531,8 @@ middleware, and as a result, possibly increasing the throughput of the workload
 execution. Moreover, \pilots can be reused to execute multiple workloads until
 the \pilots' walltime expire.  It should be noted that how tasks are actually
 assigned to \pilots is a matter of implementation. For example, a dedicated
-scheduler could be adopted, or tasks might be directly assigned to a
-\pilot by the user.
+scheduler could be adopted, or tasks might be directly assigned to a \pilot by
+the user.
 
 The type of binding of tasks to \pilots depends on the state of the \pilot. A
 \pilot is inactive until it is executed on a DCR, is active thereafter, until it
@@ -1773,7 +1773,12 @@ auxiliary properties are not necessarily shared among all \pilot systems.
   reference here}\jhanote{there is a potential problem here: we define core
   property based upon its requirement by a \pilot functionality. we define
   auxiliary based upon its requirement by a \pilot system. can we not define
-  core simply as, ``... necessary for any \pilot system''?}
+  core simply as, ``... necessary for any \pilot system''?} \jhanote{how about
+  traditional meaning of auxiliary: ``in support of'' and add to the definition
+  of auxiliary properties: those that help implement/support core properties? In
+  general, I think some more discussion about the classification of ``core'' and
+  ``auxiliary'' will help readability and prevent complications of the type
+  ``why is X auxiliary and not core?''.}
 
 % As shown in Table~\ref{table:core_properties}, the core properties are
 % derived consistently with the functionalities presented in \S\ref{sec:3} -
@@ -2232,11 +2237,11 @@ of individual instantiations of \pilots.
   implementation properties.
 
 % These comments were originally in section 3.
-\msnote{The paragraph above is more ammunition for the argument that the
-division between core and aux props is at least fuzzy, or potentially
-arbitrary, or C\&C is just a core prop. This needs further discussion.}
-\mtnote{In the agenda for next Tuesday? Otherwise, please feel free to propose
-the changes in 4.1 and we can discuss via comments.}
+% \msnote{The paragraph above is more ammunition for the argument that the
+% division between core and aux props is at least fuzzy, or potentially
+% arbitrary, or C\&C is just a core prop. This needs further discussion.}
+% \mtnote{In the agenda for next Tuesday? Otherwise, please feel free to propose
+% the changes in 4.1 and we can discuss via comments.}
 
 % aux because: its an implementation detail
 \item \textbf{Interface}. \pilot systems may present several types of private
