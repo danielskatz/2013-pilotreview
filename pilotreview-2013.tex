@@ -1241,17 +1241,17 @@ imposed by the middleware and policies of the targeted machines. The common
 denominators among \pilot systems are defined along multiple dimensions:
 purpose, logical components, and functionalities.
 
-The purpose shared by every \pilot system is to improve the performance of
-workload execution when compared to executing the same workload directly on one
-or more machines. Performance of workload execution is usually measured by
-throughput and execution time to completion (TTC), but other metrics could also
-be considered: for example, energy efficiency, data transfer minimization, scale
-of the workload executed, or a mix of them. Metrics that are not performance
-related include robustness and ease of application deployment.  In order to
-optimize the chosen set of metrics, each \pilot system exhibits characteristics
-that are both common or specific to one or more implementations. Discerning
-these characteristics requires isolating and defining the minimal set of logical
-components that has to characterize every \pilot system.
+The purpose shared by every \pilot system is to improve workload execution when
+compared to executing the same workload directly on one or more machines.
+Performance of workload execution is usually measured by throughput and
+execution time to completion (TTC), but other metrics could also be considered:
+energy efficiency, data transfer minimization, scale of the workload executed,
+or a mix of them. Metrics that are not performance related include robustness
+and ease of application deployment. In order to optimize the chosen set of
+metrics, each \pilot system exhibits characteristics that are both common or
+specific to one or more implementations. Discerning these characteristics
+requires isolating the minimal set of logical components that has to
+characterize every \pilot system.
 
 At some level, all \pilot systems employ three separate but coordinated logical
 components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
@@ -1265,22 +1265,23 @@ placeholders.
 The implementation details of these three logical components vary significantly
 across \pilot systems (see~\S\ref{sec:analysis}). One or more logical components
 may be responsible for specific functionalities, both on application as well as
-infrastructure level; two or more logical components may be implemented in a
-single software module; or additional functionalities may be integrated into the
-three managers. Nevertheless, the \pilot, Workload and Task Managers can always
-be distinguished across different \pilot systems.
+machine level; two or more logical components may be implemented in a single
+software module; or additional functionalities may be integrated into the three
+managers. Nevertheless, the \pilot, Workload, and Task Managers can always be
+distinguished across different \pilot systems.
 
 Each \pilot system supports a minimal set of functionalities that allow for the
 execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching},
 and \vocab{Task Execution}. \pilot systems need to schedule resource
-placeholders on the targeted machines, schedule tasks on the available
-placeholders, and then use these placeholders to execute the tasks of the given
-workload. More functionalities might be needed to implement a production-grade
-\pilot system: authentication, authorization, accounting, data management,
-fault-tolerance, or load-balancing. While these functionalities may be critical
-implementation details, they depend on the specific characteristics of the given
-use cases, workloads, or targeted resources. As such, these functionalities
-should not be considered a necessary characteristic of every \pilot system.
+placeholders on the targeted machines \mtnote{`targeted machines' or `target
+machines'?}, schedule tasks on the available placeholders, and then use these
+placeholders to execute the tasks of the given workload. More functionalities
+might be needed to implement a production-grade \pilot system: authentication,
+authorization, accounting, data management, fault-tolerance, or load-balancing.
+While these functionalities may be critical implementation details, they depend
+on the specific characteristics of the given use cases, workloads, or targeted
+resources. As such, these functionalities should not be considered a necessary
+characteristic of every \pilot system.
 
 Among the core functionalities that characterize every \pilot system, Pilot
 Provisioning is essential because it allows for the creation of resource
@@ -1294,7 +1295,9 @@ vocabulary of resource/DCR/DCI that we developed for the proposals here, and
 make it consistent throughout the paper. In this para for example we use the
 term DCI resource, which is inconsistent with developed vocabulary} \mtnote{If
 we want the definitions here, then we should probably move all of them before
-this subsection. Do you want me to do it? Meanwhile, I rephrased the whole subsection avoiding DCI altogether.}
+this subsection. Do you want me to do it? Meanwhile, I rephrased the whole
+subsection avoiding DCI altogether and added the definition of DCR to the next
+subsection.}
 
 % MS: I would move this comment to section 5 I think, as multi-tenant pilot
 % systems do have to make these trade-offs, and it would be good to point that
@@ -1305,14 +1308,14 @@ this subsection. Do you want me to do it? Meanwhile, I rephrased the whole subse
 
 The provisioning of resource placeholders depends on the capabilities exposed by
 the middleware of the targeted machine and on the implementation of each \pilot
-system. Typically, for DCIs adopting queues, batch systems, and schedulers,
-provisioning a placeholder involves it being submitted as a job. A `job' on this
-kind of middleware is a type of logical container that includes configuration
-and execution parameters alongside information on the executable that will be
-executed on the machine's compute nodes. Conversely, for infrastructures that do
-not adopt a job-based middleware, a resource placeholder would be executed by
-means of other types of logical container as, for example, a Virtual Machine
-(VM) or a Docker Engine~\cite{bernstein2014,felter2014}.
+system. Typically, for middleware adopting queues, batch systems, and
+schedulers, provisioning a placeholder involves it being submitted as a job. A
+`job' on this kind of middleware is a type of logical container that includes
+configuration and execution parameters alongside information on the executable
+that will be executed on the machine's compute nodes. Conversely, for
+infrastructures that do not adopt a job-based middleware, a resource placeholder
+would be executed by means of other types of logical container as, for example,
+a virtual machine or a Docker Engine~\cite{bernstein2014,felter2014}.
 
 Once resource placeholders are bound to the resources of a machine, tasks need
 to be dispatched to those placeholders for execution. Task dispatching does not
@@ -1353,7 +1356,7 @@ implemented into the Task Manager. Alternative coordination strategies, for
 example where a Task Manager directly coordinates the task scheduling, might
 require a functionally simpler Workload Manager but a comparatively more
 feature-rich Task Manager. The former would require capabilities for submitting
-tasks, while the latter would require to coordinate with its neighbor executors
+tasks, while the latter capabilities to coordinate with its neighbor executors
 leveraging, for example, a dedicated overlay network. While these systems adopt
 different coordination strategies, they can both be considered \pilot systems.
 
@@ -2159,7 +2162,7 @@ of individual instantiations of \pilots.
   type of capabilities needed for their execution. \pilot systems support a
   varying degree of semantic richness for the workload and its tasks. The
   (standard) format or language in which the workloads are described may also
-  be relevant. 
+  be relevant.
 
   \jhanote{moved comment sequence to end of file, after end{document}}
 
@@ -4118,7 +4121,7 @@ The analysis offered in~\S\ref{sec:analysis} shows a widespread adoption of the
 adoption of the \pilot paradigm in scientific computing environment brings to
 the fore a rich set of details about its specification, requirements, and
 functionalities.  While the paradigm remains the same, its application varies
-depending on the characteristics of the type of computation considered. 
+depending on the characteristics of the type of computation considered.
 
 % These differences are well illustrated by looking at how \pilot systems support
 % the execution of parallel and distributed applications.
