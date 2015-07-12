@@ -3882,8 +3882,7 @@ the default form they come in and how they are meant to be deployed.
 
 \jhanote{General note: (i) needs major reduction, (ii) needs 4.2 to be complete
   before this section will get desired/needed punch, (iii) needs elaboration of
-  P*. Possibly a good point to introduce MPI workload discussion and enterprise
-  workload discussion.}
+  P*.}
 
 
 % \jhanote{the structure of section 5 is: (i) revisit the myths. (ii)
@@ -3915,7 +3914,7 @@ to as `\pilot paradigm'.
 
 In this section, the properties of the \pilot paradigm are critically assessed.
 The goal is to show the generality of this paradigm and how \pilot systems go
-beyond the implementation of a special purpose trickery to speed up the
+beyond the implementation of a special purpose solutions to speed up the
 execution of a certain type of workload. Once the breadth of the \pilot paradigm
 has been understood, it is contextualized by describing its relation with
 relevant domains such as middleware, applications, security, and the enterprise.
@@ -3936,6 +3935,20 @@ engineering challenges that are being faced both by developers and target users.
 %
 \subsection{The Pilot Paradigm}
 \label{sec:paradigm}
+
+\jhanote{A suggestion for the organization of S5: Establish the generality of
+  the concept in 5.1 via a discussion of ``internal'' core properties (task
+  binding, execution...)  of the pilot (c.f. section 4.1). We move to 5.2 and
+  discuss the generality with respect to ``external'' core properties. (I am not
+  advocating for a formal bloat of terminology, but just as an internal
+  organizational principle). 5.2 than speaks to the resource types, possibly
+  workload semantics (might require shifting text around from 5.1) etc.. Also, I
+  know in 5.2 we are trying to highlight that the paradigm remains the same, but
+  the implementation of and application of the pilot paradigm differs.  It can
+  speak to auxiliary properties such as AAA, but we know they are already fairly
+  specific to an implementation, so we don't need to spend much real estate on
+  specific auxiliary properties, but possibly generalize the challenges/reasons
+  to the set of auxiliary properties.}
 
 
 % \jhanote{Need thinking: Following on from discussion yesterday, is early/late
@@ -3994,6 +4007,7 @@ execute workloads composed by an arbitrary number of tasks with disparate
 requirements. For example, as seen in~\S\ref{sec:analysis}, \pilot systems can
 execute homogeneous or heterogeneous bags of independent or intercommunicating
 tasks with arbitrary duration, data, or computation requirements.
+
 % The \pilot paradigm has been successfully integrated within workflow systems
 % to support execution of workloads with articulated data and task dependencies.
 % Furthermore, both single and multi-core tasks can be executed by many existing
@@ -4042,37 +4056,59 @@ Traditionally, \pilots have been thought of as a means to optimize the
 throughput of single-core (or at least single-node), short-lived, uncoupled
 tasks execution ~\cite{pordes2007,sfiligoi2009,juve2010}. The analysis presented
 in~\S\ref{sec:analysis} showed that such a view is restrictive.  The \pilot
-paradigm is in fact characterized and defined primarily by resource
-placeholding, multi-level scheduling, and late binding, \pilot systems represent
+paradigm has been successfully integrated within workflow systems to support
+execution of workloads with articulated data and task dependencies.
+Furthermore, both single and multi-core tasks can be executed by many existing
+\pilot systems, with some of them also offering resource-specific MPI support.
+As such, depending on the type of the given workload, the \pilot paradigm can be
+implemented to optimize different metrics of task execution other than
+throughput. \jhanote{In support of generality of workload, we should mention
+  multiple tightly-coupled workloads cf next section}
+
+The benefits of executing tightly-coupled parallel code via \pilot systems are
+especially evident when considering workloads involving homogeneous tasks and
+possibly diverse computational phases. For example, applications with separated
+simulation and analysis phases [ref], or applications integrating multiple types
+of analysis [ref], \ldots. \mtnote{To be expanded with better/further examples
+  of why we want to run MPI with pilots.}\jhanote{multiple possibly
+  tight-coupled components use a pilot to provide (i) single point of entry to
+  the scheduler for multiple components, (ii) growing/shrinking of resources
+  needed for (interacting) components i.e., a different type of dynamic resource
+  allocation}\jhanote{move to previous section where generality of workload is
+  discussed}
+
+
+
+The \pilot paradigm is characterized and defined primarily by resource
+placeholding, multi-level scheduling, and late binding, \pilot systems represents
 a category of software in itself. \pilot systems are not just an alternative
 implementation of a scheduler, of a workload manager, of a batch system, or of
 any other special-purpose software component.
-
-%\jhanote{this paragraph can be reduced or better still merged with
-%   opening paragraph of this section on workloads}
-
 
 % This specific system is used when abstracting one or more type of physical
 % resources with well-defined spatial and time properties can lead to the
 % optimization of one or more parameters of the workload execution. \jhanote{last
 %   sentence can be deleted or needs attention to make straight and simple.}
 
-\jhanote{We need 1-2 paragraphs describing the relationship of Section 3 to the
-  P* model/paper. Else we are going to get dinged by reviewer or cause confusion
-  to the reader. Where this paragraph goes is open for discussion, but please
-  draft a paragraph.}
 
-\jhanote{Candidate for removal. from here...}  Appreciating the generality of
-the \pilot paradigm and the independence of its implementations from other types
-of software, helps also to avoid a potential misunderstanding involving \pilots
-and how multi-level scheduling works. \pilot systems do not circumvent the
-infrastructure middleware but abstract away some of its properties in order to
-optimize one or more user-defined (performance) metrics.  Multi-level scheduling
-does not replace the infrastructure-level scheduler either. As clearly
-illustrated in~\S\ref{sec:understanding}, resource containers are still created
-on the target infrastructure by means of that infrastructure's capabilities and
-the second level of scheduling is completely contained within the boundaries of
-the resource container.
+
+Appreciating the generality of the \pilot paradigm and the independence of its
+implementations from other types of software, helps also to avoid a potential
+misunderstanding involving \pilots and how multi-level scheduling works. \pilot
+systems do not circumvent the infrastructure middleware but abstract away some
+of its properties in order to optimize one or more user-defined (performance)
+metrics.  Multi-level scheduling does not replace the infrastructure-level
+scheduler either. As clearly illustrated in~\S\ref{sec:understanding}, resource
+containers are still created on the target infrastructure by means of that
+infrastructure's capabilities and the second level of scheduling is completely
+contained within the boundaries of the resource container.
+The generality of the \pilot paradigm may come as a surprise when considering
+the requirement that has motivated most implementations, viz., leveraging
+multi-level scheduling so as to increase the execution throughput of large
+workloads made qof short running tasks.  For example, as seen
+in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were initially developed as
+single-point solutions, focusing on either a type of workload, a specific
+infrastructure, or the optimization of a single performance metric.
 
 Optimizing the usage of the resource containers, for example by minimizing
 idling time, is an implementation issue, not an intrinsic limitation of the
@@ -4082,17 +4118,6 @@ necessarily responsible for an efficient resource utilization. A \pilot system
 can be implemented as a middleware component, as seen with HTCondor and its role
 as an integral part of the infrastructure middleware stack on some DCIs.
 
-The generality of the \pilot paradigm may come as a surprise when considering
-the requirement that has motivated most implementations, viz., leveraging
-multi-level scheduling so as to increase the execution throughput of large
-workloads made qof short running tasks.
-%has been achieved without having to devise a new paradigm.
-For example, as seen in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were
-initially developed as single-point solutions, focusing on either a type of
-workload, a specific infrastructure, or the optimization of a single performance
-metric.
-\jhanote{.... to here}
-
 Appreciating the properties of the \pilot paradigm becomes necessary once
 requirements of infrastructure interoperability, support for multiple types of
 workloads, or flexibility in the optimization of execution are introduced.
@@ -4100,6 +4125,12 @@ Satisfying those requirements requires abstracting the specificity of
 middleware, infrastructure architectures, and application patterns. As shown in
 this paper, this process of abstraction mandates the development of an
 understanding of the \pilot paradigm.
+
+\jhanote{We need 1-2 paragraphs describing the relationship of Section 3 to the
+  P* model/paper. Else we are going to get dinged by reviewer or cause confusion
+  to the reader. Where this paragraph goes is open for discussion, but please
+  draft a paragraph.}
+
 
 % The \pilot paradigm... Why it is a independent distributed system
 % abstraction? Independent = unique characteristics and properties when
@@ -4122,6 +4153,8 @@ adoption of the \pilot paradigm in scientific computing environment brings to
 the fore a rich set of details about its specification, requirements, and
 functionalities.  While the paradigm remains the same, its application varies
 depending on the characteristics of the type of computation considered.
+
+
 
 % These differences are well illustrated by looking at how \pilot systems support
 % the execution of parallel and distributed applications.
@@ -4161,27 +4194,7 @@ depending on the characteristics of the type of computation considered.
 
 % \paragraph*{MPI, OpenMP, etc.}
 
-\jhanote{reduce the length of this paragraph. concept of localization is OK} The
-notion of task as defined in~\S\ref{sec:understanding} and then utilized
-in~\S\ref{sec:analysis} shapes both the conceptualization and implementation of
-the \pilot paradigm. Conceptually, adding a wrapper to the executables of a
-distributed or parallel application means creating a well-defined space for
-their localization. This may involve not only the specification of program
-switches, data locations, or library dependences but also loading modules,
-downloading supporting code, or on-the-fly compilations and execution of
-supporting applications. Implementation-wise, the process of localization
-requires tight coupling with the target infrastructure, its capabilities,
-policies, and specific configurations.
 
-The implementation of the localization process becomes more challenging in the
-presence of heterogeneous infrastructures. The same executable may require
-different localization procedures depending on where it will be executed. More
-importantly, different types of localizations may or may not be available or
-allowed on all the target infrastructures. This imposes decision capabilities on
-the task scheduler and the development of a robust interoperability layer
-between the \pilot system and the heterogeneous target infrastructures.  Thus,
-interoperable localization offers the opportunity to execute heterogeneous
-executables via \pilot systems.
 
 % As seen in~\S\ref{sec:history}, the abstraction
 % of \pilot was progressively developed in a distributed context leaving
@@ -4190,17 +4203,6 @@ executables via \pilot systems.
 % the \pilot paradigm. For example, by leveraging localization, different flavors
 % of MPI libraries can be loaded and specific execution commands may be used to
 % run MPI applications via a task wrapper and a \pilot agent.
-
-The benefits of executing tightly-coupled parallel code via \pilot systems are
-especially evident when considering workloads involving homogeneous tasks and
-possibly diverse computational phases. For example, applications with separated
-simulation and analysis phases [ref], or applications integrating multiple types
-of analysis [ref], \ldots. \mtnote{To be expanded with better/further examples
-  of why we want to run MPI with pilots.}\jhanote{multiple possibly
-  tight-coupled components use a pilot to provide (i) single point of entry to
-  the scheduler for multiple components, (ii) growing/shrinking of resources
-  needed for (interacting) components i.e., a different type of dynamic resource
-  allocation}
 
 
 % In the \pstar model and in the discussion so far we have mainly been
@@ -4276,10 +4278,10 @@ applications could be built upon. As with the resource layer, the \pilot
 paradigm offers a well-defined and well-isolated layer between applications and
 resources. This fosters extensibility, interoperability, and modularity by
 separating the application description and logic from the management of its
-execution, and from the provisioning and aggregation of resources. In turn,
-this avoids the need to develop special-purpose, vertical, and end-to-end
+execution, and from the provisioning and aggregation of resources. In turn, this
+avoids the need to develop special-purpose, vertical, and end-to-end
 applications, the main source of duplication and fragmentation in the current
-distributed application landscape.
+distributed application and tooling landscape.
 
 % \paragraph*{Pilot and AAA}
 
@@ -4309,6 +4311,29 @@ consistently with the infrastructure policies. These credentials are supposed to
 be provided by the application layer therefore reducing to a minimum the
 requirements for AAA implementation within \pilot systems.
 
+\jhanote{the concept of localization is OK. Can the discussion about
+  localization and AAA be merged to save space?} The
+notion of task as defined in~\S\ref{sec:understanding} and then utilized
+in~\S\ref{sec:analysis} shapes both the conceptualization and implementation of
+the \pilot paradigm. Conceptually, adding a wrapper to the executables of a
+distributed or parallel application means creating a well-defined space for
+their localization. This may involve not only the specification of program
+switches, data locations, or library dependences but also loading modules,
+downloading supporting code, or on-the-fly compilations and execution of
+supporting applications. Implementation-wise, the process of localization
+requires tight coupling with the target infrastructure, its capabilities,
+policies, and specific configurations.
+
+The implementation of the localization process becomes more challenging in the
+presence of heterogeneous infrastructures. The same executable may require
+different localization procedures depending on where it will be executed. More
+importantly, different types of localizations may or may not be available or
+allowed on all the target infrastructures. This imposes decision capabilities on
+the task scheduler and the development of a robust interoperability layer
+between the \pilot system and the heterogeneous target infrastructures.  Thus,
+interoperable localization offers the opportunity to execute heterogeneous
+executables via \pilot systems.
+
 % Because the \pilot can run as a different ``user'' than the ``owner'' of the
 % \vocab{Task} there are challenges for many aspects of Authentication,
 % Authorization, and Accounting (AAA). The issue mainly arises because
@@ -4319,6 +4344,142 @@ requirements for AAA implementation within \pilot systems.
 % and then extended.}
 
 % \paragraph*{Pilot and the Enterprise}
+
+
+
+% -----------------------------------------------------------------------------
+% 5.3
+%
+\subsection{Future Directions and Challenges}
+\label{sec:future}
+
+The \pilot landscape is currently fragmented with a high degree of duplicated
+effort and capabilities. The reasons for such a balkanization are to be traced
+back mainly to two factors: (i) the relatively recent discovery of the
+importance of the \pilot paradigm; and (ii) the development model fostered
+within academic institutions.
+
+As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
+as a pragmatic solution for improving the throughput of distributed
+applications. \pilot systems were not thought from their inception as an
+independent class of middleware but, at best, as a module within a specific
+framework. This not only promoted duplication of development effort across
+frameworks and projects but also hindered the appreciation for the generality of
+the \pilot abstraction, the theoretical framework underlying the \pilot systems,
+and the application execution paradigm they enable.
+
+\pilot systems inherited the development model of the scientific projects
+within which they were initially developed. Most of the early \pilot systems
+were developed to serve a specific use case, often within the remit of a
+specific research project. As a consequence, these systems were not engineered
+to promote (re)usability, modularity, well-defined interfaces, or long-term
+sustainability. Furthermore, for the most part code was not build around a
+wider community, following recognized and widely-accepted coding standards.
+
+% All this is likely to change with the progressive appreciation of the
+% generality, richness, and versatility of the \pilot paradigm. The ongoing
+% re-engineering of PANDA and DIRAC and the development of RADICAL-Pilot indicate
+% that the \pilot paradigm is becoming the leading approach for large scale
+% scientific applications. For example, PANDA supports the execution of 5 million
+% jobs weekly for the ATLAS project~\cite{Aad2008} and in the past year
+% RADICAL-pilot has be used to execute [...]\mtnote{TODO: Ask Shantenu reference
+% about RP usage on XSEDE} million jobs on XSEDE. \msnote{This sounds biased. I
+% would think there are better examples of production usage than that of RP ...}
+% \mtnote{This is based on Shantenu's report about RP-based experiments being the
+% biggest user of XSEDE in the past year. If you have better examples, I would be
+% happy to follow pointers to them.}
+
+% \mtnote{we may want to add some data here, showing the staggering amount of
+% resources consumed by means of these two pilot systems.}
+
+% It should be noted that `large scale scientific applications' includes both
+% distributed and parallel applications executed on diverse types of
+% infrastructure. 
+
+\jhanote{important point about removing artifical distinction between HPC and
+  HTC and why.. but can we integrate the next two paragraphs with discussion in
+  5.1?} As argued in the previous section, \pilot systems are agnostic towards
+the type of application that is executed. They need to be engineered so to
+support different types of applications but the \pilot paradigm and its
+underlying notions of resource placeholder and multi-level scheduling do not
+require for the application to be distributed, parallel, MPI, closed-coupled, or
+communication independent. This shows how historical distinctions between, for
+example, HPC and HTC are progressively loosing their meaning when considering
+resource provisioning and application execution by means of \pilot systems.
+
+\pilots holds resources and the properties of such resources can be arbitrarily
+specified. Analogously, \pilots allow for tasks to be scheduled but the type of
+matching between the requirements of these tasks and the capabilities offered by
+the resources held by the pilot is not mandated by the \pilot paradigm itself.
+For this reason, adopting the \pilot paradigm for the execution of increasingly
+diverse applications should be seen as a set of often challenging implementation
+details more than a foundational issue requiring new middleware paradigms.
+
+% It is relevant to stress how \pilot systems allow for the unification of the
+% execution process of diverse type of applications outside the remit of the
+% middleware of target resources. This offers the opportunity to overcome one
+% of the main limitations encountered when developing other types of
+% middleware, especially those supporting grid computing [cit].
+
+% \paragraph*{Performance and Scalability}
+
+% Scalability and performance are two important elements that should see further
+% development in the \pilot system landscape. The ongoing increase of the scale
+% required by scientific applications [cit] poses new challenges to the
+% development of effective \pilot systems. Increase in scale brings the need to
+% focus on federation of resources, integration of leadership machines, and
+% scaling-out to cloud infrastructures. Furthermore, large scale executions make
+% fault-tolerance and advanced mechanisms for fault-recovery essential. For
+% example, \pilot systems need to support the rerun of those few tasks that failed
+% among the millions that have been successfully executed.\msnote{How do we want
+% to draw the line between pilot systems and WMS? The restart of task can be done
+% on multiple levels.} \mtnote{You can read this as `the \pilot system needs to
+% support fault-tolerance either directly or indirectly'. At 30 pages, I would
+% avoid further distinctions.} Analogously, the failure of a \pilot among the many
+% instantiated must not be an unrecoverable event. In this context, resource
+% discovery and dynamic handling of application execution will probably play an
+% increasingly important role.
+
+% With scale, performance becomes an increasingly relevant issue. Performance not
+% only as in overall application throughput but, more subtly and yet not less
+% relevant, also as in overheads imposed by the \pilot system on the application
+% execution. Such overheads need to be quantifiable and accountable for.
+% Especially in a context of heterogeneous types of applications, \pilot overheads
+% may be relevant to decide what type of resource to target, how many pilots to
+% instantiate, or whether a \pilot system should be used at all.
+
+% \paragraph*{Generality or Optimization} The existence of many \pilot systems
+% is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
+% Workload management. [this has a clear link to the pilot and application
+% layer paragraph]\mtnote{Happy to write this after discussing what was the
+% original idea. Should we move this to future trends?}
+
+The analysis offered in this paper indicates that the number of \pilot systems
+actively developed should be reduced so to avoid duplication while promoting
+consolidation, robustness, and overall capabilities. Nonetheless, this
+conclusion should not be taken to an extreme. A single \pilot system should not
+be elected as the only implementation worthy of development effort or
+adoption. As with other software systems and middleware~\cite{bernstein1996} the
+problem is not to eliminate special purpose systems in favor of a single
+encompassing solution but it is, instead, having both of them, depending on the
+application and use case requirements. A multi-purpose, functionally
+encompassing \pilot system is desirable for all those use cases in which
+applications are heterogeneous in the type of computation, time, or space. For
+specific applications designed to run on a single type of infrastructure with an
+unique performance objective, a special purpose system might be warranted, but
+otherwise a conservative approach is warranted.  Another rationale against rigid
+consolidation is the diversity in programming languages used, the different
+deployment models required, and what that means for the interaction with
+existing applications.
+
+\mtnote{Consider whether to add a paragraph about interoperability among \pilot
+  systems. I would probably not do it as it does not seem of primary relevance
+  to me.}\jhanote{I might add: we are not advocating interoperability of
+  pilot. if there is a compelling reason for the community, then they will
+  self-organize. What we're saying is that any attempt at interoperability will
+  be successful/should be taken only after adequate advances in conceptual
+  understanding exists. This paper is arguably the most comprehensive paper
+  towards that end goal.}
 
 \jhanote{I will move/integrate in right place..} Moving away from the
 relationship between the \pilot paradigm and critical implementation details
@@ -4361,139 +4522,6 @@ will have a go at it with a paragraph but I am by no means an expert of these
 technologies.}
 \msnote{I'll write up a bit about Google's Kubernetes, which not completely
 coincidently is Greek for Pilot}
-
-% -----------------------------------------------------------------------------
-% 5.3
-%
-\subsection{Future Directions and Challenges}
-\label{sec:future}
-
-The \pilot landscape is currently fragmented with a high degree of duplicated
-effort and capabilities. The reasons for such a balkanization are to be traced
-back mainly to two factors: (i) the relatively recent discovery of the
-importance of the \pilot paradigm; and (ii) the development model fostered
-within academic institutions.
-
-As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
-as a pragmatic solution for improving the throughput of distributed
-applications. \pilot systems were not thought from their inception as an
-independent class of middleware but, at best, as a module within a specific
-framework. This not only promoted duplication of development effort across
-frameworks and projects but also hindered the appreciation for the generality of
-the \pilot abstraction, the theoretical framework underlying the \pilot systems,
-and the application execution paradigm they enable.
-
-\pilot systems inherited the development model of the scientific projects
-within which they were initially developed. Most of the early \pilot systems
-were developed to serve a specific use case, often within the remit of a
-specific research project. As a consequence, these systems were not engineered
-to promote (re)usability, modularity, well-defined interfaces, or long-term
-sustainability. Furthermore, for the most part code was not build around a
-wider community, following recognized and widely-accepted coding standards.
-
-All this is likely to change with the progressive appreciation of the
-generality, richness, and versatility of the \pilot paradigm. The ongoing
-re-engineering of PANDA and DIRAC and the development of RADICAL-Pilot indicate
-that the \pilot paradigm is becoming the leading approach for large scale
-scientific applications. For example, PANDA supports the execution of 5 million
-jobs weekly for the ATLAS project~\cite{Aad2008} and in the past year
-RADICAL-pilot has be used to execute [...]\mtnote{TODO: Ask Shantenu reference
-about RP usage on XSEDE} million jobs on XSEDE. \msnote{This sounds biased. I
-would think there are better examples of production usage than that of RP ...}
-\mtnote{This is based on Shantenu's report about RP-based experiments being the
-biggest user of XSEDE in the past year. If you have better examples, I would be
-happy to follow pointers to them.}
-
-% \mtnote{we may want to add some data here, showing the staggering amount of
-% resources consumed by means of these two pilot systems.}
-
-It should be noted that `large scale scientific applications' includes both
-distributed and parallel applications executed on diverse types of
-infrastructure. This shows how historical distinctions between, for example,
-HPC and HTC are progressively loosing their meaning when considering resource
-provisioning and application execution by means of \pilot systems.
-
-As argued in the previous section, \pilot systems are agnostic towards the type
-of application that is executed. They need to be engineered so to support
-different types of applications but the \pilot paradigm and its underlying
-notions of resource placeholder and multi-level scheduling do not require for
-the application to be distributed, parallel, MPI, closed-coupled, or
-communication independent.
-
-\pilots holds resources and the properties of such resources can be arbitrarily
-specified. Analogously, \pilots allow for tasks to be scheduled but the type of
-matching between the requirements of these tasks and the capabilities offered by
-the resources held by the pilot is not mandated by the \pilot paradigm itself.
-For this reason, adopting the \pilot paradigm for the execution of increasingly
-diverse applications should be seen as a set of often challenging implementation
-details more than a foundational issue requiring new middleware paradigms.
-
-% It is relevant to stress how \pilot systems allow for the unification of the
-% execution process of diverse type of applications outside the remit of the
-% middleware of target resources. This offers the opportunity to overcome one
-% of the main limitations encountered when developing other types of
-% middleware, especially those supporting grid computing [cit].
-
-% \paragraph*{Performance and Scalability}
-
-Scalability and performance are two important elements that should see further
-development in the \pilot system landscape. The ongoing increase of the scale
-required by scientific applications [cit] poses new challenges to the
-development of effective \pilot systems. Increase in scale brings the need to
-focus on federation of resources, integration of leadership machines, and
-scaling-out to cloud infrastructures. Furthermore, large scale executions make
-fault-tolerance and advanced mechanisms for fault-recovery essential. For
-example, \pilot systems need to support the rerun of those few tasks that failed
-among the millions that have been successfully executed.\msnote{How do we want
-to draw the line between pilot systems and WMS? The restart of task can be done
-on multiple levels.} \mtnote{You can read this as `the \pilot system needs to
-support fault-tolerance either directly or indirectly'. At 30 pages, I would
-avoid further distinctions.} Analogously, the failure of a \pilot among the many
-instantiated must not be an unrecoverable event. In this context, resource
-discovery and dynamic handling of application execution will probably play an
-increasingly important role.
-
-With scale, performance becomes an increasingly relevant issue. Performance not
-only as in overall application throughput but, more subtly and yet not less
-relevant, also as in overheads imposed by the \pilot system on the application
-execution. Such overheads need to be quantifiable and accountable for.
-Especially in a context of heterogeneous types of applications, \pilot overheads
-may be relevant to decide what type of resource to target, how many pilots to
-instantiate, or whether a \pilot system should be used at all.
-
-% \paragraph*{Generality or Optimization} The existence of many \pilot systems
-% is tempting to frown at from a perspective of Not-Invented-Here-Syndrome.
-% Workload management. [this has a clear link to the pilot and application
-% layer paragraph]\mtnote{Happy to write this after discussing what was the
-% original idea. Should we move this to future trends?}
-
-The analysis offered in this paper indicates that the number of \pilot systems
-actively developed should be reduced so to avoid duplication while promoting
-consolidation, robustness, and overall capabilities. Nonetheless, this
-conclusion should not be taken to an extreme. A single \pilot system should not
-be elected as the only implementation worthy of development effort or
-adoption. As with other software systems and middleware~\cite{bernstein1996} the
-problem is not to eliminate special purpose systems in favor of a single
-encompassing solution but it is, instead, having both of them, depending on the
-application and use case requirements. A multi-purpose, functionally
-encompassing \pilot system is desirable for all those use cases in which
-applications are heterogeneous in the type of computation, time, or space. For
-specific applications designed to run on a single type of infrastructure with an
-unique performance objective, a special purpose system might be warranted, but
-otherwise a conservative approach is warranted.  Another rationale against rigid
-consolidation is the diversity in programming languages used, the different
-deployment models required, and what that means for the interaction with
-existing applications.
-
-\mtnote{Consider whether to add a paragraph about interoperability among \pilot
-  systems. I would probably not do it as it does not seem of primary relevance
-  to me.}\jhanote{I might add: we are not advocating interoperability of
-  pilot. if there is a compelling reason for the community, then they will
-  self-organize. What we're saying is that any attempt at interoperability will
-  be successful/should be taken only after adequate advances in conceptual
-  understanding exists. This paper is arguably the most comprehensive paper
-  towards that end goal.}
-
 
 % \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
 % \jhanote{\pilotjobs have potential, but it is not being realized due to
@@ -4582,6 +4610,7 @@ understood, it would show to the user communities, DCIs managers, and developers
 that converging towards a robust, interoperable, openly available, community
 developed and maintained \pilot system is a privileged way to progress the
 computational-intense research of many scientific fields.
+
 
 % -----------------------------------------------------------------------------
 % \item \textbf{Pilot abstraction} as a well-defined, independent
