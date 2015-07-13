@@ -863,13 +863,13 @@ robust abstractions has still to be devised and implemented.
 
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
-imposed on \mtnote{to?} the application layer. Even with solutions like grid
-computing aiming at effectively and, to some extent, transparently integrating
-diverse resources, most of the requirements involving the coordination of task
-execution still resides with the application layer. This translates into
-single-point solutions, extensive redesign and redevelopment of existing
-applications when they need to be adapted to new use cases or new resources, and
-lack of portability and interoperability.
+imposed on the application layer. Even with solutions like grid computing aiming
+at effectively and, to some extent, transparently integrating diverse resources,
+most of the requirements involving the coordination of task execution still
+resides with the application layer. This translates into single-point solutions,
+extensive redesign and redevelopment of existing applications when they need to
+be adapted to new use cases or new resources, and lack of portability and
+interoperability.
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
@@ -1030,9 +1030,10 @@ created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management required
 system level software configurations that had to be made by the administrator of
-each individual resource of each Condor resource pool. \jhanote{resource
-management could not be done on application level'' does not make sense to me.
-Are we referring to aggregation?}\mtnote{Better?}
+each individual resource of each Condor resource pool. 
+
+% \jhanote{resource management could not be done on application level'' does not
+%   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
 within the Condor system. Condor-G/GlideIn~\cite{condor-g} allowed users to add
@@ -1048,8 +1049,9 @@ resource placeholder -- which is part of a pilot, and not necessarily a full
 pilot.} \mtnote{We do not use \pilotjob system so I do not think we are implying
 that glideIn is a `full pilot' (even if I am not so sure what exactly a full
 pilot is). I slightly edited the sentence, any better?}
-\jhanote{as this is historical evolution, some parts need to be in the past
-tense. Care will be needed to get the tense right.} \mtnote{Better?}
+
+% \jhanote{as this is historical evolution, some parts need to be in the past
+% tense. Care will be needed to get the tense right.} \mtnote{Better?}
 
 The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
 enable scientific computation at scale and on heterogeneous resources. The
@@ -1273,12 +1275,11 @@ be distinguished across different \pilotjob systems.
 
 Each \pilotjob system supports a minimal set of functionalities that allow for
 the execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task
-Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
-resource placeholders on the targeted machines \mtnote{`targeted machines' or
-`target machines'?}, schedule tasks on the available placeholders, and then use
-these placeholders to execute the tasks of the given workload. More
-functionalities might be needed to implement a production-grade \pilotjob
-system: authentication, authorization, accounting, data management,
+  Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
+resource placeholders on the target machines, schedule tasks on the available
+placeholders, and then use these placeholders to execute the tasks of the given
+workload. More functionalities might be needed to implement a production-grade
+\pilotjob system: authentication, authorization, accounting, data management,
 fault-tolerance, or load-balancing. While these functionalities may be critical
 implementation details, they depend on the specific characteristics of the given
 use cases, workloads, or targeted resources. As such, these functionalities
@@ -1345,8 +1346,8 @@ adopting any suitable mechanism (e.g. time synchronization, static or dynamic
 coordinator election, local or global information sharing, or \MW). The same
 applies to network architectures and protocols: different network architectures
 and protocols may be used to achieve effective communication and coordination.
-\jhanote{is this a reference to coordination or communication? unclear}
-\mtnote{`communication and coordination' so I would say to both.}
+% \jhanote{is this a reference to coordination or communication? unclear}
+% \mtnote{`communication and coordination' so I would say to both.}
 
 As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 \pilotjob systems. When the master is identified with the Workload Manager, and
@@ -1818,8 +1819,8 @@ core and auxiliary property alongside their mapping to the required components
 and functionalities of a \pilot system as described
 in~\S\ref{sec:compsandfuncs}.
 
-\jhanote{the table structure is different to the order presented here. See
-  comments at the end of next paragraph.} \mtnote{Done.}
+% \jhanote{the table structure is different to the order presented here. See
+%   comments at the end of next paragraph.} \mtnote{Done.}
 
 \jhanote{the contents of this section are fine. my observation is that of style:
   both internal to the text, and text vis-a-vis the table. Could we not (i)
