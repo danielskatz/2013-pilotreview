@@ -765,7 +765,7 @@ Challenge\footnote{Based on private communication.}, and then introduced in
 writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
 already well-known at the beginning of the twentieth century: task-level
-distribution and parallelism on multiple resources.
+distribution and parallelism on multiple resources. 
 
 Lewis Fry Richardson devised in 1922 a Forecast Factory
 (Figure~\ref{fig:figures_forecast-factory}) to solve systems of differential
@@ -774,9 +774,9 @@ computers' supervised by a senior clerk. The clerk would distribute portions of
 the differential equations to the computers so that they could forecast the
 weather of specific regions of the globe. The computers would perform their
 calculations and then send the results back to the clerk. The Forecast Factory
-was not only an early conceptualization of what is called today a
-``high-performance machine'' but also of the coordination pattern for
-distributed and parallel computation called ``\MW''.
+was not only an early conceptualization of what is today called
+``high-performance'' task-level parallelism, but also of the coordination
+pattern for distributed and parallel computation called ``\MW''.
 
 \begin{figure}[t]
   \centering
@@ -826,7 +826,7 @@ compute-node sharing policies vary from resource to resource. Finally, each
 high-performance machine may be designed and configured to support only specific
 types of application.
 
-The resource provision of multi-tenant and heterogeneous high-performance
+The resource provisioning of multi-tenant and heterogeneous high-performance
 machines is limited, irregular, and largely
 unpredictable~\cite{downey1997,wolski2003,li2004,tsafrir2007}. By definition,
 the resources accessible and available at any given time can be less than those
@@ -853,13 +853,16 @@ complexity across resources, middleware, and applications.
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
 umbrellas of grid computing or cloud computing\jhanote{need to be more specific
-than grid computing} \mtnote{Any insight in what kind of specificity you are
-thinking about? Grid and cloud computing are at the same level of generality so
-I will have to specify also the latter.}, targeted the resource layer, others
-the application layer as, for example, with workflow frameworks. All these
-approaches offered and still offer some degree of success for specific
+  than grid computing} \mtnote{Any insight in what kind of specificity you are
+  thinking about? Grid and cloud computing are at the same level of generality
+  so I will have to specify also the latter.}, targeted the resource layer,
+others the application layer as, for example, with workflow frameworks. All
+these approaches offered and still offer some degree of success for specific
 applications and use cases but a general solution based on well-defined and
-robust abstractions has still to be devised and implemented.
+robust abstractions has still to be devised and implemented.\jhanote{sorry my
+  remark wasn't very clear: i meant we need citations rather than a simple
+  reference to grid and or cloud computing. Either upstream or with ``all
+  these..."}
 
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
@@ -869,7 +872,8 @@ most of the requirements involving the coordination of task execution still
 resides with the application layer. This translates into single-point solutions,
 extensive redesign and redevelopment of existing applications when they need to
 be adapted to new use cases or new resources, and lack of portability and
-interoperability.
+interoperability. \jhanote{maybe same case here. specific examples/citations as
+  opposed to ``grid computing''}
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
@@ -882,13 +886,13 @@ application requires a large amount of development and capabilities that are not
 specific to the given scientific problem but pertain instead to the coordination
 and management of its computation.
 
-The notion of resource placeholder was devised as a pragmatic and relatively
-cheap to implement attempt to reduce or at least better manage the complexity of
-executing distributed applications. A resource placeholder decouples the
-acquisition of remote compute resource from their use to execute the tasks of a
-distributed application. Resources are acquired by scheduling a job onto the
-remote high-performance machine. Once executed, the job runs an agent capable of
-retrieving and executing application tasks.
+\jhanote{first sentence needs attention} The notion of resource placeholder was
+devised as a pragmatic and relatively cheap to implement attempt to reduce or at
+least better manage the complexity of executing distributed applications. A resource placeholder decouples the acquisition of remote compute resource from
+their use to execute the tasks of a distributed application. Resources are
+acquired by scheduling a job onto the remote high-performance machine. Once
+executed, the job runs an agent capable of retrieving and executing application
+tasks.
 
 Resource placeholders bring together multi-level scheduling to enable parallel
 execution of the tasks of distributed applications. Multi-level scheduling is
