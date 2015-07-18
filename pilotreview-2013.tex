@@ -206,16 +206,16 @@ lack in interoperability.
 % graceful transition: from pilotjobs to pilotsystems? If so, should we stick
 % with pilotjobs here?}
 
-The fundamental reason for the proliferation of \pilotjob systems is that
-they provide a simple solution to the rigid and static resource management
+The fundamental reason for the proliferation of \pilotjob systems is that they
+provide a simple solution to the rigid and static resource management
 historically found in high-performance and distributed computing (HPDC).  There
 are two ways in which \pilotjobs break free of the rigid resource utilization
 model: (i) through a process often referred to as
-late-binding~\cite{latebinding}, \pilotjobs make the selection of heterogeneous
-and dynamic resources easier and effective; and (ii) \pilotjobs decouple the
-workload specification from the task management.  The former results in the
-ability to utilize resources ``dynamically'', the latter simplifies the
-placement of workloads on those resources.
+late-binding~\cite{moscicki2011,glatard2010,delgado2014}, \pilotjobs make the
+selection of heterogeneous and dynamic resources easier and effective; and (ii)
+\pilotjobs decouple the workload specification from the task management.  The
+former results in the ability to utilize resources ``dynamically'', the latter
+simplifies the placement of workloads on those resources.
 
 % management of improving the efficiency of task assignment while shielding
 % applications from having to manage tasks across such resources.
@@ -250,18 +250,18 @@ development.
 
 This approach is not problematic in itself and has led to effective
 implementations that serve many million jobs a year on diverse computing
-platforms~\cite{pj_stats}. However, the lack of an explicit appreciation of the
-computing paradigm underlying \pilotjobs has undermined the full development of
-dedicated designs and implementations. This limitation is well illustrated not
-only by the effort duplication but also by an overall immaturity of the
-available systems in terms of functionalities, flexibility, portability,
-interoperability, and, most often, robustness.
+platforms~\cite{maeno2014,katz2012}. However, the lack of an explicit
+appreciation of the computing paradigm underlying \pilotjobs has undermined the
+full development of dedicated designs and implementations. This limitation is
+well illustrated not only by the effort duplication but also by an overall
+immaturity of the available systems in terms of functionalities, flexibility,
+portability, interoperability, and, most often, robustness.
 
 This survey is motivated by the fact that, in spite of the demonstrated
-potential and proliferation of \pilotjob systemss, there remains significant
-lack of clarity and understanding about the \pilotjob abstraction. We believe
-this results in unfulfilled and lost potential as well as significant overhead
-and repetition of effort.
+potential and proliferation of \pilotjob systems, there remains significant lack
+of clarity and understanding about the \pilotjob abstraction. We believe this
+results in unfulfilled and lost potential as well as significant overhead and
+repetition of effort.
 
 This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
@@ -1171,12 +1171,13 @@ Physics community.
 The \pilot abstraction has also been integrated into scientific workflow
 systems. \pilotjob systems have proven an effective tool for managing the
 workloads executed in the various stages of a workflow. For the Pegasus
-project\cite{pegasus}, the Corral system~\cite{Rynge:2011:EUG:2116259.2116599}
-was developed to support the optimize the placements of \pilots with respect to
-their workload for the Pegasus workflow system. Corral serves as a front-end to
-Condor GlideIn. In contrast to GlideinWMS, Corral provides more explicit control
-over the placement and start of \pilots to the end-user. Corral was later
-extended to also serve as a possible front end to GlideinWMS.
+project\cite{deelman2015}, the Corral
+system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
+optimize the placements of \pilots with respect to their workload for the
+Pegasus workflow system. Corral serves as a front-end to Condor GlideIn. In
+contrast to GlideinWMS, Corral provides more explicit control over the placement
+and start of \pilots to the end-user. Corral was later extended to also serve as
+a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language also provides capabilities for
@@ -1496,11 +1497,11 @@ workload on that resource.
 It should be noted that the term `\pilot' as defined here is named differently
 across \pilotjob systems. Depending upon context, in addition to the term
 `placeholder', \pilot may also be named `agent' or
-`\pilotjob'~\cite{name_of_pilots}. All these terms are, in practice, used as
-synonyms without properly distinguishing between the type of container and the
-type of executable that compose a \pilot. This is a clear indication of how
-necessary the minimal and consistent vocabulary offered here is when reasoning
-analytically about multiple \pilotjob system implementations.
+`\pilotjob'~\cite{moscicki2011,pinchak2002}. All these terms are, in practice,
+used as synonyms without properly distinguishing between the type of container
+and the type of executable that compose a \pilot. This is a clear indication of
+how necessary the minimal and consistent vocabulary offered here is when
+reasoning analytically about multiple \pilotjob system implementations.
 
 Until now, the term \pilotjob system has been used to indicate those systems
 capable of executing workloads on \pilots. From now on, the term `\pilot system'
