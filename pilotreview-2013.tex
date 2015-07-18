@@ -765,7 +765,7 @@ Challenge\footnote{Based on private communication.}, and then introduced in
 writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
 already well-known at the beginning of the twentieth century: task-level
-distribution and parallelism on multiple resources. 
+distribution and parallelism on multiple resources.
 
 Lewis Fry Richardson devised in 1922 a Forecast Factory
 (Figure~\ref{fig:figures_forecast-factory}) to solve systems of differential
@@ -850,30 +850,37 @@ available high-performance machine. While this approach promises an increase in
 both scale and usability of applications, it also introduces diverse types of
 complexity across resources, middleware, and applications.
 
+% \jhanote{need to be more specific than grid computing} \mtnote{Any insight in
+%   what kind of specificity you are thinking about? Grid and cloud computing
+%   are at the same level of generality so I will have to specify also the
+%   latter.}
+
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
-umbrellas of grid computing or cloud computing\jhanote{need to be more specific
-  than grid computing} \mtnote{Any insight in what kind of specificity you are
-  thinking about? Grid and cloud computing are at the same level of generality
-  so I will have to specify also the latter.}, targeted the resource layer,
-others the application layer as, for example, with workflow frameworks. All
-these approaches offered and still offer some degree of success for specific
-applications and use cases but a general solution based on well-defined and
-robust abstractions has still to be devised and implemented.\jhanote{sorry my
-  remark wasn't very clear: i meant we need citations rather than a simple
-  reference to grid and or cloud computing. Either upstream or with ``all
-  these..."}
+umbrellas of grid computing~\cite{raicu2007,singh2005,ramakrishnan2006} or cloud
+computing~\cite{foster2008,juve2008,villegas2012,song2009}, targeted the
+resource layer, others the application layer as, for example, with workflow
+frameworks. All these approaches offered and still offer some degree of success
+for specific applications and use cases but a general solution based on
+well-defined and robust abstractions has still to be devised and implemented.
+
+\jhanote{sorry my remark wasn't very clear: i meant we need citations rather
+  than a simple reference to grid and or cloud computing. Either upstream or
+  with ``all these..."}\mtnote{Done.}
 
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
 imposed on the application layer. Even with solutions like grid computing aiming
 at effectively and, to some extent, transparently integrating diverse resources,
 most of the requirements involving the coordination of task execution still
-resides with the application layer. This translates into single-point solutions,
-extensive redesign and redevelopment of existing applications when they need to
-be adapted to new use cases or new resources, and lack of portability and
-interoperability. \jhanote{maybe same case here. specific examples/citations as
-  opposed to ``grid computing''}
+resides with the application layer~\cite{legrand2003,krauter2002,darema2005}.
+This translates into single-point solutions, extensive redesign and
+redevelopment of existing applications when they need to be adapted to new use
+cases or new resources, and lack of portability and interoperability.
+
+\jhanote{maybe same case here. specific examples/citations as
+  opposed to ``grid computing''} \mtnote{Not sure I managed to found appropriate
+  references.}
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
@@ -886,13 +893,13 @@ application requires a large amount of development and capabilities that are not
 specific to the given scientific problem but pertain instead to the coordination
 and management of its computation.
 
-\jhanote{first sentence needs attention} The notion of resource placeholder was
-devised as a pragmatic and relatively cheap to implement attempt to reduce or at
-least better manage the complexity of executing distributed applications. A resource placeholder decouples the acquisition of remote compute resource from
-their use to execute the tasks of a distributed application. Resources are
-acquired by scheduling a job onto the remote high-performance machine. Once
-executed, the job runs an agent capable of retrieving and executing application
-tasks.
+The notion of resource placeholder was devised as a pragmatic solution to better
+manage the complexity of executing distributed applications. A resource
+placeholder decouples the acquisition of remote compute resource from their use
+to execute the tasks of a distributed application. Resources are acquired by
+scheduling a job onto the remote high-performance machine. Once executed, the
+job runs an agent capable of retrieving and executing application tasks.
+\jhanote{first sentence needs attention} \mtnote{Better?}
 
 Resource placeholders bring together multi-level scheduling to enable parallel
 execution of the tasks of distributed applications. Multi-level scheduling is
@@ -1034,7 +1041,7 @@ created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
 resource pools in an aggregative manner. However, resource management required
 system level software configurations that had to be made by the administrator of
-each individual resource of each Condor resource pool. 
+each individual resource of each Condor resource pool.
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
