@@ -1307,14 +1307,15 @@ tasks to utilize resources without directly depending on the capabilities
 exposed by the targeted machines. Resource placeholders are scheduled onto
 remote machines by means of dedicated capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
-execution of the tasks of a workload. \jhanote{We may want to introduce the
-vocabulary of resource/DCR/DCI that we developed for the proposals here, and
-make it consistent throughout the paper. In this para for example we use the
-term DCI resource, which is inconsistent with developed vocabulary} \mtnote{If
-we want the definitions here, then we should probably move all of them before
-this subsection. Do you want me to do it? Meanwhile, I rephrased the whole
-subsection avoiding DCI altogether and added the definition of DCR to the next
-subsection.}
+execution of the tasks of a workload. 
+
+% \jhanote{We may want to introduce the vocabulary of resource/DCR/DCI that we
+%   developed for the proposals here, and make it consistent throughout the
+%   paper. In this para for example we use the term DCI resource, which is
+%   inconsistent with developed vocabulary} \mtnote{If we want the definitions
+%   here, then we should probably move all of them before this subsection. Do you
+%   want me to do it? Meanwhile, I rephrased the whole subsection avoiding DCI
+%   altogether and added the definition of DCR to the next subsection.}
 
 % MS: I would move this comment to section 5 I think, as multi-tenant pilot
 % systems do have to make these trade-offs, and it would be good to point that
@@ -1412,9 +1413,6 @@ need to be understood in the context of machines and middleware used by
 and \pilots allow for the users to utilize those resources to execute the tasks
 of one or more workloads.
 
-\jhanote{needs to be updated and made consistent with terminology developed for
-  proposal} \mtnote{Done.}
-
 \begin{description}
 
 \item[Task.] A container for operations to be performed on a computing
@@ -1487,7 +1485,11 @@ implementation details. A \pilotjob system is software capable of creating
 \pilots so as to gain exclusive control over a set of resources on one or more
 DCRs and then to execute the tasks of one or more workloads on those \pilots.
 % \jhanote{another example for the need for definitional consistency}
-\jhanote{also I would not use the word exclusive} \mtnote{Why?}
+\jhanote{also I would not use the word exclusive} \mtnote{Why?}\jhanote{In our
+  definition of Resource earlier in this section, we define it as a finite
+  physical quantity utilized. As we do not claim that the resource is logical we
+  should not claim that the resource is exclusively available}
+
 
 \begin{description}
 
@@ -1537,9 +1539,6 @@ potentially be distributed over multiple and diverse DCRs.
 Three more terms associated with \pilot systems need to be explicitly defined:
 `Multi-level scheduling', `early binding', and `late binding'.
 
-\jhanote{we should start completing the references. currently many 'cit' or
-'ref'.}
-
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: \pilots and tasks. A portion of the
 resources of a DCR is allocated to one or more \pilots in the form of containers
@@ -1562,10 +1561,9 @@ As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be
 executed on a \pilot without waiting in the queuing system of the DCR's
 middleware, and as a result, possibly increasing the throughput of the workload
 execution. Moreover, \pilots can be reused to execute multiple workloads until
-the \pilots' walltime expire.  It should be noted that how tasks are actually
-assigned to \pilots is a matter of implementation. For example, a dedicated
-scheduler could be adopted, or tasks might be directly assigned to a \pilot by
-the user.
+the \pilots' walltime expire.  How tasks are actually assigned to \pilots is a
+matter of implementation. For example, a dedicated scheduler could be adopted,
+or tasks might be directly assigned to a \pilot by the user.
 
 The type of binding of tasks to \pilots depends on the state of the \pilot. A
 \pilot is inactive until it is executed on a DCR, is active thereafter, until it
@@ -1581,11 +1579,12 @@ aforementioned high throughput of the distributed application by allowing
 sustained task execution without additional queuing time or container
 instantiation time.
 
-It should be noted that some aspects of early binding can also be achieved
-without a \pilot system, but, importantly, \pilot systems allow to do both types
-of binding, even within the confinements of a single workload. \jhanote{Is both
-a reference to early and late binding?} \mtnote{I would think so. Any better?
-Should we just delete the whole three lines?}
+Some aspects of early binding can also be achieved without a \pilot system, but,
+importantly, \pilot systems permit both types of binding, even within the
+confinements of a single workload. \jhanote{what is a single workload?}
+
+% \jhanote{Is both a reference to early and late binding?} \mtnote{I would think
+%   so. Any better?  Should we just delete the whole three lines?}
 
 % \msnote{I would think parts of this paragraph also have their place in S5 (if
 % its not already there)}
