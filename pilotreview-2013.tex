@@ -929,10 +929,11 @@ The \pilot abstraction has a rich set of properties~\cite{pstar-2012} that have
 been progressively implemented into multiple \pilotjob systems.
 Figure~\ref{fig:timeline} shows the introduction of \pilotjob systems over time
 while Figure~\ref{fig:pilotjob_clustering} shows their clustering along the axes
-of workload management and pilot functionalities complexity. Starting from a set
-of core functionalities focused on acquiring remote resources and utilizing them
+of workload management and pilot functionalities. Starting from a set of core
+functionalities focused on acquiring remote resources and utilizing them
 independently from the resource management, \pilotjob systems progressively
-evolved including advanced capabilities like workload and data management.
+evolved to include advanced capabilities like workload and data management.
+
 
 % As seen in Ref.~\cite{pstar-2012}, the \pilot abstraction has a rich set of
 % properties and its implementations offer a vast array of capabilities
@@ -1008,14 +1009,15 @@ for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has complete knowledge of the available
-resources while the latter has none. As a consequence, AppLes can request and
-orchestrate a set of resource, allocate tasks in advance to specific workers
-(i.e. resources placeholders), and implement load balancing among resources. In
-voluntary computing tasks are pulled by the clients when they become active
-and, as such, specific resource availability is unknown in advance. This
-potential drawback is mitigated by the redundancy offered by the large scale
-that voluntary computing can reach thanks to its simpler model of worker
-distribution and installation.
+resources while the latter has none. \jhanote{In the previous sentence, I think
+  adding ``prior'' in lieu of ``complete'' would be most effective. OK?} As a
+consequence, AppLes can request and orchestrate a set of resources, allocate
+tasks in advance to specific workers (i.e. resources placeholders), and
+implement load balancing among resources. In voluntary computing tasks are
+pulled by the clients when they become active and, as such, specific resource
+availability is unknown in advance. This potential drawback is mitigated by the
+redundancy offered by the large scale that voluntary computing can reach thanks
+to its simpler model of worker distribution and installation.
 
 % The opportunistic use of geographically distributed resources championed by
 % voluntary computing offers several advantages. The resource landscape
@@ -1028,13 +1030,13 @@ distribution and installation.
 % on the few resources that offer low-latency network interconnect.\msnote{This
 % paragraph is a good candidate for removal?}
 
-Condor is a high-throughput distributed batch computing system that uses diverse
-and possibly geographically distributed resources. Originally, Condor was
-created for systems within one administrative domain but
-Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
-resource pools in an aggregative manner. However, resource management required
-system level software configurations that had to be made by the administrator of
-each individual resource of each Condor resource pool.
+\jhanote{is ``batch'' redundant?} Condor is a high-throughput distributed batch
+computing system that uses diverse and possibly geographically distributed
+resources. Originally, Condor was created for systems within one administrative
+domain but Flocking~\cite{Epema:1996:flocking} made it possible to group
+multiple Condor resource pools in an aggregative manner. However, resource
+management required system level software configurations that had to be made by
+the administrator of each individual resource of each Condor resource pool.
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
@@ -1071,7 +1073,7 @@ applications by means of dedicated APIs and libraries.
 The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
 limitations, to broaden the type of applications supported by the \pilot-based
 execution model, and to extend the \pilot abstraction beyond the boundaries of
-compute tasks.  BigJob offers an application-level programmability to provide
+compute tasks.  BigJob offers application-level programmability to provide
 the end-user with more flexibility and control over the design of distributed
 application and the isolation of the management of their execution. BigJob is
 flexible and extensible and uses the Simple API for Grid Applications (SAGA)
