@@ -1828,9 +1828,11 @@ based on functional requirements, how \pilot systems are designed and
 engineered, and the design principles that underly such systems.
 
 \mtnote{The promises made at the end of these paragraph need to the fulfilled by
-offering remarks about: (i) choosing a pilot system; (ii) critical notes on the
-design and engineering of pilot systems; (iii) shared design principles. Should
-we do at the end of 4.2 or in 5?}
+  offering remarks about: (i) choosing a pilot system; (ii) critical notes on
+  the design and engineering of pilot systems; (iii) shared design
+  principles. Should we do at the end of 4.2 or in 5?} \jhanote{I propose
+  5. We'll also need to weaken the claims made at the end of the previous
+  section.}
 
 % -----------------------------------------------------------------------------
 % 4.1
@@ -1843,14 +1845,14 @@ system. Two sets of properties are introduced: core and auxiliary (see
 Table~\ref{table:property_component_mapping}). Both sets of properties are
 chosen by considering the implementation requirements of the \pilot capabilities
 as defined in~\S\ref{sec:history}. Core properties are necessary for every
-\pilot system implementation to provide the minimal set of capabilities as
+\pilot system implementation to provide the minimal set of functionalities as
 described in~\S\ref{sec:compsandfuncs}. Auxiliary properties are instead
 required only as a support to the implementation of core properties. For
 example, while every \pilot system has to implement a mechanism for \pilot
 instantiation, a specific authentication and authorization protocol may be
-required to support the instantiation of \pilots only for the particular
-middleware of a DCR. As such, auxiliary properties are not necessarily shared
-among all \pilot systems.
+required to support the instantiation of \pilots for a particular middleware of
+a DCR. As such, auxiliary properties are not necessarily shared among all \pilot
+systems.
 
 % \jhanote{removed table reference..as a consequence of changes in 3, broken
 %   reference here}
@@ -1862,16 +1864,17 @@ among all \pilot systems.
   properties and functionalities as representing the connection between Section
   3 and 4, namely the connection between an abstract description of every \pilot
   system functionalities and the properties of specific \pilot system
-  implementations. Does it make sense?}
+  implementations. Does it make sense?}\jhanote{Yes. I also agree. the linkage
+  is between property and functionality.}
 
-\jhanote{how about traditional meaning of auxiliary: ``in support of'' and add
-  to the definition of auxiliary properties: those that help implement/support
-  core properties?} \mtnote{Done. Any better?}
+% \jhanote{how about traditional meaning of auxiliary: ``in support of'' and add
+%   to the definition of auxiliary properties: those that help implement/support
+%   core properties?} \mtnote{Done. Any better?}
 
-\jhanote{In general, I think some more discussion about the classification of
-  ``core'' and ``auxiliary'' will help readability and prevent complications of
-  the type ``why is X auxiliary and not core?''.} \mtnote{I will wait to address
-  this once the sets of core and auxiliary properties will be definitive.}
+% \jhanote{In general, I think some more discussion about the classification of
+%   ``core'' and ``auxiliary'' will help readability and prevent complications of
+%   the type ``why is X auxiliary and not core?''.} \mtnote{I will wait to address
+%   this once the sets of core and auxiliary properties will be definitive.}
 
 Table~\ref{table:property_component_mapping} offers a brief description for each
 core and auxiliary property alongside their mapping to the required components
