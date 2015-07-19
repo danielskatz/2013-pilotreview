@@ -183,11 +183,12 @@ arguably one of the most widely-used distributed computing abstractions, as
 suggested by the proliferation of \pilotjob systems used in production
 cyberinfrastructure.
 
-A variety of \pilotjob systems have emerged: Condor-G/
-Glide-in~\cite{condor-g}, Swift~\cite{Wilde2011}, DIANE~\cite{Moscicki:908910},
+A variety of \pilotjob systems have emerged: Condor-G/ Glide-in~\cite{condor-g},
+Swift~\cite{Wilde2011}, DIANE~\cite{Moscicki:908910},
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-219-6-062041},
 ToPoS~\cite{topos}, Nimrod/G~\cite{10.1109/HPC.2000.846563},
-Falkon~\cite{1362680} and MyCluster~\cite{1652061} to name a few. These
+Falkon~\cite{1362680} and
+MyCluster~\cite{1652061,mycluster-clade,mycluster-cluster} to name a few. These
 systems are for the most part functionally equivalent as they support the
 decoupling of workload submission from resource assignment. Nonetheless, their
 implementations often serve specific use cases, target specific resources, and
@@ -3320,7 +3321,7 @@ and services that have been grown and curated for the past 20 years.
 \subsubsection{MyCluster}
 \label{sec:mycluster}
 
-MyCluster~\cite{1652061} was developed to allow users to submit and manage jobs
+MyCluster~\cite{1652061,mycluster-clade,mycluster-cluster} was developed to allow users to submit and manage jobs
 across heterogeneous NSF TeraGrid resources in a uniform, on-demand manner.
 TeraGrid, the predecessor of XSEDE, existed as a group of compute clusters
 connected by high-bandwidth links facilitating the movement of data, but with
