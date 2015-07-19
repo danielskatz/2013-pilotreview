@@ -1238,7 +1238,7 @@ differences among \pilotjob systems. Features and capabilities tend to be named
 inconsistently, often with the same terms referring to multiple concepts or the
 same concept named in different ways.
 
-This section offers an description of the logical components and functionalities
+This section offers a description of the logical components and functionalities
 shared by every \pilotjob system. The goal is to offer a paradigmatic
 description of a \pilotjob system and a well-defined vocabulary to reason about
 such a description and, eventually, about its multiple implementations.
@@ -1253,23 +1253,26 @@ such a description and, eventually, about its multiple implementations.
 
 All \pilotjob systems introduced in~\S\ref{sec:history} are engineered to allow
 for the execution of multiple types of workloads on machines with diverse
-middleware, e.g. grid, cloud, or HPC. This is achieved differently, depending on
-use cases, design and implementation choices, but also on the constraints
-imposed by the middleware and policies of the targeted machines. The common
-denominators among \pilotjob systems are defined along multiple dimensions:
-purpose, logical components, and functionalities.
+middleware, e.g. grid, cloud, or HPC. This is achieved in different ways,
+depending on use cases, design and implementation choices, but also on the
+constraints imposed by the middleware and policies of the targeted machines. The
+common denominators among \pilotjob systems are defined along multiple
+dimensions: purpose, logical components, and functionalities.
 
 The purpose shared by every \pilotjob system is to improve workload execution
-when compared to executing the same workload directly on one or more machines.
-Performance of workload execution is usually measured by throughput and
-execution time to completion (TTC), but other metrics could also be considered:
-energy efficiency, data transfer minimization, scale of the workload executed,
-or a mix of them. Metrics that are not performance related include robustness
-and ease of application deployment. In order to optimize the chosen set of
-metrics, each \pilotjob system exhibits characteristics that are both common or
-specific to one or more implementations. Discerning these characteristics
-requires isolating the minimal set of logical components that has to
-characterize every \pilotjob system.
+when compared to executing the same workload directly on one or more
+machines.\jhanote{one or more resources?}  Performance of workload execution is
+usually measured by throughput and execution time to completion (TTC), but other
+metrics could also be considered: energy efficiency, data transfer minimization,
+scale of the workload executed, or a mix of them. Metrics that are not
+performance related include robustness and ease of application deployment.  In
+order to achieve the required metrics under given constraints, each
+\pilotjob system exhibits characteristics that are both common or specific to
+one or more implementations. Discerning these characteristics requires isolating
+the minimal set of logical components that characterize every \pilotjob system.
+
+\jhanote{I removed, ``In order to optimize the chosen set of metrics..'' as it
+  is difficult to argue that non-performance related metrics are optimized}
 
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
@@ -1298,7 +1301,11 @@ workload. More functionalities might be needed to implement a production-grade
 fault-tolerance, or load-balancing. While these functionalities may be critical
 implementation details, they depend on the specific characteristics of the given
 use cases, workloads, or targeted resources. As such, these functionalities
-should not be considered a necessary characteristic of every \pilotjob system.
+should not be considered necessary characteristics of every \pilotjob
+system. \jhanote{I vote to remove the word ``every'' in the previous sentence;
+  we currently imply it is a necessary characteristic of some. this then
+  confuses the reader in section 4. I agree with the use of every in the next
+  sentence.}
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
@@ -1308,6 +1315,8 @@ exposed by the targeted machines. Resource placeholders are scheduled onto
 remote machines by means of dedicated capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
 execution of the tasks of a workload. 
+
+\jhanote{possibly use ``resources'' in lieu of remote machines?}
 
 % \jhanote{We may want to introduce the vocabulary of resource/DCR/DCI that we
 %   developed for the proposals here, and make it consistent throughout the
@@ -1342,26 +1351,34 @@ implemented as part of the \pilotjob system. In this way, the control over the
 execution of a workload is shifted from the machine's middleware to the \pilot
 system. This shift is a defining characteristic of the \pilot paradigm, as it
 decouples the execution of a workload from the need to submit its tasks via the
-machine's scheduler. The tasks of a workload will not individually have to wait
-on the targeted machine's queues, but rather on the availability of the
-placeholder before being executed. More elaborate execution patterns involving
-task and data interdependence can thus be implemented outside the boundaries of
-the machine's middleware capabilities. Ultimately, this is how \pilotjob systems
-allow for the direct control of workload execution and the optimization, for
-example, of execution throughput.
+machine's scheduler. For example, the tasks of a workload will not individually
+have to wait on the targeted machine's queues, but rather on the availability of
+the placeholder before being executed. More elaborate execution patterns
+involving task and data interdependence can thus be implemented
+independent of %  outside the
+% boundaries of 
+the target machine's middleware capabilities. Ultimately, this is how \pilotjob
+systems allow for the direct control of workload execution and the optimization,
+for example, of execution throughput. \jhanote{I'd like to use a more general
+  term than ``machine's scheduler'' when talking about the defining
+  characteristic. It weakens the punch of an impactful and important
+  sentence. Also in the subsequent sentence, ``The tasks of a workload..''. I've
+  introduced a for example to help give a specific instance of the general
+  paradigm.}
 
 Communication and coordination are two distinguishing characteristics of
-distributed systems and \pilotjob systems are no exception. The Workload
-Manager, Pilot Manager, and the Task Manager need to communicate to coordinate
-the execution of the given workload on the instantiated resource placeholders.
-Nonetheless, \pilotjob systems are not defined by any specific communication
-pattern and coordination approach. The logical components of a \pilotjob system
-may communicate using any suitable pattern (e.g. one-to-one, many-to-one,
-one-to-many~\ref{comm_patterns} with a push or pull model), or coordinate
-adopting any suitable mechanism (e.g. time synchronization, static or dynamic
-coordinator election, local or global information sharing, or \MW). The same
-applies to network architectures and protocols: different network architectures
-and protocols may be used to achieve effective communication and coordination.
+distributed systems and \pilotjob systems are no exception. The three logical
+components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
+communicate and coordinate the execution of the given workload on the
+instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
+defined by any specific communication pattern and coordination approach. The
+logical components of a \pilotjob system may communicate using any suitable
+pattern (e.g. one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a
+push or pull model), or coordinate adopting any suitable mechanism (e.g. time
+synchronization, static or dynamic coordinator election, local or global
+information sharing, or \MW). The same applies to network architectures and
+protocols: different network architectures and protocols may be used to achieve
+effective communication and coordination.
 % \jhanote{is this a reference to coordination or communication? unclear}
 % \mtnote{`communication and coordination' so I would say to both.}
 
