@@ -764,7 +764,7 @@ To the best of the authors' knowledge, the term `\pilot' was first coined in
 Challenge\footnote{Based on private communication.}, and then introduced in
 writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
-already well-known at the beginning of the twentieth century: task-level
+already well-known at the beginning of the twentieth century: {\bf task-level}
 distribution and parallelism on multiple resources.
 
 Lewis Fry Richardson devised in 1922 a Forecast Factory
@@ -791,7 +791,7 @@ her `workers'. Requests and responses go back and forth between the master and
 all its workers. Each worker has no information about the overall computation
 nor about the states of any other worker. The master is the only one possessing
 a global view both of the overall problem to compute and of its progress towards
-a solution. As such, the \MW is a coordination pattern allowing for the
+a solution. As such, the {\bf \MW} is a coordination pattern allowing for the
 structured distribution of tasks so to orchestrate their parallel execution.
 This directly translates into a better time to completion of the overall
 computation when compared to a coordination pattern in which each equation is
@@ -807,9 +807,9 @@ capacity, capabilities, and interfaces. Furthermore, high-performance machines
 supported different types of applications, depending on the applications'
 communication and coordination models.
 
-Multi-tenancy has defined the way in which high-performance computing resources
-are exposed to their users. Job schedulers, often called ``batch queuing
-systems''~\cite{czajkowski1998} and first used in the time of punch
+{\bf Multi-tenancy} has defined the way in which high-performance computing
+resources are exposed to their users. Job schedulers, often called ``batch
+queuing systems''~\cite{czajkowski1998} and first used in the time of punch
 cards~\cite{katz1966,silberschatz1998}, adopt the batch processing concept to
 promote efficient and fair resource sharing. Job schedulers implement a
 usability model where users submit computational tasks called ``jobs'' to a
@@ -841,7 +841,7 @@ users.
 %   i.e., you can definitely do meta scheduling without multilevel scheduling.
 %   Please argue otherwise, else I will remove meta scheduling.}
 
-Multi-level scheduling is one of the strategies devised to improve resource
+{\bf Multi-level scheduling} is one of the strategies devised to improve resource
 access across multiple high-performance machines. The idea is to hide the
 scheduling point of each high-performance machine behind a single scheduler. The
 users or the applications submit their tasks to the a scheduler that negotiates
@@ -864,10 +864,6 @@ frameworks. All these approaches offered and still offer some degree of success
 for specific applications and use cases but a general solution based on
 well-defined and robust abstractions has still to be devised and implemented.
 
-\jhanote{sorry my remark wasn't very clear: i meant we need citations rather
-  than a simple reference to grid and or cloud computing. Either upstream or
-  with ``all these..."}\mtnote{Done.}
-
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
 imposed on the application layer. Even with solutions like grid computing aiming
@@ -877,10 +873,6 @@ resides with the application layer~\cite{legrand2003,krauter2002,darema2005}.
 This translates into single-point solutions, extensive redesign and
 redevelopment of existing applications when they need to be adapted to new use
 cases or new resources, and lack of portability and interoperability.
-
-\jhanote{maybe same case here. specific examples/citations as
-  opposed to ``grid computing''} \mtnote{Not sure I managed to found appropriate
-  references.}
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
@@ -899,16 +891,16 @@ placeholder decouples the acquisition of remote compute resource from their use
 to execute the tasks of a distributed application. Resources are acquired by
 scheduling a job onto the remote high-performance machine. Once executed, the
 job runs an agent capable of retrieving and executing application tasks.
-\jhanote{first sentence needs attention} \mtnote{Better?}
 
-Resource placeholders bring together multi-level scheduling to enable parallel
-execution of the tasks of distributed applications. Multi-level scheduling is
-achieved by scheduling the agent and then by enabling direct scheduling of
-application tasks to that agent. The \MW pattern is often an effective choice to
-manage the coordination of tasks execution on the available agent(s).
-Multi-level scheduling can be extended to multiple resources by instantiating
-resource placeholders on diverse high-performance machines and then using a
-dedicated scheduler to schedule tasks across all the placeholders.
+
+{\bf Resource placeholders} bring together multi-level scheduling to enable
+parallel execution of the tasks of distributed applications. Multi-level
+scheduling is achieved by scheduling the agent and then by enabling direct
+scheduling of application tasks to that agent. The \MW pattern is often an
+effective choice to manage the coordination of tasks execution on the available
+agent(s).  Multi-level scheduling can be extended to multiple resources by
+instantiating resource placeholders on diverse high-performance machines and
+then using a dedicated scheduler to schedule tasks across all the placeholders.
 
 It should be noted that resource placeholders also mitigate the side-effects
 introduced by a multi-tenant scheduling of resource placeholders. A placeholder
@@ -1055,11 +1047,11 @@ pioneering the \pilot abstraction implementation, enabling some \pilot
 capabilities also for third parties systems like Bosco~\cite{bosco}.
 
 \jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
-\jhanote{Also there is a bit of care needed: we're implying glide-in is a
-resource placeholder -- which is part of a pilot, and not necessarily a full
-pilot.} \mtnote{We do not use \pilotjob system so I do not think we are implying
-that glideIn is a `full pilot' (even if I am not so sure what exactly a full
-pilot is). I slightly edited the sentence, any better?}
+% \jhanote{Also there is a bit of care needed: we're implying glide-in is a
+% resource placeholder -- which is part of a pilot, and not necessarily a full
+% pilot.} \mtnote{We do not use \pilotjob system so I do not think we are implying
+% that glideIn is a `full pilot' (even if I am not so sure what exactly a full
+% pilot is). I slightly edited the sentence, any better?}
 
 % \jhanote{as this is historical evolution, some parts need to be in the past
 % tense. Care will be needed to get the tense right.} \mtnote{Better?}
