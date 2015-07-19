@@ -1902,31 +1902,35 @@ The core properties `Pilot Resources', `Pilot Deployment', and `DCR Interaction'
 characterize the implementation of a Pilot Manager and its Pilot Provisioning
 functionality. Pilot Resources identifies the type of resources that the \pilot
 system exposes, e.g. compute, data, or networking. Pilot Deployment describes
-the modalities of scheduling, utilization, and aggregation of pilots.
-DCR Interactions singles out the protocols and policies required for
-the \pilot system to interact with the remote DCR(s). For example, to
-schedule a pilot onto a specific DCR, \pilot systems need to know
-what type of container to use (e.g. job, virtual machine), what type of
-scheduler the resource exposes, the amount of cores and for how long they can be
-asked for, what filesystems can be accessed, how to contact the remote resource,
-but possibly also the type of cores, the amount of available memory and storage
-and whether a low-latency interconnect is available.
-
+the modalities of scheduling, utilization, and aggregation of pilots.  DCR
+Interactions singles out the protocols and policies required for the \pilot
+system to interact with the DCR(s). For example, to schedule a pilot onto a
+specific DCR, \pilot systems need to know what type of container to use
+(e.g. job, virtual machine), what type of scheduler the resource exposes, the
+amount of cores and duration they can be requisitioned for, what filesystems can
+be accessed, how to contact the remote resource.  \jhanote{the way we discuss
+  resource interaction, it appears that the interaction is really information
+  about the resources, that could be provided by say an information
+  service. calling this a property of the pilot system doesn't seem very
+  useful.}  \jhanote{In general, greater the information available, the better
+  the use of the DCR the \pilot system can make, e.g., information about the
+  type of cores, the amount of available memory and storage and whether a
+  low-latency interconnect is available.}
 
 The core properties `Workload Semantics' and `Workload Binding' characterize the
 implementation of a Workload Manager and its Task Dispatching functionality.
 Semantically, a workload description contains all the information necessary for
-it to be dispatched to the appropriate resource. For example, type, number,
+it to be dispatched to an appropriate resource.  For example, type, number,
 size, and duration of tasks alongside their grouping into stages or their data
 dependences need to be known when deciding how many resources of a specific type
 should be used to execute the given workload but also for how long such
-resources should be available. Executing a workload requires for its tasks to be
-bound to the resources. Both the temporal and spatial dimensions of the binding
-operations are relevant for the implementation of Task Dispatching. Depending on
-the concurrency of a given workload, tasks could be dispatched to one or more
-pilots for an efficient execution. Furthermore, tasks could be bound to pilots
-before or after its instantiation, depending on resource availability and
-scheduling decisions.
+resources should be available. Executing a workload requires for its tasks to
+be bound to the resources. Both the temporal and spatial dimensions of the
+binding operations are relevant for the implementation of Task
+Dispatching. Depending on the concurrency of a given workload, tasks could be
+dispatched to one or more pilots for an efficient execution. Furthermore, tasks
+could be bound to pilots before or after its instantiation, depending on
+resource availability and scheduling decisions.
 
 Finally, the core properties `Workload Execution' and `DCR Interaction'
 characterize the implementation of a Task Manager and its Task Execution
@@ -1934,7 +1938,8 @@ functionality. Workload Execution identifies the process of task dispatching and
 the modalities with which the execution environment is set up for each task. The
 dispatching process may also depend on the capabilities exposed by the target
 DCR and its policies. As such, the execution of the workload may depend on how
-the \pilot systems has to interact with the remote DCR.
+the \pilot systems has to interact with the remote DCR. \jhanote{DCR Interaction
+  has been discussed 3 paragraphs earlier.}
 
 Several auxiliary properties play a fundamental role in supporting the
 implementation and usability of the core properties for diverse \pilot systems
@@ -1945,6 +1950,9 @@ authorization, and accounting; support for multiple usage modes like HPC or HTC;
 or robustness in terms of fault-tolerance and high-availability; are all
 examples of properties that might be necessary for a \pilot implementation but
 that, in of themselves, would not distinguish a \pilot as a unique system.
+\jhanote{I propose to remove multi-tenancy from the list. Only to avoid possible
+  confusion arising from the fact that it was referred to as a functional
+  underpinning in section 2.}
 
 Both core and auxiliary properties have a direct impact on the use cases for
 which \pilot systems are currently engineered and deployed. For example, while
@@ -2142,20 +2150,27 @@ of individual instantiations of \pilots.
   (e.g. x86, or GPU), file systems (e.g. local, shared, or distributed). The
   coupling between pilot and the resources that it holds may vary depending on
   the architecture of the resources in which it is instantiated. For example, a
-  pilot may bind multiple compute nodes, single nodes, or portion of the cores
-  of each node. The same applies to file systems and its partitions or to
-  software defined or physical network resources.
+  pilot may bind to multiple compute nodes, single nodes, or portion of the
+  cores of each node. The same applies to file systems and its partitions, or to
+  software defined or physical network resources. \jhanote{how about the
+    following for the first sentence: ``depending on the capabilities offered by
+    the DCR and the middleware used, pilots might also..''}
 
 % core because: its fundamental to our model
 \item \textbf{Pilot Deployment}. \pilots are scheduled and then bootstrapped on
-  the remote DCR. The characteristic of both operations varies depending on the
+  a DCR. The characteristic of both operations varies depending on the
   implementation details of the \pilot systems and on the architecture,
   interfaces, and capabilities offered by the remote DCR. For example, \pilot
   scheduling may be fully automated or directly controlled by applications and
   end-users. The bootstrapping can offer explicit or implicit localization by
   allowing to load specific libraries, compilers, and support software. Both
   scheduling and bootstrapping varies depending on whether the remote DCR expose
-  HPC, grid, or cloud interfaces.
+  HPC, grid, or cloud interfaces. \jhanote{in general, a dependency on DCR
+    properties suggests a non-core pilot property to me. pilot deployment shares
+    this feature with DCR interaction. I'm not advocating to remove deployment
+    from a core property, but suggest we address this possible weakness. In the
+    case of the pilot deployment we can constraint the discussion to the modes
+    of deployment that a pilot supports?}
 
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
@@ -2164,8 +2179,8 @@ of individual instantiations of \pilots.
   affinity between data and compute resources required by the tasks, and the
   type of capabilities needed for their execution. \pilot systems support a
   varying degree of semantic richness for the workload and its tasks. The
-  (standard) format or language in which the workloads are described may also
-  be relevant.
+  (standard) format or language in which the workloads are described may also be
+  relevant.
 
   % \jhanote{moved comment sequence to end of file, after end{document}}
 
@@ -2183,10 +2198,10 @@ of individual instantiations of \pilots.
   binding between tasks and \pilots: early binding and late binding. \pilot
   system implementations differ in whether and how they support these two types
   of binding. Specifically, while there might be implementations that only
-  support a single type of binding, they might also differ in whether they
-  allow for the users to control directly what type of binding is performed,
-  and in whether both types of binding are available on an heterogeneous pool
-  of resources. Besides the binary decision between early and late binding, the
+  support a single type of binding, they might also differ in whether they allow
+  for the users to control directly what type of binding is performed, and in
+  whether both types of binding are available on an heterogeneous pool of
+  resources. Besides the binary decision between early and late binding, the
   \pilot system can expose, for example, more detailed application-level
   scheduling decisions, dispatch policies, or even include more levels of
   scheduling.
@@ -2217,9 +2232,8 @@ of individual instantiations of \pilots.
 
   \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
     still valid?}  \msnote{I'm still not comfortable with the overlap of this
-    with Task Execution and Pilot Deployment}
-  \mtnote{I am OK with it but if you offer an alternative I will see how to
-    integrate it into the existing text.}
+    with Task Execution and Pilot Deployment} \mtnote{I am OK with it but if you
+    offer an alternative I will see how to integrate it into the existing text.}
   \jhanote{In my opinion, at least as currently written, infrastructure
     interaction is NOT a core property but artifact of other decisions and
     factors. Thus, possibly a candidate for movement into auxiliary properties?}
@@ -2231,7 +2245,14 @@ of individual instantiations of \pilots.
     system implementation' a system that runs only on non-DCR localhost.
     Especially in a section where the goal is to analyze the properties of
     \pilot systems implementations used to serve real-life scientific use
-    cases.}
+    cases.}  \jhanote{I am not saying the DCR interaction is an avoidable or
+    unnecessary feature. I view DCR interaction arising as a consequence when a
+    pilot system is compatible with a DCR, not as a fundamental property of the
+    pilot itself. Just like how two people interact is a function of the
+    who/what they are, as opposed to the interaction itself being a fundamental
+    property of one of the people. Make sense?}  \jhanote{I think remote DCR is
+    redundant. Just DCR -- whether logically or physically separate is enough,
+    IMO..}
 
 \end{itemize}
 
