@@ -760,7 +760,7 @@ between the five features and the \pilot abstraction.}
 \subsection{Functional Underpinnings of the Pilot Abstraction}
 \label{sec:histabstr}
 
-To the best of the authors' knowledge, the term `\pilot' was first coined in
+To the best of the authors' knowledge, the term `pilot' was first coined in
 2004 in the context of the Large Hadron Collider (LHC) Computing Grid (LCG) Data
 Challenge\footnote{Based on private communication.}, and then introduced in
 writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
@@ -1008,16 +1008,16 @@ framework grew out of SETI@Home, becoming the {\it de facto} standard framework
 for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
-and voluntary computing. The former has complete knowledge of the available
+and voluntary computing. The former has prior knowledge of the available
 resources while the latter has none. \jhanote{In the previous sentence, I think
-  adding ``prior'' in lieu of ``complete'' would be most effective. OK?} As a
-consequence, AppLes can request and orchestrate a set of resources, allocate
-tasks in advance to specific workers (i.e. resources placeholders), and
-implement load balancing among resources. In voluntary computing tasks are
-pulled by the clients when they become active and, as such, specific resource
-availability is unknown in advance. This potential drawback is mitigated by the
-redundancy offered by the large scale that voluntary computing can reach thanks
-to its simpler model of worker distribution and installation.
+adding ``prior'' in lieu of ``complete'' would be most effective.
+OK?}\mtnote{Done.} As a consequence, AppLes can request and orchestrate a set of
+resources, allocate tasks in advance to specific workers (i.e. resources
+placeholders), and implement load balancing among resources. In voluntary
+computing tasks are pulled by the clients when they become active and, as such,
+specific resource availability is unknown in advance. This potential drawback is
+mitigated by the redundancy offered by the large scale that voluntary computing
+can reach thanks to its simpler model of worker distribution and installation.
 
 % The opportunistic use of geographically distributed resources championed by
 % voluntary computing offers several advantages. The resource landscape
@@ -1030,13 +1030,16 @@ to its simpler model of worker distribution and installation.
 % on the few resources that offer low-latency network interconnect.\msnote{This
 % paragraph is a good candidate for removal?}
 
-\jhanote{is ``batch'' redundant?} Condor is a high-throughput distributed batch
-computing system that uses diverse and possibly geographically distributed
-resources. Originally, Condor was created for systems within one administrative
-domain but Flocking~\cite{Epema:1996:flocking} made it possible to group
-multiple Condor resource pools in an aggregative manner. However, resource
-management required system level software configurations that had to be made by
-the administrator of each individual resource of each Condor resource pool.
+\jhanote{is ``batch'' redundant?} \mtnote{Probably
+(based on: http://research.cs.wisc.edu/htcondor/doc/condor-practice.pdf). I
+changed system to framework as system is used differently in the following
+sentence.} Condor is a high-throughput distributed computing framework that uses
+diverse and possibly geographically distributed resources~\cite{thain2005}.
+Originally, Condor was created for systems within one administrative domain but
+Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
+resource pools in an aggregative manner. However, resource management required
+system level software configurations that had to be made by the administrator of
+each individual resource of each Condor resource pool.
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
@@ -1071,7 +1074,7 @@ but does not programmatically support the development of distributed
 applications by means of dedicated APIs and libraries.
 
 The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
-limitations, to broaden the type of applications supported by the \pilot-based
+limitations, to broaden the type of applications supported by the pilot-based
 execution model, and to extend the \pilot abstraction beyond the boundaries of
 compute tasks.  BigJob offers application-level programmability to provide the
 end-user with more flexibility and control over the design of distributed
@@ -1079,7 +1082,7 @@ application and the isolation of the management of their execution. BigJob is
 flexible and extensible and uses the Simple API for Grid Applications (SAGA)
 interoperability library~\cite{saga-x,goodale2006,luckow2010} to work on a
 variety of infrastructures.  Additionally, BigJob has also been extended to work
-with data and, analogous to compute \pilots, to abstract away direct user
+with data and, analogous to compute pilots, to abstract away direct user
 communication between different storage systems.
 
 % was recently re-implemented as a production-level tool named
@@ -1092,7 +1095,7 @@ communication between different storage systems.
 
 BigJob was recently re-implemented as a production-level tool named
 `RADICAL-Pilot''~\cite{review_rp-paper-2015}. BigJob/RADICAL-Pilot represent an
-evolution of the \pilot abstraction: initially \pilot were implemented as ad hoc
+evolution of the \pilot abstraction: initially pilots were implemented as ad hoc
 place holder machinery for a specific application but evolved to be integrated
 with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
 \pilot abstraction as an interoperable compute and data management system that
@@ -1100,16 +1103,16 @@ can be programmatically integrated into end-user applications and thus provides
 both features.
 
 Another ongoing evolutionary trend has been to implement the \pilot abstractions
-into \pilot-based workload managers, thus moving away from providing simple
-\pilot capabilities in application space. These higher-level systems which are
+into pilot-based workload managers, thus moving away from providing simple
+pilot capabilities in application space. These higher-level systems which are
 often centrally hosted, move critical functionality from the client to the
-server (i.e. a service model). These systems usually deploy \pilot factories
-that automatically start new \pilots on demand and integrate security mechanisms
+server (i.e. a service model). These systems usually deploy pilot factories
+that automatically start new pilots on demand and integrate security mechanisms
 to support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
-of \pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
+of pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-331-7-072069},
 AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
 these \pilotjob systems serves a particular user community and experiment.
@@ -1130,11 +1133,11 @@ identical) characteristics.
 
 
 GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
-system that is based on the \pilot capabilities of Condor GlideIn. The system
+system that is based on the pilot capabilities of Condor GlideIn. The system
 can, based on the current and expected number of jobs in the pool, automatically
-increase or decrease the number of active Glide-ins (i.e. \pilots) available to
+increase or decrease the number of active Glide-ins (i.e. pilots) available to
 the pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a
-hosted service. GlideinWMS attempts to hide the \pilot capabilities rather than
+hosted service. GlideinWMS attempts to hide the pilot capabilities rather than
 exposing them to the user. GlideinWMS is currently deployed in production on the
 Open Science Grid (OSG)~\cite{url_osg} and is the recommended mode for new users
 wanting to access OSG resources.
@@ -1157,7 +1160,7 @@ to keep detailed track of all resources, which leads to a more simple
 implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
 
 DIRAC~\cite{1742-6596-219-6-062049} used by the LHCb experiment~\cite{lhcb} is
-another comprehensive \pilot based workload management system.
+another comprehensive pilot-based workload management system.
 It supports the management of data, which can be placed in different
 kinds of storage elements (e.\,g.\ based on SRM).
 
@@ -1176,10 +1179,10 @@ systems. \pilotjob systems have proven an effective tool for managing the
 workloads executed in the various stages of a workflow. For the Pegasus
 project\cite{deelman2015}, the Corral
 system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
-optimize the placements of \pilots with respect to their workload for the
+optimize the placements of pilots with respect to their workload for the
 Pegasus workflow system. Corral serves as a front-end to Condor GlideIn. In
 contrast to GlideinWMS, Corral provides more explicit control over the placement
-and start of \pilots to the end-user. Corral was later extended to also serve as
+and start of pilots to the end-user. Corral was later extended to also serve as
 a possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
@@ -1277,7 +1280,7 @@ the minimal set of logical components that characterize every \pilotjob system.
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
 \vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
-and use of one or more resource placeholders (i.e. `\pilots`) on single or
+and use of one or more resource placeholders (i.e. `pilots`) on single or
 multiple machines. The Workload Manager handles the scheduling of one or more
 workloads on the available resource placeholders. The Task Manager takes care of
 executing the tasks of each workload by means of the resources held by the
@@ -1301,11 +1304,11 @@ workload. More functionalities might be needed to implement a production-grade
 fault-tolerance, or load-balancing. While these functionalities may be critical
 implementation details, they depend on the specific characteristics of the given
 use cases, workloads, or targeted resources. As such, these functionalities
-should not be considered necessary characteristics of every \pilotjob
+should not be considered necessary characteristics of a \pilotjob
 system. \jhanote{I vote to remove the word ``every'' in the previous sentence;
   we currently imply it is a necessary characteristic of some. this then
   confuses the reader in section 4. I agree with the use of every in the next
-  sentence.}
+  sentence.} \mtnote{Done.}
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
@@ -1314,9 +1317,11 @@ tasks to utilize resources without directly depending on the capabilities
 exposed by the targeted machines. Resource placeholders are scheduled onto
 remote machines by means of dedicated capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
-execution of the tasks of a workload. 
+execution of the tasks of a workload.
 
-\jhanote{possibly use ``resources'' in lieu of remote machines?}
+\jhanote{possibly use ``resources'' in lieu of remote machines?} \mtnote{Would
+that overload the term with two separate meanings: resource as what is held and
+resource as DCR?}
 
 % \jhanote{We may want to introduce the vocabulary of resource/DCR/DCI that we
 %   developed for the proposals here, and make it consistent throughout the
@@ -1356,7 +1361,7 @@ have to wait on the targeted machine's queues, but rather on the availability of
 the placeholder before being executed. More elaborate execution patterns
 involving task and data interdependence can thus be implemented
 independent of %  outside the
-% boundaries of 
+% boundaries of
 the target machine's middleware capabilities. Ultimately, this is how \pilotjob
 systems allow for the direct control of workload execution and the optimization,
 for example, of execution throughput. \jhanote{I'd like to use a more general
@@ -1419,16 +1424,19 @@ components and capabilities described so far is defined.
 \subsection{Terms and Definitions}
 \label{sec:termsdefs}
 
-\jhanote{Is the second sentence OK?} The terms `pilot' and `job' are arguably
-among the most relevant when referring to \pilotjob systems. It is the case that
-\pilotjob systems are commonly referred to as `\pilotjob systems', a clear
-indication of the primary role played by the concepts of `pilot' and `job' in
-this type of system. The definition of both concepts is context-dependent and
-several other terms need to be clarified in order to offer a coherent
-terminology. Both `job' and `pilot' need to be understood in the context of
-machines and middleware used by \pilotjob systems. These machines offer compute,
-storage, and network resources and \pilots allow for the users to utilize those
-resources to execute the tasks of one or more workloads.
+\jhanote{Is the second sentence OK?} \mtnote{Superfluous? I commented it out but
+happy to bring it back modified if you think it is needed.} The terms `pilot'
+and `job' are arguably among the most relevant when referring to \pilotjob
+systems.
+% It is the case that \pilotjob systems are commonly referred to as
+% `\pilotjob systems', a clear indication of the primary role played by the
+% concepts of `pilot' and `job' in this type of system.
+The definition of both concepts is context-dependent and several other terms
+need to be clarified in order to offer a coherent terminology. Both `job' and
+`pilot' need to be understood in the context of machines and middleware used by
+\pilotjob systems. These machines offer compute, storage, and network resources
+and \pilots allow for the users to utilize those resources to execute the tasks
+of one or more workloads.
 
 \begin{description}
 
@@ -1473,33 +1481,39 @@ but qualitatively different. Functionally, both jobs and tasks are containers --
 i.e. metadata wrappers around one or more executables often called `kernel',
 `application', or `script'. Qualitatively, the term `task' is used when
 reasoning about workloads while `job' is used in relation to a specific type of
-DCR middleware where such a container can be executed. \jhanote{maybe workload
-  in lieu of container in the previous sentence?} Accordingly, tasks are
-considered as the functional units of a workload, while jobs as a way to
-schedule tasks on a DCR with a specific middleware.  \jhanote{minor nitpic: are
-  we assuming 1 task per job? I don't think we should..}  It should be noted
-that, given their functional equivalence, the two terms can be adopted
-interchangeably when considered outside the context of \pilotjob
-systems. Indeed, workloads are encoded into jobs when they have to be directly
-executed on DCRs that support or require that type of container.
+DCR middleware where such a container is submitted. \jhanote{maybe workload in
+lieu of container in the previous sentence?}\mtnote{The idea is that job is
+dependent from a middleware, specifically a HPC-based one. For example, we do
+not submit a `job' to a cloud middleware. I replace executed by submitted.}
+Accordingly, tasks are considered as the functional units of a workload, while
+jobs as a way to schedule tasks on a DCR with a specific middleware.
+\jhanote{minor nitpic: are we assuming 1 task per job? I don't think we
+should..} \mtnote{I do not think so as we use `tasks'. Should we make it
+explicit?}  It should be noted that, given their functional equivalence, the two
+terms can be adopted interchangeably when considered outside the context of
+\pilotjob systems. Indeed, workloads are encoded into jobs when they have to be
+directly executed on DCRs that support or require that type of container.
 
 \jhanote{We start with jobs and tasks, but it gets a bit tricky to navigate this
   past paragraph, because workloads, tasks and jobs are discussed. Would it be
   better if the mapping in this paragraph was between tasks and jobs only? or
-  just workloads and jobs?}
+  just workloads and jobs?} \mtnote{I do not think I would be able to remove
+  workload from the previous paragraph as it is used to distinguish
+  qualitatively jobs from tasks. Maybe the distinction is not convincing?}
 
 As described in~\S\ref{sec:compsandfuncs}, a resource placeholder needs to be
 submitted to a DCR wrapped in the type of container supported by the middleware
 of that specific DCR. For this reason, the capabilities exposed by the job
 submission system of the target DCR determine the submission process of resource
 placeholders and its specifics.
-%and how or for how long they can be used. 
+%and how or for how long they can be used.
 For example, when wrapped within a `job', placeholders are provisioned by
 submitting a job to the DCR queuing system, and become available only once the
-job is scheduled on the resources out of the queue, and is available only for
-the duration of the job lifetime.\jhanote{changed DCI to DCR. OK?}\jhanote{not
-  sure what ``out of the queue'' means? maybe say, ``.. become available when
-  the job is active, and is available...''}
+job has become active, and is available only for the duration of the job
+lifetime.\jhanote{changed DCI to DCR. OK?}\jhanote{not sure what ``out of the
+queue'' means? maybe say, ``.. become available when the job is active, and is
+available...''} \mtnote{Better? I used `once... has become' to indicate that the
+job sits within the queue for a certain amount of time.}
 
 
 % For example, for a DCR exposing a HPC or grid
@@ -1508,16 +1522,19 @@ the duration of the job lifetime.\jhanote{changed DCI to DCR. OK?}\jhanote{not
 % placeholder will need to be wrapped within a different type of container as,
 % for example, a VM or a Docker Engine.
 
-A \pilot is a resource placeholder. As a resource placeholder, a \pilot holds
+A \pilot is a resource placeholder. As a resource placeholder, a pilot holds
 portion of a DCR's resources for a user or a group of users, depending on
 implementation details. A \pilotjob system is software capable of creating
-\pilots so as to gain exclusive control over a set of resources on one or more
-DCRs and then to execute the tasks of one or more workloads on those \pilots.
+pilots so as to gain exclusive control over a set of resources on one or more
+DCRs and then to execute the tasks of one or more workloads on those pilots.
 % \jhanote{another example for the need for definitional consistency}
 \jhanote{also I would not use the word exclusive} \mtnote{Why?}\jhanote{In our
   definition of Resource earlier in this section, we define it as a finite
   physical quantity utilized. As we do not claim that the resource is logical we
-  should not claim that the resource is exclusively available}
+  should not claim that the resource is exclusively available}\mtnote{Thank you.
+  I think exclusive applies because once the quantity of resource is held by the
+  pilot, it can be used only by the pilot. For example, it is not shared with
+  the DCR scheduler as other jobs of the DCR cannot use those resources.}
 
 
 \begin{description}
@@ -1528,26 +1545,28 @@ workload on that resource.
 
 \end{description}
 
-It should be noted that the term `\pilot' as defined here is named differently
+It should be noted that the term `pilot' as defined here is named differently
 across \pilotjob systems. Depending upon context, in addition to the term
-`placeholder', \pilot may also be named `agent' or
+`placeholder', pilot may also be named `agent' or
 `\pilotjob'~\cite{moscicki2011,pinchak2002}. All these terms are, in practice,
 used as synonyms without properly distinguishing between the type of container
-and the type of executable that compose a \pilot. This is a clear indication of
+and the type of executable that compose a pilot. This is a clear indication of
 how necessary the minimal and consistent vocabulary offered here is when
 reasoning analytically about multiple \pilotjob system implementations.
 
 Until now, the term \pilotjob system has been used to indicate those systems
-capable of executing workloads on \pilots. From now on, the term `\pilot system'
+capable of executing workloads on pilots. From now on, the term `\pilot system'
 will be used instead, as the term `job' in `pilot-job' identifies just the way
-in which a \pilot is provisioned on a DCR exposing specific capabilities; it is
+in which a pilot is provisioned on a DCR exposing specific capabilities; it is
 not a general property of all the \pilotjob systems. The use of the term
 `\pilotjob system' should therefore be regarded as a historical artifact, viz.,
 the targeting of a specific class of DCRs in which the term `job' was, and still
 is, meaningful. With the development of new types of DCR middleware as, for
 example, those based on virtual machines, the term `job' has become too
 restrictive, a situation that can lead to terminological and conceptual
-confusion.\jhanote{I removed VMs to be a bit more specific}
+confusion.
+
+% \jhanote{I removed VMs to be a bit more specific}
 
 % \jhanote{even by my standards of repeating the main points, i think we are
 % painfully belabouring the point about ``jobs'' in pilot-jobs.} \mtnote{Maybe so
@@ -1555,36 +1574,37 @@ confusion.\jhanote{I removed VMs to be a bit more specific}
 % example in which we were repeating the concept of job as a type of container.
 % Here we make the case of a terminological confusion. Any better?}
 
-We have now defined resources, DCRs, and \pilots. We have established that a
-\pilot is a placeholder for a set of resources. When combined, the resources of
-multiple \pilots form a resource overlay. The \pilots of a resource overlay can
+We have now defined resources, DCRs, and pilots. We have established that a
+pilot is a placeholder for a set of resources. When combined, the resources of
+multiple pilots form a resource overlay. The pilots of a resource overlay can
 potentially be distributed over multiple and diverse DCRs.
 
 % The details of this aggregation or federation is outside the scope of this
 % paper.
 
 \begin{description}
-\item[Resource Overlay.] The aggregated set of resources of multiple \pilots.
+\item[Resource Overlay.] The aggregated set of resources of multiple pilots.
 \end{description}
 
 Three more terms associated with \pilot systems need to be explicitly defined:
 `Multi-level scheduling', `early binding', and `late binding'.
 
 Pilot systems are said to implement multi-level scheduling because they require
-the scheduling of two types of entities: \pilots and tasks. \jhanote{should we
-  use lower case for second instance of ``pilots'' ? This would make it
-  consistent with job, task, workload as these are now simply similar elements
-  of our vocabulary?} A portion of the resources of a DCR is allocated to one or
-more \pilots in the form of containers supported by that DCR, and the tasks of a
-workload are dispatched for execution to those \pilots. As alluded to in the
-previous sub-section, this is a fundamental feature of \pilot systems.  It leads
-to the following: (i) more flexible and potentially reduced times to completion
-of workloads is achieved by avoiding the overhead imposed by a centralized job
-management system shared among multiple users; and (ii) the tasks of a workload
-can be bound to a set of \pilots before or after it becomes available on a
-remote resource. Depending on the implementation of a \pilot system, there can
-be another level of scheduling, where the \pilot makes scheduling decisions
-about task placement within the \pilot's resource allocation.
+the scheduling of two types of entities: pilots and tasks. \jhanote{should we
+use lower case for second instance of ``pilots'' ? This would make it consistent
+with job, task, workload as these are now simply similar elements of our
+vocabulary?} \mtnote{This has opened the proverbial can of warms. Ongoing but will need revision.} A portion of the resources of a DCR is allocated to
+one or more pilots in the form of containers supported by that DCR, and the
+tasks of a workload are dispatched for execution to those pilots. As alluded to
+in the previous sub-section, this is a fundamental feature of \pilot systems.
+It leads to the following: (i) more flexible and potentially reduced times to
+completion of workloads is achieved by avoiding the overhead imposed by a
+centralized job management system shared among multiple users; and (ii) the
+tasks of a workload can be bound to a set of pilots before or after it becomes
+available on a remote resource. Depending on the implementation of a \pilot
+system, there can be another level of scheduling, where the \pilot system makes
+scheduling decisions about task placement within the pilot's resource
+allocation.
 
 % \jhanote{about point (i): I know we caveat the statement with
 %   ``potentially'' but maybe the focus should be on (a) greater control to the
@@ -1596,24 +1616,24 @@ about task placement within the \pilot's resource allocation.
 The greater control obtained as a consequence of bypassing the job submission
 system of the DCR is one of the main reasons for the success and early adoption
 of \pilot systems.  As mentioned in~\S\ref{sec:compsandfuncs}, the tasks of a
-workload can be executed on a \pilot without each task individually waiting in
+workload can be executed on a pilot without each task individually waiting in
 the queuing system of the DCR's middleware. This greater control results in
 several advantages, including possibly increasing the throughput of the workload
-execution. Moreover, \pilots can be reused to execute multiple workloads until
-the \pilots are no longer active.  How tasks are actually assigned to \pilots is
+execution. Moreover, pilots can be reused to execute multiple workloads until
+the pilots are no longer active.  How tasks are actually assigned to pilots is
 a matter of implementation. For example, a dedicated scheduler could be adopted,
-or tasks might be directly assigned to a \pilot by the user.
+or tasks might be directly assigned to a pilot by the user.
 
-The type of binding of tasks to \pilots depends on the state of the \pilot. A
-\pilot is inactive until it is executed on a DCR, is active thereafter, until it
+The type of binding of tasks to pilots depends on the state of the pilot. A
+pilot is inactive until it is executed on a DCR, is active thereafter, until it
 completes or fails.  Early binding indicates the binding of a task to an
-inactive \pilot; late binding the binding of a task to an active one. Early
-binding is potentially useful to increase the information about which \pilots
+inactive pilot; late binding the binding of a task to an active one. Early
+binding is potentially useful to increase the information about which pilots
 can be deployed. By knowing in advance the properties of the tasks that are
-bound to a \pilot, specific deployment decisions can be made for that \pilot.
+bound to a pilot, specific deployment decisions can be made for that pilot.
 Additionally, in case of early binding, other type of decisions related to the
 workload could be made, e.g., the transfer of data to a certain resource while
-the \pilot is still inactive. Late binding is critical in assuring the
+the pilot is still inactive. Late binding is critical in assuring the
 aforementioned high throughput of the distributed application by allowing
 sustained task execution without additional queuing time or container
 instantiation time.
@@ -1634,12 +1654,12 @@ confinements of a single workload. \jhanote{what is the ``confinements of a
 
 \begin{description}
 
-\item[Multi-level scheduling.] Scheduling \pilots onto resources, and
-scheduling tasks onto (active or inactive) \pilots.
+\item[Multi-level scheduling.] Scheduling pilots onto resources, and
+scheduling tasks onto (active or inactive) pilots.
 
-\item[Early binding.] Binding one or more tasks to an inactive \pilot.
+\item[Early binding.] Binding one or more tasks to an inactive pilot.
 
-\item[Late binding.] Binding one or more tasks to an active \pilot.
+\item[Late binding.] Binding one or more tasks to an active pilot.
 
 \end{description}
 
@@ -1728,7 +1748,7 @@ Figure~\ref{fig:core_vocabulary} offers a diagrammatic overview of the logical
 components of \pilot systems (green) alongside their functionalities (blue) and
 the defined vocabulary (red). An application submits a workload composed of
 tasks to the \pilot system via an interface (Figure~\ref{fig:core_vocabulary}
-(a)). The Pilot Manager is responsible for \pilot provisioning
+(a)). The Pilot Manager is responsible for pilot provisioning
 (Figure~\ref{fig:core_vocabulary} (b)), the Workload Manager to dispatch tasks
 to the Task Manager (Figure~\ref{fig:core_vocabulary} (c)), the Task Manager to
 executes those tasks once the pilot has become available
@@ -1848,9 +1868,9 @@ as defined in~\S\ref{sec:history}. Core properties are necessary for every
 \pilot system implementation to provide the minimal set of functionalities as
 described in~\S\ref{sec:compsandfuncs}. Auxiliary properties are instead
 required only as a support to the implementation of core properties. For
-example, while every \pilot system has to implement a mechanism for \pilot
+example, while every \pilot system has to implement a mechanism for pilot
 instantiation, a specific authentication and authorization protocol may be
-required to support the instantiation of \pilots for a particular middleware of
+required to support the instantiation of pilots for a particular middleware of
 a DCR. As such, auxiliary properties are not necessarily shared among all \pilot
 systems.
 
@@ -2137,7 +2157,7 @@ onto the components described in \S\ref{sec:compsandfuncs}.}}
 Following is an in depth description of core properties characterizing each
 implementation of a \pilot system. This list of properties is minimal and
 complete. Note that these are the properties of \pilot implementations, and not
-of individual instantiations of \pilots.
+of individual instantiations of pilots.
 
 \begin{itemize}
 
@@ -2157,10 +2177,10 @@ of individual instantiations of \pilots.
     the DCR and the middleware used, pilots might also..''}
 
 % core because: its fundamental to our model
-\item \textbf{Pilot Deployment}. \pilots are scheduled and then bootstrapped on
+\item \textbf{Pilot Deployment}. Pilots are scheduled and then bootstrapped on
   a DCR. The characteristic of both operations varies depending on the
   implementation details of the \pilot systems and on the architecture,
-  interfaces, and capabilities offered by the remote DCR. For example, \pilot
+  interfaces, and capabilities offered by the remote DCR. For example, pilot
   scheduling may be fully automated or directly controlled by applications and
   end-users. The bootstrapping can offer explicit or implicit localization by
   allowing to load specific libraries, compilers, and support software. Both
@@ -2174,7 +2194,7 @@ of individual instantiations of \pilots.
 
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
-  \pilots depending on the workload semantics. Specifically, dispatching
+  pilots depending on the workload semantics. Specifically, dispatching
   decisions depends on the temporal and spatial relationships among tasks, the
   affinity between data and compute resources required by the tasks, and the
   type of capabilities needed for their execution. \pilot systems support a
@@ -2191,11 +2211,11 @@ of individual instantiations of \pilots.
 
 % core because: this is of the heart of pilot systems
 \item \textbf{Task Binding}. The Task Dispatching functionality implies the
-  capability of binding tasks to \pilots. Without such a capability, it would
-  not be possible to know where to dispatch tasks, \pilots could not be used to
+  capability of binding tasks to pilots. Without such a capability, it would
+  not be possible to know where to dispatch tasks, pilots could not be used to
   execute tasks and, as such, the whole \pilot system would not be usable. As
   seen in \S\ref{sec:understanding}, \pilot systems may allow for two types of
-  binding between tasks and \pilots: early binding and late binding. \pilot
+  binding between tasks and pilots: early binding and late binding. \pilot
   system implementations differ in whether and how they support these two types
   of binding. Specifically, while there might be implementations that only
   support a single type of binding, they might also differ in whether they allow
@@ -2208,15 +2228,15 @@ of individual instantiations of \pilots.
 
 % core because: its the only property of the task executor
 % component/functionality
-\item \textbf{Task Execution}. Once the tasks are dispatched to a \pilot, their
+\item \textbf{Task Execution}. Once the tasks are dispatched to a pilot, their
   execution may require for a specific runtime environment to be set up (e.g.
   MPI). \pilot systems differ in whether and how they offer such a capability.
   \pilot systems may adopt dedicated components for managing execution
-  environments, or they may rely on ad hoc configuration of the \pilots.
+  environments, or they may rely on ad hoc configuration of the pilots.
   Furthermore, execution environments can be of varying complexity, depending on
   whether the \pilot system allows for data retrieval, software and library
   installations, communication and coordination among execution environments and
-  \pilots.
+  pilots.
 
   % \msnote{Are some words missing here or does the "in case" refer to c and c
   % between pilots?}
@@ -2227,7 +2247,7 @@ of individual instantiations of \pilots.
   DCRs at multiple levels. The degree of coupling between the \pilot system and
   the DCR can vary as much as the information shared between them. Depending on
   the capabilities implemented, \pilot systems have to negotiate the scheduling
-  on \pilots, may be staging data in and out of the DCR, and may have to mediate
+  on pilots, may be staging data in and out of the DCR, and may have to mediate
   task binding and execution by means of remote interfaces and protocols.
 
   \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
@@ -2295,7 +2315,7 @@ of individual instantiations of \pilots.
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Interoperability}. Interoperability is defined as the capability
-  to deploy \pilots on heterogeneous DCRs. It allows for a \pilot
+  to deploy pilots on heterogeneous DCRs. It allows for a \pilot
   system to provision pilots and execute workloads on different types of
   DCR middleware (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm, or Torque).
 
@@ -2306,10 +2326,10 @@ of individual instantiations of \pilots.
   level, multiple users may share the same pilot.
 
 % aux because: not all the pilot systems offer an abstraction for multiple (at least two) pilots.
-\item \textbf{Resource Overlay}. The resources of multiple \pilots may be
+\item \textbf{Resource Overlay}. The resources of multiple pilots may be
   aggregated into a resource overlay. Overlays may be directly exposed to the
   application layer and to the end-users depending on the public interfaces and
-  usability models. Overlays may abstract away the notion of \pilot or offer an
+  usability models. Overlays may abstract away the notion of pilot or offer an
   explicit semantic for their aggregation, selection, and management.
 
 % aux because: its not directly coupled to one of the components/functions
