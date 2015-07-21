@@ -4097,10 +4097,9 @@ computational resources.
 It is important to note that the focus on computational resources is not
 mandated by the \pilot paradigm. In principle, pilots can be placeholders also
 and exclusively for data or network resources, depending on the capabilities
-exposed by the middleware of the target infrastructure. For example, in
-Ref.~[pilot data], the notion of \pilotdata has been conceived using the power
-of symmetry, i.e., \pilotdata taken to be a notion as fundamental to dynamic
-data placement and scheduling as \pilot is to computational tasks.
+exposed by the middleware of the target infrastructure.  For example, in
+Ref.~[pilot data] the concept of \pilotdata was conceived to be fundamental to
+dynamic data placement and scheduling as \pilot is to computational tasks.
 
 Currently, no \pilot system exposes networking resources by means of
 placeholders but there is no theoretical limitation to the implementation of
@@ -4175,7 +4174,8 @@ multi-level scheduling so as to increase the execution throughput of large
 workloads made qof short running tasks.  For example, as seen
 in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were initially developed as
 single-point solutions, focusing on either a type of workload, a specific
-infrastructure, or the optimization of a single performance metric.
+infrastructure, or the optimization of a single performance
+metric. \jhanote{this should be merged with text around paragraph 2 in 5.3}
 
 Optimizing the usage of the resource containers, for example by minimizing
 idling time, is an implementation issue, not an intrinsic limitation of the
@@ -4423,19 +4423,21 @@ executables via \pilot systems.
 \label{sec:future}
 
 The \pilot landscape is currently fragmented with a high degree of duplicated
-effort and capabilities. The reasons for such a balkanization are to be traced
+effort and capabilities. The reasons for such balkanization can be traced
 back mainly to two factors: (i) the relatively recent discovery of the
 importance of the \pilot paradigm; and (ii) the development model fostered
 within academic institutions.
 
 As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
 as a pragmatic solution for improving the throughput of distributed
-applications. \pilot systems were not thought from their inception as an
-independent class of middleware but, at best, as a module within a specific
-framework. This not only promoted duplication of development effort across
-frameworks and projects but also hindered the appreciation for the generality of
-the \pilot abstraction, the theoretical framework underlying the \pilot systems,
-and the application execution paradigm they enable.
+applications, and designed as local and point solution.  \pilot systems were not
+thought from their inception as an independent class of middleware but, at best,
+as a module within a specific framework.  This not only promoted duplication of
+development effort across frameworks and projects but also hindered the
+appreciation for the generality of the \pilot abstraction, the theoretical
+framework underlying the \pilot systems, and the application execution paradigm
+they enable. \jhanote{need consistency about whether we want to refer to pilots
+  as a system or type/class of middleware} \jhanote{we should say that they were
 
 \pilot systems inherited the development model of the scientific projects
 within which they were initially developed. Most of the early \pilot systems
