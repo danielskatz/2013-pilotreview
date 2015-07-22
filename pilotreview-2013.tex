@@ -4120,12 +4120,13 @@ to as `\pilot paradigm'.
 In this section, the properties of the \pilot paradigm are critically assessed.
 The goal is to show the generality of this paradigm and how \pilot systems go
 beyond the implementation of a special purpose solutions to speed up the
-execution of a certain type of workload. Once the breadth of the \pilot paradigm
-has been understood, it is contextualized by describing its relation with
-relevant domains such as middleware, applications, security, and the enterprise.
-Finally, the section closes with a look into the future of \pilot systems moving
-from the current state of the art and discussing the sociotechnical and
-engineering challenges that are being faced both by developers and target users.
+execution of a certain type of workload. 
+% Once the breadth of the \pilot paradigm has been understood, it is
+% contextualized by describing its relation with relevant domains such as
+% middleware, applications, security, and the enterprise.  Finally, 
+The section closes with a look into the future of \pilot systems moving from the
+current state of the art and discussing the sociotechnical and engineering
+challenges that are being faced both by developers and target users.
 
 \jhanote{A suggestion for the organization of S5: Establish the generality of
   the concept in 5.1 via a discussion of ``internal'' core properties (task
@@ -4163,14 +4164,18 @@ engineering challenges that are being faced both by developers and target users.
 \subsection{The Pilot Paradigm}
 \label{sec:paradigm}
 
-The \pilot paradigm is characterized and defined primarily by resource
-placeholding, multi-level scheduling, and late binding.  \pilot systems
-represents a category of software in itself. \pilot systems are not just an
-alternative implementation of a scheduler, of a workload manager, of a batch
-system, or of any other special-purpose software component. Appreciating the
+% The \pilot paradigm is characterized and defined primarily by resource
+% placeholding, multi-level scheduling, and late binding.  
+
+\pilot systems represents a category of software in itself.  Appreciating the
 generality of the \pilot paradigm and the independence of its implementations
 from other types of software, helps also to avoid a potential misunderstanding
-involving \pilots and how multi-level scheduling works. % \pilot systems do not
+that \pilots are not just an alternative implementation of a scheduler, of a
+workload manager, of a batch system, or of any other special-purpose software
+component. \jhanote{This paragraph could be transposed with the last paragraph
+  in 5.1. Thoughts?}
+
+%and how multi-level scheduling works. % \pilot systems do not
 % circumvent the infrastructure middleware but abstract away some of its
 % properties in order to optimize one or more user-defined (performance) metrics.
 % Multi-level scheduling does not replace the infrastructure-level scheduler
@@ -4178,7 +4183,7 @@ involving \pilots and how multi-level scheduling works. % \pilot systems do not
 % are still created on the target infrastructure by means of that infrastructure's
 % capabilities and the second level of scheduling is completely contained within
 % the boundaries of the resource container.
-
+%\pilot systems are
 
 The \pilot paradigm identifies a type of software system with both general and
 unique characteristics. This paradigm is general because it does not strictly
