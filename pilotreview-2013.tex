@@ -2479,25 +2479,30 @@ task computing performance (HPC), or container-based high scalability (Cloud).
 
 A set of \pilot systems has been chosen for further analysis to show how the
 core properties just described are implemented under different requirements both
-in terms of target DCRs and  application workloads. Examining these
-\pilot systems using the common vocabulary defined in~\S\ref{sec:termsdefs}
-exposes similarities and differences allowing a detailed analysis. Critically
-assessing these differences allow to bring to the fore the generality of the
-pilot abstraction alongside its independence from specific software systems and
-technological environments.
+in terms of target DCRs and application workloads. Examining these \pilot
+systems using the common vocabulary defined in~\S\ref{sec:termsdefs} exposes
+similarities and differences allowing a detailed analysis. Critically assessing
+these differences will bring to the fore the generality of the pilot abstraction
+alongside its independence from specific software systems and technological
+environments.
 
 In the following analysis, \pilot systems are ordered alphabetically and
 syntactic conventions are used to support the reader. The \vocab{Logical
-Components}, the \vocab{Functionalities}, and the \vocab{Terms and Definitions}
-introduced in~\S\ref{sec:understanding} are highlighted in \vocab{Bold}.
-\prop{Italic} is used to refer to the core \prop{Properties} just described and,
-when necessary, the specific terminology used in the documentation of the \pilot
-systems under analysis is distinguished by using the \impterm{Typewriter} font.
+  Components}, the \vocab{Functionalities}, and the \vocab{Terms and
+  Definitions} introduced in~\S\ref{sec:understanding} are highlighted in
+\vocab{Bold}.  \prop{Italic} is used to refer to the core \prop{Properties} just
+described and, when necessary, the specific terminology used in the
+documentation of the \pilot systems under analysis is distinguished by using the
+\impterm{Typewriter} font.
 
 \mtnote{Do we need this formatting devices? They are not always added to every
 use of the terms and they make the text a bit `heavy' for me.}
 
-\mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain why so few: we now introduce 4 examplar cases showing how systems developed to execute different types of application on diverse DCRs... Different capabilities... Same core components/functionalities/properties -> Therefore: general paradigm, best practices for the implementation, choosing criteria.}
+\mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain
+  why so few: we now introduce 4 examplar cases showing how systems developed to
+  execute different types of application on diverse DCRs... Different
+  capabilities... Same core components/functionalities/properties -> Therefore:
+  general paradigm, best practices for the implementation, choosing criteria.}
 
 
 % ------------------------------------------------------------------------------
@@ -2511,20 +2516,21 @@ the execution of workloads on both local and EGI/WLCG Grid DCRs. DIANE has since
 been used also in the Life Sciences \mtnote{Reference needed} and in few other
 scientific domains \mtnote{Reference needed}.
 
-DIANE is a application task coordination framework for those distributed
-applications that can be executed by means of the \MW
-pattern~\cite{Moscicki:908910}. DIANE consists of four components: a
-TaskScheduler, an ApplicationManager, a SubmitterScript, and a set of
-ApplicationWorkers. The TaskScheduler and the ApplicationManager are implemented
-as a RunMaster service while the ApplicationWorkers as a WorkerAgent service.
-Submitter Scripts deploy ApplicationWorkers on DCRs.
+DIANE is a application task coordination framework for distributed applications
+that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
+consists of four components: a TaskScheduler, an ApplicationManager, a
+SubmitterScript, and a set of ApplicationWorkers. The TaskScheduler and the
+ApplicationManager are implemented as a RunMaster service while the
+ApplicationWorkers as a WorkerAgent service.  Submitter Scripts deploy
+ApplicationWorkers on DCRs. \jhanote{I know we ``Define'' that next paragraph,
+  but we should think about the ``clarity'' of the previous two sentences?}
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
 functionalities of a pilot system as described in~\S\ref{sec:understanding}: the
 RunMaster service is a Workload Manager, the SubmitterScript is a Pilot Manager,
 and the ApplicationWorker of each WorkerAgent service is a Task Manager.
-Accordingly, the \pilot provision functionality is implemented by the
+Accordingly, the \pilot provisioning functionality is implemented by the
 SubmitterScript, Task Dispatching by the RunMaster, and Task Execution by the
 WorkerAgent. In DIANE, Pilots are called WorkerAgents.
 
@@ -2567,14 +2573,14 @@ uniform interface and abstraction.
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
 ensembles of parametric tasks on multiple ApplicationAgents. Each task can
-consists of an executable invocation but also of a set of instructions, OpenMP
+consist of an executable invocation but also of a set of instructions, OpenMP
 threads, or MPI processes~\ref{moscicki2011}. Relations among tasks and group of
 tasks can be specified before or during runtime enabling DIANE to execute
 articulated workflows. Plugins have been written to manage
 DAGs~\cite{grzeslo2009} and data-oriented workflows~\cite{glatard2008}.
 
 % workload binding
-DIANE is primarily designed for HTC/GRID environments and to execute pilots with
+DIANE is primarily designed for HTC/Grid environments and to execute pilots with
 a single core. Nonetheless, the notion of ``capacity'' is exposed to the user to
 allow for the specification of pilots with multiple cores. Although the workload
 binding is controllable by the user-programmable TaskScheduler, the general
