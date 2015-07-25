@@ -2544,9 +2544,10 @@ The pilots used by DIANE bind compute resources on the target DCRs.
 ApplicationAgents are executed by the DCR middleware as jobs with mostly one
 core but possibly more. DIANE offers also a data service with a dedicated API
 and CLI that allows for staging files in and out of ApplicationAgents. This
-service represents an abstraction of the data capabilities offered by the DCR
-middleware and it is designed to handle data only in the form of files stored
-into a file system.
+service represents an abstraction of the data resources and capabilities offered
+by the DCR and it is designed to handle data only in the form of files stored
+into a file system. Network resources are assumed to be available and no
+abstractions are offered.
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
