@@ -2511,19 +2511,19 @@ use of the terms and they make the text a bit `heavy' for me.}
 \subsubsection{DIANE}
 \label{sec:diane}
 
-DIANE (DIstributed ANalysis Environment) has been developed at CERN to support
-the execution of workloads on both local and EGI/WLCG Grid DCRs. DIANE has since
-been used also in the Life Sciences \mtnote{Reference needed} and in few other
-scientific domains \mtnote{Reference needed}.
+DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
+developed at CERN to support the execution of workloads on both local and
+EGI/WLCG Grid DCRs. DIANE has since been used also in the Life Sciences
+\mtnote{Reference needed} and in few other scientific domains \mtnote{Reference
+  needed}.
 
-DIANE is a application task coordination framework for distributed applications
+DIANE is an application task coordination framework for distributed applications
 that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
-consists of four components: a TaskScheduler, an ApplicationManager, a
-SubmitterScript, and a set of ApplicationWorkers. The TaskScheduler and the
-ApplicationManager are implemented as a RunMaster service while the
-ApplicationWorkers as a WorkerAgent service.  Submitter Scripts deploy
-ApplicationWorkers on DCRs. \jhanote{I know we ``Define'' that next paragraph,
-  but we should think about the ``clarity'' of the previous two sentences?}
+consists of four \jhanote{logical?} components: a TaskScheduler, an
+ApplicationManager, a SubmitterScript, and a set of ApplicationWorkers. The
+first two components -- TaskScheduler and the ApplicationManager, are
+implemented as a RunMaster service, while the ApplicationWorkers as a
+WorkerAgent service.  Submitter Scripts deploy ApplicationWorkers on DCRs.
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
@@ -2560,7 +2560,7 @@ DIANE leaves the user free to develop deployment mechanisms tailored to specific
 resources. The RunMaster service assumes to have pilots available to schedule
 the tasks of the workload. Deployment mechanisms can range from direct manual
 execution of jobs on remote resources to deployment scripts or full-fledged
-factories systems to support a sustained provision of pilots over extended
+factory systems to support the sustained provisioning of pilots over extended
 periods of time.
 
 A computational task-management tool called GANGA is available to support the
@@ -2568,7 +2568,7 @@ development of SubmitterScripts. GANGA offers a unified interface for job
 submission to DCRs with Globus, Condor, UNICORE, or gLite
 middleware~\cite{Moscicki20092303}. The main goal of GANGLIA is to facilitate
 the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a
-uniform interface and abstraction.
+uniform interface and abstraction.\jhanote{What is GANGLIA? typo for GANGA?}
 
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
@@ -2751,10 +2751,15 @@ executables via \pilot systems.
 % ------------------------------------------------------------------------------
 % Section 4's concluding remarks
 %
+
+\paragraph{Other Pilot Systems:} We have discussed only a limited number of
+\pilots systems that exist; this is purely a reflection of the limitations of
+space. We eschewed coverage in favour of favour of completeness of a the few
+\pilot systems. \jhanote{As discussed we'll have a closing paragraph or two,
+  about all the pilot systems that we don't discuss}
+
 \subsection{Overall observations}
 
-\jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
-  systems that we don't discuss}
 
 \begin{itemize}
 
@@ -2766,7 +2771,10 @@ executables via \pilot systems.
 \item Remark consistency of implementation architectures with the one given in
 3.
 
-\item Use three dimensions (D I H) to analyze types of workloads.
+\item Use three dimensions (D (dependency) C (coupling) and H (heterogeneity) )
+  (D I H) to analyze types of workloads. \jhanote{Is ``I'' independent?. Also we
+    might want to add ``N'' -- cardinality, which captures the number of tasks
+    in the workload.}
 
 \item Analyze different implementation methods underlying the differences in usability and requirements between frameworks and full-fledged applications. ``Some of systems we have discussed, like DIRAC, X, are inherently service
 oriented, or exposed as a service. On the other side of the spectrum, systems
