@@ -2479,25 +2479,30 @@ task computing performance (HPC), or container-based high scalability (Cloud).
 
 A set of \pilot systems has been chosen for further analysis to show how the
 core properties just described are implemented under different requirements both
-in terms of target DCRs and  application workloads. Examining these
-\pilot systems using the common vocabulary defined in~\S\ref{sec:termsdefs}
-exposes similarities and differences allowing a detailed analysis. Critically
-assessing these differences allow to bring to the fore the generality of the
-pilot abstraction alongside its independence from specific software systems and
-technological environments.
+in terms of target DCRs and application workloads. Examining these \pilot
+systems using the common vocabulary defined in~\S\ref{sec:termsdefs} exposes
+similarities and differences allowing a detailed analysis. Critically assessing
+these differences will bring to the fore the generality of the pilot abstraction
+alongside its independence from specific software systems and technological
+environments.
 
 In the following analysis, \pilot systems are ordered alphabetically and
 syntactic conventions are used to support the reader. The \vocab{Logical
-Components}, the \vocab{Functionalities}, and the \vocab{Terms and Definitions}
-introduced in~\S\ref{sec:understanding} are highlighted in \vocab{Bold}.
-\prop{Italic} is used to refer to the core \prop{Properties} just described and,
-when necessary, the specific terminology used in the documentation of the \pilot
-systems under analysis is distinguished by using the \impterm{Typewriter} font.
+  Components}, the \vocab{Functionalities}, and the \vocab{Terms and
+  Definitions} introduced in~\S\ref{sec:understanding} are highlighted in
+\vocab{Bold}.  \prop{Italic} is used to refer to the core \prop{Properties} just
+described and, when necessary, the specific terminology used in the
+documentation of the \pilot systems under analysis is distinguished by using the
+\impterm{Typewriter} font.
 
 \mtnote{Do we need this formatting devices? They are not always added to every
 use of the terms and they make the text a bit `heavy' for me.}
 
-\mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain why so few: we now introduce 4 examplar cases showing how systems developed to execute different types of application on diverse DCRs... Different capabilities... Same core components/functionalities/properties -> Therefore: general paradigm, best practices for the implementation, choosing criteria.}
+\mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain
+  why so few: we now introduce 4 examplar cases showing how systems developed to
+  execute different types of application on diverse DCRs... Different
+  capabilities... Same core components/functionalities/properties -> Therefore:
+  general paradigm, best practices for the implementation, choosing criteria.}
 
 
 % ------------------------------------------------------------------------------
@@ -2507,26 +2512,27 @@ use of the terms and they make the text a bit `heavy' for me.}
 \label{sec:diane}
 
 % Who did it and for what scientific domains.
-DIANE (DIstributed ANalysis Environment) has been developed at CERN to support
-the execution of workloads on both local and EGI/WLCG Grid DCRs. DIANE has since
-been used also in the Life Sciences \mtnote{Reference needed} and in few other
-scientific domains \mtnote{Reference needed}.
+DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
+developed at CERN to support the execution of workloads on both local and
+EGI/WLCG Grid DCRs. DIANE has since been used also in the Life Sciences
+\mtnote{Reference needed} and in few other scientific domains \mtnote{Reference
+  needed}.
 
 % Architecture.
-DIANE is a application task coordination framework for those distributed
-applications that can be executed by means of the \MW
-pattern~\cite{Moscicki:908910}. DIANE consists of four components: a
-TaskScheduler, an ApplicationManager, a SubmitterScript, and a set of
-ApplicationWorkers. The TaskScheduler and the ApplicationManager are implemented
-as a RunMaster service while the ApplicationWorkers as a WorkerAgent service.
-Submitter Scripts deploy ApplicationWorkers on DCRs.
+DIANE is an application task coordination framework for distributed applications
+that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
+consists of four \jhanote{logical?} components: a TaskScheduler, an
+ApplicationManager, a SubmitterScript, and a set of ApplicationWorkers. The
+first two components -- TaskScheduler and the ApplicationManager, are
+implemented as a RunMaster service, while the ApplicationWorkers as a
+WorkerAgent service.  Submitter Scripts deploy ApplicationWorkers on DCRs.
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
 functionalities of a pilot system as described in~\S\ref{sec:understanding}: the
 RunMaster service is a Workload Manager, the SubmitterScript is a Pilot Manager,
 and the ApplicationWorker of each WorkerAgent service is a Task Manager.
-Accordingly, the \pilot provision functionality is implemented by the
+Accordingly, the \pilot provisioning functionality is implemented by the
 SubmitterScript, Task Dispatching by the RunMaster, and Task Execution by the
 WorkerAgent. In DIANE, Pilots are called WorkerAgents.
 
@@ -2556,27 +2562,27 @@ DIANE leaves the user free to develop deployment mechanisms tailored to specific
 resources. The RunMaster service assumes to have pilots available to schedule
 the tasks of the workload. Deployment mechanisms can range from direct manual
 execution of jobs on remote resources to deployment scripts or full-fledged
-factories systems to support a sustained provision of pilots over extended
+factory systems to support the sustained provisioning of pilots over extended
 periods of time.
 
 A computational task-management tool called GANGA is available to support the
 development of SubmitterScripts. GANGA offers a unified interface for job
 submission to DCRs with Globus, Condor, UNICORE, or gLite
-middleware~\cite{Moscicki20092303}. The main goal of GANGLIA is to facilitate
-the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a
-uniform interface and abstraction.
+middleware~\cite{Moscicki20092303}. The main goal of GANGA is to facilitate the
+submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a uniform
+interface and abstraction.
 
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
 ensembles of parametric tasks on multiple ApplicationAgents. Each task can
-consists of an executable invocation but also of a set of instructions, OpenMP
+consist of an executable invocation but also of a set of instructions, OpenMP
 threads, or MPI processes~\ref{moscicki2011}. Relations among tasks and group of
 tasks can be specified before or during runtime enabling DIANE to execute
 articulated workflows. Plugins have been written to manage
 DAGs~\cite{grzeslo2009} and data-oriented workflows~\cite{glatard2008}.
 
 % workload binding
-DIANE is primarily designed for HTC/GRID environments and to execute pilots with
+DIANE is primarily designed for HTC/Grid environments and to execute pilots with
 a single core. Nonetheless, the notion of ``capacity'' is exposed to the user to
 allow for the specification of pilots with multiple cores. Although the workload
 binding is controllable by the user-programmable TaskScheduler, the general
@@ -2823,10 +2829,15 @@ executables via \pilot systems.
 % ------------------------------------------------------------------------------
 % Section 4's concluding remarks
 %
+
+\paragraph{Other Pilot Systems:} We have discussed only a limited number of
+\pilots systems that exist; this is purely a reflection of the limitations of
+space. We eschewed coverage in favour of favour of completeness of a the few
+\pilot systems. \jhanote{As discussed we'll have a closing paragraph or two,
+  about all the pilot systems that we don't discuss}
+
 \subsection{Overall observations}
 
-\jhanote{As discussed we'll have a closing paragraph or two, about all the pilot
-  systems that we don't discuss}
 
 \begin{itemize}
 
@@ -2838,7 +2849,10 @@ executables via \pilot systems.
 \item Remark consistency of implementation architectures with the one given in
 3.
 
-\item Use three dimensions (D I H) to analyze types of workloads.
+\item Use three dimensions (D (dependency) C (coupling) and H (heterogeneity) )
+  (D I H) to analyze types of workloads. \jhanote{Is ``I'' independent?. Also we
+    might want to add ``N'' -- cardinality, which captures the number of tasks
+    in the workload.}
 
 \item Analyze different implementation methods underlying the differences in usability and requirements between frameworks and full-fledged applications. ``Some of systems we have discussed, like DIRAC, X, are inherently service
 oriented, or exposed as a service. On the other side of the spectrum, systems
