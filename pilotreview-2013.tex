@@ -2601,6 +2601,16 @@ task once it is available and has free resources.
 \subsubsection{HTCondor Glidein and GlideinWMS}
 \label{sec:glidein}
 
+\jhanote{place somewhere. refine to better provide context.} HTCondor system has
+evolved over the years from being a batch-queue system to supporting the latest
+incarnation of distributed systems: scavenger and volunteer computing, grids and
+clouds. This includes the gradual evolution to of HTCondor to support
+pilots. Not surprisingly thanks to this historical evolution, the glidein pilot
+capabilities are arguably more strongly coupled to the ``base'' HTCondor system
+than most other pilot systems are coupled to a base system. As a consequence,
+there is a need to appreciate the basic components of HTCondor.
+
+
 % Who did it and for what scientific domains.
 The HTCondor Glidein Service implements pilots within regular Condor pools.
 Developed by [...] its main goal was originally to include DCRs exposing grid
@@ -2608,18 +2618,21 @@ middleware into Condor pools. The HTCondor Glidein Service has been complemented
 by GlideinWMS, a Glidein-based workload management system that automates
 deployment and management of glideins on multiple types of DCR middleware.
 \mtnote{Find out metrics on usage and target scientific communities}
+\jhanote{just a reminder that Glidein might not be service but just jobs, as
+  discussed at:
+  http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html}
 
 % Architecture.
 HTCondor Glidein Service has been designed as part of the service ecosystem of
-HT Condor. The components relevant to the Glidein Service are: a set of Schedd
-and Startd daemons, a Collector, and a Negotiator. Schedd is a queuing system
-that holds workload tasks and Startd handles the DCR resources. The Collector
-and the Negotiator are implemented within a service called `Condor Central
-Manager'. The Collector holds references to all the active Schedd/Startd
+HTCondor. The HTCondor components relevant to the Glidein Service are: a set of
+Schedd and Startd daemons, a Collector, and a Negotiator. Schedd is a queuing
+system that holds workload tasks and Startd handles the DCR resources. The
+Collector and the Negotiator are implemented within a service called `Condor
+Central Manager'. The Collector holds references to all the active Schedd/Startd
 daemons, and the Negotiator matches tasks queued in a Schedd to resources
 handled by a Startd.
 
-GlideinWMS build upon the HTCondor Glidein Service adding the following
+GlideinWMS build upon the HTCondor Glidein Service by adding the following
 components: a set of Glidein Factory daemons, a set of VO Frontend daemons, and
 a VMS Collector. Glidein Factories submits jobs to the DCRs middleware, each VO
 Frontend matches the tasks on one or more Schedd to the attributes of a specific
@@ -2644,7 +2657,7 @@ is a pilot.
     \caption{Diagrammatic representation of Glidein components,
     functionalities, and core vocabulary mapped on
     Figure~\ref{fig:core_vocabulary}.}
-    \label{fig:diane_comparison}
+    \label{fig:glidein_comparison}
 \end{figure}
 
 % Execution model.
