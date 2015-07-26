@@ -2652,10 +2652,19 @@ bootstraps a working Startd daemon. This Startd daemon advertises itself with
 the Collector. The user submits the workload tasks to the Schedd daemon that
 advertises them with the Collector. The Negotiator matches the requirements of
 the jobs to the properties of one of the available Startd daemon (i.e. a
-glidein), communicates the match to the Schedd that submits the tasks to the
+glidein), and communicates the match to the Schedd that submits the tasks to the
 indicated Startd daemon.
 
-The execution model of GlideinWMS...
+GlideinWMS extends the execution model of the HTCondor Glidein Service by
+automating the provision of glideins. The user does not have to submit glidein
+directly but only tasks to Schedd. Every Schedd advertises its tasks with the VO
+Frontend that matches their requirements with the resource properties advertised
+by the WMS Connector. On the base of these matchings, the VO Frontend places
+requests for glidein instantiation to the VMS Collector that contacts the
+appropriate Glidein Factory to execute the instantiation request. Once the
+requested glideins become active on the DCRs, the advertise their availability
+with the (HTCondor) Collector. From there on the execution model is the same as
+described for the HTCondor Glidein Service.
 
 %% 5 core properties.
 
