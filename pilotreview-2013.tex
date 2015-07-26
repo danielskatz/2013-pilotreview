@@ -2511,12 +2511,14 @@ use of the terms and they make the text a bit `heavy' for me.}
 \subsubsection{DIANE}
 \label{sec:diane}
 
+% Who did it and for what scientific domains.
 DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
 developed at CERN to support the execution of workloads on both local and
 EGI/WLCG Grid DCRs. DIANE has since been used also in the Life Sciences
 \mtnote{Reference needed} and in few other scientific domains \mtnote{Reference
   needed}.
 
+% Architecture.
 DIANE is an application task coordination framework for distributed applications
 that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
 consists of four \jhanote{logical?} components: a TaskScheduler, an
@@ -2543,6 +2545,9 @@ WorkerAgent. In DIANE, Pilots are called WorkerAgents.
     \label{fig:diane_comparison}
 \end{figure}
 
+% Execution model.
+\mtnote{TODO: Explicitly describe execution model of DIANE.}
+
 %% 5 core properties
 
 % Pilot Resources
@@ -2566,9 +2571,9 @@ periods of time.
 A computational task-management tool called GANGA is available to support the
 development of SubmitterScripts. GANGA offers a unified interface for job
 submission to DCRs with Globus, Condor, UNICORE, or gLite
-middleware~\cite{Moscicki20092303}. The main goal of GANGLIA is to facilitate
-the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a
-uniform interface and abstraction.\jhanote{What is GANGLIA? typo for GANGA?}
+middleware~\cite{Moscicki20092303}. The main goal of GANGA is to facilitate the
+submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a uniform
+interface and abstraction.
 
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
@@ -2591,32 +2596,155 @@ task once it is available and has free resources.
 \input{section_4-2_v0}
 
 % ------------------------------------------------------------------------------
-% HTCONDOR
+% Glidein
 %
-\subsubsection{HTCondor}
-\label{sec:diane}
+\subsubsection{HTCondor Glidein and GlideinWMS}
+\label{sec:glidein}
+
+% Who did it and for what scientific domains.
+The HTCondor Glidein Service implements pilots within regular Condor pools.
+Developed by [...] its main goal was originally to include DCRs exposing grid
+middleware into Condor pools. The HTCondor Glidein Service has been complemented
+by GlideinWMS, a Glidein-based workload management system that automates
+deployment and management of glideins on multiple types of DCR middleware.
+\mtnote{Find out metrics on usage and target scientific communities}
+
+% Architecture.
+HTCondor Glidein Service has been designed as part of the service ecosystem of
+HT Condor. The components relevant to the Glidein Service are: a set of Schedd
+and Startd daemons, a Collector, and a Negotiator. Schedd is a queuing system
+that holds workload tasks and Startd handles the DCR resources. The Collector
+and the Negotiator are implemented within a service called `Condor Central
+Manager'. The Collector holds references to all the active Schedd/Startd
+daemons, and the Negotiator matches tasks queued in a Schedd to resources
+handled by a Startd.
+
+GlideinWMS build upon the HTCondor Glidein Service adding the following
+components: a set of Glidein Factory daemons, a set of VO Frontend daemons, and
+a VMS Collector. Glidein Factories submits jobs to the DCRs middleware, each VO
+Frontend matches the tasks on one or more Schedd to the attributes of a specific
+Glidein Factory, and the VMS Collector holds references to all the active
+Glidein Factories and VO Frontend daemons.
+
+% Why it is a pilot system.
+Figure~\ref{fig:glidein_comparison} shows the mapping of the HTCondor Glidein
+Service and GlideinWMS elements to the components and functionalities of a pilot
+system as described in~\S\ref{sec:understanding}. The set of VO Frontend and
+Glidein Factory, and the WMS collector implement a Pilot Manager alongside its
+pilot provisioning functionality, while the set of Schedd, the collector, and
+the negotiator implement a Workload Manager alongside its task dispatching
+functionality. The Startd daemon implement a Task Manager alongside its task
+execution functionality. A glidein is a job submitted to a DCR middleware that,
+once instantiated, configures and executes a Startd daemon. As such, a glidein
+is a pilot.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/glidein_comparison.pdf}
+    \caption{Diagrammatic representation of Glidein components,
+    functionalities, and core vocabulary mapped on
+    Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:diane_comparison}
+\end{figure}
+
+% Execution model.
+The execution model of the HTCondor Glidein Service assumes that the user submit
+a job (i.e. a glidein) to a DCR batch scheduler and that once executed, this job
+bootstraps a working Startd daemon. This Startd daemon advertises itself with
+the Collector. The user submits the workload tasks to the Schedd daemon that
+advertises them with the Collector. The Negotiator matches the requirements of
+the jobs to the properties of one of the available Startd daemon (i.e. a
+glidein), communicates the match to the Schedd that submits the tasks to the
+indicated Startd daemon.
+
+The execution model of GlideinWMS...
+
+%% 5 core properties.
+
+% Pilot Resources.
+
+% Pilot Deployment.
+
+% Workload Semantics.
+
+% workload binding.
 
 % ------------------------------------------------------------------------------
 % PANDA
 %
 \subsubsection{PANDA}
-\label{sec:diane}
+\label{sec:panda}
+
+% Who did it and for what scientific domains.
+
+% Architecture.
+
+% Why it is a pilot system.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/panda_comparison.pdf}
+    \caption{Diagrammatic representation of PANDA components,
+    functionalities, and core vocabulary mapped on
+    Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:diane_comparison}
+\end{figure}
+
+% Execution model.
+
+%% 5 core properties.
+
+% Pilot Resources.
+
+% Pilot Deployment.
+
+% Workload Semantics.
+
+% workload binding.
+
 
 % ------------------------------------------------------------------------------
 % RADICAL PILOT
 %
 \subsubsection{RADICAL Pilot}
-\label{sec:diane}
+\label{sec:radical_pilot}
+
+% Who did it and for what scientific domains.
+
+% Architecture.
+
+% Why it is a pilot system.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/radicalp_comparison.pdf}
+    \caption{Diagrammatic representation of RADICAL Pilot components,
+    functionalities, and core vocabulary mapped on
+    Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:diane_comparison}
+\end{figure}
+
+% Execution model.
+
+%% 5 core properties.
+
+% Pilot Resources.
+
+% Pilot Deployment.
+
+% Workload Semantics.
+
+% workload binding.
 
 
 % -----------------------------------------------------------------------------
-% 4.3 or 4.2.5
+% 4.3
 %
 \subsection{Auxiliary Properties}
 \label{sec:context}
 
 \mtnote{A merging with auxiliary properties or each pilot system implementation
-will happen. It might become 4.2.5 or a stand-alone 4.3. To be decided.}
+will happen.}
 
 % \paragraph*{HTC and HPC}
 
