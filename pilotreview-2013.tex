@@ -2733,8 +2733,23 @@ late binding. Early binding is not available.
 \label{sec:panda}
 
 % Who did it and for what scientific domains.
+\panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} was
+developed to provide a multi-user workload management system (WMS) for
+ATLAS~\cite{aad2008atlas}. ATLAS is a particle detector at the Large Hadron
+Collider (LHC) at CERN that requires a WMS to handle large numbers of tasks for
+their data-driven processing workloads. In addition to the logistics of handling
+large-scale task execution, ATLAS also needs integrated monitoring for analysis
+of system state and a high degree of automation to reduce user and
+administrative intervention.
+
+\panda has been initially deployed as an HTC-oriented, multi-user WMS system
+for ATLAS, consisting of ~100 heterogeneous computing
+sites~\cite{maeno_pd2p:_2012}. Recent improvements to \panda have extended the
+range of deployment scenarios to HPC and Cloud-based DCRs making \panda a
+general-purpose \pilot system~\cite{nilsson2012recent}.
 
 % Architecture.
+\panda architecture consists of a \panda server and a grid scheduler. The \panda server is implemented by three main components: a Task Buffer, a Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects all the submitted tasks into a queue, the
 
 % Why it is a pilot system.
 
