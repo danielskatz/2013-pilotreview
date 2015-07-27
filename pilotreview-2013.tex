@@ -2601,55 +2601,53 @@ task once it is available and has free resources.
 \subsubsection{HTCondor Glidein and GlideinWMS}
 \label{sec:glidein}
 
-\jhanote{place somewhere. refine to better provide context.} HTCondor system has
-evolved over the years from being a batch-queue system to supporting the latest
-incarnation of distributed systems: scavenger and volunteer computing, grids and
-clouds. This includes the gradual evolution to of HTCondor to support
-pilots. Not surprisingly thanks to this historical evolution, the glidein pilot
-capabilities are arguably more strongly coupled to the ``base'' HTCondor system
-than most other pilot systems are coupled to a base system. As a consequence,
-there is a need to appreciate the basic components of HTCondor.
-
+HTCondor system has evolved over the years from being a batch-queue system to
+supporting the latest incarnation of distributed systems: scavenger and
+volunteer computing, grids and clouds. This includes the gradual evolution to of
+HTCondor to support pilots. Not surprisingly, the pilot capabilities are more
+tightly coupled to the HTCondor software distribution and ecosystem than in most
+of the other pilot systems.
 
 % Who did it and for what scientific domains.
-The HTCondor Glidein Service implements pilots within regular Condor pools.
+The HTCondor Glidein system implements pilots within regular Condor pools.
 Developed by [...] its main goal was originally to include DCRs exposing grid
-middleware into Condor pools. The HTCondor Glidein Service has been complemented
-by GlideinWMS, a Glidein-based workload management system that automates
-deployment and management of glideins on multiple types of DCR middleware.
+middleware into Condor pools. HTCondor Glidein has been complemented by
+GlideinWMS, a Glidein-based workload management system that automates deployment
+and management of glideins on multiple types of DCR middleware.
 \mtnote{Find out metrics on usage and target scientific communities}
-\jhanote{just a reminder that Glidein might not be service but just jobs, as
-  discussed at:
-  http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html}D
+
+% \jhanote{just a reminder that Glidein might not be service but just jobs, as
+% discussed at:
+% http://www.uscms.org/SoftwareComputing/Grid/WMS/glideinWMS/doc.prd/index.html}
+% \mtnote{I removed service and used system instead. Better?}
 
 % Architecture.
-HTCondor Glidein Service has been designed as part of the service ecosystem of
-HTCondor. The HTCondor components relevant to the Glidein Service are: a set of
-Schedd and Startd daemons, a Collector, and a Negotiator. Schedd is a queuing
+The HTCondor Glidein system has been designed as part of the software ecosystem
+of HTCondor. The HTCondor components relevant to the Glidein system are: a set
+of Schedd and Startd daemons, a Collector, and a Negotiator. Schedd is a queuing
 system that holds workload tasks and Startd handles the DCR resources. The
-Collector and the Negotiator are implemented within a service called `Condor
-Central Manager'. The Collector holds references to all the active Schedd/Startd
-daemons, and the Negotiator matches tasks queued in a Schedd to resources
-handled by a Startd.
+Collector holds references to all the active Schedd/Startd daemons, and the
+Negotiator matches tasks queued in a Schedd to resources handled by a Startd.
 
-GlideinWMS build upon the HTCondor Glidein Service by adding the following
+GlideinWMS builds upon the HTCondor Glidein system by adding the following
 components: a set of Glidein Factory daemons, a set of VO Frontend daemons, and
-a VMS Collector. Glidein Factories submits jobs to the DCRs middleware, each VO
-Frontend matches the tasks on one or more Schedd to the attributes of a specific
-Glidein Factory, and the VMS Collector holds references to all the active
-Glidein Factories and VO Frontend daemons.
+a Collector dedicated to the WMS. Glidein Factories submits tasks to the DCRs
+middleware, each VO Frontend matches the tasks on one or more Schedd to the
+resource attributes advertised by a specific Glidein Factory, and the VMS
+Collector holds references to all the active Glidein Factories and VO Frontend
+daemons.
 
 % Why it is a pilot system.
 Figure~\ref{fig:glidein_comparison} shows the mapping of the HTCondor Glidein
 Service and GlideinWMS elements to the components and functionalities of a pilot
-system as described in~\S\ref{sec:understanding}. The set of VO Frontend and
-Glidein Factory, and the WMS collector implement a Pilot Manager alongside its
-pilot provisioning functionality, while the set of Schedd, the collector, and
-the negotiator implement a Workload Manager alongside its task dispatching
-functionality. The Startd daemon implement a Task Manager alongside its task
-execution functionality. A glidein is a job submitted to a DCR middleware that,
-once instantiated, configures and executes a Startd daemon. As such, a glidein
-is a pilot.
+system as described in~\S\ref{sec:understanding}. The set of VO Frontends and
+Glidein Factories alongside the WMS collector implement a Pilot Manager and its
+pilot provisioning functionality. The set of Schedds, the Collector, and the
+Negotiator implement a Workload Manager and its task dispatching functionality.
+The Startd daemon implements a Task Manager alongside its task execution
+functionality. A glidein is a job submitted to a DCR middleware that, once
+instantiated, configures and executes a Startd daemon. As such, a glidein is a
+pilot.
 
 \begin{figure}[t]
     \centering
@@ -2661,26 +2659,70 @@ is a pilot.
 \end{figure}
 
 % Execution model.
-The execution model of the HTCondor Glidein Service assumes that the user submit
-a job (i.e. a glidein) to a DCR batch scheduler and that once executed, this job
-bootstraps a working Startd daemon. This Startd daemon advertises itself with
-the Collector. The user submits the workload tasks to the Schedd daemon that
-advertises them with the Collector. The Negotiator matches the requirements of
-the jobs to the properties of one of the available Startd daemon (i.e. a
-glidein), communicates the match to the Schedd that submits the tasks to the
-indicated Startd daemon.
+The execution model of the HTCondor Glidein system can be summarized in n
+steps: 1. the user submits a glidein (i.e. a job) to a DCR batch scheduler; 2.
+once executed, this glidein bootstraps a Startd daemon; 3. the Startd daemon
+advertises itself with the Collector; 4. the user submits the tasks of the
+workload to the Schedd daemon; 5. the Schedd advertises these tasks with the
+Collector; 6. the Negotiator matches the requirements of the tasks to the
+properties of one of the available Startd daemon (i.e. a glidein); 7. the
+Negotiator communicates the match to the Schedd; 8. the schedd submits the tasks
+to the Startd daemon indicated by the Negotiator.
 
-The execution model of GlideinWMS...
+GlideinWMS extends the execution model of the HTCondor Glidein system by
+automating the glideins provision. The user does not have to submit glidein
+directly but only tasks to Schedd. From there: 1. every Schedd advertises its
+tasks with the VO Frontend; 2. the VO Frontend matches the tasks' requirements
+to the resource properties advertised by the WMS Connector; 3. the VO Frontend
+places requests for glideins instantiation to the VMS Collector; 4. the VMS
+Collector contacts the appropriate Glidein Factory to execute the requested
+glideins; 5. the requested glideins become active on the DCRs; and 6. the
+glideins advertise their availability with the (HTCondor) Collector. From there
+on the execution model is the same as described for the HTCondor Glidein
+Service.
 
 %% 5 core properties.
 
 % Pilot Resources.
+The resources managed by a single glidein (i.e. pilot) are limited to compute
+resources. Glideins may bind one or more cores, depending on the target DCRs.
+For example, heterogeneous HTCondor pools with resources for desktops,
+workstations, small campus clusters, and some larger clusters will run mostly
+single core glideins. More specialized pools holding, for example, only DCRs
+with HTC/grid/cloud middleware may instantiate glideins with a larger number of
+cores. Both HTCondor Glidein and GlideinWMS provide abstractions for file
+staging but no pilot abstraction is offered for data or network resources.
 
 % Pilot Deployment.
+The process of pilot deployment is the main difference between HTCondor Glidein
+and GlideinWMS. While the HTCondor Glidein system requires users to submit the
+pilots to the DCRs, GlideinWMS automates and optimizes pilot provisioning.
+GlideinWMS minimizes the amount of resources utilization and maximizes the
+throughput of task execution by continuously instantiating glideins until the
+queue of the available Schedds are emptied. Once all the tasks have been
+executed, the remaining glideins are terminated.
 
 % Workload Semantics.
+HTCondor Glidein and GlideWMS expose the well-defined interfaces of HTCondor to
+the application layer and no theoretical limitations are posed to the type and
+complexity of the workloads that can be executed. For example, DAGman (Directed
+Acyclic Graph Manager) has been designed to execute workflows by submitting
+tasks to Schedd daemons, and a \MW tool is available to design applications with
+a \MW execution pattern.
+
+In practice, as HTCondor has been originally designed for resource scavenging
+and opportunistic computing, single or low-core, independent tasks are more
+commonly executed than multi-core, possibly parallel tasks. For example, this is
+the case for OSG, the largest HTCondor and GlideinWMS deployment in the world.
+Nonetheless, it should be noted that specific projects may use dedicated
+installation and resources to execute tasks with larger core requirements both
+for distributed and parallel applications, including MPI applications.
 
 % workload binding.
+Both HTCondor Glidein and GlideWMS rely on one or more HTCondor Connector to
+match task requirements and resource properties. This matching can be evaluated
+right before the execution of the task. As such, both pilot systems allow for
+late binding. Early binding is not available.
 
 % ------------------------------------------------------------------------------
 % PANDA
@@ -2918,6 +2960,12 @@ space. We eschewed coverage in favour of favour of completeness of a the few
   (D I H) to analyze types of workloads. \jhanote{Is ``I'' independent?. Also we
     might want to add ``N'' -- cardinality, which captures the number of tasks
     in the workload.}
+
+\item Accessory properties is what determine whether potential capabilities can
+be translate into practical executions. E.g. while Condor allows for execution
+of parallel applications, in practice the requirements in terms of software and
+configuration imposed on the DCR make very difficult or undesirable to expose
+resources from DCR with HTC-size compute nodes.
 
 \item Analyze different implementation methods underlying the differences in usability and requirements between frameworks and full-fledged applications. ``Some of systems we have discussed, like DIRAC, X, are inherently service
 oriented, or exposed as a service. On the other side of the spectrum, systems
