@@ -1137,22 +1137,19 @@ user/administrative intervention.
 for ATLAS, consisting of ~100 heterogeneous computing
 sites~\cite{maeno_pd2p:_2012}. Recent improvements to \panda have extended the
 range of deployment scenarios to HPC and Cloud-based DCRs making \panda a
-general-use \pilot system~\cite{nilsson2012recent}.
+general-pourpose \pilot system~\cite{nilsson2012recent}.
 
 \paragraph{Architecture}
 
 \panda's central component is called the \impterm{\panda server}. It keeps track
 of jobs, matches jobs with pilots and resources, dispatches jobs to resources,
-and coordinates data management.
-The \panda server is implemented as a stateless multi-process REST web service,
-with a database backend, to which it communicates through the \impterm{Bamboo}
-interface.
-A central job queue allows users to submit jobs to distributed resources in a
-uniform manner.
+and coordinates data management. The \panda server is implemented as a stateless
+multi-process REST web service, with a database backend, to which it
+communicates through the \impterm{Bamboo} interface. A central job queue allows
+users to submit jobs to distributed resources in a uniform manner.
 \panda's \vocab{\pilot} is called, appropriately enough, a \impterm{Pilot}, and
-handles the execution environment.
-When pilots are launched, they collects information about their worker nodes
-that is sent back to the job dispatcher.
+handles the execution environment. When pilots are launched, they collects
+information about their worker nodes that is sent back to the job dispatcher.
 The main functionality of the \pilot is the so-called multi-job loop.  It
 connects to the \panda server to ask for jobs to run.  If a matching job does
 not exist, the pilot ends. If a job does exist, the pilot forks a separate

@@ -2662,9 +2662,9 @@ pilot.
 \end{figure}
 
 % Execution model.
-The execution model of the HTCondor Glidein system can be summarized in n steps:
-1. the user submits a glidein (i.e. a job) to a DCR batch scheduler; 2.  once
-executed, this glidein bootstraps a Startd daemon; 3. the Startd daemon
+The execution model of the HTCondor Glidein system can be summarized in eight
+steps: 1. the user submits a glidein (i.e. a job) to a DCR batch scheduler; 2.
+once executed, this glidein bootstraps a Startd daemon; 3. the Startd daemon
 advertises itself with the Collector; 4. the user submits the tasks of the
 workload to the Schedd daemon; 5. the Schedd advertises these tasks to the
 Collector; 6. the Negotiator matches the requirements of the tasks to the
@@ -2754,6 +2754,9 @@ both pilot systems allow for late binding. Early binding is not available.
 \subsubsection{PANDA}
 \label{sec:panda}
 
+
+\mtnote{NOTE: references needs to be added to the whole subsection.}
+
 % Who did it and for what scientific domains.
 \panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} was
 developed to provide a multi-user workload management system (WMS) for
@@ -2764,38 +2767,85 @@ large-scale task execution, ATLAS also needs integrated monitoring for analysis
 of system state and a high degree of automation to reduce user and
 administrative intervention.
 
-\panda has been initially deployed as an HTC-oriented, multi-user WMS system
-for ATLAS, consisting of ~100 heterogeneous computing
-sites~\cite{maeno_pd2p:_2012}. Recent improvements to \panda have extended the
-range of deployment scenarios to HPC and Cloud-based DCRs making \panda a
-general-purpose \pilot system~\cite{nilsson2012recent}.
+\panda has been initially deployed as an HTC-oriented, multi-user WMS system for
+ATLAS, consisting of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
+Recent improvements to \panda have extended the range of deployment scenarios to
+HPC and Cloud-based DCRs making \panda a general-purpose \pilot
+system~\cite{nilsson2012recent}.
 
 % Architecture.
-\panda architecture consists of a \panda server and a grid scheduler. The \panda server is implemented by three main components: a Task Buffer, a Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects all the submitted tasks into a queue, the
+\panda architecture consists of a Grid Scheduler and a \panda Server. The Grid
+Scheduler is implemented by a component called `AutoPilot' that submits jobs to
+diverse DCRs. The \panda server is implemented by three main components: a Task
+Buffer, a Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects
+all the submitted tasks into a global queue and the Broker prioritizes and binds
+those tasks to DCRs on the basis of multiple criteria. The Data Service stages
+the tasks' input file(s) to the DCR to which the tasks have been bound using the
+data transfer technologies exposed by the DCR middleware (e.g. uberftp, gridftp,
+or lcg-cp). The Job Dispatcher delivers the tasks to the pilots running on the
+bound DCR.
 
 % Why it is a pilot system.
+Figure~\ref{fig:diane_comparison} shows how PANDA implements the components and
+functionalities of a pilot system as described in~\S\ref{sec:understanding}: the
+Grid Scheduler is a Workload Manager implementing Pilot Provision while the
+\panda Server is a Task Manager implementing Task Dispatching. The jobs
+submitted by the Grid Scheduler are called `Pilots' and act as pilots once
+instantiated on the DCR by contacting the Job Dispatcher component to request
+for tasks to execute.
 
 \begin{figure}[t]
     \centering
         \includegraphics[width=.48\textwidth]{figures/panda_comparison.pdf}
-    \caption{Diagrammatic representation of PANDA components,
-    functionalities, and core vocabulary mapped on
-    Figure~\ref{fig:core_vocabulary}.}
+    \caption{Diagrammatic representation of PANDA components, functionalities,
+    and core vocabulary mapped on Figure~\ref{fig:core_vocabulary}.}
     \label{fig:diane_comparison}
 \end{figure}
 
 % Execution model.
+The execution model of PANDA can be summarized in seven steps: 1. the user
+submits tasks to the \panda server; 2. the tasks are queued within the Task
+Buffer; 3. the tasks requirements are evaluated by the Broker and bound to a
+DCR; 4. the tasks' input files are staged to the bound DCR by the Data Service;
+5. the required pilot(s) are submitted as jobs to the target DCR; 6. the
+   submitted pilot(s) becomes available and reports back to the Job Dispatcher;
+   7. tasks are dispatched to the available pilots for execution.
 
 %% 5 core properties.
 
 % Pilot Resources.
+\panda pilots expose computational resources. Pilots are designed to expose
+mainly a single core but extensions have been developed to instantiate pilots
+with multiple cores. The Data Service of \panda allows to integrate and automate
+data staging within the task execution process but no pilot-based data
+abstractions are offered. Network resources are assumed to be available but no
+network-specific abstractions are made available.
 
 % Pilot Deployment.
+The AutoPilot component of \panda's Grid Scheduler has been designed to use
+multiple methods to submit pilots to DCRs. The \panda installations of the US
+ATLAS infrastructure uses the HTCondor-G system to submit pilots to the US
+production sites. Other scheduler unable AutoPilot to submit to local and remote
+batch systems or to the GlideinWMS frontend. Submissions via the canonical tools
+offered by HTCondor have also been used to submit tasks to cloud resources via
+\panda.
 
 % Workload Semantics.
+\panda has been designed to serve  specifically the ATLAS use case. As such,
+\panda is used to execute mostly single-core. parametrized tasks.\mtnote{Is this
+true? I did not find specific literature, so this is mostly an extrapolation of
+mine.} Initially, data requirements were assumed for each task in terms of input
+and output files. Since its initial design, \panda has been evolving towards a
+general purpose workload manager. Experimental support for multi-core tasks is
+under development, especially in relation to the development of the JEDI (Job
+Execution and Definition Interface) and ATLAS AthenaMP, the multi-core
+implementation of the ATLAS software framework.
 
 % workload binding.
-
+Workload jobs are assigned to activated and validated pilots by the \panda
+server based on brokerage criteria like data locality and resource
+characteristics. As such, \panda offers late binding but not early binding
+capabilities.
 
 % ------------------------------------------------------------------------------
 % RADICAL PILOT
