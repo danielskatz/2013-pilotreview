@@ -2716,7 +2716,7 @@ GlideinWMS minimizes resource utilization and maximizes the throughput of task
 execution by continuously instantiating glideins until the queue of the
 available Schedds are emptied. Once all the tasks have been executed, the
 remaining glideins are terminated.\jhanote{not sure what ``minimizes the amount
-of resource utilization'' means?}\mtnote{That uses as little resources as
+of resource utilization'' means?} \mtnote{That uses as little resources as
 possible to execute the given tasks. Better?}
 
 % Workload Semantics.
@@ -2753,12 +2753,12 @@ type of resources that are added to a Condor pool.}
 Both HTCondor Glidein and GlideWMS rely on one or more HTCondor Collectors to
 match task requirements and resource properties. This matching can be evaluated
 right before the execution of the task. \jhanote{is this match-maker the
-ClassAds, or is there another level of match-makeing for the glideins? There is
-lack of documentation but I assume the Collector is the component where the
-matchmaking function is implemented. ClassAds should be the name given to the
-entries published by the Glidein Factories within the WMS collector (in the case
-of GlideinWMS but it should be the same with the old HTCondor Glidein)} As such,
-both pilot systems allow for late binding. Early binding is not available.
+ClassAds, or is there another level of match-makeing for the glideins?} \mtnote{
+There is lack of documentation but I assume the Collector is the component where
+the matchmaking function is implemented. ClassAds should be the name given to
+the entries published by the Glidein Factories within the WMS collector (in the
+case of GlideinWMS but it should be the same with the old HTCondor Glidein)} As
+such, both pilot systems allow for late binding. Early binding is not available.
 
 % ------------------------------------------------------------------------------
 % PANDA
@@ -2820,8 +2820,8 @@ submits tasks to the \panda server; 2. the tasks are queued within the Task
 Buffer; 3. the tasks requirements are evaluated by the Broker and bound to a
 DCR; 4. the tasks' input files are staged to the bound DCR by the Data Service;
 5. the required pilot(s) are submitted as jobs to the target DCR; 6. the
-submitted pilot(s) becomes available and reports back to the Job Dispatcher; 7.
-tasks are dispatched to the available pilots for execution.
+submitted pilot(s) becomes available and reports back to the Job Dispatcher;
+7. tasks are dispatched to the available pilots for execution.
 
 %% 5 core properties.
 
@@ -2837,9 +2837,10 @@ network-specific abstractions are made available.
 The AutoPilot component of \panda's Grid Scheduler has been designed to use
 multiple methods to submit pilots to DCRs. The \panda installations of the US
 ATLAS infrastructure uses the HTCondor-G system to submit pilots to the US
-production sites. Other schedulers enable AutoPilot to submit to local and remote
-batch systems or to the GlideinWMS frontend. Submissions via the canonical tools
-offered by HTCondor have also been used to submit tasks to cloud resources via
+production sites. Other schedulers enable AutoPilot to submit to local and
+remote batch systems or to the GlideinWMS frontend. Submissions via the
+canonical tools offered by HTCondor have also been used to submit tasks to cloud
+resources via
 \panda.
 
 % Workload Semantics.
@@ -2884,10 +2885,10 @@ pushed by the CU manager.
 % Why it is a pilot system.
 RADICAL-Pilot has been specifically designed to be a \pilot system and, as seen
 for example with DIANE, it closely resembles the description offered
-in~\S\ref{sec:understanding}. The Pilot Manager and the Workload Manager are
-implemented by the CU Manager. The Agent is deployed on the DCR to expose its
-resources and execute the tasks pushed by the CU Manager. As such, the Agent is
-a pilot.
+in~\S\ref{sec:understanding} (see Figure~\ref{fig:panda_comparison}). The Pilot
+Manager and the Workload Manager are implemented by the CU Manager. The Agent is
+deployed on the DCR to expose its resources and execute the tasks pushed by the
+CU Manager. As such, the Agent is a pilot.
 
 \begin{figure}[t]
     \centering
@@ -2909,7 +2910,7 @@ each CU either to the pilot indicated in the CU description or on the first
 pilot with free and available resources; 5. when required, the CU Manager stages
 also the CU's input file(s) to the target DCR; and 6. the Agent executes the CU.
 Eventually, if needed the output files of the CU can be staged to a user-defined
-destination. \jhanote{need to add reference to the figure..}
+destination. \jhanote{need to add reference to the figure..} \mtnote{Done.}
 
 %% 5 core properties.
 
@@ -2927,11 +2928,12 @@ The Pilot Manager deploys the Agents of RADICAL-Pilot by means of the
 SAGA-python API~\cite{sagax}. SAGA provides access to diverse DCR middleware via
 an unified and coherent API, and thus RADICAL-Pilot can submit pilots to all the
 resources exposed by XSEDE, by the OSG HTCondor pools, and many ``leadership''
-class systems like NERSC Hopper, OLCF Titan, or NCSA Bluewaters. Adding support
-for a new DCR is relatively simple, as proven for example with the LRZ SuperMUC
-Petascale System or the recent inclusion of a connector for public and private
-IaaS DCRs. \jhanote{not sure we want to mention hopper, titan and bluewaters or
-  supermuc as they are likely to become ``dated'' soon. thoughts?}
+class systems like those managed by NERSC~\cite{nersc_url},
+OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}. Adding support for a new DCR is
+relatively simple, as proven for example with the ongoing inclusion of a
+LRZ~\cite{lrz_url} petascale system and IaaS DCRs. \jhanote{not sure we want to
+mention hopper, titan and bluewaters or supermuc as they are likely to become
+``dated'' soon. thoughts?} \mtnote{Better?}
 
 
 
