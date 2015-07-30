@@ -27,11 +27,14 @@
 }
 {\endminipage}
 
-% Watermark
-% \usepackage[printwatermark]{xwatermark}
-% \usepackage{xcolor}
-% \usepackage{graphicx}
-% \newwatermark[allpages,angle=45,scale=7,xpos=-25,ypos=-150]{DRAFT}
+
+\usepackage[firstpage]{draftwatermark}
+\SetWatermarkLightness{0.8}
+\SetWatermarkText{Draft}
+\SetWatermarkVerCenter{13cm}
+\SetWatermarkHorCenter{10cm}
+\SetWatermarkScale{1}
+
 
 \begin{document}
 % \conferenceinfo{HPDC'13}{2013, New York, USA}
