@@ -2957,7 +2957,7 @@ and late binding, depending on the use case and the user specifications.
 % -----------------------------------------------------------------------------
 % 4.3
 %
-\subsection{Implementation Differences and Auxiliary Properties}
+\subsection{Implementation Differences and Overall observations}
 \label{sec:context}
 
 \mtnote{Some of the auxiliary properties are missing from the following
@@ -2969,21 +2969,26 @@ them is needed.}
 The analysis offered in the previous subsection shows how diverse \pilot system
 implementations conform to the set of components and functionalities defined
 in~\S\ref{sec:understanding}. These sets are therefore minimal but also
-necessary, as \pilot deployment, task submission, and task execution
-functionalities have to be implemented in order to enable the execution of
-task-based workloads by means of multi-level scheduling.
+necessary, as the implementation descriptions showed that \pilot deployment,
+task submission, and task execution functionalities have to be implemented in
+order to enable the execution of task-based workloads by means of multi-level
+scheduling.
 
 The analysis of DIANE, HTCondor Glidein, GlideinWMS, PANDA, and RADICAL-Pilot
-highlighted also implementation differences, especially in the auxiliary
+highlighted also implementation differences, especially concerning the auxiliary
 properties of these \pilot systems. For example, based on the description of the
-auxiliary properties offered in~\S\ref{sec:auxprops}, the reviewed \pilot
+auxiliary properties offered in~\S\ref{sec:auxprops}, the described \pilot
 systems showed not only evident variations in their architectures and data
 management capabilities, but also in their DCR interaction model, their
 interfaces, and interoperability. Here these differences are described widening
 the scope of the analysis also to other relevant auxiliary properties.
 
 The goal is not only to highlight the differences among \pilot systems but also
-to show their implementation challenges.
+to show their implementation challenges. In this way, the following analysis can
+contribute clarity and useful indications to the evolution process the \pilot
+systems implementations are undergoing. Furthermore, clarifying the differences
+among \pilot systems implementations could also offer relevant indications on
+how and when a specific implementation should be adopted.
 
 % Architecture (DONE in previous subsection)
 
@@ -2995,9 +3000,8 @@ of interoperability across diverse DCRs. For example, DIANE and PANDA were
 initially designed to support mostly the Grid-based DCRs used by the LHC
 experiments, while HTCondor Glidein and GlideinWMS to execute tasks on the
 Condor-based DCRs. With the progressive development of both the \pilot systems
-and the DCR middleware, more types of DCR are being supported. The increased
-interoperability among DCRs highlights the relevance of task execution
-localization.
+and the DCR middleware, more types of DCR are being supported, highlighting the
+relevance of task execution localization.
 
 The notion of task as defined in~\S\ref{sec:understanding} and then utilized
 in~\S\ref{sec:implementations} shapes both the design and implementation of
@@ -3020,26 +3024,31 @@ scheduler and the development of a robust interoperability layer between the
 
 % Resource Overlay
 
-Interoperability is a necessary preconditions to utilizing multiple pilots
-across diverse DCRs. In a multi-pilot, multi-DCR scenario, the relations among
-resources and task requirements increase in number and complexity. Data not only
-needs to be replicated and made available across different locations but the
-applications and protocols used to move data may change across target DCRs. DCR
-with specialized data capabilities may have to be prioritized depending on the
-data requirements of the tasks or the same may need to be done with DCR
-supporting specific types of compute resources as, for example, for those DCR
-offering GPU compute cards.
+Interoperability across DCRs is a necessary preconditions to utilize multiple
+pilots across diverse DCRs. In a multi-pilot, multi-DCR scenario, the relations
+among resources and task requirements increase in number and complexity. Data
+not only needs to be replicated and made available across different locations
+but the applications and protocols used to move data may change across target
+DCRs. DCR with specialized data capabilities may have to be prioritized
+depending on the data requirements of the tasks or, analogously, DCR supporting
+specific types of compute resources may have to be chosen when, for example,
+applications require GPU compute cards.
 
-In this context, \pilot systems need to support higher level abstractions as,
-for example, that of resource affinity. The correlation among data, compute, and
-network resources needs to be assessed for every execution and carefully
-leveraged to optimize not only time to completion but also resource utilization.
-These optimizations may be the determining factor to enable the execution of
+In this context, \pilot systems need to support higher level abstractions such
+as resource affinity~\cite{luckow2014pilot,neumeyer2010s4} or multidimensional
+scheduling~\cite{zhu2008multi}. The correlation among data, compute, and network
+resources needs to be assessed for every execution and carefully leveraged to
+optimize not only time to completion but also resource utilization. These
+optimizations may be the determining factor to enable the execution of
 applications with stringent data, compute, or networking requirements.
 
-Among the described \pilot systems, GlideinWMS and PANDA have started to support
-multi-pilot, multi-DCRs executions by implementing the required abstractions and
-capabilities within their workload management components.
+Given these requirements, it is not surprising that GlideinWMS and PANDA have
+began to support multi-pilot, multi-DCRs executions. These \pilot systems
+implement articulated workload management components with well-isolated
+scheduling elements and robust communication and coordination infrastructures.
+Without such an architecture, a robust implementation of the higher-level
+capabilities required by multi-pilot, multi-DCR task executions would be very
+challenging.
 
 % Files and Data
 
@@ -3062,7 +3071,7 @@ example, transparent support for distributed filesystems like
 HDFS~\cite{borthakur2008}, opportunistic creations of data clusters like those
 utilized by YARN~\cite{vavilapalli2013}, transparent integration of databases or
 storage services are likely to play a relevant role in the efficient execution
-of data-oriented distributed
+of data-oriented, distributed
 applications~\cite{rey2015open,sboner2015primer,zhang2010}.
 
 % Robustness
@@ -3071,46 +3080,48 @@ applications~\cite{rey2015open,sboner2015primer,zhang2010}.
 
 % DCR Interaction
 
-The \pilot systems described in the previous subsection present differences in
-the two auxiliary properties DCR Interaction and Interface. GlideWMS, PANDA, and
-RADICAL-Pilot support diverse DCR middleware including typical HPC, Grid, and
-Cloud batch systems. As seen in~\S\ref{fig:core_vocabulary}, this flexibility is
-possible due to the generality of the notion of resource placeholder and its
-independence from the specificities of the target infrastructures and their
-middleware. Placeholders abstract the notions of resources, scheduling, and task
-execution, creating a well-defined and isolated logical space for the management
-of task execution. It remains to be understood in what conditions and for what
-type of application each implementation of a placeholder is more appropriate.
+The \pilot systems described in the previous subsection present differences also
+in the two auxiliary properties DCR Interaction and Interface. GlideWMS, PANDA,
+and RADICAL-Pilot support diverse DCR middleware including typical HPC, Grid,
+and Cloud batch systems. As seen in~\S\ref{fig:core_vocabulary}, this
+flexibility is possible due to the generality of the notion of resource
+placeholder and its independence from the specificities of the target
+infrastructures and their middleware. Placeholders abstract the notions of
+resources, scheduling, and task execution, creating a well-defined and isolated
+logical space for the management of task execution. It remains to be understood
+in what conditions and for what type of application each implementation of a
+placeholder is more appropriate.
 
 % Interfaces
 
 Each \pilot system described in the previous subsection exposes a different
-interface. DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer sets of command
-lines tailored to specific use cases, applications, and DCRs. RADICAL-Pilot
+interface. DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer command line
+tools tailored to specific use cases, applications, and DCRs. RADICAL-Pilot
 exposes instead an API but both the DIANE and PANDA command line tools are built
-on API that users may directly access. This degree of heterogeneity can be
-justified with special-purpose \pilot systems but it may lead to fragmentation
-and duplication of effort with general-purpose systems.
+on API that users may directly access and use to develop distributed
+applications. This degree of heterogeneity can be justified with special-purpose
+\pilot systems but it may lead to fragmentation and duplication of effort with
+general-purpose systems.
 
 The current state of the workflow systems~\cite{taylor2014} is a paradigmatic
-example of this risks. Many workflow systems have been implemented with
+example of this risk. Many workflow systems have been implemented with
 significant duplication of effort and limited means for extensibility and
 interoperability. One important contributing factor to these limitations is the
 lack of suitable, open, and possibly standard-based interfaces for the resource
 layer. Most workflow engines are developed with proprietary solutions to access
-the resource layer, solutions that cannot be shared with other engines and that
+the resource layer; solutions that cannot be shared with other engines and that
 often serve specific requirements, use cases, and infrastructures.
 
-Open APIs like the one specified in~\cite{luckow2012b} offer the missing layer
-on which workflow and, more generally, distributed applications could be built
-upon. As with the resource layer, \pilot systems offers a well-defined and
-well-isolated layer between applications and resources. This fosters
-extensibility, interoperability, and modularity by separating the application
-description and logic from the management of its execution, and from the
-provisioning and aggregation of resources. In turn, this avoids the need to
-develop special-purpose, vertical, and end-to-end applications, the main source
-of duplication and fragmentation in the current distributed application and
-tooling landscape.
+Open APIs like the one specified in~\cite{luckow2012b} and implemented by
+RADICAL-Pilot offer the missing layer on which workflow and, more generally,
+distributed applications could be built upon. As with the resource layer, \pilot
+systems offers a well-defined and well-isolated layer between applications and
+resources. This fosters extensibility, interoperability, and modularity by
+separating the application description and logic from the management of its
+execution, and from the provisioning and aggregation of resources. In turn, this
+avoids the need to develop special-purpose, vertical, and end-to-end
+applications, the main source of duplication and fragmentation in the current
+distributed application and tooling landscape.
 
 % Security and multitenancy
 
@@ -3140,48 +3151,57 @@ implementation within \pilot systems are minimal.
 % ------------------------------------------------------------------------------
 % Section 4's concluding remarks
 %
-\subsection{Overall observations}
+% \subsection{Overall observations}
 
-The descriptions and analyses offered in Subsections~\ref{sec:implementations} and~\ref{sec:context} shows the relevance of at least three characteristics of \pilot system implementations: interoperability layers, automation of pilot provision, and type of implemented architecture.
+% The descriptions and analyses offered in Subsections~\ref{sec:implementations}
+% and~\ref{sec:context} shows the relevance of at least three characteristics of
+% \pilot system implementations: interoperability layers, automation of pilot
+% provision, and type of implemented architecture.
 
-\begin{itemize}
+% The interoperability layer enables the implementations of a Pilot Manager to
+% submit pilots to diverse DCRs. As such general-purpose \pilot systems depend
+% upon this layer and the capabilities that exposes.
 
-\item Importance on interoperability layers/libraries over DCRs' middleware
-(e.g. GANGA, SAGA)
+% \begin{itemize}
 
-\item Importance of automating pilot provisioning as opposed to leave the task tot he user to develop deployment scripts.
+% \item Importance on interoperability layers/libraries over DCRs' middleware
+% (e.g. GANGA, SAGA)
 
-\item Remark consistency of implementation architectures with the one given in
-3.
+% \item Importance of automating pilot provisioning as opposed to leave the task
+% tot he user to develop deployment scripts.
 
-\item Use three dimensions (D (dependency) C (coupling) and H (heterogeneity) )
-  (D I H) to analyze types of workloads. \jhanote{Is ``I'' independent?. Also we
-    might want to add ``N'' -- cardinality, which captures the number of tasks
-    in the workload.}
+% \item Remark consistency of implementation architectures with the one given in
+% 3.
 
-\item Accessory properties is what determine whether potential capabilities can
-be translate into practical executions. E.g. while Condor allows for execution
-of parallel applications, in practice the requirements in terms of software and
-configuration imposed on the DCR make very difficult or undesirable to expose
-resources from DCR with HTC-size compute nodes.
+% \item Use three dimensions (D (dependency) C (coupling) and H (heterogeneity)
+%   ) (D I H) to analyze types of workloads. \jhanote{Is ``I'' independent?.
+%   Also we might want to add ``N'' -- cardinality, which captures the number of
+%   tasks in the workload.}
 
-\item Analyze different implementation methods underlying the differences in usability and requirements between frameworks and full-fledged applications. ``Some of systems we have discussed, like DIRAC, X, are inherently service
-oriented, or exposed as a service. On the other side of the spectrum, systems
-like DIANE and RADICAL-Pilot take the form of a library or a framework. From a
-formal standpoint, services can be abstracted by a library and a library can be
-abstracted by a service, so the main distinction between these architectures if
-the default form they come in and how they are meant to be deployed.''
+% \item Accessory properties is what determine whether potential capabilities
+% can be translate into practical executions. E.g. while Condor allows for
+% execution of parallel applications, in practice the requirements in terms of
+% software and configuration imposed on the DCR make very difficult or
+% undesirable to expose resources from DCR with HTC-size compute nodes.
 
-\item Other Pilot Systems: We have discussed only a limited number of
-\pilots systems that exist; this is purely a reflection of the limitations of
-space. We eschewed coverage in favour of favour of completeness of a the few
-\pilot systems. \jhanote{As discussed we'll have a closing paragraph or two,
-  about all the pilot systems that we don't discuss}
+% \item Analyze different implementation methods underlying the differences in
+% usability and requirements between frameworks and full-fledged applications.
+% ``Some of systems we have discussed, like DIRAC, X, are inherently service
+% oriented, or exposed as a service. On the other side of the spectrum, systems
+% like DIANE and RADICAL-Pilot take the form of a library or a framework. From a
+% formal standpoint, services can be abstracted by a library and a library can
+% be abstracted by a service, so the main distinction between these
+% architectures if the default form they come in and how they are meant to be
+% deployed.''
+
+% \item Other Pilot Systems: We have discussed only a limited number of
+% \pilots systems that exist; this is purely a reflection of the limitations of
+% space. We eschewed coverage in favour of favour of completeness of a the few
+% \pilot systems. \jhanote{As discussed we'll have a closing paragraph or two,
+%   about all the pilot systems that we don't discuss}
 
 
-\end{itemize}
-
-
+% \end{itemize}
 
 
 % -----------------------------------------------------------------------------
