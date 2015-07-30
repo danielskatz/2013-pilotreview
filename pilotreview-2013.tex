@@ -35,6 +35,18 @@
 % \usepackage{graphicx}
 % \newwatermark[allpages,angle=45,scale=7,xpos=-25,ypos=-150]{DRAFT}
 
+\makeatletter
+\renewcommand\sc@wm@print[1]{% redefine positioning of mark (-1in to 330pt)
+ \if@sc@wm@stamp
+          \setbox\@tempboxa\vbox to \z@{%
+            \vskip 330pt \moveleft -3in \vbox{%
+              \hbox to \z@{%
+                #1\hss}}\vss}
+          \dp\@tempboxa\z@
+          \box\@tempboxa
+          \fi}
+\makeatother
+
 \usepackage[firstpage]{draftwatermark}
 \SetWatermarkLightness{0.5}
 \SetWatermarkScale{1}
