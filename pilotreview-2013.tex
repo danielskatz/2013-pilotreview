@@ -2868,24 +2868,25 @@ of \pilot systems for the past several years. In addition to formulating the P*
 Model~\cite{luckow2012} which by most accounts is the first complete conceptual
 model of a pilot system, the RADICAL group is responsible for the development
 and maintenance of RADICAL-Pilot\cite{rp-paper2015,rp_url}. RADICAL-Pilot is the
-groups long-term effort for creating a production level \pilot system. The
-effort is build upon the experience gained from developing, maintaining and
-using BigJob~\cite{luckow2010}, an initial prototype of \pilot system.
+group's long-term effort for creating a production level \pilot system. The
+effort is built upon the experience gained from developing and deploying
+BigJob~\cite{luckow2010}, and and integrating it with many applications on
+different DCRs~\cite{x,y,z}.
 
 % Architecture.
 RADICAL-Pilot consists of three main components: a Pilot Manager, a Compute Unit
-(CU) Manager, and a set of Agents. The Pilot Manager allows to describe pilots
-and then submit them to DCR, while The CU manager to describe tasks (i.e. CU)
-and to schedule them to one or more pilots. Agents are instantiated on DCRs and
-execute the CUs pushed by the CU manager.
+(CU) Manager, and a set of Agents. The Pilot Manager describes pilots and then
+submit them to DCR, while the CU manager describes tasks (i.e. CU) and schedules
+them to one or more pilots. Agents are instantiated on DCRs and execute the CUs
+pushed by the CU manager.
 
 % Why it is a pilot system.
 RADICAL-Pilot has been specifically designed to be a \pilot system and, as seen
 for example with DIANE, it closely resembles the description offered
-in~\S\ref{sec:understanding}. Clearly, the Pilot Manager is implemented and the
-Workload Manager is implemented by the CU Manager. The Agent is deployed on the
-DCR to expose its resources and execute the tasks pushed by the CU Manager. As
-such, the Agent is a pilot.
+in~\S\ref{sec:understanding}. The Pilot Manager and the Workload Manager are
+implemented by the CU Manager. The Agent is deployed on the DCR to expose its
+resources and execute the tasks pushed by the CU Manager. As such, the Agent is
+a pilot.
 
 \begin{figure}[t]
     \centering
@@ -2900,7 +2901,7 @@ such, the Agent is a pilot.
 RADICAL-pilot is implemented as a python module that a user can use to design
 and code a distributed application. The execution model of RADICAL-Pilot is as
 follows: 1. the user describes tasks as a set of CUs with or without data and
-DCR dependences; 2. the user describes also one or more pilots choosing the
+DCR dependences; 2. the user also describes one or more pilots choosing the
 DCR(s) where they should be submitted to; 3. The Pilot Manager submits each
 pilot that has been described to the indicated DCR; 4. The CU Manager schedules
 each CU either to the pilot indicated in the CU description or on the first
@@ -2922,12 +2923,16 @@ pilot abstraction is offered for their abstraction.
 
 % Pilot Deployment.
 The Pilot Manager deploys the Agents of RADICAL-Pilot by means of the
-SAGA-python API. SAGA subsumes under a unified and coherent API diverse DCR
-middleware. Thanks to SAGA, RADICAL-Pilot can submit pilots to all the resources
-exposed by XSEDE, by the OSG HTCondor pools, and by HPC systems like NERSC
-Hopper, OLCF Titan, or NCSA Bluewaters. Adding support for new DCR is relatively
-simple, as proven for example with the LRZ SuperMUC Petascale System or the
-recent inclusion of a connector for public and private IaaS DCRs.
+SAGA-python API~\cite{sagax}. SAGA provides access to diverse DCR middleware via
+an unified and coherent API, and thus RADICAL-Pilot can submit pilots to all the
+resources exposed by XSEDE, by the OSG HTCondor pools, and many ``leadership''
+class systems like NERSC Hopper, OLCF Titan, or NCSA Bluewaters. Adding support
+for a new DCR is relatively simple, as proven for example with the LRZ SuperMUC
+Petascale System or the recent inclusion of a connector for public and private
+IaaS DCRs. \jhanote{not sure we want to mention hopper, titan and bluewaters or
+  supermuc as they are likely to become ``dated'' soon. thoughts?}
+
+
 
 % Workload Semantics.
 RADICAL-Pilot can execute tasks with varying degree of coupling and
