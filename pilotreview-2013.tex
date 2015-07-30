@@ -2798,7 +2798,7 @@ or lcg-cp). The Job Dispatcher delivers the tasks to the RunJob(s) running on
 the bound DCR.
 
 % Why it is a pilot system.
-Figure~\ref{fig:diane_comparison} shows how PANDA implements the components and
+Figure~\ref{fig:panda_comparison} shows how PANDA implements the components and
 functionalities of a pilot system as described in~\S\ref{sec:understanding}: the
 Grid Scheduler is a Workload Manager implementing Pilot Provision while the
 \panda Server is a Task Manager implementing Task Dispatching. The jobs
@@ -2811,7 +2811,7 @@ for tasks to execute.
         \includegraphics[width=.48\textwidth]{figures/panda_comparison.pdf}
     \caption{Diagrammatic representation of PANDA components, functionalities,
     and core vocabulary mapped on Figure~\ref{fig:core_vocabulary}.}
-    \label{fig:diane_comparison}
+    \label{fig:panda_comparison}
 \end{figure}
 
 % Execution model.
@@ -2837,19 +2837,20 @@ network-specific abstractions are made available.
 The AutoPilot component of \panda's Grid Scheduler has been designed to use
 multiple methods to submit pilots to DCRs. The \panda installations of the US
 ATLAS infrastructure uses the HTCondor-G system to submit pilots to the US
-production sites. Other scheduler unable AutoPilot to submit to local and remote
+production sites. Other schedulers enable AutoPilot to submit to local and remote
 batch systems or to the GlideinWMS frontend. Submissions via the canonical tools
 offered by HTCondor have also been used to submit tasks to cloud resources via
 \panda.
 
 % Workload Semantics.
-\panda has been designed to serve specifically the ATLAS use case and, as such,
-to execute mostly single-core tasks with input and output files. Since its
+\panda was initially designed to serve specifically the ATLAS use case and, as
+such, to execute mostly single-core tasks with input and output files. Since its
 initial design, the ATLAS analysis and simulation tools have started to
 investigate multi-core task execution with AthenaMP~\cite{crooks2012} and \panda
 has been evolving towards a general purpose workload manager. As a consequence,
 \panda is starting to offer experimental support for multi-core pilots and tasks
-with or without data dependences.
+with or without data dependences. \panda also now supports applications from a
+variety of science domains.\cite{x,y}.
 
 % workload binding.
 \panda offers late binding but not early binding capabilities. Workload jobs are
@@ -2894,7 +2895,7 @@ a pilot.
     \caption{Diagrammatic representation of RADICAL Pilot components,
     functionalities, and core vocabulary mapped on
     Figure~\ref{fig:core_vocabulary}.}
-    \label{fig:diane_comparison}
+    \label{fig:rp_comparison}
 \end{figure}
 
 % Execution model.
@@ -2908,7 +2909,7 @@ each CU either to the pilot indicated in the CU description or on the first
 pilot with free and available resources; 5. when required, the CU Manager stages
 also the CU's input file(s) to the target DCR; and 6. the Agent executes the CU.
 Eventually, if needed the output files of the CU can be staged to a user-defined
-destination.
+destination. \jhanote{need to add reference to the figure..}
 
 %% 5 core properties.
 
