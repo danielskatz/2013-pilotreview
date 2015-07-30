@@ -28,7 +28,8 @@
 {\endminipage}
 
 
-\usepackage[firstpage]{draftwatermark}
+\usepackage{draftwatermark}
+%\usepackage[firstpage]{draftwatermark}
 \SetWatermarkLightness{0.8}
 \SetWatermarkText{Draft}
 \SetWatermarkVerCenter{13cm}
@@ -96,28 +97,30 @@
 
 \begin{abstract}
 
-This paper provides a comprehensive perspective of \pilotjobs, a type of
-middleware software that has been gaining rapid adoption among various
-scientific communities. For example, \pilotjobs systems are used to provide more
-than 700 million CPU hours a year to the Open Science Grid (OSG) communities and
-to process up to 5 million jobs a week for the ATLAS experiment. Notwithstanding
-the growing impact of \pilotjobs on scientific research, there is no agreement
-upon their definition, no clear understanding of the underlying abstraction and
-paradigm, no shared best practices or interoperability among their
-implementations. This lack of foundational understanding and of design
-convergence is hindering the full exploitation of the \pilotjobs potential
-dispersing the available resources across a fragmented development landscape.
-This paper offers the conceptual tools to promote shared understanding of the
-\pilot paradigm while critically reviewing the state of the art of \pilotjobs
-implementations. Five main contributions are provided: (i) an analysis of the
-motivations and evolution of the \pilotjob abstraction; (ii) an outline of the
-minimal set of distinguishing functionalities; (iii) the definition of a core
-vocabulary to reason consistently about \pilotjobs; (iv) the description of core
-and auxiliary properties of \pilotjobs systems; and (v) a critical review of the
-current state of the art of their implementations. These contributions are
-brought together to illustrate the defining characteristics of the \pilotjob
-paradigm, its generality, and the main opportunities and challenges posed by its
-support of distributed computing.
+  This paper provides a comprehensive analysis of the evolution, functional
+  properties and implementations of the pilot abstraction, the most common
+  incarnation of which are the many \pilotjob software systems that have been
+  gaining rapid adoption among various scientific communities. For example,
+  \pilotjobs systems are used to provide more than 700 million CPU hours a year
+  to the Open Science Grid (OSG) communities and to process up to 5 million jobs
+  a week for the ATLAS experiment. Notwithstanding the growing impact of
+  \pilotjobs on scientific research, there is no agreement upon their
+  definition, no clear understanding of the underlying abstraction and paradigm,
+  no shared best practices or interoperability among their implementations. This
+  lack of foundational understanding and of design convergence is hindering the
+  full exploitation of the \pilotjobs potential dispersing the available
+  resources across a fragmented development landscape.  This paper offers the
+  conceptual tools to promote shared understanding of the \pilot paradigm while
+  critically reviewing the state of the art of \pilotjobs implementations. Five
+  main contributions are provided: (i) an analysis of the motivations and
+  evolution of the \pilotjob abstraction; (ii) an outline of the minimal set of
+  distinguishing functionalities; (iii) the definition of a core vocabulary to
+  reason consistently about \pilotjobs; (iv) the description of core and
+  auxiliary properties of \pilotjobs systems; and (v) a critical review of the
+  current state of the art of their implementations. These contributions are
+  brought together to illustrate the defining characteristics of the \pilotjob
+  paradigm, its generality, and the main opportunities and challenges posed by
+  its support of distributed computing.
 
   % There is no agreed upon definition of \pilotjobs; however a functional
   % attribute of \pilotjobs that is generally agreed upon is they are
