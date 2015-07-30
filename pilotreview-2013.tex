@@ -2403,81 +2403,6 @@ scalability (Cloud).
 \mtnote{Add something to connect to 4.2. Something that indicates why we move now to the analysis of specific implementations.}
 
 
-\begin{table*}[t]
- \up
- \centering
- \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-  \hline
-    \textbf{Pilot\newline System} &
-    \textit{Pilot\newline Resources} &
-    \textit{Resource\newline Interaction} &
-    \textit{Pilot\newline Deployment} &
-    \textit{Workload\newline Semantics} &
-    \textit{Task\newline Binding} &
-    \textit{Task\newline Execution} \\
-  \hline
-  \hline
-    DIANE &
-    HTC &
-    GANGA &
-    Out-of-Band / explicit &
-    Programmable &
-    Late &
-    Serial \\
-  \hline
-    DIRAC &
-    HTC &
-    Custom &
-    Community Service / implicit &
-    None (Data dependencies?) &
-    Late &
-    Serial, some MPI \\
-  \hline
-    Falkon &
-    HPC &
-    Unspecified &
-    Web Service &
-    None &
-    Late (mixed push/pull) &
-    Serial \\
-  \hline
-    HTCondor &
-    HTC (and to some degree HPC) &
-    Condor-G &
-    Explicit in Glidein case &
-    Graph &
-    Late &
-    All \\
-  \hline
-    MyCluster &
-    HPC &
-    Custom (SGE / PBS / HTCondor) &
-    CLI tools from respective LRMS &
-    Workload semantics from respective LRMS &
-    Agnostic &
-    All \\
-  \hline
-    \panda &
-    HTC &
-    Custom, SAGA &
-    Community Service / implicit &
-    Task type, priority &
-    Late &
-    Serial, some MPI \\
-  \hline
-    RADICAL-Pilot &
-    HPC &
-    SAGA &
-    Programmable / explicit &
-    Programmable &
-    Early \& Late &
-    Serial \& MPI \\
- \hline
- \end{tabular}
- \caption{\textbf{Overview of \pilot systems and a summary their core properties.}}
- \label{table:implementations-properties}
-\end{table*}
-
 % -----------------------------------------------------------------------------
 % 4.2
 %
@@ -2489,21 +2414,98 @@ core properties just described are implemented under different requirements both
 in terms of target DCRs and application workloads. Examining these \pilot
 systems using the common vocabulary defined in~\S\ref{sec:termsdefs} exposes
 similarities and differences allowing a detailed analysis. Critically assessing
-these differences will bring to the fore the generality of the pilot abstraction
-alongside its independence from specific software systems and technological
-environments.
+these differences will bring to the fore the generality of the pilot
+abstraction, its independence from specific software systems and technological
+environments, and the more relevant challenges of \pilot systems implementation.
+Table~\ref{table:implementations-properties} offers a summary of the core
+properties for each analyzed \pilot system.
 
-In the following analysis, \pilot systems are ordered alphabetically and
-syntactic conventions are used to support the reader. The \vocab{Logical
-  Components}, the \vocab{Functionalities}, and the \vocab{Terms and
-  Definitions} introduced in~\S\ref{sec:understanding} are highlighted in
-\vocab{Bold}.  \prop{Italic} is used to refer to the core \prop{Properties} just
-described and, when necessary, the specific terminology used in the
-documentation of the \pilot systems under analysis is distinguished by using the
-\impterm{Typewriter} font.
+\begin{table*}[t]
+ \up
+ \centering
+ \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+    \textbf{Pilot\newline System} &
+    \textit{Pilot\newline Resources} &
+    %\textit{DCR\newline Interaction} &
+    \textit{Pilot\newline Deployment} &
+    \textit{Workload\newline Semantics} &
+    \textit{Workload\newline Binding} &
+    \textit{Workload\newline Execution} \\
+  \hline
+  \hline
+    DIANE &
+    HTC &
+    %GANGA &
+    Out-of-Band / explicit &
+    Programmable &
+    Late &
+    Serial \\
+  \hline
+    DIRAC &
+    HTC &
+    %Custom &
+    Community Service / implicit &
+    None (Data dependencies?) &
+    Late &
+    Serial, some MPI \\
+  \hline
+    Falkon &
+    HPC &
+    %Unspecified &
+    Web Service &
+    None &
+    Late (mixed push/pull) &
+    Serial \\
+  \hline
+    HTCondor &
+    HTC (and to some degree HPC) &
+    %Condor-G &
+    Explicit in Glidein case &
+    Graph &
+    Late &
+    All \\
+  \hline
+    MyCluster &
+    HPC &
+    %Custom (SGE / PBS / HTCondor) &
+    CLI tools from respective LRMS &
+    Workload semantics from respective LRMS &
+    Agnostic &
+    All \\
+  \hline
+    \panda &
+    HTC &
+    %Custom, SAGA &
+    Community Service / implicit &
+    Task type, priority &
+    Late &
+    Serial, some MPI \\
+  \hline
+    RADICAL-Pilot &
+    HPC &
+    %SAGA &
+    Programmable / explicit &
+    Programmable &
+    Early \& Late &
+    Serial \& MPI \\
+ \hline
+ \end{tabular}
+ \caption{\textbf{Overview of \pilot systems and a summary their core properties.}}
+ \label{table:implementations-properties}
+\end{table*}
+
+% In the following analysis, \pilot systems are ordered alphabetically and
+% syntactic conventions are used to support the reader. The \vocab{Logical
+% Components}, the \vocab{Functionalities}, and the \vocab{Terms and
+% Definitions} introduced in~\S\ref{sec:understanding} are highlighted in
+% \vocab{Bold}.  \prop{Italic} is used to refer to the core \prop{Properties}
+% just described and, when necessary, the specific terminology used in the
+% documentation of the \pilot systems under analysis is distinguished by using
+% the \impterm{Typewriter} font.
 
 \mtnote{Do we need this formatting devices? They are not always added to every
-use of the terms and they make the text a bit `heavy' for me.}
+use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the moment we are not using them but please let me know whether you think we should go back to them.}
 
 \mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain
   why so few: we now introduce 4 examplar cases showing how systems developed to
@@ -2515,7 +2517,7 @@ use of the terms and they make the text a bit `heavy' for me.}
 % ------------------------------------------------------------------------------
 % DIANE
 %
-\subsubsection{DIANE}
+\subsubsection{DIANE\protect\footnote{Pilot systems are ordered alphabetically.}}
 \label{sec:diane}
 
 % Who did it and for what scientific domains.
