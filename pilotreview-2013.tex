@@ -2523,18 +2523,21 @@ use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the mo
 % Who did it and for what scientific domains.
 DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
 developed at CERN to support the execution of workloads on both local and
-EGI/WLCG Grid DCRs. DIANE has since been used also in the Life Sciences
-\mtnote{Reference needed} and in few other scientific domains \mtnote{Reference
-  needed}.
+EGI/WLCG Grid DCRs. DIANE has since been used also in the Life
+Sciences~\cite{moscicki2004biomedical,jacq2007virtual,moscicki2003} and in few
+other scientific domains~\cite{bacu2011gswat,mantero2003simulation}.
 
 % Architecture.
 DIANE is an application task coordination framework for distributed applications
 that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
-consists of four \jhanote{logical?} components: a TaskScheduler, an
-ApplicationManager, a SubmitterScript, and a set of ApplicationWorkers. The
-first two components -- TaskScheduler and the ApplicationManager, are
-implemented as a RunMaster service, while the ApplicationWorkers as a
-WorkerAgent service. Submitter Scripts deploy ApplicationWorkers on DCRs.
+consists of four \jhanote{logical?} \mtnote{I am not sure we need to distinguish
+among types of component as we do not use this differentiation in the \pilot
+system descriptions. Said that, I think we mean logical components.} components:
+a TaskScheduler, an ApplicationManager, a SubmitterScript, and a set of
+ApplicationWorkers~\cite{diane_url}. The first two components -- TaskScheduler
+and the ApplicationManager, are implemented as a RunMaster service, while the
+ApplicationWorkers as a WorkerAgent service. Submitter Scripts deploy
+ApplicationWorkers on DCRs.
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
@@ -2555,12 +2558,13 @@ WorkerAgent. In DIANE, Pilots are called WorkerAgents.
 \end{figure}
 
 % Execution model.
-The execution model of DAINE can be summarized in four steps: 1. the user
-submits one or more jobs to DCR by means of SubmitScript(s) to bootstrap one or
-more WorkerAgent; 2. When ready, the WorkAgent(s) reports back to the
-ApplicationManager; 3. tasks are scheduled by the TaskScheduler on the available
-WorkerAgent(s); 4. after execution, WorkerAgents send the output of the
-computation back to the ApplicationManager.
+The execution model of DAINE can be summarized in four
+steps~\cite{moscicki2011understanding}: 1. the user submits one or more jobs to
+DCR by means of SubmitScript(s) to bootstrap one or more WorkerAgent; 2. When
+ready, the WorkAgent(s) reports back to the ApplicationManager; 3. tasks are
+scheduled by the TaskScheduler on the available WorkerAgent(s); 4. after
+execution, WorkerAgents send the output of the computation back to the
+ApplicationManager.
 
 %% 5 core properties
 
@@ -2582,12 +2586,12 @@ execution of jobs on remote resources to deployment scripts or full-fledged
 factory systems to support the sustained provisioning of pilots over extended
 periods of time.
 
-A computational task-management tool called GANGA is available to support the
-development of SubmitterScripts. GANGA offers a unified interface for job
-submission to DCRs with Globus, Condor, UNICORE, or gLite
-middleware~\cite{Moscicki20092303}. The main goal of GANGA is to facilitate the
-submission of WorkerAgents (i.e. pilots) to diverse DCRs by means of a uniform
-interface and abstraction.
+A computational task-management tool called
+GANGA~\cite{moscicki2009ganga,ganga_url} is available to support the development
+of SubmitterScripts. GANGA offers a unified interface for job submission to DCRs
+with Globus, Condor, UNICORE, or gLite middleware. The main goal of GANGA is to
+facilitate the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means
+of a uniform interface and abstraction.
 
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
@@ -2607,8 +2611,6 @@ architecture is consistent with a pull model. The pull model naturally
 implements the late-binding paradigm where every ApplicationAgent pulls a new
 task once it is available and has free resources.
 
-%\input{section_4-2_v0}
-
 % ------------------------------------------------------------------------------
 % Glidein
 %
@@ -2618,34 +2620,40 @@ task once it is available and has free resources.
 % Who did it and for what scientific domains.
 The HTCondor Glidein system has been designed as part of the software ecosystem
 of HTCondor. The HTCondor Glidein system implements pilots within regular Condor
-pools.  Developed by [...] its main goal was originally to include DCRs exposing
-grid middleware, into Condor pools. \jhanote{I'm not sure the meaning of the
-previous sentence is clear: does it mean (a) DCRs that expose grid middleware
-into a pool, (b) although we don't define/use federate, does ``include''
-actually refer to federate?} \mtnote{I would not think so. A condor pool is a
-list of DCRs with a set of properties for each item of the list. I added a
-comma, better? That sentence needs to convey the following: there is a condor
-pool, there are DCRs with a grid middleware (i.e. Globus), these DCRs need to be
-added to the condor pool; The HTCondor Glidein system does that.}
+pools.  Developed by by the Center for High Throughput Computing at the
+University of Wisconsin-Madison (UW-Madison), HTCondor Glidein's main goal was
+originally to include DCRs exposing grid middleware, into Condor
+pools~\cite{glidein_manual_url}.
+\jhanote{I'm not sure the meaning of the previous sentence is clear: does it
+mean (a) DCRs that expose grid middleware into a pool, (b) although we don't
+define/use federate, does ``include'' actually refer to federate?} \mtnote{I
+would not think so. A condor pool is a list of DCRs with a set of properties for
+each item of the list. I added a comma, better? That sentence needs to convey
+the following: there is a condor pool, there are DCRs with a grid middleware
+(i.e. Globus), these DCRs need to be added to the condor pool; The HTCondor
+Glidein system does that.}
 
  \mtnote{Find out metrics on usage and target scientific communities}
 
 % Architecture.
 The HTCondor components relevant to the Glidein system are: a set of Schedd and
-Startd daemons, a Collector, and a Negotiator. Schedd is a queuing system that
-holds workload tasks and Startd handles the DCR resources. The Collector holds
-references to all the active Schedd/Startd daemons, and the Negotiator matches
-tasks queued in a Schedd to resources handled by a Startd.
+Startd daemons, a Collector, and a Negotiator~\cite{glidein_presentation_url}.
+Schedd is a queuing system that holds workload tasks and Startd handles the DCR
+resources. The Collector holds references to all the active Schedd/Startd
+daemons, and the Negotiator matches tasks queued in a Schedd to resources
+handled by a Startd.
 
-HTCondor Glidein has been complemented by GlideinWMS, a Glidein-based workload
-management system that automates deployment and management of glideins on
-multiple types of DCR middleware. GlideinWMS builds upon the HTCondor Glidein
-system by adding the following components: a set of Glidein Factory daemons, a
-set of VO Frontend daemons, and a Collector dedicated to the WMS. Glidein
-Factories submits tasks to the DCRs middleware, each VO Frontend matches the
-tasks on one or more Schedd to the resource attributes advertised by a specific
-Glidein Factory, and the WMS Collector holds references to all the active
-Glidein Factories and VO Frontend daemons.
+HTCondor Glidein has been complemented by
+GlideinWMS~\cite{sfiligoi2008glideinwms}, a Glidein-based workload management
+system that automates deployment and management of glideins on multiple types of
+DCR middleware. GlideinWMS builds upon the HTCondor Glidein system by adding the
+following components: a set of Glidein Factory daemons, a set of VO Frontend
+daemons, and a Collector dedicated to the
+WMS~\cite{glideinwms_url,glideinwms_manual_url}. Glidein Factories submits tasks
+to the DCRs middleware, each VO Frontend matches the tasks on one or more Schedd
+to the resource attributes advertised by a specific Glidein Factory, and the WMS
+Collector holds references to all the active Glidein Factories and VO Frontend
+daemons.
 
 % \jhanote{I have the original text commented below. I reorganized a bit so as
 %   to help the flow better. Also, we were introducing too many concepts in the
