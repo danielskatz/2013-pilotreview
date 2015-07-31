@@ -1268,22 +1268,17 @@ constraints imposed by the middleware and policies of the targeted machines. The
 common denominators among \pilotjob systems are defined along multiple
 dimensions: purpose, logical components, and functionalities.
 
-The purpose shared by every \pilotjob system is to improve workload execution
-when compared to executing the same workload directly on one or more
-resources.\jhanote{one or more resources?}\mtnote{Done.} Performance of workload
-execution is usually measured by throughput and execution time to completion
-(TTC), but other metrics could also be considered: energy efficiency, data
-transfer minimization, scale of the workload executed, or a mix of them. Metrics
-that are not performance related include robustness and ease of application
-deployment.  In order to achieve the required metrics under given constraints,
-each \pilotjob system exhibits characteristics that are both common or specific
-to one or more implementations. Discerning these characteristics requires
-isolating the minimal set of logical components that characterize every
-\pilotjob system.
-
-\jhanote{I removed, ``In order to optimize the chosen set of metrics..'' as it
-  is difficult to argue that non-performance related metrics are optimized}
-  \mtnote{OK.}
+A purpose shared by every \pilotjob system is to improve workload execution when
+compared to executing the same workload directly on one or more
+resources. Performance of workload execution is usually measured by throughput
+and execution time to completion (TTC), but other metrics could also be
+considered: energy efficiency, data transfer minimization, scale of the workload
+executed, or a mix of them. Metrics that are not performance related include
+reliability, ease of application deployment and generality of workload.  In
+order to achieve the required metrics under given constraints, each \pilotjob
+system exhibits characteristics that are both common or specific to one or more
+implementations. Discerning these characteristics requires isolating the minimal
+set of logical components that characterize every \pilotjob system.
 
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
@@ -1295,41 +1290,43 @@ executing the tasks of each workload by means of the resources held by the
 placeholders.
 
 The implementation details of these three logical components vary significantly
-across \pilotjob systems (see~\S\ref{sec:analysis}). One or more logical
-components may be responsible for specific functionalities, both on application
-as well as machine level; two or more logical components may be implemented in a
-single software module; or additional functionalities may be integrated into the
-three managers. Nevertheless, the \pilot, Workload, and Task Managers can always
-be distinguished across different \pilotjob systems.
+across \pilotjob systems (see~\S\ref{sec:analysis}). \jhanote{I'm struggling
+  with the sentence upto ``;''} One or more logical components may be
+responsible for specific functionalities, both on application as well as machine
+level; two or more logical components may be implemented in a single software
+module; or additional functionalities may be integrated into the three
+managers. Nevertheless, the \pilot, Workload, and Task Managers can always be
+distinguished across different \pilotjob systems.
 
-Each \pilotjob system supports a minimal set of functionalities that allow for
-the execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task
-  Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
-resource placeholders on the target machines, schedule tasks on the available
-placeholders, and then use these placeholders to execute the tasks of the given
-workload. More functionalities might be needed to implement a production-grade
-\pilotjob system: authentication, authorization, accounting, data management,
+\jhanote{Should we use ``execution of tasks'' in opening sentence. We talk about
+  executing tasks before and after, and not necessarily workloads.  Issue of
+  consistency and granularity and not of correctness.}  Each \pilotjob system
+supports a minimal set of functionalities that allow for the execution of
+workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching}, and \vocab{Task
+  Execution}. \pilotjob systems need to schedule resource placeholders on the
+target machines, schedule tasks on the available placeholders, and then use
+these placeholders to execute the tasks of the given workload. More
+functionalities might be needed to implement a production-grade \pilotjob
+system: authentication, authorization, accounting, data management,
 fault-tolerance, or load-balancing. While these functionalities may be critical
 implementation details, they depend on the specific characteristics of the given
 use cases, workloads, or targeted resources. As such, these functionalities
-should not be considered necessary characteristics of a \pilotjob
-system. \jhanote{I vote to remove the word ``every'' in the previous sentence;
-  we currently imply it is a necessary characteristic of some. this then
-  confuses the reader in section 4. I agree with the use of every in the next
-  sentence.} \mtnote{Done.}
+should not be considered necessary characteristics of a \pilotjob system.
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
 placeholders. As seen in \S\ref{sec:history}, this type of placeholder enables
 tasks to utilize resources without directly depending on the capabilities
 exposed by the targeted machines. Resource placeholders are scheduled onto
-remote machines by means of dedicated capabilities, but once scheduled and then
+target machines by means of dedicated capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
 execution of the tasks of a workload.
 
 \jhanote{possibly use ``resources'' in lieu of remote machines?} \mtnote{Would
-that overload the term with two separate meanings: resource as what is held and
-resource as DCR?}
+  that overload the term with two separate meanings: resource as what is held
+  and resource as DCR?}\jhanote{I removed ``remote'', retained machine.  I want
+  to avoid implying placeholders have to be distributed from the point of
+  submission.}
 
 % \jhanote{We may want to introduce the vocabulary of resource/DCR/DCI that we
 %   developed for the proposals here, and make it consistent throughout the
@@ -1364,24 +1361,31 @@ implemented as part of the \pilotjob system. In this way, the control over the
 execution of a workload is shifted from the machine's middleware to the \pilot
 system. This shift is a defining characteristic of the \pilot paradigm, as it
 decouples the execution of a workload from the need to submit its tasks via the
-machine's scheduler. For example, the tasks of a workload will not individually
-have to wait on the targeted machine's queues, but rather on the availability of
-the placeholder before being executed. More elaborate execution patterns
-involving task and data interdependence can thus be implemented independent of
-the target machine's middleware capabilities. Ultimately, this is how \pilotjob
-systems allow for the direct control of workload execution and the optimization,
-for example, of execution throughput. \jhanote{I'd like to use a more general
-term than ``machine's scheduler'' when talking about the defining
-characteristic. It weakens the punch of an impactful and important sentence.}
-\mtnote{Any idea about what term would you like to use?}
-\jhanote{Also in the subsequent sentence, ``The tasks of a workload..''. I've
-  introduced a for example to help give a specific instance of the general
-  paradigm.} \mtnote{OK.}
+machine's scheduler.  For example, the execution of tasks of a workload will not
+individually depend upon the specifics of the targeted machine's state or
+availability, but rather on the state and availability of the placeholder before
+being executed.
+% For example, the tasks of a workload will not individually
+% have to wait on the targeted machine's queues, but rather on the availability of
+% the placeholder before being executed.
+More elaborate execution patterns involving task and data interdependence can
+thus be implemented independent of the target machine's middleware
+capabilities. Ultimately, this is how \pilotjob systems allow for the direct
+control of workload execution and the optimization, for example, of execution
+throughput. \jhanote{Matteo: please confirm you are OK with the suggested
+  change.}
+
+% \jhanote{I'd like to use a more general term than ``machine's scheduler'' when
+%   talking about the defining characteristic. It weakens the punch of an
+%   impactful and important sentence.}  \mtnote{Any idea about what term would you
+%   like to use?}  \jhanote{Also in the subsequent sentence, ``The tasks of a
+%   workload..''. I've introduced a for example to help give a specific instance
+%   of the general paradigm.} \mtnote{OK.}
 
 Communication and coordination are two distinguishing characteristics of
 distributed systems and \pilotjob systems are no exception. The three logical
 components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
-communicate and coordinate the execution of the given workload on the
+communicate in order to coordinate the execution of the given workload on the
 instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
 defined by any specific communication pattern and coordination approach. The
 logical components of a \pilotjob system may communicate using any suitable
@@ -1399,8 +1403,8 @@ As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 the worker with the Task Manager, the functionalities related to task
 description, scheduling, and monitoring will generally be implemented within the
 Workload Manager, while the functionalities needed to execute each task will be
-implemented into the Task Manager. Alternative coordination strategies, for
-example where a Task Manager directly coordinates the task scheduling, might
+implemented within the Task Manager. Alternative coordination strategies, for
+example, where a Task Manager directly coordinates the task scheduling, might
 require a functionally simpler Workload Manager but a comparatively more
 feature-rich Task Manager. The former would require capabilities for submitting
 tasks, while the latter capabilities to coordinate with its neighbor executors
@@ -1412,16 +1416,21 @@ Data management can play an important role within a \pilotjob system. For
 example, functionalities can be provided to support the local or remote data
 staging required to execute the tasks of a workload, or data might be managed
 according to the specific capabilities offered by the targeted machine's
-middleware. \pilotjob systems can be devised in which tasks do not require any
-data management because they: (i) do not necessitate input files; (ii) do not
-produce output files; (iii) data is already locally available; or (iv) data
-management is outsourced to third-party systems. Being able to read and write
-files to a local filesystem should then be considered the minimal capability
-related to data required by a \pilotjob system. More advanced and specific data
-capabilities like, for example, data replication, (concurrent) data transfers,
-data abstractions other than files and directories, or data placeholders should
-be considered special-purpose capabilities, not characteristic of every
-\pilotjob system.
+middleware. How these requirements are implemented do not
+define a core functionality of the \pilot system. 
+%For example,
+%\pilotjob systems can be devised in which tasks do not require any data
+% management because they: (i) do not necessitate input files; (ii) do not produce
+% output files; (iii) data is already locally available; or (iv) data management
+% is outsourced to third-party systems.
+Being able to read and write files to a local filesystem should then be
+considered the minimal capability related to data required by a \pilotjob
+system. More advanced and specific data capabilities like, for example, data
+replication, (concurrent) data transfers, data abstractions other than files and
+directories, or data placeholders should be considered special-purpose
+capabilities, not characteristic of every \pilotjob system. \jhanote{Please
+  check my edit/deletion. I did not think the statement and listing of ``tasks
+  not requiring data management helped in anyway}
 
 In the following sub-section, a minimal set of terms related to the logical
 components and capabilities described so far is defined.
