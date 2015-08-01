@@ -1980,19 +1980,19 @@ in~\S\ref{sec:compsandfuncs}.
 % \jhanote{the table structure is different to the order presented here. See
 %   comments at the end of next paragraph.} \mtnote{Done.}
 
-\jhanote{the contents of this section are fine. my observation is that of style:
-  both internal to the text, and text vis-a-vis the table. Could we not (i)
-  identify and describe the properties, (ii) then mention the components and
-  functionality associated with the property. If we did so, then the
-  ``description'' column would move to be after the property, followed by
-  component and functionality. This is section on properties.  But the
-  properties are presented as subsidiary/secondary in importance to the
-  components. Also, i think current style makes is a tad bit harder to read as
-  one looks at the table.} \mtnote{Done in the table, more loosely done in the
-  text. In my opinion, rigidly enforcing your suggestion in the text would
-  weaken the connection between Section 3 and Section 4. I think we may want to
-  strike a balance between consistency with the table and letting the reader
-  that comes straight from 3 to move smoothly on into 4.}
+% \jhanote{the contents of this section are fine. my observation is that of style:
+%   both internal to the text, and text vis-a-vis the table. Could we not (i)
+%   identify and describe the properties, (ii) then mention the components and
+%   functionality associated with the property. If we did so, then the
+%   ``description'' column would move to be after the property, followed by
+%   component and functionality. This is section on properties.  But the
+%   properties are presented as subsidiary/secondary in importance to the
+%   components. Also, i think current style makes is a tad bit harder to read as
+%   one looks at the table.} \mtnote{Done in the table, more loosely done in the
+%   text. In my opinion, rigidly enforcing your suggestion in the text would
+%   weaken the connection between Section 3 and Section 4. I think we may want to
+%   strike a balance between consistency with the table and letting the reader
+%   that comes straight from 3 to move smoothly on into 4.}
 
 The core properties `Pilot Resources' and `Pilot Deployment' characterize the
 implementation of a Pilot Manager and its Pilot Provisioning functionality.
@@ -2005,17 +2005,17 @@ machine), what type of scheduler the resource exposes, the amount of cores and
 duration they can be requisitioned for, what filesystems can be accessed, or how
 to contact the remote resource.
 
-\jhanote{the way we discuss resource interaction, it appears that the
-  interaction is really information about the resources, that could be provided
-  by say an information service. calling this a property of the pilot system
-  doesn't seem very useful.} \mtnote{Interaction has been removed as it is not
-  part of core properties anymore.}
+% \jhanote{the way we discuss resource interaction, it appears that the
+%   interaction is really information about the resources, that could be provided
+%   by say an information service. calling this a property of the pilot system
+%   doesn't seem very useful.} \mtnote{Interaction has been removed as it is not
+%   part of core properties anymore.}
 
-\jhanote{In general, greater the information available, the better the use of
-  the DCR the \pilot system can make, e.g., information about the type of cores,
-  the amount of available memory and storage and whether a low-latency
-  interconnect is available.} \mtnote{Agreed. Does the revised version
-  incorporate this comment or should we make it more explicit?}
+% \jhanote{In general, greater the information available, the better the use of
+%   the DCR the \pilot system can make, e.g., information about the type of cores,
+%   the amount of available memory and storage and whether a low-latency
+%   interconnect is available.} \mtnote{Agreed. Does the revised version
+%   incorporate this comment or should we make it more explicit?}
 
 The core properties `Workload Semantics' and `Workload Binding' characterize the
 implementation of a Workload Manager and its Task Dispatching functionality.
@@ -2041,15 +2041,15 @@ depend on the capabilities exposed by the target DCR and its policies. As such,
 the execution of the workload may depend on how the \pilot systems implement
 their interactions with the remote DCR.
 
-\jhanote{DCR Interaction has been discussed 3 paragraphs earlier.}
-\mtnote{Interaction has been removed as a core property. The word interaction is
-still used in the last sentence. Should we try to eliminate it?}
+% \jhanote{DCR Interaction has been discussed 3 paragraphs earlier.}
+% \mtnote{Interaction has been removed as a core property. The word interaction is
+% still used in the last sentence. Should we try to eliminate it?}
 
-\jhanote{I propose to remove multi-tenancy from the list. Only to avoid possible
-  confusion arising from the fact that it was referred to as a functional
-  underpinning in section 2.} \mtnote{Better? I am worried about acknowledging
-  for the reviewers that multitenancy is one of the main/distinctive features of
-  OSG pilots.}
+% \jhanote{I propose to remove multi-tenancy from the list. Only to avoid possible
+%   confusion arising from the fact that it was referred to as a functional
+%   underpinning in section 2.} \mtnote{Better? I am worried about acknowledging
+%   for the reviewers that multitenancy is one of the main/distinctive features of
+%   OSG pilots.}
 
 \begin{table*}
 \centering
@@ -2213,7 +2213,14 @@ Pilot Provisioning \newline
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
-onto the components described in \S\ref{sec:compsandfuncs}.}}
+    onto the components described in \S\ref{sec:compsandfuncs}.} \jhanote{Given that
+    we have reduced our discussion of auxiliary properties, I think the binding them to
+    ``components'' and ``functionality'' is a bit constraining if not misleading. We
+    could remove the last two columns, and where needed in the core properties
+    introduce a mention of relevant components/functionality into the
+    description. This has a major advantage of making this table more space
+    efficient, i.e., by reduce to 3 formal columns: core/aux,
+    property and description, and using the description more flexibly. thoughts?}}
 \label{table:property_component_mapping}
 \end{table*}
 
@@ -2240,9 +2247,9 @@ of individual instantiations of pilots.
   nodes, or portion of the cores of each node. The same applies to file systems
   and its partitions, or to software defined or physical network resources.
 
-  \jhanote{how about the following for the first sentence: ``depending on the
-  capabilities offered by the DCR and the middleware used, pilots might
-  also..''} \mtnote{Done.}
+  % \jhanote{how about the following for the first sentence: ``depending on the
+  % capabilities offered by the DCR and the middleware used, pilots might
+  % also..''} \mtnote{Done.}
 
 % core because: its fundamental to our model
 \item \textbf{Pilot Deployment}. Pilots are scheduled and then bootstrapped on
@@ -2316,20 +2323,21 @@ of individual instantiations of pilots.
   %   interaction is NOT a core property but artifact of other decisions and
   %   factors. Thus, possibly a candidate for movement into auxiliary
   %   properties?}
-  \mtnote{IMHO, a \pilot system \textbf{implementation} that cannot interact
-    with a DCR should not be considered a ``viable'' implementation of the
-    \pilot paradigm. It might be possible to find corner cases for which such
-    a system is a ``valid'' implementation of the ``model'' offered in Section
-    3.1, maybe even of P*. Nonetheless, I feel uncomfortable to call `\pilot
-    system implementation' a system that runs only on non-DCR localhost.
-    Especially in a section where the goal is to analyze the properties of
-    \pilot systems implementations used to serve real-life scientific use
-    cases.}  \jhanote{I am not saying the DCR interaction is an avoidable or
-    unnecessary feature. I view DCR interaction arising as a consequence when
-    a pilot system is compatible with a DCR, not as a fundamental property of
-    the pilot itself. Just like how two people interact is a function of the
-    who/what they are, as opposed to the interaction itself being a
-    fundamental property of one of the people. Make sense?} \mtnote{Moved to auxiliary as per discussion.}
+
+  % \mtnote{IMHO, a \pilot system \textbf{implementation} that cannot interact
+  %   with a DCR should not be considered a ``viable'' implementation of the
+  %   \pilot paradigm. It might be possible to find corner cases for which such
+  %   a system is a ``valid'' implementation of the ``model'' offered in Section
+  %   3.1, maybe even of P*. Nonetheless, I feel uncomfortable to call `\pilot
+  %   system implementation' a system that runs only on non-DCR localhost.
+  %   Especially in a section where the goal is to analyze the properties of
+  %   \pilot systems implementations used to serve real-life scientific use
+  %   cases.}  \jhanote{I am not saying the DCR interaction is an avoidable or
+  %   unnecessary feature. I view DCR interaction arising as a consequence when
+  %   a pilot system is compatible with a DCR, not as a fundamental property of
+  %   the pilot itself. Just like how two people interact is a function of the
+  %   who/what they are, as opposed to the interaction itself being a
+  %   fundamental property of one of the people. Make sense?} \mtnote{Moved to auxiliary as per discussion.}
 
 \end{itemize}
 
