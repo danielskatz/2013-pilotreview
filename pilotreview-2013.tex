@@ -1290,34 +1290,31 @@ executing the tasks of each workload by means of the resources held by the
 placeholders.
 
 The implementation details of these three logical components vary significantly
-across \pilotjob systems (see~\S\ref{sec:analysis}). \jhanote{I'm struggling
-with the sentence upto ``;''} \mtnote{I am not sure what we wanted to say with
-it either. Any better?}
-%One or more logical components may be responsible for
-%specific functionalities, both on application as well as machine level;
+across \pilotjob systems (see~\S\ref{sec:analysis}). 
+% One or more logical components may be responsible for specific
+% functionalities, both on application as well as machine level;
 For example, two or more logical components may be implemented by a single
 software module or additional functionalities may be integrated into the three
 managers. Nevertheless, the \pilot, Workload, and Task Managers can always be
 distinguished across different \pilotjob systems.
 
-\jhanote{Should we use ``execution of tasks'' in opening sentence. We talk about
-  executing tasks before and after, and not necessarily workloads.  Issue of
-  consistency and granularity and not of correctness.} \mtnote{I reread from the
-  beginning and I think we use workload and task consistently: ``All \pilotjob
-  systems introduced in~\S\ref{sec:history} are engineered to allow for the
-  execution of multiple types of workloads'', ``The purpose shared by every
-  \pilotjob system is to improve workload execution'', ``The Workload Manager
-  handles the scheduling of one or more workloads'', ``The Task Manager takes
-  care of executing the tasks of each workload''}
+% \jhanote{Should we use ``execution of tasks'' in opening sentence. We talk about
+%   executing tasks before and after, and not necessarily workloads.  Issue of
+%   consistency and granularity and not of correctness.} \mtnote{I reread from the
+%   beginning and I think we use workload and task consistently: ``All \pilotjob
+%   systems introduced in~\S\ref{sec:history} are engineered to allow for the
+%   execution of multiple types of workloads'', ``The purpose shared by every
+%   \pilotjob system is to improve workload execution'', ``The Workload Manager
+%   handles the scheduling of one or more workloads'', ``The Task Manager takes
+%   care of executing the tasks of each workload''}
 
-Each \pilotjob system
-supports a minimal set of functionalities that allow for the execution of
-workloads: \vocab{Pilot Provisioning}, \vocab{Task Dispatching}, and \vocab{Task
-  Execution}. \pilotjob systems need to schedule resource placeholders on the
-target machines, schedule tasks on the available placeholders, and then use
-these placeholders to execute the tasks of the given workload. More
-functionalities might be needed to implement a production-grade \pilotjob
-system: authentication, authorization, accounting, data management,
+Each \pilotjob system supports a minimal set of functionalities that allow for
+the execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task
+  Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
+resource placeholders on the target machines, schedule tasks on the available
+placeholders, and then use these placeholders to execute the tasks of the given
+workload. More functionalities might be needed to implement a production-grade
+\pilotjob system: authentication, authorization, accounting, data management,
 fault-tolerance, or load-balancing. While these functionalities may be critical
 implementation details, they depend on the specific characteristics of the given
 use cases, workloads, or targeted resources. As such, these functionalities
@@ -1327,16 +1324,16 @@ Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
 placeholders. As seen in \S\ref{sec:history}, this type of placeholder enables
 tasks to utilize resources without directly depending on the capabilities
-exposed by the targeted \mtnote{Target or targeted?} machines. Resource placeholders are scheduled onto
-target machines by means of dedicated capabilities, but once scheduled and then
+exposed by the target machines. Resource placeholders are scheduled onto target
+machines by means of dedicated capabilities, but once scheduled and then
 executed, these placeholders make their resources directly available for the
 execution of the tasks of a workload.
 
-\jhanote{possibly use ``resources'' in lieu of remote machines?} \mtnote{Would
-  that overload the term with two separate meanings: resource as what is held
-  and resource as DCR?}\jhanote{I removed ``remote'', retained machine.  I want
-  to avoid implying placeholders have to be distributed from the point of
-  submission.} \mtnote{Great.}
+% \jhanote{possibly use ``resources'' in lieu of remote machines?} \mtnote{Would
+%   that overload the term with two separate meanings: resource as what is held
+%   and resource as DCR?}\jhanote{I removed ``remote'', retained machine.  I want
+%   to avoid implying placeholders have to be distributed from the point of
+%   submission.} \mtnote{Great.}
 
 % \jhanote{We may want to introduce the vocabulary of resource/DCR/DCI that we
 %   developed for the proposals here, and make it consistent throughout the
@@ -1356,13 +1353,17 @@ execution of the tasks of a workload.
 The provisioning of resource placeholders depends on the capabilities exposed by
 the middleware of the targeted machine and on the implementation of each \pilot
 system. Typically, for middleware adopting queues, batch systems, and
-schedulers, provisioning a placeholder involves it being submitted as a job. A
-`job' on this kind of middleware is a type of logical container that includes
-configuration and execution parameters alongside information on the executable \mtnote{Too many execut*. Should we use `code' instead of `executable'? Any better option than `code' to replace `executable'?}
-that will be executed on the machine's compute nodes. Conversely, for
+schedulers, provisioning a placeholder involves it being submitted as a job.
+For such middleware, a `job' is a type of logical container that includes
+configuration and execution parameters alongside information on the application
+to be executed on the machine's compute nodes. Conversely, for
 infrastructures that do not adopt a job-based middleware, a resource placeholder
 would be executed by means of other types of logical container as, for example,
 a virtual machine or a Docker Engine~\cite{bernstein2014,felter2014}.
+
+\mtnote{Too many execut*. Should we use `code' instead of `executable'? Any
+  better option than `code' to replace `executable'?} \jhanote{used application, but
+  task might be better? code is acceptable too.}
 
 Once resource placeholders are bound to the resources of a machine, tasks need
 to be dispatched to those placeholders for execution. Task dispatching does not
@@ -1371,10 +1372,9 @@ implemented as part of the \pilotjob system. In this way, the control over the
 execution of a workload is shifted from the machine's middleware to the \pilot
 system. This shift is a defining characteristic of the \pilot paradigm, as it
 decouples the execution of a workload from the need to submit its tasks via the
-machine's scheduler. For example, the execution of tasks of a workload will not
+machine's scheduler.  For example, the execution of tasks of a workload will not
 individually depend upon the specifics of the targeted machine's state or
-availability, but rather on the state and availability of the placeholder before
-being executed.
+availability, but rather on those of the placeholder.
 % For example, the tasks of a workload will not individually
 % have to wait on the targeted machine's queues, but rather on the availability of
 % the placeholder before being executed.
@@ -1383,11 +1383,12 @@ thus be implemented independent of the target machine's middleware
 capabilities. Ultimately, this is how \pilotjob systems allow for the direct
 control of workload execution and the optimization, for example, of execution
 throughput.
-\jhanote{Matteo: please confirm you are OK with the suggested change.} \mtnote{I
-  like the generality of the new version. Would this improve readability: ``For
-  example, the execution of tasks of a workload will not individually depend
-  upon the specifics of the targeted machine's state or availability, but rather
-  on those of the placeholder.''?}
+
+% \jhanote{Matteo: please confirm you are OK with the suggested change.} \mtnote{I
+%   like the generality of the new version. Would this improve readability: ``For
+%   example, the execution of tasks of a workload will not individually depend
+%   upon the specifics of the targeted machine's state or availability, but rather
+%   on those of the placeholder.''?}
 
 % \jhanote{I'd like to use a more general term than ``machine's scheduler'' when
 %   talking about the defining characteristic. It weakens the punch of an
@@ -1442,14 +1443,16 @@ considered the minimal capability related to data required by a \pilotjob
 system. More advanced and specific data capabilities like, for example, data
 replication, (concurrent) data transfers, data abstractions other than files and
 directories, or data placeholders should be considered special-purpose
-capabilities, not characteristic of every \pilotjob system.
-\jhanote{Please check my edit/deletion. I did not think the statement and
-  listing of ``tasks not requiring data management helped in anyway''}
-  \mtnote{That (over)specification was due to the endless debate about the idea
-  that data management is not a necessary functionality of \pilot systems. If we
-  think that we drive the point clearly enough then I would eliminate the
-  statement and listing. On the other hand, if we think this could be a point of
-  `conceptual friction' for the readers, I would keep the point over-specified.}
+capabilities, not characteristic of every \pilotjob system.  \jhanote{Please
+  check my edit/deletion. I did not think the statement and listing of ``tasks
+  not requiring data management helped in anyway''} \mtnote{That
+  (over)specification was due to the endless debate about the idea that data
+  management is not a necessary functionality of \pilot systems. If we think
+  that we drive the point clearly enough then I would eliminate the statement
+  and listing. On the other hand, if we think this could be a point of
+  `conceptual friction' for the readers, I would keep the point
+  over-specified.}\jhanote{OK, lets keep this open for the moment and decide in
+  the next iteration}
 
 In the following sub-section, a minimal set of terms related to the logical
 components and capabilities described so far is defined.
@@ -1489,10 +1492,11 @@ bandwidth between a source and a destination are all examples of resources
 commonly utilized when executing workloads.
 
 \item[Distributed Computing Resource (DCR).] A set of machines characterized by
-a tuple: \{a set of possibly heterogeneous resources, a middleware software, and
-an administrative domain\}. \mtnote{I used `set of machines' because from now on
-we use DCR instead of machine and I think we need to link explicitly the two.
-Would you agree?}
+  a tuple: \{a set of possibly heterogeneous resources, a middleware software,
+  and an administrative domain\}. \mtnote{I used `set of machines' because from
+    now on we use DCR instead of machine and I think we need to link explicitly
+    the two.  Would you agree?}\jhanote{would it then not be Distributed
+    Computing Resources?}
 
 \end{description}
 
@@ -1516,20 +1520,22 @@ required to acquire resources on a specific infrastructure.
 When considering \pilotjob systems, jobs and tasks are functionally analogous
 but qualitatively different. Functionally, both jobs and tasks are containers --
 i.e. metadata wrappers around one or more executables often called `kernel',
-`application', or `script' \mtnote{If we are going to use `code' instead of `executable' in the previous subsection, I would add `code' here.}. Qualitatively, the term `task' is used when
-reasoning about workloads, while `job' is used in relation to a specific type of
-DCR middleware where such a container is submitted. Accordingly, tasks are
-considered as the functional units of a workload, while jobs as a way to
-schedule one or more task on a DCR with a specific middleware.  It should be noted that,
-given their functional equivalence, the two terms can be adopted interchangeably
-when considered outside the context of \pilotjob systems. Indeed, workloads are
-encoded into jobs when they have to be directly executed on DCRs that support or
-require that type of container.
+`application', or `script' \mtnote{If we are going to use `code' instead of
+  `executable' in the previous subsection, I would add `code'
+  here.}. Qualitatively, the term `task' is used when reasoning about workloads,
+while `job' is used in relation to a specific type of DCR middleware where such
+a container is submitted. Accordingly, tasks are considered as the functional
+units of a workload, while jobs as a way to schedule one or more tasks on a DCR
+with a specific middleware.  It should be noted that, given their functional
+equivalence, the two terms can be adopted interchangeably when considered
+outside the context of \pilotjob systems. Indeed, workloads are encoded into
+jobs when they have to be directly executed on DCRs that support or require that
+type of container.
 
-\jhanote{minor nitpic: are we assuming 1 task per job? I don't think we
-  should..} \mtnote{I do not think we are assuming a 1:1 relation as we use
-  `tasks'. Should we make it explicit?}\jhanote{Yes, if only to say there is no
-  relationship} \mtnote{Better?}
+% \jhanote{minor nitpic: are we assuming 1 task per job? I don't think we
+%   should..} \mtnote{I do not think we are assuming a 1:1 relation as we use
+%   `tasks'. Should we make it explicit?}\jhanote{Yes, if only to say there is no
+%   relationship} \mtnote{Better?}
 
 % \jhanote{maybe workload in lieu of container in the previous
 %   sentence?}\mtnote{The idea is that job is dependent from a middleware,
@@ -1550,8 +1556,8 @@ of that specific DCR. For this reason, the capabilities exposed by the job
 submission system of the target DCR determine the submission process of resource
 placeholders and its specifics.  For example, when wrapped within a `job',
 placeholders are provisioned by submitting a job to the DCR queuing system, and
-become available only once the job has become active \mtnote{replace `has become active' with `has been scheduled'?}, and only for
-the duration of the job lifetime.
+become available only once the job has been scheduled, and only for the duration
+of the job lifetime.
 
 % \jhanote{changed DCI to DCR. OK?}\jhanote{not sure what ``out of the queue''
 %   means? maybe say, ``.. become available when the job is active, and is
