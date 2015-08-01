@@ -2456,8 +2456,6 @@ that, in of themselves, would not distinguish a \pilot as a unique system.
   staging data in and out of the DCR, and may have to mediate task binding and
   execution by means of remote interfaces and protocols.
 
-  \jhanote{I think remote DCR is redundant. Just DCR -- whether logically or
-    physically separate is enough, IMO..} \mtnote{Done.}
 
 \end{itemize}
 
@@ -2751,8 +2749,7 @@ pilot.
         \includegraphics[width=.48\textwidth]{figures/glidein_comparison.pdf}
         \caption{Diagrammatic representation of Glidein components,
           functionalities, and core vocabulary mapped on
-          Figure~\ref{fig:core_vocabulary}. \jhanote{minor typo: gladein factory
-            needs to be replaced with glidein factory, and stard with startd}\mtnote{Done.}}
+          Figure~\ref{fig:core_vocabulary}.}
     \label{fig:glidein_comparison}
 \end{figure}
 
@@ -3012,13 +3009,14 @@ SAGA-python API~\cite{sagax}. SAGA provides access to diverse DCR middleware via
 an unified and coherent API, and thus RADICAL-Pilot can submit pilots to all the
 resources exposed by XSEDE, by the OSG HTCondor pools, and many ``leadership''
 class systems like those managed by NERSC~\cite{nersc_url},
-OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}. Adding support for a new DCR is
-relatively simple, as proven for example with the ongoing inclusion of a
-LRZ~\cite{lrz_url} petascale system and IaaS DCRs. \jhanote{not sure we want to
-mention hopper, titan and bluewaters or supermuc as they are likely to become
-``dated'' soon. thoughts?} \mtnote{Better?}
+OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}. 
 
-
+The resulting separation of agent deployment from DCR architecture makes the
+addition of support for a DCR relatively simple~\ref{rp-paper2015}. This is
+demonstrated by the relative ease with which RADICAL-Pilot is extended to
+support (i) a new DCR, such as IaaS, and (ii) DCR that have different middleware
+but essentially similar architecture, for example the Cray supercomputers
+operated in the US and Europe.
 
 % Workload Semantics.
 RADICAL-Pilot can execute tasks with varying degree of coupling and
