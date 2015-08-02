@@ -2387,20 +2387,27 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
 % aux because: its an "implementation" detail
 \item \textbf{Architecture}. \pilot systems may be implemented by means of
   different type of architectures (e.g service-oriented, client-server, or
-  peer-to-peer). Architectural choices may depend on multiple factors,
-  including application use cases, deployment strategies, or interoperability
-  requirements.  The analysis and comparison of architectural choices is here
-  limited to the trade-offs implied by such a choice, especially when
-  considering how they affect the Core Properties.
+  peer-to-peer). Architectural choices may depend on multiple factors, including
+  application use cases, deployment strategies, or interoperability
+  requirements.  The analysis and comparison of architectural choices is limited
+  to the trade-offs implied by such a choice, especially when considering how
+  they affect the Core Properties.  \jhanote{sentence needs attention: plurality
+    of ``choice'' seems inconsistent?}  \jhanote{lower case for core properties?
+    either way, we should be consistent, e.g., previous paragraph we use l.c.}
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
 \item \textbf{Communication and Coordination}. Communication and coordination
-  are features of every distributed system. In \ref{sec:compsandfuncs} it was
-  suggested that \pilot systems are not defined by any specific communication
-  and coordination pattern or protocol. The details of communication and
-  coordination among the \pilot system components are distinguishing
-  implementation properties.
+  are features of every distributed system, but \pilot systems are not defined by
+  any specific communication and coordination pattern or protocol. The details
+  of communication and coordination among the \pilot system components are
+  distinguishing implementation properties. \jhanote{I would not use the word
+    distinguishing in the last sentence. OK?}
+
+
+% In \ref{sec:compsandfuncs} it was
+%   suggested that \pilot systems are not defined by any specific communication
+%   and coordination pattern or protocol.
 
 % These comments were originally in section 3.
 % \msnote{The paragraph above is more ammunition for the argument that the
@@ -2417,9 +2424,10 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Interoperability}. Interoperability is defined as the capability
-  to deploy pilots on heterogeneous DCRs. It allows for a \pilot
-  system to provision pilots and execute workloads on different types of
-  DCR middleware (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm, or Torque).
+  to deploy pilots on DCRs characterized by heterogeneous middleware. It allows
+  for a \pilot system to provision pilots and execute workloads on different
+  types of DCR middleware (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm, or
+  Torque).
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Multitenancy}. \pilot systems may offer multitenancy at both
@@ -2448,11 +2456,16 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
   % systems in the introduction.}
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Security}. The properties of \pilot systems related to
-  security would require a dedicated analysis. The analysis here is limited to
-  authentication, authorization paradigms. The scope of the analysis is further
-  constrained by focusing only on those elements that impact the Core
-  Functionalities as defined in \S\ref{sec:compsandfuncs}.
+\item \textbf{Security}. \jhanote{We need a sentence that speaks to what are the
+    primary consideration before we go exclusionary. How about something like?
+    ``\pilot functionality are not defined by the type and method of security
+    associated with them; the usage and applicability is however influenced by
+    the security''} The properties of \pilot systems related to security would
+  require a dedicated analysis. The analysis here is limited to authentication,
+  authorization paradigms. The scope of the analysis is further constrained by
+  focusing only on those elements that impact the Core Functionalities as
+  defined in \S\ref{sec:compsandfuncs}. \jhanote{the sentence: ``the analysis
+    here is limited..'' is that legacy and can go?}
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Data}. As discussed in Section~\ref{sec:compsandfuncs}, only
@@ -2490,14 +2503,16 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
 Both core and auxiliary properties have a direct impact on the use cases for
 which \pilot systems are engineered and deployed. For example, while every
 \pilot system offers the opportunity to schedule the tasks of a workload on a
-pilot, the degree of support of specific workloads vastly varies across
+pilot, the degree of support for specific workloads varies across
 implementations. Furthermore, some \pilot systems support Virtual Organizations
 (VO)~\cite{foster2001} and running tasks from multiple users on a single pilot
 while others support jobs using a Message Passing Interface (MPI). Analogously,
 all \pilot systems support the execution of one or more type of workload but
 they differ when considering execution modalities that maximize application
 throughput (HTC), task computing performance (HPC), or container-based high
-scalability (Cloud).
+scalability (Cloud). \jhanote{Sorry, but I don't see what the last sentence is
+  ``analagous'' to? Possibly merge last sentence with second sentence for
+  conciseness and readability}
 
 \mtnote{Add something to connect to 4.2. Something that indicates why we move now to the analysis of specific implementations.}
 
