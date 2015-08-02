@@ -2230,7 +2230,10 @@ Pilot Provisioning \newline
 Following is an in depth description of core properties characterizing each
 implementation of a \pilot system. This list of properties is minimal and
 complete. Note that these are the properties of \pilot implementations, and not
-of individual instantiations of pilots.
+of individual instantiations of pilots. \jhanote{the last sentence is a very
+  important sentence. It could do with italicising or even boldfacing. Should we
+  change the ``implementations'' to just systems, as currently the reader might
+  be confused between implementations and individual instantiations?}
 
 \begin{itemize}
 
@@ -2270,13 +2273,20 @@ of individual instantiations of pilots.
 
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
-  pilots depending on the workload semantics. Specifically, dispatching
-  decisions depends on the temporal and spatial relationships among tasks, the
-  affinity between data and compute resources required by the tasks, and the
-  type of capabilities needed for their execution. \pilot systems support a
-  varying degree of semantic richness for the workload and its tasks. The
-  (standard) format or language in which the workloads are described may also be
-  relevant.
+  pilots depending on the workload semantics. For example, dispatching decisions
+  depend on the temporal and spatial relationships among tasks and the type of
+  capabilities needed for their execution. \pilot systems support varying
+  degrees of semantic richness of workloads and its tasks. The (standard)
+  format or language in which the workloads are described may also be relevant.
+  \jhanote{Do we need the last sentence? I vote to remove it for now.}
+  \jhanote{The list of dependencies was not complete, hence the conversion from
+    specifically to for example. also i removed ``affinity'' between data and
+    compute resources, as it would be unclear to the reader.}
+
+  % Specifically, dispatching decisions depends on the temporal and spatial
+  % relationships among tasks, the affinity between data and compute resources
+  % required by the tasks, and the type of capabilities needed for their
+  % execution.
 
   % \jhanote{moved comment sequence to end of file, after end{document}}
 
@@ -2341,15 +2351,33 @@ of individual instantiations of pilots.
 
 \end{itemize}
 
-Several auxiliary properties play a fundamental role in supporting the
-implementation and usability of the core properties. Programming and user
-interfaces; interoperability across differing middleware and other \pilot
-systems; multitenancy of pilots as opposed to that of DCRs; strategies and
-abstractions for data management; security including authentication,
-authorization, and accounting; support for multiple usage modes like HPC or HTC;
-or robustness in terms of fault-tolerance and high-availability; are all
-examples of properties that might be necessary for a \pilot implementation but
-that, in of themselves, would not distinguish a \pilot as a unique system.
+Several auxiliary properties play an important role in supporting the
+implementation and usability of the core properties.  Examples of such auxiliary
+properties that might be necessary for a \pilot implementation but that, in of
+themselves, would not distinguish a \pilot as a unique system. For example,
+programming and user interfaces; interoperability across differing middleware
+and other \pilot systems; multitenancy of pilots as opposed to that of DCRs;
+strategies and abstractions for data management; security including
+authentication, authorization, and accounting; support for multiple usage modes
+like HPC or HTC; or robustness in terms of fault-tolerance and
+high-availability.  \jhanote{alternate style suggestion: moved the earlier last
+  sub-sentence to the beginning. i've commented out the original text in case
+  you'd like to revert}
+
+% Programming and user interfaces; interoperability across differing middleware
+% and other \pilot systems; multitenancy of pilots as opposed to that of DCRs;
+% strategies and abstractions for data management; security including
+% authentication, authorization, and accounting; support for multiple usage modes
+% like HPC or HTC; or robustness in terms of fault-tolerance and
+% high-availability; are all examples of properties that might be necessary for a
+% \pilot implementation but that, in of themselves, would not distinguish a \pilot
+% as a unique system.
+
+\jhanote{the transition to 4.1.2 is a bit unsmooth, e.g., no text before we
+  start bullet points. Two possibilities: (i) could the last paragraph could
+  just as well as be in 4.1.2 as it is in 4.1.1 ? (ii) Break up last paragraph
+  into a 4.1.1 component and a 4.1.2 component?}
+
 
 \subsubsection{Auxiliary properties}
 \label{sec:auxprops}
