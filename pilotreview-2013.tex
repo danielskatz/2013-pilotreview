@@ -1290,7 +1290,7 @@ executing the tasks of each workload by means of the resources held by the
 placeholders.
 
 The implementation details of these three logical components vary significantly
-across \pilotjob systems (see~\S\ref{sec:analysis}). 
+across \pilotjob systems (see~\S\ref{sec:analysis}).
 % One or more logical components may be responsible for specific
 % functionalities, both on application as well as machine level;
 For example, two or more logical components may be implemented by a single
@@ -2220,7 +2220,13 @@ Pilot Provisioning \newline
     introduce a mention of relevant components/functionality into the
     description. This has a major advantage of making this table more space
     efficient, i.e., by reduce to 3 formal columns: core/aux,
-    property and description, and using the description more flexibly. thoughts?}}
+    property and description, and using the description more flexibly. thoughts?}
+    \mtnote{The mapping between core properties, components, and functionalities
+    is used heavily in the text so I would leave it. Agreed for the auxiliary
+    in the current version of the text. I would split the table in two tables,
+    one for core properties, the other for auxiliary without the last two
+    columns, and reference/place them accordingly.}
+    }
 \label{table:property_component_mapping}
 \end{table*}
 
@@ -2229,11 +2235,13 @@ Pilot Provisioning \newline
 
 Following is an in depth description of core properties characterizing each
 implementation of a \pilot system. This list of properties is minimal and
-complete. Note that these are the properties of \pilot implementations, and not
-of individual instantiations of pilots. \jhanote{the last sentence is a very
-  important sentence. It could do with italicising or even boldfacing. Should we
-  change the ``implementations'' to just systems, as currently the reader might
-  be confused between implementations and individual instantiations?}
+complete. \textit{Note that these are the properties of \pilot implementations,
+and not of individual systems of pilots}.
+
+\jhanote{the last sentence is a very important sentence. It could do with
+italicizing or even boldfacing. Should we change the ``implementations'' to just
+systems, as currently the reader might be confused between implementations and
+individual instantiations?} \mtnote{Done.}
 
 \begin{itemize}
 
@@ -2276,12 +2284,14 @@ of individual instantiations of pilots. \jhanote{the last sentence is a very
   pilots depending on the workload semantics. For example, dispatching decisions
   depend on the temporal and spatial relationships among tasks and the type of
   capabilities needed for their execution. \pilot systems support varying
-  degrees of semantic richness of workloads and its tasks. The (standard)
+  degrees of semantic richness of workloads and its tasks. The
   format or language in which the workloads are described may also be relevant.
   \jhanote{Do we need the last sentence? I vote to remove it for now.}
   \jhanote{The list of dependencies was not complete, hence the conversion from
     specifically to for example. also i removed ``affinity'' between data and
-    compute resources, as it would be unclear to the reader.}
+    compute resources, as it would be unclear to the reader.} \mtnote{I removed
+    `(standard)' as it seemed unnecessary but please add it back if you think
+    differently.}
 
   % Specifically, dispatching decisions depends on the temporal and spatial
   % relationships among tasks, the affinity between data and compute resources
@@ -2351,10 +2361,13 @@ of individual instantiations of pilots. \jhanote{the last sentence is a very
 
 \end{itemize}
 
+\subsubsection{Auxiliary properties}
+\label{sec:auxprops}
+
 Several auxiliary properties play an important role in supporting the
-implementation and usability of the core properties.  Examples of such auxiliary
-properties that might be necessary for a \pilot implementation but that, in of
-themselves, would not distinguish a \pilot as a unique system. For example,
+implementation and usability of the core properties. While these
+properties might be necessary for a \pilot implementation, in of
+themselves they do not distinguish a \pilot as a unique system. For example,
 programming and user interfaces; interoperability across differing middleware
 and other \pilot systems; multitenancy of pilots as opposed to that of DCRs;
 strategies and abstractions for data management; security including
@@ -2362,25 +2375,22 @@ authentication, authorization, and accounting; support for multiple usage modes
 like HPC or HTC; or robustness in terms of fault-tolerance and
 high-availability.  \jhanote{alternate style suggestion: moved the earlier last
   sub-sentence to the beginning. i've commented out the original text in case
-  you'd like to revert}
+  you'd like to revert} \mtnote{I reviewed the second sentence because it was incomplete.}
 
 % Programming and user interfaces; interoperability across differing middleware
 % and other \pilot systems; multitenancy of pilots as opposed to that of DCRs;
 % strategies and abstractions for data management; security including
-% authentication, authorization, and accounting; support for multiple usage modes
-% like HPC or HTC; or robustness in terms of fault-tolerance and
-% high-availability; are all examples of properties that might be necessary for a
-% \pilot implementation but that, in of themselves, would not distinguish a \pilot
-% as a unique system.
+% authentication, authorization, and accounting; support for multiple usage
+% modes like HPC or HTC; or robustness in terms of fault-tolerance and
+% high-availability; are all examples of properties that might be necessary for
+% a \pilot implementation but that, in of themselves, would not distinguish a
+% \pilot as a unique system.
 
 \jhanote{the transition to 4.1.2 is a bit unsmooth, e.g., no text before we
   start bullet points. Two possibilities: (i) could the last paragraph could
   just as well as be in 4.1.2 as it is in 4.1.1 ? (ii) Break up last paragraph
-  into a 4.1.1 component and a 4.1.2 component?}
+  into a 4.1.1 component and a 4.1.2 component?} \mtnote{Went for option (i). Better?}
 
-
-\subsubsection{Auxiliary properties}
-\label{sec:auxprops}
 
 \begin{itemize}
 
@@ -2390,10 +2400,11 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
   peer-to-peer). Architectural choices may depend on multiple factors, including
   application use cases, deployment strategies, or interoperability
   requirements.  The analysis and comparison of architectural choices is limited
-  to the trade-offs implied by such a choice, especially when considering how
+  to the trade-offs implied by each choice, especially when considering how
   they affect the Core Properties.  \jhanote{sentence needs attention: plurality
-    of ``choice'' seems inconsistent?}  \jhanote{lower case for core properties?
-    either way, we should be consistent, e.g., previous paragraph we use l.c.}
+    of ``choice'' seems inconsistent?}  \mtnote{Better?}
+    \jhanote{lower case for core properties? either way, we should be
+    consistent, e.g., previous paragraph we use l.c.} \mtnote{I proposed to review this towards the end of the paper review so to have a global lock.}
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
@@ -2401,8 +2412,8 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
   are features of every distributed system, but \pilot systems are not defined by
   any specific communication and coordination pattern or protocol. The details
   of communication and coordination among the \pilot system components are
-  distinguishing implementation properties. \jhanote{I would not use the word
-    distinguishing in the last sentence. OK?}
+  implementation properties. \jhanote{I would not use the word
+    distinguishing in the last sentence. OK?} \mtnote{Done.}
 
 
 % In \ref{sec:compsandfuncs} it was
@@ -2456,16 +2467,25 @@ high-availability.  \jhanote{alternate style suggestion: moved the earlier last
   % systems in the introduction.}
 
 % aux because: its not directly coupled to one of the components/functions
-\item \textbf{Security}. \jhanote{We need a sentence that speaks to what are the
-    primary consideration before we go exclusionary. How about something like?
-    ``\pilot functionality are not defined by the type and method of security
-    associated with them; the usage and applicability is however influenced by
-    the security''} The properties of \pilot systems related to security would
-  require a dedicated analysis. The analysis here is limited to authentication,
-  authorization paradigms. The scope of the analysis is further constrained by
-  focusing only on those elements that impact the Core Functionalities as
-  defined in \S\ref{sec:compsandfuncs}. \jhanote{the sentence: ``the analysis
-    here is limited..'' is that legacy and can go?}
+\item \textbf{Security}. The usage and applicability of \pilot systems' Core
+Functionalities are influenced by security protocols and mechanisms. The
+analysis here focuses on authentication and authorization, describing their main
+characteristics and the differences among \pilot systems implementations. An in
+depth analysis of the security protocols for \pilot systems is outside the scope
+of this paper.
+
+\jhanote{We need a sentence that speaks to what are the primary consideration
+    before we go exclusionary. How about something like? ``\pilot functionality
+    are not defined by the type and method of security associated with them; the
+    usage and applicability is however influenced by the security''} \mtnote{I
+    wrote a new description. Better?}
+
+  % The properties of \pilot systems related to security would require a
+  % dedicated analysis. The analysis here is limited to authentication,
+  % authorization paradigms. The scope of the analysis is further constrained by
+  % focusing only on those elements that impact the Core Functionalities as
+  % defined in \S\ref{sec:compsandfuncs}. \jhanote{the sentence: ``the analysis
+  % here is limited..'' is that legacy and can go?}
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Data}. As discussed in Section~\ref{sec:compsandfuncs}, only
@@ -2504,15 +2524,16 @@ Both core and auxiliary properties have a direct impact on the use cases for
 which \pilot systems are engineered and deployed. For example, while every
 \pilot system offers the opportunity to schedule the tasks of a workload on a
 pilot, the degree of support for specific workloads varies across
-implementations. Furthermore, some \pilot systems support Virtual Organizations
+implementations. Some \pilot systems support Virtual Organizations
 (VO)~\cite{foster2001} and running tasks from multiple users on a single pilot
-while others support jobs using a Message Passing Interface (MPI). Analogously,
+while others support jobs using a Message Passing Interface (MPI). Furthermore,
 all \pilot systems support the execution of one or more type of workload but
 they differ when considering execution modalities that maximize application
 throughput (HTC), task computing performance (HPC), or container-based high
 scalability (Cloud). \jhanote{Sorry, but I don't see what the last sentence is
   ``analagous'' to? Possibly merge last sentence with second sentence for
-  conciseness and readability}
+  conciseness and readability} \mtnote{Sentence \#1,2,3 are three examples of ``Both core and auxiliary properties have a direct impact on the use cases for
+which \pilot systems are engineered and deployed''. Better?}
 
 \mtnote{Add something to connect to 4.2. Something that indicates why we move now to the analysis of specific implementations.}
 
@@ -2620,10 +2641,12 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 % the \impterm{Typewriter} font.
 
 \mtnote{Do we need this formatting devices? They are not always added to every
-use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the moment we are not using them but please let me know whether you think we should go back to them.}
+use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the
+moment we are not using them but please let me know whether you think we should
+go back to them.}
 
 \mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain
-  why so few: we now introduce 4 examplar cases showing how systems developed to
+  why so few: we now introduce 4 exemplar cases showing how systems developed to
   execute different types of application on diverse DCRs... Different
   capabilities... Same core components/functionalities/properties -> Therefore:
   general paradigm, best practices for the implementation, choosing criteria.}
@@ -2636,7 +2659,7 @@ use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the mo
 
 % Who did it and for what scientific domains.
 DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
-developed at CERN to support the execution of workloads for 
+developed at CERN to support the execution of workloads for
 %local and
 the DCRs associated with EGI/WLCG. DIANE has since been used also in the Life
 Sciences~\cite{moscicki2004biomedical,jacq2007virtual,moscicki2003} and in few
@@ -2655,7 +2678,7 @@ service. Submitter Scripts deploy ApplicationWorkers on DCRs.
   component as we do not use this differentiation in the \pilot system
   descriptions. Said that, I think we mean logical components.} \jhanote{I
   agree, but the mapping to RunMaster and WorkerAgent service is made easier by
-  explicitly calling them as logical}
+  explicitly calling them as logical} \mtnote{Added logical to the other pilot descriptions.}
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
@@ -2686,7 +2709,8 @@ ApplicationManager.
 
 \jhanote{minor point: for readability, we might want to have a boldface before
   numerical value of each step. if we decide to do so, we would need to be
-  consistent across all systems}
+  consistent across all systems} \mtnote{I would decide about this towards the
+  end of the review process so to have a global lock.}
 
 %% 5 core properties
 
@@ -2699,8 +2723,9 @@ service represents an abstraction of the data resources and capabilities offered
 by the DCR, and it is designed to handle data only in the form of files stored
 into a file system. Network resources are assumed to be available and no
 abstractions are offered. \jhanote{``bind to'' compute resources in the first
-  sentence?? i.e., is it the pilots that are being bound or do they act as the
-  intermediary?}
+sentence?? i.e., is it the pilots that are being bound or do they act as the
+intermediary?} \mtnote{I see pilots always as intermediaries but if you think it
+is preferable, I would have no issues with using ``bind to compute resources''.}
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
@@ -2744,9 +2769,9 @@ task once it is available and has free resources.
 % Who did it and for what scientific domains.
 The HTCondor Glidein system has been designed as part of the software ecosystem
 of HTCondor. The HTCondor Glidein system implements pilots within regular Condor
-pools.  It was developed by by the Center for High Throughput Computing at the
+pools.  It was developed by the Center for High Throughput Computing at the
 University of Wisconsin-Madison (UW-Madison).  HTCondor Glidein's original goal
-was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.  
+was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
 
 \jhanote{I'm not sure the meaning of the previous sentence is clear: does it
   mean (a) DCRs that expose grid middleware into a pool, (b) although we don't
@@ -2757,12 +2782,12 @@ was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
   middleware (i.e. Globus), these DCRs need to be added to the condor pool; The
   HTCondor Glidein system does that.}\jhanote{Unless there are objections to the
   word ``Aggregate'' I think the sentence is as simple as possible without loss
-  of correctness. OK?}
+  of correctness. OK?} \mtnote{I think there is loss of meaning: if I got the literature right, it was about getting HTCondor to work with grid middleware. Any specific reason because using `grid middleware' is problematic?}
 
  \mtnote{Find out metrics on usage and target scientific communities}
 
 % Architecture.
-The HTCondor components relevant to the Glidein system are: a set of Schedd and
+The logical components of HTCondor relevant to the Glidein system are: a set of Schedd and
 Startd daemons, a Collector, and a Negotiator~\cite{glidein_presentation_url}.
 Schedd is a queuing system that holds workload tasks and Startd handles the DCR
 resources. The Collector holds references to all the active Schedd/Startd
@@ -2773,7 +2798,7 @@ HTCondor Glidein has been complemented by
 GlideinWMS~\cite{sfiligoi2008glideinwms}, a Glidein-based workload management
 system that automates deployment and management of glideins on multiple types of
 DCR middleware. GlideinWMS builds upon the HTCondor Glidein system by adding the
-following components: a set of Glidein Factory daemons, a set of VO Frontend
+following logical components: a set of Glidein Factory daemons, a set of VO Frontend
 daemons, and a Collector dedicated to the
 WMS~\cite{glideinwms_url,glideinwms_manual_url}. Glidein Factories submits tasks
 to the DCRs middleware, each VO Frontend matches the tasks on one or more Schedd
@@ -2855,16 +2880,16 @@ terminated.
 \jhanote{not sure what ``minimizes the amount of resource utilization'' means?}
 \mtnote{That uses as little resources as possible to execute the given
   tasks. Better?}\jhanote{I propose removing, ``minimizes resource utilization''
-  and emphasising what it controls actively?}
+  and emphasising what it controls actively?} \mtnote{OK. I am happy with the current version.}
 
 % Workload Semantics.
 HTCondor Glidein and GlideWMS expose the interfaces of HTCondor to the
 application layer and no theoretical limitations are posed on the type and
-complexity of the workloads that can be executed. For example, DAGman (Directed
-Acyclic Graph Manager) has been designed to execute workflows by submitting
-tasks to Schedds, and a \MW tool is available to design applications with a \MW
-execution pattern. \jhanote{reference to DAGMan needed}\mtnote{I still have to
-  add all the references.}
+complexity of the workloads that can be executed~\cite{couvares2007workflow}.
+For example, DAGman (Directed Acyclic Graph Manager)~\cite{frey2002condor} has
+been designed to execute workflows by submitting tasks to Schedds, and a \MW
+tool is available to design applications with a \MW execution pattern.
+\jhanote{reference to DAGMan needed}\mtnote{Done.}
 
 % \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word
 % is capitalized so the `d' is part of the name of the component, not an
@@ -2897,9 +2922,10 @@ applications. \jhanote{Matteo: OK?}
 % workload binding.
 
 Both HTCondor Glidein and GlideWMS rely on one or more HTCondor Collectors to
-match task requirements and resource properties. This matching can be evaluated
-right before the execution of the task. As such, both pilot systems allow for
-late binding. Early binding is not available.
+match task requirements and resource properties, represented in form of
+ClassAds~\cite{classad_url}. This matching can be evaluated right before the
+execution of the task. As such, both pilot systems allow for late binding. Early
+binding is not available.
 
 \jhanote{is this match-maker the ClassAds, or is there another level of
   match-makeing for the glideins?} \mtnote{ There is lack of documentation but I
@@ -2907,7 +2933,7 @@ late binding. Early binding is not available.
   implemented. ClassAds should be the name given to the entries published by the
   Glidein Factories within the WMS collector (in the case of GlideinWMS but it
   should be the same with the old HTCondor Glidein)}\jhanote{Out of abundance of
-  caution, ok to use a reference to ClassAds?}
+  caution, ok to use a reference to ClassAds?} \mtnote{Better?}
 
 % ------------------------------------------------------------------------------
 % PANDA
@@ -3025,7 +3051,7 @@ BigJob~\cite{luckow2010}, and and integrating it with many applications on
 different DCRs~\cite{x,y,z}.
 
 % Architecture.
-RADICAL-Pilot consists of three main components: a Pilot Manager, a Compute Unit
+RADICAL-Pilot consists of three main logical components: a Pilot Manager, a Compute Unit
 (CU) Manager, and a set of Agents. The Pilot Manager describes pilots and then
 submit them to DCR, while the CU manager describes tasks (i.e. CU) and schedules
 them to one or more pilots. Agents are instantiated on DCRs and execute the CUs
@@ -3078,7 +3104,7 @@ SAGA-python API~\cite{sagax}. SAGA provides access to diverse DCR middleware via
 an unified and coherent API, and thus RADICAL-Pilot can submit pilots to all the
 resources exposed by XSEDE, by the OSG HTCondor pools, and many ``leadership''
 class systems like those managed by NERSC~\cite{nersc_url},
-OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}. 
+OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}.
 
 The resulting separation of agent deployment from DCR architecture makes the
 addition of support for a DCR relatively simple~\ref{rp-paper2015}. This is
