@@ -2375,11 +2375,12 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
   peer-to-peer). Architectural choices may depend on multiple factors, including
   application use cases, deployment strategies, or interoperability
   requirements.  The analysis and comparison of architectural choices is limited
-  to the trade-offs implied by each choice, especially when considering how
-  they affect the Core Properties.  \jhanote{sentence needs attention: plurality
-    of ``choice'' seems inconsistent?}  \mtnote{Better?}
+  to the trade-offs implied by each choice, especially when considering how they
+  affect the Core Properties.  \jhanote{sentence needs attention: plurality of
+  ``choice'' seems inconsistent?}  \mtnote{Better?}
     \jhanote{lower case for core properties? either way, we should be
-    consistent, e.g., previous paragraph we use l.c.} \mtnote{I proposed to review this towards the end of the paper review so to have a global lock.}
+    consistent, e.g., previous paragraph we use l.c.} \mtnote{I proposed to
+    review this towards the end of the paper review so to have a global lock.}
 
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
@@ -2420,7 +2421,8 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
   to utilize the same instance of a \pilot system. When available at local
   level, multiple users may share the same pilot.
 
-% aux because: not all the pilot systems offer an abstraction for multiple (at least two) pilots.
+% aux because: not all the pilot systems offer an abstraction for multiple (at
+% least two) pilots.
 \item \textbf{Resource Overlay}. The resources of multiple pilots may be
   aggregated into a resource overlay. Overlays may be directly exposed to the
   application layer and to the end-users depending on the public interfaces and
@@ -2448,11 +2450,12 @@ characteristics and the differences among \pilot systems implementations. An in
 depth analysis of the security protocols for \pilot systems is outside the scope
 of this paper.
 
-% \jhanote{We need a sentence that speaks to what are the primary consideration
-%     before we go exclusionary. How about something like? ``\pilot functionality
-%     are not defined by the type and method of security associated with them; the
-%     usage and applicability is however influenced by the security''} \mtnote{I
-%     wrote a new description. Better?}
+  % \jhanote{We need a sentence that speaks to what are the primary
+  %     consideration before we go exclusionary. How about something like?
+  %     ``\pilot functionality are not defined by the type and method of
+  %     security associated with them; the usage and applicability is however
+  %     influenced by the security''} \mtnote{I wrote a new description.
+  %     Better?}
 
   % The properties of \pilot systems related to security would require a
   % dedicated analysis. The analysis here is limited to authentication,
@@ -2512,7 +2515,8 @@ scalability (Cloud).
 %   auxiliary properties have a direct impact on the use cases for which \pilot
 %   systems are engineered and deployed''. Better?}
 
-\mtnote{Add something to connect to 4.2. Something that indicates why we move now to the analysis of specific implementations.}
+\mtnote{Add something to connect to 4.2. Something that indicates why we move
+now to the analysis of specific implementations.}
 
 
 % -----------------------------------------------------------------------------
@@ -2604,7 +2608,8 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     Serial \& MPI \\
  \hline
  \end{tabular}
- \caption{\textbf{Overview of \pilot systems and a summary of the values of their core properties.}}
+ \caption{\textbf{Overview of \pilot systems and a summary of the values of
+ their core properties.}}
  \label{table:implementations-properties}
 \end{table*}
 
@@ -2653,9 +2658,9 @@ service. Submitter Scripts deploy ApplicationWorkers on DCRs.
 % \jhanote{logical?} \mtnote{I am not sure we need to distinguish among types of
 %   component as we do not use this differentiation in the \pilot system
 %   descriptions. Said that, I think we mean logical components.} \jhanote{I
-%   agree, but the mapping to RunMaster and WorkerAgent service is made easier by
-%   explicitly calling them as logical} \mtnote{Added logical to the other pilot
-%   descriptions.}
+%   agree, but the mapping to RunMaster and WorkerAgent service is made easier
+%   by explicitly calling them as logical} \mtnote{Added logical to the other
+%   pilot descriptions.}
 
 % Why it is a pilot system.
 Figure~\ref{fig:diane_comparison} shows how DIANE implements the components and
@@ -2795,19 +2800,19 @@ was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
  \mtnote{Find out metrics on usage and target scientific communities}
 
 % Architecture.
-The logical components of HTCondor relevant to the Glidein system are: a set of Schedd and
-Startd daemons, a Collector, and a Negotiator~\cite{glidein_presentation_url}.
-Schedd is a queuing system that holds workload tasks and Startd handles the DCR
-resources. The Collector holds references to all the active Schedd/Startd
-daemons, and the Negotiator matches tasks queued in a Schedd to resources
-handled by a Startd.
+The logical components of HTCondor relevant to the Glidein system are: a set of
+Schedd and Startd daemons, a Collector, and a
+Negotiator~\cite{glidein_presentation_url}. Schedd is a queuing system that
+holds workload tasks and Startd handles the DCR resources. The Collector holds
+references to all the active Schedd/Startd daemons, and the Negotiator matches
+tasks queued in a Schedd to resources handled by a Startd.
 
 HTCondor Glidein has been complemented by
 GlideinWMS~\cite{sfiligoi2008glideinwms}, a Glidein-based workload management
 system that automates deployment and management of glideins on multiple types of
 DCR middleware. GlideinWMS builds upon the HTCondor Glidein system by adding the
-following logical components: a set of Glidein Factory daemons, a set of VO Frontend
-daemons, and a Collector dedicated to the
+following logical components: a set of Glidein Factory daemons, a set of VO
+Frontend daemons, and a Collector dedicated to the
 WMS~\cite{glideinwms_url,glideinwms_manual_url}. Glidein Factories submits tasks
 to the DCRs middleware, each VO Frontend matches the tasks on one or more Schedd
 to the resource attributes advertised by a specific Glidein Factory, and the WMS
