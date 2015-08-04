@@ -1368,9 +1368,9 @@ infrastructures that do not adopt a job-based middleware, a resource placeholder
 would be executed by means of other types of logical container as, for example,
 a virtual machine or a Docker Engine~\cite{bernstein2014,felter2014}.
 
-\mtnote{Too many execut*. Should we use `code' instead of `executable'? Any
-  better option than `code' to replace `executable'?} \jhanote{used application, but
-  task might be better? code is acceptable too.}
+% \mtnote{Too many execut*. Should we use `code' instead of `executable'? Any
+%   better option than `code' to replace `executable'?} \jhanote{used application, but
+%   task might be better? code is acceptable too.}
 
 Once resource placeholders are bound to the resources of a machine, tasks need
 to be dispatched to those placeholders for execution. Task dispatching does not
@@ -1450,16 +1450,17 @@ considered the minimal capability related to data required by a \pilotjob
 system. More advanced and specific data capabilities like, for example, data
 replication, (concurrent) data transfers, data abstractions other than files and
 directories, or data placeholders should be considered special-purpose
-capabilities, not characteristic of every \pilotjob system.  \jhanote{Please
-  check my edit/deletion. I did not think the statement and listing of ``tasks
-  not requiring data management helped in anyway''} \mtnote{That
-  (over)specification was due to the endless debate about the idea that data
-  management is not a necessary functionality of \pilot systems. If we think
-  that we drive the point clearly enough then I would eliminate the statement
-  and listing. On the other hand, if we think this could be a point of
-  `conceptual friction' for the readers, I would keep the point
-  over-specified.}\jhanote{OK, lets keep this open for the moment and decide in
-  the next iteration}
+capabilities, not characteristic of every \pilotjob system.  
+
+% \jhanote{Please check my edit/deletion. I did not think the statement and
+%   listing of ``tasks not requiring data management helped in anyway''}
+% \mtnote{That (over)specification was due to the endless debate about the idea
+%   that data management is not a necessary functionality of \pilot systems. If we
+%   think that we drive the point clearly enough then I would eliminate the
+%   statement and listing. On the other hand, if we think this could be a point of
+%   `conceptual friction' for the readers, I would keep the point
+%   over-specified.}\jhanote{OK, lets keep this open for the moment and decide in
+%   the next iteration}
 
 In the following sub-section, a minimal set of terms related to the logical
 components and capabilities described so far is defined.
