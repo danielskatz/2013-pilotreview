@@ -1499,12 +1499,14 @@ the tasks of a workload. Compute cores, data storage space, or network
 bandwidth between a source and a destination are all examples of resources
 commonly utilized when executing workloads.
 
-\item[Distributed Computing Resource (DCR).] A set of machines characterized by
+\item[Distributed Computing Resource (DCR).] A machine characterized by
   a tuple: \{a set of possibly heterogeneous resources, a middleware software,
-  and an administrative domain\}. \mtnote{I used `set of machines' because from
-    now on we use DCR instead of machine and I think we need to link explicitly
-    the two.  Would you agree?}\jhanote{would it then not be Distributed
-    Computing Resources?}
+  and an administrative domain\}. 
+
+  % \mtnote{I used `set of machines' because from now on we use DCR instead of
+  % machine and I think we need to link explicitly
+  % the two.  Would you agree?}\jhanote{would it then not be Distributed
+  % Computing Resources?}
 
 \end{description}
 
@@ -1528,17 +1530,15 @@ required to acquire resources on a specific infrastructure.
 When considering \pilotjob systems, jobs and tasks are functionally analogous
 but qualitatively different. Functionally, both jobs and tasks are containers --
 i.e. metadata wrappers around one or more executables often called `kernel',
-`application', or `script' \mtnote{If we are going to use `code' instead of
-  `executable' in the previous subsection, I would add `code'
-  here.}. Qualitatively, the term `task' is used when reasoning about workloads,
-while `job' is used in relation to a specific type of DCR middleware where such
-a container is submitted. Accordingly, tasks are considered as the functional
-units of a workload, while jobs as a way to schedule one or more tasks on a DCR
-with a specific middleware.  It should be noted that, given their functional
-equivalence, the two terms can be adopted interchangeably when considered
-outside the context of \pilotjob systems. Indeed, workloads are encoded into
-jobs when they have to be directly executed on DCRs that support or require that
-type of container.
+`application', or `script'. Qualitatively, the term `task' is used when
+reasoning about workloads, while `job' is used in relation to a specific type of
+DCR middleware where such a container is submitted. Accordingly, tasks are
+considered as the functional units of a workload, while jobs as a way to
+schedule one or more tasks on a DCR with a specific middleware.  It should be
+noted that, given their functional equivalence, the two terms can be adopted
+interchangeably when considered outside the context of \pilotjob
+systems. Indeed, workloads are encoded into jobs when they have to be directly
+executed on DCRs that support or require that type of container.
 
 % \jhanote{minor nitpic: are we assuming 1 task per job? I don't think we
 %   should..} \mtnote{I do not think we are assuming a 1:1 relation as we use
@@ -1628,7 +1628,9 @@ example, those based on virtual machines, the term `job' has become too
 restrictive, a situation that can lead to terminological and conceptual
 confusion.
 
-\mtnote{nitpick: `those based on virtual machines' does not exclude jobs and schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to instantiate VMs.}
+\mtnote{nitpick: `those based on virtual machines' does not exclude jobs and
+  schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to
+  instantiate VMs.}\jhanote{Agreed. Please suggest alternative}
 
 % \jhanote{I removed VMs to be a bit more specific}
 
@@ -1643,7 +1645,10 @@ pilot is a placeholder for a set of resources. When combined, the resources of
 multiple pilots form a resource overlay. The pilots of a resource overlay can
 potentially be distributed over multiple and diverse DCRs.
 
-\mtnote{We may want to use resource overlay in Section 4.3 when we describe multi-DCR, multi-pilot scenarios.}
+% \mtnote{We may want to use resource overlay in Section 4.3 when we describe
+%   multi-DCR, multi-pilot scenarios.}
+\jhanote{Matteo to add a hook to resource
+  overlay the first time the multi-pilot, multi-resource are used downstream..}
 
 % The details of this aggregation or federation is outside the scope of this
 % paper.
@@ -1666,7 +1671,12 @@ Three more terms associated with \pilot systems need to be explicitly defined:
   entities can be scheduled at the same or different levels. These have all
   historically be clubbed as multi-level scheduling, i.e., there is multi-level
   and dimensional scheduling. Not sure if want to make distinction explicit
-  here.} \mtnote{I am not sure I follow. We may want to discuss this on a call/meeting.}
+  here.} \mtnote{I am not sure I follow. We may want to discuss this on a
+  call/meeting.}
+
+\jhanote{As agreed, we will introduce 3-4 sentences for multi-stage and
+  multi-entity, we will eschew multi-level scheduling. MT to refine/rewrite
+  accordingly}
 
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: pilots and tasks. A portion of the
