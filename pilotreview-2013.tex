@@ -1944,16 +1944,16 @@ and engineered, and the design principles that underly such systems.
 
 This subsection analyzes the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: core and auxiliary (see
-Table~\ref{table:property_component_mapping}). Both sets of properties are
-chosen by considering the implementation requirements of the \pilot capabilities
-as defined in~\S\ref{sec:history}. Core properties are necessary for every
-\pilot system implementation to provide the minimal set of functionalities as
-described in~\S\ref{sec:compsandfuncs}. Auxiliary properties are instead
-required only as a support to the implementation of core properties. For
-example, while every \pilot system has to implement a mechanism for pilot
+Tables~\ref{table:core_properties} and~\ref{table:aux_properties}). Both sets of
+properties are chosen by considering the implementation requirements of the
+\pilot capabilities as defined in~\S\ref{sec:history}. Core properties are
+necessary for every \pilot system implementation to provide the minimal set of
+functionalities as described in~\S\ref{sec:compsandfuncs}. Auxiliary properties
+are instead required only as a support to the implementation of core properties.
+For example, while every \pilot system has to implement a mechanism for pilot
 instantiation, a specific authentication and authorization protocol may be
-required to support the instantiation of pilots for a particular middleware of
-a DCR. As such, auxiliary properties are not necessarily shared among all \pilot
+required to support the instantiation of pilots for a particular middleware of a
+DCR. As such, auxiliary properties are not necessarily shared among all \pilot
 systems.
 
 % \jhanote{removed table reference..as a consequence of changes in 3, broken
@@ -1979,10 +1979,10 @@ systems.
 %   address this once the sets of core and auxiliary properties will be
 %   definitive.}
 
-Table~\ref{table:property_component_mapping} offers a brief description for each
-core and auxiliary property alongside their mapping to the required components
-and functionalities of a \pilot system as described
-in~\S\ref{sec:compsandfuncs}.
+% Table~\ref{table:property_component_mapping} offers a brief description for
+% each core and auxiliary property alongside their mapping to the required
+% components and functionalities of a \pilot system as described
+% in~\S\ref{sec:compsandfuncs}.
 
 % \jhanote{the table structure is different to the order presented here. See
 %   comments at the end of next paragraph.} \mtnote{Done.}
@@ -2055,9 +2055,31 @@ their interactions with the remote DCR.
 % \jhanote{I propose to remove multi-tenancy from the list. Only to avoid possible
 %   confusion arising from the fact that it was referred to as a functional
 %   underpinning in section 2.} \mtnote{Better? I am worried about acknowledging
-%   for the reviewers that multitenancy is one of the main/distinctive features of
-%   OSG pilots.}
+%   for the reviewers that multitenancy is one of the main/distinctive features
+%   of OSG pilots.}
 
+\subsubsection{Core properties}
+\label{sec:coreprops}
+
+% Following is an in depth description of core properties characterizing each
+% implementation of a \pilot system. This list of properties is minimal and
+% complete. \textit{Note that these are the properties of \pilot
+% implementations, and not of individual systems of pilots}.
+
+% \jhanote{the last sentence is a very important sentence. It could do with
+%   italicizing or even boldfacing. Should we change the ``implementations'' to
+%   just systems, as currently the reader might be confused between
+%   implementations and individual instantiations?} \mtnote{Done.}\jhanote{I
+%   propose the following as replacement for the paragraph. Apologies if I'm
+%   causing confusion. Would be glad to discuss} \mtnote{Great, commented out the
+%   previous version}
+
+Following is an in depth description of core properties by which any \pilot
+system can be characterized (see Table~\ref{table:core_properties}). This list
+of properties is minimal and complete. Note that these are the properties of
+\pilot systems and not of individual pilot instances.
+
+% Core properties
 \begin{table*}
 \centering
 \begin{tabular}{c|p{3.6cm}|p{5cm}|p{2.7cm}|p{2.7cm}|}
@@ -2101,166 +2123,12 @@ Types of tasks and the mechanisms to execute tasks &
 Task Manager                    &
 Task Execution \\
 \hline
-% Auxiliary
-\multirow{10}{*}{\textit{Auxiliary}} &
-Architecture                         &
-Frameworks and architecture that the components and their whole are build
-with &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Coordination~and   \newline
-  Communication                      &
-The interaction between the components of the system &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Interface                            &
-Interface that the user can use to interact with the system &
-Pilot Manager      \newline
-  Workload Manager                   &
-Pilot Provisioning \newline
-  Task Dispatching \\
-\cline{2-5}
-                                     &
-Interoperability                     &
-Interoperability between \pilots on multiple DCIs &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Multitenancy                         &
-The use of components by multiple (simultaneous) users &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Resource Overlay                     &
-The aggregation of resources from multiple pilots into overlays &
-Pilot Manager      \newline
-  Workload Manager                   &
-Pilot Provisioning \newline
-  Task Dispatching \\
-\cline{2-5}
-                                     &
-Robustness                           &
-The measures in place to increase the robustness of the components and the
-whole &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Security                             &
-AAA considerations for the components and the whole &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Files and Data                       &
-The mechanisms that the system offers to explicitly deal with files and data &
-Pilot Manager      \newline
-   Workload Manager                  &
-Pilot Provisioning \newline
-  Task Dispatching \\
-\cline{2-5}
-                                     &
-Performance~and    \newline
-  Scalability                        &
-A description of scale and limitations and measures to reach that &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                     &
-Development Model                    &
-The development and support model for the software &
-Pilot Manager      \newline
-  Workload Manager \newline
-  Task Manager                       &
-Pilot Provisioning \newline
-  Task Dispatching \newline
-  Task Execution \\
-\cline{2-5}
-                                &
-DCR Interaction                 &
-Modalities and protocols used to coordinate the pilot system/DCR interaction &
-Pilot Manager      \newline
-  Task Manager                  &
-Pilot Provisioning \newline
-  Task Execution \\
-\hline
 \end{tabular}
-\caption{\textbf{Mapping of the Properties of \pilot system implementations
+\caption{\textbf{Mapping of the Core Properties of \pilot system implementations
     onto the components described in \S\ref{sec:compsandfuncs}.}
-  \jhanote{Given that we have reduced our discussion of auxiliary properties,
-    I think the binding them to ``components'' and ``functionality'' is a bit
-    constraining if not misleading. We could remove the last two columns, and
-    where needed in the core properties introduce a mention of relevant
-    components/functionality into the description. This has a major advantage of
-    making this table more space efficient, i.e., by reduce to 3 formal columns:
-    core/aux, property and description, and using the description more flexibly.
-    thoughts?}
-  \mtnote{The mapping between core properties, components, and functionalities
-    is used heavily in the text so I would leave it. Agreed for the auxiliary
-    in the current version of the text. I would split the table in two tables,
-    one for core properties, the other for auxiliary without the last two
-    columns, and reference/place them accordingly.}
-  \jhanote{Yes, this makes sense.}
 }
-\label{table:property_component_mapping}
+\label{table:core_properties}
 \end{table*}
-
-\subsubsection{Core properties}
-\label{sec:coreprops}
-
-% Following is an in depth description of core properties characterizing each
-% implementation of a \pilot system. This list of properties is minimal and
-% complete. \textit{Note that these are the properties of \pilot
-% implementations, and not of individual systems of pilots}.
-
-% \jhanote{the last sentence is a very important sentence. It could do with
-%   italicizing or even boldfacing. Should we change the ``implementations'' to
-%   just systems, as currently the reader might be confused between
-%   implementations and individual instantiations?} \mtnote{Done.}\jhanote{I
-%   propose the following as replacement for the paragraph. Apologies if I'm
-%   causing confusion. Would be glad to discuss} \mtnote{Great, commented out the
-%   previous version}
-
-Following is an in depth description of core properties by which any \pilot
-system can be characterized. This list of properties is minimal and
-complete. Note that these are the properties of \pilot systems and not of
-individual pilot instances.
-
-
 
 
 \begin{itemize}
@@ -2387,14 +2255,96 @@ individual pilot instances.
 \label{sec:auxprops}
 
 Several auxiliary properties play an important role in supporting the
-implementation and usability of the core properties. While these properties
-might be necessary for a \pilot implementation, in of themselves they do not
-distinguish a \pilot as a unique system. For example, programming and user
-interfaces; interoperability across differing middleware and other \pilot
-systems; multitenancy of pilots as opposed to that of DCRs; strategies and
-abstractions for data management; security including authentication,
-authorization, and accounting; support for multiple usage modes like HPC or HTC;
-or robustness in terms of fault-tolerance and high-availability.
+implementation and usability of the core properties (see
+Table~\ref{table:aux_properties}). While these properties might be necessary for
+a \pilot implementation, in of themselves they do not distinguish a \pilot as a
+unique system. For example, programming and user interfaces; interoperability
+across differing middleware and other \pilot systems; multitenancy of pilots as
+opposed to that of DCRs; strategies and abstractions for data management;
+security including authentication, authorization, and accounting; support for
+multiple usage modes like HPC or HTC; or robustness in terms of fault-tolerance
+and high-availability.
+
+% Auxiliary properties
+\begin{table*}
+\centering
+\begin{tabular}{c|p{5cm}|p{9cm}|}
+% header
+\cline{2-3}
+                       &
+\textbf{Property}      &
+\textbf{Description}\\
+\hline
+\multirow{10}{*}{\textit{Auxiliary}} &
+Architecture                         &
+Frameworks and architecture that the components and their whole are build
+with \\
+\cline{2-3}
+                                     &
+Coordination and Communication       &
+The interaction between the components of the system \\
+\cline{2-3}
+                                     &
+Interface                            &
+Interface that the user can use to interact with the system \\
+\cline{2-3}
+                                     &
+Interoperability                     &
+Interoperability between \pilots on multiple DCIs \\
+\cline{2-3}
+                                     &
+Multitenancy                         &
+The use of components by multiple (simultaneous) users \\
+\cline{2-3}
+                                     &
+Resource Overlay                     &
+The aggregation of resources from multiple pilots into overlays \\
+\cline{2-3}
+                                     &
+Robustness                           &
+The measures in place to increase the robustness of the components and the
+whole \\
+\cline{2-3}
+                                     &
+Security                             &
+AAA considerations for the components and the whole \\
+\cline{2-3}
+                                     &
+Files and Data                       &
+The mechanisms that the system offers to explicitly deal with files and data \\
+\cline{2-3}
+                                     &
+Performance and Scalability          &
+A description of scale and limitations and measures to reach that \\
+\cline{2-3}
+                                     &
+Development Model                    &
+The development and support model for the software \\
+\cline{2-3}
+                                &
+DCR Interaction                 &
+Modalities and protocols used to coordinate the pilot system/DCR interaction \\
+\hline
+\end{tabular}
+\caption{\textbf{Summary of Auxiliary Properties and their descriptions.}
+  \jhanote{Given that we have reduced our discussion of auxiliary properties,
+    I think the binding them to ``components'' and ``functionality'' is a bit
+    constraining if not misleading. We could remove the last two columns, and
+    where needed in the core properties introduce a mention of relevant
+    components/functionality into the description. This has a major advantage of
+    making this table more space efficient, i.e., by reduce to 3 formal columns:
+    core/aux, property and description, and using the description more flexibly.
+    thoughts?}
+  \mtnote{The mapping between core properties, components, and functionalities
+    is used heavily in the text so I would leave it. Agreed for the auxiliary
+    in the current version of the text. I would split the table in two tables,
+    one for core properties, the other for auxiliary without the last two
+    columns, and reference/place them accordingly.}
+  \jhanote{Yes, this makes sense.}
+  \mtnote{Done.}
+}
+\label{table:aux_properties}
+\end{table*}
 
 % \jhanote{alternate style suggestion: moved the earlier last sub-sentence to
 %   the beginning. i've commented out the original text in case you'd like to
@@ -2554,7 +2504,7 @@ while others support jobs using a Message Passing Interface (MPI). Furthermore,
 all \pilot systems support the execution of one or more type of workload but
 they differ when considering execution modalities that maximize application
 throughput (HTC), task computing performance (HPC), or container-based high
-scalability (Cloud). 
+scalability (Cloud).
 
 % \jhanote{Sorry, but I don't see what the last sentence is ``analagous'' to?
 %   Possibly merge last sentence with second sentence for conciseness and
@@ -2967,7 +2917,7 @@ more commonly executed than many-core tasks, as is the case for OSG, the largest
 HTCondor and GlideinWMS deployment. Nonetheless, in principle specific projects
 may use dedicated installation and resources to execute tasks with larger core
 requirements both for distributed and parallel applications, including MPI
-applications. 
+applications.
 
 % \jhanote{Matteo: OK?} \mtnote{Extrapolating from the literature I think so. We
 %   may want to seek confirmation for an expert.}
@@ -3266,7 +3216,7 @@ and DCR middleware, more types of DCR are being supported, highlighting the
 relevance of task execution localization. \jhanote{the concept of task execution
   localization is insufficiently developed. ``localization'' occurs only once in
   the context of pilot deployment. I too am not sure what is being said,
-  ``.. relevance of task execution localization.}\jhanote{Also reading through
+  ``relevance of task execution localization''.}\jhanote{Also reading through
   the next two paragraphs, I struggle to distinguish task execution localization
   and task deployment?}\jhanote{Also what is unique about task localization as
   encountered by pilots vis-a-vis task localization encountered by general
@@ -3280,7 +3230,7 @@ relevance of task execution localization. \jhanote{the concept of task execution
   applications.. into section 5. This would focus 4.3 on a discussion of 4.1/4.2
   and leave more general issues for 5. Thoughts?}
 
- 
+
 The notion of task as defined in~\S\ref{sec:understanding} and then utilized
 in~\S\ref{sec:implementations} shapes both the design and implementation of
 \pilot systems. From the perspective of design, adding a wrapper to the
@@ -3980,11 +3930,10 @@ Both contributions offered in \S\ref{sec:understanding} were then leveraged in
 implementations. The shift from understanding the minimal set of components and
 functionalities characterizing the \pilot abstraction to the comparison of
 actual \pilot implementations required to outline core and auxiliary
-implementation properties. Table~\ref{table:property_component_mapping}
-summarize these contributions by mapping both types of property into the \pilot
-system components and functionalities. This table can be used to analyze any
-middleware software, decide whether it is a \pilot system, and assess the
-richness of its functionalities.
+implementation properties. Tables~\ref{table:core_properties}
+and~\ref{table:aux_properties} summarize these contributions and can be used to
+analyze any middleware software, decide whether it is a \pilot system, and
+assess the richness of its functionalities.
 
 The work done in \S\ref{sec:history}, \S\ref{sec:understanding}, and
 \S\ref{sec:properties} supported the comparative analysis of \pilot system
