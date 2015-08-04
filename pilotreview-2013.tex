@@ -2240,13 +2240,13 @@ Pilot Provisioning \newline
 % complete. \textit{Note that these are the properties of \pilot
 % implementations, and not of individual systems of pilots}.
 
-\jhanote{the last sentence is a very important sentence. It could do with
-  italicizing or even boldfacing. Should we change the ``implementations'' to
-  just systems, as currently the reader might be confused between
-  implementations and individual instantiations?} \mtnote{Done.}\jhanote{I
-  propose the following as replacement for the paragraph. Apologies if I'm
-  causing confusion. Would be glad to discuss} \mtnote{Great, commented out the
-  previous version}
+% \jhanote{the last sentence is a very important sentence. It could do with
+%   italicizing or even boldfacing. Should we change the ``implementations'' to
+%   just systems, as currently the reader might be confused between
+%   implementations and individual instantiations?} \mtnote{Done.}\jhanote{I
+%   propose the following as replacement for the paragraph. Apologies if I'm
+%   causing confusion. Would be glad to discuss} \mtnote{Great, commented out the
+%   previous version}
 
 Following is an in depth description of core properties by which any \pilot
 system can be characterized. This list of properties is minimal and
@@ -2301,8 +2301,6 @@ individual pilot instances.
 
   % The format or language in which the workloads are described may also be
   % relevant.
-  \jhanote{Do we need the last sentence? I vote to remove it for now.}
-  \mtnote{Done.}
 
   % \jhanote{The list of dependencies was not complete, hence the conversion
   %   from specifically to for example. also i removed ``affinity'' between data
@@ -2493,11 +2491,11 @@ characteristics and the differences among \pilot systems implementations. An in
 depth analysis of the security protocols for \pilot systems is outside the scope
 of this paper.
 
-\jhanote{We need a sentence that speaks to what are the primary consideration
-    before we go exclusionary. How about something like? ``\pilot functionality
-    are not defined by the type and method of security associated with them; the
-    usage and applicability is however influenced by the security''} \mtnote{I
-    wrote a new description. Better?}
+% \jhanote{We need a sentence that speaks to what are the primary consideration
+%     before we go exclusionary. How about something like? ``\pilot functionality
+%     are not defined by the type and method of security associated with them; the
+%     usage and applicability is however influenced by the security''} \mtnote{I
+%     wrote a new description. Better?}
 
   % The properties of \pilot systems related to security would require a
   % dedicated analysis. The analysis here is limited to authentication,
@@ -2549,10 +2547,13 @@ while others support jobs using a Message Passing Interface (MPI). Furthermore,
 all \pilot systems support the execution of one or more type of workload but
 they differ when considering execution modalities that maximize application
 throughput (HTC), task computing performance (HPC), or container-based high
-scalability (Cloud). \jhanote{Sorry, but I don't see what the last sentence is
-  ``analagous'' to? Possibly merge last sentence with second sentence for
-  conciseness and readability} \mtnote{Sentence \#1,2,3 are three examples of ``Both core and auxiliary properties have a direct impact on the use cases for
-which \pilot systems are engineered and deployed''. Better?}
+scalability (Cloud). 
+
+% \jhanote{Sorry, but I don't see what the last sentence is ``analagous'' to?
+%   Possibly merge last sentence with second sentence for conciseness and
+%   readability} \mtnote{Sentence \#1,2,3 are three examples of ``Both core and
+%   auxiliary properties have a direct impact on the use cases for which \pilot
+%   systems are engineered and deployed''. Better?}
 
 \mtnote{Add something to connect to 4.2. Something that indicates why we move now to the analysis of specific implementations.}
 
@@ -2743,14 +2744,15 @@ service represents an abstraction of the data resources and capabilities offered
 by the DCR, and it is designed to handle data only in the form of files stored
 into a file system. Network resources are assumed to be available and no
 abstractions are offered. \jhanote{``bind to'' compute resources in the first
-sentence?? i.e., is it the pilots that are being bound or do they act as the
-intermediary?} \mtnote{I see pilots always as intermediaries but if you think it
-is preferable, I would have no issues with using ``bind to compute resources''.}
-\jhanote{I'm fine with ``bind'' as an intermediary, but then we need to specify
-what is bound to what. currently only the resource is specified as one entity
-that is being bound.} \mtnote{Would ``hold'' instead of ``bind'' be clearer? For
-me it would be better as it would avoid overloading of ``bind'' as used in
-binding tasks to a pilot.}
+  sentence?? i.e., is it the pilots that are being bound or do they act as the
+  intermediary?} \mtnote{I see pilots always as intermediaries but if you think
+  it is preferable, I would have no issues with using ``bind to compute
+  resources''.}  \jhanote{I'm fine with ``bind'' as an intermediary, but then we
+  need to specify what is bound to what. currently only the resource is
+  specified as one entity that is being bound.} \mtnote{Would ``hold'' instead
+  of ``bind'' be clearer? For me it would be better as it would avoid
+  overloading of ``bind'' as used in binding tasks to a pilot.}\jhanote{hold is
+  fine. consistent with placeholder too.}
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
@@ -2956,7 +2958,10 @@ more commonly executed than many-core tasks, as is the case for OSG, the largest
 HTCondor and GlideinWMS deployment. Nonetheless, in principle specific projects
 may use dedicated installation and resources to execute tasks with larger core
 requirements both for distributed and parallel applications, including MPI
-applications. \jhanote{Matteo: OK?} \mtnote{Extrapolating from the literature I think so. We may want to seek confirmation for an expert.}
+applications. 
+
+% \jhanote{Matteo: OK?} \mtnote{Extrapolating from the literature I think so. We
+%   may want to seek confirmation for an expert.}
 
 % \jhanote{I'm not sure I understand the rationale of
 %   the last sentence?} \mtnote{Get a cluster with multi-core compute nodes and
