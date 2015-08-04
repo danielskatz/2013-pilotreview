@@ -2424,8 +2424,7 @@ or robustness in terms of fault-tolerance and high-availability.
   are features of every distributed system, but \pilot systems are not defined by
   any specific communication and coordination pattern or protocol. The details
   of communication and coordination among the \pilot system components are
-  implementation properties. \jhanote{I would not use the word
-    distinguishing in the last sentence. OK?} \mtnote{Done.}
+  implementation properties. 
 
 
 % In \ref{sec:compsandfuncs} it was
@@ -2897,10 +2896,11 @@ instantiating glideins until the queue of the available Schedds are
 emptied. Once all the tasks have been executed, the remaining glideins are
 terminated.
 
-\jhanote{not sure what ``minimizes the amount of resource utilization'' means?}
-\mtnote{That uses as little resources as possible to execute the given
-  tasks. Better?}\jhanote{I propose removing, ``minimizes resource utilization''
-  and emphasising what it controls actively?} \mtnote{OK. I am happy with the current version.}
+% \jhanote{not sure what ``minimizes the amount of resource utilization'' means?}
+% \mtnote{That uses as little resources as possible to execute the given
+%   tasks. Better?}\jhanote{I propose removing, ``minimizes resource utilization''
+%   and emphasising what it controls actively?} \mtnote{OK. I am happy with the
+%   current version.}
 
 % Workload Semantics.
 HTCondor Glidein and GlideWMS expose the interfaces of HTCondor to the
@@ -2909,7 +2909,7 @@ complexity of the workloads that can be executed~\cite{couvares2007workflow}.
 For example, DAGman (Directed Acyclic Graph Manager)~\cite{frey2002condor} has
 been designed to execute workflows by submitting tasks to Schedds, and a \MW
 tool is available to design applications with a \MW execution pattern.
-\jhanote{reference to DAGMan needed}\mtnote{Done.}
+
 
 % \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word
 % is capitalized so the `d' is part of the name of the component, not an
