@@ -2213,19 +2213,21 @@ Pilot Provisioning \newline
 \hline
 \end{tabular}
 \caption{\textbf{Mapping of the Properties of \pilot system implementations
-    onto the components described in \S\ref{sec:compsandfuncs}.} \jhanote{Given that
-    we have reduced our discussion of auxiliary properties, I think the binding them to
-    ``components'' and ``functionality'' is a bit constraining if not misleading. We
-    could remove the last two columns, and where needed in the core properties
-    introduce a mention of relevant components/functionality into the
-    description. This has a major advantage of making this table more space
-    efficient, i.e., by reduce to 3 formal columns: core/aux,
-    property and description, and using the description more flexibly. thoughts?}
+    onto the components described in \S\ref{sec:compsandfuncs}.}
+  \jhanote{Given that we have reduced our discussion of auxiliary properties,
+    I think the binding them to ``components'' and ``functionality'' is a bit
+    constraining if not misleading. We could remove the last two columns, and
+    where needed in the core properties introduce a mention of relevant
+    components/functionality into the description. This has a major advantage of
+    making this table more space efficient, i.e., by reduce to 3 formal columns:
+    core/aux, property and description, and using the description more flexibly.
+    thoughts?}
   \mtnote{The mapping between core properties, components, and functionalities
     is used heavily in the text so I would leave it. Agreed for the auxiliary
     in the current version of the text. I would split the table in two tables,
     one for core properties, the other for auxiliary without the last two
-    columns, and reference/place them accordingly.}\jhanote{Yes, this makes sense.}
+    columns, and reference/place them accordingly.}
+  \jhanote{Yes, this makes sense.}
 }
 \label{table:property_component_mapping}
 \end{table*}
@@ -2233,17 +2235,18 @@ Pilot Provisioning \newline
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-Following is an in depth description of core properties characterizing each
-implementation of a \pilot system. This list of properties is minimal and
-complete. \textit{Note that these are the properties of \pilot implementations,
-and not of individual systems of pilots}.
+% Following is an in depth description of core properties characterizing each
+% implementation of a \pilot system. This list of properties is minimal and
+% complete. \textit{Note that these are the properties of \pilot
+% implementations, and not of individual systems of pilots}.
 
 \jhanote{the last sentence is a very important sentence. It could do with
   italicizing or even boldfacing. Should we change the ``implementations'' to
   just systems, as currently the reader might be confused between
   implementations and individual instantiations?} \mtnote{Done.}\jhanote{I
   propose the following as replacement for the paragraph. Apologies if I'm
-  causing confusion. Would be glad to discuss}
+  causing confusion. Would be glad to discuss} \mtnote{Great, commented out the
+  previous version}
 
 Following is an in depth description of core properties by which any \pilot
 system can be characterized. This list of properties is minimal and
@@ -2294,14 +2297,18 @@ individual pilot instances.
   pilots depending on the workload semantics. For example, dispatching decisions
   depend on the temporal and spatial relationships among tasks and the type of
   capabilities needed for their execution. \pilot systems support varying
-  degrees of semantic richness of workloads and its tasks. The
-  format or language in which the workloads are described may also be relevant.
+  degrees of semantic richness of workloads and its tasks.
+
+  % The format or language in which the workloads are described may also be
+  % relevant.
   \jhanote{Do we need the last sentence? I vote to remove it for now.}
-  % \jhanote{The list of dependencies was not complete, hence the conversion from
-  %   specifically to for example. also i removed ``affinity'' between data and
-  %   compute resources, as it would be unclear to the reader.} \mtnote{I removed
-  %   `(standard)' as it seemed unnecessary but please add it back if you think
-  %   differently.}
+  \mtnote{Done.}
+
+  % \jhanote{The list of dependencies was not complete, hence the conversion
+  %   from specifically to for example. also i removed ``affinity'' between data
+  %   and compute resources, as it would be unclear to the reader.} \mtnote{I
+  %   removed `(standard)' as it seemed unnecessary but please add it back if
+  %   you think differently.}
 
   % Specifically, dispatching decisions depends on the temporal and spatial
   % relationships among tasks, the affinity between data and compute resources
@@ -2384,8 +2391,9 @@ abstractions for data management; security including authentication,
 authorization, and accounting; support for multiple usage modes like HPC or HTC;
 or robustness in terms of fault-tolerance and high-availability.
 
-% \jhanote{alternate style suggestion: moved the earlier last sub-sentence to the
-%   beginning. i've commented out the original text in case you'd like to revert}
+% \jhanote{alternate style suggestion: moved the earlier last sub-sentence to
+%   the beginning. i've commented out the original text in case you'd like to
+%   revert}
 % \mtnote{I reviewed the second sentence because it was incomplete.}
 
 % Programming and user interfaces; interoperability across differing middleware
@@ -2400,8 +2408,8 @@ or robustness in terms of fault-tolerance and high-availability.
 % \jhanote{the transition to 4.1.2 is a bit unsmooth, e.g., no text before we
 %   start bullet points. Two possibilities: (i) could the last paragraph could
 %   just as well as be in 4.1.2 as it is in 4.1.1 ? (ii) Break up last paragraph
-%   into a 4.1.1 component and a 4.1.2 component?} \mtnote{Went for option
-%   (i). Better?}
+%   into a 4.1.1 component and a 4.1.2 component?} \mtnote{Went for option (i).
+%   Better?}
 
 
 \begin{itemize}
@@ -2421,11 +2429,11 @@ or robustness in terms of fault-tolerance and high-availability.
 % aux because: its an implementation detail not directly coupled to one of the
 % components or functions
 \item \textbf{Communication and Coordination}. Communication and coordination
-  are features of every distributed system, but \pilot systems are not defined by
-  any specific communication and coordination pattern or protocol. The details
-  of communication and coordination among the \pilot system components are
-  implementation properties. \jhanote{I would not use the word
-    distinguishing in the last sentence. OK?} \mtnote{Done.}
+  are features of every distributed system, but \pilot systems are not defined
+  by any specific communication and coordination pattern or protocol. The
+  details of communication and coordination among the \pilot system components
+  are implementation properties. \jhanote{I would not use the word
+  distinguishing in the last sentence. OK?} \mtnote{Done.}
 
 
 % In \ref{sec:compsandfuncs} it was
@@ -2736,12 +2744,14 @@ service represents an abstraction of the data resources and capabilities offered
 by the DCR, and it is designed to handle data only in the form of files stored
 into a file system. Network resources are assumed to be available and no
 abstractions are offered. \jhanote{``bind to'' compute resources in the first
-  sentence?? i.e., is it the pilots that are being bound or do they act as the
-  intermediary?} \mtnote{I see pilots always as intermediaries but if you think
-  it is preferable, I would have no issues with using ``bind to compute
-  resources''.}  \jhanote{I'm fine with ``bind'' as an intermediary, but then we
-  need to specify what is bound to what. currently only the resource is
-  specified as one entity that is being bound.}
+sentence?? i.e., is it the pilots that are being bound or do they act as the
+intermediary?} \mtnote{I see pilots always as intermediaries but if you think it
+is preferable, I would have no issues with using ``bind to compute resources''.}
+\jhanote{I'm fine with ``bind'' as an intermediary, but then we need to specify
+what is bound to what. currently only the resource is specified as one entity
+that is being bound.} \mtnote{Would ``hold'' instead of ``bind'' be clearer? For
+me it would be better as it would avoid overloading of ``bind'' as used in
+binding tasks to a pilot.}
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
@@ -2799,10 +2809,29 @@ was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
   HTCondor Glidein system does that.}\jhanote{Unless there are objections to the
   word ``Aggregate'' I think the sentence is as simple as possible without loss
   of correctness. OK?} \mtnote{I think there is loss of meaning: if I got the
-  literature right, it was about getting HTCondor to work with grid
-  middleware. Any specific reason because using `grid middleware' is
+  literature right, it was about getting HTCondor to work with grid middleware.
+  Any specific reason because using `grid middleware' is
   problematic?}\jhanote{the objective remains to aggregate DCRs. grid middleware
-  is a layer/mechanism.}
+  is a layer/mechanism.} \mtnote{I agree but DCRs are already aggregated into
+  condor pools. The problem is that without glideins they are not able to
+  aggregate DCRs with grid middleware. As such, the issue is about the layer
+  mechanism, not about DCRs in general. Let me share some of the references I used to make up the opinion above:
+  \url{http://www.slideserve.com/hastin/the-glidein-service}, slide 2, ``A
+  technique for creating temporary, user controlled Condor pools using resources
+  from remote Grid sites'', slide 9, ``Running short jobs on the Grid: Condor
+  can dispatch jobs faster than Globus'';
+  \url{http://research.cs.wisc.edu/htcondor/manual/v7.6/5_4Glidein.html},
+   ``Glidein is a mechanism by which one or more grid resources (remote
+   machines) temporarily join a local Condor pool'' , ``condor\_glidein
+   accomplishes two separate tasks towards having a remote grid resource join
+   the local Condor pool. They are the set up task and the execution task''; In
+   `Condor-G: A Computation Management Agent for Multi-Institutional Grids',
+   ``In  effect,  the Condor-G GlideIn mechanism uses Grid protocols to
+   dynamically create a personal Condor pool out of Grid resources by
+   “gliding-in” Condor daemons to the remote resource. ''; In `Making Science in
+   the Grid World: Using Glideins to Maximize Scientific Output', ``In this
+   paper we present the glidein approach that  aims to make the  Grid  computing
+   as easy  as  working  in  a local batch environment.''}
 
  \mtnote{Find out metrics on usage and target scientific communities}
 
@@ -2927,7 +2956,7 @@ more commonly executed than many-core tasks, as is the case for OSG, the largest
 HTCondor and GlideinWMS deployment. Nonetheless, in principle specific projects
 may use dedicated installation and resources to execute tasks with larger core
 requirements both for distributed and parallel applications, including MPI
-applications. \jhanote{Matteo: OK?}
+applications. \jhanote{Matteo: OK?} \mtnote{Extrapolating from the literature I think so. We may want to seek confirmation for an expert.}
 
 % \jhanote{I'm not sure I understand the rationale of
 %   the last sentence?} \mtnote{Get a cluster with multi-core compute nodes and
@@ -3105,7 +3134,7 @@ each CU either to the pilot indicated in the CU description or on the first
 pilot with free and available resources; 5. when required, the CU Manager stages
 also the CU's input file(s) to the target DCR; and 6. the Agent executes the CU.
 Eventually, if needed the output files of the CU can be staged to a user-defined
-destination. 
+destination.
 %\jhanote{need to add reference to the figure..} \mtnote{Done.}
 
 %% 5 core properties.
