@@ -972,6 +972,9 @@ evolved to include advanced capabilities like workload and data management.
     \label{fig:timeline}
 \end{figure}
 
+%\footnote{http://wiki.nikhef.nl/biggrid/Using_the_Grid/ToPoS},
+
+
 \begin{figure}[t]
   \centering
     \includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
@@ -2820,23 +2823,25 @@ was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
   is a layer/mechanism.} \mtnote{I agree but DCRs are already aggregated into
   condor pools. The problem is that without glideins they are not able to
   aggregate DCRs with grid middleware. As such, the issue is about the layer
-  mechanism, not about DCRs in general. Let me share some of the references I used to make up the opinion above:
+  mechanism, not about DCRs in general. Let me share some of the references I
+  used to make up the opinion above:
   \url{http://www.slideserve.com/hastin/the-glidein-service}, slide 2, ``A
   technique for creating temporary, user controlled Condor pools using resources
   from remote Grid sites'', slide 9, ``Running short jobs on the Grid: Condor
   can dispatch jobs faster than Globus'';
   \url{http://research.cs.wisc.edu/htcondor/manual/v7.6/5_4Glidein.html},
-   ``Glidein is a mechanism by which one or more grid resources (remote
-   machines) temporarily join a local Condor pool'' , ``condor\_glidein
-   accomplishes two separate tasks towards having a remote grid resource join
-   the local Condor pool. They are the set up task and the execution task''; In
-   `Condor-G: A Computation Management Agent for Multi-Institutional Grids',
-   ``In  effect,  the Condor-G GlideIn mechanism uses Grid protocols to
-   dynamically create a personal Condor pool out of Grid resources by
-   “gliding-in” Condor daemons to the remote resource. ''; In `Making Science in
-   the Grid World: Using Glideins to Maximize Scientific Output', ``In this
-   paper we present the glidein approach that  aims to make the  Grid  computing
-   as easy  as  working  in  a local batch environment.''}
+  ``Glidein is a mechanism by which one or more grid resources (remote machines)
+  temporarily join a local Condor pool'' , ``condor\_glidein accomplishes two
+  separate tasks towards having a remote grid resource join the local Condor
+  pool. They are the set up task and the execution task''; In `Condor-G: A
+  Computation Management Agent for Multi-Institutional Grids', ``In effect, the
+  Condor-G GlideIn mechanism uses Grid protocols to dynamically create a
+  personal Condor pool out of Grid resources by “gliding-in” Condor daemons to
+  the remote resource. ''; In `Making Science in the Grid World: Using Glideins
+  to Maximize Scientific Output', ``In this paper we present the glidein
+  approach that aims to make the Grid computing as easy as working in a local
+  batch environment.''}\jhanote{I refer us to the working definition of DCR,
+  which is already comprised of a defined middleware}.
 
  \mtnote{Find out metrics on usage and target scientific communities}
 
