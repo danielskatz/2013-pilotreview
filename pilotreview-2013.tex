@@ -3232,6 +3232,12 @@ relevance of task execution localization. \jhanote{the concept of task execution
   the challenges faced by pilot systems. Glad to discuss further if I am missing
   something?}
 
+\jhanote{one possibility is to move text from here... till the end of ... play a
+  relevant role in the efficient execution of data-oriented, distributed
+  applications.. into section 5. This would focus 4.3 on a discussion of 4.1/4.2
+  and leave more general issues for 5. Thoughts?}
+
+ 
 The notion of task as defined in~\S\ref{sec:understanding} and then utilized
 in~\S\ref{sec:implementations} shapes both the design and implementation of
 \pilot systems. From the perspective of design, adding a wrapper to the
@@ -3272,6 +3278,11 @@ optimize not only time to completion but also resource utilization. These
 optimizations may be the determining factor to enable the execution of
 applications with stringent data, compute, or networking requirements.
 
+\jhanote{I'm not sure I see the connection between these paragraphs. Also maybe
+  we could structure this sub-section into ``discuss differences'' and leave
+  observations for section 5. If so observations about architectural importance
+  etc. would be nicely put into 5. Thoughts?}
+
 Given these requirements, it is not surprising that GlideinWMS and PANDA have
 begun to support multi-pilot, multi-DCRs execution. These \pilot systems
 implement articulated workload management components with well-isolated
@@ -3281,6 +3292,9 @@ capabilities required by multi-pilot, multi-DCR task executions would be very
 challenging.
 
 % Files and Data
+
+\jhanote{the next three paragraphs are possible candidates for moving into
+  section 5 too. to be discussed}
 
 The relevance of both compute and data resources is shown by the implementation
 of dedicated capabilities in all the \pilot systems described in the previous
