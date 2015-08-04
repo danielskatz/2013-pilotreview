@@ -2633,9 +2633,8 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
 % Who did it and for what scientific domains.
 DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
-developed at CERN to support the execution of workloads for
-%local and
-the DCRs associated with EGI/WLCG. DIANE has since been used also in the Life
+developed at CERN to support the execution of workloads for the DCRs associated
+with EGI/WLCG. DIANE has since been used also in the Life
 Sciences~\cite{moscicki2004biomedical,jacq2007virtual,moscicki2003} and in few
 other scientific domains~\cite{bacu2011gswat,mantero2003simulation}.
 
@@ -2690,7 +2689,7 @@ ApplicationManager.
 %% 5 core properties
 
 % Pilot Resources
-The pilots used by DIANE bind compute resources on the target DCRs.
+The pilots used by DIANE hold compute resources on the target DCRs.
 ApplicationAgents are executed by the DCR middleware as jobs with mostly one
 core but possibly more. DIANE also offers a data service with a dedicated API
 and CLI that allows for staging files in and out of ApplicationAgents. This
@@ -2706,7 +2705,7 @@ abstractions are offered. \jhanote{``bind to'' compute resources in the first
   specified as one entity that is being bound.} \mtnote{Would ``hold'' instead
   of ``bind'' be clearer? For me it would be better as it would avoid
   overloading of ``bind'' as used in binding tasks to a pilot.}\jhanote{hold is
-  fine. consistent with placeholder too.}
+  fine. consistent with placeholder too.} \mtnote{Done.}
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
@@ -2881,10 +2880,11 @@ instantiating glideins until the queue of the available Schedds are
 emptied. Once all the tasks have been executed, the remaining glideins are
 terminated.
 
-% \jhanote{not sure what ``minimizes the amount of resource utilization'' means?}
-% \mtnote{That uses as little resources as possible to execute the given
-%   tasks. Better?}\jhanote{I propose removing, ``minimizes resource utilization''
-%   and emphasising what it controls actively?} \mtnote{OK. I am happy with the
+% \jhanote{not sure what ``minimizes the amount of resource utilization''
+% means?}
+% \mtnote{That uses as little resources as possible to execute the given tasks.
+%   Better?}\jhanote{I propose removing, ``minimizes resource utilization'' and
+%   emphasising what it controls actively?} \mtnote{OK. I am happy with the
 %   current version.}
 
 % Workload Semantics.
@@ -2896,11 +2896,11 @@ been designed to execute workflows by submitting tasks to Schedds, and a \MW
 tool is available to design applications with a \MW execution pattern.
 
 
-% \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word
-% is capitalized so the `d' is part of the name of the component, not an
+% \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word is
+% capitalized so the `d' is part of the name of the component, not an
 % abbreviation or a letter of an acronym.}
-% \jhanote{what is the name of the master-worker tool?} \mtnote{It is called like
-% that: `\MW tool'.}
+% \jhanote{what is the name of the master-worker tool?} \mtnote{It is called
+% like that: `\MW tool'.}
 
 % In practice, as HTCondor has been originally designed for resource scavenging
 % and opportunistic computing, sin- gle or low-core, independent tasks are more
@@ -2917,17 +2917,16 @@ applications.
 % \jhanote{Matteo: OK?} \mtnote{Extrapolating from the literature I think so. We
 %   may want to seek confirmation for an expert.}
 
-% \jhanote{I'm not sure I understand the rationale of
-%   the last sentence?} \mtnote{Get a cluster with multi-core compute nodes and
-%   fast interconnect (and possibly add a bunch of separate machines/VMs); install
-%   all the HTCondor stack + the GlideinWMS and the headnode (and possibly on the
+% \jhanote{I'm not sure I understand the rationale of the last sentence?}
+%   \mtnote{Get a cluster with multi-core compute nodes and fast interconnect
+%   (and possibly add a bunch of separate machines/VMs); install all the
+%   HTCondor stack + the GlideinWMS and the headnode (and possibly on the
 %   separate machines); now you can run your distribute, parallel, MPI
-%   applications on that cluster via glideins. As far as I understand, there is no
-%   intrinsic limitation built within HTCondor or GlideinWMS to the execution of
-%   distributed, parallel, and MPI applications. Executing only distributed
+%   applications on that cluster via glideins. As far as I understand, there is
+%   no intrinsic limitation built within HTCondor or GlideinWMS to the execution
+%   of distributed, parallel, and MPI applications. Executing only distributed
 %   applications, mostly with single-core tasks is a consequence of the type of
-%   resources that are added to a Condor pool.}
-% workload binding.
+%   resources that are added to a Condor pool.} workload binding.
 
 Both HTCondor Glidein and GlideWMS rely on one or more HTCondor Collectors to
 match task requirements and resource properties, represented in form of
@@ -2936,12 +2935,12 @@ execution of the task. As such, both pilot systems allow for late binding. Early
 binding is not available.
 
 % \jhanote{is this match-maker the ClassAds, or is there another level of
-%   match-makeing for the glideins?} \mtnote{ There is lack of documentation but I
-%   assume the Collector is the component where the matchmaking function is
-%   implemented. ClassAds should be the name given to the entries published by the
-%   Glidein Factories within the WMS collector (in the case of GlideinWMS but it
-%   should be the same with the old HTCondor Glidein)}\jhanote{Out of abundance of
-%   caution, ok to use a reference to ClassAds?} \mtnote{Better?}
+%   match-makeing for the glideins?} \mtnote{ There is lack of documentation but
+%   I assume the Collector is the component where the matchmaking function is
+%   implemented. ClassAds should be the name given to the entries published by
+%   the Glidein Factories within the WMS collector (in the case of GlideinWMS
+%   but it should be the same with the old HTCondor Glidein)}\jhanote{Out of
+%   abundance of caution, ok to use a reference to ClassAds?} \mtnote{Better?}
 
 % ------------------------------------------------------------------------------
 % PANDA
@@ -3094,6 +3093,7 @@ pilot with free and available resources; 5. when required, the CU Manager stages
 also the CU's input file(s) to the target DCR; and 6. the Agent executes the CU.
 Eventually, if needed the output files of the CU can be staged to a user-defined
 destination.
+
 %\jhanote{need to add reference to the figure..} \mtnote{Done.}
 
 %% 5 core properties.
@@ -3151,22 +3151,23 @@ them is needed.}
 
 % \paragraph*{HTC and HPC}
 
-% The analysis offered in the previous subsection shows how diverse \pilot system
-% implementations conform to the set of components and functionalities defined
-% in~\S\ref{sec:understanding}. These sets are therefore minimal but also
-% necessary, as the implementation descriptions showed that \pilot deployment,
-% task submission, and task execution functionalities have to be implemented in
-% order to enable the execution of task-based workloads by means of multi-level
-% scheduling.
+% The analysis offered in the previous subsection shows how diverse \pilot
+% system implementations conform to the set of components and functionalities
+% defined in~\S\ref{sec:understanding}. These sets are therefore minimal but
+% also necessary, as the implementation descriptions showed that \pilot
+% deployment, task submission, and task execution functionalities have to be
+% implemented in order to enable the execution of task-based workloads by means
+% of multi-level scheduling.
 
 % The analysis of DIANE, HTCondor Glidein, GlideinWMS, PANDA, and RADICAL-Pilot
-% also highlighted implementation differences, especially concerning the auxiliary
-% properties of these \pilot systems. For example, based on the description of the
-% auxiliary properties offered in~\S\ref{sec:auxprops}, the described \pilot
-% systems showed not only evident variations in their architectures and data
-% management capabilities, but also in their DCR interaction model, their
-% interfaces, and interoperability. Here these differences are described, widening
-% the scope of the analysis to other relevant auxiliary properties.
+% also highlighted implementation differences, especially concerning the
+% auxiliary properties of these \pilot systems. For example, based on the
+% description of the auxiliary properties offered in~\S\ref{sec:auxprops}, the
+% described \pilot systems showed not only evident variations in their
+% architectures and data management capabilities, but also in their DCR
+% interaction model, their interfaces, and interoperability. Here these
+% differences are described, widening the scope of the analysis to other
+% relevant auxiliary properties.
 
 The analysis offered in the previous subsection shows how diverse \pilot system
 implementations conform to the set of components and functionalities defined
@@ -3176,9 +3177,9 @@ differences, especially concerning the auxiliary properties of these \pilot
 systems. For example, based on the description of the auxiliary properties
 offered in~\S\ref{sec:auxprops}, the described \pilot systems showed not only
 evident variations in their architectures and data management capabilities, but
-also in their DCR interaction model, their interfaces, and
-interoperability. Here these differences are described, widening the scope of
-the analysis to other relevant auxiliary properties.
+also in their DCR interaction model, their interfaces, and interoperability.
+Here these differences are described, widening the scope of the analysis to
+other relevant auxiliary properties.
 
 % The goal is not only to highlight the differences among Pilot systems but also
 % to show their implementation chal- lenges. In this way, the following analysis
@@ -3189,12 +3190,13 @@ the analysis to other relevant auxiliary properties.
 
 Clarifying the differences among \pilot systems implementations offers insight
 on how and when a specific implementation should be adopted, or possibly
-adapted.  The goal \jhanote{of this sub-section?} is not only to highlight the
-differences among \pilot systems, but to show the challenges in implementing
-them and to highlight the evolution that \pilot system implementations are
-undergoing. \jhanote{this is an interesting/important point. Are pilot systems
-  evolving or are they adapting to the evolution of technology/infrastructure
-  etc?}
+adapted.  The goal of of this sub-section \mtnote{Check consistency between
+sub-section and subsection} is not only to underline the differences among
+\pilot systems, but to show the challenges in implementing them and to highlight
+the evolution that \pilot system implementations are undergoing. \jhanote{this
+is an interesting/important point. Are pilot systems evolving or are they
+adapting to the evolution of technology/infrastructure etc?} \mtnote{Probably
+both?}
 
 
 % Architecture (DONE in previous subsection)
