@@ -1015,15 +1015,14 @@ for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has prior knowledge of the available
-resources while the latter has none. \jhanote{In the previous sentence, I think
-adding ``prior'' in lieu of ``complete'' would be most effective.
-OK?}\mtnote{Done.} As a consequence, AppLes can request and orchestrate a set of
-resources, allocate tasks in advance to specific workers (i.e. resources
-placeholders), and implement load balancing among resources. In voluntary
-computing tasks are pulled by the clients when they become active and, as such,
-specific resource availability is unknown in advance. This potential drawback is
-mitigated by the redundancy offered by the large scale that voluntary computing
-can reach thanks to its simpler model of worker distribution and installation.
+resources while the latter has none. As a consequence, AppLes can request and
+orchestrate a set of resources, allocate tasks in advance to specific workers
+(i.e. resources placeholders), and implement load balancing among resources. In
+voluntary computing tasks are pulled by the clients when they become active and,
+as such, specific resource availability is unknown in advance. This potential
+drawback is mitigated by the redundancy offered by the large scale that
+voluntary computing can reach thanks to its simpler model of worker distribution
+and installation.
 
 % The opportunistic use of geographically distributed resources championed by
 % voluntary computing offers several advantages. The resource landscape
@@ -1036,10 +1035,13 @@ can reach thanks to its simpler model of worker distribution and installation.
 % on the few resources that offer low-latency network interconnect.\msnote{This
 % paragraph is a good candidate for removal?}
 
-\jhanote{is ``batch'' redundant?} \mtnote{Probably
-(based on: http://research.cs.wisc.edu/htcondor/doc/condor-practice.pdf). I
-changed system to framework as system is used differently in the following
-sentence.} Condor is a high-throughput distributed computing framework that uses
+% \jhanote{is ``batch'' redundant?} \mtnote{Probably
+% (based on: http://research.cs.wisc.edu/htcondor/doc/condor-practice.pdf). I
+% changed system to framework as system is used differently in the following
+% sentence.}
+
+\jhanote{Should we be using HTCondor?}
+Condor is a high-throughput distributed computing framework that uses
 diverse and possibly geographically distributed resources~\cite{thain2005}.
 Originally, Condor was created for systems within one administrative domain but
 Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
@@ -3428,6 +3430,10 @@ they only need to present the credentials provided by the application layer (or
 directly by the user) to the DCR. As such, the requirements for AAA
 implementation within \pilot systems are minimal.
 
+\jhanote{In general, we are missing an opportunity to use the figures/diagram in
+  section 4 as an aid/tool to help (i) reinforce main points (ii) reiterate any
+  differences between the different systems.}
+
 
 % ------------------------------------------------------------------------------
 % Section 4's concluding remarks
@@ -3933,11 +3939,18 @@ coincidently is Greek for Pilot}
 \subsection{Contributions}
 \label{sec:contributions}
 
-\paragraph*{Contributions} \jhanote{(i) we provide first comprehensive
-historical and technical analysis, (ii) set the stage for a common conceptual
-model and implementation framework, and (iii) provide insight and lessons for
-other tools and higher-level frameworks, such as Workflow systems possibly}
-\mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added also contributions of 4 and 5. }
+
+\paragraph*{Contributions} \jhanote{(i) we provide comprehensive historical and
+  technical analysis of pilots, (ii) set the stage for a common conceptual model
+  and implementation framework, (iii) provide insight and lessons for other
+  tools and higher-level frameworks, such as Workflow and Workload management
+  systems, (iv) but implications/insight for software sustainability/ecosystem,
+  (v) pilots: a proxy for the limitations of resource management in distributed
+  system (mostly a legacy of resource management from HPC)}
+
+
+\mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added
+  also contributions of 4 and 5. }
 
 This paper offers several contributions to support the understanding, design,
 and adoption of \pilot systems. \S\ref{sec:history} provided an overview of both
