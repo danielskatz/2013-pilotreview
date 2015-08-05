@@ -3,33 +3,11 @@
 \input{head}
 \input{include}
 
-\usepackage{listings}
+%\usepackage{listings}
 \usepackage{paralist}
 \usepackage{multirow}
-\usepackage{flushend}
-\usepackage{lscape}
-
-\lstnewenvironment{code}[1][]%
-{
-  \noindent
-  %\minipage{0.98 \linewidth}
-  \minipage{1.0 \linewidth}
-    \vspace{0.5\baselineskip}
-    \lstset{
-        language=Python,
-    %    numbers=left,
-    %    numbersep=4pt,
-        frame=single,
-        captionpos=b,
-        stringstyle=\ttfamily,
-        basicstyle=\scriptsize\ttfamily,
-        showstringspaces=false,#1}
-}
-{\endminipage}
-
 
 \usepackage{draftwatermark}
-%\usepackage[firstpage]{draftwatermark}
 \SetWatermarkLightness{0.8}
 \SetWatermarkText{Draft}
 \SetWatermarkVerCenter{13cm}
@@ -38,12 +16,7 @@
 
 
 \begin{document}
-% \conferenceinfo{HPDC'13}{2013, New York, USA}
-% \conferenceinfo{ECMLS'11,} {June 8, 2011, San Jose, California, USA.}
 \CopyrightYear{2015}
-% \crdata{978-1-4503-0702-4/11/06}
-% \clubpenalty=10000
-% \widowpenalty = 10000
 
 \title{A Comprehensive Perspective on the Pilot-Abstraction}
 
@@ -174,13 +147,14 @@
 \label{sec:intro}
 
 % \jhanote{Building tools and components that have well-defined and
-%   well-characterized behavior, including performance. This leads to descriptive
-%   models of pilot-jobs, which while pervasive in distributed computing, are
-%   conspicuous by their absence in high-performance and data-intensive computing.
-%   By providing a firm theoretical underpinning  pilot-jobs [3], one can
-%   provide a more “programmable” and flexible yet common pilot-job for different
-%   types of distributed infrastructure, and also extend the concept of pilot-jobs
-%   to high-performance and data-intensive computing [4]}
+%   well-characterized behavior, including performance. This leads to
+%   descriptive models of pilot-jobs, which while pervasive in distributed
+%   computing, are conspicuous by their absence in high-performance and
+%   data-intensive computing. By providing a firm theoretical underpinning
+%   pilot-jobs [3], one can provide a more “programmable” and flexible yet
+%   common pilot-job for different types of distributed infrastructure, and also
+%   extend the concept of pilot-jobs to high-performance and data-intensive
+%   computing [4]}
 
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
@@ -189,11 +163,11 @@ arguably one of the most widely-used distributed computing abstractions, as
 suggested by the proliferation of \pilotjob systems used in production
 cyberinfrastructure.
 
-A variety of \pilotjob systems have emerged: Condor-G/ Glide-in~\cite{frey2002condorG},
-Swift~\cite{Wilde2011}, DIANE~\cite{Moscicki:908910},
-DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-219-6-062041},
-ToPoS~\cite{topos}, Nimrod/G~\cite{10.1109/HPC.2000.846563},
-Falkon~\cite{raicu2007} and
+A variety of \pilotjob systems have emerged: HTCondor-G/
+Glide-in~\cite{frey2002condorG}, Swift~\cite{Wilde2011},
+DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
+\panda~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
+Nimrod/G~\cite{10.1109/HPC.2000.846563}, Falkon~\cite{raicu2007} and
 MyCluster~\cite{1652061,mycluster-clade,walker2007personal} to name a few. These
 systems are for the most part functionally equivalent as they support the
 decoupling of workload submission from resource assignment. Nonetheless, their
@@ -227,20 +201,19 @@ simplifies the placement of workloads on those resources.
 % management of improving the efficiency of task assignment while shielding
 % applications from having to manage tasks across such resources.
 
-%   \onote{I think the most important reasons why Pilot Jobs being so
-%     popular (and re-invented over and over again) is that they allow
-%     the execution of small (i.e., singe / few-core) tasks efficiently
-%     on HPC infrastrucutre by massively reducing queueing time. HPC
-%     sites (from schedulers to policies) have always been (and still
-%     are) discrimatory against this type of workload in favor of the
-%     large, tightly-coupled ones. Pilot-Jobs try to counteract. While
-%     this is certainly not the main story that we want to tell, this
-%     should IMHO still be mentioned. } \jhanote{This is definitely one
-%     of the main reasons, but as Melissa pointed out it during RADICAL
-%     call, it is by no means the only reason. Need to get the different
-%     reasons down here.. then find a nice balance and description}
+%   \onote{I think the most important reasons why Pilot Jobs being so popular
+%     (and re-invented over and over again) is that they allow the execution of
+%     small (i.e., singe / few-core) tasks efficiently on HPC infrastrucutre by
+%     massively reducing queueing time. HPC sites (from schedulers to policies)
+%     have always been (and still are) discrimatory against this type of
+%     workload in favor of the large, tightly-coupled ones. Pilot-Jobs try to
+%     counteract. While this is certainly not the main story that we want to
+%     tell, this should IMHO still be mentioned. } \jhanote{This is definitely
+%     one of the main reasons, but as Melissa pointed out it during RADICAL
+%     call, it is by no means the only reason. Need to get the different reasons
+%     down here.. then find a nice balance and description}
 
- %(thus providing {\it post-facto} justification of its needs)
+% (thus providing {\it post-facto} justification of its needs)
 
 % \mtnote{Should we have a paragraph explaining the core contribution offered by
 % this paper?} \jhanote{yes} \mtnote{Should I write a first draft of it?}
@@ -297,7 +270,7 @@ insights about the future directions and challenges faced by the \pilot
 paradigm.
 
 \jhanote{these last two are not reasons for the success of pilot-jobs. they
-  arise as a consequence of the success} The \pilotjob abstraction is also a
+arise as a consequence of the success} The \pilotjob abstraction is also a
 promising route to address specific requirements of distributed scientific
 applications, such as coupled-execution and application-level
 scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}. Another concern often
@@ -759,7 +732,7 @@ predicate.} \mtnote{I shortened the paragraph to make clearer the relationship
 between the five features and the \pilot abstraction.}
 
 \mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of
-  \pilot systems as described in Subsection 2.2.}\cite{frey2002condorG}
+  \pilot systems as described in Subsection 2.2.}
 
 % ------------------------------------------------------------------------------
 % 2.1
@@ -848,14 +821,14 @@ users.
 %   i.e., you can definitely do meta scheduling without multilevel scheduling.
 %   Please argue otherwise, else I will remove meta scheduling.}
 
-{\bf Multi-level scheduling} is one of the strategies devised to improve resource
-access across multiple high-performance machines. The idea is to hide the
-scheduling point of each high-performance machine behind a single scheduler. The
-users or the applications submit their tasks to the a scheduler that negotiates
-and orchestrates the distribution of the tasks via the scheduler of each
-available high-performance machine. While this approach promises an increase in
-both scale and usability of applications, it also introduces diverse types of
-complexity across resources, middleware, and applications.
+{\bf Multi-level scheduling} is one of the strategies devised to improve
+resource access across multiple high-performance machines. The idea is to hide
+the scheduling point of each high-performance machine behind a single scheduler.
+The users or the applications submit their tasks to the a scheduler that
+negotiates and orchestrates the distribution of the tasks via the scheduler of
+each available high-performance machine. While this approach promises an
+increase in both scale and usability of applications, it also introduces diverse
+types of complexity across resources, middleware, and applications.
 
 % \jhanote{need to be more specific than grid computing} \mtnote{Any insight in
 %   what kind of specificity you are thinking about? Grid and cloud computing
@@ -898,7 +871,6 @@ placeholder decouples the acquisition of remote compute resource from their use
 to execute the tasks of a distributed application. Resources are acquired by
 scheduling a job onto the remote high-performance machine. Once executed, the
 job runs an agent capable of retrieving and executing application tasks.
-
 
 {\bf Resource placeholders} bring together multi-level scheduling to enable
 parallel execution of the tasks of distributed applications. Multi-level
@@ -951,8 +923,8 @@ evolved to include advanced capabilities like workload and data management.
 % scheduling~\cite{Pinchak02practicalheterogeneous} should be seen as early
 % \pilot system implementations.
 
-% The progressive definition and implementation of the \pilot abstraction can
-% be seen as the process of evolving both the understanding and implementation
+% The progressive definition and implementation of the \pilot abstraction can be
+% seen as the process of evolving both the understanding and implementation
 % complexity of the notion of resource placeholder.
 
 \begin{figure}[t]
@@ -965,10 +937,10 @@ evolved to include advanced capabilities like workload and data management.
     \caption{Introduction of systems over time. When available, the date of
       first mention in a publication or otherwise the release date of software
       implementation is used. \mtnote{Missing from from both Section 3 and 4:
-        WISDOM, ToPoS, Corral.}\jhanote{Corral is a WMS and not a pilot system?
+        WISDOM, ToPoS, Corral.} \jhanote{Corral is a WMS and not a pilot system?
         If so, I would remove Corral from this figure possibly. Also, from my
         quick reading, ToPoS is not a pilot system but a token pool for
-        pilots.}}
+        pilots.} \mtnote{Done.}}
     \label{fig:timeline}
 \end{figure}
 
@@ -978,7 +950,7 @@ evolved to include advanced capabilities like workload and data management.
 \begin{figure}[t]
   \centering
     \includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
-  \caption{Pilot-Job Clustering}
+  \caption{Pilot-Job Clustering \mtnote{The clustering is incomplete. Should we list all the \pilot systems we mention?}}
   \label{fig:pilotjob_clustering}
 \end{figure}
 
@@ -1045,38 +1017,38 @@ and installation.
 % changed system to framework as system is used differently in the following
 % sentence.}
 
-\jhanote{Should we be using HTCondor?}
-Condor is a high-throughput distributed computing framework that uses
-diverse and possibly geographically distributed resources~\cite{thain2005}.
-Originally, Condor was created for systems within one administrative domain but
-Flocking~\cite{Epema:1996:flocking} made it possible to group multiple Condor
-resource pools in an aggregative manner. However, resource management required
-system level software configurations that had to be made by the administrator of
-each individual resource of each Condor resource pool.
+\jhanote{Should we be using HTCondor?} \mtnote{Done in the whole document.}
+HTCondor (formerly known as Condor) is a high-throughput distributed computing
+framework that uses diverse and possibly geographically distributed
+resources~\cite{thain2005}. Originally, HTCondor was created for systems within
+one administrative domain but Flocking~\cite{Epema:1996:flocking} made it
+possible to group multiple resource pools in an aggregative manner. However,
+resource management required system level software configurations that had to be
+made by the administrator of each individual resource of each resource pool.
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
-within the Condor system. Condor-G/GlideIn~\cite{frey2002condorG} allowed users to add
-remote grid resources to Condor resource pools. In this way, users could
+within the HTCondor system. HT\-Con\-dor-G/Gli\-de\-In~\cite{frey2002condorG} allowed
+users to add remote grid resources to resource pools. In this way, users could
 uniformly execute jobs on resource pools composed by diverse resources. Thanks
-to its use of resource placeholders, GlideIn was one of the systems
-pioneering the \pilot abstraction implementation, enabling some \pilot
-capabilities also for third parties systems like Bosco~\cite{bosco}.
+to its use of resource placeholders, GlideIn was one of the systems pioneering
+the \pilot abstraction implementation, enabling some \pilot capabilities also
+for third parties systems like Bosco~\cite{bosco}.
 
 \jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
 % \jhanote{Also there is a bit of care needed: we're implying glide-in is a
 % resource placeholder -- which is part of a pilot, and not necessarily a full
-% pilot.} \mtnote{We do not use \pilotjob system so I do not think we are implying
-% that glideIn is a `full pilot' (even if I am not so sure what exactly a full
-% pilot is). I slightly edited the sentence, any better?}
+% pilot.} \mtnote{We do not use \pilotjob system so I do not think we are
+% implying that glideIn is a `full pilot' (even if I am not so sure what exactly
+% a full pilot is). I slightly edited the sentence, any better?}
 
 % \jhanote{as this is historical evolution, some parts need to be in the past
 % tense. Care will be needed to get the tense right.} \mtnote{Better?}
 
-The success of Condor-G/GlideIn shows the relevance of the pilot abstraction to
-enable scientific computation at scale and on heterogeneous resources. The
+The success of HTCondor-G/GlideIn shows the relevance of the pilot abstraction
+to enable scientific computation at scale and on heterogeneous resources. The
 implementation of GlideIn also highlighted at least two limitations: user/system
 layer isolation, and application development model. While GlideIn allows for the
 user to manage resource placeholders directly, daemons must still be running on
@@ -1107,7 +1079,7 @@ communication between different storage systems.
 %   comment.}
 
 BigJob was recently re-implemented as a production-level tool named
-`RADICAL-Pilot''~\cite{rp-paper-2015}. BigJob/RADICAL-Pilot represent an
+`RADICAL-Pilot'~\cite{rp-paper-2015}. BigJob/RADICAL-Pilot represent an
 evolution of the \pilot abstraction: initially pilots were implemented as ad hoc
 place holder machinery for a specific application but evolved to be integrated
 with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
@@ -1116,19 +1088,19 @@ can be programmatically integrated into end-user applications and thus provides
 both features.
 
 Another ongoing evolutionary trend has been to implement the \pilot abstractions
-into pilot-based workload managers, thus moving away from providing simple
-pilot capabilities in application space. These higher-level systems which are
-often centrally hosted, move critical functionality from the client to the
-server (i.e. a service model). These systems usually deploy pilot factories
-that automatically start new pilots on demand and integrate security mechanisms
-to support multiple users simultaneously.
+into pilot-based workload managers, thus moving away from providing simple pilot
+capabilities in application space. These higher-level systems which are often
+centrally hosted, move critical functionality from the client to the server
+(i.e. a service model). These systems usually deploy pilot factories that
+automatically start new pilots on demand and integrate security mechanisms to
+support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-331-7-072069},
-AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{buncicco}. Each of
-these \pilotjob systems serves a particular user community and experiment.
+AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{buncicco}. Each of these
+\pilotjob systems serves a particular user community and experiment.
 Interestingly, these systems are functionally very similar, work on almost the
 same underlying infrastructure, and serve applications with very similar (if not
 identical) characteristics.
@@ -1144,9 +1116,8 @@ identical) characteristics.
   reviewer from that system..}\jhanote{I also note that GWPilot isn't referenced
   anywhere/anymore. We should be sure to put GWPilot into that paragraph}
 
-
 GlideinWMS~\cite{sfiligoi2008glideinwms} is a higher-level workload management
-system that is based on the pilot capabilities of Condor GlideIn. The system
+system that is based on the pilot capabilities of HTCondor GlideIn. The system
 can, based on the current and expected number of jobs in the pool, automatically
 increase or decrease the number of active Glide-ins (i.e. pilots) available to
 the pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a
@@ -1159,9 +1130,9 @@ wanting to access OSG resources.
 the workload management system of the ATLAS experiment, used to run managed
 production and user analysis jobs on the grid. The ATLAS Computing Facility
 operates the pilot submission systems. This is done using the \panda `AutoPilot'
-scheduler component which submits pilot jobs via Condor-G. \panda also provides
-the ability to manage data associated the jobs managed by the \panda workload
-manager.
+scheduler component which submits pilot jobs via HTCondor-G. \panda also
+provides the ability to manage data associated the jobs managed by the \panda
+workload manager.
 
 In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
 ability to tightly integrate storage and compute resources and is also able to
@@ -1173,9 +1144,9 @@ to keep detailed track of all resources, which leads to a more simple
 implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
 
 DIRAC~\cite{1742-6596-219-6-062049} used by the LHCb experiment~\cite{lhcb} is
-another comprehensive pilot-based workload management system.
-It supports the management of data, which can be placed in different
-kinds of storage elements (e.\,g.\ based on SRM).
+another comprehensive pilot-based workload management system. It supports the
+management of data, which can be placed in different kinds of storage elements
+(e.\,g.\ based on SRM).
 
 Another interesting \pilotjob system that is used in the LHC context is
 Co-Pilot~\cite{buncicco}. Co-Pilot serves as an integration point among
@@ -1192,11 +1163,11 @@ systems. \pilotjob systems have proven an effective tool for managing the
 workloads executed in the various stages of a workflow. For the Pegasus
 project\cite{deelman2015}, the Corral
 system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
-optimize the placements of pilots with respect to their workload for the
-Pegasus workflow system. Corral serves as a front-end to Condor GlideIn. In
-contrast to GlideinWMS, Corral provides more explicit control over the placement
-and start of pilots to the end-user. Corral was later extended to also serve as
-a possible front end to GlideinWMS.
+optimize the placements of pilots with respect to their workload for the Pegasus
+workflow system. Corral serves as a front-end to HTCondor GlideIn. In contrast
+to GlideinWMS, Corral provides more explicit control over the placement and
+start of pilots to the end-user. Corral was later extended to also serve as a
+possible front end to GlideinWMS.
 
 Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
 workflows and computations. The language also provides capabilities for
@@ -1233,7 +1204,6 @@ specific functionality and inconsistent terminology calls for a standard
 vocabulary to assist in understanding the varied approaches and their
 commonalities and differences. This is primary motivation of
 Section~\ref{sec:understanding}.
-
 
 
 %------------------------------------------------------------------------------
@@ -2440,7 +2410,7 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
 \item \textbf{Interoperability}. Interoperability is defined as the capability
   to deploy pilots on DCRs characterized by heterogeneous middleware. It allows
   for a \pilot system to provision pilots and execute workloads on different
-  types of DCR middleware (e.g. HTC, HPC, Cloud but also Condor, LSF, Slurm, or
+  types of DCR middleware (e.g. HTC, HPC, Cloud but also HTCondor, LSF, Slurm, or
   Torque).
 
 % aux because: its not directly coupled to one of the components/functions
@@ -2758,7 +2728,7 @@ periods of time.
 A computational task-management tool called
 GANGA~\cite{moscicki2009ganga,ganga_url} is available to support the development
 of SubmitterScripts. GANGA offers a unified interface for job submission to DCRs
-with Globus, Condor, UNICORE, or gLite middleware. The main goal of GANGA is to
+with Globus, HTCondor, UNICORE, or gLite middleware. The main goal of GANGA is to
 facilitate the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means
 of a uniform interface and abstraction.
 
@@ -2791,7 +2761,7 @@ The HTCondor Glidein system has been designed as part of the software ecosystem
 of HTCondor. The HTCondor Glidein system implements pilots within regular Condor
 pools.  It was developed by the Center for High Throughput Computing at the
 University of Wisconsin-Madison (UW-Madison).  HTCondor Glidein's original goal
-was to aggregate DCRs with heterogeneous middleware into Condor
+was to aggregate DCRs with heterogeneous middleware into HTCondor resource
 pools~\cite{glidein_manual_url}.
 
 % \jhanote{I'm not sure the meaning of the previous sentence is clear: does it
@@ -3007,7 +2977,7 @@ administrative intervention.
 ATLAS, consisting of ~100 heterogeneous computing sites~\cite{maeno2012pd2p}.
 Recent improvements to \panda have extended the range of deployment scenarios to
 HPC and Cloud-based DCRs making \panda a general-purpose \pilot
-system~\cite{nilsson2012recent}.
+system~\cite{nilsson2012recentrp}.
 
 % Architecture.
 \panda architecture consists of a Grid Scheduler and a \panda
@@ -3255,7 +3225,7 @@ The \pilot systems described in the previous subsection offer a varying degree
 of interoperability across diverse DCRs. For example, DIANE and PANDA were
 initially designed to support mostly grid-based DCRs used by the LHC
 experiments, while HTCondor Glidein and GlideinWMS to execute tasks on the
-Condor-based DCRs. With the progressive development of both the \pilot systems
+HTCondor-based DCRs. With the progressive development of both the \pilot systems
 and DCR middleware, more types of DCR are being supported.  Collectively these
 reinforce the importance of well-defined and robust interoperability layer
 between the \pilot system and heterogeneous target DCRs.
@@ -4116,46 +4086,46 @@ required by multi-pilot, multi-DCR task executions would be very challenging.
     helpful discussions, comments and criticisms.}}
 
 % \bibliographystyle{IEEEtran}
-\bibliographystyle{abbrv}
+\bibliographystyle{ieeetr}
 \bibliography{pilotreview,literatur,saga,saga-related,urls,hadoop,pilotjob}
 
 
 \end{document}
 
 
-  \amnote{why are task dependencies (which seems to be what you call
-  'workload semantics') a core property?  A pilot system is still a pilot
-  system if it does not implement task dependencies (ahem! ;-).}
+% \amnote{why are task dependencies (which seems to be what you call
+% 'workload semantics') a core property?  A pilot system is still a pilot
+% system if it does not implement task dependencies (ahem! ;-).}
 
-  \mtnote{A pilot system implementation without tasks is a useless pilot
-  system. In this section we are not modeling (that was done in 3) but
-  reviewing/analyzing existing, real world implementations designed and used to
-  run tasks.}
+% \mtnote{A pilot system implementation without tasks is a useless pilot
+% system. In this section we are not modeling (that was done in 3) but
+% reviewing/analyzing existing, real world implementations designed and used to
+% run tasks.}
 
-  \amnote{sure, tasks are necessary.  But the paragraph explicitly
-      refers to 'relationships among tasks'.  More to the point, the
-      paragraph says: 'tasks ... are dispatched to pilots depending on
-      their semantics' -- I disagree with that: a pilot system does
-      not care about task semantics, ie. does not care if the task is
-      /bin/sleep or mdrun.  One \textit{can} implement schedulers
-      which respect task dependencies (which are part of the workload
-      semantics, but I don't see that as a core property: a stupid
-      round-robin scheduler (which does not care about any workload
-      semantics, neither in tasks not task dependencies) is perfectly
-      viable for a pilot system...}
+% \amnote{sure, tasks are necessary.  But the paragraph explicitly
+%     refers to 'relationships among tasks'.  More to the point, the
+%     paragraph says: 'tasks ... are dispatched to pilots depending on
+%     their semantics' -- I disagree with that: a pilot system does
+%     not care about task semantics, ie. does not care if the task is
+%     /bin/sleep or mdrun.  One \textit{can} implement schedulers
+%     which respect task dependencies (which are part of the workload
+%     semantics, but I don't see that as a core property: a stupid
+%     round-robin scheduler (which does not care about any workload
+%     semantics, neither in tasks not task dependencies) is perfectly
+%     viable for a pilot system...}
 
-  \mtnote{I agree. Indeed the kernel of the task is not mentioned among the
-  semantic properties taken into consideration for the scheduling decision.
-  Pilot systems that are not capable of ``dispatching decisions
-  depends on the temporal and spatial relationships among tasks'', or ``the
-  affinity between data and compute resources required by the tasks'', or ``and
-  the type of capabilities needed for their execution'' are toy systems or mere
-  conceptual possibilities that are not relevant in a section dedicated to pilot
-  systems used to run real-life scientific workloads. Do you feel we should add
-  a sentence specifying that we are not speaking about the intrinsic properties
-  of the kernel of a task? Consider that we do not have the word `kernel'
-  defined in 3, so in case of affirmative answer I may have to add that too.
-  Not a problem if you consider this necessary.}
+% \mtnote{I agree. Indeed the kernel of the task is not mentioned among the
+% semantic properties taken into consideration for the scheduling decision.
+% Pilot systems that are not capable of ``dispatching decisions
+% depends on the temporal and spatial relationships among tasks'', or ``the
+% affinity between data and compute resources required by the tasks'', or ``and
+% the type of capabilities needed for their execution'' are toy systems or mere
+% conceptual possibilities that are not relevant in a section dedicated to pilot
+% systems used to run real-life scientific workloads. Do you feel we should add
+% a sentence specifying that we are not speaking about the intrinsic properties
+% of the kernel of a task? Consider that we do not have the word `kernel'
+% defined in 3, so in case of affirmative answer I may have to add that too.
+% Not a problem if you consider this necessary.}
 
 
 
