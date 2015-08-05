@@ -2778,41 +2778,41 @@ University of Wisconsin-Madison (UW-Madison).  HTCondor Glidein's original goal
 was to aggregate DCRs with heterogeneous middleware into Condor
 pools~\cite{glidein_manual_url}.
 
-\jhanote{I'm not sure the meaning of the previous sentence is clear: does it
-  mean (a) DCRs that expose grid middleware into a pool, (b) although we don't
-  define/use federate, does ``include'' actually refer to federate?} \mtnote{I
-  would not think so. A condor pool is a list of DCRs with a set of properties
-  for each item of the list. I added a comma, better? That sentence needs to
-  convey the following: there is a condor pool, there are DCRs with a grid
-  middleware (i.e. Globus), these DCRs need to be added to the condor pool; The
-  HTCondor Glidein system does that.}\jhanote{Unless there are objections to the
-  word ``Aggregate'' I think the sentence is as simple as possible without loss
-  of correctness. OK?} \mtnote{I think there is loss of meaning: if I got the
-  literature right, it was about getting HTCondor to work with grid middleware.
-  Any specific reason because using `grid middleware' is
-  problematic?}\jhanote{the objective remains to aggregate DCRs. grid middleware
-  is a layer/mechanism.} \mtnote{I agree but DCRs are already aggregated into
-  condor pools. The problem is that without glideins they are not able to
-  aggregate DCRs with grid middleware. As such, the issue is about the layer
-  mechanism, not about DCRs in general. Let me share some of the references I
-  used to make up the opinion above:
-  \url{http://www.slideserve.com/hastin/the-glidein-service}, slide 2, ``A
-  technique for creating temporary, user controlled Condor pools using resources
-  from remote Grid sites'', slide 9, ``Running short jobs on the Grid: Condor
-  can dispatch jobs faster than Globus'';
-  \url{http://research.cs.wisc.edu/htcondor/manual/v7.6/5_4Glidein.html},
-  ``Glidein is a mechanism by which one or more grid resources (remote machines)
-  temporarily join a local Condor pool'' , ``condor\_glidein accomplishes two
-  separate tasks towards having a remote grid resource join the local Condor
-  pool. They are the set up task and the execution task''; In `Condor-G: A
-  Computation Management Agent for Multi-Institutional Grids', ``In effect, the
-  Condor-G GlideIn mechanism uses Grid protocols to dynamically create a
-  personal Condor pool out of Grid resources by “gliding-in” Condor daemons to
-  the remote resource. ''; In `Making Science in the Grid World: Using Glideins
-  to Maximize Scientific Output', ``In this paper we present the glidein
-  approach that aims to make the Grid computing as easy as working in a local
-  batch environment.''}\jhanote{I refer us to the working definition of DCR,
-  which is already comprised of a defined middleware}.
+% \jhanote{I'm not sure the meaning of the previous sentence is clear: does it
+%   mean (a) DCRs that expose grid middleware into a pool, (b) although we don't
+%   define/use federate, does ``include'' actually refer to federate?} \mtnote{I
+%   would not think so. A condor pool is a list of DCRs with a set of properties
+%   for each item of the list. I added a comma, better? That sentence needs to
+%   convey the following: there is a condor pool, there are DCRs with a grid
+%   middleware (i.e. Globus), these DCRs need to be added to the condor pool; The
+%   HTCondor Glidein system does that.}\jhanote{Unless there are objections to the
+%   word ``Aggregate'' I think the sentence is as simple as possible without loss
+%   of correctness. OK?} \mtnote{I think there is loss of meaning: if I got the
+%   literature right, it was about getting HTCondor to work with grid middleware.
+%   Any specific reason because using `grid middleware' is
+%   problematic?}\jhanote{the objective remains to aggregate DCRs. grid middleware
+%   is a layer/mechanism.} \mtnote{I agree but DCRs are already aggregated into
+%   condor pools. The problem is that without glideins they are not able to
+%   aggregate DCRs with grid middleware. As such, the issue is about the layer
+%   mechanism, not about DCRs in general. Let me share some of the references I
+%   used to make up the opinion above:
+%   \url{http://www.slideserve.com/hastin/the-glidein-service}, slide 2, ``A
+%   technique for creating temporary, user controlled Condor pools using resources
+%   from remote Grid sites'', slide 9, ``Running short jobs on the Grid: Condor
+%   can dispatch jobs faster than Globus'';
+%   \url{http://research.cs.wisc.edu/htcondor/manual/v7.6/5_4Glidein.html},
+%   ``Glidein is a mechanism by which one or more grid resources (remote machines)
+%   temporarily join a local Condor pool'' , ``condor\_glidein accomplishes two
+%   separate tasks towards having a remote grid resource join the local Condor
+%   pool. They are the set up task and the execution task''; In `Condor-G: A
+%   Computation Management Agent for Multi-Institutional Grids', ``In effect, the
+%   Condor-G GlideIn mechanism uses Grid protocols to dynamically create a
+%   personal Condor pool out of Grid resources by “gliding-in” Condor daemons to
+%   the remote resource. ''; In `Making Science in the Grid World: Using Glideins
+%   to Maximize Scientific Output', ``In this paper we present the glidein
+%   approach that aims to make the Grid computing as easy as working in a local
+%   batch environment.''}\jhanote{I refer us to the working definition of DCR,
+%   which is already comprised of a defined middleware}.
 
  \mtnote{Find out metrics on usage and target scientific communities}
 
