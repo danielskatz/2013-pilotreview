@@ -189,12 +189,12 @@ arguably one of the most widely-used distributed computing abstractions, as
 suggested by the proliferation of \pilotjob systems used in production
 cyberinfrastructure.
 
-A variety of \pilotjob systems have emerged: Condor-G/ Glide-in~\cite{condor-g},
+A variety of \pilotjob systems have emerged: Condor-G/ Glide-in~\cite{frey2002condorG},
 Swift~\cite{Wilde2011}, DIANE~\cite{Moscicki:908910},
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-219-6-062041},
 ToPoS~\cite{topos}, Nimrod/G~\cite{10.1109/HPC.2000.846563},
-Falkon~\cite{1362680} and
-MyCluster~\cite{1652061,mycluster-clade,mycluster-cluster} to name a few. These
+Falkon~\cite{raicu2007} and
+MyCluster~\cite{1652061,mycluster-clade,walker2007personal} to name a few. These
 systems are for the most part functionally equivalent as they support the
 decoupling of workload submission from resource assignment. Nonetheless, their
 implementations often serve specific use cases, target specific resources, and
@@ -257,7 +257,7 @@ development.
 
 This approach is not problematic in itself and has led to effective
 implementations that serve many million jobs a year on diverse computing
-platforms~\cite{maeno2014,katz2012}. However, the lack of an explicit
+platforms~\cite{maeno2014evolution,katz2012}. However, the lack of an explicit
 appreciation of the computing paradigm underlying \pilotjobs has undermined the
 full development of dedicated designs and implementations. This limitation is
 well illustrated not only by the effort duplication but also by an overall
@@ -381,13 +381,13 @@ jobs.
 % fault tolerant mechanism, many \pilotjob systems monitor failed jobs
 % and have the ability to restart them within the given time frame of
 % the \pilotjob's total
-% runtime~\cite{1742-6596-219-6-062049,condor-g,nilsson2011atlas}.
+% runtime~\cite{1742-6596-219-6-062049,frey2002condorG,nilsson2011atlas}.
 
 % In order to appreciate \pilotjobs, we outline the evolution of
 % \pilot-like capabilities ultimately leading to the creation of the
 % first actual \pilotjob. We present a brief chronological order of
 % \pilotjob-like systems, beginning with simple Master-Worker-based
-% applications through advanced workload management systems.
+% applications through advanced workload management systems.~\cite{}
 
 % \subsubsection*{The Evolution of \pilotjobs}\label{sssec:evolution}
 
@@ -506,11 +506,11 @@ jobs.
 
 % As established in the introduction, \pilotjobs have proven to be an effective
 % tool for task-level parallelism. \mtnote{Do we introduce task-level
-% parallelism explicitly?} (Note that the current term \textit{\pilotjob} is
-% not as old as the concept itself, and the word \pilot for this concept was
-% likely introduced around 2004 in the context of the LHC data challenge.
-% \alnote{the concept or the name? figure 2 goes back way further than 2004} It's
-% first written appearance is in a 2005 LHCb report\cite{lhcb2005}).
+% parallelism explicitly?} (Note that the current term \textit{\pilotjob} is not
+% as old as the concept itself, and the word \pilot for this concept was likely
+% introduced around 2004 in the context of the LHC data challenge.
+% \alnote{the concept or the name? figure 2 goes back way further than 2004}
+% It's first written appearance is in a 2005 LHCb report\cite{nobrega2005lhcb}).
 % \msnote{find a nice place for this line} One common use for the \pilotjob
 % paradigm is to enable the Master-Worker (M-W) scheme \mtnote{We use pattern
 % istead of schema in the next paragraph.} and its associated frameworks for
@@ -521,30 +521,30 @@ jobs.
 % large scale parallel computing. In determining the necessary processing power
 % for weather forecasting, he estimated that 64000 human \textit{computers}
 % would be required for solving the equations. These computers would all be
-% assigned a part of the globe by a central \textit{senior clerk}. The
-% computers would perform their calculations and the results would be collected
-% by the clerk. This was in effect a Master-Worker pattern.
+% assigned a part of the globe by a central \textit{senior clerk}. The computers
+% would perform their calculations and the results would be collected by the
+% clerk. This was in effect a Master-Worker pattern.
 
 % Figure~\ref{fig:timeline} shows the introduction of the discussed systems and
-% terms. When available, the date of first mention in a publication or
-% otherwise the release date of software implementation is used.
+% terms. When available, the date of first mention in a publication or otherwise
+% the release date of software implementation is used.
 
 % In the context of present distributed systems, the M-W scheme was initially
-% used for farming tasks from a master to a various number of workers, and
-% could easily be adapted to run in a platform-independent way across
-% potentially heterogeneous resources~\cite{masterworker, Goux00anenabling}.
-% M-W based frameworks could respond to dynamically changing resources by
-% adapting the number of workers to match the resource
-% availability.\mtnote{Should this paragraph be expanded so to include some
-% description/example of the referenced distributed systems and capabilities?}
+% used for farming tasks from a master to a various number of workers, and could
+% easily be adapted to run in a platform-independent way across potentially
+% heterogeneous resources~\cite{masterworker, Goux00anenabling}. M-W based
+% frameworks could respond to dynamically changing resources by adapting the
+% number of workers to match the resource availability.\mtnote{Should this
+% paragraph be expanded so to include some description/example of the referenced
+% distributed systems and capabilities?}
 
 % As distributed computing infrastructures became more popular and available,
 % user demand drove the need for efficient shared allocation of heterogeneous
 % resources. Leveraging the batch processing concept, first used in the time of
 % punchcards [ref], job schedulers were created to accommodate these needs,
 % often called ``batch queuing systems''. The adoption of batch queuing meant
-% users were expected to submit their tasks to the job scheduler (queue) of
-% each cluster and grid system.
+% users were expected to submit their tasks to the job scheduler (queue) of each
+% cluster and grid system.
 % \msnote{From here its an obvious (side)-step to meta scheduling?}
 
 % Often, the type of scheduler on a one machine was different than that of
@@ -759,7 +759,7 @@ predicate.} \mtnote{I shortened the paragraph to make clearer the relationship
 between the five features and the \pilot abstraction.}
 
 \mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of
-  \pilot systems as described in Subsection 2.2.}
+  \pilot systems as described in Subsection 2.2.}\cite{frey2002condorG}
 
 % ------------------------------------------------------------------------------
 % 2.1
@@ -769,7 +769,7 @@ between the five features and the \pilot abstraction.}
 To the best of the authors' knowledge, the term `pilot' was first coined in
 2004 in the context of the Large Hadron Collider (LHC) Computing Grid (LCG) Data
 Challenge\footnote{Based on private communication.}, and then introduced in
-writing as `pilot-agent' in a 2005 LHCb report\cite{lhcb2005}. Despite its
+writing as `pilot-agent' in a 2005 LHCb report\cite{nobrega2005lhcb}. Despite its
 relatively recent explicit naming, the \pilot abstraction addresses a problem
 already well-known at the beginning of the twentieth century: {\bf task-level}
 distribution and parallelism on multiple resources.
@@ -864,8 +864,8 @@ complexity across resources, middleware, and applications.
 
 Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. Some approaches, for example those developed under the
-umbrellas of grid computing~\cite{raicu2007,singh2005,ramakrishnan2006} or cloud
-computing~\cite{foster2008,juve2008,villegas2012,song2009}, targeted the
+umbrellas of grid computing~\cite{raicu2007,singh2005,ramakrishnan2006toward} or
+cloud computing~\cite{foster2008,juve2008,villegas2012,song2009}, targeted the
 resource layer, others the application layer as, for example, with workflow
 frameworks. All these approaches offered and still offer some degree of success
 for specific applications and use cases but a general solution based on
@@ -1058,7 +1058,7 @@ each individual resource of each Condor resource pool.
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
-within the Condor system. Condor-G/GlideIn~\cite{condor-g} allowed users to add
+within the Condor system. Condor-G/GlideIn~\cite{frey2002condorG} allowed users to add
 remote grid resources to Condor resource pools. In this way, users could
 uniformly execute jobs on resource pools composed by diverse resources. Thanks
 to its use of resource placeholders, GlideIn was one of the systems
@@ -1093,9 +1093,9 @@ compute tasks.  BigJob offers application-level programmability to provide the
 end-user with more flexibility and control over the design of distributed
 application and the isolation of the management of their execution. BigJob is
 flexible and extensible and uses the Simple API for Grid Applications (SAGA)
-interoperability library~\cite{saga-x,goodale2006,luckow2010} to work on a
-variety of infrastructures.  Additionally, BigJob has also been extended to work
-with data and, analogous to compute pilots, to abstract away direct user
+interoperability library~\cite{merzky2015saga,goodale2006,luckow2010} to work on
+a variety of infrastructures.  Additionally, BigJob has also been extended to
+work with data and, analogous to compute pilots, to abstract away direct user
 communication between different storage systems.
 
 % was recently re-implemented as a production-level tool named
@@ -1107,7 +1107,7 @@ communication between different storage systems.
 %   comment.}
 
 BigJob was recently re-implemented as a production-level tool named
-`RADICAL-Pilot''~\cite{review_rp-paper-2015}. BigJob/RADICAL-Pilot represent an
+`RADICAL-Pilot''~\cite{rp-paper-2015}. BigJob/RADICAL-Pilot represent an
 evolution of the \pilot abstraction: initially pilots were implemented as ad hoc
 place holder machinery for a specific application but evolved to be integrated
 with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
@@ -1127,7 +1127,7 @@ Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
 DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-331-7-072069},
-AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{copilot-tr}. Each of
+AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{buncicco}. Each of
 these \pilotjob systems serves a particular user community and experiment.
 Interestingly, these systems are functionally very similar, work on almost the
 same underlying infrastructure, and serve applications with very similar (if not
@@ -1145,7 +1145,7 @@ identical) characteristics.
   anywhere/anymore. We should be sure to put GWPilot into that paragraph}
 
 
-GlideinWMS~\cite{1742-6596-119-6-062044} is a higher-level workload management
+GlideinWMS~\cite{sfiligoi2008glideinwms} is a higher-level workload management
 system that is based on the pilot capabilities of Condor GlideIn. The system
 can, based on the current and expected number of jobs in the pool, automatically
 increase or decrease the number of active Glide-ins (i.e. pilots) available to
@@ -1167,7 +1167,7 @@ In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
 ability to tightly integrate storage and compute resources and is also able to
 manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
-the data. AliEn deploys a pull-based model~\cite{Saiz:2003:alien} assuming that
+the data. AliEn deploys a pull-based model~\cite{saiz2003alien} assuming that
 the resource pool is dynamic, and that a pull model doesn't require the broker
 to keep detailed track of all resources, which leads to a more simple
 implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
@@ -1178,7 +1178,7 @@ It supports the management of data, which can be placed in different
 kinds of storage elements (e.\,g.\ based on SRM).
 
 Another interesting \pilotjob system that is used in the LHC context is
-Co-Pilot~\cite{copilot-tr}. Co-Pilot serves as an integration point among
+Co-Pilot~\cite{buncicco}. Co-Pilot serves as an integration point among
 different grid \pilotjob systems (such as AliEn and \panda), clouds, and
 volunteer computing resources. Co-Pilot provides components for building a
 framework for seamless and transparent integration of these resources into
@@ -1206,7 +1206,7 @@ between application tasks. Swift uses a \pilot implementation called
 requirements by supporting various types of infrastructure, including clouds and
 grids.
 
-Swift has also been used in conjunction with Falkon~\cite{1362680}. Falkon was
+Swift has also been used in conjunction with Falkon~\cite{raicu2007}. Falkon was
 engineered for executing many small tasks on HPC systems and shows high
 performance compared to the native queuing systems. Falkon is a paradigmatic
 example of how the \pilot abstraction can be implemented to support very
@@ -2994,7 +2994,7 @@ binding is not available.
 \mtnote{NOTE: references needs to be added to the whole subsection.}
 
 % Who did it and for what scientific domains.
-\panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} was
+\panda (Production and Distributed Analysis)~\cite{zhao2011panda} was
 developed to provide a multi-user workload management system (WMS) for
 ATLAS~\cite{aad2008atlas}. ATLAS is a particle detector at the Large Hadron
 Collider (LHC) at CERN that requires a WMS to handle large numbers of tasks for
@@ -3004,19 +3004,20 @@ of system state and a high degree of automation to reduce user and
 administrative intervention.
 
 \panda has been initially deployed as an HTC-oriented, multi-user WMS system for
-ATLAS, consisting of ~100 heterogeneous computing sites~\cite{maeno_pd2p:_2012}.
+ATLAS, consisting of ~100 heterogeneous computing sites~\cite{maeno2012pd2p}.
 Recent improvements to \panda have extended the range of deployment scenarios to
 HPC and Cloud-based DCRs making \panda a general-purpose \pilot
 system~\cite{nilsson2012recent}.
 
 % Architecture.
-\panda architecture consists of a Grid Scheduler and a \panda Server. The Grid
-Scheduler is implemented by a component called `AutoPilot' that submits jobs to
-diverse DCRs. The \panda server is implemented by four main components: a Task
-Buffer, a Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects
-all the submitted tasks into a global queue and the Broker prioritizes and binds
-those tasks to DCRs on the basis of multiple criteria. The Data Service stages
-the tasks' input file(s) to the DCR to which the tasks have been bound using the
+\panda architecture consists of a Grid Scheduler and a \panda
+Server~\cite{panda_architecture_url,maeno2011overview}. The Grid Scheduler is
+implemented by a component called `AutoPilot' that submits jobs to diverse DCRs.
+The \panda server is implemented by four main components: a Task Buffer, a
+Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects all the
+submitted tasks into a global queue and the Broker prioritizes and binds those
+tasks to DCRs on the basis of multiple criteria. The Data Service stages the
+tasks' input file(s) to the DCR to which the tasks have been bound using the
 data transfer technologies exposed by the DCR middleware (e.g. uberftp, gridftp,
 or lcg-cp). The Job Dispatcher delivers the tasks to the RunJob(s) running on
 the bound DCR.
@@ -3039,43 +3040,46 @@ for tasks to execute.
 \end{figure}
 
 % Execution model.
-The execution model of PANDA can be summarized in seven steps: 1. the user
-submits tasks to the \panda server; 2. the tasks are queued within the Task
-Buffer; 3. the tasks requirements are evaluated by the Broker and bound to a
-DCR; 4. the tasks' input files are staged to the bound DCR by the Data Service;
-5. the required pilot(s) are submitted as jobs to the target DCR; 6. the
-   submitted pilot(s) becomes available and reports back to the Job Dispatcher;
-7. tasks are dispatched to the available pilots for execution.
+The execution model of PANDA can be summarized in seven
+steps~\cite{nilsson2011atlas,pandarun_url}: 1. the user submits tasks to the
+\panda server; 2. the tasks are queued within the Task Buffer; 3. the tasks
+requirements are evaluated by the Broker and bound to a DCR; 4. the tasks' input
+files are staged to the bound DCR by the Data Service; 5. the required pilot(s)
+are submitted as jobs to the target DCR; 6. the submitted pilot(s) becomes
+available and reports back to the Job Dispatcher; 7. tasks are dispatched to the
+available pilots for execution.
 
 %% 5 core properties.
 
 % Pilot Resources.
 \panda pilots expose computational resources. Pilots are designed to expose
 mainly a single core but extensions have been developed to instantiate pilots
-with multiple cores. The Data Service of \panda allows to integrate and automate
-data staging within the task execution process but no pilot-based data
-abstractions are offered. Network resources are assumed to be available but no
-network-specific abstractions are made available.
+with multiple cores~\cite{crooks2012multi}. The Data Service of \panda allows to
+integrate and automate data staging within the task execution process but no
+pilot-based data abstractions are offered~\cite{maeno2012pd2p}. Network
+resources are assumed to be available but no network-specific abstractions are
+made available.
 
 % Pilot Deployment.
 The AutoPilot component of \panda's Grid Scheduler has been designed to use
 multiple methods to submit pilots to DCRs. The \panda installations of the US
-ATLAS infrastructure uses the HTCondor-G system to submit pilots to the US
-production sites. Other schedulers enable AutoPilot to submit to local and
-remote batch systems or to the GlideinWMS frontend. Submissions via the
-canonical tools offered by HTCondor have also been used to submit tasks to cloud
-resources via
+ATLAS infrastructure uses the HTCondor-G~\cite{frey2002condorG} system to submit
+pilots to the US production sites. Other schedulers enable AutoPilot to submit
+to local and remote batch systems or to the GlideinWMS frontend. Submissions via
+the canonical tools offered by HTCondor have also been used to submit tasks to
+cloud resources via
 \panda.
 
 % Workload Semantics.
 \panda was initially designed to serve specifically the ATLAS use case and, as
 such, to execute mostly single-core tasks with input and output files. Since its
 initial design, the ATLAS analysis and simulation tools have started to
-investigate multi-core task execution with AthenaMP~\cite{crooks2012} and \panda
-has been evolving towards a general purpose workload manager. As a consequence,
-\panda is starting to offer experimental support for multi-core pilots and tasks
-with or without data dependences. \panda also now supports applications from a
-variety of science domains.\cite{x,y}.
+investigate multi-core task execution with AthenaMP~\cite{crooks2012multi} and
+\panda has been evolving towards a general purpose workload
+manager~\cite{maeno2014evolution}. As a consequence, \panda is starting to offer
+experimental support for multi-core pilots and tasks with or without data
+dependences. \panda also now supports applications from a variety of science
+domains.\cite{x,y}.
 
 % workload binding.
 \panda offers late binding but not early binding capabilities. Workload jobs are
@@ -3151,10 +3155,10 @@ pilot abstraction is offered for their abstraction.
 
 % Pilot Deployment.
 The Pilot Manager deploys the Agents of RADICAL-Pilot by means of the
-SAGA-python API~\cite{sagax}. SAGA provides access to diverse DCR middleware via
-an unified and coherent API, and thus RADICAL-Pilot can submit pilots to
-resources exposed by XSEDE and NERSC~\cite{nersc_url}, by the OSG HTCondor
-pools, and many ``leadership'' class systems like those managed by
+SAGA-python API~\cite{merzky2015saga}. SAGA provides access to diverse DCR
+middleware via an unified and coherent API, and thus RADICAL-Pilot can submit
+pilots to resources exposed by XSEDE and NERSC~\cite{nersc_url}, by the OSG
+HTCondor pools, and many ``leadership'' class systems like those managed by
 OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}.
 
 The resulting separation of agent deployment from DCR architecture makes the
@@ -3295,7 +3299,7 @@ distributed applications. This degree of heterogeneity can be justified with
 special-purpose \pilot systems but it may lead to fragmentation and duplication
 of effort with general-purpose systems.
 
-Open APIs like the one specified in~\cite{luckow2012b} and implemented by
+Open APIs like the one specified in~\cite{pstar-2012} and implemented by
 RADICAL-Pilot offer the missing layer on which workflow and, more generally,
 distributed applications could be built upon. As with the resource layer, \pilot
 systems offers a well-defined and well-isolated layer between applications and
@@ -3765,10 +3769,10 @@ associated with its use in a scientific, production-grade computing environment,
 the \pilot paradigm has relevant implications also for the enterprise sector,
 which has seen an increased adoption of distributed computing.
 
-Over the past years, Hadoop~\cite{hadoop} emerged as distributed computing for
-data-intensive tasks in the enterprise sector. While early versions of Hadoop
-were monolithic, tightly coupling the Map Reduce programming framework to the
-underlying infrastructure resource management, Hadoop~2 introduced the
+Over the past years, Hadoop~\cite{hadoop_url} emerged as distributed computing
+for data-intensive tasks in the enterprise sector. While early versions of
+Hadoop were monolithic, tightly coupling the Map Reduce programming framework to
+the underlying infrastructure resource management, Hadoop~2 introduced the
 YARN~\cite{yarn-paper} resource manager to support not only Map Reduce but also
 heterogeneous workloads.
 
