@@ -3206,8 +3206,6 @@ systems. For example, based on the description of the auxiliary properties
 offered in~\S\ref{sec:auxprops}, the described \pilot systems showed not only
 evident variations in their architectures and data management capabilities, but
 also in their DCR interaction model, their interfaces, and interoperability.
-Here these differences are described, widening the scope of the analysis to
-other relevant auxiliary properties.
 
 % The goal is not only to highlight the differences among Pilot systems but also
 % to show their implementation chal- lenges. In this way, the following analysis
@@ -3218,14 +3216,16 @@ other relevant auxiliary properties.
 
 Clarifying the differences among \pilot systems implementations offers insight
 on how and when a specific implementation should be adopted, or possibly
-adapted.  The goal of of this sub-section \mtnote{Check consistency between
-sub-section and subsection} is not only to underline the differences among
-\pilot systems, but to show the challenges in implementing them and to highlight
-the evolution that \pilot system implementations are undergoing. \jhanote{this
-is an interesting/important point. Are pilot systems evolving or are they
-adapting to the evolution of technology/infrastructure etc?} \mtnote{Probably
-both?}
+adapted.  Here these differences are described, widening the scope of the
+analysis to other relevant auxiliary properties, and to thereby highlight the
+challenges in implementing them.
 
+\jhanote{this we now do in the next section: as well as the co-evolution of
+  \pilot system implementations and technology/infrastructure.}
+
+% \jhanote{this is an interesting/important point. Are pilot systems evolving or
+%   are they adapting to the evolution of technology/infrastructure etc?}
+% \mtnote{Probably both?}
 
 % Architecture (DONE in previous subsection)
 
@@ -3237,33 +3237,24 @@ of interoperability across diverse DCRs. For example, DIANE and PANDA were
 initially designed to support mostly grid-based DCRs used by the LHC
 experiments, while HTCondor Glidein and GlideinWMS to execute tasks on the
 Condor-based DCRs. With the progressive development of both the \pilot systems
-and DCR middleware, more types of DCR are being supported.  This also imposes
-decision capabilities on the task scheduler and the development of a robust
-interoperability layer between the \pilot system and heterogeneous target DCRs,
-collectively reinforcing the importance of well-defined and interoperble
-capabilities for pilot deployment.
-
-\jhanote{highlighting the relevance of task execution localization} \jhanote{the
-  concept of task execution localization is insufficiently
-  developed. ``localization'' occurs only once in the context of pilot
-  deployment. I too am not sure what is being said, ``relevance of task
-  execution localization''.}\jhanote{Also reading through the next two
-  paragraphs, I struggle to distinguish task execution localization and task
-  deployment?}\jhanote{Also what is unique about task localization as
-  encountered by pilots vis-a-vis task localization encountered by general
-  distributed applications? I would say deployment remains a major challenge of
-  distributed applications and computing; this is trivially (???) reflected in
-  the challenges faced by pilot systems. Glad to discuss further if I am missing
-  something?}
+and DCR middleware, more types of DCR are being supported.  Collectively these
+reinforce the importance of well-defined and robust interoperability layer
+between the \pilot system and heterogeneous target DCRs.
 
 
-Given advances, it is not surprising that GlideinWMS and PANDA have
-begun to support multi-pilot, multi-DCRs execution. These \pilot systems
-implement articulated workload management components with well-isolated
-scheduling elements and robust communication and coordination infrastructures.
-Without such an architecture, a robust implementation of the higher-level
-capabilities required by multi-pilot, multi-DCR task executions would be very
-challenging.
+GlideIn, PANDA, and RADICAL-Pilot support diverse DCR middleware including
+typical HPC, grid, and cloud batch systems. As seen
+in~\S\ref{fig:core_vocabulary}, this flexibility is possible due to the
+generality of the notion of resource placeholder and its independence from the
+specificities of the target infrastructures and their middleware. Placeholders
+abstract the notions of resources, scheduling, and task execution, creating a
+well-defined and isolated logical space for the management of task execution.
+It remains to be understood under what conditions and for what type of
+application each implementation of a placeholder is more appropriate.
+
+
+% This also imposes decision capabilities on the task scheduler and the
+% development of a 
 
 
 % Robustness
@@ -3272,17 +3263,11 @@ challenging.
 
 % DCR Interaction
 
-The \pilot systems described in the previous subsection present differences also
-in the two auxiliary properties: DCR Interaction and Interface. GlideWMS, PANDA,
-and RADICAL-Pilot support diverse DCR middleware including typical HPC, grid,
-and cloud batch systems. As seen in~\S\ref{fig:core_vocabulary}, this
-flexibility is possible due to the generality of the notion of resource
-placeholder and its independence from the specificities of the target
-infrastructures and their middleware. Placeholders abstract the notions of
-resources, scheduling, and task execution, creating a well-defined and isolated
-logical space for the management of task execution. It remains to be understood
-under what conditions and for what type of application each implementation of a
-placeholder is more appropriate.
+% The \pilot systems described in the previous subsection present differences also
+% in the two auxiliary properties: DCR Interaction and Interface. 
+% \jhanote{can we remove the previous sentence. And just have the following
+%   sentences following on from the previous sentence?}
+
 
 % Interfaces
 
@@ -3933,6 +3918,20 @@ often serve specific requirements, use cases, and infrastructures.
 
 \jhanote{move from 4.3. to be fixed}
 
+\jhanote{highlighting the relevance of task execution localization} \jhanote{the
+  concept of task execution localization is insufficiently
+  developed. ``localization'' occurs only once in the context of pilot
+  deployment. I too am not sure what is being said, ``relevance of task
+  execution localization''.}\jhanote{Also reading through the next two
+  paragraphs, I struggle to distinguish task execution localization and task
+  deployment?}\jhanote{Also what is unique about task localization as
+  encountered by pilots vis-a-vis task localization encountered by general
+  distributed applications? I would say deployment remains a major challenge of
+  distributed applications and computing; this is trivially (???) reflected in
+  the challenges faced by pilot systems. Glad to discuss further if I am missing
+  something?}
+
+
 % \jhanote{one possibility is to move text from here... till the end of ... play a
 %   relevant role in the efficient execution of data-oriented, distributed
 %   applications.. into section 5. This would focus 4.3 on a discussion of 4.1/4.2
@@ -3978,6 +3977,16 @@ resources needs to be assessed for every execution and carefully leveraged to
 optimize not only time to completion but also resource utilization. These
 optimizations may be the determining factor to enable the execution of
 applications with stringent data, compute, or networking requirements.
+
+Given advances, it is not surprising that GlideinWMS and PANDA have begun to
+support multi-pilot, multi-DCRs execution. These \pilot systems implement
+articulated workload management components with well-isolated scheduling
+elements and robust communication and coordination infrastructures.  Without
+such an architecture, a robust implementation of the higher-level capabilities
+required by multi-pilot, multi-DCR task executions would be very challenging.
+
+
+
 
 \jhanote{I'm not sure I see the connection between these paragraphs. Also maybe
   we could structure this sub-section into ``discuss differences'' and leave
