@@ -1899,12 +1899,12 @@ binding.
     \label{fig:core_vocabulary}
 \end{figure}
 
-\mtnote{Lessons learned to be discussed before writing them down
-  here.}\jhanote{do you mean ``here''?} \mtnote{As in: at this point of the
-  subsection. Reading the whole Section in a go I am wondering whether we need
-  to add more. The paragraph describing Figure~\ref{fig:core_vocabulary} seems
-  to offer a summary of the main contributions and we have discussed
-  contentious points along the way. }
+% \mtnote{Lessons learned to be discussed before writing them down
+%   here.}\jhanote{do you mean ``here''?} \mtnote{As in: at this point of the
+%   subsection. Reading the whole Section in a go I am wondering whether we need
+%   to add more. The paragraph describing Figure~\ref{fig:core_vocabulary} seems
+%   to offer a summary of the main contributions and we have discussed
+%   contentious points along the way. }
 
 The wide spectrum of available implementations of the logical components of a
 \pilot system is explored in the next section.
@@ -2338,24 +2338,27 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
 \hline
 \end{tabular}
 \caption{\textbf{Summary of Auxiliary Properties and their descriptions.}
-  \jhanote{Given that we have reduced our discussion of auxiliary properties,
-    I think the binding them to ``components'' and ``functionality'' is a bit
-    constraining if not misleading. We could remove the last two columns, and
-    where needed in the core properties introduce a mention of relevant
-    components/functionality into the description. This has a major advantage of
-    making this table more space efficient, i.e., by reduce to 3 formal columns:
-    core/aux, property and description, and using the description more flexibly.
-    thoughts?}
-  \mtnote{The mapping between core properties, components, and functionalities
-    is used heavily in the text so I would leave it. Agreed for the auxiliary
-    in the current version of the text. I would split the table in two tables,
-    one for core properties, the other for auxiliary without the last two
-    columns, and reference/place them accordingly.}
-  \jhanote{Yes, this makes sense.}
-  \mtnote{Done.}
 }
 \label{table:aux_properties}
 \end{table*}
+
+
+  % \jhanote{Given that we have reduced our discussion of auxiliary properties,
+  %   I think the binding them to ``components'' and ``functionality'' is a bit
+  %   constraining if not misleading. We could remove the last two columns, and
+  %   where needed in the core properties introduce a mention of relevant
+  %   components/functionality into the description. This has a major advantage of
+  %   making this table more space efficient, i.e., by reduce to 3 formal columns:
+  %   core/aux, property and description, and using the description more flexibly.
+  %   thoughts?}
+  % \mtnote{The mapping between core properties, components, and functionalities
+  %   is used heavily in the text so I would leave it. Agreed for the auxiliary
+  %   in the current version of the text. I would split the table in two tables,
+  %   one for core properties, the other for auxiliary without the last two
+  %   columns, and reference/place them accordingly.}
+  % \jhanote{Yes, this makes sense.}
+  % \mtnote{Done.}
+
 
 % \jhanote{alternate style suggestion: moved the earlier last sub-sentence to
 %   the beginning. i've commented out the original text in case you'd like to
@@ -2387,8 +2390,8 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
   application use cases, deployment strategies, or interoperability
   requirements.  The analysis and comparison of architectural choices is limited
   to the trade-offs implied by each choice, especially when considering how they
-  affect the Core Properties.  \jhanote{sentence needs attention: plurality of
-  ``choice'' seems inconsistent?}  \mtnote{Better?}
+  affect the Core Properties. %  \jhanote{sentence needs attention: plurality of
+  % ``choice'' seems inconsistent?}  \mtnote{Better?}
     \jhanote{lower case for core properties? either way, we should be
     consistent, e.g., previous paragraph we use l.c.} \mtnote{I proposed to
     review this towards the end of the paper review so to have a global lock.}
@@ -2633,10 +2636,10 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 % documentation of the \pilot systems under analysis is distinguished by using
 % the \impterm{Typewriter} font.
 
-\mtnote{Do we need this formatting devices? They are not always added to every
-  use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the
-  moment we are not using them but please let me know whether you think we
-  should go back to them.}
+% \mtnote{Do we need this formatting devices? They are not always added to every
+%   use of the terms and they make the text a bit `heavy' for me.} \mtnote{At the
+%   moment we are not using them but please let me know whether you think we
+%   should go back to them.}
 
 \mtnote{Pilot systems analyzed: DIANE, HTCONDOR, PANDA, RADICAL Pilot. Explain
   why so few: we now introduce 4 exemplar cases showing how systems developed to
@@ -2715,16 +2718,18 @@ and CLI that allows for staging files in and out of ApplicationAgents. This
 service represents an abstraction of the data resources and capabilities offered
 by the DCR, and it is designed to handle data only in the form of files stored
 into a file system. Network resources are assumed to be available and no
-abstractions are offered. \jhanote{``bind to'' compute resources in the first
-  sentence?? i.e., is it the pilots that are being bound or do they act as the
-  intermediary?} \mtnote{I see pilots always as intermediaries but if you think
-  it is preferable, I would have no issues with using ``bind to compute
-  resources''.}  \jhanote{I'm fine with ``bind'' as an intermediary, but then we
-  need to specify what is bound to what. currently only the resource is
-  specified as one entity that is being bound.} \mtnote{Would ``hold'' instead
-  of ``bind'' be clearer? For me it would be better as it would avoid
-  overloading of ``bind'' as used in binding tasks to a pilot.}\jhanote{hold is
-  fine. consistent with placeholder too.} \mtnote{Done.}
+abstractions are offered. 
+
+% \jhanote{``bind to'' compute resources in the first sentence?? i.e., is it the
+%   pilots that are being bound or do they act as the intermediary?} \mtnote{I see
+%   pilots always as intermediaries but if you think it is preferable, I would
+%   have no issues with using ``bind to compute resources''.}  \jhanote{I'm fine
+%   with ``bind'' as an intermediary, but then we need to specify what is bound to
+%   what. currently only the resource is specified as one entity that is being
+%   bound.} \mtnote{Would ``hold'' instead of ``bind'' be clearer? For me it would
+%   be better as it would avoid overloading of ``bind'' as used in binding tasks
+%   to a pilot.}\jhanote{hold is fine. consistent with placeholder too.}
+% \mtnote{Done.}
 
 % Pilot Deployment
 DIANE leaves the user free to develop deployment mechanisms tailored to specific
@@ -2770,7 +2775,8 @@ The HTCondor Glidein system has been designed as part of the software ecosystem
 of HTCondor. The HTCondor Glidein system implements pilots within regular Condor
 pools.  It was developed by the Center for High Throughput Computing at the
 University of Wisconsin-Madison (UW-Madison).  HTCondor Glidein's original goal
-was to aggregate DCRs into Condor pools~\cite{glidein_manual_url}.
+was to aggregate DCRs with heterogeneous middleware into Condor
+pools~\cite{glidein_manual_url}.
 
 \jhanote{I'm not sure the meaning of the previous sentence is clear: does it
   mean (a) DCRs that expose grid middleware into a pool, (b) although we don't
@@ -3163,7 +3169,8 @@ and late binding, depending on the use case and the user specifications.
 % -----------------------------------------------------------------------------
 % 4.3
 %
-\subsection{Implementation Differences and Overall observations}
+\subsection{Implementation Discussion}
+%Differences and Overall observations}
 \label{sec:context}
 
 \mtnote{Some of the auxiliary properties are missing from the following
