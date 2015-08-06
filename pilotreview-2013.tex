@@ -3186,8 +3186,8 @@ them is needed.}
 
 The analysis offered in the previous subsection shows how diverse \pilot system
 implementations conform to the set of components and functionalities defined
-in~\S\ref{sec:understanding}.  The analysis of DIANE, HTCondor Glidein,
-GlideinWMS, PANDA, and RADICAL-Pilot also highlighted implementation
+in~\S\ref{sec:understanding}.  The analysis of DIANE, HTCondor Glidein (and
+GlideinWMS), PANDA, and RADICAL-Pilot also highlighted implementation
 differences, especially concerning the auxiliary properties of these \pilot
 systems. For example, based on the description of the auxiliary properties
 offered in~\S\ref{sec:auxprops}, the described \pilot systems showed not only
@@ -3202,10 +3202,15 @@ also in their DCR interaction model, their interfaces, and interoperability.
 % indications on how and when a specific implementation should be adopted.
 
 Clarifying the differences among \pilot systems implementations offers insight
-on how and when a specific implementation should be adopted, or possibly
-adapted.  Here these differences are described, widening the scope of the
-analysis to other relevant auxiliary properties, and to thereby highlight the
-challenges in implementing them.
+into how and when a specific implementation should be adopted, or possibly
+adapted. Understanding the differences will also help appreciate the challenges
+in implementing them.
+
+\jhanote{I propose the following sentence can be removed? If yes, then the
+  previous sentence can be merged with the previous paragraph, as opposed to
+  being stand-alone} Here these differences are described, widening the scope of
+the analysis to other relevant auxiliary properties, and to thereby highlight
+the challenges in implementing them.
 
 \jhanote{this we now do in the next section: as well as the co-evolution of
   \pilot system implementations and technology/infrastructure.}
@@ -3222,22 +3227,20 @@ challenges in implementing them.
 The \pilot systems described in the previous subsection offer a varying degree
 of interoperability across diverse DCRs. For example, DIANE and PANDA were
 initially designed to support mostly grid-based DCRs used by the LHC
-experiments, while HTCondor Glidein and GlideinWMS to execute tasks on the
-HTCondor-based DCRs. With the progressive development of both the \pilot systems
-and DCR middleware, more types of DCR are being supported.  Collectively these
-reinforce the importance of well-defined and robust interoperability layer
-between the \pilot system and heterogeneous target DCRs.
-
-
-GlideIn, PANDA, and RADICAL-Pilot support diverse DCR middleware including
-typical HPC, grid, and cloud batch systems. As seen
-in~\S\ref{fig:core_vocabulary}, this flexibility is possible due to the
+experiments, while Glidein to execute tasks on the HTCondor-based DCRs. With the
+progressive development of both the \pilot systems and DCR middleware, more
+types of DCR are being supported.  GlideIn, PANDA, and RADICAL-Pilot support
+diverse DCR middleware including typical HPC, grid, and cloud batch systems.
+This in part reinforces the importance of well-defined and robust
+interoperability layer between the \pilot system and heterogeneous target DCRs.
+As seen in~\S\ref{fig:core_vocabulary}, this flexibility is possible due to the
 generality of the notion of resource placeholder and its independence from the
 specificities of the target infrastructures and their middleware. Placeholders
 abstract the notions of resources, scheduling, and task execution, creating a
 well-defined and isolated logical space for the management of task execution.
 It remains to be understood under what conditions and for what type of
 application each implementation of a placeholder is more appropriate.
+
 
 
 % This also imposes decision capabilities on the task scheduler and the
@@ -3258,14 +3261,20 @@ application each implementation of a placeholder is more appropriate.
 
 % Interfaces
 
+\jhanote{I understand the rationale for explicitly separating out Glidein and
+  GlideinWMS, but I would make a mention of Glidein and associated tools once
+  somewhere, and then keep it simple and readable by using only Glidein}
+
 Each \pilot system described in the previous subsection exposes a different
-interface. \jhanote{to the user?} DIANE, HTCondor Glidein, GlideinWMS, and
-PANDA offer command line tools tailored to specific use cases, applications, and
-DCRs. RADICAL-Pilot exposes instead an API but both the DIANE and PANDA command
-line tools are built on API that users may directly access and use to develop
-distributed applications. This degree of heterogeneity can be justified with
-special-purpose \pilot systems but it may lead to fragmentation and duplication
-of effort with general-purpose systems.
+interface. \jhanote{to what? for what?} DIANE, Glidein, and PANDA offer command
+line tools tailored
+%DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer command line tools tailored
+to specific use cases, applications, and DCRs. RADICAL-Pilot exposes an API;
+DIANE and PANDA command line tools are built on API that users may directly
+access and use to develop distributed applications. This degree of heterogeneity
+can be justified with special-purpose \pilot systems but it may lead to
+fragmentation and duplication of effort with general-purpose
+systems. \jhanote{I'm not sure I see the point of the last sentence}
 
 Open APIs like the one specified in~\cite{luckow2012towards} and implemented by
 RADICAL-Pilot offer the missing layer on which workflow and, more generally,
@@ -3278,9 +3287,13 @@ avoids the need to develop special-purpose, vertical, and end-to-end
 applications, the main source of duplication and fragmentation in the current
 distributed application and tooling landscape.
 
+
+
 % Security and multitenancy
 
-Finally, DIANE, HTCondor Glidein, GlideinWMS, PANDA, and RADICAL-Pilot implement
+%Finally, DIANE, HTCondor Glidein, GlideinWMS, PANDA, and RADICAL-Pilot
+%implement
+Finally, DIANE, Glidein, PANDA, and RADICAL-Pilot implement
 different types of authentication, authorization, and accounting processes
 (AAA). Nonetheless, the AAA requirements specific to \pilot system
 implementations can be limited to: (i) the single or multitenancy of the
