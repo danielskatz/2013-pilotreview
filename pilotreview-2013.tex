@@ -937,10 +937,7 @@ evolved to include advanced capabilities like workload and data management.
     \caption{Introduction of systems over time. When available, the date of
       first mention in a publication or otherwise the release date of software
       implementation is used. \mtnote{Missing from from both Section 3 and 4:
-        WISDOM, ToPoS, Corral.} \jhanote{Corral is a WMS and not a pilot system?
-        If so, I would remove Corral from this figure possibly. Also, from my
-        quick reading, ToPoS is not a pilot system but a token pool for
-        pilots.} \mtnote{Done.}}
+        WISDOM} }
     \label{fig:timeline}
 \end{figure}
 
@@ -950,7 +947,10 @@ evolved to include advanced capabilities like workload and data management.
 \begin{figure}[t]
   \centering
     \includegraphics[width=.45\textwidth]{figures/pilotjob-clustering.pdf}
-  \caption{Pilot-Job Clustering \mtnote{The clustering is incomplete. Should we list all the \pilot systems we mention?}}
+    \caption{A partial clustering of pilots along functionality. \mtnote{The
+        clustering is incomplete. Should we list all the \pilot systems we
+        mention?} \jhanote{We should for now just mention that its partial. More
+        importantly,  should we revisit the axis labels?}}
   \label{fig:pilotjob_clustering}
 \end{figure}
 
@@ -1017,7 +1017,6 @@ and installation.
 % changed system to framework as system is used differently in the following
 % sentence.}
 
-\jhanote{Should we be using HTCondor?} \mtnote{Done in the whole document.}
 HTCondor (formerly known as Condor) is a high-throughput distributed computing
 framework that uses diverse and possibly geographically distributed
 resources~\cite{thain2005}. Originally, HTCondor was created for systems within
@@ -1598,10 +1597,10 @@ as, for example, that of virtual machine, the term `job' has become too
 restrictive, a situation that can lead to terminological and conceptual
 confusion.
 
-\mtnote{nitpick: `those based on virtual machines' does not exclude jobs and
-  schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to
-  instantiate VMs.} \jhanote{Agreed. Please suggest alternative}
-  \mtnote{Better?}
+% \mtnote{nitpick: `those based on virtual machines' does not exclude jobs and
+%   schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to
+%   instantiate VMs.} \jhanote{Agreed. Please suggest alternative}
+%   \mtnote{Better?}
 
 % \jhanote{I removed VMs to be a bit more specific}
 
@@ -1618,9 +1617,9 @@ potentially be distributed over multiple and diverse DCRs.
 
 % \mtnote{We may want to use resource overlay in Section 4.3 when we describe
 %   multi-DCR, multi-pilot scenarios.}
-\jhanote{Matteo to add a hook to resource overlay the first time the
-  multi-pilot, multi-DCR are used downstream.}
-  \mtnote{Done.}
+% \jhanote{Matteo to add a hook to resource overlay the first time the
+%   multi-pilot, multi-DCR are used downstream.}
+%   \mtnote{Done.}
 
 % The details of this aggregation or federation is outside the scope of this
 % paper.
@@ -1646,9 +1645,9 @@ Three more terms associated with \pilot systems need to be explicitly defined:
   here.} \mtnote{I am not sure I follow. We may want to discuss this on a
   call/meeting.}
 
-\jhanote{As agreed, we will introduce 3-4 sentences for multi-stage and
-  multi-entity, we will eschew multi-level scheduling. MT to refine/rewrite
-  accordingly} \mtnote{Better?}
+% \jhanote{As agreed, we will introduce 3-4 sentences for multi-stage and
+%   multi-entity, we will eschew multi-level scheduling. MT to refine/rewrite
+%   accordingly} \mtnote{Better?}
 
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: pilots and
