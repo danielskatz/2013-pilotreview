@@ -165,10 +165,10 @@ cyberinfrastructure.
 
 A variety of \pilotjob systems have emerged: HTCondor-G/
 Glide-in~\cite{frey2002condorG}, Swift~\cite{Wilde2011},
-DIANE~\cite{Moscicki:908910}, DIRAC~\cite{1742-6596-219-6-062049},
-\panda~\cite{1742-6596-219-6-062041}, ToPoS~\cite{topos},
-Nimrod/G~\cite{10.1109/HPC.2000.846563}, Falkon~\cite{raicu2007} and
-MyCluster~\cite{1652061,mycluster-clade,walker2007personal} to name a few. These
+DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
+\panda~\cite{chiu2010pilot}, Nimrod/G~\cite{buyya2000nimrod},
+Falkon~\cite{raicu2007} and
+MyCluster~\cite{walker2006creating,walker2007personal} to name a few. These
 systems are for the most part functionally equivalent as they support the
 decoupling of workload submission from resource assignment. Nonetheless, their
 implementations often serve specific use cases, target specific resources, and
@@ -273,7 +273,7 @@ paradigm.
 arise as a consequence of the success} The \pilotjob abstraction is also a
 promising route to address specific requirements of distributed scientific
 applications, such as coupled-execution and application-level
-scheduling~\cite{ko-efficient,DBLP:conf/hpdc/KimHMAJ10}. Another concern often
+scheduling~\cite{ko2010efficient,kim2010exploring}. Another concern often
 addressed by \pilotjobs is fault tolerance which commonly refers to the ability
 of the \pilotjob system to verify the execution environment before executing
 jobs.
@@ -354,7 +354,7 @@ jobs.
 % fault tolerant mechanism, many \pilotjob systems monitor failed jobs
 % and have the ability to restart them within the given time frame of
 % the \pilotjob's total
-% runtime~\cite{1742-6596-219-6-062049,frey2002condorG,nilsson2011atlas}.
+% runtime~\cite{casajus2010dirac,frey2002condorG,nilsson2011atlas}.
 
 % In order to appreciate \pilotjobs, we outline the evolution of
 % \pilot-like capabilities ultimately leading to the creation of the
@@ -572,7 +572,7 @@ jobs.
 %Core \pilotjob systems focus on the basic \pilot capabilities, i.\,e.\ the
 %provisioning of the placeholder job capability. Various Master-Worker systems
 %that provide such a mechanism (e.\,g.\
-%Nimrod-G~\cite{10.1109/HPC.2000.846563}). Condor-G/Glide-In is the most
+%Nimrod-G~\cite{buyya2000nimrod}). Condor-G/Glide-In is the most
 %well-known \pilotjob system.  \msnote{Im tempted to not make claims like this,
 %especially not without backing up.}
 
@@ -580,7 +580,7 @@ jobs.
 %MyCluster~\cite{Walker:2007:PAC:1285840.1285848}, MySGE~\cite{mysge},
 %GridBot~\cite{Silberstein:2009:GEB:1654059.1654071} and LGI~\cite{lgi}.
 
-%Nimrod-G~\cite{10.1109/HPC.2000.846563}, DIANE~\cite{diane-thesis} and Work
+%Nimrod-G~\cite{buyya2000nimrod}, DIANE~\cite{diane-thesis} and Work
 %Queue~\cite{workqueue-pyhpc2011} are examples of Master-Worker systems that
 %utilize a placeholder agent that dispatches and manages tasks. For example,
 %Nimrod-G utilizes a Job Wrapper that is responsible for pulling a task and its
@@ -903,7 +903,7 @@ without competing with other users for the high-performance machine scheduler.
 \subsection{Evolution of Pilot System Implementations}
 \label{sec:histimpl}
 
-The \pilot abstraction has a rich set of properties~\cite{pstar-2012} that have
+The \pilot abstraction has a rich set of properties~\cite{luckow2012towards} that have
 been progressively implemented into multiple \pilotjob systems.
 Figure~\ref{fig:timeline} shows the introduction of \pilotjob systems over time
 while Figure~\ref{fig:pilotjob_clustering} shows their clustering along the axes
@@ -913,7 +913,7 @@ independently from the resource management, \pilotjob systems progressively
 evolved to include advanced capabilities like workload and data management.
 
 
-% As seen in Ref.~\cite{pstar-2012}, the \pilot abstraction has a rich set of
+% As seen in Ref.~\cite{luckow2012towards}, the \pilot abstraction has a rich set of
 % properties and its implementations offer a vast array of capabilities
 % including multiple scheduling algorithms, data and compute placeholders, and
 % late or early binding. Nonetheless, the capability of acquiring remote
@@ -954,12 +954,12 @@ evolved to include advanced capabilities like workload and data management.
   \label{fig:pilotjob_clustering}
 \end{figure}
 
-AppLeS~\cite{Berman:1996:apples} is a framework for application-level scheduling
-and offers an example of an early implementation of resource placeholder. AppLeS
-provides an agent that can be embedded into an application thus enabling the
-application to acquire resources and to schedule tasks onto these. Besides \MW,
-AppLeS also provides application templates, e.\,g.\ for parameter sweep and
-moldable parallel applications~\cite{Berman:2003:ACG:766629.766632}.
+AppLeS~\cite{berman1996application} is a framework for application-level
+scheduling and offers an example of an early implementation of resource
+placeholder. AppLeS provides an agent that can be embedded into an application
+thus enabling the application to acquire resources and to schedule tasks onto
+these. Besides \MW, AppLeS also provides application templates, e.\,g.\ for
+parameter sweep and moldable parallel applications~\cite{berman2003adaptive}.
 
 AppLeS offered user-level control of scheduling but did not isolate the
 application layer from the management and coordination of task execution. Any
@@ -983,12 +983,12 @@ volunteer worker can be seen as an opportunistic resource placeholder and, as
 such, an implementation of the core functionality of the \pilot abstraction.
 
 The first public volunteer computing projects were The Great Internet Mersenne
-Prime Search effort\cite{woltman:2004:gimps}, shortly followed by
-distributed.net~\cite{Lawton:2000:distributednet} in 1997 to compete in the
+Prime Search effort\cite{woltman2004great}, shortly followed by
+distributed.net~\cite{lawton2000distributed} in 1997 to compete in the
 RC5-56 secret-key challenge, and the SETI@Home project, which set out to
 analyze radio telescope data. The generic BOINC distributed master-worker
 framework grew out of SETI@Home, becoming the {\it de facto} standard framework
-for voluntary computing~\cite{Anderson:2004:BSP:1032646.1033223}.
+for voluntary computing~\cite{anderson2004boinc}.
 
 It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has prior knowledge of the available
@@ -1021,7 +1021,7 @@ and installation.
 HTCondor (formerly known as Condor) is a high-throughput distributed computing
 framework that uses diverse and possibly geographically distributed
 resources~\cite{thain2005}. Originally, HTCondor was created for systems within
-one administrative domain but Flocking~\cite{Epema:1996:flocking} made it
+one administrative domain but Flocking~\cite{epema1996worldwide} made it
 possible to group multiple resource pools in an aggregative manner. However,
 resource management required system level software configurations that had to be
 made by the administrator of each individual resource of each resource pool.
@@ -1030,12 +1030,12 @@ made by the administrator of each individual resource of each resource pool.
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
-within the HTCondor system. HT\-Con\-dor-G/Gli\-de\-In~\cite{frey2002condorG} allowed
-users to add remote grid resources to resource pools. In this way, users could
-uniformly execute jobs on resource pools composed by diverse resources. Thanks
-to its use of resource placeholders, GlideIn was one of the systems pioneering
-the \pilot abstraction implementation, enabling some \pilot capabilities also
-for third parties systems like Bosco~\cite{bosco}.
+within the HTCondor system. HT\-Con\-dor-G/Gli\-de\-In~\cite{frey2002condorG}
+allowed users to add remote grid resources to resource pools. In this way, users
+could uniformly execute jobs on resource pools composed by diverse resources.
+Thanks to its use of resource placeholders, GlideIn was one of the systems
+pioneering the \pilot abstraction implementation, enabling some \pilot
+capabilities also for third parties systems like Bosco~\cite{weitzel2012campus}.
 
 \jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
 % \jhanote{Also there is a bit of care needed: we're implying glide-in is a
@@ -1097,8 +1097,8 @@ support multiple users simultaneously.
 
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
-of pilots, e.\,g.\ DIANE~\cite{Moscicki:908910}, GlideInWMS,
-DIRAC~\cite{1742-6596-219-6-062049}, \panda~\cite{1742-6596-331-7-072069},
+of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
+DIRAC~\cite{casajus2010dirac}, \panda~\cite{1742-6596-331-7-072069},
 AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{buncicco}. Each of these
 \pilotjob systems serves a particular user community and experiment.
 Interestingly, these systems are functionally very similar, work on almost the
@@ -1138,12 +1138,12 @@ In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
 ability to tightly integrate storage and compute resources and is also able to
 manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
-the data. AliEn deploys a pull-based model~\cite{saiz2003alien} assuming that
+the data. AliEn deploys a pull-based model~\cite{saiz2003alienpr} assuming that
 the resource pool is dynamic, and that a pull model doesn't require the broker
 to keep detailed track of all resources, which leads to a more simple
 implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
 
-DIRAC~\cite{1742-6596-219-6-062049} used by the LHCb experiment~\cite{lhcb} is
+DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb} is
 another comprehensive pilot-based workload management system. It supports the
 management of data, which can be placed in different kinds of storage elements
 (e.\,g.\ based on SRM).
@@ -2640,7 +2640,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 \subsubsection{DIANE}\label{sec:diane}
 
 % Who did it and for what scientific domains.
-DIANE~\cite{Moscicki:908910} (DIstributed ANalysis Environment) has been
+DIANE~\cite{moscicki2003diane} (DIstributed ANalysis Environment) has been
 developed at CERN to support the execution of workloads for the DCRs associated
 with EGI/WLCG. DIANE has since been used also in the Life
 Sciences~\cite{moscicki2004biomedical,jacq2007virtual,moscicki2003} and in few
@@ -2648,7 +2648,7 @@ other scientific domains~\cite{bacu2011gswat,mantero2003simulation}.
 
 % Architecture.
 DIANE is an application task coordination framework for distributed applications
-that can be executed by means of the \MW pattern~\cite{Moscicki:908910}. DIANE
+that can be executed by means of the \MW pattern~\cite{moscicki2003diane}. DIANE
 consists of four logical components: a TaskScheduler, an ApplicationManager, a
 SubmitterScript, and a set of ApplicationWorkers~\cite{diane_url}. The first two
 components -- TaskScheduler and the ApplicationManager, are implemented as a
@@ -3269,7 +3269,7 @@ distributed applications. This degree of heterogeneity can be justified with
 special-purpose \pilot systems but it may lead to fragmentation and duplication
 of effort with general-purpose systems.
 
-Open APIs like the one specified in~\cite{pstar-2012} and implemented by
+Open APIs like the one specified in~\cite{luckow2012towards} and implemented by
 RADICAL-Pilot offer the missing layer on which workflow and, more generally,
 distributed applications could be built upon. As with the resource layer, \pilot
 systems offers a well-defined and well-isolated layer between applications and
