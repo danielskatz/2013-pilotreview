@@ -164,7 +164,7 @@ suggested by the proliferation of \pilotjob systems used in production
 cyberinfrastructure.
 
 A variety of \pilotjob systems have emerged: HTCondor-G/
-Glide-in~\cite{frey2002condorG}, Swift~\cite{Wilde2011},
+Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
 DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
 \panda~\cite{chiu2010pilot}, Nimrod/G~\cite{buyya2000nimrod},
 Falkon~\cite{raicu2007} and
@@ -1079,7 +1079,7 @@ communication between different storage systems.
 %   comment.}
 
 BigJob was recently re-implemented as a production-level tool named
-`RADICAL-Pilot'~\cite{rp-paper-2015}. BigJob/RADICAL-Pilot represent an
+`RADICAL-Pilot'~\cite{merzky2015radical}. BigJob/RADICAL-Pilot represent an
 evolution of the \pilot abstraction: initially pilots were implemented as ad hoc
 place holder machinery for a specific application but evolved to be integrated
 with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
@@ -1098,8 +1098,8 @@ support multiple users simultaneously.
 Several of these have been developed in the context of the LHC experiment at
 CERN, which is associated with a major increase in the uptake and availability
 of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
-DIRAC~\cite{casajus2010dirac}, \panda~\cite{1742-6596-331-7-072069},
-AliEn~\cite{1742-6596-119-6-062012} and Co-Pilot~\cite{buncicco}. Each of these
+DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
+AliEn~\cite{saiz2003alien} and Co-Pilot~\cite{buncicco2011co}. Each of these
 \pilotjob systems serves a particular user community and experiment.
 Interestingly, these systems are functionally very similar, work on almost the
 same underlying infrastructure, and serve applications with very similar (if not
@@ -1123,10 +1123,10 @@ increase or decrease the number of active Glide-ins (i.e. pilots) available to
 the pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a
 hosted service. GlideinWMS attempts to hide the pilot capabilities rather than
 exposing them to the user. GlideinWMS is currently deployed in production on the
-Open Science Grid (OSG)~\cite{url_osg} and is the recommended mode for new users
+Open Science Grid (OSG)~\cite{osg_url} and is the recommended mode for new users
 wanting to access OSG resources.
 
-\panda (Production and Distributed Analysis)~\cite{1742-6596-331-7-072069} is
+\panda (Production and Distributed Analysis)~\cite{zhao2011panda} is
 the workload management system of the ATLAS experiment, used to run managed
 production and user analysis jobs on the grid. The ATLAS Computing Facility
 operates the pilot submission systems. This is done using the \panda `AutoPilot'
@@ -1134,7 +1134,7 @@ scheduler component which submits pilot jobs via HTCondor-G. \panda also
 provides the ability to manage data associated the jobs managed by the \panda
 workload manager.
 
-In addition to processing, AliEn~\cite{1742-6596-119-6-062012} also provides the
+In addition to processing, AliEn~\cite{saiz2003alien} also provides the
 ability to tightly integrate storage and compute resources and is also able to
 manage file replicas. While all data can be accessed from anywhere, the
 scheduler is aware of data localities and attempts to schedule compute close to
@@ -1143,13 +1143,13 @@ the resource pool is dynamic, and that a pull model doesn't require the broker
 to keep detailed track of all resources, which leads to a more simple
 implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
 
-DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb} is
+DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb_url} is
 another comprehensive pilot-based workload management system. It supports the
 management of data, which can be placed in different kinds of storage elements
 (e.\,g.\ based on SRM).
 
 Another interesting \pilotjob system that is used in the LHC context is
-Co-Pilot~\cite{buncicco}. Co-Pilot serves as an integration point among
+Co-Pilot~\cite{buncicco2011co}. Co-Pilot serves as an integration point among
 different grid \pilotjob systems (such as AliEn and \panda), clouds, and
 volunteer computing resources. Co-Pilot provides components for building a
 framework for seamless and transparent integration of these resources into
@@ -1161,19 +1161,18 @@ Physics community.
 The \pilot abstraction has also been integrated into scientific workflow
 systems. \pilotjob systems have proven an effective tool for managing the
 workloads executed in the various stages of a workflow. For the Pegasus
-project\cite{deelman2015}, the Corral
-system~\cite{Rynge:2011:EUG:2116259.2116599} was developed to support the
-optimize the placements of pilots with respect to their workload for the Pegasus
-workflow system. Corral serves as a front-end to HTCondor GlideIn. In contrast
-to GlideinWMS, Corral provides more explicit control over the placement and
-start of pilots to the end-user. Corral was later extended to also serve as a
-possible front end to GlideinWMS.
+project\cite{deelman2015}, the Corral system~\cite{rynge2011experiences} was
+developed to support the optimize the placements of pilots with respect to their
+workload for the Pegasus workflow system. Corral serves as a front-end to
+HTCondor GlideIn. In contrast to GlideinWMS, Corral provides more explicit
+control over the placement and start of pilots to the end-user. Corral was later
+extended to also serve as a possible front end to GlideinWMS.
 
-Swift~\cite{Wilde2011} is a scripting language designed for expressing abstract
+Swift~\cite{wilde2011swift} is a scripting language designed for expressing abstract
 workflows and computations. The language also provides capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
-``Coaster''~\cite{coasters}, developed to address workload management
+``Coaster''~\cite{coasters_url}, developed to address workload management
 requirements by supporting various types of infrastructure, including clouds and
 grids.
 
@@ -3067,9 +3066,9 @@ The authors of this paper have been engaged in theoretical and practical aspects
 of \pilot systems for the past several years. In addition to formulating the P*
 Model~\cite{luckow2012} which by most accounts is the first complete conceptual
 model of a pilot system, the RADICAL group is responsible for the development
-and maintenance of RADICAL-Pilot\cite{rp-paper2015,rp_url}. RADICAL-Pilot is the
-group's long-term effort for creating a production level \pilot system. The
-effort is built upon the experience gained from developing and deploying
+and maintenance of RADICAL-Pilot\cite{merzky2015radical,rp_url}. RADICAL-Pilot
+is the group's long-term effort for creating a production level \pilot system.
+The effort is built upon the experience gained from developing and deploying
 BigJob~\cite{luckow2010}, and and integrating it with many applications on
 different DCRs~\cite{x,y,z}.
 
@@ -3132,7 +3131,7 @@ HTCondor pools, and many ``leadership'' class systems like those managed by
 OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}.
 
 The resulting separation of agent deployment from DCR architecture makes the
-addition of support for a DCR relatively simple~\ref{rp-paper2015}. This is
+addition of support for a DCR relatively simple~\ref{merzky2015radical}. This is
 demonstrated by the relative ease with which RADICAL-Pilot is extended to
 support (i) a new DCR, such as IaaS, and (ii) DCR that have different middleware
 but essentially similar architecture, for example the Cray supercomputers
@@ -3743,7 +3742,7 @@ Over the past years, Hadoop~\cite{hadoop_url} emerged as distributed computing
 for data-intensive tasks in the enterprise sector. While early versions of
 Hadoop were monolithic, tightly coupling the Map Reduce programming framework to
 the underlying infrastructure resource management, Hadoop~2 introduced the
-YARN~\cite{yarn-paper} resource manager to support not only Map Reduce but also
+YARN~\cite{vavilapalli2013apache} resource manager to support not only Map Reduce but also
 heterogeneous workloads.
 
 YARN supports multi-level scheduling enabling the application to deploy their
@@ -3758,12 +3757,12 @@ then can execute tasks in these containers.
 As with the HPC environment, the support for different application workloads and
 job types as long-lived vs. short-lived applications, or homogeneous vs.
 heterogeneous tasks is challenging. \pilot-like frameworks are emerging for YARN
-to address such a challenge. Llama~\cite{llama} offers a long-running
-application master for YARN designed for the Impala SQL engine. TEZ~\cite{tez}
-is a DAG processing engine primarily designed to support the Hive SQL engine
-allowing the application to hold containers across multiple phases of the DAG
-execution without the need to de/reallocate resources.
-REEF~\cite{Chun:2013:RRE:2536274.2536318} is a similar runtime environment that
+to address such a challenge. Llama~\cite{llama_url} offers a long-running
+application master for YARN designed for the Impala SQL engine.
+TEZ~\cite{tez_url} is a DAG processing engine primarily designed to support the
+Hive SQL engine allowing the application to hold containers across multiple
+phases of the DAG execution without the need to de/reallocate resources.
+REEF~\cite{chun2013reef} is a similar runtime environment that
 provides applications a higher-level abstractions to YARN resources allowing it
 to retain memory and cores supporting heterogeneous workloads.
 
@@ -4087,7 +4086,7 @@ required by multi-pilot, multi-DCR task executions would be very challenging.
 
 % \bibliographystyle{IEEEtran}
 \bibliographystyle{ieeetr}
-\bibliography{pilotreview,literatur,saga,saga-related,urls,hadoop,pilotjob}
+\bibliography{pilotreview}
 
 
 \end{document}
