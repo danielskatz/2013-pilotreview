@@ -3640,30 +3640,43 @@ back mainly to two factors: (i) the relatively recent discovery of the
 importance of the \pilot paradigm; and (ii) the development model fostered
 within academic institutions.
 
-As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
-as a pragmatic solution for improving the throughput of distributed
-applications, and designed as local and point solution.  \pilot systems were not
-thought from their inception as an independent class of middleware but, at best,
-as a module within a specific framework.  This not only promoted duplication of
-development effort across frameworks and projects but also hindered the
-appreciation for the generality of the \pilot abstraction, the theoretical
-framework underlying the \pilot systems, and the application execution paradigm
-they enable. \jhanote{need consistency about whether we want to refer to pilots
-  as a system or type/class of middleware}
+As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems were
+developed to serve a specific use case, e.g., they emerged as a pragmatic
+solution for improving the throughput of distributed applications, and designed
+as local and point solution.  \pilot systems were not thought from their
+inception as an independent and well-defined system, but, at best, as a module
+within a specific framework.  \pilot systems also inherited the development
+model of the scientific projects within which they were initially developed.  As
+a consequence, these systems were not engineered to promote (re)usability,
+modularity, well-defined interfaces, or long-term sustainability.  Collectively,
+this not only promoted duplication of development effort across frameworks and
+projects but also hindered the appreciation for the generality of the \pilot
+abstraction, the theoretical framework underlying the \pilot systems, and the
+application execution paradigm they enable.
 
-\pilot systems inherited the development model of the scientific projects
-within which they were initially developed. Most of the early \pilot systems
-were developed to serve a specific use case, often within the remit of a
-specific research project. As a consequence, these systems were not engineered
-to promote (re)usability, modularity, well-defined interfaces, or long-term
-sustainability. Furthermore, for the most part code was not build around a
-wider community, following recognized and widely-accepted coding standards.
+% As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems emerged
+% as a pragmatic solution for improving the throughput of distributed
+% applications, and designed as local and point solution.  \pilot systems were not
+% thought from their inception as an independent and well-defined system, but, at
+% best, as a module within a specific framework.  This not only promoted
+% duplication of development effort across frameworks and projects but also
+% hindered the appreciation for the generality of the \pilot abstraction, the
+% theoretical framework underlying the \pilot systems, and the application
+% execution paradigm they enable.
 
-\jhanote{tentative location} Currently, no \pilot system exposes networking
-resources by means of placeholders but there is no theoretical limitation to the
-implementation of what may be called `\pilot networks'. With the advent of
-Software-Defined Networking and User-Schedulable Network paths in mind, the
-concept was already hinted at in \cite{santcroos2012}.
+% \jhanote{there is some compactification that can be done by merging these two
+%   paragraphs. Sentence that begins with, ``... Most of the early \pilot systems
+%   were developed to serve a specific use case, often within the remit of a
+%   specific research project.'' can replace the sentence, ``pragmatic solution..''}
+
+% \pilot systems inherited the development model of the scientific projects within
+% which they were initially developed.  Most of the early \pilot systems were
+% developed to serve a specific use case, often within the remit of a specific
+% research project. As a consequence, these systems were not engineered to promote
+% (re)usability, modularity, well-defined interfaces, or long-term sustainability.
+
+%Furthermore, for the most part code was not build around a
+%wider community, following recognized and widely-accepted coding standards.
 
 % All this is likely to change with the progressive appreciation of the
 % generality, richness, and versatility of the \pilot paradigm. The ongoing
@@ -3685,24 +3698,16 @@ concept was already hinted at in \cite{santcroos2012}.
 % distributed and parallel applications executed on diverse types of
 % infrastructure.
 
-\jhanote{important point about removing artificial distinction between HPC and
-  HTC and why.. but can we integrate the next two paragraphs with discussion in
-  5.1?} As argued in the previous section, \pilot systems are agnostic towards
-the type of application that is executed. They need to be engineered so to
-support different types of applications but the \pilot paradigm and its
-underlying notions of resource placeholder and multi-level scheduling do not
-require for the application to be distributed, parallel, MPI, closed-coupled, or
-communication independent. This shows how historical distinctions between, for
-example, HPC and HTC are progressively loosing their meaning when considering
-resource provisioning and application execution by means of \pilot systems.
 
-\pilots holds resources and the properties of such resources can be arbitrarily
-specified. Analogously, \pilots allow for tasks to be scheduled but the type of
-matching between the requirements of these tasks and the capabilities offered by
-the resources held by the pilot is not mandated by the \pilot paradigm itself.
-For this reason, adopting the \pilot paradigm for the execution of increasingly
-diverse applications should be seen as a set of often challenging implementation
-details more than a foundational issue requiring new middleware paradigms.
+% \jhanote{important point about removing artificial distinction between HPC and
+%   HTC and why..but for later..}
+% and its underlying notions of resource placeholder and multi-level scheduling do
+% not require for the application to be distributed, parallel, MPI,
+% closed-coupled, or communication independent. This shows how historical
+% distinctions between, for example, HPC and HTC are progressively loosing their
+% meaning when considering resource provisioning and application execution by
+% means of \pilot systems.
+
 
 % It is relevant to stress how \pilot systems allow for the unification of the
 % execution process of diverse type of applications outside the remit of the
@@ -3744,8 +3749,8 @@ details more than a foundational issue requiring new middleware paradigms.
 % original idea. Should we move this to future trends?}
 
 The analysis offered in this paper indicates that the number of \pilot systems
-actively developed should be reduced so to avoid duplication while promoting
-consolidation, robustness, and overall capabilities. Nonetheless, this
+actively developed can be reduced so to avoid duplication while promoting
+consolidation, robustness, and overall capabilities.  Nonetheless, this
 conclusion should not be taken to an extreme. A single \pilot system should not
 be elected as the only implementation worthy of development effort or
 adoption. As with other software systems and middleware~\cite{bernstein1996} the
@@ -3761,115 +3766,60 @@ consolidation is the diversity in programming languages used, the different
 deployment models required, and what that means for the interaction with
 existing applications.
 
-\mtnote{Consider whether to add a paragraph about interoperability among \pilot
-  systems. I would probably not do it as it does not seem of primary relevance
-  to me.}\jhanote{I might add: we are not advocating interoperability of
-  pilot. if there is a compelling reason for the community, then they will
-  self-organize. What we're saying is that any attempt at interoperability will
-  be successful/should be taken only after adequate advances in conceptual
-  understanding exists. This paper is arguably the most comprehensive paper
-  towards that end goal.}
+As argued in the previous section, \pilot systems are agnostic towards the type
+of application that is executed. They can be engineered so to support different
+types of applications and application objectives. \pilots hold resources and the
+properties of such resources can also be arbitrarily specified. Thus the \pilot paradigm
+%allow for tasks to be scheduled but the
+does not mandate the type of matching between the requirements of these tasks
+and the capabilities offered by the resources held by the pilot. For this
+reason, adopting the \pilot paradigm for the execution of increasingly diverse
+applications on new infrastructure or different resources should be seen as a
+set of often challenging implementation details more than a foundational issue
+requiring new paradigms.
 
-\jhanote{I will move/integrate in right place..} Moving away from the
-relationship between the \pilot paradigm and critical implementation details
-associated with its use in a scientific, production-grade computing environment,
-the \pilot paradigm has relevant implications also for the enterprise sector,
-which has seen an increased adoption of distributed computing.
 
-Over the past years, Hadoop~\cite{hadoop_url} emerged as distributed computing
-for data-intensive tasks in the enterprise sector. While early versions of
-Hadoop were monolithic, tightly coupling the Map Reduce programming framework to
-the underlying infrastructure resource management, Hadoop~2 introduced the
-YARN~\cite{vavilapalli2013apache} resource manager to support not only Map Reduce but also
-heterogeneous workloads.
+% Moving away from the relationship between the \pilot paradigm and critical
+% implementation details associated with its use in a scientific, production-grade
+% computing environment, the \pilot paradigm has relevant implications also for
+% the enterprise sector, which has seen an increased adoption of distributed
+% computing.
 
-YARN supports multi-level scheduling enabling the application to deploy their
+This can be evidenced by the emergence of frameworks that encapsulate the \pilot
+paradigm. Hadoop~\cite{hadoop_url} has emerged as an important infrastructure
+development for data-intensive computing.  While early versions of Hadoop were
+monolithic, tightly coupling the Map Reduce programming framework to the
+underlying infrastructure resource management, Hadoop~2 introduced the
+YARN~\cite{vavilapalli2013apache} resource manager to heterogeneous workloads in
+addition to traditional MapReduce workloads.  In order to do so, YARN supports
+multi-stage scheduling enabling the application to deploy their
 own application-level scheduling routines on top of Hadoop-managed storage and
-compute resources. With YARN managing the lower resources, the higher-level
-runtimes typically use an application-level scheduler to optimize resource usage
-for the application. Applications need to initialize their so-called
-Application-Master via YARN; the Application Master is then responsible for
-allocating resources in form of so called containers for the applications. YARN
-then can execute tasks in these containers.
+compute resources.
 
-As with the HPC environment, the support for different application workloads and
-job types as long-lived vs. short-lived applications, or homogeneous vs.
-heterogeneous tasks is challenging. \pilot-like frameworks are emerging for YARN
-to address such a challenge. Llama~\cite{llama_url} offers a long-running
+With YARN managing the lower resources, the higher-level runtimes typically use
+an application-level scheduler to optimize resource usage for the
+application. Applications need to initialize their so-called Application-Master
+via YARN; the Application Master is then responsible for allocating resources in
+form of so called containers for the applications. YARN then can execute tasks
+in these containers. Furthermore, frameworks built upon the \pilot paradigm are
+emerging for YARN. For example, Llama~\cite{llama_url} offers a long-running
 application master for YARN designed for the Impala SQL engine.
 TEZ~\cite{tez_url} is a DAG processing engine primarily designed to support the
 Hive SQL engine allowing the application to hold containers across multiple
 phases of the DAG execution without the need to de/reallocate resources.
-REEF~\cite{chun2013reef} is a similar runtime environment that
-provides applications a higher-level abstractions to YARN resources allowing it
-to retain memory and cores supporting heterogeneous workloads.
+REEF~\cite{chun2013reef} is a similar runtime environment that provides
+applications a higher-level abstractions to YARN resources allowing it to retain
+memory and cores supporting heterogeneous workloads. Independent of the Hadoop
+developments, Google's Kubernetes is emerging as an important container
+management approach, which not completely coincidently is Greek for Pilot.
 
-\jhanote{We should briefly discuss cluster management and container advances
-(e.g. Docker) and their relation to pilots} \mtnote{Is this still valid?
-Apologies but I am not sure what comments are old and what are new. If so, I
-will have a go at it with a paragraph but I am by no means an expert of these
-technologies.}
-\msnote{I'll write up a bit about Google's Kubernetes, which not completely
-coincidently is Greek for Pilot}
+Currently, no \pilot system exposes networking resources by means of
+placeholders but there is no theoretical limitation to the implementation of
+what may be called `\pilot networks'. With the advent of Software-Defined
+Networking and User-Schedulable Network paths in mind, the concept was already
+hinted at in \cite{santcroos2012}.
 
-% Files and Data
-
-\jhanote{the next three paragraphs are possible candidates for moving into
-  section 5 too. to be discussed}
-
-The relevance of both compute and data resources is shown by the implementation
-of dedicated capabilities in all the \pilot systems described in the previous
-subsection. Along with the use of pilots to expose compute resources, \pilot
-systems utilize dedicated subsystems to manage data staging. Data staging is
-coordinated with task executions and implemented by utilizing the file-transfer
-capabilities exposed by the DCR middleware.
-
-The data abstraction utilized by all the reviewed \pilot systems is
-file-centric. Data are expected to be aggregated into input/output files that
-need to be transferred between workstations, data repository, or DCR filesystems
-across the networking infrastructure. This assumptions may be limiting,
-especially when considering data-intensive applications.
-
-Support for diverse technologies and higher-level abstractions is likely to
-become a requirement for the development of general purpose \pilot systems. For
-example, transparent support for distributed filesystems like
-HDFS~\cite{borthakur2008}, opportunistic creations of data clusters like those
-utilized by YARN~\cite{vavilapalli2013}, transparent integration of databases or
-storage services are likely to play a relevant role in the efficient execution
-of data-oriented, distributed
-applications~\cite{rey2015open,sboner2015primer,zhang2010}.
-
-% \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
-% \jhanote{\pilotjobs have potential, but it is not being realized due to
-% ad hoc nature of theory and practise,}; Fragmentation/balkanization of the
-% pilot landscape. While in this paper we also talk about HTC and HPC and their
-% differences and commonalities, we have referred to an existing and growing
-% demand for convergence between the two from an application perspective. [ref
-% MTC?] HPC users are no longer exclusively interested in running one large
-% job, but applications become more versatile and dynamic and are conflicting
-% with the conventional thougths and operational realities on how to ``use''
-% HPC resources. [ref cray, cram, etc.] If the HPC world is going to accept
-% this mode of operation, then recognizing, embracing and investing in the
-% \pilot Paradigm is inevatable.
-
-% \paragraph*{Engineering} \jhanote{Why should we do to enhance the
-% usability?}; \aznote{I would argue that our work is important to
-% \pilotjobs because by expressing a common model, we enable researchers
-% to 1) understand the commonalities between existing \pilotjob approaches
-% in order to 2) motivate innovation + construction of ``next-gen''
-% \pilotjob systems. E.G., implement the basics (or work from an existing
-% system) + understand where the boundaries/unexplored territory is
-% without having to first completely understand all 15+ existing \pilotjob
-% systems and their unique vocabulary.}
-
-% While we are in no way to argue for a one-size-fits-all \pilot we do believe
-% that our work has shown that there is enough common ground that establishing
-% a new recognized layer in the stack would not only help conceptually, but
-% would also pay-off from a practical engineering standpoint. There are many
-% intricate details for example in the runtime environment, that sharing
-% efforts on that layer would allow the various systems to focus their
-% attention where there is less overlap and more tailored to their own
-% communities. [ref Open RunTime Environment] Standardisation?
+\jhanote{one option is to finish this sub-section at this point}
 
 % -----------------------------------------------------------------------------
 % 5.4
@@ -3877,14 +3827,15 @@ applications~\cite{rey2015open,sboner2015primer,zhang2010}.
 \subsection{Contributions}
 \label{sec:contributions}
 
+\jhanote{contribution or conclusion?}
 
-\paragraph*{Contributions} \jhanote{(i) we provide comprehensive historical and
-  technical analysis of pilots, (ii) set the stage for a common conceptual model
-  and implementation framework, (iii) provide insight and lessons for other
-  tools and higher-level frameworks, such as Workflow and Workload management
-  systems, (iv) but implications/insight for software sustainability/ecosystem,
-  (v) pilots: a proxy for the limitations of resource management in distributed
-  system (mostly a legacy of resource management from HPC)}
+\jhanote{(i) we provide comprehensive historical and technical analysis of
+  pilots, (ii) set the stage for a common conceptual model and implementation
+  framework, (iii) provide insight and lessons for other tools and higher-level
+  frameworks, such as Workflow and Workload management systems, (iv) but
+  implications/insight for software sustainability/ecosystem, (v) pilots: a
+  proxy for the limitations of resource management in distributed system (mostly
+  a legacy of resource management from HPC)}
 
 
 \mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added
@@ -3942,7 +3893,89 @@ layer. Most workflow engines are developed with proprietary solutions to access
 the resource layer; solutions that cannot be shared with other engines and that
 often serve specific requirements, use cases, and infrastructures.
 
-\jhanote{move from 4.3. to be fixed}
+\jhanote{a few sentences about how our work provides insight and example into
+  possible models and ``reference architectures'' for different tools}
+
+\subsection{candidates for removal in current draft-version}
+
+% As with the HPC environment, the support for different application workloads and
+% job types as long-lived vs. short-lived applications, or homogeneous vs.
+% heterogeneous tasks is challenging. 
+
+% \jhanote{We should briefly discuss cluster management and container advances
+%   (e.g. Docker) and their relation to pilots} \mtnote{Is this still valid?
+%   Apologies but I am not sure what comments are old and what are new. If so, I
+%   will have a go at it with a paragraph but I am by no means an expert of these
+%   technologies.}  \jhanote{I'll write up a bit about Google's Kubernetes, which
+%   not completely coincidently is Greek for Pilot}
+
+% Files and Data
+
+The relevance of both compute and data resources is shown by the implementation
+of dedicated capabilities in all the \pilot systems described in the previous
+subsection. Along with the use of pilots to expose compute resources, \pilot
+systems utilize dedicated subsystems to manage data staging. Data staging is
+coordinated with task executions and implemented by utilizing the file-transfer
+capabilities exposed by the DCR middleware.
+
+The data abstraction utilized by all the reviewed \pilot systems is
+file-centric. Data are expected to be aggregated into input/output files that
+need to be transferred between workstations, data repository, or DCR filesystems
+across the networking infrastructure. This assumptions may be limiting,
+especially when considering data-intensive applications.
+
+Support for diverse technologies and higher-level abstractions is likely to
+become a requirement for the development of general purpose \pilot systems. For
+example, transparent support for distributed filesystems like
+HDFS~\cite{borthakur2008}, opportunistic creations of data clusters like those
+utilized by YARN~\cite{vavilapalli2013}, transparent integration of databases or
+storage services are likely to play a relevant role in the efficient execution
+of data-oriented, distributed
+applications~\cite{rey2015open,sboner2015primer,zhang2010}.
+
+\mtnote{Consider whether to add a paragraph about interoperability among \pilot
+  systems. I would probably not do it as it does not seem of primary relevance
+  to me.}\jhanote{I might add: we are not advocating interoperability of
+  pilot. if there is a compelling reason for the community, then they will
+  self-organize. What we're saying is that any attempt at interoperability will
+  be successful/should be taken only after adequate advances in conceptual
+  understanding exists. This paper is arguably the most comprehensive paper
+  towards that end goal.}
+
+
+% \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
+% \jhanote{\pilotjobs have potential, but it is not being realized due to
+% ad hoc nature of theory and practise,}; Fragmentation/balkanization of the
+% pilot landscape. While in this paper we also talk about HTC and HPC and their
+% differences and commonalities, we have referred to an existing and growing
+% demand for convergence between the two from an application perspective. [ref
+% MTC?] HPC users are no longer exclusively interested in running one large
+% job, but applications become more versatile and dynamic and are conflicting
+% with the conventional thougths and operational realities on how to ``use''
+% HPC resources. [ref cray, cram, etc.] If the HPC world is going to accept
+% this mode of operation, then recognizing, embracing and investing in the
+% \pilot Paradigm is inevatable.
+
+% \paragraph*{Engineering} \jhanote{Why should we do to enhance the
+% usability?}; \aznote{I would argue that our work is important to
+% \pilotjobs because by expressing a common model, we enable researchers
+% to 1) understand the commonalities between existing \pilotjob approaches
+% in order to 2) motivate innovation + construction of ``next-gen''
+% \pilotjob systems. E.G., implement the basics (or work from an existing
+% system) + understand where the boundaries/unexplored territory is
+% without having to first completely understand all 15+ existing \pilotjob
+% systems and their unique vocabulary.}
+
+% While we are in no way to argue for a one-size-fits-all \pilot we do believe
+% that our work has shown that there is enough common ground that establishing
+% a new recognized layer in the stack would not only help conceptually, but
+% would also pay-off from a practical engineering standpoint. There are many
+% intricate details for example in the runtime environment, that sharing
+% efforts on that layer would allow the various systems to focus their
+% attention where there is less overlap and more tailored to their own
+% communities. [ref Open RunTime Environment] Standardisation?
+
+
 
 \jhanote{highlighting the relevance of task execution localization} \jhanote{the
   concept of task execution localization is insufficiently
