@@ -1499,7 +1499,7 @@ The wide spectrum of available implementations of the logical components of a
 \section{Pilot Systems: Analysis and Implementations}
 \label{sec:analysis}
 
-Section \S\ref{sec:understanding} offered two main contributions: (i) the
+Section~\S\ref{sec:understanding} offered two main contributions: (i) the
 minimal sets of logical components and functionalities of \pilot systems; and
 (ii) a well-defined core terminology to support reasoning about such systems.
 The former defines the necessary and sufficient requirements for a software
@@ -1513,9 +1513,9 @@ section to analyze a selection of \pilot systems.
 The goal of this section is twofold. Initially, the \pilot functionalities
 presented in~\S\ref{sec:compsandfuncs} are used as the basis to infer core and
 auxiliary \pilot implementation properties. Subsequently, a selection of \pilot
-systems are analyzed and then clustered around the properties previously
-defined. In this way, insight is offered about how \pilot systems are designed
-and engineered, and the design principles that underly such systems.
+systems are described and then analyzed. In this way, insight is offered about
+the commonalities underlying these systems alongside their distinguishing
+differences.
 
 % how to choose a \pilot system based on functional requirements,
 
@@ -1671,47 +1671,45 @@ of properties is minimal and complete. Note that these are the properties of
 % Core properties
 \begin{table*}
 \centering
-\begin{tabular}{c|p{3.6cm}|p{5cm}|p{2.7cm}|p{2.7cm}|}
-% header
-\cline{2-5}
-                       &
-\textbf{Property}      &
-\textbf{Description}   &
-\textbf{Component}     &
+\begin{tabular}{p{3.6cm}p{5cm}p{2.7cm}p{2.7cm}}
+
+\toprule
+
+\textbf{Property} &
+\textbf{Description} &
+\textbf{Component} &
 \textbf{Functionality} \\
-\hline
-% Core
-\multirow{6}{*}{\textit{Core}}  &
-Pilot Resources                 &
+
+\midrule
+
+Pilot Resources &
 Types and capabilities of the resources held by the pilot &
-Pilot Manager                   &
+Pilot Manager &
 Pilot Provisioning \\
-\cline{2-5}
-                                &
-Pilot Deployment                &
+
+Pilot Deployment &
 Modalities and protocols for pilot scheduling, utilization, and aggregation &
-Pilot Manager                   &
+Pilot Manager &
 Pilot Provisioning \\
-\cline{2-5}
-                                &
-Workload Semantics              &
+
+Workload Semantics &
 The specification of the semantics among tasks captured in the workload
 description &
-Workload Manager                &
+Workload Manager &
 Task Dispatching \\
-\cline{2-5}
-                                &
-Workload Binding                &
+
+Workload Binding&
 Modalities and policies for binding tasks to pilots &
-Workload Manager                &
+Workload Manager&
 Task Dispatching \\
-\cline{2-5}
-                                &
-Workload Execution              &
+
+Workload Execution &
 Types of tasks and the mechanisms to execute tasks &
-Task Manager                    &
+Task Manager &
 Task Execution \\
-\hline
+
+\bottomrule
+
 \end{tabular}
 \caption{\textbf{Mapping of the Core Properties of \pilot system implementations
   onto the components and functionalities described in
@@ -1859,63 +1857,55 @@ and high-availability.
 % Auxiliary properties
 \begin{table*}
 \centering
-\begin{tabular}{c|p{5cm}|p{9cm}|}
-% header
-\cline{2-3}
-                       &
+\begin{tabular}{p{5cm}p{9cm}}
+
+\toprule
+
 \textbf{Property}      &
 \textbf{Description}\\
-\hline
-\multirow{10}{*}{\textit{Auxiliary}} &
-Architecture                         &
+
+\midrule
+
+Architecture &
 Frameworks and architecture that the components and their whole are build
 with \\
-\cline{2-3}
-                                     &
-Coordination and Communication       &
+
+Coordination and Communication &
 The interaction between the components of the system \\
-\cline{2-3}
-                                     &
-Interface                            &
+
+Interface &
 Interface that the user can use to interact with the system \\
-\cline{2-3}
-                                     &
-Interoperability                     &
+
+Interoperability &
 Interoperability between \pilots on multiple DCIs \\
-\cline{2-3}
-                                     &
-Multitenancy                         &
+
+Multitenancy &
 The use of components by multiple (simultaneous) users \\
-\cline{2-3}
-                                     &
-Resource Overlay                     &
+
+Resource Overlay &
 The aggregation of resources from multiple pilots into overlays \\
-\cline{2-3}
-                                     &
-Robustness                           &
+
+Robustness &
 The measures in place to increase the robustness of the components and the
 whole \\
-\cline{2-3}
-                                     &
-Security                             &
+
+Security &
 AAA considerations for the components and the whole \\
-\cline{2-3}
-                                     &
-Files and Data                       &
+
+Files and Data &
 The mechanisms that the system offers to explicitly deal with files and data \\
-\cline{2-3}
-                                     &
-Performance and Scalability          &
+
+Performance and Scalability &
 A description of scale and limitations and measures to reach that \\
-\cline{2-3}
-                                     &
-Development Model                    &
+
+Development Model &
 The development and support model for the software \\
-\cline{2-3}
-                                     &
-DCR Interaction                      &
+
+DCR Interaction &
 Modalities and protocols used to coordinate the pilot system/DCR interaction \\
-\hline
+
+\bottomrule
+
 \end{tabular}
 \caption{\textbf{Summary of Auxiliary Properties and their descriptions.
   Auxiliary properties are required as a support to the implementation of core
@@ -2132,76 +2122,89 @@ Table~\ref{table:implementations-properties} offers a summary of the core
 properties for each analyzed \pilot system\protect\footnote{Pilot systems are
   ordered alphabetically in the table \& text.}.
 
-\begin{table*}[t]
- \up
+\begin{table*}
  \centering
- \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-  \hline
+% \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \begin{tabular}{p{3cm}p{3cm}p{2.25cm}p{2.25cm}p{2.25cm}p{2cm}p{2cm}|}
+
+  \toprule
+
     \textbf{Pilot\newline System} &
-    \textit{Pilot\newline Resources} &
-    %\textit{DCR\newline Interaction} &
-    \textit{Pilot\newline Deployment} &
-    \textit{Workload\newline Semantics} &
-    \textit{Workload\newline Binding} &
-    \textit{Workload\newline Execution} \\
-  \hline
-  \hline
+    \textbf{Pilot\newline Resources} &
+    %\textbf{DCR\newline Interaction} &
+    \textbf{Pilot\newline Deployment} &
+    \textbf{Workload\newline Semantics} &
+    \textbf{Workload\newline Binding} &
+    \textbf{Workload\newline Execution} \\
+
+  \midrule
+
     DIANE &
     HTC &
     %GANGA &
-    Out-of-Band / explicit &
+    Explicit &
     Programmable &
     Late &
     Serial \\
-  \hline
-    DIRAC &
+
+  %   DIRAC &
+  %   HTC &
+  %   %Custom &
+  %   Community Service / implicit &
+  %   None (Data dependencies?) &
+  %   Late &
+  %   Serial, some MPI \\
+
+  %   Falkon &
+  %   HPC &
+  %   %Unspecified &
+  %   Web Service &
+  %   None &
+  %   Late (mixed push/pull) &
+  %   Serial \\
+
+    HTCondor Glidein &
     HTC &
-    %Custom &
-    Community Service / implicit &
-    None (Data dependencies?) &
-    Late &
-    Serial, some MPI \\
-  \hline
-    Falkon &
-    HPC &
-    %Unspecified &
-    Web Service &
-    None &
-    Late (mixed push/pull) &
-    Serial \\
-  \hline
-    HTCondor &
-    HTC (and to some degree HPC) &
     %Condor-G &
-    Explicit in Glidein case &
+    Explicit &
     Graph &
     Late &
-    All \\
-  \hline
-    MyCluster &
-    HPC &
-    %Custom (SGE / PBS / HTCondor) &
-    CLI tools from respective LRMS &
-    Workload semantics from respective LRMS &
-    Agnostic &
-    All \\
-  \hline
-    \panda &
-    HTC &
-    %Custom, SAGA &
-    Community Service / implicit &
-    Task type, priority &
+    Serial, MPI \\
+
+    GlideinWMS&
+    HTC, HPC, Cloud &
+    %Condor-G &
+    Implicit &
+    Graph &
     Late &
-    Serial, some MPI \\
-  \hline
-    RADICAL-Pilot &
-    HPC &
-    %SAGA &
-    Programmable / explicit &
+    Serial, MPI \\
+
+  %   MyCluster &
+  %   HPC &
+  %   %Custom (SGE / PBS / HTCondor) &
+  %   CLI tools from respective LRMS &
+  %   Workload semantics from respective LRMS &
+  %   Agnostic &
+  %   All \\
+
+    \panda &
+    HTC, HPC &
+    %Custom, SAGA &
+    Implicit &
     Programmable &
-    Early \& Late &
-    Serial \& MPI \\
- \hline
+    Late &
+    Serial, MPI \\
+
+    RADICAL-Pilot &
+    HTC, HPC, Cloud &
+    %SAGA &
+    Explicit &
+    Programmable &
+    Early, Late &
+    Serial, MPI \\
+
+ \bottomrule
+
  \end{tabular}
  \caption{\textbf{Overview of \pilot systems and a summary of the values of
  their core properties.} \mtnote{This table needs to be consistent with the
