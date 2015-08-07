@@ -3354,9 +3354,10 @@ deployment models required, and what that means for the interaction with
 existing applications.
 
 As argued in the previous section, \pilot systems are agnostic towards the type
-of application that is executed. They can be engineered so to support different
-types of applications and application objectives. \pilots hold resources and the
-properties of such resources can also be arbitrarily specified. Thus the \pilot paradigm
+of application that is executed. They can be engineered so as to support
+different types of applications and application objectives. \pilots hold
+resources and the properties of such resources can also be arbitrarily
+specified. Thus the \pilot paradigm
 %allow for tasks to be scheduled but the
 does not mandate the type of matching between the requirements of these tasks
 and the capabilities offered by the resources held by the pilot. For this
@@ -3372,6 +3373,14 @@ requiring new paradigms.
 % the enterprise sector, which has seen an increased adoption of distributed
 % computing.
 
+% enabling the application to deploy their
+% own application-level scheduling routines on top of Hadoop-managed storage and
+% compute resources.
+
+% With YARN managing the lower resources, the higher-level runtimes typically use
+% an application-level scheduler to optimize resource usage for the
+% application.
+
 This can be evidenced by the emergence of frameworks that encapsulate the \pilot
 paradigm. Hadoop~\cite{hadoop_url} has emerged as an important infrastructure
 development for data-intensive computing.  While early versions of Hadoop were
@@ -3379,26 +3388,22 @@ monolithic, tightly coupling the Map Reduce programming framework to the
 underlying infrastructure resource management, Hadoop~2 introduced the
 YARN~\cite{vavilapalli2013apache} resource manager to heterogeneous workloads in
 addition to traditional MapReduce workloads.  In order to do so, YARN supports
-multi-stage scheduling enabling the application to deploy their
-own application-level scheduling routines on top of Hadoop-managed storage and
-compute resources.
-
-With YARN managing the lower resources, the higher-level runtimes typically use
-an application-level scheduler to optimize resource usage for the
-application. Applications need to initialize their so-called Application-Master
-via YARN; the Application Master is then responsible for allocating resources in
-form of so called containers for the applications. YARN then can execute tasks
-in these containers. Furthermore, frameworks built upon the \pilot paradigm are
-emerging for YARN. For example, Llama~\cite{llama_url} offers a long-running
-application master for YARN designed for the Impala SQL engine.
+multi-stage scheduling: Applications need to initialize their so-called
+Application-Master via YARN; the Application Master is then responsible for
+allocating resources in form of so called containers for the applications. YARN
+then can execute tasks in these containers. Furthermore, frameworks built upon
+the \pilot paradigm are emerging for YARN. % For example, Llama~\cite{llama_url}
+% offers a long-running application master for YARN designed for the Impala SQL
+% engine. 
 TEZ~\cite{tez_url} is a DAG processing engine primarily designed to support the
 Hive SQL engine allowing the application to hold containers across multiple
-phases of the DAG execution without the need to de/reallocate resources.
-REEF~\cite{chun2013reef} is a similar runtime environment that provides
-applications a higher-level abstractions to YARN resources allowing it to retain
-memory and cores supporting heterogeneous workloads. Independent of the Hadoop
-developments, Google's Kubernetes is emerging as an important container
-management approach, which not completely coincidently is Greek for Pilot.
+phases of the DAG execution without the need to de/reallocate
+resources.  % REEF~\cite{chun2013reef} is a similar runtime environment that
+% provides applications a higher-level abstractions to YARN resources allowing it
+% to retain memory and cores supporting heterogeneous workloads.
+Independent of the Hadoop developments, Google's Kubernetes~\cite{XXX} is
+emerging as an important container management approach, which not completely
+coincidently is Greek for Pilot.
 
 Currently, no \pilot system exposes networking resources by means of
 placeholders but there is no theoretical limitation to the implementation of
