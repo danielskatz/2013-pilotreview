@@ -840,7 +840,8 @@ Several approaches have been devised to manage the complexities associated with
 multi-level scheduling. For example, the approaches developed under the
 umbrellas of grid computing~\cite{raicu2007,singh2005,ramakrishnan2006toward} or
 cloud computing~\cite{foster2008,juve2008,villegas2012,song2009}, target the
-resource layer; others the application layer as, for example, with workflow frameworks~\cite{taylor2014,curcin2008scientific,juve2008,balderrama2012scalable}.
+resource layer; others the application layer as, for example, with workflow
+systems~\cite{taylor2014,curcin2008scientific,juve2008,balderrama2012scalable}.
 All these approaches offered and still offer some degree of success for specific
 applications and use cases but a general solution based on well-defined and
 robust abstractions has still to be devised and implemented.
@@ -912,12 +913,12 @@ Figure~\ref{fig:timeline} shows the introduction of \pilotjob systems over time
 while Figure~\ref{fig:pilotjob_clustering} shows their clustering along the axes
 of workload management and pilot functionalities. Starting from a set of core
 functionalities focused on acquiring remote resources and utilizing them
-independently from the resource management, \pilotjob systems progressively
-evolved to include advanced capabilities like workload and data management.
+independently from the resource management of the remote high-performance
+machine, \pilotjob systems progressively evolved to include advanced
+capabilities like workload and data management.
 
-
-% As seen in Ref.~\cite{luckow2012towards}, the \pilot abstraction has a rich set of
-% properties and its implementations offer a vast array of capabilities
+% As seen in Ref.~\cite{luckow2012towards}, the \pilot abstraction has a rich
+% set of properties and its implementations offer a vast array of capabilities
 % including multiple scheduling algorithms, data and compute placeholders, and
 % late or early binding. Nonetheless, the capability of acquiring remote
 % resources and directly utilizing them, independently from the supercomputer
@@ -945,7 +946,6 @@ evolved to include advanced capabilities like workload and data management.
 \end{figure}
 
 %\footnote{http://wiki.nikhef.nl/biggrid/Using_the_Grid/ToPoS},
-
 
 \begin{figure}[t]
   \centering
@@ -1024,22 +1024,23 @@ HTCondor (formerly known as Condor) is a high-throughput distributed computing
 framework that uses diverse and possibly geographically distributed
 resources~\cite{thain2005}. Originally, HTCondor was created for systems within
 one administrative domain but Flocking~\cite{epema1996worldwide} made it
-possible to group multiple resource pools in an aggregative manner. However,
+possible to group multiple machines into aggregated resource pools. However,
 resource management required system level software configurations that had to be
-made by the administrator of each individual resource of each resource pool.
+made by the administrator of each individual machine of each resource pool.
+
+\jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
 This limitation was overcame by integrating a resource placeholder mechanism
 within the HTCondor system. HT\-Con\-dor-G/Gli\-de\-In~\cite{frey2002condorG}
-allowed users to add remote grid resources to resource pools. In this way, users
-could uniformly execute jobs on resource pools composed by diverse resources.
-Thanks to its use of resource placeholders, GlideIn was one of the systems
-pioneering the \pilot abstraction implementation, enabling some \pilot
-capabilities also for third parties systems like Bosco~\cite{weitzel2012campus}.
+allowed users to add grid resources to resource pools. In this way, users could
+uniformly execute jobs on heterogeneous resource pools. Thanks to its use of
+resource placeholders, GlideIn was one of the systems pioneering the
+implementation of the \pilot abstraction, enabling some \pilot capabilities also
+for third parties systems like Bosco~\cite{weitzel2012campus}.
 
-\jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
 % \jhanote{Also there is a bit of care needed: we're implying glide-in is a
 % resource placeholder -- which is part of a pilot, and not necessarily a full
 % pilot.} \mtnote{We do not use \pilotjob system so I do not think we are
@@ -1054,8 +1055,8 @@ to enable scientific computation at scale and on heterogeneous resources. The
 implementation of GlideIn also highlighted at least two limitations: user/system
 layer isolation, and application development model. While GlideIn allows for the
 user to manage resource placeholders directly, daemons must still be running on
-the remote resources. This means that GlideIn cannot be deployed without
-involving the resource owners and system administrators. Implemented as a
+the remote machines. This means that GlideIn cannot be deployed without
+involving the machine owners and system administrators. Implemented as a
 service, GlideIn supports integration with distributed application frameworks
 but does not programmatically support the development of distributed
 applications by means of dedicated APIs and libraries.
@@ -1063,12 +1064,12 @@ applications by means of dedicated APIs and libraries.
 The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
 limitations, to broaden the type of applications supported by the pilot-based
 execution model, and to extend the \pilot abstraction beyond the boundaries of
-compute tasks.  BigJob offers application-level programmability to provide the
+compute tasks. BigJob offers application-level programmability to provide the
 end-user with more flexibility and control over the design of distributed
 application and the isolation of the management of their execution. BigJob is
 flexible and extensible and uses the Simple API for Grid Applications (SAGA)
 interoperability library~\cite{merzky2015saga,goodale2006,luckow2010} to work on
-a variety of infrastructures.  Additionally, BigJob has also been extended to
+a variety of infrastructures. Additionally, BigJob has also been extended to
 work with data and, analogous to compute pilots, to abstract away direct user
 communication between different storage systems.
 
@@ -1097,11 +1098,11 @@ centrally hosted, move critical functionality from the client to the server
 automatically start new pilots on demand and integrate security mechanisms to
 support multiple users simultaneously.
 
-Several of these have been developed in the context of the LHC experiment at
-CERN, which is associated with a major increase in the uptake and availability
-of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
+Several \pilotjob systems have been developed in the context of the LHC
+experiment at CERN, which is associated with a major increase in the uptake and
+availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
 DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
-AliEn~\cite{saiz2003alien} and Co-Pilot~\cite{buncicco2011co}. Each of these
+AliEn~\cite{saiz2003alien}, and Co-Pilot~\cite{buncicco2011co}. Each of these
 \pilotjob systems serves a particular user community and experiment.
 Interestingly, these systems are functionally very similar, work on almost the
 same underlying infrastructure, and serve applications with very similar (if not
@@ -1118,57 +1119,62 @@ identical) characteristics.
   reviewer from that system..}\jhanote{I also note that GWPilot isn't referenced
   anywhere/anymore. We should be sure to put GWPilot into that paragraph}
 
-GlideinWMS~\cite{sfiligoi2008glideinwms} is a higher-level workload management
-system that is based on the pilot capabilities of HTCondor GlideIn. The system
-can, based on the current and expected number of jobs in the pool, automatically
-increase or decrease the number of active Glide-ins (i.e. pilots) available to
-the pool. GlideinWMS is a multi-user \pilotjob system commonly deployed as a
-hosted service. GlideinWMS attempts to hide the pilot capabilities rather than
-exposing them to the user. GlideinWMS is currently deployed in production on the
-Open Science Grid (OSG)~\cite{osg_url} and is the recommended mode for new users
-wanting to access OSG resources.
+GlideinWMS~\cite{sfiligoi2008glideinwms} is a workload management system that is
+based on the pilot capabilities of HTCondor GlideIn. The system can, based on
+the current and expected number of jobs in a pool, automatically increase or
+decrease the number of active Glide-ins (i.e. pilots) available to that pool.
+GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
+service.
+% GlideinWMS attempts to hide the pilot capabilities rather than exposing
+% them to the user.
+GlideinWMS is currently deployed in production on the Open Science Grid
+(OSG)~\cite{osg_url} and is the recommended mode for new users wanting to access
+OSG resources. \mtnote{I commented out the sentence as I think it would need
+further explanation, a level of depth/analysis that I believe does not belong to
+this section. Would you agree?}
 
 \panda (Production and Distributed Analysis)~\cite{zhao2011panda} is
-the workload management system of the ATLAS experiment, used to run managed
-production and user analysis jobs on the grid. The ATLAS Computing Facility
-operates the pilot submission systems. This is done using the \panda `AutoPilot'
-scheduler component which submits pilot jobs via HTCondor-G. \panda also
-provides the ability to manage data associated the jobs managed by the \panda
-workload manager.
+the workload management system of the ATLAS experiment~\cite{aad2008atlas}, used
+to run managed production and user analysis jobs on the grid. The ATLAS
+Computing Facility~\cite{acf_url} operates the pilot submission systems. This is
+done using the \panda `AutoPilot' scheduler component which submits pilot jobs
+via HTCondor-G. \panda also provides the ability to manage data associated the
+jobs managed by the \panda workload manager.
 
-In addition to processing, AliEn~\cite{saiz2003alien} also provides the
-ability to tightly integrate storage and compute resources and is also able to
-manage file replicas. While all data can be accessed from anywhere, the
-scheduler is aware of data localities and attempts to schedule compute close to
-the data. AliEn deploys a pull-based model~\cite{saiz2003alienpr} assuming that
-the resource pool is dynamic, and that a pull model doesn't require the broker
-to keep detailed track of all resources, which leads to a more simple
-implementation. \jhanote{what is the broker here?} \mtnote{Mark?}
+AliEn~\cite{saiz2003alien} provides the ability to tightly integrate storage and
+compute resources and is also able to manage file replicas. While all data can
+be accessed from anywhere, the scheduler is aware of data localities and
+attempts to schedule compute close to the data. AliEn deploys a pull-based
+model~\cite{saiz2003alienpr} assuming that the resource pool is dynamic
+% , and that a pull model doesn't require the broker to keep detailed track of
+% all resources, which leads to a more simple implementation.
+\jhanote{what is the broker here?} \mtnote{Mark?} \mtnote{I have eliminated the
+sentence because it seems too detailed compared to the other descriptions.}
 
 DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb_url} is
 another comprehensive pilot-based workload management system. It supports the
-management of data, which can be placed in different kinds of storage elements
+management of data, which can be placed in different types of storage elements
 (e.\,g.\ based on SRM).
 
-Another interesting \pilotjob system that is used in the LHC context is
+Another \pilotjob system that is used in the LHC context is
 Co-Pilot~\cite{buncicco2011co}. Co-Pilot serves as an integration point among
-different grid \pilotjob systems (such as AliEn and \panda), clouds, and
-volunteer computing resources. Co-Pilot provides components for building a
-framework for seamless and transparent integration of these resources into
-existing grid and batch computing infrastructures exploited by the High Energy
-Physics community.
+grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
+computing resources. Co-Pilot provides components for building a framework for
+seamless and transparent integration of these resources into existing grid and
+batch computing infrastructures exploited by the High Energy Physics (HEP)
+community.
 
 \mtnote{End of the suggested paragraph removal.}
 
-The \pilot abstraction has also been integrated into scientific workflow
-systems. \pilotjob systems have proven an effective tool for managing the
-workloads executed in the various stages of a workflow. For the Pegasus
-project\cite{deelman2015}, the Corral system~\cite{rynge2011experiences} was
-developed to support the optimize the placements of pilots with respect to their
-workload for the Pegasus workflow system. Corral serves as a front-end to
-HTCondor GlideIn. In contrast to GlideinWMS, Corral provides more explicit
-control over the placement and start of pilots to the end-user. Corral was later
-extended to also serve as a possible front end to GlideinWMS.
+% The \pilot abstraction has also been integrated into scientific workflow
+% systems.
+\pilotjob systems have proven an effective tool for managing the workloads
+executed in the various stages of a scientific workflow. For example, the Corral
+system~\cite{rynge2011experiences} has been developed to serve as a frontend to
+HTCondor GlideIn and to optimize glides (i.e. pilots) placement for the Pegasus
+workflow system~\cite{deelman2015}. In contrast to GlideinWMS, Corral provides
+more explicit control over the placement and start of pilots to the end-user.
+Corral was later extended to also serve as a possible front end to GlideinWMS.
 
 Swift~\cite{wilde2011swift} is a scripting language designed for expressing
 abstract workflows and computations. The language also provides capabilities for
@@ -1182,29 +1188,29 @@ Swift has also been used in conjunction with Falkon~\cite{raicu2007}. Falkon was
 engineered for executing many small tasks on HPC systems and shows high
 performance compared to the native queuing systems. Falkon is a paradigmatic
 example of how the \pilot abstraction can be implemented to support very
-specific workload.
+specific workloads.
 
-The proliferation of \pilotjob systems underlines not only a progressive
+The proliferation of \pilotjob systems and their integration within other type
+of application and middleware systems, underlines not only a progressive
 appreciation for the \pilot abstraction but also the emergence of a \pilot
-paradigm to support the execution of distributed and increasingly of parallel
+paradigm to support the execution of distributed and, increasingly, of parallel
 applications. The brief description of the many \pilotjob system implementations
 introduced in this section helps to identify some distinctions in terms of
-design, usage and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
-graphical representation of this rough clustering.
+design, usage, and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
+graphical representation of this clustering.
 
 The evolution of the \pilot paradigm has been organic and uncoordinated leading
 to an inconsistent terminology related to the \pilot abstraction, its
 implementations and usage. A coherent understanding of the \pilot components and
 functionalities is still missing leading to a blurred definition of \pilot
-abstraction and how it should be distinguished from other abstractions and
-middleware and application software.
+abstraction and how it should be distinguished from other abstractions, and
+application or middleware software.
 
 The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
 specific functionality and inconsistent terminology calls for a standard
 vocabulary to assist in understanding the varied approaches and their
-commonalities and differences. This is primary motivation of
-Section~\ref{sec:understanding}.
+commonalities and differences. This is primary motivation of the next section.
 
 
 %------------------------------------------------------------------------------
