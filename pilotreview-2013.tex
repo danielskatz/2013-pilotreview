@@ -3418,7 +3418,6 @@ hinted at in \cite{santcroos2012}.
 \subsection{Contributions}
 \label{sec:contributions}
 
-\jhanote{contribution or conclusion?}
 
 \jhanote{(i) we provide comprehensive historical and technical analysis of
   pilots, (ii) set the stage for a common conceptual model and implementation
@@ -3428,9 +3427,8 @@ hinted at in \cite{santcroos2012}.
   proxy for the limitations of resource management in distributed system (mostly
   a legacy of resource management from HPC)}
 
-
-\mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added
-  also contributions of 4 and 5. }
+% \mtnote{Here the first crack at it. (i) Done. (ii) Done. (iii) Not sure. Added
+%   also contributions of 4 and 5. }
 
 This paper offers several contributions to support the understanding, design,
 and adoption of \pilot systems. \S\ref{sec:history} provided an overview of both
@@ -3466,23 +3464,35 @@ impact on the overall \pilot systems capabilities and their target use cases.
 Thanks to these insights, it was possible in \S\ref{sec:discussion} to highlight
 the properties of the \pilot paradigm.
 
-Generality along the types of workload, resource, and performance indicates the
-fundamental role that the \pilot paradigm can play to support distributed
-computing to higher scales and on diverse infrastructures. Among all the
-contributions of this paper, this indication is one of the most important. When
-understood, it would show to the user communities, DCIs managers, and developers
-that converging towards a robust, interoperable, openly available, community
-developed and maintained \pilot system is a privileged way to progress the
-computational-intense research of many scientific fields.
-
 The current state of the workflow systems~\cite{taylor2014} is a paradigmatic
-example of this risk. Many workflow systems have been implemented with
-significant duplication of effort and limited means for extensibility and
-interoperability. One important contributing factor to these limitations is the
-lack of suitable, open, and possibly standard-based interfaces for the resource
-layer. Most workflow engines are developed with proprietary solutions to access
-the resource layer; solutions that cannot be shared with other engines and that
-often serve specific requirements, use cases, and infrastructures.
+example of the consequence of a lack of conceptual clarity: Many workflow
+systems have been implemented with significant duplication of effort and limited
+means for extensibility and interoperability. One important contributing factor
+to these limitations is the lack of suitable, open, and possibly standard-based
+interfaces for the resource layer. Most workflow engines are developed with
+proprietary solutions to access the resource layer; solutions that cannot be
+shared with other engines and that often serve specific requirements, use cases,
+and infrastructures.
+ 
+This paper establishes the \pilot paradigm and shows that an more structured
+approach is possible. This paper establishes the \pilot paradigm by providing a
+conceptual framework in \S3; underscores the importance of the \pilot paradigm,
+as well as showing the critical need for greater rigor in the conceptualization
+and design of software systems used as tools and middleware.  It establishes
+generality along the types of workload, resource, and performance indicates the
+fundamental role that the \pilot paradigm can play to support task-level
+parallelism -- whether on multiple distributed resources or individual HPC
+machines -- at higher scales and on diverse infrastructures. If appreciated, it
+will improve the interoperability of exiting \pilot systems, enhance the
+implementations of existing \pilot system and thus curtail the need to create
+unsustainable partial implementations.
+
+
+% When understood, it would show to the user communities, DCIs managers, and
+% developers that converging towards a robust, interoperable, openly available,
+% community developed and maintained \pilot system is a privileged way to progress
+% the computational-intense research of many scientific fields.
+
 
 \jhanote{a few sentences about how our work provides insight and example into
   possible models and ``reference architectures'' for different tools}
