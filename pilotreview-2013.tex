@@ -3539,10 +3539,20 @@ As such, depending on the type of the given workload, the \pilot paradigm can be
 implemented to optimize different metrics of task execution other than
 throughput.
 
+\jhanote{we've discussed resources, infrastructure and workload types.. thus
+  putting them together} Thus, the \pilot systems offers a well-defined and
+well-isolated layer between applications and resources. This fosters
+extensibility, interoperability, and modularity by separating the application
+description and logic from the management of its execution, and from the
+provisioning and aggregation of resources. In turn, this avoids the need to
+develop special-purpose, vertical, and end-to-end applications, the main source
+of duplication and fragmentation in the current distributed application and
+tooling landscape.  \jhanote{this is a repeat from earlier so if we keep this
+  here we must fix in previous section..}
+
 \jhanote{We need 1-2 paragraphs describing the relationship of this paper to P*
   model/paper. Else we are going to get dinged by reviewer or cause confusion to
-  the reader. Where this paragraph goes is open for discussion, but please draft
-  a paragraph.}
+  the reader. Where this paragraph goes is open for discussion.}
 
 The generality of the pilot paradigm across resource, infrastructure and
 workload types was first discussed in Ref.~\cite{luckow2012}, wherein a
@@ -3550,9 +3560,9 @@ conceptual model for pilots was proposed. This work significantly enhances and
 extends the preliminary analysis in Ref.~\cite{luckow2012} used to discern the
 initial model for pilots.
 
-\jhanote{This paragraph is possibly a nice way to start rather than end this
-  sub-section. Thoughts?} The generality of the \pilot paradigm may come as a
-surprise when considering the requirement that has motivated most
+\jhanote{These next two paragraphs are possibly nice ways to start rather than
+  end this sub-section. Thoughts?} The generality of the \pilot paradigm may
+come as a surprise when considering the requirement that has motivated most
 implementations, viz., leveraging multi-level scheduling so as to increase the
 execution throughput of large workloads made of short running tasks.
 \jhanote{We should refrain from using multi-level scheduling. Just the following
@@ -3569,9 +3579,6 @@ Satisfying those requirements requires abstracting the specificity of
 middleware, infrastructure architectures, and application patterns. As shown in
 this paper, this process of abstraction mandates the development of an
 understanding of the \pilot paradigm.
-
-
-
 
 % \mtnote{To be expanded with better/further examples of why we want to run MPI
 % with pilots.}\jhanote{multiple possibly tight-coupled components use a pilot to
