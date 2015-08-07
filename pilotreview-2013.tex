@@ -318,7 +318,7 @@ predicate.} \mtnote{I shortened the paragraph to make clearer the relationship
 between the five features and the \pilot abstraction.}
 
 \mtnote{Possibly add a paragraph summarizing the salient evolutionary steps of
-  \pilot systems as described in Subsection 2.2.}
+  \pilot systems as described in subsection 2.2.}
 
 % ------------------------------------------------------------------------------
 % 2.1
@@ -999,7 +999,8 @@ leveraging, for example, a dedicated overlay network. While these systems would
 adopt different coordination strategies, they could be both be considered
 \pilotjob systems.
 
-\mtnote{Across the paper, \MW is called pattern, mechanism, and strategy. We need to make up our mind. I am happy to consider it a coordination pattern.}
+\mtnote{Across the paper, \MW is called pattern, mechanism, and strategy. We
+need to make up our mind. I am happy to consider it a coordination pattern.}
 
 Data management can play an important role within a \pilotjob system. For
 example, functionalities can be provided to support the local or remote data
@@ -1030,7 +1031,7 @@ capabilities, not characteristic of every \pilotjob system.
 %   over-specified.}\jhanote{OK, lets keep this open for the moment and decide
 %   in the next iteration}
 
-In the following sub-section, a minimal set of terms related to the logical
+In the following subsection, a minimal set of terms related to the logical
 components and capabilities described so far is defined.
 
 %------------------------------------------------------------------------------
@@ -1055,9 +1056,9 @@ resources to execute the tasks of one or more workloads.
 \begin{description}
 
 \item[Task.] A container for operations to be performed on a computing platform,
-alongside a description of the properties of those operations, and indications
-on how they should be executed. Implementations of a task may include wrappers,
-scripts, or applications.
+alongside a description of the properties and dependences of those operations,
+and indications on how they should be executed and satisfied. Implementations of
+a task may include wrappers, scripts, or applications.
 
 \item[Workload.] A set of tasks, possibly related by a set of arbitrarily
 complex relations.
@@ -1077,11 +1078,11 @@ administrative domain\}.
 
 \end{description}
 
-A cluster is a typical example of DCR: it offers compute and data resources; it
-exposes an access middleware, for example, the Torque batch system, the Globus
-grid middleware, of the OpenStack platform; and it is deployed by and consistent
-with the policies of an administrative domain like, for example, XSEDE or a
-certain University.
+A cluster is a typical example of DCR: it offers sets of compute and data
+resources; it deploys a middleware as, for example, the Torque batch system, the
+Globus grid middleware, of the OpenStack platform; and enforces policies of an
+administrative domain like, for example, XSEDE, OSG, CERN, NERSC, or a certain
+University.
 
 As seen in~\S\ref{sec:history}, most of the DCRs used by \pilotjob systems
 utilize `queues', `batch systems', and `schedulers'. In such DCRs, jobs are
@@ -1102,7 +1103,7 @@ i.e. metadata wrappers around one or more executables often called `kernel',
 reasoning about workloads, while `job' is used in relation to a specific type of
 DCR middleware where such a container is submitted. Accordingly, tasks are
 considered as the functional units of a workload, while jobs as a way to
-schedule one or more tasks on a DCR with a specific middleware.  It should be
+schedule one or more tasks on a DCR with a specific middleware. It should be
 noted that, given their functional equivalence, the two terms can be adopted
 interchangeably when considered outside the context of \pilotjob systems.
 Indeed, workloads are encoded into jobs when they have to be directly executed
@@ -1130,7 +1131,7 @@ As described in~\S\ref{sec:compsandfuncs}, a resource placeholder needs to be
 submitted to a DCR wrapped in the type of container supported by the middleware
 of that specific DCR. For this reason, the capabilities exposed by the job
 submission system of the target DCR determine the submission process of resource
-placeholders and its specifics.  For example, when wrapped within a `job',
+placeholders and its specifics. For example, when wrapped within a `job',
 placeholders are provisioned by submitting a job to the DCR queuing system, and
 become available only once the job has been scheduled, and only for the duration
 of the job lifetime.
@@ -1146,11 +1147,11 @@ of the job lifetime.
 % placeholder will need to be wrapped within a different type of container as,
 % for example, a VM or a Docker Engine.
 
-A \pilot is a resource placeholder. As a resource placeholder, a pilot holds
-portion of a DCR's resources for a user or a group of users, depending on
-implementation details. A \pilotjob system is software capable of creating
-pilots so as to gain exclusive control over a set of resources on one or more
-DCRs and then to execute the tasks of one or more workloads on those pilots.
+A \pilot is a resource placeholder. As such, a pilot holds portion of a DCR's
+resources for a user or a group of users, depending on implementation details. A
+\pilotjob system is a software capable of creating pilots so as to gain
+exclusive control over a set of resources on one or more DCRs and then to
+execute the tasks of one or more workloads on those pilots.
 
 % \jhanote{also I would not use the word exclusive} \mtnote{Why?}\jhanote{In our
 %   definition of Resource earlier in this section, we define it as a finite
@@ -1174,7 +1175,7 @@ workload on that resource.
 
 It should be noted that the term `pilot' as defined here is named differently
 across \pilotjob systems. Depending upon context, in addition to the term
-`placeholder', pilot may also be named `agent' or
+`placeholder', a pilot may also be named `agent' or
 `\pilotjob'~\cite{moscicki2011,pinchak2002}. All these terms are, in practice,
 used as synonyms without properly distinguishing between the type of container
 and the type of executable that compose a pilot. This is a clear indication of
@@ -1184,14 +1185,14 @@ reasoning analytically about multiple \pilotjob system implementations.
 Until now, the term \pilotjob system has been used to indicate those systems
 capable of executing workloads on pilots. From now on, the term `\pilot system'
 will be used instead, as the term `job' in `pilot-job' identifies just the way
-in which a pilot is provisioned on a DCR exposing specific capabilities; it is
-not a general property of all the \pilotjob systems. The use of the term
-`\pilotjob system' should therefore be regarded as a historical artifact, viz.,
-the targeting of a specific class of DCRs in which the term `job' was, and still
-is, meaningful. With the development of DCR middleware based on new abstractions
-as, for example, that of virtual machine, the term `job' has become too
-restrictive, a situation that can lead to terminological and conceptual
-confusion.
+in which a pilot is provisioned on a DCR exposing specific middleware
+% ; it is not a general property of all the \pilotjob systems.
+The use of the term `\pilotjob system' should therefore be regarded as a
+historical artifact, viz., the targeting of a specific class of DCRs in which
+the term `job' was, and still is, meaningful. With the development of DCR
+middleware based on new abstractions as, for example, that of virtual machine,
+the term `job' has become too restrictive, a situation that can lead to
+terminological and conceptual confusion.
 
 % \mtnote{nitpick: `those based on virtual machines' does not exclude jobs and
 %   schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to
@@ -1221,11 +1222,12 @@ potentially be distributed over multiple and diverse DCRs.
 % paper.
 
 \begin{description}
-\item[Resource Overlay.] The aggregated set of resources of multiple pilots.
+\item[Resource Overlay.] The aggregated set of resources of multiple pilots possibly instantiated on diverse DCRs.
 \end{description}
 
-Three more terms associated with \pilot systems need to be explicitly defined:
-`Multi-level scheduling', `early binding', and `late binding'.
+As seen in~\S\ref{sec:histabstr}, three more terms associated with \pilot
+systems need to be explicitly defined: `Multi-level scheduling', `early
+binding', and `late binding'.
 
 % \jhanote{should we use lower case for second instance of ``pilots'' ? This
 %   would make it consistent with job, task, workload as these are now simply
@@ -1234,7 +1236,7 @@ Three more terms associated with \pilot systems need to be explicitly defined:
 
 % \jhanote{In case it suggests a change in the wording of opening sentence (and
 %   as discussed after the definition of multi-level scheduling downstream in
-%   this sub-section): the same entity can be scheduled at multiple levels,
+%   this subsection): the same entity can be scheduled at multiple levels,
 %   different entities can be scheduled at the same or different levels. These
 %   have all historically be clubbed as multi-level scheduling, i.e., there is
 %   multi-level and dimensional scheduling. Not sure if want to make distinction
@@ -1250,12 +1252,12 @@ definition of `multi-level scheduling' is problematic because the term `level'
 is left undefined. It is not clear what constitutes a level or how its
 boundaries should be assessed. `Multi-entity' and `multi-stage' are better terms
 to describe the scheduling properties of \pilot systems, as these terms
-specifically indicate that (at least) two different entities are scheduled and
-that such a scheduling happens at separate moments in time.
+specifically indicate that (at least) two entities are scheduled and that such a
+scheduling happens at separate moments in time.
 
 In the \pilot systems, a portion of the resources of a DCR is allocated to one
 or more pilots, and the tasks of a workload are dispatched for execution to
-those pilots. As alluded to in the previous sub-section, this is a fundamental
+those pilots. As alluded to in the previous subsection, this is a fundamental
 feature of \pilot systems. It leads to the following: (i) more flexible and
 potentially reduced times to completion of workloads as a consequence of
 avoiding a centralized job management system multiple times; and (ii) the tasks
@@ -1263,6 +1265,9 @@ of a workload can be bound to a set of pilots before or after it becomes
 available on a remote resource. Depending on the implementation of a \pilot
 system, tasks can be further scheduled by deciding about their placement within
 the pilot's resource allocation.
+
+\mtnote{OED reports subsection and not sub-section as the term currently in use.
+Accordingly, I have done a global search and replace.}
 
 % \jhanote{about point (i): I know we caveat the statement with ``potentially''
 %   but maybe the focus should be on (a) greater control to the user without any
@@ -1295,9 +1300,9 @@ still inactive. Late binding is instead critical to assure the aforementioned
 high throughput of the distributed application by allowing sustained task
 execution without additional queuing time or container instantiation time.
 
-Some aspects of early binding can also be achieved without a \pilot system, but,
-importantly, \pilot systems permit both types of binding, even within a single
-workload.
+It should be noted that some aspects of early binding can also be achieved
+without a \pilot system, but, importantly, \pilot systems permit both types of
+binding, even within a single workload.
 
 % \jhanote{Is both a reference to early and late binding?} \mtnote{I would think
 %   so. Any better?  Should we just delete the whole three lines?}
@@ -1425,11 +1430,12 @@ component exposes capabilities.
 
 Note how in Figure~\ref{fig:core_vocabulary}, scheduling happens at the DCR
 level, for example by means of a cluster scheduler, and then at the pilot level.
-The term `multi-level scheduling' pertains to both the pilot and workload
-managers and their respective pilot provisioning and task dispatching
-functionalities. \mtnote{Check Upper/lower case in the previous sentence of
-managers and functionalities} As such, multi-level scheduling applies to two
-different entities: jobs on DCR middleware, and tasks on pilots.
+This illustrates what has been called here a multi-entity and multi-stage
+scheduling, a couple of terms replacing the more common but less precise
+`multi-level scheduling'.  Figure~\ref{fig:core_vocabulary} depicts the
+separation between scheduling at pilot level and scheduling at workload manager
+level, highlighting the four entities involved: jobs on DCR middleware, and
+tasks on pilots.
 
 % \jhanote{are we also trying to say that multi-level scheduling is for
 %   different ``entities'' at the different levels? either way, we may consider
@@ -1448,9 +1454,9 @@ of the task manager.
 Figure~\ref{fig:core_vocabulary} should not be confused with an architectural
 diagram. No indications are given about the interfaces that should be used, how
 the logical component should be mapped into software modules, or what type of
-communication and coordination protocols should be used among such components.
-This is why no distinction is made diagrammatically between early and late
-binding.
+communication and coordination protocols should be adopted among such
+components. This is why no distinction is made diagrammatically between, for
+example, early and late binding.
 
 % \jhanote{this is not needed here. we have discussed the difference between
 %   early versus later before. by having it here we are losing the opportunity
@@ -1472,11 +1478,11 @@ binding.
     \label{fig:core_vocabulary}
 \end{figure}
 
-% \mtnote{Lessons learned to be discussed before writing them down
-%   here.} \jhanote{do you mean ``here''?} \mtnote{As in: at this point of the
-%   subsection. Reading the whole Section in a go I am wondering whether we need
-%   to add more. The paragraph describing Figure~\ref{fig:core_vocabulary} seems
-%   to offer a summary of the main contributions and we have discussed
+% \mtnote{Lessons learned to be discussed before writing them down here.}
+%   \jhanote{do you mean ``here''?} \mtnote{As in: at this point of the
+%   subsection. Reading the whole Section in a go I am wondering whether we
+%   need to add more. The paragraph describing Figure~\ref{fig:core_vocabulary}
+%   seems to offer a summary of the main contributions and we have discussed
 %   contentious points along the way. }
 
 The wide spectrum of available implementations of the logical components of a
@@ -2921,8 +2927,9 @@ implementation within \pilot systems are minimal.
 %
 % \subsection{Overall observations}
 
-% The descriptions and analyses offered in Subsections~\ref{sec:implementations}
-% and~\ref{sec:context} shows the relevance of at least three characteristics of
+% The descriptions and analyses offered in
+% subsections~\ref{sec:implementations} and~\ref{sec:context} shows the
+% relevance of at least three characteristics of
 % \pilot system implementations: interoperability layers, automation of pilot
 % provision, and type of implemented architecture.
 
@@ -3186,7 +3193,7 @@ model for \pilot systems was proposed. This paper significantly enhances and
 extends that preliminary analysis.
 
 \jhanote{These next two paragraphs are possibly nice ways to start rather than
-  end this sub-section. Thoughts?} \mtnote{Moved at the beginning.}
+  end this subsection. Thoughts?} \mtnote{Moved at the beginning.}
 
 % \mtnote{To be expanded with better/further examples of why we want to run MPI
 % with pilots.}\jhanote{multiple possibly tight-coupled components use a pilot
@@ -3508,6 +3515,10 @@ for the improvement of exiting \pilot systems implementations, improving their
 interoperability and curtailing the need to create unsustainable partial
 implementations.
 
+\mtnote{I would eliminate the reference to a better interoperability seeing your
+comments in the notes about it. Maybe hinting at better choosing among the
+available implementations?}
+
 % When understood, it would show to the user communities, DCIs managers, and
 % developers that converging towards a robust, interoperable, openly available,
 % community developed and maintained \pilot system is a privileged way to
@@ -3668,7 +3679,7 @@ such an architecture, a robust implementation of the higher-level capabilities
 required by multi-pilot, multi-DCR task executions would be very challenging.
 
 \jhanote{I'm not sure I see the connection between these paragraphs. Also maybe
-  we could structure this sub-section into ``discuss differences'' and leave
+  we could structure this subsection into ``discuss differences'' and leave
   observations for section 5. If so observations about architectural importance
   etc. would be nicely put into 5. Thoughts?}
 
@@ -3731,7 +3742,7 @@ required by multi-pilot, multi-DCR task executions would be very challenging.
 %   something for the history section or a separate category for Master/Worker
 %   frameworks...  PJ evolved from the need to map master/worker style
 %   computations to heterogeneous, dynamic distributed grid environments. Added
-%   a pre-\pilot category to the history sub-section.}
+%   a pre-\pilot category to the history subsection.}
 
 % \jhanote{I think all the functionality of PJs is predicated on the following
 %   core capability: enable the decoupling between assigning a workload from the
