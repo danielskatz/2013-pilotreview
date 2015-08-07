@@ -3068,8 +3068,7 @@ generality of the \pilot paradigm and the independence of its implementations
 from other types of software, helps also to avoid a potential misunderstanding
 that \pilots are not just an alternative implementation of a scheduler, of a
 workload manager, of a batch system, or of any other special-purpose software
-component. \jhanote{This paragraph could be transposed with the last paragraph
-  in 5.1. Thoughts?}
+component. 
 
 %and how multi-level scheduling works. % \pilot systems do not
 % circumvent the infrastructure middleware but abstract away some of its
@@ -3142,9 +3141,9 @@ of duplication and fragmentation in the current distributed application and
 tooling landscape.  \jhanote{this is a repeat from earlier so if we keep this
   here we must fix in previous section..}
 
-\jhanote{We need 1-2 paragraphs describing the relationship of this paper to P*
-  model/paper. Else we are going to get dinged by reviewer or cause confusion to
-  the reader. Where this paragraph goes is open for discussion.}
+% \jhanote{We need 1-2 paragraphs describing the relationship of this paper to P*
+%   model/paper. Else we are going to get dinged by reviewer or cause confusion to
+%   the reader. Where this paragraph goes is open for discussion.}
 
 The generality of the pilot paradigm across resource, infrastructure and
 workload types was first discussed in Ref.~\cite{luckow2012}, wherein a
@@ -3155,14 +3154,13 @@ initial model for pilots.
 \jhanote{These next two paragraphs are possibly nice ways to start rather than
   end this sub-section. Thoughts?} The generality of the \pilot paradigm may
 come as a surprise when considering the requirement that has motivated most
-implementations, viz., leveraging multi-level scheduling so as to increase the
-execution throughput of large workloads made of short running tasks.
-\jhanote{We should refrain from using multi-level scheduling. Just the following
-  should suffice:``.. increasing the execution throughput of large workloads of
-  short running tasks''} For example, as seen in~\S\ref{sec:analysis} \panda,
-Falkon, or DIRAC were initially developed as single-point solutions, focusing on
-either a type of workload, a specific infrastructure, or the optimization of a
-single performance metric.
+implementations, viz., to increase the execution throughput of large workloads
+made of short running tasks.  \jhanote{We should refrain from using multi-level
+  scheduling. Just the following should suffice:``.. increasing the execution
+  throughput of large workloads of short running tasks''} For example, as seen
+in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were initially developed as
+single-point solutions, focusing on either a type of workload, a specific
+infrastructure, or the optimization of a single performance metric.
 
 Appreciating the properties of the \pilot paradigm becomes necessary once
 requirements of infrastructure interoperability, support for multiple types of
@@ -3411,7 +3409,6 @@ what may be called `\pilot networks'. With the advent of Software-Defined
 Networking and User-Schedulable Network paths in mind, the concept was already
 hinted at in \cite{santcroos2012}.
 
-\jhanote{one option is to finish this sub-section at this point}
 
 % -----------------------------------------------------------------------------
 % 5.4
