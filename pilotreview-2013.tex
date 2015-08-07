@@ -771,10 +771,10 @@ requirements by supporting various types of infrastructure, including clouds and
 grids.
 
 Swift has also been used in conjunction with Falkon~\cite{raicu2007}. Falkon was
-engineered for executing many small tasks on HPC systems and shows high
-performance compared to the native queuing systems. Falkon is a paradigmatic
-example of how the \pilot abstraction can be implemented to support very
-specific workloads.
+engineered for executing many small tasks on High Performance Computing (HPC)
+systems and shows high performance compared to the native queuing systems.
+Falkon is a paradigmatic example of how the \pilot abstraction can be
+implemented to support very specific workloads.
 
 The proliferation of \pilotjob systems and their integration within other type
 of application and middleware systems, underlines not only a progressive
@@ -823,7 +823,7 @@ description of a \pilotjob system and a well-defined vocabulary to reason about
 such a description and, eventually, about its multiple implementations.
 
 % \jhanote{would ``description'' be better than ``analysis'' in the first
-%   sentence?}
+%   sentence?} \mtnote{Done.}
 
 %------------------------------------------------------------------------------
 % 3.1
@@ -839,12 +839,12 @@ common denominators among \pilotjob systems are defined along three dimensions:
 purpose, logical components, and functionalities.
 
 The purpose shared by every \pilotjob system is to improve workload execution
-when compared to executing the same workload directly on one or more resources.
+when compared to executing the same workload directly on one or more machines.
 Performance of workload execution is usually measured by throughput and
 execution time to completion, but other metrics could also be considered: energy
 efficiency, data transfer minimization, scale of the workload executed, or a mix
 of them. Metrics that are not performance related include reliability, ease of
-application deployment and generality of workload.  In order to achieve the
+application deployment, and generality of workload. In order to achieve the
 required metrics under given constraints, each \pilotjob system exhibits
 characteristics that are both common or specific to one or more implementations.
 Discerning these characteristics requires isolating the minimal set of logical
@@ -853,11 +853,10 @@ components that characterize every \pilotjob system.
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
 \vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
-and use of one or more resource placeholders (i.e. `pilots`) on single or
-multiple machines. The Workload Manager handles the scheduling of one or more
-workloads on the available resource placeholders. The Task Manager takes care of
-executing the tasks of each workload by means of the resources held by the
-placeholders.
+and use of one or more resource placeholders (i.e. pilots) on single or multiple
+machines. The Workload Manager handles the scheduling of one or more workloads
+on the available resource placeholders. The Task Manager takes care of executing
+the tasks of each workload by means of the resources held by the placeholders.
 
 The implementation details of these three logical components vary significantly
 across \pilotjob systems (see~\S\ref{sec:analysis}). For example, two or more
@@ -894,7 +893,7 @@ should not be considered necessary characteristics of a \pilotjob system.
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
-placeholders. As seen in \S\ref{sec:history}, this type of placeholder enables
+placeholders. As seen in~\S\ref{sec:history}, this type of placeholder enables
 tasks to utilize resources without directly depending on the capabilities
 exposed by the target machines. Resource placeholders are scheduled onto target
 machines by means of dedicated capabilities, but once scheduled and then
@@ -926,12 +925,12 @@ The provisioning of resource placeholders depends on the capabilities exposed by
 the middleware of the targeted machine and on the implementation of each \pilot
 system. Typically, for middleware adopting queues, batch systems, and
 schedulers, provisioning a placeholder involves it being submitted as a job. For
-such middleware, a `job' is a type of logical container that includes
+such middleware, a job is a type of logical container that includes
 configuration and execution parameters alongside information on the application
-to be executed on the machine's compute nodes. Conversely, for infrastructures
-that do not adopt a job-based middleware, a resource placeholder would be
-executed by means of other types of logical container as, for example, a virtual
-machine or a Docker Engine~\cite{bernstein2014,felter2014}.
+to be executed on the machine's compute resources. Conversely, for machines
+without a job-based middleware, a resource placeholder would be executed by
+means of other types of logical container as, for example, a virtual machine or
+a Docker Engine~\cite{bernstein2014,felter2014}.
 
 % \mtnote{Too many execut*. Should we use `code' instead of `executable'? Any
 %   better option than `code' to replace `executable'?} \jhanote{used
@@ -944,7 +943,7 @@ implemented as part of the \pilotjob system. In this way, the control over the
 execution of a workload is shifted from the machine's middleware to the \pilot
 system. This shift is a defining characteristic of the \pilot paradigm, as it
 decouples the execution of a workload from the need to submit its tasks via the
-machine's scheduler.  For example, the execution of tasks of a workload will not
+machine's scheduler. For example, the execution of tasks of a workload will not
 individually depend upon the specifics of the targeted machine's state or
 availability, but rather on those of the placeholder. More elaborate execution
 patterns involving task and data interdependence can thus be implemented
@@ -970,14 +969,14 @@ optimization, for example, of execution throughput.
 %   instance of the general paradigm.} \mtnote{OK.}
 
 Communication and coordination are two distinguishing characteristics of
-distributed systems and \pilotjob systems are no exception. The three logical
+distributed systems, and \pilotjob systems are no exception. The three logical
 components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
 communicate in order to coordinate the execution of the given workload on the
 instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
-defined by any specific communication pattern and coordination approach. The
-logical components of a \pilotjob system may communicate using any suitable
-pattern (e.g. one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a
-push or pull model), or coordinate adopting any suitable mechanism (e.g. time
+defined by any specific communication and coordination pattern . The logical
+components of a \pilotjob system may communicate using any suitable pattern
+(e.g. one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a push or
+pull model), or coordinate adopting any suitable mechanism (e.g. time
 synchronization, static or dynamic coordinator election, local or global
 information sharing, or \MW). The same applies to network architectures and
 protocols: different network architectures and protocols may be used to achieve
@@ -999,6 +998,8 @@ tasks, while the latter capabilities to coordinate with its neighbor executors
 leveraging, for example, a dedicated overlay network. While these systems would
 adopt different coordination strategies, they could be both be considered
 \pilotjob systems.
+
+\mtnote{Across the paper, \MW is called pattern, mechanism, and strategy. We need to make up our mind. I am happy to consider it a coordination pattern.}
 
 Data management can play an important role within a \pilotjob system. For
 example, functionalities can be provided to support the local or remote data
@@ -1200,8 +1201,8 @@ confusion.
 % \jhanote{I removed VMs to be a bit more specific}
 
 % \jhanote{even by my standards of repeating the main points, i think we are
-% painfully belabouring the point about ``jobs'' in pilot-jobs.} \mtnote{Maybe so
-% but I do not see where we explicitly say this before. I have eliminated an
+% painfully belabouring the point about ``jobs'' in pilot-jobs.} \mtnote{Maybe
+% so but I do not see where we explicitly say this before. I have eliminated an
 % example in which we were repeating the concept of job as a type of container.
 % Here we make the case of a terminological confusion. Any better?}
 
@@ -1231,18 +1232,16 @@ Three more terms associated with \pilot systems need to be explicitly defined:
 %   similar elements of our vocabulary?} \mtnote{This has opened the proverbial
 %   can of warms. Ongoing but will need revision.}
 
-\jhanote{In case it suggests a change in the wording of opening sentence (and as
-  discussed after the definition of multi-level scheduling downstream in this
-  sub-section): the same entity can be scheduled at multiple levels, different
-  entities can be scheduled at the same or different levels. These have all
-  historically be clubbed as multi-level scheduling, i.e., there is multi-level
-  and dimensional scheduling. Not sure if want to make distinction explicit
-  here.} \mtnote{I am not sure I follow. We may want to discuss this on a
-  call/meeting.}
-
-% \jhanote{As agreed, we will introduce 3-4 sentences for multi-stage and
-%   multi-entity, we will eschew multi-level scheduling. MT to refine/rewrite
-%   accordingly} \mtnote{Better?}
+% \jhanote{In case it suggests a change in the wording of opening sentence (and
+%   as discussed after the definition of multi-level scheduling downstream in
+%   this sub-section): the same entity can be scheduled at multiple levels,
+%   different entities can be scheduled at the same or different levels. These
+%   have all historically be clubbed as multi-level scheduling, i.e., there is
+%   multi-level and dimensional scheduling. Not sure if want to make distinction
+%   explicit here.} \mtnote{I am not sure I follow. We may want to discuss this
+%   on a call/meeting.} \jhanote{As agreed, we will introduce 3-4 sentences for
+%   multi-stage and multi-entity, we will eschew multi-level scheduling. MT to
+%   refine/rewrite accordingly} \mtnote{Better?}
 
 Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: pilots and
@@ -1264,7 +1263,6 @@ of a workload can be bound to a set of pilots before or after it becomes
 available on a remote resource. Depending on the implementation of a \pilot
 system, tasks can be further scheduled by deciding about their placement within
 the pilot's resource allocation.
-
 
 % \jhanote{about point (i): I know we caveat the statement with ``potentially''
 %   but maybe the focus should be on (a) greater control to the user without any
@@ -3068,7 +3066,7 @@ generality of the \pilot paradigm and the independence of its implementations
 from other types of software, helps also to avoid a potential misunderstanding
 that \pilots are not just an alternative implementation of a scheduler, of a
 workload manager, of a batch system, or of any other special-purpose software
-component. 
+component.
 
 %and how multi-level scheduling works. % \pilot systems do not
 % circumvent the infrastructure middleware but abstract away some of its
