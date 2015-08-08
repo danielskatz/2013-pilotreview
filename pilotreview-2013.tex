@@ -158,10 +158,10 @@
 
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
-abstractions at the development, deployment, and execution level. \pilotjob is
-arguably one of the most widely-used distributed computing abstractions, as
-suggested by the proliferation of \pilotjob systems used in production
-cyberinfrastructure.
+abstractions at the development, deployment, and execution
+level~\cite{dpa_surveypaper,dpagrid2009}.  As suggested by the proliferation of
+\pilotjob systems used in production cyberinfrastructure, the \pilotjob
+abstraction is arguably one of the few widely-used in distributed computing.
 
 A variety of \pilotjob systems have emerged: HTCondor-G/
 Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
@@ -169,10 +169,12 @@ DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
 \panda~\cite{chiu2010pilot}, Nimrod/G~\cite{buyya2000nimrod},
 Falkon~\cite{raicu2007} and
 MyCluster~\cite{walker2006creating,walker2007personal} to name a few. These
-systems are for the most part functionally equivalent as they support the
-decoupling of workload submission from resource assignment. Nonetheless, their
-implementations often serve specific use cases, target specific resources, and
-lack in interoperability.
+systems are for the most part functionally equivalent and motivated by similar
+objectives; nonetheless, their implementations often serve specific use cases,
+target specific resources, and lack in interoperability.
+
+% as they support the decoupling of workload submission from resource
+% assignment. N
 
 % The situation is reminiscent of the proliferation of functionally similar yet
 % incompatible workflow systems, where in spite of significant {\it a
@@ -189,9 +191,9 @@ lack in interoperability.
 
 The fundamental reason for the proliferation of \pilotjob systems is that they
 provide a simple solution to the rigid and static resource management
-historically found in high-performance and distributed computing (HPDC).  There
-are two ways in which \pilotjobs break free of the rigid resource utilization
-model: (i) through a process often referred to as
+historically found in high-performance and distributed computing.  There are two
+ways in which \pilotjobs break free of the rigid resource utilization model: (i)
+through a process often referred to as
 late-binding~\cite{moscicki2011,glatard2010,delgado2014}, \pilotjobs make the
 selection of heterogeneous and dynamic resources easier and effective; and (ii)
 \pilotjobs decouple the workload specification from the task management.  The
@@ -233,7 +235,7 @@ implementations that serve many million jobs a year on diverse computing
 platforms~\cite{maeno2014evolution,katz2012}. However, the lack of an explicit
 appreciation of the computing paradigm underlying \pilotjobs has undermined the
 full development of dedicated designs and implementations. This limitation is
-well illustrated not only by the effort duplication but also by an overall
+well illustrated not only by the duplication of effort, but also by an overall
 immaturity of the available systems in terms of functionalities, flexibility,
 portability, interoperability, and, most often, robustness.
 
@@ -268,20 +270,6 @@ relates to both other middleware and the application layer. The outcome of the
 critical review of the current implementation state of the art is used to give
 insights about the future directions and challenges faced by the \pilot
 paradigm.
-
-\jhanote{these last two are not reasons for the success of pilot-jobs. they
-arise as a consequence of the success} The \pilotjob abstraction is also a
-promising route to address specific requirements of distributed scientific
-applications, such as coupled-execution and application-level
-scheduling~\cite{ko2010efficient,kim2010exploring}. Another concern often
-addressed by \pilotjobs is fault tolerance which commonly refers to the ability
-of the \pilotjob system to verify the execution environment before executing
-jobs.
-
-\mtnote{We need to verify if all this is described in 4.2. For example, what
-  \pilot systems offer fault-tolerance? Runs on heterogeneous resources?
-  Dynamic?} \jhanote{I'll be rewriting the Introduction, so please consider
-  introduction locked.}
 
 
 % -----------------------------------------------------------------------------
@@ -3527,6 +3515,21 @@ unsustainable partial implementations.
 % NOTES
 %
 \subsection{candidates for removal in current draft-version}
+
+\jhanote{these last two are not reasons for the success of pilot-jobs. they
+arise as a consequence of the success} The \pilotjob abstraction is also a
+promising route to address specific requirements of distributed scientific
+applications, such as coupled-execution and application-level
+scheduling~\cite{ko2010efficient,kim2010exploring}. Another concern often
+addressed by \pilotjobs is fault tolerance which commonly refers to the ability
+of the \pilotjob system to verify the execution environment before executing
+jobs.
+
+\mtnote{We need to verify if all this is described in 4.2. For example, what
+  \pilot systems offer fault-tolerance? Runs on heterogeneous resources?
+  Dynamic?} \jhanote{I'll be rewriting the Introduction, so please consider
+  introduction locked.}
+
 
 % As with the HPC environment, the support for different application workloads
 % and job types as long-lived vs. short-lived applications, or homogeneous vs.
