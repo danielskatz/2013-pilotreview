@@ -1078,6 +1078,8 @@ administrative domain\}.
 
 \end{description}
 
+\mtnote{Here we can add the description of workloads across the three axes. This would support the workload semantic core property in \S4.}
+
 A cluster is a typical example of DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
 Globus grid middleware, of the OpenStack platform; and enforces policies of an
@@ -1537,13 +1539,13 @@ Tables~\ref{table:core_properties} and~\ref{table:aux_properties}). Both sets of
 properties are chosen by considering the implementation requirements of the
 \pilot capabilities as defined in~\S\ref{sec:history}. Core properties are
 necessary for every \pilot system implementation to provide the minimal set of
-functionalities as described in~\S\ref{sec:compsandfuncs}. Auxiliary properties
-are instead required only as a support to the implementation of core properties.
-For example, while every \pilot system has to implement a mechanism for pilot
-instantiation, a specific authentication and authorization protocol may be
-required to support the instantiation of pilots for a particular middleware of a
-DCR. As such, auxiliary properties are not necessarily shared among all \pilot
-systems.
+components and functionalities as described in~\S\ref{sec:compsandfuncs}.
+Auxiliary properties are instead required only as a support to the
+implementation of core properties. For example, while every \pilot system has to
+implement a mechanism for pilot instantiation, a specific authentication and
+authorization protocol may be required to support the instantiation of pilots
+for a particular middleware of a DCR. As such, auxiliary properties are not
+necessarily shared among all \pilot systems.
 
 % \jhanote{removed table reference..as a consequence of changes in 3, broken
 %   reference here}
@@ -1590,6 +1592,11 @@ systems.
 %   to strike a balance between consistency with the table and letting the
 %   reader that comes straight from 3 to move smoothly on into 4.}
 
+Every \pilot systems has five core properties, two pertaining to the components
+and functionalities related to pilots, three to those of workloads: Pilot
+Resources, Pilot Deployment, Workload Semantics, Workload Binding, and Workload
+Execution.
+
 The core properties `Pilot Resources' and `Pilot Deployment' characterize the
 implementation of a Pilot Manager and its Pilot Provisioning functionality.
 Pilot Resources identifies the type of resources that the \pilot system exposes,
@@ -1599,7 +1606,7 @@ to schedule a pilot onto a specific DCR, \pilot systems need to acquire and
 process information about what type of container to use (e.g. job, virtual
 machine), what type of scheduler the resource exposes, the amount of cores and
 duration they can be requisitioned for, what filesystems can be accessed, or how
-to contact the remote resource.
+to communicate with the DCR.
 
 % \jhanote{the way we discuss resource interaction, it appears that the
 %   interaction is really information about the resources, that could be
@@ -1616,11 +1623,11 @@ to contact the remote resource.
 The core properties `Workload Semantics' and `Workload Binding' characterize the
 implementation of a Workload Manager and its Task Dispatching functionality.
 Semantically, a workload description contains all the information necessary for
-it to be dispatched to an appropriate resource.  For example, type, number,
-size, and duration of tasks alongside their grouping into stages or their data
-dependences need to be known when deciding how many resources of a specific type
-should be used to execute the given workload but also for how long such
-resources should be available.
+it to be dispatched to an appropriate DCR and to be executed. For example, type,
+number, size, and duration of tasks alongside their grouping into stages or
+their data dependences need to be known when deciding how many resources of a
+specific type should be used to execute the given workload but also for how long
+such resources should be available.
 
 Executing a workload requires for its tasks to be bound to the resources. Both
 the temporal and spatial dimensions of the binding operations are relevant for
@@ -1666,7 +1673,7 @@ their interactions with the remote DCR.
 Following is an in depth description of core properties by which any \pilot
 system can be characterized (see Table~\ref{table:core_properties}). This list
 of properties is minimal and complete. Note that these are the properties of
-\pilot systems and not of individual pilot instances.
+\pilot systems and not of individual pilot instances executed on DCRs.
 
 % Core properties
 \begin{table*}
@@ -1720,17 +1727,17 @@ Task Execution \\
 
 \begin{itemize}
 
-%core because: it says something elementary about the principle element
+% core because: pilots are resource placeholders.
 \item \textbf{Pilot Resources}. Usually, pilots expose compute resources but
   pilots might also expose data and network resources. Some of the typical
   characteristics of pilots resources are: size (e.g. number of cores),
   lifespan, intercommunication (e.g. low-latency or inter-domain), computing
   platforms (e.g. x86, or GPU), file systems (e.g. local, shared, or
   distributed). The coupling between pilot and the resources that it holds may
-  vary depending on the architecture of the resources in which it is
-  instantiated. For example, a pilot may bind to multiple compute nodes, single
+  vary depending on the architecture of the DCR in which it is
+  instantiated. For example, a pilot may hold multiple compute nodes, single
   nodes, or portion of the cores of each node. The same applies to file systems
-  and its partitions, or to software defined or physical network resources.
+  and their partitions, or to software defined or physical networks.
 
   % \jhanote{how about the following for the first sentence: ``depending on the
   % capabilities offered by the DCR and the middleware used, pilots might
@@ -1745,7 +1752,7 @@ Task Execution \\
   is bundled by the DCR. Both scheduling and bootstrapping varies depending on
   whether the \pilot system targets one or more DCR with heterogeneous or
   homogeneous middleware. For example, a design based on connectors will be
-  required when targeting DCRs with different middleware, overkilled when
+  required when targeting DCRs with different middleware, optional when
   targeting a single DCR or multiple DCRs with the same middleware. \jhanote{in
   general, a dependency on DCR properties suggests a non-core pilot property to
   me. pilot deployment shares this feature with DCR interaction. I'm not
@@ -1757,10 +1764,11 @@ Task Execution \\
 
 % core because: both tasks and workload are core components
 \item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
-  pilots depending on the workload semantics. For example, dispatching decisions
-  depend on the temporal and spatial relationships among tasks and the type of
+  pilots depending on the workload semantics. Dispatching decisions depend on
+  the temporal and spatial relationships among tasks and the type of
   capabilities needed for their execution. \pilot systems support varying
-  degrees of semantic richness of workloads and its tasks.
+  degrees of semantic richness of workloads and its tasks. \mtnote{add
+  examples? See note in \S3 about having a general description of workloads across the three axes, possibly with an example of taxonomy to use here and in the table of core properties.}
 
   % The format or language in which the workloads are described may also be
   % relevant.
@@ -1798,7 +1806,7 @@ Task Execution \\
   resources. Besides the binary decision between early and late binding, the
   \pilot system can expose, for example, more detailed application-level
   scheduling decisions, dispatch policies, or even include more levels of
-  scheduling.
+  scheduling. \mtnote{To be reduced and cleaned up.}
 
 % core because: its the only property of the task executor
 % component/functionality
@@ -1846,13 +1854,13 @@ Task Execution \\
 Several auxiliary properties play an important role in supporting the
 implementation and usability of the core properties (see
 Table~\ref{table:aux_properties}). While these properties might be necessary for
-a \pilot implementation, in of themselves they do not distinguish a \pilot as a
-unique system. For example, programming and user interfaces; interoperability
-across differing middleware and other \pilot systems; multitenancy of pilots as
-opposed to that of DCRs; strategies and abstractions for data management;
-security including authentication, authorization, and accounting; support for
-multiple usage modes like HPC or HTC; or robustness in terms of fault-tolerance
-and high-availability.
+\pilot systems deployment and usability, in of themselves they do not
+distinguish a \pilot as a unique system. For example, programming and user
+interfaces; interoperability across differing middleware and other \pilot
+systems; multitenancy of pilots as opposed to that of DCRs; strategies and
+abstractions for data management; security including authentication,
+authorization, and accounting; support for multiple usage modes like HPC or HTC;
+or robustness in terms of fault-tolerance and high-availability.
 
 % Auxiliary properties
 \begin{table*}
@@ -2079,7 +2087,6 @@ of this paper.
   staging data in and out of the DCR, and may have to mediate task binding and
   execution by means of remote interfaces and protocols.
 
-
 \end{itemize}
 
 Both core and auxiliary properties have a direct impact on the use cases for
@@ -2140,7 +2147,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
   \midrule
 
     DIANE &
-    HTC &
+    Compute &
     %GANGA &
     Explicit &
     Programmable &
@@ -2164,7 +2171,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
   %   Serial \\
 
     HTCondor Glidein &
-    HTC &
+    Compute &
     %Condor-G &
     Explicit &
     Graph &
@@ -2172,7 +2179,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     Serial, MPI \\
 
     GlideinWMS&
-    HTC, HPC, Cloud &
+    Compute &
     %Condor-G &
     Implicit &
     Graph &
@@ -2188,7 +2195,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
   %   All \\
 
     \panda &
-    HTC, HPC &
+    Compute &
     %Custom, SAGA &
     Implicit &
     Programmable &
@@ -2196,7 +2203,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     Serial, MPI \\
 
     RADICAL-Pilot &
-    HTC, HPC, Cloud &
+    Compute, data &
     %SAGA &
     Explicit &
     Programmable &
