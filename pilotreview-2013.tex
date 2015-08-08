@@ -1048,7 +1048,25 @@ administrative domain\}.
 
 \end{description}
 
-\mtnote{Here we can add the description of workloads across the three axes. This would support the workload semantic core property in \S4.}
+\mtnote{Here we can add the description of workloads across the three axes. This
+  would support the workload semantic core property in \S4.}
+
+Workloads are characterized by multiple tasks. The tasks could be homogeneous,
+heterogeneous or one-of-a-kind.  There does not exist an established taxonomy
+for workload description; we propose a workload taxonomy based upon the
+orthogonal properties of coupling, dependency and similarity of the tasks.
+Workloads comprised of tasks that are independent and effectively
+indistinguishable from other tasks; such a workload is commonly referred to as a
+Bag-of-Tasks (BoT). Ensembles (ENS) represent workloads when the collective
+outcome of the tasks is relevant (e.g., computing the average property). The
+tasks that comprise the ensembles (i.e., ensemble-members) in turn can have
+varying degrees and types of coupling; coupled ensembles might have global
+(synchronous) or local exchanges (asynchronous), regular or irregular
+communication. We categorize workloads as coupled ensembles (C-ENS) independent
+of the specific details of the coupling between the tasks. A workflow (WF)
+represents a workload with arbitrarily complex relationships among the tasks,
+ranging from dependencies (e.g., sequential or data) to coupling between the
+tasks (e.g., frequency or volume of exchange).
 
 A cluster is a typical example of DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
