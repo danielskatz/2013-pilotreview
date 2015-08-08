@@ -220,30 +220,34 @@ simplifies the placement of workloads on those resources.
 % \mtnote{Should we have a paragraph explaining the core contribution offered by
 % this paper?} \jhanote{yes} \mtnote{Should I write a first draft of it?}
 
-Though mostly as a pragmatic solution to the need of improving throughput
-performance of distributed applications, \pilotjobs have been almost exclusively
-developed within preexisting systems and middleware dedicated to specific
-scientific requirements. As a consequence, the development of \pilotjobs have
-not been grounded on a robust understanding of underpinning abstractions, or on
-a well-understood set of dedicated design principles. The functionalities and
-properties of \pilotjobs have been understood mostly in relation to the needs of
-the containing software systems or of the user cases justifying their
-development.
+% Though mostly as a pragmatic solution to the need of improving throughput
+% performance of distributed applications.
+
+\pilotjobs have been almost exclusively developed within pre-existing systems
+and middleware dedicated to specific scientific requirements. As a consequence,
+the development of \pilotjobs have not been grounded on a robust understanding
+of underpinning abstractions, or on a well-understood set of dedicated design
+principles. The functionalities and properties of \pilotjobs have been
+understood mostly in relation to the needs of the containing software systems or
+of the user cases justifying their development.
 
 This approach is not problematic in itself and has led to effective
 implementations that serve many million jobs a year on diverse computing
-platforms~\cite{maeno2014evolution,katz2012}. However, the lack of an explicit
-appreciation of the computing paradigm underlying \pilotjobs has undermined the
-full development of dedicated designs and implementations. This limitation is
-well illustrated not only by the duplication of effort, but also by an overall
-immaturity of the available systems in terms of functionalities, flexibility,
-portability, interoperability, and, most often, robustness.
+platforms~\cite{maeno2014evolution,katz2012}. However, the lack of an conceptual
+clarity and an explicit appreciation of the computing paradigm underlying
+\pilotjobs has undermined the development of dedicated designs and
+implementations. This limitation is illustrated not only by the duplication of
+effort, but also by an overall immaturity of the available systems in terms of
+functionalities, flexibility, portability, interoperability, and, most often,
+robustness. 
 
 This survey is motivated by the fact that, in spite of the demonstrated
 potential and proliferation of \pilotjob systems, there remains significant lack
 of clarity and understanding about the \pilotjob abstraction. We believe this
 results in unfulfilled and lost potential as well as significant overhead and
-repetition of effort.
+repetition of effort. Ultimately, these also contribute to a high-cost of
+development and low software sustainability.
+
 
 This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
