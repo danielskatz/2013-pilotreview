@@ -239,7 +239,7 @@ clarity and an explicit appreciation of the computing paradigm underlying
 implementations. This limitation is illustrated not only by the duplication of
 effort, but also by an overall immaturity of the available systems in terms of
 functionalities, flexibility, portability, interoperability, and, most often,
-robustness. 
+robustness.
 
 This survey is motivated by the fact that, in spite of the demonstrated
 potential and proliferation of \pilotjob systems, there remains significant lack
@@ -662,7 +662,7 @@ computing resources.
 % The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
 % limitations, to broaden the type of applications supported by the pilot-based
 % execution model, and to extend the \pilot abstraction beyond the boundaries of
-% compute tasks. 
+% compute tasks.
 
 The BigJob \pilotjob system~\cite{luckow2010} was designed to support task-level
 parallelism on distributed HPC resources, to broaden the type of applications
@@ -2102,7 +2102,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 \begin{table*}
  \centering
 % \begin{tabular}{|p{2cm}||p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
-  \begin{tabular}{p{3cm}p{3cm}p{2.25cm}p{2.25cm}p{2.25cm}p{2cm}p{2cm}|}
+  \begin{tabular}{p{2.5cm}p{2.25cm}p{2cm}p{5cm}p{1.75cm}p{1.75cm}p{1.75cm}|}
 
   \toprule
 
@@ -2118,65 +2118,65 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
     DIANE &
     Compute &
-    %GANGA &
+    % GANGA &
     Explicit &
-    Programmable &
+    WF (MOTOUR~\cite{korkhov2009dynamic}) &
     Late &
     Serial \\
 
-  %   DIRAC &
-  %   HTC &
-  %   %Custom &
-  %   Community Service / implicit &
-  %   None (Data dependencies?) &
-  %   Late &
-  %   Serial, some MPI \\
+    % DIRAC &
+    % HTC &
+    % % Custom &
+    % Community Service / implicit &
+    % None (Data dependencies?) &
+    % Late &
+    % Serial, some MPI \\
 
-  %   Falkon &
-  %   HPC &
-  %   %Unspecified &
-  %   Web Service &
-  %   None &
-  %   Late (mixed push/pull) &
-  %   Serial \\
+    % Falkon &
+    % HPC &
+    % % Unspecified &
+    % Web Service &
+    % None &
+    % Late (mixed push/pull) &
+    % Serial \\
 
-    HTCondor Glidein &
+    % HTCondor Glidein &
+    % Compute &
+    % % Condor-G &
+    % Explicit &
+    % BoT &
+    % Late &
+    % Serial, MPI \\
+
+    GlideinWMS &
     Compute &
-    %Condor-G &
-    Explicit &
-    Graph &
-    Late &
-    Serial, MPI \\
-
-    GlideinWMS&
-    Compute &
-    %Condor-G &
+    % Condor-G &
     Implicit &
-    Graph &
+    WF (Pegaus~\cite{deelman2015}, DAGMan~\cite{frey2002condor}) &
     Late &
     Serial, MPI \\
 
-  %   MyCluster &
-  %   HPC &
-  %   %Custom (SGE / PBS / HTCondor) &
-  %   CLI tools from respective LRMS &
-  %   Workload semantics from respective LRMS &
-  %   Agnostic &
-  %   All \\
+    % MyCluster &
+    % HPC &
+    % % Custom (SGE / PBS / HTCondor) &
+    % CLI tools from respective LRMS &
+    % Workload semantics from respective LRMS &
+    % Agnostic &
+    % All \\
 
     \panda &
     Compute &
-    %Custom, SAGA &
+    % Custom, SAGA &
     Implicit &
-    Programmable &
+    BoT &
     Late &
     Serial, MPI \\
 
     RADICAL-Pilot &
     Compute, data &
-    %SAGA &
+    % SAGA &
     Explicit &
-    Programmable &
+    ENS (EnsembleMD Toolkit~\cite{emdtoolkit_url}) &
     Early, Late &
     Serial, MPI \\
 
@@ -2184,7 +2184,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
  \end{tabular}
  \caption{\textbf{Overview of \pilot systems and a summary of the values of
- their core properties.} \mtnote{This table needs to be consistent with the
+ their core properties. Based on the tooling currently available for each \pilot system, the types of workload supported as defined in~\S\ref{sec:termsdefs} are: BoT = Bag of Tasks; ENS = Ensembles; WF = workflows.} \mtnote{This table needs to be consistent with the
  tables of the core an auxiliary properties.}}
  \label{table:implementations-properties}
 \end{table*}
@@ -2336,8 +2336,8 @@ task once it is available and has free resources.
 % Who did it and for what scientific domains.
 The HTCondor Glidein system has been designed as part of the software ecosystem
 of HTCondor. The HTCondor Glidein system implements pilots within regular Condor
-pools.  It was developed by the Center for High Throughput Computing at the
-University of Wisconsin-Madison (UW-Madison).  HTCondor Glidein's original goal
+pools. It was developed by the Center for High Throughput Computing at the
+University of Wisconsin-Madison (UW-Madison). HTCondor Glidein's original goal
 was to aggregate DCRs with heterogeneous middleware into HTCondor resource
 pools~\cite{glidein_manual_url}.
 
@@ -3563,7 +3563,7 @@ batch computing infrastructures exploited by the High Energy Physics (HEP)
 community.
 
 \mtnote{End of the suggested paragraph removal.}
-% ---- end of section 1 ---- 
+% ---- end of section 1 ----
 
 
 \jhanote{these last two are not reasons for the success of pilot-jobs. they
