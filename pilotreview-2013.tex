@@ -166,8 +166,8 @@ abstraction is arguably one of the few widely-used in distributed computing.
 A variety of \pilotjob systems have emerged: HTCondor-G/
 Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
 DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
-\panda~\cite{chiu2010pilot}, Nimrod/G~\cite{buyya2000nimrod},
-Falkon~\cite{raicu2007} and
+\panda~\cite{chiu2010pilot}, GWPilot~\cite{rubio2015gwpilot},
+Nimrod/G~\cite{buyya2000nimrod}, Falkon~\cite{raicu2007} and
 MyCluster~\cite{walker2006creating,walker2007personal} to name a few. These
 systems are for the most part functionally equivalent and motivated by similar
 objectives; nonetheless, their implementations often serve specific use cases,
@@ -519,7 +519,7 @@ capabilities like workload and data management.
     \caption{Introduction of systems over time. When available, the date of
       first mention in a publication or otherwise the release date of software
       implementation is used. \mtnote{Missing from from both Section 3 and 4:
-        WISDOM} }
+        WISDOM} \jhanote{I think PANDA is too far left..I would say post-2005?}}
     \label{fig:timeline}
 \end{figure}
 
@@ -606,8 +606,6 @@ possible to group multiple machines into aggregated resource pools. However,
 resource management required system level software configurations that had to be
 made by the administrator of each individual machine of each resource pool.
 
-\jhanote{So we are sure flocking came before glide-in?} \mtnote{Mark?}
-
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
 
@@ -639,17 +637,47 @@ service, GlideIn supports integration with distributed application frameworks
 but does not programmatically support the development of distributed
 applications by means of dedicated APIs and libraries.
 
-The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
-limitations, to broaden the type of applications supported by the pilot-based
-execution model, and to extend the \pilot abstraction beyond the boundaries of
-compute tasks. BigJob offers application-level programmability to provide the
-end-user with more flexibility and control over the design of distributed
-application and the isolation of the management of their execution. BigJob is
-flexible and extensible and uses the Simple API for Grid Applications (SAGA)
-interoperability library~\cite{merzky2015saga,goodale2006,luckow2010} to work on
-a variety of infrastructures. Additionally, BigJob has also been extended to
-work with data and, analogous to compute pilots, to abstract away direct user
-communication between different storage systems.
+Concomitant and correlated with developments at LHC there was a ``Cambrian
+Explosion'' of \pilotjobs in first decade of the millennium, e.\,g.\
+DIANE~\cite{moscicki2003diane}, GlideInWMS, DIRAC~\cite{casajus2010dirac},
+\panda~\cite{zhao2011panda}, AliEn~\cite{saiz2003alien}, and
+Co-Pilot~\cite{buncicco2011co}.  Each of these \pilotjob systems serves a
+particular user community and experiment at the LHC:
+DIRAC~\cite{casajus2010dirac} was developed by the LHCb
+experiment~\cite{lhcb_url}; AliEn~\cite{saiz2003alien} was developed by the
+ALICE experiment; \panda (Production and Distributed
+Analysis)~\cite{zhao2011panda} was developed by the ATLAS
+experiment~\cite{aad2008atlas}. Due to socio-technical reasons, the CMS
+experiment at LHC mostly converged around the
+HTCondor-Glidein-GlideinWMS~\cite{sfiligoi2008glideinwms} ecosystem.  Another
+\pilotjob system that is used in the LHC context is
+Co-Pilot~\cite{buncicco2011co}. Interestingly, these systems are functionally
+very similar, work on almost the same underlying infrastructure, and serve
+applications with very similar (if not identical) characteristics.
+
+It is worth noting that Co-Pilot was set up as an integration point among
+grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
+computing resources.
+
+% The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
+% limitations, to broaden the type of applications supported by the pilot-based
+% execution model, and to extend the \pilot abstraction beyond the boundaries of
+% compute tasks. 
+
+The BigJob \pilotjob system~\cite{luckow2010} was designed to support task-level
+parallelism on distributed HPC resources, to broaden the type of applications
+supported by the pilot-based execution model, and ultimately to extend the
+\pilot abstraction beyond the boundaries of compute tasks. BigJob offers
+application-level programmability to provide the end-user with more flexibility
+and control over the design of distributed application and the isolation of the
+management of their execution. BigJob is flexible and extensible and uses the
+Simple API for Grid Applications (SAGA) interoperability
+library~\cite{merzky2015saga,goodale2006,luckow2010} to work on a variety of
+infrastructures.
+
+% Additionally, BigJob has also been extended to work with data
+% and, analogous to compute pilots, to abstract away direct user communication
+% between different storage systems.
 
 % was recently re-implemented as a production-level tool named
 % ``RADICAL-Pilot''~\cite{radical_pilot_paper}. rep- resents one of the latest
@@ -676,73 +704,23 @@ centrally hosted, move critical functionality from the client to the server
 automatically start new pilots on demand and integrate security mechanisms to
 support multiple users simultaneously.
 
-Several \pilotjob systems have been developed in the context of the LHC
-experiment at CERN, which is associated with a major increase in the uptake and
-availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
-DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
-AliEn~\cite{saiz2003alien}, and Co-Pilot~\cite{buncicco2011co}. Each of these
-\pilotjob systems serves a particular user community and experiment.
-Interestingly, these systems are functionally very similar, work on almost the
-same underlying infrastructure, and serve applications with very similar (if not
-identical) characteristics.
+% Several \pilotjob systems have been developed in the context of the LHC
+% experiment at CERN, which is associated with a major increase in the uptake and
+% availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
+% DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
+% AliEn~\cite{saiz2003alien}, and Co-Pilot~\cite{buncicco2011co}. Each of these
+% \pilotjob systems serves a particular user community and experiment.
+% Interestingly, these systems are functionally very similar, work on almost the
+% same underlying infrastructure, and serve applications with very similar (if not
+% identical) characteristics.
 
-% \jhanote{Need consistency between PanDA (two paras from now) and PanDa}
 
-\mtnote{I would consider to cut the following 5 paragraphs. They are largely a
-  repetition of what we have in 4.2 and historically they offer details that
-  have been already summarized (or can be summarized) in the preceding,
-  encompassing paragraph.}  \jhanote{I think this is a fair suggestion. But we
-  need to ensure that those that are not discussed in 4.2 are in the paragraph
-  ``for all other pilot systems'' --- so as to avoid possibly being dinged by a
-  reviewer from that system..}\jhanote{I also note that GWPilot isn't referenced
-  anywhere/anymore. We should be sure to put GWPilot into that paragraph}
+% Co-Pilot provides components for building a
+% framework for seamless and transparent integration of these resources into
+% existing grid and batch computing infrastructures exploited by the High Energy
+% Physics (HEP) community.
 
-GlideinWMS~\cite{sfiligoi2008glideinwms} is a workload management system that is
-based on the pilot capabilities of HTCondor GlideIn. The system can, based on
-the current and expected number of jobs in a pool, automatically increase or
-decrease the number of active Glide-ins (i.e. pilots) available to that pool.
-GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
-service.
-% GlideinWMS attempts to hide the pilot capabilities rather than exposing
-% them to the user.
-GlideinWMS is currently deployed in production on the Open Science Grid
-(OSG)~\cite{osg_url} and is the recommended mode for new users wanting to access
-OSG resources. \mtnote{I commented out the sentence as I think it would need
-further explanation, a level of depth/analysis that I believe does not belong to
-this section. Would you agree?}
 
-\panda (Production and Distributed Analysis)~\cite{zhao2011panda} is
-the workload management system of the ATLAS experiment~\cite{aad2008atlas}, used
-to run managed production and user analysis jobs on the grid. The ATLAS
-Computing Facility~\cite{acf_url} operates the pilot submission systems. This is
-done using the \panda `AutoPilot' scheduler component which submits pilot jobs
-via HTCondor-G. \panda also provides the ability to manage data associated the
-jobs managed by the \panda workload manager.
-
-AliEn~\cite{saiz2003alien} provides the ability to tightly integrate storage and
-compute resources and is also able to manage file replicas. While all data can
-be accessed from anywhere, the scheduler is aware of data localities and
-attempts to schedule compute close to the data. AliEn deploys a pull-based
-model~\cite{saiz2003alienpr} assuming that the resource pool is dynamic
-% , and that a pull model doesn't require the broker to keep detailed track of
-% all resources, which leads to a more simple implementation.
-\jhanote{what is the broker here?} \mtnote{Mark?} \mtnote{I have eliminated the
-sentence because it seems too detailed compared to the other descriptions.}
-
-DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb_url} is
-another comprehensive pilot-based workload management system. It supports the
-management of data, which can be placed in different types of storage elements
-(e.\,g.\ based on SRM).
-
-Another \pilotjob system that is used in the LHC context is
-Co-Pilot~\cite{buncicco2011co}. Co-Pilot serves as an integration point among
-grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
-computing resources. Co-Pilot provides components for building a framework for
-seamless and transparent integration of these resources into existing grid and
-batch computing infrastructures exploited by the High Energy Physics (HEP)
-community.
-
-\mtnote{End of the suggested paragraph removal.}
 
 % The \pilot abstraction has also been integrated into scientific workflow
 % systems.
@@ -3519,6 +3497,67 @@ unsustainable partial implementations.
 % NOTES
 %
 \subsection{candidates for removal in current draft-version}
+
+
+%-----from section 1-----
+\jhanote{Need consistency between PanDA (two paras from now) and PanDa}
+
+\mtnote{I would consider to cut the following 5 paragraphs. They are largely a
+  repetition of what we have in 4.2 and historically they offer details that
+  have been already summarized (or can be summarized) in the preceding,
+  encompassing paragraph.}  \jhanote{I think this is a fair suggestion. But we
+  need to ensure that those that are not discussed in 4.2 are in the paragraph
+  ``for all other pilot systems'' --- so as to avoid possibly being dinged by a
+  reviewer from that system..}
+
+GlideinWMS~\cite{sfiligoi2008glideinwms} is a workload management system that is
+based on the pilot capabilities of HTCondor GlideIn. The system can, based on
+the current and expected number of jobs in a pool, automatically increase or
+decrease the number of active Glide-ins (i.e. pilots) available to that pool.
+GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
+service.
+% GlideinWMS attempts to hide the pilot capabilities rather than exposing
+% them to the user.
+GlideinWMS is currently deployed in production on the Open Science Grid
+(OSG)~\cite{osg_url} and is the recommended mode for new users wanting to access
+OSG resources. \mtnote{I commented out the sentence as I think it would need
+further explanation, a level of depth/analysis that I believe does not belong to
+this section. Would you agree?}
+
+\panda (Production and Distributed Analysis)~\cite{zhao2011panda} is
+the workload management system of the ATLAS experiment~\cite{aad2008atlas}, used
+to run managed production and user analysis jobs on the grid. The ATLAS
+Computing Facility~\cite{acf_url} operates the pilot submission systems. This is
+done using the \panda `AutoPilot' scheduler component which submits pilot jobs
+via HTCondor-G. \panda also provides the ability to manage data associated the
+jobs managed by the \panda workload manager.
+
+AliEn~\cite{saiz2003alien} provides the ability to tightly integrate storage and
+compute resources and is also able to manage file replicas. While all data can
+be accessed from anywhere, the scheduler is aware of data localities and
+attempts to schedule compute close to the data. AliEn deploys a pull-based
+model~\cite{saiz2003alienpr} assuming that the resource pool is dynamic
+% , and that a pull model doesn't require the broker to keep detailed track of
+% all resources, which leads to a more simple implementation.
+% \jhanote{what is the broker here?} \mtnote{Mark?} \mtnote{I have eliminated the
+% sentence because it seems too detailed compared to the other descriptions.}
+
+DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb_url} is
+another comprehensive pilot-based workload management system. It supports the
+management of data, which can be placed in different types of storage elements
+(e.\,g.\ based on SRM).
+
+Another \pilotjob system that is used in the LHC context is
+Co-Pilot~\cite{buncicco2011co}. Co-Pilot serves as an integration point among
+grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
+computing resources. Co-Pilot provides components for building a framework for
+seamless and transparent integration of these resources into existing grid and
+batch computing infrastructures exploited by the High Energy Physics (HEP)
+community.
+
+\mtnote{End of the suggested paragraph removal.}
+% ---- end of section 1 ---- 
+
 
 \jhanote{these last two are not reasons for the success of pilot-jobs. they
 arise as a consequence of the success} The \pilotjob abstraction is also a
