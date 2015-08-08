@@ -3077,9 +3077,6 @@ example, as seen in~\S\ref{sec:analysis} \panda, Falkon, or DIRAC were initially
 developed as single-point solutions, focusing on either a type of workload, a
 specific infrastructure, or the optimization of a single performance metric.
 
-\jhanote{We should refrain from using multi-level scheduling. Fixed (nothing to
-  do).}
-
 Appreciating the properties of the \pilot paradigm becomes necessary once
 requirements of DCR interoperability, support for multiple types of workloads,
 or flexibility in the optimization of execution are introduced. Satisfying those
@@ -3114,9 +3111,6 @@ arbitrary number of tasks with disparate requirements. For example, as seen
 in~\S\ref{sec:analysis}, \pilot systems can execute homogeneous or heterogeneous
 bags of independent or intercommunicating tasks with arbitrary duration, data,
 or computation requirements.
-
-\jhanote{I hope this is not nitpicking, but I would discuss infrastructure
-  before resource, viz., transpose the next two paragraphs} \mtnote{Done.}
 
 The same generality applies to both the types of DCR and of resource on which a
 \pilot system can execute workloads. The descriptions presented
@@ -3168,10 +3162,6 @@ data/compute placement, and dynamic resource sizing can be achieved.
 % use a \pilot system to provide not only a single entry point to the DCR
 % scheduler, but also a dynamic resource allocation that grows or shrinks
 % depending on the required resources.
-
-\jhanote{we've discussed resources, infrastructure and workload types.. thus
-  putting them together} \mtnote{Made this explicit by expanding `thus' into a
-  description.}
 
 Thanks to the generality of the \pilot paradigm in respect of types of workload,
 target DCR, and resource, \pilot systems offers a well-defined and well-isolated
@@ -3408,9 +3398,8 @@ infrastructure for data-intensive computing,
 % Reduce programming framework to the underlying infrastructure resource
 % management, Hadoop~2
 introduced the YARN~\cite{vavilapalli2013apache} resource manager to
-heterogeneous workloads
+heterogeneous workloads.
 % in addition to traditional MapReduce workloads
-.
 %In order to do so,
 YARN supports multi-stage scheduling: Applications need to initialize their
 so-called `Application-Master' via YARN; the Application Master is then
@@ -3491,9 +3480,10 @@ Thanks to these insights, it was possible in \S\ref{sec:discussion} to highlight
 the properties of the \pilot paradigm.
 
 \mtnote{I think this paragraph should be moved to 5.2 as it is part of an
-analysis and not of a summary of the overall contributions of the paper. This
-should help also with eliminating yet another reference to the sorry state of
-workflows - we did that already twice.} The current state of the workflow
+  analysis and not of a summary of the overall contributions of the paper. This
+  should help also with eliminating yet another reference to the sorry state of
+  workflows - we did that already twice.} \jhanote{Lets discuss how to
+  consolidate these remarks/observations} The current state of the workflow
 systems~\cite{taylor2014} is a paradigmatic example of the consequence of a lack
 of conceptual clarity: Many workflow systems have been implemented with
 significant duplication of effort and limited means for extensibility and
@@ -3515,12 +3505,14 @@ performance indicates the fundamental role that the it can play to support
 task-level parallelism at higher scales and on possibly multiple and diverse
 DCRs. If appreciated, the contributions of this paper offer an analytical base
 for the improvement of exiting \pilot systems implementations, improving their
-interoperability and curtailing the need to create unsustainable partial
-implementations.
+interoperability across specific DCR and curtailing the need to create
+unsustainable partial implementations.
 
 \mtnote{I would eliminate the reference to a better interoperability seeing your
-comments in the notes about it. Maybe hinting at better choosing among the
-available implementations?}
+  comments in the notes about it. Maybe hinting at better choosing among the
+  available implementations?}\jhanote{Yes, I agree we shouldn't get into pilot
+  interoperability. I meant interoperability across different DCR. I have made
+  that explicit; please remove if you disagree with this}.
 
 % When understood, it would show to the user communities, DCIs managers, and
 % developers that converging towards a robust, interoperable, openly available,
