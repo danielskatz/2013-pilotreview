@@ -1,0 +1,48 @@
+% Pilot Resources
+% Description
+Pilot Resources identifies the type of resources that the \pilot system exposes,
+e.g. compute, data, or networking
+% Example
+
+% Pilot Deployment
+% Description
+Pilot Deployment describes the modalities of scheduling, utilization, and
+aggregation of pilots.
+% Example
+For example, to schedule a pilot onto a specific DCR, \pilot systems need to
+acquire and process information about what type of container to use (e.g. job,
+virtual machine), what type of scheduler the resource exposes, the amount of
+cores and duration they can be requisitioned for, what filesystems can be
+accessed, or how to communicate with the DCR.
+
+% Workload Semantics
+% Description
+Semantically, a workload description contains all the information necessary for
+it to be dispatched to an appropriate DCR and to be executed.
+% Example
+For example, type,
+number, size, and duration of tasks alongside their grouping into stages or
+their data dependences need to be known when deciding how many resources of a
+specific type should be used to execute the given workload but also for how long
+such resources should be available.
+
+% Workload Binding
+% Description
+Executing a workload requires for its tasks to be bound to the resources. Both
+the temporal and spatial dimensions of the binding operations are relevant for
+the implementation of Task Dispatching.
+% Example
+Depending on the concurrency of a given workload, tasks could be dispatched to
+one or more pilots for an efficient execution. Furthermore, tasks could be bound
+to pilots before or after its instantiation, depending on resource availability
+and scheduling decisions.
+
+% Workload Execution
+% Description
+Workload Execution identifies the process of task dispatching and the modalities
+with which the execution environment is set up for each task. The dispatching
+process may also depend on the capabilities exposed by the target DCR and its
+policies. As such, the execution of the workload may depend on how the \pilot
+systems implement their interactions with the remote DCR.
+% Example
+
