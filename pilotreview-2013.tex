@@ -1604,9 +1604,9 @@ Provisioning functionality. Workload Semantics describes the properties and
 relations among tasks captured in a workload description while Workload Binding
 the modalities and policies for binding tasks to pilots. These two properties
 identify the implementation of a Workload Manager and its Task Dispatching
-functionality. Workload Execution identifies the types of tasks and the
-mechanisms for their executions. As such, this property characterizes the
-implementation of a Task Manager and its Task Execution functionality.
+functionality. Workload Execution identifies the type and characteristics of the
+environment in which tasks are executed. As such, this property characterizes
+the implementation of a Task Manager and its Task Execution functionality.
 
 % The core properties `Pilot Resources' and `Pilot Deployment' characterize the
 % implementation of a Pilot Manager and its Pilot Provisioning functionality.
@@ -1715,7 +1715,7 @@ Workload Manager&
 Task Dispatching \\
 
 Workload Execution &
-Types of tasks and the mechanisms for their execution &
+Type and characteristics of the environment in which tasks are executed &
 Task Manager &
 Task Execution \\
 
@@ -1762,7 +1762,7 @@ Task Execution \\
   Scheduling and bootstrapping are performed on a DCR and their design depends
   on whether single or multiple types of DCRs are targeted. For example, a
   design based on connectors will be desirable when targeting multiple DCRs in
-  order to gather and leverage information about type of container (job, virtual
+  order to gather and use information about type of container (job, virtual
   machine), type of scheduler (PBS, HTCondor, Globus), amount of cores,
   walltime, or available filesystems.
 
@@ -1776,12 +1776,21 @@ Task Execution \\
   \mtnote{Better?}
 
 % core because: both tasks and workload are core components
-\item \textbf{Workload Semantics}. The tasks of a workload are dispatched to
-  pilots depending on the workload semantics. Dispatching decisions depend on
-  the temporal and spatial relationships among tasks and the type of
-  capabilities needed for their execution. \pilot systems support varying
-  degrees of semantic richness of workloads and its tasks. \mtnote{add
-  examples? See note in \S3 about having a general description of workloads across the three axes, possibly with an example of taxonomy to use here and in the table of core properties.}
+\item \textbf{Workload Semantics}. Properties and relations among tasks captured
+  in a workload description. This description encodes all the information
+  necessary for the workload to be dispatched to appropriate DCR(s) for
+  execution. Dispatching decisions depend on the temporal and spatial
+  relationships among tasks and the type of capabilities needed for their
+  execution. For example, type, number, size, and duration of tasks alongside
+  their grouping into stages or their data dependences need to be known when
+  deciding how many DCRs should be used to execute the given workload, for how
+  long, and with what capabilities. \pilot systems may support workloads with
+  varying semantic richness as labeled in~\S\ref{sec:termsdefs}: bag of tasks
+  (BoT), ensemble (ENS), milti-phase (MP), workflow (WF).
+
+  % \mtnote{add examples? See note in \S3 about having a general description of
+  % workloads across the three axes, possibly with an example of taxonomy to use
+  % here and in the table of core properties.}
 
   % The format or language in which the workloads are described may also be
   % relevant.
@@ -1805,33 +1814,30 @@ Task Execution \\
   % into "depending on workload semantics".}
 
 % core because: this is of the heart of pilot systems
-\item \textbf{Task Binding}. The Task Dispatching functionality implies the
-  capability of binding tasks to pilots. Without such a capability, it would not
-  be possible to know where to dispatch tasks, pilots could not be used to
-  execute tasks and, as such, the whole \pilot system would not be usable. As
-  seen in \S\ref{sec:understanding}, \pilot systems may allow for two types of
-  binding between tasks and pilots: early binding and late binding. \pilot
-  system implementations differ in whether and how they support these two types
-  of binding. Specifically, while there might be implementations that only
-  support a single type of binding, they might also differ in whether they allow
-  for the users to control directly what type of binding is performed, and in
-  whether both types of binding are available on an heterogeneous pool of
-  resources. Besides the binary decision between early and late binding, the
-  \pilot system can expose, for example, more detailed application-level
-  scheduling decisions, dispatch policies, or even include more levels of
-  scheduling. \mtnote{To be reduced and cleaned up.}
+\item \textbf{Task Binding}. Modalities and policies for binding tasks to
+  pilots. Executing a workload requires for its tasks to be bound to one or more
+  pilots instantiated on one or more DCRs. As seen in \S\ref{sec:understanding},
+  \pilot systems may allow for two modalities of binding between tasks and
+  pilots: early binding and late binding. \pilot system implementations differ
+  in whether and how they support these two types of binding. Furthermore,
+  \pilot systems can support application-level or multi-level scheduling decisions. For example, coupled tasks may have to be bound to
+  a single pilot, loosely coupled or uncoupled tasks to multiple pilots; tasks
+  may be scheduled to a pilot and then to a specific pool of resources on a
+  single compute node; or task binding may be prioritized depending on task size
+  and duration.
 
 % core because: its the only property of the task executor
 % component/functionality
-\item \textbf{Task Execution}. Once the tasks are dispatched to a pilot, their
-  execution may require for a specific runtime environment to be set up (e.g.
-  MPI). \pilot systems differ in whether and how they offer such a capability.
-  \pilot systems may adopt dedicated components for managing execution
-  environments, or they may rely on ad hoc configuration of the pilots.
-  Furthermore, execution environments can be of varying complexity, depending on
-  whether the \pilot system allows for data retrieval, software and library
-  installations, communication and coordination among execution environments and
-  pilots.
+\item \textbf{Task Execution}. Type and characteristics of the
+  environment in which tasks are executed. Once bound to a pilot, a task needs
+  an environment that satisfies its execution requirements. The execution
+  environment depends on the type of task (e.g., single or multi-threaded, MPI),
+  task code dependences (e.g., compilers, libraries, interpreters, or modules ),
+  and task communication, coordination and data requirements (e.g.,
+  interprocess, internode communication, data staging, sharing, and
+  replication).
+
+ and diverse dispatch policies
 
   % \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
   %   still valid?}  \msnote{I'm still not comfortable with the overlap of this
