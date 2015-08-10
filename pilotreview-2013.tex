@@ -2018,7 +2018,7 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
 \item \textbf{Interoperability}. Interoperability is defined as the capability
   to deploy pilots on DCRs characterized by heterogeneous middleware. It allows
   for a \pilot system to provision pilots and execute workloads on different
-  types of DCR middleware (e.g. HTC, HPC, Cloud but also HTCondor, LSF, Slurm, or
+  types of DCR middleware (e.g. HTC, HPC, cloud but also HTCondor, LSF, Slurm, or
   Torque).
 
 % aux because: its not directly coupled to one of the components/functions
@@ -2112,7 +2112,7 @@ while others support jobs using a Message Passing Interface (MPI). Furthermore,
 all \pilot systems support the execution of one or more type of workload but
 they differ when considering execution modalities that maximize application
 throughput (HTC), task computing performance (HPC), or container-based high
-scalability (Cloud).
+scalability (cloud).
 
 % \jhanote{Sorry, but I don't see what the last sentence is ``analagous'' to?
 %   Possibly merge last sentence with second sentence for conciseness and
@@ -2596,7 +2596,7 @@ administrative intervention.
 \panda has been initially deployed as an HTC-oriented, multi-user WMS system for
 ATLAS, consisting of ~100 heterogeneous computing sites~\cite{maeno2012pd2p}.
 Recent improvements to \panda have extended the range of deployment scenarios to
-HPC and Cloud-based DCRs making \panda a general-purpose \pilot
+HPC and cloud-based DCRs making \panda a general-purpose \pilot
 system~\cite{nilsson2012recentrp}.
 
 % Architecture.
@@ -3136,7 +3136,7 @@ The same generality applies to both the types of DCR and of resource on which a
 \pilot system can execute workloads. The descriptions presented
 in~\S\ref{sec:implementations}, showed how \pilot systems already operate on
 diverse DCRs. Originally devised for HTC grid infrastructures, \pilot systems
-have been (re-)engineered to operate also on HPC and Cloud infrastructures.
+have been (re-)engineered to operate also on HPC and cloud infrastructures.
 
 As seen in~\S\ref{sec:understanding}, the \pilot paradigm demands resource
 placeholders but does not specify the type of resource that the placeholder
@@ -3183,7 +3183,7 @@ data/compute placement, and dynamic resource sizing can be achieved.
 % scheduler, but also a dynamic resource allocation that grows or shrinks
 % depending on the required resources.
 
-Thanks to the generality of the \pilot paradigm in respect of types of workload,
+Thanks to the generality of the \pilot paradigm with respect of types of workload,
 target DCR, and resource, \pilot systems offers a well-defined and well-isolated
 layer between applications and resources. This fosters extensibility,
 interoperability, and modularity by separating the application description and
@@ -3191,10 +3191,10 @@ logic from the management of its execution, and from the provisioning and
 aggregation of resources. In turn, this avoids the need to develop
 special-purpose, vertical, and end-to-end applications, namely the main sources
 of duplication and fragmentation in the current distributed application and
-tooling landscape.
+tooling landscape. \jhanote{last sentence needs some attention..}
 
-\jhanote{this is a repeat (that I placed/introduced) from 4.3, so if we keep
-this here we must fix in 4.3..}
+% \jhanote{this is a repeat (that I placed/introduced) from 4.3, so if we keep
+% this here we must fix in 4.3..}
 
 % \jhanote{We need 1-2 paragraphs describing the relationship of this paper to
 %   P* model/paper. Else we are going to get dinged by reviewer or cause
@@ -3254,8 +3254,8 @@ extends that preliminary analysis.
 \label{sec:future}
 
 The \pilot landscape is currently fragmented with a high degree of duplicated
-effort and capabilities. The reasons for such a balkanization can be traced
-back mainly to two factors: (i) the relatively recent discovery of the
+effort and capabilities. The reasons for such a balkanization can be traced back
+mainly to two factors: (i) the relatively recent discovery of the generality and
 importance of the \pilot paradigm; and (ii) the development model fostered
 within academic institutions.
 
@@ -3367,7 +3367,7 @@ application execution paradigm they enable.
 % idea. Should we move this to future trends?}
 
 The analysis offered in this paper indicates that the number of \pilot systems
-actively developed can be reduced so to avoid duplication while promoting
+actively developed can be reduced so as to avoid duplication while promoting
 consolidation, robustness, and overall capabilities.  Nonetheless, this
 conclusion should not be taken to an extreme. A single \pilot system should not
 be elected as the only implementation worthy of development effort or adoption.
@@ -3417,7 +3417,7 @@ infrastructure for data-intensive computing,
 % While early versions of Hadoop were monolithic, tightly coupling the Map
 % Reduce programming framework to the underlying infrastructure resource
 % management, Hadoop~2
-introduced the YARN~\cite{vavilapalli2013apache} resource manager to
+introduced the YARN~\cite{vavilapalli2013apache} resource manager for
 heterogeneous workloads.
 % in addition to traditional MapReduce workloads
 %In order to do so,
