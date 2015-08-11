@@ -1591,22 +1591,41 @@ requirements. Note that both set of properties refer to
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-Every \pilot systems has five core properties, two pertaining to the components
-and functionalities related to pilots, three to those of workloads: Pilot
-Resources, Pilot Deployment, Workload Semantics, Workload Binding, and Workload
-Execution.
+The core properties that have to characterize every \pilot system are derived by
+analyzing what characteristics each component described in
+in~\S\ref{sec:compsandfuncs} has to have in order to implement its defining
+functionality.
 
-As described in Tables~\ref{table:core_properties}, Pilot Resources and Pilot
-Deployment represent the types and characteristics of the resources held by the
-pilot, and the modalities for pilot scheduling, bootstrapping, and aggregation.
-Both properties characterize the implementation of a Pilot Manager and its Pilot
-Provisioning functionality. Workload Semantics describes the properties and
-relations among tasks captured in a workload description while Workload Binding
-the modalities and policies for binding tasks to pilots. These two properties
-identify the implementation of a Workload Manager and its Task Dispatching
-functionality. Workload Execution identifies the type and characteristics of the
-environment in which tasks are executed. As such, this property characterizes
-the implementation of a Task Manager and its Task Execution functionality.
+The Pilot Manager implementation has to have at least the following
+characteristics in order to provide its Pilot Provisioning functionality: pilots
+need to (i) hold at least one type of resource otherwise a pilot would not be
+usable to execute tasks; (ii) have a wrapper of the type required by the target
+DCR otherwise it would not be possible to schedule that pilot on the chosen DCR;
+(iii) have the appropriate bootstrapping environment and routines otherwise the
+pilot would not become available for task scheduling and execution. These
+characteristics are here grouped into two core properties: Pilot Resources and
+Pilot Deployment.
+
+The Workload Manager implementation needs at least the following characteristics
+to provide its Task Dispatching functionality: (i) workloads descriptions have
+to express the computing requirements of each task alongside its data and
+inter-task dependences (if any) in order for the workload to be scheduled and
+then executed; (ii) each pilot has to have a list of tasks and given task has to
+be in the list of at least one pilot otherwise complete binding between task and
+pilot(s) will not be achieved; (iii) each task list has to belong to a pilot
+description to obtain early binding or to a pilot instance to obtain late
+binding. Workload Semantics and Workload Binding are the two core properties
+used to represent these characteristics of the Workload Manager.
+
+The Task Manager implementation requires information about those configuration
+and environmental features that determine the execution process of a task on the
+chosen DCR. Without such information, Task Execution functionality could not be
+implemented as the execution of a task would fail for misconfiguration or, for
+example, for lack of required libraries, modules, or coordination with
+supporting execution software. This requirements are here indicated with the
+core property named `Workload Execution'.
+
+The following offers a detailed description of each core property.
 
 % The core properties `Pilot Resources' and `Pilot Deployment' characterize the
 % implementation of a Pilot Manager and its Pilot Provisioning functionality.
@@ -1699,7 +1718,7 @@ Pilot Manager &
 Pilot Provisioning \\
 
 Pilot Deployment &
-Modalities for pilot scheduling, bootstrapping, and aggregation &
+Modalities for pilot scheduling and bootstrapping &
 Pilot Manager &
 Pilot Provisioning \\
 
@@ -1751,20 +1770,22 @@ Task Execution \\
   % also..''} \mtnote{Done.}
 
 % core because: its fundamental to our model
-\item \textbf{Pilot Deployment}. Modalities for pilot scheduling, bootstrapping,
-  and aggregation. The characteristic of these operations varies depending on
-  the design choices of the \pilot systems. For example, pilot scheduling may be
-  fully automated (i.e. implicit) or directly controlled by applications and
-  end-users (i.e. explicit). Pilots can be bootstrapped from code downloaded at
-  every instantiation or from code that is bundled by the DCR. Once
-  bootstrapped, pilots can be independently used or aggregated into a resource
-  overlay presented as an homogeneous set of resources to the application layer.
-  Scheduling and bootstrapping are performed on a DCR and their design depends
-  on whether single or multiple types of DCRs are targeted. For example, a
-  design based on connectors will be desirable when targeting multiple DCRs in
-  order to gather and use information about type of container (job, virtual
-  machine), type of scheduler (PBS, HTCondor, Globus), amount of cores,
-  walltime, or available filesystems.
+\item \textbf{Pilot Deployment}. Modalities for pilot scheduling and
+  bootstrapping. The characteristic of these operations varies depending on the
+  design choices of \pilot systems. For example, pilot scheduling may be fully
+  automated (i.e. implicit) or directly controlled by applications and end-users
+  (i.e. explicit). Pilots can be bootstrapped from code downloaded at every
+  instantiation or from code that is bundled by the DCR. Scheduling and
+  bootstrapping are performed on a DCR and their design depends on whether
+  single or multiple types of DCRs are targeted. For example, a design based on
+  connectors will be desirable when targeting multiple DCRs in order to gather
+  and use information about type of container (e.g., job, virtual machine), type
+  of scheduler (e.g., PBS, HTCondor, Globus), amount of cores, walltime, or
+  available filesystems.
+
+  % Once bootstrapped, pilots can be independently used or aggregated into a
+  % resource overlay presented as an homogeneous set of resources to the
+  % application layer.
 
   \jhanote{in general, a dependency on DCR properties suggests a non-core pilot
   property to me. pilot deployment shares this feature with DCR interaction. I'm
