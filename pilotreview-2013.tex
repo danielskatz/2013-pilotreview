@@ -374,7 +374,7 @@ promote efficient and fair resource sharing. Job schedulers implement a
 usability model where users submit computational tasks called ``jobs'' to a
 queue. The execution of these job is delayed waiting for the required amount of
 resources to be available. The amount of delay mostly depends on the size and
-duration of the submitted job, resource availability, and policies (e.g. fair
+duration of the submitted job, resource availability, and policies (e.g., fair
 usage).
 
 High-performance machines are often characterized by several types of
@@ -574,7 +574,7 @@ It should be noted that process of resource acquisition is different in AppLes
 and voluntary computing. The former has prior knowledge of the available
 resources while the latter has none. As a consequence, AppLes can request and
 orchestrate a set of resources, allocate tasks in advance to specific workers
-(i.e. resources placeholders), and implement load balancing among resources. In
+(i.e., resources placeholders), and implement load balancing among resources. In
 voluntary computing tasks are pulled by the clients when they become active and,
 as such, specific resource availability is unknown in advance. This potential
 drawback is mitigated by the redundancy offered by the large scale that
@@ -699,7 +699,7 @@ Another ongoing evolutionary trend has been to implement the \pilot abstractions
 into pilot-based workload managers, thus moving away from providing simple pilot
 capabilities in application space. These higher-level systems which are often
 centrally hosted, move critical functionality from the client to the server
-(i.e. a service model). These systems usually deploy pilot factories that
+(i.e., a service model). These systems usually deploy pilot factories that
 automatically start new pilots on demand and integrate security mechanisms to
 support multiple users simultaneously.
 
@@ -726,7 +726,7 @@ support multiple users simultaneously.
 \pilotjob systems have proven an effective tool for managing the workloads
 executed in the various stages of a scientific workflow. For example, the Corral
 system~\cite{rynge2011experiences} has been developed to serve as a frontend to
-HTCondor GlideIn and to optimize glides (i.e. pilots) placement for the Pegasus
+HTCondor GlideIn and to optimize glides (i.e., pilots) placement for the Pegasus
 workflow system~\cite{deelman2015}. In contrast to GlideinWMS, Corral provides
 more explicit control over the placement and start of pilots to the end-user.
 Corral was later extended to also serve as a possible front end to GlideinWMS.
@@ -822,10 +822,11 @@ components that characterize every \pilotjob system.
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
 \vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
-and use of one or more resource placeholders (i.e. pilots) on single or multiple
-machines. The Workload Manager handles the scheduling of one or more workloads
-on the available resource placeholders. The Task Manager takes care of executing
-the tasks of each workload by means of the resources held by the placeholders.
+and use of one or more resource placeholders (i.e., pilots) on single or
+multiple machines. The Workload Manager handles the scheduling of one or more
+workloads on the available resource placeholders. The Task Manager takes care of
+executing the tasks of each workload by means of the resources held by the
+placeholders.
 
 The implementation details of these three logical components vary significantly
 across \pilotjob systems (see~\S\ref{sec:analysis}). For example, two or more
@@ -944,8 +945,8 @@ communicate in order to coordinate the execution of the given workload on the
 instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
 defined by any specific communication and coordination pattern . The logical
 components of a \pilotjob system may communicate using any suitable pattern
-(e.g. one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a push or
-pull model), or coordinate adopting any suitable mechanism (e.g. time
+(e.g., one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a push or
+pull model), or coordinate adopting any suitable mechanism (e.g., time
 synchronization, static or dynamic coordinator election, local or global
 information sharing, or \MW). The same applies to network architectures and
 protocols: different network architectures and protocols may be used to achieve
@@ -1174,14 +1175,15 @@ reasoning analytically about multiple \pilotjob system implementations.
 Until now, the term \pilotjob system has been used to indicate those systems
 capable of executing workloads on pilots. From now on, the term `\pilot system'
 will be used instead, as the term `job' in `pilot-job' identifies just the way
-in which a pilot is provisioned on a DCR exposing specific middleware
-% ; it is not a general property of all the \pilotjob systems.
+in which a pilot is provisioned on a DCR exposing specific middleware.
 The use of the term `\pilotjob system' should therefore be regarded as a
 historical artifact, viz., the targeting of a specific class of DCRs in which
 the term `job' was, and still is, meaningful. With the development of DCR
 middleware based on new abstractions as, for example, that of virtual machine,
 the term `job' has become too restrictive, a situation that can lead to
 terminological and conceptual confusion.
+
+% ; it is not a general property of all the \pilotjob systems.
 
 % \mtnote{nitpick: `those based on virtual machines' does not exclude jobs and
 %   schedulers. For example, Nimbus or the CNAF `cloud' use queues and jobs to
@@ -1633,7 +1635,7 @@ The following offers a detailed description of each core property.
 % exposes, e.g. compute, data, or networking while Pilot Deployment describes
 % the modalities of scheduling, utilization, and aggregation of pilots. For
 % example, to schedule a pilot onto a specific DCR, \pilot systems need to
-% acquire and process information about what type of container to use (e.g. job,
+% acquire and process information about what type of container to use (e.g., job,
 % virtual machine), what type of scheduler the resource exposes, the amount of
 % cores and duration they can be requisitioned for, what filesystems can be
 % accessed, or how to communicate with the DCR.
@@ -1701,7 +1703,7 @@ The following offers a detailed description of each core property.
 % Core properties
 \begin{table*}
 \centering
-\begin{tabular}{p{3.6cm}p{5cm}p{2.7cm}p{2.7cm}}
+\begin{tabular}{p{3cm}p{7.8cm}p{2.7cm}p{2.6cm}}
 
 \toprule
 
@@ -1713,7 +1715,7 @@ The following offers a detailed description of each core property.
 \midrule
 
 Pilot Resources &
-Types and characteristics of the resources held by the pilot &
+Types and characteristics of pilot resources &
 Pilot Manager &
 Pilot Provisioning \\
 
@@ -1723,8 +1725,7 @@ Pilot Manager &
 Pilot Provisioning \\
 
 Workload Semantics &
-Properties and relations among tasks captured in a workload
-description &
+Tasks description, dependences, and relations &
 Workload Manager &
 Task Dispatching \\
 
@@ -1734,7 +1735,7 @@ Workload Manager&
 Task Dispatching \\
 
 Workload Execution &
-Type and characteristics of the environment in which tasks are executed &
+Type and features of the task execution environment &
 Task Manager &
 Task Execution \\
 
@@ -1754,8 +1755,8 @@ Task Execution \\
 \item \textbf{Pilot Resources}. The type and characteristics of resources that
   the \pilot system exposes. Resource types are, for example, compute, data, or
   networking while some of the their typical characteristics are: size (e.g.
-  number of cores), lifespan, intercommunication (e.g. low-latency or
-  inter-domain), computing platforms (e.g. x86, or GPU), file systems (e.g.
+  number of cores), lifespan, intercommunication (e.g., low-latency or
+  inter-domain), computing platforms (e.g., x86, or GPU), file systems (e.g.
   local, shared, or distributed). The coupling between pilot and the resources
   that it holds may vary depending on the architecture of the DCR in which the
   pilot is instantiated. For example, a pilot may hold multiple compute nodes,
@@ -1773,8 +1774,8 @@ Task Execution \\
 \item \textbf{Pilot Deployment}. Modalities for pilot scheduling and
   bootstrapping. The characteristic of these operations varies depending on the
   design choices of \pilot systems. For example, pilot scheduling may be fully
-  automated (i.e. implicit) or directly controlled by applications and end-users
-  (i.e. explicit). Pilots can be bootstrapped from code downloaded at every
+  automated (i.e., implicit) or directly controlled by applications and end-users
+  (i.e., explicit). Pilots can be bootstrapped from code downloaded at every
   instantiation or from code that is bundled by the DCR. Scheduling and
   bootstrapping are performed on a DCR and their design depends on whether
   single or multiple types of DCRs are targeted. For example, a design based on
@@ -1858,7 +1859,7 @@ Task Execution \\
   interprocess, internode communication, data staging, sharing, and
   replication).
 
- and diverse dispatch policies
+  % and diverse dispatch policies
 
   % \msnote{This should not overlap with Task Execution Modes} \mtnote{Is this
   %   still valid?}  \msnote{I'm still not comfortable with the overlap of this
@@ -1905,7 +1906,7 @@ or robustness in terms of fault-tolerance and high-availability.
 % Auxiliary properties
 \begin{table*}
 \centering
-\begin{tabular}{p{5cm}p{9cm}}
+\begin{tabular}{p{5cm}p{12cm}}
 
 \toprule
 
@@ -2004,7 +2005,7 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
 
 % aux because: its an "implementation" detail
 \item \textbf{Architecture}. \pilot systems may be implemented by means of
-  different type of architectures (e.g service-oriented, client-server, or
+  different type of architectures (e.g., service-oriented, client-server, or
   peer-to-peer). Architectural choices may depend on multiple factors, including
   application use cases, deployment strategies, or interoperability
   requirements.  The analysis and comparison of architectural choices is limited
@@ -2045,7 +2046,7 @@ Modalities and protocols used to coordinate the pilot system/DCR interaction \\
 \item \textbf{Interoperability}. Interoperability is defined as the capability
   to deploy pilots on DCRs characterized by heterogeneous middleware. It allows
   for a \pilot system to provision pilots and execute workloads on different
-  types of DCR middleware (e.g. HTC, HPC, cloud but also HTCondor, LSF, Slurm, or
+  types of DCR middleware (e.g., HTC, HPC, cloud but also HTCondor, LSF, Slurm, or
   Torque).
 
 % aux because: its not directly coupled to one of the components/functions
@@ -2376,7 +2377,7 @@ A computational task-management tool called
 GANGA~\cite{moscicki2009ganga,ganga_url} is available to support the development
 of SubmitterScripts. GANGA offers a unified interface for job submission to DCRs
 with Globus, HTCondor, UNICORE, or gLite middleware. The main goal of GANGA is to
-facilitate the submission of WorkerAgents (i.e. pilots) to diverse DCRs by means
+facilitate the submission of WorkerAgents (i.e., pilots) to diverse DCRs by means
 of a uniform interface and abstraction.
 
 % Workload Semantics
@@ -2417,7 +2418,7 @@ pools~\cite{glidein_manual_url}.
 %   would not think so. A condor pool is a list of DCRs with a set of properties
 %   for each item of the list. I added a comma, better? That sentence needs to
 %   convey the following: there is a condor pool, there are DCRs with a grid
-%   middleware (i.e. Globus), these DCRs need to be added to the condor pool;
+%   middleware (i.e., Globus), these DCRs need to be added to the condor pool;
 %   The HTCondor Glidein system does that.}\jhanote{Unless there are objections
 %   to the word ``Aggregate'' I think the sentence is as simple as possible
 %   without loss of correctness. OK?} \mtnote{I think there is loss of meaning:
@@ -2499,12 +2500,12 @@ pilot.
 
 % Execution model.
 The execution model of the HTCondor Glidein system can be summarized in eight
-steps: 1. the user submits a glidein (i.e. a job) to a DCR batch scheduler; 2.
+steps: 1. the user submits a glidein (i.e., a job) to a DCR batch scheduler; 2.
 once executed, this glidein bootstraps a Startd daemon; 3. the Startd daemon
 advertises itself with the Collector; 4. the user submits the tasks of the
 workload to the Schedd daemon; 5. the Schedd advertises these tasks to the
 Collector; 6. the Negotiator matches the requirements of the tasks to the
-properties of one of the available Startd daemon (i.e. a glidein); 7. the
+properties of one of the available Startd daemon (i.e., a glidein); 7. the
 Negotiator communicates the match to the Schedd; 8. the schedd submits the tasks
 to the Startd daemon indicated by the Negotiator.
 
@@ -2522,7 +2523,7 @@ the execution model is the same as described for the HTCondor Glidein Service.
 %% 5 core properties.
 
 % Pilot Resources.
-The resources managed by a single glidein (i.e. pilot) are limited to compute
+The resources managed by a single glidein (i.e., pilot) are limited to compute
 resources. Glideins may bind one or more cores, depending on the target DCRs.
 For example, heterogeneous HTCondor pools with resources for desktops,
 workstations, small campus clusters, and some larger clusters will run mostly
@@ -2635,7 +2636,7 @@ Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects all the
 submitted tasks into a global queue and the Broker prioritizes and binds those
 tasks to DCRs on the basis of multiple criteria. The Data Service stages the
 tasks' input file(s) to the DCR to which the tasks have been bound using the
-data transfer technologies exposed by the DCR middleware (e.g. uberftp, gridftp,
+data transfer technologies exposed by the DCR middleware (e.g., uberftp, gridftp,
 or lcg-cp). The Job Dispatcher delivers the tasks to the RunJob(s) running on
 the bound DCR.
 
@@ -2990,7 +2991,7 @@ implementation within \pilot systems are minimal.
 % \begin{itemize}
 
 % \item Importance on interoperability layers/libraries over DCRs' middleware
-% (e.g. GANGA, SAGA)
+% (e.g., GANGA, SAGA)
 
 % \item Importance of automating pilot provisioning as opposed to leave the task
 % tot he user to develop deployment scripts.
@@ -3641,7 +3642,7 @@ criticisms.}}
 % scheduling seems to be the means to have placeholders. Both early and late
 % binding refers to the same entities: tasks bound to pilots, i.e. place
 % holders. Multi-level scheduling refers to two pairs of entities: container
-% (i.e. jobs) scheduled to DCIs, and tasks scheduled to placeholders. This
+% (i.e., jobs) scheduled to DCIs, and tasks scheduled to placeholders. This
 % opens the issue of whether binding is a form of scheduling, whether binding
 % and scheduling are the same. We may want to discuss about it.}
 
@@ -3702,7 +3703,7 @@ criticisms.}}
 % supporting their execution depend less on the size of the nodes of the target
 % infrastructure and more on the overall number of possibly independent cores that
 % they can hold. These \pilots can be instantiated also by means of decentralized
-% services (e.g. WMS) aggregating resources from possibly heterogeneous
+% services (e.g., WMS) aggregating resources from possibly heterogeneous
 % infrastructures.
 
 % to HPC and HTC presents practical differences. The ratio of tasks and \pilots
