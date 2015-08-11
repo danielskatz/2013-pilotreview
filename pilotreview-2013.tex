@@ -1524,22 +1524,24 @@ differences.
 
 This subsection analyzes the properties of diverse implementations of a \pilot
 system. Two sets of properties are introduced: core and auxiliary (see
-Tables~\ref{table:core_properties} and~\ref{table:aux_properties}). Both sets of
-properties are chosen by considering the implementation requirements of the
-\pilot capabilities as defined in~\S\ref{sec:history}. Core properties are
-necessary for every \pilot system implementation to provide the minimal set of
-components and functionalities as described in~\S\ref{sec:compsandfuncs}.
-Auxiliary properties are instead required only as a support to the
-implementation of core properties. For example, while every \pilot system has to
-implement pilot deployment, a specific authentication and authorization protocol
-may be required to deploy pilots by means of a particular DCR middleware. As
-such, auxiliary properties are not necessarily shared among all \pilot systems.
+Tables~\ref{table:core_properties} and~\ref{table:aux_properties}). Core
+properties are necessary for every \pilot system implementation to provide the
+minimal set of components and functionalities as described
+in~\S\ref{sec:compsandfuncs}. Auxiliary properties are instead required only as
+a support to the implementation of core properties. For example, while every
+\pilot system has to implement pilot deployment, a specific authentication and
+authorization protocol may be required to deploy pilots by means of a particular
+DCR middleware. As such, auxiliary properties are not necessarily shared among
+all \pilot systems.
+
+% Both sets of properties are chosen by considering the implementation
+% requirements of the \pilot capabilities as defined in~\S\ref{sec:history}.
 
 Following is a detailed description of both core and auxiliary properties by
 which any \pilot system can be characterized. This list of core properties is
-minimal and complete while that of auxiliary properties is an exemplar subset.
-While a minimal set of properties has to characterize a \pilot system in order
-for it to implement the components and functionalities described
+minimal and complete while that of auxiliary properties is an representative
+subset. While a minimal set of properties has to characterize a \pilot system in
+order for it to implement the components and functionalities described
 in~\S\ref{sec:compsandfuncs}, an arbitrary number of auxiliary properties
 support can characterize \pilot systems, depending on use case and target DCRs
 requirements. Note that both set of properties refer to
@@ -1593,39 +1595,35 @@ requirements. Note that both set of properties refer to
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-The core properties that have to characterize every \pilot system are derived by
-analyzing what characteristics each component described in
-in~\S\ref{sec:compsandfuncs} has to have in order to implement its defining
-functionality.
+The core properties of every \pilot system are derived by analyzing what feature
+each component described in in~\S\ref{sec:compsandfuncs} has to have in order to
+implement its defining functionality.
 
-The Pilot Manager implementation has to have at least the following
-characteristics in order to provide its Pilot Provisioning functionality: pilots
-need to (i) hold at least one type of resource otherwise a pilot would not be
-usable to execute tasks; (ii) have a wrapper of the type required by the target
-DCR otherwise it would not be possible to schedule that pilot on the chosen DCR;
-(iii) have the appropriate bootstrapping environment and routines otherwise the
-pilot would not become available for task scheduling and execution. These
-characteristics are here grouped into two core properties: Pilot Resources and
-Pilot Deployment.
+The Pilot Manager implementation requires at least the following in order to
+provide its Pilot Provisioning functionality: (i) managing pilots holding at
+least one type of resource in order to be used to execute tasks; (ii) pilot
+wrappers of the type required by the target DCR so to make possible for a pilot
+to be scheduled on the chosen DCR; (iii) bootstrapping environment and routines
+so that pilots can become available for task scheduling and execution. These
+features are here grouped into two core properties: Pilot Resources and Pilot
+Deployment.
 
-The Workload Manager implementation needs at least the following characteristics
-to provide its Task Dispatching functionality: (i) workloads descriptions have
-to express the computing requirements of each task alongside its data and
-inter-task dependences (if any) in order for the workload to be scheduled and
-then executed; (ii) each pilot has to have a list of tasks and given task has to
-be in the list of at least one pilot otherwise complete binding between task and
-pilot(s) will not be achieved; (iii) each task list has to belong to a pilot
-description to obtain early binding or to a pilot instance to obtain late
-binding. Workload Semantics and Workload Binding are the two core properties
-used to represent these characteristics of the Workload Manager.
+The Workload Manager implementation needs at least the following to provide its
+Task Dispatching functionality: (i) workloads descriptions expressing the
+computing requirements of each task alongside data and inter-task dependences
+(if any) to make possible for a workload to be scheduled and then executed; (ii)
+pilots with a list of tasks and each task listed in at least one pilot so to
+enable complete binding between task and pilot(s); (iii) task lists associated
+with a pilot description or to a pilot instance in order to obtain respectively
+early and late binding. Workload Semantics and Workload Binding are the two core
+properties used to represent these Workload Manager features.
 
 The Task Manager implementation requires information about those configuration
 and environmental features that determine the execution process of a task on the
 chosen DCR. Without such information, Task Execution functionality could not be
-implemented as the execution of a task would fail for misconfiguration or, for
-example, for lack of required libraries, modules, or coordination with
-supporting execution software. This requirements are here indicated with the
-core property named `Workload Execution'.
+implemented as the execution of a task would fail, for example due to
+misconfiguration or lack of required supporting software. This requirement is
+here represented with the core property named `Workload Execution'.
 
 The following offers a detailed description of each core property.
 
