@@ -1028,7 +1028,7 @@ to \pilotjob systems. The definition of both concepts is context-dependent and
 several other terms need to be clarified in order to offer a coherent
 terminology. Both `job' and `pilot' need to be understood in the context of
 machines and middleware used by \pilotjob systems. These machines offer compute,
-storage, and network resources and \pilots allow for the users to utilize those
+storage, and network resources and \pilots allow for the utilization of those
 resources to execute the tasks of one or more workloads.
 
 \begin{description}
@@ -1061,20 +1061,24 @@ administrative domain\}.
 
 Workloads are characterized by multiple tasks. The tasks could be homogeneous,
 heterogeneous or one-of-a-kind.  There does not exist an established taxonomy
-for workload description; we propose a workload taxonomy based upon the
-orthogonal properties of coupling, dependency and similarity of the tasks.
-Workloads comprised of tasks that are independent and effectively
-indistinguishable from other tasks; such a workload is commonly referred to as a
-Bag-of-Tasks (BoT). Ensembles (ENS) represent workloads when the collective
-outcome of the tasks is relevant (e.g., computing the average property). The
-tasks that comprise the ensembles (i.e., ensemble-members) in turn can have
-varying degrees and types of coupling; coupled ensembles might have global
-(synchronous) or local exchanges (asynchronous), regular or irregular
-communication. We categorize workloads as coupled ensembles (C-ENS) independent
-of the specific details of the coupling between the tasks. A workflow (WF)
-represents a workload with arbitrarily complex relationships among the tasks,
-ranging from dependencies (e.g., sequential or data) to coupling between the
-tasks (e.g., frequency or volume of exchange).
+for workload description; we propose a necessarily limited workload taxonomy
+based upon the orthogonal properties of coupling, dependency and similarity of
+tasks.  Workloads comprised of tasks that are independent and effectively
+indistinguishable from other tasks are commonly referred to as a Bag-of-Tasks
+(BoT). Ensembles (ENS) represent workloads when the collective outcome of the
+tasks is relevant (e.g., computing the average property). The tasks that
+comprise the workload in turn can have varying degrees and types of coupling;
+coupled tasks might have global (synchronous) or local exchanges (asynchronous),
+regular or irregular
+communication. % The tasks that comprise the ensembles (i.e., ensemble-members) in
+% turn can have varying degrees and types of coupling; coupled ensembles might
+% have global (synchronous) or local exchanges (asynchronous), regular or
+% irregular communication. 
+We categorize such workloads as coupled ensembles (C-ENS) independent of the
+specific details of the coupling between the tasks. A workflow (WF) represents a
+workload with arbitrarily complex relationships among the tasks, ranging from
+dependencies (e.g., sequential or data) to coupling between the tasks (e.g.,
+frequency or volume of exchange).
 
 A cluster is a typical example of DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
