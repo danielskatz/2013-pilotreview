@@ -815,13 +815,14 @@ purpose, logical components, and functionalities.
 
 The purpose shared by every \pilotjob system is to improve workload execution
 when compared to executing the same workload directly on one or more machines.
-Performance of workload execution is usually measured by throughput and
-execution time to completion, but other metrics could also be considered: energy
-efficiency, data transfer minimization, scale of the workload executed, or a mix
-of them. Metrics that are not performance related include reliability, ease of
-application deployment, and generality of workload. In order to achieve the
-required metrics under given constraints, each \pilotjob system exhibits
-characteristics that are both common or specific to one or more implementations.
+Performance of workload execution is usually measured by throughput and time to
+completion, but other metrics could also be considered: data transfer
+minimization, scale of the workload executed, or a mix of them. Metrics that are
+not performance related include reliability, ease of application deployment, and
+generality of workload. In order to achieve the required metrics under given
+constraints, each \pilotjob system exhibits characteristics that are 
+either common or specific to one or more implementations.  
+%both common or specific to one or more implementations.  
 Discerning these characteristics requires isolating the minimal set of logical
 components that characterize every \pilotjob system.
 
@@ -899,12 +900,12 @@ execution of the tasks of a workload.
 
 The provisioning of resource placeholders depends on the capabilities exposed by
 the middleware of the targeted machine and on the implementation of each \pilot
-system. Typically, for middleware adopting queues, batch systems, and
-schedulers, provisioning a placeholder involves it being submitted as a job. For
-such middleware, a job is a type of logical container that includes
+system. Typically, on middleware for resources adopting queues, batch systems,
+and schedulers, provisioning a placeholder involves it being submitted as a
+job. For such middleware, a job is a type of logical container that includes
 configuration and execution parameters alongside information on the application
 to be executed on the machine's compute resources. Conversely, for machines
-without a job-based middleware, a resource placeholder would be executed by
+without a queue-based middleware, a resource placeholder would be executed by
 means of other types of logical container as, for example, a virtual machine or
 a Docker Engine~\cite{bernstein2014,felter2014}.
 
@@ -919,13 +920,14 @@ implemented as part of the \pilotjob system. In this way, the control over the
 execution of a workload is shifted from the machine's middleware to the \pilot
 system. This shift is a defining characteristic of the \pilot paradigm, as it
 decouples the execution of a workload from the need to submit its tasks via the
-machine's scheduler. For example, the execution of tasks of a workload will not
-individually depend upon the specifics of the targeted machine's state or
+machine's scheduler. For example, the execution of individual tasks of a
+workload will not depend upon the specifics of the targeted machine's state or
 availability, but rather on those of the placeholder. More elaborate execution
 patterns involving task and data interdependence can thus be implemented
-independent of the target machine's middleware capabilities. Ultimately, this is
-how \pilotjob systems allow for the direct control of workload execution and the
-optimization, for example, of execution throughput.
+independent of the target machine's middleware capabilities and
+constraints. Ultimately, this is how \pilotjob systems allow for the direct
+control of workload execution and the optimization, for example, of execution
+throughput.
 
 % For example, the tasks of a workload will not individually have to wait on the
 % targeted machine's queues, but rather on the availability of the placeholder
@@ -949,9 +951,9 @@ distributed systems, and \pilotjob systems are no exception. The three logical
 components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
 communicate in order to coordinate the execution of the given workload on the
 instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
-defined by any specific communication and coordination pattern . The logical
+defined by any specific communication and coordination pattern. The logical
 components of a \pilotjob system may communicate using any suitable pattern
-(e.g., one-to-one, many-to-one, one-to-many~\ref{comm_patterns} with a push or
+(e.g., one-to-one, many-to-one, one-to-many~\ref{comm_patterns}, with a push or
 pull model), or coordinate adopting any suitable mechanism (e.g., time
 synchronization, static or dynamic coordinator election, local or global
 information sharing, or \MW). The same applies to network architectures and
@@ -972,15 +974,15 @@ require a functionally simpler Workload Manager but a comparatively more
 feature-rich Task Manager. The former would require capabilities for submitting
 tasks, while the latter capabilities to coordinate with its neighbor executors
 leveraging, for example, a dedicated overlay network. While these systems would
-adopt different coordination strategies, they could be both be considered
-\pilotjob systems.
+adopt different coordination strategies, they could both be considered \pilotjob
+systems.
 
 \mtnote{Across the paper, \MW is called pattern, mechanism, and strategy. We
 need to make up our mind. I am happy to consider it a coordination pattern.}
 
 Data management can play an important role within a \pilotjob system. For
-example, functionalities can be provided to support the local or remote data
-staging required to execute the tasks of a workload, or data might be managed
+example, functionalities can be provided to support the local or remote staging
+of data required to execute the tasks of a workload, or data might be managed
 according to the specific capabilities offered by the targeted machine's
 middleware. How these requirements are implemented do not define a core
 functionality of the \pilot system.
