@@ -3386,7 +3386,6 @@ or flexibility in the optimization of execution are introduced. Satisfying those
 requirements demands abstracting the specificity of application characteristics,
 of the middleware and architectures of DCRs, and of the types of resources.
 
-
 \jhanote{These next two paragraphs are possibly nice ways to start rather than
   end this subsection. Thoughts?} \mtnote{Moved at the beginning.}
 
@@ -3556,16 +3555,38 @@ be elected as the only implementation worthy of development effort or adoption.
 As with other software systems and middleware~\cite{bernstein1996} the problem
 is not to eliminate special purpose systems in favor of a single encompassing
 solution but it is, instead, having both of them, depending on the application
-and use case requirements.
-
-A multi-purpose, functionally encompassing \pilot system is desirable for all
-those use cases in which applications are heterogeneous in the type of
-computation, time, or space. For specific applications designed to run on a
-single type of infrastructure with an unique performance objective, a special
-purpose system might be warranted, but otherwise a conservative approach would
-be more efficient and effective. Another rationale against rigid consolidation
-is the diversity in programming languages used, the different deployment models
+and use case requirements.  Another rationale against rigid consolidation is the
+diversity in programming languages used, the different deployment models
 required, and what that means for the interaction with existing applications.
+
+For specific applications designed to run on a single type of infrastructure
+with an unique performance objective, a special purpose system might be
+warranted, but otherwise a conservative approach would be more efficient and
+effective. Arguably, it is most important to have well-defined models of \pilot
+functionality, as well as an unambiguous description of properties; collectively
+these should be reflected in external/internal interfaces that both developers
+and users can rely upon.
+
+\mtnote{I think this paragraph should be moved to 5.2 as it is part of an
+  analysis and not of a summary of the overall contributions of the paper. This
+  should help also with eliminating yet another reference to the sorry state of
+  workflows - we did that already twice.} \jhanote{Lets discuss how to
+  consolidate these remarks/observations} The current state of the workflow
+systems~\cite{taylor2014} is a paradigmatic example of the consequence of a lack
+of conceptual clarity: Many workflow systems have been implemented with
+significant duplication of effort and limited means for extensibility and
+interoperability. One important contributing factor to these limitations is the
+lack of suitable, open, and possibly standard-based interfaces for the resource
+layer. Most workflow engines are developed with proprietary solutions to access
+the resource layer; solutions that cannot be shared with other engines and that
+often serve specific requirements, use cases, and infrastructures.
+
+
+
+% A multi-purpose, functionally encompassing \pilot system is desirable for all
+% those use cases in which applications are heterogeneous in the type of
+% computation, time, or space.
+
 
 As argued in the previous section, \pilot systems should be agnostic towards the
 type of application that is executed. They can be engineered so as to support
@@ -3650,50 +3671,42 @@ hinted at in \cite{santcroos2012}.
 This paper offers several contributions to support the understanding, design,
 and adoption of \pilot systems. \S\ref{sec:history} provided an overview of both
 the motivations that led to the development of the \pilot abstraction and its
-early implementations, and an analysis of the many \pilot systems that have been
-and still are used to support scientific computing. These systems were clustered
-on the base of their capabilities to show the progressive development process of
+early implementations, as well as an analysis of the many \pilot systems that
+have been used to support scientific computing. These systems were clustered on
+the basis of their capabilities to show the progressive evolution of
 the \pilot abstraction.
+
+%development process
 
 The analysis provided in \S\ref{sec:history} also showed the heterogeneity of
 the \pilot landscape and the need for a clarification of the basic components
 and functionalities that distinguish a \pilot system. These were described in
 \S\ref{sec:understanding} offering a way to identify \pilot systems and
-discriminate them from other type of middleware. \S\ref{sec:understanding}
-contributed also a well-defined vocabulary that can be used to reason
-consistently about different implementation of the \pilot abstraction.
+discriminate them from other systems. \S\ref{sec:understanding} also contributed
+a well-defined vocabulary that can be used to reason consistently about
+different implementation of the \pilot abstraction.
+
+%type of middleware
 
 Both contributions offered in \S\ref{sec:understanding} were then leveraged in
 \S\ref{sec:analysis} to analyze a set of paradigmatic \pilot system
 implementations. The shift from understanding the minimal set of components and
 functionalities characterizing the \pilot abstraction to the comparison of
-actual \pilot implementations required to outline core and auxiliary
-implementation properties. Tables~\ref{table:core_properties}
+actual \pilot implementations required that core and auxiliary implementation
+properties be delineated. Tables~\ref{table:core_properties}
 and~\ref{table:aux_properties} summarize these contributions and can be used to
-analyze any middleware software, decide whether it is a \pilot system, and
-assess the richness of its functionalities.
+analyze software systems, decide whether it is a \pilot system, and assess the
+richness of its functionalities.
 
 The work done in \S\ref{sec:history}, \S\ref{sec:understanding}, and
 \S\ref{sec:properties} supported the comparative analysis of \pilot system
 implementations offered in \S\ref{sec:implementations}. This contribution
 outlined differences and similarities among implementations, showing how they
-impact on the overall \pilot systems capabilities and their target use cases.
+impact  the overall \pilot system capabilities and their target use cases.
 Thanks to these insights, it was possible in \S\ref{sec:discussion} to highlight
 the properties of the \pilot paradigm.
 
-\mtnote{I think this paragraph should be moved to 5.2 as it is part of an
-  analysis and not of a summary of the overall contributions of the paper. This
-  should help also with eliminating yet another reference to the sorry state of
-  workflows - we did that already twice.} \jhanote{Lets discuss how to
-  consolidate these remarks/observations} The current state of the workflow
-systems~\cite{taylor2014} is a paradigmatic example of the consequence of a lack
-of conceptual clarity: Many workflow systems have been implemented with
-significant duplication of effort and limited means for extensibility and
-interoperability. One important contributing factor to these limitations is the
-lack of suitable, open, and possibly standard-based interfaces for the resource
-layer. Most workflow engines are developed with proprietary solutions to access
-the resource layer; solutions that cannot be shared with other engines and that
-often serve specific requirements, use cases, and infrastructures.
+
 
 This paper establishes the the generality of \pilot paradigm and shows that a
 more structured approach is needed to the conceptualization
