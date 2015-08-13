@@ -289,11 +289,11 @@ paradigm.
 At least five features need elucidation to understand the technical origins and
 motivations of the \pilot abstraction: task-level distribution and parallelism,
 \MW pattern, multi-tenancy, multi-level scheduling, and resource placeholding.
-Even if these features are not unique to the \pilot abstraction, the \pilot
-abstraction brings them together towards an integrated and collective
-capability. This section offers an overview of these five features and an
-analysis of the relationship they hold with the \pilot abstraction. A
-chronological perspective is taken so to contextualize the inception and
+Even if these features taken individually are not unique to the \pilot
+abstraction, the \pilot abstraction brings them together towards an integrated
+and collective capability. This section offers an overview of these five
+features and an analysis of their relationship with the \pilot abstraction. A
+chronological perspective is taken so as to contextualize the %inception and
 evolution of the \pilot abstraction into its multiple and diverse
 implementations.
 
@@ -325,7 +325,7 @@ Despite its relatively recent explicit naming, the \pilot abstraction addresses
 a problem already well-known at the beginning of the twentieth century: {\bf
 task-level} distribution and parallelism on multiple resources.
 
-Lewis Fry Richardson devised in 1922 a Forecast
+In 1922 Lewis Fry Richardson devised a Forecast
 Factory~\cite{lynch1999richardson} (Figure~\ref{fig:figures_forecast-factory})
 to solve systems of differential equations for weather
 forecasting~\cite{richardson1922weather}. This factory required 64,000 `human
@@ -347,18 +347,18 @@ pattern for distributed and parallel computation called ``\MW''.
 
 The clerk of the Forecast Factory is the `master' while the human computers are
 her `workers'. Requests and responses go back and forth between the master and
-all its workers. Each worker has no information about the overall computation
-nor about the states of any other worker. The master is the only one possessing
-a global view both of the overall problem to compute and of its progress towards
-a solution. As such, the {\bf \MW} is a coordination pattern allowing for the
-structured distribution of tasks so to orchestrate their parallel execution.
-This directly translates into a better time to completion of the overall
-computation when compared to a coordination pattern in which each equation is
-sequentially solved by a single worker.
+all her workers. Each worker has no information about the overall computation
+nor about the states of any other worker.  The master has an exclusive global
+view both of the overall problem and of its progress towards a solution. As
+such, the {\bf \MW} is a coordination pattern allowing for the structured
+distribution of tasks so as to orchestrate their parallel and concurrent
+execution.  This invariably translates into a reduced time to completion of the
+overall computation when compared to a coordination pattern in which each
+equation is sequentially solved by a single worker.
 
-Modern silicon-based, high-performance machines brought at least three key
-differences when compared to the carbon-based Forecast Factory devised by
-Richardson. Most of modern high-performance machines are meant to be used by
+Modern silicon-based, high-performance machines introduced at least three key
+differences compared to the carbon-based Forecast Factory devised by
+Richardson. Most modern high-performance machines are meant to be used by
 multiple users, i.e. they support multi-tenancy. Furthermore, diverse
 high-performance machines were made available to the scientific community, each
 with both distinctive and homogeneous properties in terms of architecture,
@@ -373,7 +373,7 @@ cards~\cite{katz1966,silberschatz1998}, adopt the batch processing concept to
 promote efficient and fair resource sharing. Job schedulers implement a
 usability model where users submit computational tasks called ``jobs'' to a
 queue. The execution of these job is delayed waiting for the required amount of
-resources to be available. The amount of delay mostly depends on the size and
+resources to be available. The extent of delay mostly depends on the size and
 duration of the submitted job, resource availability, and policies (e.g., fair
 usage).
 
@@ -400,13 +400,13 @@ to the users.
 %   Please argue otherwise, else I will remove meta scheduling.}
 
 {\bf Multi-level scheduling} is one of the strategies devised to improve
-resource access across multiple high-performance machines. The idea is to hide
-the scheduling point of each high-performance machine behind a single scheduler.
-The users or the applications submit their tasks to the a scheduler that
-negotiates and orchestrates the distribution of the tasks via the scheduler of
-each available high-performance machine. While this approach promises an
-increase in both scale and usability of applications, it also introduces
-complexities across resources, middleware, and applications.
+resource access across multiple high-performance and distributed machines. The
+idea is to hide the scheduling point of each high-performance machine behind a
+single scheduler.  The users or the applications submit their tasks to a
+scheduler that negotiates and orchestrates the distribution of the tasks via the
+scheduler of each available high-performance machine. While this approach
+promises an increase in both scale and usability of applications, it also
+introduces complexities across resources, middleware, and applications.
 
 % \jhanote{need to be more specific than grid computing} \mtnote{Any insight in
 %   what kind of specificity you are thinking about? Grid and cloud computing
@@ -414,10 +414,12 @@ complexities across resources, middleware, and applications.
 %   latter.}
 
 Several approaches have been devised to manage the complexities associated with
-multi-level scheduling. For example, the approaches developed under the
-umbrellas of grid computing~\cite{raicu2007,singh2005,ramakrishnan2006toward} or
-cloud computing~\cite{foster2008,juve2008,villegas2012,song2009}, target the
-resource layer; others the application layer as, for example, with workflow
+multi-level scheduling. For example, some approaches
+target the resource layer ~\cite{raicu2007,singh2005,ramakrishnan2006toward,foster2008,juve2008,villegas2012,song2009};
+%the approaches developed under the umbrellas of grid computing
+%~\cite{raicu2007,singh2005,ramakrishnan2006toward} or
+%cloud computing~\cite{foster2008,juve2008,villegas2012,song2009},
+others the application layer as, for example, with workflow
 systems~\cite{taylor2014,curcin2008scientific,juve2008,balderrama2012scalable}.
 All these approaches offered and still offer some degree of success for specific
 applications and use cases but a general solution based on well-defined and
@@ -3754,9 +3756,9 @@ DE-FG02-12ER26115 and NSF CAREER ACI-1253644. We thank the many members of the
 RADICAL group -- former and current, for helpful discussions, comments and
 criticisms.}}
 
-\subsubsection*{Author Contributions} MT was the primary author and
-co-organized the paper with SJ. MS wrote an earlier draft of parts of Section 4
-and 2.  SJ and MT edited the paper.
+\subsubsection*{Author Contributions} MT was the primary author and co-organized
+the paper with SJ. MS wrote an early draft of parts of Section 2 and 4.  SJ and
+MT edited the paper.
 
 
 
