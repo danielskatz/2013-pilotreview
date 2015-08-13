@@ -2148,7 +2148,6 @@ scalability (cloud).
 \mtnote{Add something to connect to 4.2. Something that indicates why we move
 now to the analysis of specific implementations.}
 
-
 % -----------------------------------------------------------------------------
 % 4.2
 %
@@ -2373,9 +2372,9 @@ periods of time.
 A computational task-management tool called
 GANGA~\cite{moscicki2009ganga,ganga_url} is available to support the development
 of SubmitterScripts. GANGA offers a unified interface for job submission to DCRs
-with Globus, HTCondor, UNICORE, or gLite middleware. The main goal of GANGA is to
-facilitate the submission of WorkerAgents (i.e., pilots) to diverse DCRs by means
-of a uniform interface and abstraction.
+with Globus, HTCondor, UNICORE, or gLite middleware. The main goal of GANGA is
+to facilitate the submission of WorkerAgents (i.e., pilots) to diverse DCRs by
+means of a uniform interface and abstraction.
 
 % Workload Semantics
 DIANE has been designed to execute workloads that can be partitioned into
@@ -2394,6 +2393,125 @@ binding is controllable by the user-programmable TaskScheduler, the general
 architecture is consistent with a pull model. The pull model naturally
 implements the late-binding paradigm where every ApplicationAgent pulls a new
 task once it is available and has free resources.
+
+% ------------------------------------------------------------------------------
+% DIRAC
+%
+\subsubsection{DIRAC}\label{sec:dirac}
+
+% Who did it and for what scientific domains.
+DIRAC (Distributed Infrastructure with Remote Agent Control) is a software
+product developed by the CERN LHCb project\cite{diracgrid2004}. DIRAC implements
+a Workload Management System (WMS) to manage the detector data processing, Monte
+Carlo simulations, and end-user analyses required by the LHCb project. DIRAC
+primarely serves as the LHCb workload management interface to the worldwide LHC
+Computing Grid (WLCG) and, as such, it can managed the execution of workloads on
+DCRs deploying Grid, Cloud, and HPC middleware.
+
+% Architecture.
+DIRAC has four main logical components: a set of TaskQeues, a set of
+TaskQueueDirectors, a set of JobWrappers, and a MatchMaker. TaskQueues,
+TaskQueueDirectors, and the MatchMaker are implemented within a monolithic WMS.
+Each TaskQeue collects tasks submitted by users, multiple TaskQeue being created
+depending on the tasks requirements and ownership. JobWrappers are executed on
+the DCR to bind compute resources and execute tasks submitted by the users. Each
+TaskQueueDirector submits JobWrappers to target DCRs. The MatchMaker matched
+tasks requests from JobWrappers to suitable tasks into TaskQeues.
+
+% Why it is a pilot system.
+DIRAC was the first pilot-based WMS designed, developed, and deployed to serve
+one of the LHC main experiments~\cite{}. Figure~\ref{fig:dirac_comparison} shows
+how the DIRAC WMS implements both a Workload and a Pilot Manager as they have
+been described in~\S\ref{sec:understanding}. TaskQueues and the MatchMaker
+implement the Workload Manager and the related Task Dispatching functionality.
+Each TaskQueueDirector implements a Pilot Manager and its Pilot Provisioning
+functionality, while each JobWrapper implements a Task Manager and Pilot
+Execution.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/dirac_comparison.pdf}
+    \caption{Diagrammatic representation of DIRAC components, functionalities,
+    and core vocabulary mapped on Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:dirac_comparison}
+\end{figure}
+
+% Execution model.
+The DIRAC execution model can be summarized by 5 steps: 1. a user submits one or
+more tasks by means of a CLI, Web portal, or API to the WMS Job Manager; 2.
+submitted tasks are validated and added to a new or an existing TaskQeue,
+depending on the task properties; 3. one or more TaskQueues are evaluated by a
+TaskQueueDirector and a suitable number of JobWrappers are submitted to
+available DCRs; 4. JobWrappers, once instantiated on the DCRs, pull the
+MatchMaker asking for tasks to be executed; 5. tasks are executed by the
+JobWrappers under the supervision of each JobWrapper's Watchdog.
+
+%% 5 core properties.
+
+% Pilot Resources.
+JobWrappers, the DIRAC pilots, hold compute resources in the form of single or
+multiple cores, spanning portions, whole or multiple compute nodes. A dedicated
+subsystem is offered to manage data staging and replication but data
+capabilities are not exposed by JobWrappers by means of the pilot abstraction.
+Network resources are assumed to be available to allow JobWrappers to
+communicate with the WMS.
+
+% Pilot Deployment.
+Pilots are deployed by TaskQueueDirectors. Three main operations are iterated:
+(i) getting a list of TaskQueues; (ii) calculating the number of pilot to submit
+depending on the user-specified priority of each task, and the number and
+properties of the available and scheduled pilots; and (iii) submitting the
+calculated number of pilots while rewriting the task description in the language
+required by the DCR middleware on which the pilot has been submitted.
+
+% Workload Semantics.
+Natively, DIRAC can execute tasks described by means of the Job Description
+Language (JDL)~\cite{pacini2006job}. As such, single-core, multi-core, MPI,
+parametric, and collection jobs can be described and submitted. Users can
+specify a priority index for each submitted job and one or more specific DCR
+that should be targeted for execution. Tasks with complex data dependences can
+be described by means of a DIRAC system called `Transformation Management
+System' (TMS)~\cite{tsaregorodtsev2006dirac}. In this way, user-specified,
+data-driven workflows can be automatically submitted and managed by the DIRAC
+WMS.
+
+% workload binding.
+As for DIANE, DIRAC features a task pull model that naturally implements the
+late-binding paradigm. Each JobWrapper pulls a new task once it is available and
+has free resources. No early binding capabilities are offered.
+
+% ------------------------------------------------------------------------------
+% Falkon
+%
+\subsubsection{Falkon}\label{sec:falkon}
+
+% Who did it and for what scientific domains.
+The Fast and Light-weight tasK executiON framework
+(Falkon)~\cite{raicu2007falkon} has been developed
+
+% Architecture.
+
+% Why it is a pilot system.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/falkon_comparison.pdf}
+    \caption{Diagrammatic representation of Falkon components, functionalities,
+    and core vocabulary mapped on Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:falkon_comparison}
+\end{figure}
+
+% Execution model.
+
+%% 5 core properties
+% Pilot Resources
+
+% Pilot Deployment
+
+% Workload Semantics
+
+% workload binding
+
 
 % ------------------------------------------------------------------------------
 % Glidein
@@ -2552,7 +2670,6 @@ For example, DAGman (Directed Acyclic Graph Manager)~\cite{frey2002condor} has
 been designed to execute workflows by submitting tasks to Schedds, and a \MW
 tool is available to design applications with a \MW execution pattern.
 
-
 % \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word is
 % capitalized so the `d' is part of the name of the component, not an
 % abbreviation or a letter of an acronym.}
@@ -2600,13 +2717,41 @@ binding is not available.
 %   abundance of caution, ok to use a reference to ClassAds?} \mtnote{Better?}
 
 % ------------------------------------------------------------------------------
+% MyCluster
+%
+\subsubsection{MyCluster}\label{sec:mycluster}
+
+% Who did it and for what scientific domains.
+
+% Architecture.
+
+% Why it is a pilot system.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/mycluster_comparison.pdf}
+    \caption{Diagrammatic representation of MyCluster components,
+    functionalities, and core vocabulary mapped on
+    Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:mycluster_comparison}
+\end{figure}
+
+% Execution model.
+
+%% 5 core properties
+% Pilot Resources
+
+% Pilot Deployment
+
+% Workload Semantics
+
+% workload binding
+
+% ------------------------------------------------------------------------------
 % PANDA
 %
 \subsubsection{PANDA}
 \label{sec:panda}
-
-
-\mtnote{NOTE: references needs to be added to the whole subsection.}
 
 % Who did it and for what scientific domains.
 \panda (Production and Distributed Analysis)~\cite{zhao2011panda} was
@@ -2633,9 +2778,9 @@ Broker, a Job Dispatcher, and a Data Service. The Task Buffer collects all the
 submitted tasks into a global queue and the Broker prioritizes and binds those
 tasks to DCRs on the basis of multiple criteria. The Data Service stages the
 tasks' input file(s) to the DCR to which the tasks have been bound using the
-data transfer technologies exposed by the DCR middleware (e.g., uberftp, gridftp,
-or lcg-cp). The Job Dispatcher delivers the tasks to the RunJob(s) running on
-the bound DCR.
+data transfer technologies exposed by the DCR middleware (e.g., uberftp,
+gridftp, or lcg-cp). The Job Dispatcher delivers the tasks to the RunJob(s)
+running on the bound DCR.
 
 % Why it is a pilot system.
 Figure~\ref{fig:panda_comparison} shows how PANDA implements the components and
@@ -2803,7 +2948,7 @@ and late binding, depending on the use case and the user specifications.
 % -----------------------------------------------------------------------------
 % 4.3
 %
-\subsection{Implementations Analysis}
+\subsection{Implementations Comparison}
 %Differences and Overall observations}
 \label{sec:context}
 
