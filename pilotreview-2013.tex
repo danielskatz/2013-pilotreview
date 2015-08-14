@@ -1081,9 +1081,9 @@ workload with arbitrarily complex relationships among the tasks, ranging from
 dependencies (e.g., sequential or data) to coupling between the tasks (e.g.,
 frequency or volume of exchange).
 
-A cluster is a typical example of DCR: it offers sets of compute and data
+A cluster is a typical example of a DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
-Globus grid middleware, of the OpenStack platform; and enforces policies of an
+Globus grid middleware, or the OpenStack platform; and enforces policies of an
 administrative domain like, for example, XSEDE, OSG, CERN, NERSC, or a certain
 University.
 
@@ -1182,8 +1182,12 @@ across \pilotjob systems. Depending upon context, in addition to the term
 `\pilotjob'~\cite{moscicki2011,pinchak2002}. All these terms are, in practice,
 used as synonyms without properly distinguishing between the type of container
 and the type of executable that compose a pilot. This is a clear indication of
-how necessary the minimal and consistent vocabulary offered here is when
+the necessity of a consistent vocabulary when
 reasoning analytically about multiple \pilotjob system implementations.
+
+% indication of how necessary the minimal and consistent vocabulary offered here
+% is when reasoning analytically about multiple \pilotjob system
+% implementations.
 
 Until now, the term \pilotjob system has been used to indicate those systems
 capable of executing workloads on pilots. From now on, the term `\pilot system'
@@ -1256,7 +1260,7 @@ definition of `multi-level scheduling' is problematic because the term `level'
 is left undefined. It is not clear what constitutes a level or how its
 boundaries should be assessed. `Multi-entity' and `multi-stage' are better terms
 to describe the scheduling properties of \pilot systems, as these terms
-specifically indicate that (at least) two entities are scheduled and that such a
+specifically indicate that (at least) two entities are scheduled and that such
 scheduling happens at separate moments in time.
 
 In the \pilot systems, a portion of the resources of a DCR is allocated to one
@@ -1267,8 +1271,11 @@ potentially reduced times to completion of workloads as a consequence of
 avoiding a centralized job management system multiple times; and (ii) the tasks
 of a workload can be bound to a set of pilots before or after it becomes
 available on a remote resource. Depending on the implementation of a \pilot
-system, tasks can be further scheduled by deciding about their placement within
-the pilot's resource allocation.
+system, finer-grained scheduling of tasks within the pilot's resource allocation
+might be possible.
+
+% can be further scheduled by deciding about their placement within
+% the pilot's resource allocation.
 
 \mtnote{OED reports subsection and not sub-section as the term currently in use.
 Accordingly, I have done a global search and replace.}
@@ -1282,14 +1289,27 @@ Accordingly, I have done a global search and replace.}
 
 The greater control obtained as a consequence of removing the dependence of
 every task on the job submission system of the DCR is one of the main reasons
-for the success and early adoption of \pilot systems. As mentioned
-in~\S\ref{sec:compsandfuncs}, the tasks of a workload can be executed on a pilot
-without each task individually waiting in the queuing system of the DCR's
-middleware. This greater control results in several advantages, including
-possibly increasing the throughput of the workload execution, and reusing active
-pilots to execute multiple workloads. How tasks are actually scheduled to pilots
-is a matter of implementation. For example, a dedicated scheduler could be
-adopted, or tasks might be directly scheduled to a pilot by the user.
+for the success and early adoption of \pilot systems. % As mentioned
+% in~\S\ref{sec:compsandfuncs}, 
+% The tasks of a workload can be executed on a pilot
+% without each task individually waiting in the queuing system of the DCR's
+% middleware. 
+In addition to possibly increasing the throughput of the workload
+execution, enabling tasks of a workload to be executed on a pilot without each task
+individually waiting in the queuing system of the DCR's middleware 
+% several advantages, 
+allows the reuse of active pilots to execute multiple workloads. How tasks are
+actually scheduled to pilots is a matter of implementation. For example, a
+dedicated scheduler could be adopted, or tasks might be directly scheduled to a
+pilot by the user.
+
+% The tasks of a workload can be executed on a pilot
+% without each task individually waiting in the queuing system of the DCR's
+% middleware. This greater control results in several advantages, including
+% possibly increasing the throughput of the workload execution, and reusing active
+% pilots to execute multiple workloads. How tasks are actually scheduled to pilots
+% is a matter of implementation. For example, a dedicated scheduler could be
+% adopted, or tasks might be directly scheduled to a pilot by the user.
 
 The type of binding of tasks to pilots depends on the state of the pilot. A
 pilot is inactive until it is executed on a DCR, is active thereafter, until it
