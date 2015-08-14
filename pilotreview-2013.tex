@@ -820,9 +820,9 @@ completion, but other metrics could also be considered: data transfer
 minimization, scale of the workload executed, or a mix of them. Metrics that are
 not performance related include reliability, ease of application deployment, and
 generality of workload. In order to achieve the required metrics under given
-constraints, each \pilotjob system exhibits characteristics that are 
-either common or specific to one or more implementations.  
-%both common or specific to one or more implementations.  
+constraints, each \pilotjob system exhibits characteristics that are
+either common or specific to one or more implementations.
+%both common or specific to one or more implementations.
 Discerning these characteristics requires isolating the minimal set of logical
 components that characterize every \pilotjob system.
 
@@ -1070,11 +1070,11 @@ tasks is relevant (e.g., computing the average property). The tasks that
 comprise the workload in turn can have varying degrees and types of coupling;
 coupled tasks might have global (synchronous) or local exchanges (asynchronous),
 regular or irregular
-communication. 
+communication.
 % The tasks that comprise the ensembles (i.e., ensemble-members) in
 % turn can have varying degrees and types of coupling; coupled ensembles might
 % have global (synchronous) or local exchanges (asynchronous), regular or
-% irregular communication. 
+% irregular communication.
 We categorize such workloads as coupled ensembles (C-ENS) independent of the
 specific details of the coupling between the tasks. A workflow (WF) represents a
 workload with arbitrarily complex relationships among the tasks, ranging from
@@ -2324,12 +2324,13 @@ in a stand-alone modality but, in practice, it should be regarded as a system
 specifically tailored for the Swift System requirements and design.
 
 % Architecture.
-The Coaster System is composed of three main components: a Coaster Client, a
-Coaster Service, and a set of Workers. The Coaster Client implements both a
-Bootstrap and a Messaging Service while the Coaster Service implement a data
-proxy service and a set of job providers for diverse DCRs middleware. Workers
-are executed on the DCR compute nodes to bind compute resources and execute the
-tasks submitted by the users to the Coaster System.
+The Coaster System is composed of three main
+components~\cite{hategan2011coasters}: a Coaster Client, a Coaster Service, and
+a set of Workers. The Coaster Client implements both a Bootstrap and a Messaging
+Service while the Coaster Service implement a data proxy service and a set of
+job providers for diverse DCRs middleware. Workers are executed on the DCR
+compute nodes to bind compute resources and execute the tasks submitted by the
+users to the Coaster System.
 
 % Why it is a pilot system.
 Figure~\ref{fig:coaster_comparison} illustrates how the Coaster System
@@ -2350,34 +2351,58 @@ implements Task Dispatching while the Workers implements Task Execution.
 \end{figure}
 
 % Execution model.
-The execution model of the Coaster System can be summarized in 7 steps: 1. a set
-of tasks is submitted by a user via the Coaster Client API; 2. if not already
-active, the Bootstrap Service and the Message Service are started by the Coaster
-Client; 3. if not already active, a Coaster Service is instantiated for the
-DCR(s) indicated in the tasks description; 4. the Coaster Service gets the task
-descriptions and analyzes their requirements; 5. the Coaster Service submits one
-or more Workers to the target DCR depending on whether any worker is already
-active and with free resources; 6. when a Worker becomes active it pulls a task
-and, if any, its data dependences from the Coaster Client via the Coaster
-Service; 7. the task is executed.
+The execution model of the Coaster System can be summarized in 7
+steps~\cite{coasters_url}: 1. a set of tasks is submitted by a user via the
+Coaster Client API; 2. if not already active, the Bootstrap Service and the
+Message Service are started by the Coaster Client; 3. if not already active, a
+Coaster Service is instantiated for the DCR(s) indicated in the tasks
+description; 4. the Coaster Service gets the task descriptions and analyzes
+their requirements; 5. the Coaster Service submits one or more Workers to the
+target DCR depending on whether any worker is already active and with free
+resources; 6. when a Worker becomes active it pulls a task and, if any, its data
+dependences from the Coaster Client via the Coaster Service; 7. the task is
+executed.
 
 %% 5 core properties
+
 % Pilot Resources.
 Each Worker holds compute resources in the form of compute cores. Data are
-staged directly from the client to the Worker or via the Coaster Service acting
-as a proxy running on the DCR resources. Coasters implements a dedicated
-communication protocol among the Coaster components that is used also to
-transfer the tasks' input/output data. Networking capabilities are assumed to be
-available between the client and service host, and between the service host and
-workers nodes.
+staged from a shared file-system, from the client to the Worker, or via the
+Coaster Service acting as a proxy running on the DCR resources. Data are not a
+type of resource held by the pilots so the \pilot abstraction is not used to
+expose data to the user. Networking capabilities are assumed to be available
+between the client and service host, and between the service host and workers
+nodes. Coasters implements a dedicated communication protocol among the Coaster
+System components that is used also to transfer the tasks' input/output data.
 
 % Pilot Deployment.
+The Coaster Service automates pilots (i.e. Workers) deployment by taking into
+account several parameters: total number of jobs that the DCR batch system
+accepts; number of cores for each DCR compute node; DCR policy for compute nodes
+allocation; walltime of the pilots compared to the total walltime of the tasks
+submitted by the users and that have to be executed on those pilots. These
+parameters are evaluated by a custom pilot deployment algorithm that performs a
+walltime overallocation estimated against user-defined parameters, and chooses
+the number and sizing of pilots on the base of the target DCR capabilities.
 
-
-% Workload Semantics
+% Workload Semantics.
+The Coaster System is primarily designed to serve as a \pilot backend for the
+Swift System. As such, the Coaster System can execute workflows composed of
+loosely coupled tasks with data dependences. Natively, the Coaster Client
+implements a Java CoG Job Submission Provider~\cite{von2000cog,cog_url} for
+which both Java and Python API are available to submit tasks and to develop
+distributed applications. While tasks are assumed to be single-core by default,
+multi-core tasks can be executed by configuring the Coaster System to submit
+Workers holding multiple cores~\cite{swift_guide_url}. It should also be
+possible to execute MPI tasks by having Workers to span multiple compute nodes
+of a DCR.
 
 % workload binding
-
+The Coaster Service uses providers from the Java CoG Kit Abstraction Library to
+submit Workers to DCR with grid, HPC, and cloud middleware. Workers pull the
+tasks to execute implementing in this way late binding of tasks to pilots. It
+should be noted that tasks are early bound to DCR as its specification is part
+of a task description.
 
 % ------------------------------------------------------------------------------
 % DIANE
@@ -3321,9 +3346,9 @@ resource placeholders. This is the crux of the concept referred to as `\pilot
 paradigm'.
 
 In this section, the properties of the \pilot paradigm are critically assessed.
-The goal is to show the generality of this paradigm and how \pilot systems 
-%transcend %go beyond the implementation of 
-are much more than special purpose solutions to 
+The goal is to show the generality of this paradigm and how \pilot systems
+%transcend %go beyond the implementation of
+are much more than special purpose solutions to
 %speed up the execution of a
 improve the throughput of certain type of workload. The section closes with a
 look into the future of \pilot systems moving from the current state of the art.
@@ -3459,14 +3484,14 @@ data/compute placement, and dynamic resource sizing can be achieved.
 % depending on the required resources.
 
 
-The generality of the \pilot paradigm needs careful interpretation: 
+The generality of the \pilot paradigm needs careful interpretation:
 % and the independence of its
 % implementations from other types of software, clarify also a potential
 % misunderstanding:
 \pilots are not just an alternative implementation of a scheduler, a workload
 manager, a batch system, or any other special-purpose software component. \pilot
 systems represents a category of software in itself.
- 
+
 Thanks to the generality of the \pilot paradigm with respect of types of workload,
 target DCR, and resource, \pilot systems offers a well-defined and well-isolated
 layer between applications and resources. This fosters extensibility,
