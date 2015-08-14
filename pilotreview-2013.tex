@@ -2277,6 +2277,74 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 %   Therefore: general paradigm, best practices for the implementation, choosing
 %   criteria.}
 
+% ------------------------------------------------------------------------------
+% Coaster System
+%
+\subsubsection{Coaster System}\label{sec:coaster}
+
+% Who did it and for what scientific domains.
+The Coaster Service is developed and maintained by the Distributed Systems
+Laboratory at University of Chicago, Computer Science Department. The primary
+goal of the Coaster System is to provide \pilot abstraction functionalities to
+Swift system~\cite{wilde2011swift,zhao2007swift}. The Coaster System can be used
+in a stand-alone modality but, in practice, it should be regarded as a system
+specifically tailored for the Swift System requirements and design.
+
+% Architecture.
+The Coaster System is composed of three main components: a Coaster Client, a
+Coaster Service, and a set of Workers. The Coaster Client implements both a
+Bootstrap and a Messaging Service while the Coaster Service implement a data
+proxy service and a set of job providers for diverse DCRs middleware. Workers
+are executed on the DCR compute nodes to bind compute resources and execute the
+tasks submitted by the users to the Coaster System.
+
+% Why it is a pilot system.
+Figure~\ref{fig:coaster_comparison} illustrates how the Coaster System
+components map to the components and functionalities of a \pilot system as
+described in in~\S\ref{sec:understanding}: the Coaster Client is a Workload
+Manager, the Coaster Service and Pilot Manager, and each Worker a Task Manager.
+The Coaster Service implements the Pilot Provisioning functionality by
+submitting adequate numbers of Workers on suitable DCRs. The Coaster Client
+implements Task Dispatching while the Workers implements Task Execution.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/coaster_comparison.pdf}
+    \caption{Diagrammatic representation of Coaster components,
+    functionalities, and core vocabulary mapped on
+    Figure~\ref{fig:core_vocabulary}.}
+    \label{fig:coaster_comparison}
+\end{figure}
+
+% Execution model.
+The execution model of the Coaster System can be summarized in 7 steps: 1. a set
+of tasks is submitted by a user via the Coaster Client API; 2. if not already
+active, the Bootstrap Service and the Message Service are started by the Coaster
+Client; 3. if not already active, a Coaster Service is instantiated for the
+DCR(s) indicated in the tasks description; 4. the Coaster Service gets the task
+descriptions and analyzes their requirements; 5. the Coaster Service submits one
+or more Workers to the target DCR depending on whether any worker is already
+active and with free resources; 6. when a Worker becomes active it pulls a task
+and, if any, its data dependences from the Coaster Client via the Coaster
+Service; 7. the task is executed.
+
+%% 5 core properties
+% Pilot Resources.
+Each Worker holds compute resources in the form of compute cores. Data are
+staged directly from the client to the Worker or via the Coaster Service acting
+as a proxy running on the DCR resources. Coasters implements a dedicated
+communication protocol among the Coaster components that is used also to
+transfer the tasks' input/output data. Networking capabilities are assumed to be
+available between the client and service host, and between the service host and
+workers nodes.
+
+% Pilot Deployment.
+
+
+% Workload Semantics
+
+% workload binding
+
 
 % ------------------------------------------------------------------------------
 % DIANE
@@ -2483,23 +2551,31 @@ has free resources. No early binding capabilities are offered.
 % ------------------------------------------------------------------------------
 % Falkon
 %
-\subsubsection{Falkon}\label{sec:falkon}
+% \subsubsection{Falkon}\label{sec:falkon}
 
 % Who did it and for what scientific domains.
-The Fast and Light-weight tasK executiON framework
-(Falkon)~\cite{raicu2007falkon} has been developed
+% The Fast and Light-weight tasK executiON framework
+% (Falkon)~\cite{raicu2007falkon} was developed at University of Chicago,
+% Computer Science Department in the Distributed Systems Laboratory. Falkon
+% originated between 2005 and 2007 from the need to run efficiently up to $10^4$
+% single-core, short-lived, loosely coupled tasks on DCRs with grid computing
+% middleware. At per 2015, Falkon in not actively maintained but it offered
+% important indications about performance trade offs and informed the design of
+% Coasters, the \pilot system of the Swift workflow engine~\cite{}.
 
 % Architecture.
 
+
 % Why it is a pilot system.
 
-\begin{figure}[t]
-    \centering
-        \includegraphics[width=.48\textwidth]{figures/falkon_comparison.pdf}
-    \caption{Diagrammatic representation of Falkon components, functionalities,
-    and core vocabulary mapped on Figure~\ref{fig:core_vocabulary}.}
-    \label{fig:falkon_comparison}
-\end{figure}
+% \begin{figure}[t]
+%     \centering
+%         \includegraphics[width=.48\textwidth]{figures/falkon_comparison.pdf}
+%     \caption{Diagrammatic representation of Falkon components,
+%     functionalities, and core vocabulary mapped on
+%     Figure~\ref{fig:core_vocabulary}.}
+%     \label{fig:falkon_comparison}
+% \end{figure}
 
 % Execution model.
 
