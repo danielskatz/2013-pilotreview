@@ -2870,9 +2870,9 @@ system were users create Virtual Login Sessions, and a set of Task Managers. The
 Cluster Builder Agent acquires the resources from diverse DCRs by means of
 multiple Task Managers, while the Virtual Login Session presents these set of
 resources as a virtual cluster to the user. A virtual login session can be
-dedicated to a single user or shared and customized for a whole project. Upon
-login, a user is presented with a shell-like environment where to issue commands
-to submit tasks for execution.
+dedicated to a single user, or shared and customized for the users of a project.
+Upon login on the virtual cluster, a user is presented with a shell-like
+environment where to issue commands to submit tasks for execution.
 
 % Why it is a pilot system.
 Figure~\ref{fig:mycluster_comparison} shows how the components of MyCluster map
@@ -2897,21 +2897,20 @@ Task Managers to submit and execute tasks. As such, Job Proxies are pilots.
 The execution model of MyCluster can be summarized in 5 steps: 1. a user logs
 into a dedicated virtual cluster via, for example, ssh to access a dedicated
 Virtual Login Session; 2. the user writes a job wrapper script using the
-HTCondor, SGI, or OpenPBS job specification language, depending on the job
-submission system installed on the user's virtual cluster; 3. the user submits
-the job to the job submission system on the virtual cluster; 4. the Cluster
-Builder Agent submit a suitable number of Job Proxies, holding one or more cores
-on spanning one or more DCR; 5. when the Job Proxies become active, the
-user-submitted job is executed on the resources they hold.
+HTCondor, SGI, or OpenPBS job specification language; 3. the user submits the
+job to the job submission system on the virtual cluster; 4. the Cluster Builder
+Agent submits a suitable number of Job Proxies on one or more DCR; 5. when the
+Job Proxies become active, the user-submitted job is executed on the resources
+they hold.
 
 %% 5 core properties
 % Pilot Resources
-Job Proxies hold compute resources in the form of cores. MyCluster does not
-offer any dedicated data subsystem and Job Proxies (i.e. pilots) are not used to
-expose data resources to the user. Users are assumed to stage the data required
-by the compute tasks directly or by means of the data capabilities exposed by
-the job submission system deployed on the virtual cluster. Networking is assumed
-to be available among the MyCluster components.
+Job Proxies hold compute resources in the form of compute cores. MyCluster does
+not offer any dedicated data subsystem and Job Proxies (i.e. pilots) are not
+used to expose data resources to the user. Users are assumed to stage the data
+required by the compute tasks directly or by means of the data capabilities
+exposed by the job submission system deployed on the virtual cluster. Networking
+is assumed to be available among the MyCluster components.
 
 % Pilot Deployment
 The Cluster Builder Agent submits Job Proxies to each DCR by using the GridShell
