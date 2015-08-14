@@ -2317,17 +2317,17 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
 % Who did it and for what scientific domains.
 The Coaster Service is developed and maintained by the Distributed Systems
-Laboratory at University of Chicago, Computer Science Department. The primary
-goal of the Coaster System is to provide \pilot abstraction functionalities to
-Swift system~\cite{wilde2011swift,zhao2007swift}. The Coaster System can be used
-in a stand-alone modality but, in practice, it should be regarded as a system
-specifically tailored for the Swift System requirements and design.
+Laboratory at University of Chicago. The primary goal of the Coaster System is
+to provide \pilot abstraction functionalities to Swift
+system~\cite{wilde2011swift,zhao2007swift}. The Coaster System can be used
+stand-alone but, in practice, it should be regarded as a system specifically
+tailored for the Swift System requirements and design.
 
 % Architecture.
 The Coaster System is composed of three main
 components~\cite{hategan2011coasters}: a Coaster Client, a Coaster Service, and
 a set of Workers. The Coaster Client implements both a Bootstrap and a Messaging
-Service while the Coaster Service implement a data proxy service and a set of
+Service while the Coaster Service implements a data proxy service and a set of
 job providers for diverse DCRs middleware. Workers are executed on the DCR
 compute nodes to bind compute resources and execute the tasks submitted by the
 users to the Coaster System.
