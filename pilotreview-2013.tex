@@ -168,7 +168,7 @@ Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
 DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
 \panda~\cite{chiu2010pilot}, GWPilot~\cite{rubio2015gwpilot},
 Nimrod/G~\cite{buyya2000nimrod}, Falkon~\cite{raicu2007} and
-MyCluster~\cite{walker2006creating,walker2007personal} to name a few. These
+MyCluster~\cite{walker2006creating} to name a few. These
 systems are for the most part functionally equivalent and motivated by similar
 objectives; nonetheless, their implementations often serve specific use cases,
 target specific resources, and lack in interoperability.
@@ -1290,14 +1290,14 @@ Accordingly, I have done a global search and replace.}
 The greater control obtained as a consequence of removing the dependence of
 every task on the job submission system of the DCR is one of the main reasons
 for the success and early adoption of \pilot systems. % As mentioned
-% in~\S\ref{sec:compsandfuncs}, 
+% in~\S\ref{sec:compsandfuncs},
 % The tasks of a workload can be executed on a pilot
 % without each task individually waiting in the queuing system of the DCR's
-% middleware. 
+% middleware.
 In addition to possibly increasing the throughput of the workload
 execution, enabling tasks of a workload to be executed on a pilot without each task
-individually waiting in the queuing system of the DCR's middleware 
-% several advantages, 
+individually waiting in the queuing system of the DCR's middleware
+% several advantages,
 allows the reuse of active pilots to execute multiple workloads. How tasks are
 actually scheduled to pilots is a matter of implementation. For example, a
 dedicated scheduler could be adopted, or tasks might be directly scheduled to a
@@ -2856,10 +2856,34 @@ binding is not available.
 \subsubsection{MyCluster}\label{sec:mycluster}
 
 % Who did it and for what scientific domains.
+MyCluster~\cite{walker2007personal,mycluster_url} was originally developed at
+the Texas Advanced Computing Center (TACC), sponsored by NSF to enable execution
+of workloads on TeraGrid, a set of DCRs deploying grid middleware. MyCluster
+provides users with virtual clusters: homogeneous resources dynamically acquired
+on multiple and diverse DCRs, aggregated and exposed to the user. Each virtual
+cluster exposes HTCondor~\cite{thain2005}, SGE~\cite{chase2003dynamic}, or
+OpenPBS~\cite{openpbs_url} job-submission systems, depending on the user and use
+case requirements.
 
 % Architecture.
+MyCluster is designed around three main components: a Cluster Builder Agent, a
+system were users create Virtual Login Sessions, and a set of Task Managers. The
+Cluster Builder Agent acquires the resources from diverse DCRs by means of
+multiple Task Managers, while the Virtual Login Session presents these set of
+resources as a virtual cluster to the user. A virtual login session can be
+dedicated to a single user or shared and customized for a whole project. Upon
+login, a user is presented with a shell-like environment where to issue commands
+to submit tasks for execution.
 
 % Why it is a pilot system.
+Figure~\ref{fig:mycluster_comparison} shows how the components of MyCluster map
+to the components and functionalities of a \pilot system as described
+in~\ref{sec:compsandfuncs}: The Cluster Builder Agent implements a Pilot Manager
+and a Virtual Login Session implements a Workload Manager. The Task Manager
+shares its name and functionality with the homonymous component defined
+in~\ref{sec:compsandfuncs}. The Cluster Builder Agent provides Task Managers by
+submitting Job Proxies to diverse DCRs, and a Virtual Login Session uses the
+Task Managers to submit and execute tasks. As such, Job Proxies are pilots.
 
 \begin{figure}[t]
     \centering
@@ -2871,15 +2895,41 @@ binding is not available.
 \end{figure}
 
 % Execution model.
+The execution model of MyCluster can be summarized in 5 steps: 1. a user logs
+into a dedicated virtual cluster via, for example, ssh to access a dedicated
+Virtual Login Session; 2. the user writes a job wrapper script using the
+HTCondor, SGI, or OpenPBS job specification language, depending on the job
+submission system installed on the user's virtual cluster; 3. the user submits
+the job to the job submission system on the virtual cluster; 4. the Cluster
+Builder Agent submit a suitable number of Job Proxies, holding one or more cores
+on spanning one or more DCR; 5. when the Job Proxies become active, the
+user-submitted job is executed on the resources they hold.
 
 %% 5 core properties
 % Pilot Resources
+Job Proxies hold compute resources in the form of cores. MyCluster does not
+offer any dedicated data subsystem and Job Proxies (i.e. pilots) are not used to
+expose data resources to the user. Users are assumed to stage the data required
+by the compute tasks directly or by means of the data capabilities exposed by
+the job submission system deployed on the virtual cluster. Networking is assumed
+to be available among the MyCluster components.
 
 % Pilot Deployment
+The Cluster Builder Agent submits Job Proxies to each DCR by using the GridShell
+framework~\cite{walker2004gridshell}. GridShell wraps the Job Proxies
+description into the job description language supported by the target DCR. Thanks to GridShell, MyCluster can submit jobs to DCR with diverse middleware.
 
 % Workload Semantics
+MyCluster exposes to the user a virtual cluster with a predefined job submission
+system. Moreover, pilots can have a user-defined amount of cores inter or
+cross-compute node. As such, every application built to utilize HTCondor, SGE,
+or OpenPBS can be executed transparently on MyCluster. This include single and
+multi-core tasks, MPI tasks, and data-driven workflows.
 
 % workload binding
+The jobs specified by a user are bound to the DCR resources as soon as Job
+Proxies become active. The user does not have to specify on which Job Proxies or
+DCR each task has to be executed. As such MyCluster implements late binding.
 
 % ------------------------------------------------------------------------------
 % PANDA
