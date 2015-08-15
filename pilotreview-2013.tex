@@ -451,15 +451,23 @@ The notion of resource placeholder was devised as a pragmatic solution to better
 manage the complexity of executing distributed applications. A resource
 placeholder decouples the acquisition of remote compute resource from their use
 to execute the tasks of a distributed application. Resources are acquired by
-scheduling a job onto the remote high-performance machine. Once executed, the
-job runs an agent capable of retrieving and executing application tasks.
+scheduling a job onto the remote high-performance machine, which when executed,
+is capable of retrieving and executing application tasks.
+
+% Resources are acquired by scheduling a job onto the remote high-performance
+% machine. Once executed, the job runs an agent capable of retrieving and
+% executing application tasks.
 
 {\bf Resource placeholders} bring together mul\-ti-\-le\-vel sche\-du\-ling to
 enable parallel execution of the tasks of distributed applications.
-Mul\-ti-\-le\-vel sche\-du\-ling is achieved by scheduling the agent and then by
-enabling direct scheduling of application tasks to that agent. The \MW pattern
+Multi-level scheduling is achieved by scheduling the placeholder and then by
+enabling direct scheduling of application tasks to that placeholder.
+% Mul\-ti-\-le\-vel sche\-du\-ling is achieved by scheduling the agent and then
+% by enabling direct scheduling of application tasks to that agent.
+The \MW pattern
 is often an effective choice to manage the coordination of tasks execution on
-the available agent(s).  Mul\-ti-\-le\-vel sche\-du\-ling can be extended to
+the available agent(s).
+Mul\-ti-\-le\-vel sche\-du\-ling can be extended to
 multiple resources by instantiating resource placeholders on diverse
 high-performance machines and then using a dedicated scheduler to schedule tasks
 across all the placeholders.
