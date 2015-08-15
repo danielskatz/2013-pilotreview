@@ -3061,8 +3061,10 @@ CU) and schedules them to one or more pilots. Agents are instantiated on DCRs
 and execute the CUs pushed by the CU manager.
 
 % Why it is a pilot system.
-RADICAL-Pilot has been specifically designed to be a \pilot system and, as seen
-for example with DIANE, it closely resembles the description offered
+RADICAL-Pilot
+%  has been specifically designed to be a \pilot system and, as seen
+% for example with DIANE, it
+closely resembles the description offered
 in~\S\ref{sec:understanding} (see Figure~\ref{fig:panda_comparison}). The Pilot
 Manager and the Workload Manager are implemented by the CU Manager. The Agent is
 deployed on the DCR to expose its resources and execute the tasks pushed by the
@@ -3085,10 +3087,10 @@ DCR dependences; 2. the user also describes one or more pilots choosing the
 DCR(s) where they should be submitted to; 3. The Pilot Manager submits each
 pilot that has been described to the indicated DCR; 4. The CU Manager schedules
 each CU either to the pilot indicated in the CU description or on the first
-pilot with free and available resources; 5. when required, the CU Manager stages
-also the CU's input file(s) to the target DCR; and 6. the Agent executes the CU.
-Eventually, if needed the output files of the CU can be staged to a user-defined
-destination.
+pilot with free and available resources; 5. when required, the CU Manager also
+stages the CU's input file(s) to the target DCR; and 6. the Agent executes the
+CU.  If needed the output files of the CU can be staged to a
+user-defined destination.
 
 %\jhanote{need to add reference to the figure..} \mtnote{Done.}
 
@@ -3097,11 +3099,11 @@ destination.
 % Pilot Resources.
 The Agent component of RADICAL-Pilot offers abstractions for both compute and
 data resources. Every Agent can expose between one and all the cores of the
-compute node where it is executed, and it can also expose a data handle that
+compute node where it is executed; it can also expose a data handle that
 abstracts away specific storage properties and capabilities~\cite{luckow2010}.
-In this way, the CUs running on a Agent can benefit from unified interfaces both
-to core and data resources. Network resources are assumed to be available and no
-pilot abstraction is offered for their abstraction.
+In this way, the CUs running on a Agent can benefit from unified interfaces to
+both core and data resources. Network resources are assumed to be available and
+no pilot abstraction is offered for their abstraction.
 
 % Pilot Deployment.
 The Pilot Manager deploys the Agents of RADICAL-Pilot by means of the
@@ -3112,7 +3114,7 @@ HTCondor pools, and many ``leadership'' class systems like those managed by
 OLCF~\cite{olcf_url}, or NCSA~\cite{ncsa_url}.
 
 The resulting separation of agent deployment from DCR architecture makes the
-addition of support for a DCR relatively simple~\ref{merzky2015radical}. This is
+addition of support for a DCR relatively simple~\cite{merzky2015radical}. This is
 demonstrated by the relative ease with which RADICAL-Pilot is extended to
 support (i) a new DCR, such as IaaS, and (ii) DCR that have different middleware
 but essentially similar architecture, for example the Cray supercomputers
