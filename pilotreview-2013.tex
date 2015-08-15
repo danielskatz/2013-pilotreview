@@ -1629,7 +1629,7 @@ deployed on DCRs.
 \subsubsection{Core properties}
 \label{sec:coreprops}
 
-The core properties of every \pilot system are derived by analyzing what feature
+The core properties of every \pilot system are derived by analyzing the features
 each component described in~\S\ref{sec:compsandfuncs} has to have in order to
 implement its defining functionality.
 
@@ -1638,26 +1638,26 @@ provide the Pilot Provisioning functionality: (i) pilots holding at least one
 type of resource in order to be usable for task execution; (ii) wrapping of
 pilots suitable for pilot scheduling on chosen DCR(s); (iii) bootstrapping
 environment and routines so that pilots can become available for task scheduling
-and execution. These features are here grouped into two core properties: Pilot
+and execution. These features are covered by two core properties: Pilot
 Resources and Pilot Deployment.
 
-The design of a Workload Manager needs at least the following to provide the
+The design of a Workload Manager needs the representative features to provide
 Task Dispatching functionality: (i) workload descriptions expressing the
 computing requirements of each task alongside data and inter-task dependences
 (if any) so that workloads can be scheduled and then executed; (ii) pilots with
 a list of tasks, and each task listed in at least one pilot so as to enable
 complete binding between task and pilot(s); (iii) task lists associated with a
-pilot description or to a pilot instance in order to provide early
-and late binding. Workload Semantics and Workload Binding are the two core
-properties used to represent these features.
+pilot description or to a pilot instance in order to provide early and late
+binding. Workload Semantics and Workload Binding are the two core properties
+used to represent these features.
 
 The design of a Task Manager requires that information is made available about
 configuration and environmental features that determine the execution process of
-a task on a chosen DCR. Without such information, the Task Execution
-functionality cannot not be implemented as the execution of a task would fail,
-for example due to misconfiguration or lack of required supporting software.
-This feature is here represented with the core property named `Workload
-Execution'.
+a task on a DCR. Without such information, the Task Execution functionality
+cannot not be implemented as the execution of a task would fail, for example due
+to misconfiguration or lack of required supporting software.  The core property
+of Workload Execution represents this feature and other features associated with
+task execution.
 
 The following offers a detailed description of each core property.
 
@@ -1804,7 +1804,7 @@ Task Execution \\
 
 % core because: its fundamental to our model
 \item \textbf{Pilot Deployment}. Modalities for pilot scheduling and
-  bootstrapping. The characteristic of these operations varies depending on the
+  bootstrapping. The characteristic of these operations vary depending on the
   design choices of \pilot systems. For example, pilot scheduling may be fully
   automated (i.e., implicit) or directly controlled by applications and
   end-users (i.e., explicit). Pilots can be bootstrapped from code downloaded at
@@ -1874,7 +1874,7 @@ Task Execution \\
   \pilot systems may allow for two modalities of binding between tasks and
   pilots: early binding and late binding. \pilot system implementations differ
   in whether and how they support these two types of binding. Furthermore,
-  \pilot systems can support application-level or multi-level scheduling
+  \pilot systems can support application-level or multi-stage scheduling
   decisions. For example, coupled tasks may have to be bound to a single pilot,
   loosely coupled or uncoupled tasks to multiple pilots; tasks may be scheduled
   to a pilot and then to a specific pool of resources on a single compute node;
