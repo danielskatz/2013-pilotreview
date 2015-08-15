@@ -1442,13 +1442,16 @@ resources, and scheduling tasks onto (active or inactive) pilots.
 Figure~\ref{fig:core_vocabulary} offers a diagrammatic overview of the logical
 components of \pilot systems (green) alongside their functionalities (blue) and
 the defined vocabulary (red). An application submits a workload composed of
-tasks to the \pilot system via an interface (a). The Pilot Manager is
-responsible for pilot provisioning (b), the Workload Manager to dispatch tasks
-to the Task Manager (c), the Task Manager to executes those tasks once the pilot
-has become available (d). Figure~\ref{fig:core_vocabulary} shows not only the
-separation between the DCR and the \pilot system but also how the resources on
-which tasks are executed, are contained within different logical and physical
-components. Appreciating the characteristics and functionalities of a
+tasks to the \pilot system via an interface (\ref{fig:core_vocabulary}, tag~a).
+The Pilot Manager is responsible for pilot provisioning
+(\ref{fig:core_vocabulary}, tag~b), the Workload Manager to dispatch tasks to
+the Task Manager (\ref{fig:core_vocabulary}, tag~c), the Task Manager to
+executes those tasks once the pilot has become available
+(\ref{fig:core_vocabulary}, tag~d). Figure~\ref{fig:core_vocabulary} shows not
+only the separation between the DCR and the \pilot system but also how the
+resources on which tasks are executed, are contained within different logical
+and physical components. Appreciating the characteristics and functionalities of
+a
 \pilot system depends upon understanding the levels at which each of its
 component exposes capabilities.
 
@@ -1463,9 +1466,9 @@ component exposes capabilities.
 %   reader.}
 
 Note how in Figure~\ref{fig:core_vocabulary}, scheduling happens at the DCR
-level (b), for example by means of a cluster scheduler, and then at the pilot
-level (c). This illustrates what has been called here a multi-entity and
-multi-stage scheduling, a couple of terms replacing the more common but less
+level (tag~b), for example by means of a cluster scheduler, and then at the
+pilot level (tag~c). This illustrates what has been called here a multi-entity
+and multi-stage scheduling, a couple of terms replacing the more common but less
 precise `multi-level scheduling'.  Figure~\ref{fig:core_vocabulary} depicts the
 separation between scheduling at pilot level and scheduling at workload manager
 level, highlighting the four entities involved: jobs on DCR middleware, and
@@ -1646,10 +1649,10 @@ implement its defining functionality.
 The design of a Pilot Manager requires at least the following in order to
 provide the Pilot Provisioning functionality: (i) pilots holding at least one
 type of resource in order to be usable for task execution; (ii) wrapping of
-pilots suitable for pilot scheduling on chosen DCR(s); (iii) bootstrapping
-environment and routines so that pilots can become available for task scheduling
-and execution. These features are covered by two core properties: Pilot
-Resources and Pilot Deployment.
+pilots into jobs suitable for scheduling on chosen DCR(s); (iii) bootstrapping
+environment and execution routines so that pilots can become available for task
+scheduling and execution. These features are covered by two core properties:
+Pilot Resources and Pilot Deployment.
 
 The design of a Workload Manager needs the representative features to provide
 Task Dispatching functionality: (i) workload descriptions expressing the
@@ -1940,9 +1943,8 @@ themselves they do not distinguish a \pilot as a unique system. Examples of this
 type of property are: programming and user interfaces; interoperability across
 differing middleware and other \pilot systems; multitenancy of pilots as opposed
 to that of DCRs; strategies and abstractions for data management; security
-including authentication, authorization, and accounting; support for multiple
-usage modes like HPC or HTC; or robustness in terms of fault-tolerance and
-high-availability.
+including authentication, authorization, and accounting; or robustness in terms
+of fault-tolerance and high-availability.
 
 % Auxiliary properties
 \begin{table*}
@@ -3207,7 +3209,7 @@ the scope of the analysis to other relevant auxiliary properties.
 
 % \jhanote{I propose the following sentence can be removed? If yes, then the
 %   previous sentence can be merged with the previous paragraph, as opposed to
-%   being stand-alone} 
+%   being stand-alone}
 
 \jhanote{this we now do in the next section: as well as the co-evolution of
   \pilot system implementations and technology/infrastructure.}
@@ -3232,10 +3234,10 @@ diverse DCR middleware including typical HPC, grid, and cloud batch systems.
 
 % For example, DIANE and PANDA were
 % initially designed to support mostly grid-based DCRs used by the LHC
-% experiments, while Glidein to execute tasks on the HTCondor-based DCRs. 
+% experiments, while Glidein to execute tasks on the HTCondor-based DCRs.
 
 The need for interoperability reinforces the importance of well-defined
-separation between the \pilot system and heterogeneous DCRs,   
+separation between the \pilot system and heterogeneous DCRs,
 %As seen in~\S\ref{fig:core_vocabulary}, this flexibility
 which in turn supports the generality of the notion of resource placeholder and
 its independence from the specificities of the target infrastructures and their
