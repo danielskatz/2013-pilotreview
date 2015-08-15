@@ -2216,6 +2216,14 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
   \midrule
 
+    Coaster System &
+    Compute &
+    % GANGA &
+    Implicit &
+    WF (Swift~\cite{korkhov2009dynamic}) &
+    Late (task) &
+    Serial, MPI \\
+
     DIANE &
     Compute &
     % GANGA &
@@ -2224,13 +2232,13 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     Late &
     Serial \\
 
-    % DIRAC &
-    % HTC &
-    % % Custom &
-    % Community Service / implicit &
-    % None (Data dependencies?) &
-    % Late &
-    % Serial, some MPI \\
+    DIRAC &
+    Compute &
+    % Custom &
+    Implicit &
+    WF (TMS) &
+    Late &
+    Serial, MPI \\
 
     % Falkon &
     % HPC &
@@ -2256,13 +2264,13 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     Late &
     Serial, MPI \\
 
-    % MyCluster &
-    % HPC &
-    % % Custom (SGE / PBS / HTCondor) &
-    % CLI tools from respective LRMS &
-    % Workload semantics from respective LRMS &
-    % Agnostic &
-    % All \\
+    MyCluster &
+    Compute &
+    % Custom (SGE / PBS / HTCondor) &
+    Implicit &
+    job descriptions &
+    Agnostic &
+    All \\
 
     \panda &
     Compute &
