@@ -3197,16 +3197,18 @@ interoperability.
 % differences among Pilot systems implementa- tions could also offer relevant
 % indications on how and when a specific implementation should be adopted.
 
-Clarifying the differences among \pilot systems implementations offers insight
-into how and when a specific implementation should be adopted, or possibly
-adapted. Understanding the differences will also help appreciate the challenges
-in implementing them.
+Clarifying the differences among \pilot systems implementations can offer
+insight into how and when a specific implementation should be adopted, or
+possibly adapted. Understanding the differences will also help appreciate the
+challenges in implementing them.  Here these differences are described, widening
+the scope of the analysis to other relevant auxiliary properties.
 
-\jhanote{I propose the following sentence can be removed? If yes, then the
-  previous sentence can be merged with the previous paragraph, as opposed to
-  being stand-alone} Here these differences are described, widening the scope of
-the analysis to other relevant auxiliary properties, and to thereby highlight
-the challenges in implementing them.
+% and to thereby highlight the challenges in implementing them.
+
+
+% \jhanote{I propose the following sentence can be removed? If yes, then the
+%   previous sentence can be merged with the previous paragraph, as opposed to
+%   being stand-alone} 
 
 \jhanote{this we now do in the next section: as well as the co-evolution of
   \pilot system implementations and technology/infrastructure.}
@@ -3219,23 +3221,30 @@ the challenges in implementing them.
 
 % Coordination and communication
 
+
 % Interoperability
 The \pilot systems described in the previous subsection offer a varying degree
-of interoperability across diverse DCRs. For example, DIANE and PANDA were
-initially designed to support mostly grid-based DCRs used by the LHC
-experiments, while Glidein to execute tasks on the HTCondor-based DCRs. With the
-progressive development of both the \pilot systems and DCR middleware, more
-types of DCR are being supported.  GlideIn, PANDA, and RADICAL-Pilot support
+of interoperability across diverse DCRs.  For example, GlideIn was designed to
+execute tasks on the HTCondor based DCRs; DIANE and PANDA were initially
+designed to support DCRs used by the LHC experiments but not bound to HTCondor.
+With the progressive development of \pilot systems and DCR middleware, many
+types of DCR are now supported: GlideIn, PANDA, and RADICAL-Pilot support
 diverse DCR middleware including typical HPC, grid, and cloud batch systems.
-This in part reinforces the importance of well-defined and robust
-interoperability layer between the \pilot system and heterogeneous target DCRs.
-As seen in~\S\ref{fig:core_vocabulary}, this flexibility is possible due to the
-generality of the notion of resource placeholder and its independence from the
-specificities of the target infrastructures and their middleware. Placeholders
-abstract the notions of resources, scheduling, and task execution, creating a
-well-defined and isolated logical space for the management of task execution.
-It remains to be understood under what conditions and for what type of
-application each implementation of a placeholder is more appropriate.
+
+% For example, DIANE and PANDA were
+% initially designed to support mostly grid-based DCRs used by the LHC
+% experiments, while Glidein to execute tasks on the HTCondor-based DCRs. 
+
+The need for interoperability reinforces the importance of well-defined
+separation between the \pilot system and heterogeneous DCRs,   
+%As seen in~\S\ref{fig:core_vocabulary}, this flexibility
+which in turn supports the generality of the notion of resource placeholder and
+its independence from the specificities of the target infrastructures and their
+middleware. Placeholders abstract the notions of resources, scheduling, and task
+execution, creating a well-defined and isolated logical space for the management
+of task execution.  It remains to be understood under what conditions and for
+what type of application each implementation of a placeholder is more
+appropriate.
 
 
 
@@ -3275,7 +3284,7 @@ systems. \jhanote{I'm not sure I see the point of the last sentence}
 Open APIs like the one specified in~\cite{luckow2012towards} and implemented by
 RADICAL-Pilot offer the missing layer on which workflow and, more generally,
 distributed applications could be built upon. %As with the resource layer,
-\pilot systems offers a well-defined and well-isolated layer between
+\pilot systems offer a well-defined and isolated layer between
 applications and resources. This fosters extensibility, interoperability, and
 modularity by separating the application description and logic from the
 management of its execution, and from the provisioning and aggregation of
