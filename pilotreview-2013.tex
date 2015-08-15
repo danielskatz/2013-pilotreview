@@ -483,7 +483,7 @@ without competing with other users for the high-performance machine scheduler.
 
 % ------------------------------------------------------------------------------
 % 2.2
-\subsection{Evolution of Pilot System Implementations}
+\subsection{Brief History of Pilotjob Systems}
 \label{sec:histimpl}
 
 The \pilot abstraction has a rich set of properties~\cite{luckow2012towards}
@@ -650,14 +650,14 @@ ALICE experiment; \panda (Production and Distributed
 Analysis)~\cite{zhao2011panda} was developed by the ATLAS
 experiment~\cite{aad2008atlas}. Due to socio-technical reasons, the CMS
 experiment at LHC mostly converged around the
-HTCondor-Glidein-GlideinWMS~\cite{sfiligoi2008glideinwms} ecosystem.  Another
-\pilotjob system that is used in the LHC context is
-Co-Pilot~\cite{buncicco2011co}. Interestingly, these systems are functionally
-very similar, work on almost the same underlying infrastructure, and serve
-applications with very similar (if not identical) characteristics.
+HTCondor-Glidein-GlideinWMS~\cite{sfiligoi2008glideinwms} ecosystem.
 
-It is worth noting that Co-Pilot was set up as an integration point among
-grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
+Interestingly, these systems are functionally very similar, work on almost the
+same underlying infrastructure, and serve applications with very similar (if not
+identical) characteristics.
+Co-Pilot~\cite{buncicco2011co,harutyunyan2012cernvm}, another \pilotjob system
+developed in the LHC context, promotes interoperability by integrating
+grid-based \pilotjob systems (such as AliEn and \panda) with cloud and volunteer
 computing resources.
 
 % The BigJob \pilotjob system~\cite{luckow2010} was designed to address these
@@ -665,16 +665,19 @@ computing resources.
 % execution model, and to extend the \pilot abstraction beyond the boundaries of
 % compute tasks.
 
+Other \pilotjob systems were developed alongside those tailored to the LHC
+experiments for research purposes, to target diverse types of resources and
+middleware, or as special-purpose subsystems and frameworks.
+
 The BigJob \pilotjob system~\cite{luckow2010} was designed to support task-level
 parallelism on distributed HPC resources, to broaden the type of applications
 supported by the pilot-based execution model, and ultimately to extend the
 \pilot abstraction beyond the boundaries of compute tasks. BigJob offers
 application-level programmability to provide the end-user with more flexibility
 and control over the design of distributed application and the isolation of the
-management of their execution. BigJob is flexible and extensible and uses the
-Simple API for Grid Applications (SAGA) interoperability
-library~\cite{merzky2015saga,goodale2006,luckow2010} to work on a variety of
-infrastructures.
+management of their execution. BigJob uses the Simple API for Grid Applications
+(SAGA) interoperability library~\cite{merzky2015saga,goodale2006,luckow2010} to
+work on a variety of infrastructures.
 
 % Additionally, BigJob has also been extended to work with data
 % and, analogous to compute pilots, to abstract away direct user communication
@@ -688,44 +691,42 @@ infrastructures.
 %   what we want to say ...}  \mtnote{Apologies, I am not sure I understand this
 %   comment.}
 
-BigJob was recently re-implemented as a production-level tool named
-`RADICAL-Pilot'~\cite{merzky2015radical}. BigJob/RADICAL-Pilot represent an
-evolution of the \pilot abstraction: initially pilots were implemented as ad hoc
-place holder machinery for a specific application but evolved to be integrated
-with the middleware of remote resources. BigJob/RADICAL-Pilot implements the
-\pilot abstraction as an interoperable compute and data management system that
-can be programmatically integrated into end-user applications and thus provides
-both features.
+BigJob has recently been re-implemented as a production-level tool named
+`RADICAL-Pilot'~\cite{merzky2015radical}. BigJob and now RADICAL-Pilot represent
+an evolution of the \pilot abstraction: initially pilots were implemented as ad
+hoc place holder machinery for a specific application but evolved to be
+integrated with the middleware of remote resources. Both BigJob and
+RADICAL-Pilot implement the \pilot abstraction as an interoperable compute and
+data management system that can be programmatically integrated into end-user
+applications and thus provides both features.
 
-Another ongoing evolutionary trend has been to implement the \pilot abstractions
-into pilot-based workload managers, thus moving away from providing simple pilot
-capabilities in application space. These higher-level systems which are often
-centrally hosted, move critical functionality from the client to the server
-(i.e., a service model). These systems usually deploy pilot factories that
-automatically start new pilots on demand and integrate security mechanisms to
-support multiple users simultaneously.
+% Another ongoing evolutionary trend has been to implement the \pilot
+% abstractions into pilot-based workload managers, thus moving away from
+% providing simple pilot capabilities in application space. These higher-level
+% systems which are often centrally hosted, move critical functionality from the
+% client to the server (i.e., a service model). These systems usually deploy
+% pilot factories that automatically start new pilots on demand and integrate
+% security mechanisms to support multiple users simultaneously.
 
 % Several \pilotjob systems have been developed in the context of the LHC
-% experiment at CERN, which is associated with a major increase in the uptake and
-% availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane}, GlideInWMS,
-% DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
+% experiment at CERN, which is associated with a major increase in the uptake
+% and availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane},
+% GlideInWMS, DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
 % AliEn~\cite{saiz2003alien}, and Co-Pilot~\cite{buncicco2011co}. Each of these
 % \pilotjob systems serves a particular user community and experiment.
 % Interestingly, these systems are functionally very similar, work on almost the
-% same underlying infrastructure, and serve applications with very similar (if not
-% identical) characteristics.
+% same underlying infrastructure, and serve applications with very similar (if
+% not identical) characteristics.
 
-
-% Co-Pilot provides components for building a
-% framework for seamless and transparent integration of these resources into
-% existing grid and batch computing infrastructures exploited by the High Energy
-% Physics (HEP) community.
-
-
+% Co-Pilot provides components for building a framework for seamless and
+% transparent integration of these resources into existing grid and batch
+% computing infrastructures exploited by the High Energy Physics (HEP)
+% community.
 
 % The \pilot abstraction has also been integrated into scientific workflow
 % systems.
-\pilotjob systems have proven an effective tool for managing the workloads
+
+\pilotjob systems have also proven an effective tool for managing the workloads
 executed in the various stages of a scientific workflow. For example, the Corral
 system~\cite{rynge2011experiences} has been developed to serve as a frontend to
 HTCondor GlideIn and to optimize glides (i.e., pilots) placement for the Pegasus
@@ -737,35 +738,45 @@ Swift~\cite{wilde2011swift} is a scripting language designed for expressing
 abstract workflows and computations. The language also provides capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called
-``Coaster''~\cite{coasters_url}, developed to address workload management
+`Coaster System'~\cite{coasters_url}, developed to address workload management
 requirements by supporting various types of infrastructure, including clouds and
 grids.
 
 Swift has also been used in conjunction with Falkon~\cite{raicu2007}. Falkon was
 engineered for executing many small tasks on High Performance Computing (HPC)
 systems and shows high performance compared to the native queuing systems.
-Falkon is a paradigmatic example of how the \pilot abstraction can be
-implemented to support very specific workloads.
+Falkon is a paradigmatic example of how the \pilot abstraction has been
+implemented to support specific workloads alongside investigating their
+performance. Even if Falkon is now unmaintained, the insight gained by its
+development has been used to improve the Coaster System.
 
-The proliferation of \pilotjob systems and their integration within other type
-of application and middleware systems, underlines not only a progressive
-appreciation for the \pilot abstraction but also the emergence of a \pilot
-paradigm.
+% The proliferation of \pilotjob systems and their integration within other type
+% of application and middleware systems,
+
 % to support the execution of distributed and, increasingly, of parallel
 % applications.
 
-The brief description of the many \pilotjob system implementations
-introduced in this section helps to identify some distinctions in terms of
-design, usage, and operation modes. Figure~\ref{fig:pilotjob_clustering} is a
-graphical representation of this clustering.
+The brief description of the many \pilotjob system implementations introduced in
+this section underlines a progressive appreciation for the \pilot abstraction
+and the emergence of a \pilot paradigm. Nonetheless, the proliferation of
+\pilotjob systems has been uncoordinated, developing across multiple dimensions
+(see Figure~\ref{fig:pilotjob_clustering}), and making difficult a coherent
+understanding of the \pilot components, their functionalities, implementations,
+and usages. This hinders attempts at distinguishing \pilotjob systems
+functionalities from those of other middleware and to appreciate the
+distinguishing characteristics of the \pilot paradigm.
 
-The evolution of the \pilot paradigm and proliferation of systems has been
-uncoordinated, leading to an inconsistent terminology related to the \pilot
-abstraction, its implementations and usage. A coherent understanding of the
-\pilot components and functionalities is still missing, thus hindering attempts
-at
+% Some distinctions in terms of design, usage, and operation modes can be
+% identified. Figure~\ref{fig:pilotjob_clustering} is a graphical representation
+% of this clustering.
+
+% The evolution of the \pilot paradigm and proliferation of systems has been
+% uncoordinated, leading to an inconsistent terminology related to the \pilot
+% abstraction, its implementations and usage. A coherent understanding of the
+% \pilot components and functionalities is still missing, thus hindering attempts
+% at distinguishing it from other functionality and middleware systems.
+
 %leading to a blurred definition of \pilot abstraction and how it should be
-distinguishing it from other functionality and middleware systems.
 
 The evolution of \pilots attests to their usefulness across a wide range of
 deployment environments and application scenarios, but the divergence in
@@ -2221,7 +2232,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     % GANGA &
     Implicit &
     WF (Swift~\cite{korkhov2009dynamic}) &
-    Late (task) &
+    Late (pilot) &
     Serial, MPI \\
 
     DIANE &
