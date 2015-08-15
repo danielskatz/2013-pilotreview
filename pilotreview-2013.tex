@@ -831,11 +831,10 @@ completion, but other metrics could also be considered: data transfer
 minimization, scale of the workload executed, or a mix of them. Metrics that are
 not performance related include reliability, ease of application deployment, and
 generality of workload. In order to achieve the required metrics under given
-constraints, each \pilotjob system exhibits characteristics that are
-either common or specific to one or more implementations.
-%both common or specific to one or more implementations.
-Discerning these characteristics requires isolating the minimal set of logical
-components that characterize every \pilotjob system.
+constraints, each \pilotjob system exhibits characteristics that are either
+common or specific to one or more implementations. Discerning these
+characteristics requires isolating the minimal set of logical components that
+characterize every \pilotjob system.
 
 At some level, all \pilotjob systems employ three separate but coordinated
 logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
@@ -916,7 +915,7 @@ and schedulers, provisioning a placeholder involves it being submitted as a
 job. For such middleware, a job is a type of logical container that includes
 configuration and execution parameters alongside information on the application
 to be executed on the machine's compute resources. Conversely, for machines
-without a queue-based middleware, a resource placeholder would be executed by
+without a job-based middleware, a resource placeholder would be executed by
 means of other types of logical container as, for example, a virtual machine or
 a Docker Engine~\cite{bernstein2014,felter2014}.
 
@@ -1058,7 +1057,7 @@ between a source and a destination are all examples of resources commonly
 utilized when executing workloads.
 
 \item[Distributed Computing Resource (DCR).] A machine characterized by a tuple:
-\{a set of possibly heterogeneous resources, a middleware software, and an
+\{a set of possibly heterogeneous resources, a middleware, and an
 administrative domain\}.
 
 % \mtnote{I used `set of machines' because from now on we use DCR instead of
@@ -1070,27 +1069,28 @@ administrative domain\}.
 \mtnote{Here we can add the description of workloads across the three axes. This
   would support the workload semantic core property in \S4.}
 
-Workloads are characterized by multiple tasks. The tasks could be homogeneous,
-heterogeneous or one-of-a-kind.  There does not exist an established taxonomy
-for workload description; we propose a necessarily limited workload taxonomy
-based upon the orthogonal properties of coupling, dependency and similarity of
-tasks.  Workloads comprised of tasks that are independent and effectively
+Workloads are characterized by multiple tasks. The tasks can be homogeneous,
+heterogeneous, or one-of-a-kind but an established and encompassing taxonomy for
+workload description is not available. We propose taxonomy based upon the
+orthogonal properties of coupling, dependency, and similarity of tasks.
+
+Workloads comprised of tasks that are independent and effectively
 indistinguishable from other tasks are commonly referred to as a Bag-of-Tasks
-(BoT). Ensembles (ENS) represent workloads when the collective outcome of the
-tasks is relevant (e.g., computing the average property). The tasks that
-comprise the workload in turn can have varying degrees and types of coupling;
-coupled tasks might have global (synchronous) or local exchanges (asynchronous),
-regular or irregular
-communication.
+(BoT)~\cite{da2003trading,cirne2003running}. Ensembles (ENS) represent workloads
+when the collective outcome of the tasks is relevant (e.g., computing the
+average property)~\cite{raicu2008many}. The tasks that comprise the workload in
+turn can have varying degrees and types of coupling; coupled tasks might have
+global (synchronous) or local exchanges (asynchronous), regular or irregular
+communication. We categorize such workloads as coupled ensembles (C-ENS)
+independent of the specific details of the coupling between the tasks. A
+workflow (WF) represents a workload with arbitrarily complex relationships among
+the tasks, ranging from dependencies (e.g., sequential or data) to coupling
+between the tasks (e.g., frequency or volume of exchange)~\cite{taylor2014}.
+
 % The tasks that comprise the ensembles (i.e., ensemble-members) in
 % turn can have varying degrees and types of coupling; coupled ensembles might
 % have global (synchronous) or local exchanges (asynchronous), regular or
 % irregular communication.
-We categorize such workloads as coupled ensembles (C-ENS) independent of the
-specific details of the coupling between the tasks. A workflow (WF) represents a
-workload with arbitrarily complex relationships among the tasks, ranging from
-dependencies (e.g., sequential or data) to coupling between the tasks (e.g.,
-frequency or volume of exchange).
 
 A cluster is a typical example of a DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
@@ -1300,27 +1300,26 @@ Accordingly, I have done a global search and replace.}
 
 The greater control obtained as a consequence of removing the dependence of
 every task on the job submission system of the DCR is one of the main reasons
-for the success and early adoption of \pilot systems. % As mentioned
-% in~\S\ref{sec:compsandfuncs},
-% The tasks of a workload can be executed on a pilot
-% without each task individually waiting in the queuing system of the DCR's
-% middleware.
-In addition to possibly increasing the throughput of the workload
-execution, enabling tasks of a workload to be executed on a pilot without each task
-individually waiting in the queuing system of the DCR's middleware
-% several advantages,
-allows the reuse of active pilots to execute multiple workloads. How tasks are
-actually scheduled to pilots is a matter of implementation. For example, a
-dedicated scheduler could be adopted, or tasks might be directly scheduled to a
-pilot by the user.
+for the success and early adoption of \pilot systems. In addition to possibly
+increasing the throughput of the workload execution, enabling each task to be
+executed on a pilot without waiting in the DCR's queue, it allows also the reuse
+of active pilots to execute multiple workloads. How tasks are actually scheduled
+to pilots is a matter of implementation. For example, a dedicated scheduler
+could be adopted, or tasks might be directly scheduled to a pilot by the user.
 
-% The tasks of a workload can be executed on a pilot
-% without each task individually waiting in the queuing system of the DCR's
-% middleware. This greater control results in several advantages, including
-% possibly increasing the throughput of the workload execution, and reusing active
-% pilots to execute multiple workloads. How tasks are actually scheduled to pilots
-% is a matter of implementation. For example, a dedicated scheduler could be
-% adopted, or tasks might be directly scheduled to a pilot by the user.
+% As mentioned in~\S\ref{sec:compsandfuncs}, The tasks of a workload can be
+% executed on a pilot without each task individually waiting in the queuing
+% system of the DCR's middleware.
+
+% several advantages,
+
+% The tasks of a workload can be executed on a pilot without each task
+% individually waiting in the queuing system of the DCR's middleware. This
+% greater control results in several advantages, including possibly increasing
+% the throughput of the workload execution, and reusing active pilots to execute
+% multiple workloads. How tasks are actually scheduled to pilots is a matter of
+% implementation. For example, a dedicated scheduler could be adopted, or tasks
+% might be directly scheduled to a pilot by the user.
 
 The type of binding of tasks to pilots depends on the state of the pilot. A
 pilot is inactive until it is executed on a DCR, is active thereafter, until it
@@ -1350,8 +1349,8 @@ binding, even within a single workload.
 
 \begin{description}
 
-\item[Multi-level scheduling.] Scheduling pilots onto resources, and scheduling
-tasks onto (active or inactive) pilots.
+\item[Multi-entity and Multi-stage scheduling.] Scheduling pilots onto
+resources, and scheduling tasks onto (active or inactive) pilots.
 
 \item[Early binding.] Binding one or more tasks to an inactive pilot.
 
@@ -1464,10 +1463,10 @@ component exposes capabilities.
 %   reader.}
 
 Note how in Figure~\ref{fig:core_vocabulary}, scheduling happens at the DCR
-level, for example by means of a cluster scheduler, and then at the pilot level.
-This illustrates what has been called here a multi-entity and multi-stage
-scheduling, a couple of terms replacing the more common but less precise
-`multi-level scheduling'.  Figure~\ref{fig:core_vocabulary} depicts the
+level (b), for example by means of a cluster scheduler, and then at the pilot
+level (c). This illustrates what has been called here a multi-entity and
+multi-stage scheduling, a couple of terms replacing the more common but less
+precise `multi-level scheduling'.  Figure~\ref{fig:core_vocabulary} depicts the
 separation between scheduling at pilot level and scheduling at workload manager
 level, highlighting the four entities involved: jobs on DCR middleware, and
 tasks on pilots.
