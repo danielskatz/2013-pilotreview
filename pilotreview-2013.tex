@@ -1540,7 +1540,7 @@ of \pilot system implementations are described showing how the architecture of
 each system maps to the components and functionalities presented
 in~\S\ref{sec:compsandfuncs}, and implements the given core design properties.
 Finally, insight is offered about the commonalities and differences
-distinguishing these implementations on the base of the given descriptions and
+distinguishing these implementations on the basis of the given descriptions and
 their most relevant auxiliary design properties.
 
 % how to choose a \pilot system based on functional requirements,
@@ -1566,13 +1566,13 @@ are instead required only as a support to the core properties. For example,
 while the design of every \pilot system has to specify pilot deployment,
 authentication and authorization may be required by pilot deployment only with
 some DCRs, possibly based on different protocols and mechanisms depending on the
-DCRs middleware. As such, auxiliary properties are not necessarily shared among
-all \pilot systems.
+DCRs middleware. As such, the set of auxiliary properties are not necessarily
+shared among all \pilot systems.
 
 % Both sets of properties are chosen by considering the implementation
 % requirements of the \pilot capabilities as defined in~\S\ref{sec:history}.
 
-Following is a detailed description of both core and auxiliary properties by
+The following is a detailed description of both core and auxiliary properties by
 which any \pilot system can be characterized. This list of core properties is
 minimal and complete while that of auxiliary properties is a representative
 subset. While the given set of properties has to characterize every \pilot
@@ -1630,7 +1630,7 @@ deployed on DCRs.
 \label{sec:coreprops}
 
 The core properties of every \pilot system are derived by analyzing what feature
-each component described in in~\S\ref{sec:compsandfuncs} has to have in order to
+each component described in~\S\ref{sec:compsandfuncs} has to have in order to
 implement its defining functionality.
 
 The design of a Pilot Manager requires at least the following in order to
@@ -1642,12 +1642,12 @@ and execution. These features are here grouped into two core properties: Pilot
 Resources and Pilot Deployment.
 
 The design of a Workload Manager needs at least the following to provide the
-Task Dispatching functionality: (i) workloads descriptions expressing the
+Task Dispatching functionality: (i) workload descriptions expressing the
 computing requirements of each task alongside data and inter-task dependences
 (if any) so that workloads can be scheduled and then executed; (ii) pilots with
-a list of tasks, and each task listed in at least one pilot so to enable
-complete binding between task and pilot(s); (iii) task lists associated to a
-pilot description or to a pilot instance in order to obtain respectively early
+a list of tasks, and each task listed in at least one pilot so as to enable
+complete binding between task and pilot(s); (iii) task lists associated with a
+pilot description or to a pilot instance in order to provide early
 and late binding. Workload Semantics and Workload Binding are the two core
 properties used to represent these features.
 
@@ -2193,7 +2193,7 @@ in terms of target DCRs and application workloads. Examining these \pilot
 systems using the common vocabulary defined in~\S\ref{sec:termsdefs} exposes
 similarities and differences allowing a detailed analysis. Critically assessing
 these differences will bring to the fore the generality of the pilot
-abstraction, its independence from specific software systems and technological
+abstraction, its independence from specific software systems and deployment
 environments, and the more relevant challenges of \pilot systems implementation.
 Table~\ref{table:implementations-properties} offers a summary of the core
 properties for each analyzed \pilot system\protect\footnote{Pilot systems are
