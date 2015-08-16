@@ -164,7 +164,7 @@
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
 abstractions at the development, deployment, and execution
-level~\cite{dpa_surveypaper,dpagrid2009}.  
+level
 
 As suggested by the proliferation of \pilotjob systems used on production
 distributed computing, \pilotjobs are arguably one of the few widely-used
@@ -256,8 +256,9 @@ potential and proliferation of \pilotjob systems, there remains significant lack
 of clarity and understanding about the \pilotjob abstraction. As alluded to,
 this has resulted in significant overhead and repetition of effort. Looking
 forward, with the growing importance and need for scalable task-level
-parallelism, the lack of conceptual clarity might have similar and potentially
-profound consequences in high-performance computing.
+parallelism and dynamic resource management in high-performance computing, the
+lack of conceptual clarity might have similar and potentially profound
+consequences for the next generation of supercomputing.
 
 This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
@@ -3537,11 +3538,11 @@ have been (re-)engineered to operate also on HPC and cloud infrastructures.
 
 As seen in~\S\ref{sec:understanding}, the \pilot paradigm demands resource
 placeholders but does not specify the type of resource that the placeholder
-should expose. In principle, pilots can be placeholders also and exclusively for
-data or network resources. For example, in
-Ref.~\cite{luckow2014pilot,santcroos2012} the concept of \pilotdata was
-conceived to be fundamental to dynamic data placement and scheduling as \pilot
-is to computational tasks.
+should expose. In principle, pilots can be placeholders for data or network
+resources, either exclusively or in conjunction with compute resources.  For
+example, in Ref.~\cite{luckow2014pilot,santcroos2012} the concept of \pilotdata
+was conceived to be fundamental to dynamic data placement and scheduling as
+\pilot is to computational tasks.
 
 % depending on the capabilities exposed by the middleware of the target
 % infrastructure.
@@ -3567,9 +3568,13 @@ in~\S\ref{sec:analysis} showed that such a view is restrictive: \pilot systems
 can be used to optimize diverse types of workloads along multiple performance
 dimensions. For example, \pilot systems have been successfully integrated within
 workflow systems to support optimal execution of workloads with articulated data
-and single or multi-core task dependencies. As such, not only throughput can be
-optimized for multi-core, long-lived, coupled tasks executions but optimal
-data/compute placement, and dynamic resource sizing can be achieved.
+and single or multi-core task dependencies. As such, not only can throughput be
+optimized for multi-core, long-lived, coupled tasks executions, but also for optimal
+data/compute placement, and dynamic resource sizing.
+
+% As such, not only throughput can be optimized for multi-core, long-lived,
+% coupled tasks execu- tions but optimal data/compute placement, and dynamic
+% resource sizing can be achieved.
 
 % As such, depending on the type of the given workload, the \pilot paradigm can
 % be adopted to optimize different metrics of task execution other than
@@ -3581,23 +3586,15 @@ data/compute placement, and dynamic resource sizing can be achieved.
 % depending on the required resources.
 
 
-The generality of the \pilot paradigm needs careful interpretation:
-% and the independence of its
-% implementations from other types of software, clarify also a potential
-% misunderstanding:
-\pilots are not just an alternative implementation of a scheduler, a workload
-manager, a batch system, or any other special-purpose software component. \pilot
-systems represents a category of software in itself.
-
-Thanks to the generality of the \pilot paradigm with respect of types of workload,
-target DCR, and resource, \pilot systems offers a well-defined and well-isolated
-layer between applications and resources. This fosters extensibility,
-interoperability, and modularity by separating the application description and
-logic from the management of its execution, and from the provisioning and
-aggregation of resources. In turn, this avoids the need to develop
-special-purpose, vertical, and end-to-end applications, namely the main sources
-of duplication and fragmentation in the current distributed application and
-tooling landscape. \jhanote{last sentence needs some attention..}
+Thanks to the generality of the \pilot paradigm with respect of types of
+workload, target DCR, and resource, \pilot systems offers a well-defined and
+well-isolated layer between applications and resources. This fosters
+extensibility, interoperability, and modularity by separating the application
+description and logic from the management of its execution, and from the
+provisioning and aggregation of resources. In turn, this avoids the need to
+develop special-purpose, vertical, and end-to-end applications, which have been
+the main sources of duplication and fragmentation in the current distributed
+application and tooling landscape~\cite{dpa_surveypaper,dpagrid2009}.  
 
 % \jhanote{this is a repeat (that I placed/introduced) from 4.3, so if we keep
 % this here we must fix in 4.3..}
@@ -3616,6 +3613,17 @@ requirements of DCR interoperability, support for multiple types of workloads,
 or flexibility in the optimization of execution are introduced. Satisfying those
 requirements demands abstracting the specificity of application characteristics,
 of the middleware and architectures of DCRs, and of the types of resources.
+
+The generality of the \pilot paradigm needs careful interpretation: \pilots are
+not just an alternative implementation of a scheduler, a workload manager, a
+batch system, or any other special-purpose software component. \pilot systems
+represents a software system in itself.
+
+% and the independence of its
+% implementations from other types of software, clarify also a potential
+% misunderstanding:
+
+
 
 \jhanote{These next two paragraphs are possibly nice ways to start rather than
   end this subsection. Thoughts?} \mtnote{Moved at the beginning.}
