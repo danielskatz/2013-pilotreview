@@ -459,18 +459,17 @@ is capable of retrieving and executing application tasks.
 % executing application tasks.
 
 {\bf Resource placeholders} bring together mul\-ti-\-le\-vel sche\-du\-ling to
-enable parallel execution of the tasks of distributed applications.
-Multi-level scheduling is achieved by scheduling the placeholder and then by
-enabling direct scheduling of application tasks to that placeholder.
+enable parallel execution of the tasks of distributed applications. Multi-level
+scheduling is achieved by scheduling the placeholder and then by enabling direct
+scheduling of application tasks to that placeholder. Mul\-ti-\-le\-vel
+sche\-du\-ling can be extended to multiple resources by instantiating resource
+placeholders on diverse high-performance machines and then using a dedicated
+scheduler to schedule tasks across all the placeholders.
+
 % Mul\-ti-\-le\-vel sche\-du\-ling is achieved by scheduling the agent and then
-% by enabling direct scheduling of application tasks to that agent.
-The \MW pattern
-is often an effective choice to manage the coordination of tasks execution on
-the available agent(s).
-Mul\-ti-\-le\-vel sche\-du\-ling can be extended to
-multiple resources by instantiating resource placeholders on diverse
-high-performance machines and then using a dedicated scheduler to schedule tasks
-across all the placeholders.
+% by enabling direct scheduling of application tasks to that agent. The \MW
+% pattern is often an effective choice to manage the coordination of tasks
+% execution on the available agent(s).
 
 It should be noted that resource placeholders also mitigate the side-effects
 introduced by a multi-tenant scheduling of resource placeholders. A placeholder
@@ -622,33 +621,33 @@ This limitation was overcame by integrating a resource placeholder mechanism
 within the HTCondor system. HT\-Con\-dor-G/Gli\-de\-In~\cite{frey2002condorG}
 allowed users to add grid resources to resource pools. In this way, users could
 uniformly execute jobs on heterogeneous resource pools. Thanks to its use of
-resource placeholders, GlideIn was one of the systems pioneering the
+resource placeholders, Glidein was one of the systems pioneering the
 implementation of the \pilot abstraction, enabling some \pilot capabilities also
 for third parties systems like Bosco~\cite{weitzel2012campus}.
 
 % \jhanote{Also there is a bit of care needed: we're implying glide-in is a
 % resource placeholder -- which is part of a pilot, and not necessarily a full
 % pilot.} \mtnote{We do not use \pilotjob system so I do not think we are
-% implying that glideIn is a `full pilot' (even if I am not so sure what exactly
+% implying that Glidein is a `full pilot' (even if I am not so sure what exactly
 % a full pilot is). I slightly edited the sentence, any better?}
 
 % \jhanote{as this is historical evolution, some parts need to be in the past
 % tense. Care will be needed to get the tense right.} \mtnote{Better?}
 
-The success of HTCondor-G/GlideIn shows the relevance of the pilot abstraction
+The success of HTCondor-G/Glidein shows the relevance of the pilot abstraction
 to enable scientific computation at scale and on heterogeneous resources. The
-implementation of GlideIn also highlighted at least two limitations: user/system
-layer isolation, and application development model. While GlideIn allows for the
+implementation of Glidein also highlighted at least two limitations: user/system
+layer isolation, and application development model. While Glidein allows for the
 user to manage resource placeholders directly, daemons must still be running on
-the remote machines. This means that GlideIn cannot be deployed without
+the remote machines. This means that Glidein cannot be deployed without
 involving the machine owners and system administrators. Implemented as a
-service, GlideIn supports integration with distributed application frameworks
+service, Glidein supports integration with distributed application frameworks
 but does not programmatically support the development of distributed
 applications by means of dedicated APIs and libraries.
 
 Concomitant and correlated with developments at LHC there was a ``Cambrian
 Explosion'' of \pilotjobs in first decade of the millennium, e.\,g.\
-DIANE~\cite{moscicki2003diane}, GlideInWMS, DIRAC~\cite{casajus2010dirac},
+DIANE~\cite{moscicki2003diane}, GlideinWMS, DIRAC~\cite{casajus2010dirac},
 \panda~\cite{zhao2011panda}, AliEn~\cite{saiz2003alien}, and
 Co-Pilot~\cite{buncicco2011co}.  Each of these \pilotjob systems serves a
 particular user community and experiment at the LHC:
@@ -719,7 +718,7 @@ applications and thus provides both features.
 % Several \pilotjob systems have been developed in the context of the LHC
 % experiment at CERN, which is associated with a major increase in the uptake
 % and availability of pilots, e.\,g.\ DIANE~\cite{moscicki2003diane},
-% GlideInWMS, DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
+% GlideinWMS, DIRAC~\cite{casajus2010dirac}, \panda~\cite{zhao2011panda},
 % AliEn~\cite{saiz2003alien}, and Co-Pilot~\cite{buncicco2011co}. Each of these
 % \pilotjob systems serves a particular user community and experiment.
 % Interestingly, these systems are functionally very similar, work on almost the
@@ -737,7 +736,7 @@ applications and thus provides both features.
 \pilotjob systems have also proven an effective tool for managing the workloads
 executed in the various stages of a scientific workflow. For example, the Corral
 system~\cite{rynge2011experiences} has been developed to serve as a frontend to
-HTCondor GlideIn and to optimize glides (i.e., pilots) placement for the Pegasus
+HTCondor Glidein and to optimize glides (i.e., pilots) placement for the Pegasus
 workflow system~\cite{deelman2015}. In contrast to GlideinWMS, Corral provides
 more explicit control over the placement and start of pilots to the end-user.
 Corral was later extended to also serve as a possible front end to GlideinWMS.
@@ -1651,7 +1650,7 @@ deployed on DCRs.
 \label{sec:coreprops}
 
 The core properties of every \pilot system are derived by analyzing the features
-each component described in~\S\ref{sec:compsandfuncs} has to have in order to
+each component described in~\S\ref{sec:compsandfuncs} must have in order to
 implement its defining functionality.
 
 The design of a Pilot Manager requires at least the following in order to
@@ -2098,8 +2097,8 @@ Modalities and protocols for pilot system/DCR interaction coordination \\
 \item \textbf{Interoperability}. Interoperability is defined as the capability
   to deploy pilots on DCRs characterized by heterogeneous middleware. It allows
   for a \pilot system to provision pilots and execute workloads on different
-  types of DCR middleware (e.g., HTC, HPC, cloud but also HTCondor, LSF, Slurm, or
-  Torque).
+  types of DCR middleware (e.g., HTC, HPC, cloud but also HTCondor, LSF, Slurm,
+  or Torque).
 
 % aux because: its not directly coupled to one of the components/functions
 \item \textbf{Multitenancy}. \pilot systems may offer multitenancy at both
@@ -2186,9 +2185,9 @@ every \pilot system offers the opportunity to schedule the tasks of a workload
 on a pilot, the degree of support for specific workloads varies across
 implementations. Some \pilot systems support Virtual Organizations
 (VO)~\cite{foster2001} and running tasks from multiple users on a single pilot
-while others support jobs using the Message Passing Interface
-(MPI). Furthermore, all \pilot systems support the execution of one or more type
-of workloads, but they differ when considering execution modalities that maximize
+while others support jobs using the Message Passing Interface (MPI).
+Furthermore, all \pilot systems support the execution of one or more type of
+workloads, but they differ when considering execution modalities that maximize
 application throughput (HTC), task computing performance (HPC), or
 container-based high scalability (cloud).
 
@@ -2289,7 +2288,7 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
     % Custom (SGE / PBS / HTCondor) &
     Implicit &
     job descriptions &
-    Agnostic &
+    Late &
     All \\
 
     \panda &
@@ -2344,12 +2343,12 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 \subsubsection{Coaster System}\label{sec:coaster}
 
 % Who did it and for what scientific domains.
-The Coaster Service is developed and maintained by the Distributed Systems
-Laboratory at University of Chicago. The primary goal of the Coaster System is
-to provide \pilot abstraction functionalities to Swift
-system~\cite{wilde2011swift,zhao2007swift}. The Coaster System can be used
-stand-alone but, in practice, it should be regarded as a system specifically
-tailored for the Swift System requirements and design.
+The Coaster System (also referred to in literature simply as Coasters) is
+developed and maintained by the Distributed Systems Laboratory at University of
+Chicago. The primary goal of the Coaster System is to provide \pilot abstraction
+functionalities to Swift system~\cite{wilde2011swift,zhao2007swift}. The Coaster
+System can be used stand-alone but, in practice, it should be regarded as a
+system specifically tailored for the Swift System requirements and design.
 
 % Architecture.
 The Coaster System is composed of three main
@@ -2702,25 +2701,25 @@ pools~\cite{glidein_manual_url}.
 %   grid middleware. Any specific reason because using `grid middleware' is
 %   problematic?}\jhanote{the objective remains to aggregate DCRs. grid
 %   middleware is a layer/mechanism.} \mtnote{I agree but DCRs are already
-%   aggregated into condor pools. The problem is that without glideins they are
+%   aggregated into condor pools. The problem is that without Glideins they are
 %   not able to aggregate DCRs with grid middleware. As such, the issue is about
 %   the layer mechanism, not about DCRs in general. Let me share some of the
 %   references I used to make up the opinion above:
-%   \url{http://www.slideserve.com/hastin/the-glidein-service}, slide 2, ``A
+%   \url{http://www.slideserve.com/hastin/the-Glidein-service}, slide 2, ``A
 %   technique for creating temporary, user controlled Condor pools using
 %   resources from remote Grid sites'', slide 9, ``Running short jobs on the
 %   Grid: Condor can dispatch jobs faster than Globus'';
 %   \url{http://research.cs.wisc.edu/htcondor/manual/v7.6/5_4Glidein.html},
 %   ``Glidein is a mechanism by which one or more grid resources (remote
-%   machines) temporarily join a local Condor pool'' , ``condor\_glidein
+%   machines) temporarily join a local Condor pool'' , ``condor\_Glidein
 %   accomplishes two separate tasks towards having a remote grid resource join
 %   the local Condor pool. They are the set up task and the execution task''; In
 %   `Condor-G: A Computation Management Agent for Multi-Institutional Grids',
-%   ``In effect, the Condor-G GlideIn mechanism uses Grid protocols to
+%   ``In effect, the Condor-G Glidein mechanism uses Grid protocols to
 %   dynamically create a personal Condor pool out of Grid resources by
 %   “gliding-in” Condor daemons to the remote resource. ''; In `Making Science
 %   in the Grid World: Using Glideins to Maximize Scientific Output', ``In this
-%   paper we present the glidein approach that aims to make the Grid computing
+%   paper we present the Glidein approach that aims to make the Grid computing
 %   as easy as working in a local batch environment.''}\jhanote{I refer us to
 %   the working definition of DCR, which is already comprised of a defined
 %   middleware}.
@@ -2737,7 +2736,7 @@ tasks queued in a Schedd to resources handled by a Startd.
 
 HTCondor Glidein has been complemented by
 GlideinWMS~\cite{sfiligoi2008glideinwms}, a Glidein-based workload management
-system that automates deployment and management of glideins on multiple types of
+system that automates deployment and management of Glideins on multiple types of
 DCR middleware. GlideinWMS builds upon the HTCondor Glidein system by adding the
 following logical components: a set of Glidein Factory daemons, a set of VO
 Frontend daemons, and a Collector dedicated to the
@@ -2750,7 +2749,7 @@ daemons.
 % \jhanote{I have the original text commented below. I reorganized a bit so as
 %   to help the flow better. Also, we were introducing too many concepts in the
 %   first couple of paragraphs which was getting difficult to parse. HTCondor,
-%   glidein, glideninWMS, etc. This is a bit more gradual in terms of the rate
+%   Glidein, glideninWMS, etc. This is a bit more gradual in terms of the rate
 %   at which concepts are introduced}
 
 % Why it is a pilot system.
@@ -2761,8 +2760,8 @@ Glidein Factories alongside the WMS collector implement a Pilot Manager and its
 pilot provisioning functionality. The set of Schedds, the Collector, and the
 Negotiator implement a Workload Manager and its task dispatching functionality.
 The Startd daemon implements a Task Manager alongside its task execution
-functionality. A glidein is a job submitted to a DCR middleware that, once
-instantiated, configures and executes a Startd daemon. As such, a glidein is a
+functionality. A Glidein is a job submitted to a DCR middleware that, once
+instantiated, configures and executes a Startd daemon. As such, a Glidein is a
 pilot.
 
 \begin{figure}[t]
@@ -2776,35 +2775,35 @@ pilot.
 
 % Execution model.
 The execution model of the HTCondor Glidein system can be summarized in eight
-steps: 1. the user submits a glidein (i.e., a job) to a DCR batch scheduler; 2.
-once executed, this glidein bootstraps a Startd daemon; 3. the Startd daemon
+steps: 1. the user submits a Glidein (i.e., a job) to a DCR batch scheduler; 2.
+once executed, this Glidein bootstraps a Startd daemon; 3. the Startd daemon
 advertises itself with the Collector; 4. the user submits the tasks of the
 workload to the Schedd daemon; 5. the Schedd advertises these tasks to the
 Collector; 6. the Negotiator matches the requirements of the tasks to the
-properties of one of the available Startd daemon (i.e., a glidein); 7. the
+properties of one of the available Startd daemon (i.e., a Glidein); 7. the
 Negotiator communicates the match to the Schedd; 8. the schedd submits the tasks
 to the Startd daemon indicated by the Negotiator.
 
 GlideinWMS extends the execution model of the HTCondor Glidein system by
-automating the glideins provision. The user does not have to submit glidein
+automating the Glideins provision. The user does not have to submit Glidein
 directly but only tasks to Schedd. From there: 1. every Schedd advertises its
 tasks with the VO Frontend; 2. the VO Frontend matches the tasks' requirements
 to the resource properties advertised by the WMS Connector; 3. the VO Frontend
-places requests for glideins instantiation to the WMS Collector; 4. the WMS
+places requests for Glideins instantiation to the WMS Collector; 4. the WMS
 Collector contacts the appropriate Glidein Factory to execute the requested
-glideins; 5. the requested glideins become active on the DCRs; and 6. the
-glideins advertise their availability to the (HTCondor) Collector. From there on
+Glideins; 5. the requested Glideins become active on the DCRs; and 6. the
+Glideins advertise their availability to the (HTCondor) Collector. From there on
 the execution model is the same as described for the HTCondor Glidein Service.
 
 %% 5 core properties.
 
 % Pilot Resources.
-The resources managed by a single glidein (i.e., pilot) are limited to compute
+The resources managed by a single Glidein (i.e., pilot) are limited to compute
 resources. Glideins may bind one or more cores, depending on the target DCRs.
 For example, heterogeneous HTCondor pools with resources for desktops,
 workstations, small campus clusters, and some larger clusters will run mostly
-single core glideins. More specialized pools that hold, for example, only DCRs
-with HTC/grid/cloud middleware may instantiate glideins with a larger number of
+single core Glideins. More specialized pools that hold, for example, only DCRs
+with HTC/grid/cloud middleware may instantiate Glideins with a larger number of
 cores. Both HTCondor Glidein and GlideinWMS provide abstractions for file
 staging but no pilot abstraction is offered for data or network resources.
 
@@ -2813,8 +2812,8 @@ The process of pilot deployment is the main difference between HTCondor Glidein
 and GlideinWMS. While the HTCondor Glidein system requires users to submit the
 pilots to the DCRs, GlideinWMS automates and optimizes pilot provisioning.
 GlideinWMS attempts to maximize the throughput of task execution by continuously
-instantiating glideins until the queue of the available Schedds are emptied.
-Once all the tasks have been executed, the remaining glideins are terminated.
+instantiating Glideins until the queue of the available Schedds are emptied.
+Once all the tasks have been executed, the remaining Glideins are terminated.
 
 % \jhanote{not sure what ``minimizes the amount of resource utilization''
 %   means?}
@@ -2857,7 +2856,7 @@ applications.
 %   (and possibly add a bunch of separate machines/VMs); install all the
 %   HTCondor stack + the GlideinWMS and the headnode (and possibly on the
 %   separate machines); now you can run your distribute, parallel, MPI
-%   applications on that cluster via glideins. As far as I understand, there is
+%   applications on that cluster via Glideins. As far as I understand, there is
 %   no intrinsic limitation built within HTCondor or GlideinWMS to the execution
 %   of distributed, parallel, and MPI applications. Executing only distributed
 %   applications, mostly with single-core tasks is a consequence of the type of
@@ -2870,7 +2869,7 @@ execution of the task. As such, both pilot systems allow for late binding. Early
 binding is not available.
 
 % \jhanote{is this match-maker the ClassAds, or is there another level of
-%   match-makeing for the glideins?} \mtnote{ There is lack of documentation but
+%   match-makeing for the Glideins?} \mtnote{ There is lack of documentation but
 %   I assume the Collector is the component where the matchmaking function is
 %   implemented. ClassAds should be the name given to the entries published by
 %   the Glidein Factories within the WMS collector (in the case of GlideinWMS
@@ -3233,11 +3232,11 @@ the scope of the analysis to other relevant auxiliary properties.
 
 % Interoperability
 The \pilot systems described in the previous subsection offer a varying degree
-of interoperability across diverse DCRs.  For example, GlideIn was designed to
+of interoperability across diverse DCRs.  For example, Glidein was designed to
 execute tasks on the HTCondor based DCRs; DIANE and PANDA were initially
 designed to support DCRs used by the LHC experiments but not bound to HTCondor.
 With the progressive development of \pilot systems and DCR middleware, many
-types of DCR are now supported: GlideIn, PANDA, and RADICAL-Pilot support
+types of DCR are now supported: Glidein, PANDA, and RADICAL-Pilot support
 diverse DCR middleware including typical HPC, grid, and cloud batch systems.
 
 % For example, DIANE and PANDA were
