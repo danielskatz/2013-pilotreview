@@ -745,6 +745,15 @@ applications and thus provides both features.
 % The \pilot abstraction has also been integrated into scientific workflow
 % systems.
 
+GWPilot pushes instead the boundaries of implementation
+efficiency~\cite{rubio2015gwpilot}. Aimed specifically to DCR exposing diverse
+Grid middleware, GWPilot builds upon the GridWay
+meta-scheduler~\cite{huedo2007modular} to allow the implementation of efficient
+and reliable scheduling algorithms based on DCR characterization. Scheduling can
+be customized at user level and the application level is well isolated from the
+\pilot system level. This is an important feature because it reduced the
+overhead of executing legacy code via GWPilot.
+
 \pilotjob systems have also proven an effective tool for managing the workloads
 executed in the various stages of a scientific workflow. For example, the Corral
 system~\cite{rynge2011experiences} has been developed to serve as a frontend to
@@ -867,9 +876,9 @@ placeholders.
 The implementation details of these three logical components vary significantly
 across \pilotjob systems (see~\S\ref{sec:analysis}). For example, two or more
 logical components may be implemented by a single software module or additional
-functionalities may be integrated into the three managers. Nevertheless, the
-\pilot, Workload, and Task Managers can always be distinguished across different
-\pilotjob systems.
+functionalities may be integrated into the three management components.
+Nevertheless, the \pilot, Workload, and Task Managers can always be
+distinguished across different \pilotjob systems.
 
 % One or more logical components may be responsible for specific
 % functionalities, both on application as well as machine level;
@@ -981,13 +990,12 @@ components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
 communicate in order to coordinate the execution of the given workload on the
 instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
 defined by any specific communication and coordination pattern. The logical
-components of a \pilotjob system may communicate using any suitable pattern
-(e.g., one-to-one, many-to-one, one-to-many~\ref{comm_patterns}, with a push or
-pull model), or coordinate adopting any suitable mechanism (e.g., time
-synchronization, static or dynamic coordinator election, local or global
-information sharing, or \MW). The same applies to network architectures and
-protocols: different network architectures and protocols may be used to achieve
-effective communication and coordination.
+components of a \pilotjob system may communicate or coordinate using any
+suitable pattern, e.g., one-to-one, many-to-one, or
+one-to-many~\ref{comm_patterns} patterns with a push or pull model, or
+blackboard, meeting, or \MW patterns~\ref{omicini2013coordination,}. The same
+applies to network architectures and protocols: different network architectures
+and protocols may be used to achieve effective communication and coordination.
 
 % \jhanote{is this a reference to coordination or communication? unclear}
 % \mtnote{`communication and coordination' so I would say to both.}
@@ -997,13 +1005,13 @@ As seen in~\S\ref{sec:history}, \MW is a very common coordination pattern among
 the worker with the Task Manager, the functionalities related to task
 description, scheduling, and monitoring will generally be implemented within the
 Workload Manager, while the functionalities needed to execute each task will be
-implemented within the Task Manager. Alternative coordination strategies, for
+implemented within the Task Manager. Alternative coordination patterns, for
 example, where a Task Manager directly coordinates the task scheduling, might
 require a functionally simpler Workload Manager but a comparatively more
 feature-rich Task Manager. The former would require capabilities for submitting
 tasks, while the latter capabilities to coordinate with its neighbor executors
 leveraging, for example, a dedicated overlay network. While these systems would
-adopt different coordination strategies, they could both be considered \pilotjob
+adopt different coordination patterns, they could both be considered \pilotjob
 systems.
 
 \mtnote{Across the paper, \MW is called pattern, mechanism, and strategy. We
@@ -1460,18 +1468,26 @@ resources, and scheduling tasks onto (active or inactive) pilots.
 
 Figure~\ref{fig:core_vocabulary} offers a diagrammatic overview of the logical
 components of \pilot systems (green) alongside their functionalities (blue) and
-the defined vocabulary (red). An application submits a workload composed of
-tasks to the \pilot system via an interface (\ref{fig:core_vocabulary}, tag~a).
-The Pilot Manager is responsible for pilot provisioning
-(\ref{fig:core_vocabulary}, tag~b), the Workload Manager to dispatch tasks to
-the Task Manager (\ref{fig:core_vocabulary}, tag~c), the Task Manager to
-executes those tasks once the pilot has become available
+the defined vocabulary (red). The figure is composed by three main blocks: the
+one on the top-left corner represents the workload originator. The one starting
+at the top-right and shaded in gray represents the \pilot system, while the four
+boxes one inside the other on the middle-left represent a DCR. Of the four
+boxes, the outmost denotes the DCR boundaries, e.g., a cluster. The second box
+the container used to schedule a pilot on the DCR, e.g., a job or a virtual
+machine. The third box represents the pilot once that it has been instantiated
+on the DCR, and the fourth box represent the resources held by the pilot.
+
+Together, Figure~\ref{fig:core_vocabulary} can be interpreted as follow: an
+application submits a workload composed of tasks to the \pilot system via an
+interface (\ref{fig:core_vocabulary}, tag~a). The Pilot Manager is responsible
+for pilot provisioning (\ref{fig:core_vocabulary}, tag~b), the Workload Manager
+to dispatch tasks to the Task Manager (\ref{fig:core_vocabulary}, tag~c), the
+Task Manager to executes those tasks once the pilot has become available
 (\ref{fig:core_vocabulary}, tag~d). Figure~\ref{fig:core_vocabulary} shows not
 only the separation between the DCR and the \pilot system but also how the
 resources on which tasks are executed, are contained within different logical
 and physical components. Appreciating the characteristics and functionalities of
-a
-\pilot system depends upon understanding the levels at which each of its
+a \pilot system depends upon understanding the levels at which each of its
 component exposes capabilities.
 
 % \jhanote{adequate paragraph. please don't say Figure 4(a) or Figure 4(b) as
@@ -2209,8 +2225,6 @@ container-based high scalability (cloud).
 %   auxiliary properties have a direct impact on the use cases for which \pilot
 %   systems are engineered and deployed''. Better?}
 
-\mtnote{Add something to connect to 4.2. Something that indicates why we move
-now to the analysis of specific implementations.}
 
 % -----------------------------------------------------------------------------
 % 4.2
@@ -2220,15 +2234,22 @@ now to the analysis of specific implementations.}
 
 A set of \pilot systems has been chosen for further analysis to show how the
 core properties just described are implemented under different requirements both
-in terms of target DCRs and application workloads. Examining these \pilot
-systems using the common vocabulary defined in~\S\ref{sec:termsdefs} exposes
-similarities and differences allowing a detailed analysis. Critically assessing
-these differences will bring to the fore the generality of the pilot
-abstraction, its independence from specific software systems and deployment
-environments, and the more relevant challenges of \pilot systems implementation.
-Table~\ref{table:implementations-properties} offers a summary of the core
-properties for each analyzed \pilot system\protect\footnote{Pilot systems are
-  ordered alphabetically in the table \& text.}.
+in terms of target DCRs and application workloads. The choice is based on
+availability, design, intended use, and uptake of each \pilot system. The goal
+is to describe systems that: (i) are currently available and actively
+maintained; (ii) implement diverse design; (iii) target specific or
+general-purpose use cases and DCR; (iv) are actively used by scientific
+communities.
+
+Examining these \pilot systems using the model and common vocabulary defined
+in~\S\ref{sec:understanding} exposes similarities and differences allowing a
+detailed comparison. Critically assessing these differences will bring to the
+fore the generality of the pilot abstraction, its independence from specific
+software systems and deployment environments, and the more relevant challenges
+of \pilot systems implementation. Table~\ref{table:implementations-properties}
+offers a summary of the core properties for each analyzed \pilot
+system\protect\footnote{Pilot systems are ordered alphabetically in the table \&
+text.}.
 
 \begin{table*}
  \centering
@@ -2323,8 +2344,9 @@ properties for each analyzed \pilot system\protect\footnote{Pilot systems are
 
  \end{tabular}
  \caption{\textbf{Overview of \pilot systems and a summary of the values of
- their core properties. Based on the tooling currently available for each \pilot system, the types of workload supported as defined in~\S\ref{sec:termsdefs} are: BoT~$=$~Bag of Tasks; ENS~$=$~Ensembles; WF~$=$~workflows.} \mtnote{This table needs to be consistent with the
- tables of the core an auxiliary properties.}}
+ their core properties. Based on the tooling currently available for each \pilot
+ system, the types of workload supported as defined in~\S\ref{sec:termsdefs}
+ are: BoT~$=$~Bag of Tasks; ENS~$=$~Ensembles; WF~$=$~workflows.}}
  \label{table:implementations-properties}
 \end{table*}
 
@@ -2839,8 +2861,8 @@ HTCondor Glidein and GlideWMS expose the interfaces of HTCondor to the
 application layer and no theoretical limitations are posed on the type and
 complexity of the workloads that can be executed~\cite{couvares2007workflow}.
 For example, DAGman (Directed Acyclic Graph Manager)~\cite{frey2002condor} has
-been designed to execute workflows by submitting tasks to Schedds, and a \MW
-tool is available to design applications with a \MW execution pattern.
+been designed to execute workflows by submitting tasks to Schedds, and a tool is
+available to design applications based on the \MW coordination pattern.
 
 % \jhanote{the second ``d'' in schedd is the daemon..} \mtnote{The word is
 % capitalized so the `d' is part of the name of the component, not an
@@ -3201,14 +3223,13 @@ them is needed.}
 
 The descriptions offered in the previous subsection show how diverse \pilot
 system implementations conform to the set of components and functionalities
-defined in~\S\ref{sec:understanding}.  The description of DIANE, HTCondor
-Glidein (and GlideinWMS), PANDA, and RADICAL-Pilot also highlighted
-implementation differences, especially concerning the auxiliary properties of
-these \pilot systems. For example, based on the description of the auxiliary
-properties offered in~\S\ref{sec:auxprops}, the described \pilot systems showed
-not only evident variations in their architectures and data management
-capabilities, but also in their DCR interaction model, their interfaces, and
-interoperability.
+defined in~\S\ref{sec:understanding}.  The descriptions of the seven \pilot jobs
+also highlighted implementation differences, especially concerning the auxiliary
+properties of these \pilot systems. For example, based on the description of the
+auxiliary properties offered in~\S\ref{sec:auxprops}, the described \pilot
+systems showed not only evident variations in their architectures and data
+management capabilities, but also in their DCR interaction model, their
+interfaces, and interoperability.
 
 % The goal is not only to highlight the differences among Pilot systems but also
 % to show their implementation chal- lenges. In this way, the following analysis
@@ -3239,38 +3260,75 @@ the scope of the analysis to other relevant auxiliary properties.
 
 % Architecture (DONE in previous subsection)
 
-% Coordination and communication
+Architecturally, the seven \pilot systems implement different types of design.
+DIANE, DIRAC, and, to some extent, both PANDA and the Coaster System show a
+monolithic design (Figures~\ref{fig:diane_comparison},
+\ref{fig:dirac_comparison}, \ref{fig:panda_comparison}, and
+\ref{fig:coaster_comparison}). Most of their functionalities are aggregated into
+a single middleware component, designed as a service, with a more or less
+modular implementation. For DIRAC and PANDA a dedicated hardware infrastructure
+is assumed for a production-grade environment. Consistently with a
+Globus-oriented design, the Coaster Service is assumed to be running on the DCR
+resources and act as a proxy for both the pilot and workload-related
+functionalities.
 
+RADICAL-Pilot also adopts a monolithic architecture
+(Figure~\ref{fig:rp_comparison}) but one implemented in user space and with a
+library-oriented design. Both the pilot and workload functionalities are
+implemented into a single python module that users load within their
+applications. Users are free to decide where to deploy these applications,
+either locally on their workstations or on dedicated hardware.
+
+GlideinWMS requires full integration within the HTCondor ecosystem and therefore
+also a service-based architecture but it departs from a monolithic design.
+GlideinWMS implements a set of separate services
+(Figure~\ref{fig:glidein_comparison}) that can be deployed with different
+scenarios, depending on the amount of dedicated hardware available and on the
+motivating use case.
+
+% Coordination and communication
+The seven \pilot systems described in the previous subsection display
+differences also in their communication and coordination models. While all the
+\pilot systems assume preexisting networking functionalities, the Coaster System
+implements a dedicated communication protocols used both for coordination and
+data staging. The Coaster System and RADICAL-Pilot both can work as
+communication proxies among the \pilot system's components when connectivity is
+not available on the DCR compute nodes. DIRAC, PANDA, MyCluster and, to some
+extent, the Coaster System implement a coordination model between the Task and
+the Workload Managers that allow for recovering task execution failures and
+isolate under-performing or failing DCR compute nodes.
 
 % Interoperability
 The \pilot systems described in the previous subsection offer a varying degree
-of interoperability across diverse DCRs.  For example, Glidein was designed to
-execute tasks on the HTCondor based DCRs; DIANE and PANDA were initially
-designed to support DCRs used by the LHC experiments but not bound to HTCondor.
-With the progressive development of \pilot systems and DCR middleware, many
-types of DCR are now supported: Glidein, PANDA, and RADICAL-Pilot support
-diverse DCR middleware including typical HPC, grid, and cloud batch systems.
+of interoperability across diverse DCRs.  For example, GlideinWMS was designed
+to execute tasks on the HTCondor based DCRs; DIANE, DIRAC, and PANDA were
+initially designed to support DCRs used by the LHC experiments but not bound to
+HTCondor; and MyCluster was designed specifically for TeraGrid resources. With
+the progressive development of \pilot systems and DCR middleware, many types of
+DCR are now supported: the Coaster System, Glidein, PANDA, DIRAC and
+RADICAL-Pilot support diverse DCR middleware including typical HPC, grid, and
+cloud batch systems.
 
-% For example, DIANE and PANDA were
-% initially designed to support mostly grid-based DCRs used by the LHC
-% experiments, while Glidein to execute tasks on the HTCondor-based DCRs.
+% For example, DIANE and PANDA were initially designed to support mostly
+% grid-based DCRs used by the LHC experiments, while Glidein to execute tasks on
+% the HTCondor-based DCRs.
 
 The need for interoperability reinforces the importance of well-defined
-separation between the \pilot system and heterogeneous DCRs,
-%As seen in~\S\ref{fig:core_vocabulary}, this flexibility
-which in turn supports the generality of the notion of resource placeholder and
-its independence from the specificities of the target infrastructures and their
+separation between the \pilot system and heterogeneous DCRs, which in turn
+supports the generality of the notion of resource placeholder and its
+independence from the specificities of the target infrastructures and their
 middleware. Placeholders abstract the notions of resources, scheduling, and task
 execution, creating a well-defined and isolated logical space for the management
-of task execution.  It remains to be understood under what conditions and for
-what type of application each implementation of a placeholder is more
-appropriate.
+of task execution. This isolated space is well represented in
+Figures~\ref{fig:diane_comparison} to~\ref{fig:rp_comparison} by the positioning
+of each Task Manager implementation within the DCRs' compute nodes. It remains
+to be understood under what conditions and for what type of application each
+implementation of a placeholder is more appropriate.
 
-
+%As seen in~\S\ref{fig:core_vocabulary}, this flexibility
 
 % This also imposes decision capabilities on the task scheduler and the
 % development of a
-
 
 % Robustness
 % Performance and Scalability
@@ -3278,11 +3336,10 @@ appropriate.
 
 % DCR Interaction
 
-% The \pilot systems described in the previous subsection present differences also
-% in the two auxiliary properties: DCR Interaction and Interface.
+% The \pilot systems described in the previous subsection present differences
+% also in the two auxiliary properties: DCR Interaction and Interface.
 % \jhanote{can we remove the previous sentence. And just have the following
 %   sentences following on from the previous sentence?}
-
 
 % Interfaces
 
@@ -3291,50 +3348,56 @@ appropriate.
   somewhere, and then keep it simple and readable by using only Glidein}
 
 Each \pilot system described in the previous subsection exposes a different
-interface. \jhanote{to what? for what?} DIANE, Glidein, and PANDA offer command
-line tools tailored
-%DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer command line tools tailored
-to specific use cases, applications, and DCRs. RADICAL-Pilot exposes an API;
-DIANE and PANDA command line tools are built on API that users may directly
-access and use to develop distributed applications. This degree of heterogeneity
-can be justified with special-purpose \pilot systems but it may lead to
-fragmentation and duplication of effort with general-purpose
-systems. \jhanote{I'm not sure I see the point of the last sentence}
+interface to the user. \jhanote{to what? for what?}\mtnote{Better?} DIANE,
+DIRAC, GlideinWMS, MyCluster, and PANDA offer command line tools tailored to
+specific use cases, applications, and DCRs. The Coaster System and RADICAL-Pilot
+exposes an API; DIANE, DIRAC, and PANDA command line tools are built on API that
+users may directly access and use to develop distributed applications. Specific
+types of user interfaces may be better suited for some projects with distinctive
+requirements but for general-purpose \pilot systems they may lead to
+fragmentation and duplication of effort. Open APIs specifically designed for
+general-purpose \pilot systems may be used to avoid these shortcomings.
+
+\jhanote{I'm not sure I see the point of the last sentence} \mtnote{Better?}
+
+% DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer command line tools
+% tailored
 
 Open APIs like the one specified in~\cite{luckow2012towards} and implemented by
-RADICAL-Pilot offer the missing layer on which workflow and, more generally,
-distributed applications could be built upon. %As with the resource layer,
-\pilot systems offer a well-defined and isolated layer between
-applications and resources. This fosters extensibility, interoperability, and
-modularity by separating the application description and logic from the
+RADICAL-Pilot offer also the missing layer on which distributed applications
+could be built upon. \pilot systems can offer a well-defined and isolated layer
+between applications and resources. This can foster extensibility,
+interoperability, and modularity by separating the application logic from the
 management of its execution, and from the provisioning and aggregation of
-resources. In turn, this avoids the need to develop special-purpose, vertical,
-and end-to-end applications, the main source of duplication and fragmentation in
-the current distributed application and tooling landscape. \jhanote{The issue
-  covered in this paragraph is (a) more than just an issue of API but one of the
-  power of well defined model/understanding of pilots, (b) a punch of our paper
-  and I would definitely put this into section 5}
+resources. In turn, this can help to avoid the need to develop special-purpose,
+vertical, and end-to-end applications, the main source of duplication and
+fragmentation in the current distributed application and tooling landscape.
 
+It should be noted that leveraging this opportunity would also have direct
+implications on the type of architectures best suited to general-purpose \pilot
+systems. \pilot systems with a monolithic design could hinder the separation of
+concerns among application logic, workload execution, and resource provisioning.
+These three functional domains should be not only exposed via open APIs but also
+kept separated at architectural level. In this way components developed within
+diverse projects and domains could share functional domains and interoperate
+therefore minimizing duplication and fragmentation.
 
+\jhanote{The issue covered in this paragraph is (a) more than just an issue of
+API but one of the power of well defined model/understanding of pilots, (b) a
+punch of our paper and I would definitely put this into section 5} \mtnote{I
+would be happy to start here and then bring the big picture back in 5 too. Would
+that work for you? Is the current version any better now?}
 
 % Security and multitenancy
-
-%Finally, DIANE, HTCondor Glidein, GlideinWMS, PANDA, and RADICAL-Pilot
-%implement
-Finally, DIANE, Glidein, PANDA, and RADICAL-Pilot implement
-different types of authentication, authorization, and accounting processes
-(AAA). Nonetheless, the AAA requirements specific to \pilot system
-implementations can be limited to: (i) the single or multitenancy of the
-instantiated pilots; and (ii) the credentials used to submit pilots to the DCRs.
-
-The AAA required by the user to access her own pilots varies depending on the
-pilot's tenancy. With single tenancy, the pilot can be accessed only by the user
-that submitted it. As such, AAA can be based on inherited privileges. With
+Finally, the seven \pilot systems described in the previous subsection implement
+different types of authentication, authorization, and accounting (AAA).  The AAA
+required by the user to access their own pilots varies depending on the pilot's
+tenancy. With single tenancy, the pilot can be accessed only by the user that
+submitted it. As such, AAA can be based on inherited privileges. With
 multitenancy, the \pilot system has to evaluate whether a user requesting access
-to a pilot is part of the group of allowed users. Among the described \pilot
-systems, HTCondor Glidein and GlideinWMS are the only two implementing pilot
-multitenancy and using advanced abstractions like VOs and federated certificate
-authorities~\cite{horwitz2002}.
+to a pilot is part of the group of allowed users. This requires advanced
+abstractions like those of VO and federated certificate
+authority~\cite{horwitz2002} used by GlideinWMS and the Coaster Systems.
 
 The credential used for pilot deployment depends on the target DCR. The AAA
 requirements of DCRs are a diverse and often inconsistent array of mechanisms
@@ -3345,7 +3408,7 @@ implementation within \pilot systems are minimal.
 
 \jhanote{In general, we are missing an opportunity to use the figures/diagram in
   section 4 as an aid/tool to help (i) reinforce main points (ii) reiterate any
-  differences between the different systems.}
+  differences between the different systems.} \mtnote{Better?}
 
 
 % ------------------------------------------------------------------------------
@@ -3594,7 +3657,7 @@ description and logic from the management of its execution, and from the
 provisioning and aggregation of resources. In turn, this avoids the need to
 develop special-purpose, vertical, and end-to-end applications, which have been
 the main sources of duplication and fragmentation in the current distributed
-application and tooling landscape~\cite{dpa_surveypaper,dpagrid2009}.  
+application and tooling landscape~\cite{dpa_surveypaper,dpagrid2009}.
 
 % \jhanote{this is a repeat (that I placed/introduced) from 4.3, so if we keep
 % this here we must fix in 4.3..}
