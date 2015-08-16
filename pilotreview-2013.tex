@@ -164,19 +164,19 @@
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
 abstractions at the development, deployment, and execution
-level~\cite{dpa_surveypaper,dpagrid2009}.  As suggested by the proliferation of
-\pilotjob systems used in production cyberinfrastructure, the \pilotjob
-abstraction is arguably one of the few widely-used in distributed computing.
+level~\cite{dpa_surveypaper,dpagrid2009}.  
 
-A variety of \pilotjob systems have emerged: HTCondor-G/
+As suggested by the proliferation of \pilotjob systems used on production
+distributed computing, \pilotjobs are arguably one of the few widely-used
+abstraction.  A variety of \pilotjob systems have emerged: HTCondor-G/
 Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
 DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
 \panda~\cite{chiu2010pilot}, GWPilot~\cite{rubio2015gwpilot},
 Nimrod/G~\cite{buyya2000nimrod}, Falkon~\cite{raicu2007} and
-MyCluster~\cite{walker2006creating} to name a few. These
-systems are for the most part functionally equivalent and motivated by similar
-objectives; nonetheless, their implementations often serve specific use cases,
-target specific resources, and lack in interoperability.
+MyCluster~\cite{walker2006creating} to name a few. These systems are for the
+most part functionally equivalent and motivated by similar objectives;
+nonetheless, their implementations often serve specific use cases, target
+specific resources, and lack in interoperability.
 
 % as they support the decoupling of workload submission from resource
 % assignment. N
@@ -232,26 +232,32 @@ simplifies the placement of workloads on those resources.
 and middleware dedicated to specific scientific requirements. As a consequence,
 the development of \pilotjobs have not been grounded on a robust understanding
 of underpinning abstractions, or on a well-understood set of dedicated design
-principles. The functionalities and properties of \pilotjobs have been
-understood mostly in relation to the needs of the containing software systems or
-of the user cases justifying their development.
+principles. Furthermore, the terminology used to describe functionally
+equivalent systems is inconsistent; the proliferation and specificity are a
+manifestation of a lack of common understanding and vocabulary, as well as a
+compounding factor.  Not surprisingly, the functionalities and properties of
+\pilotjobs have been understood mostly, if not exclusively, in relation to the
+needs of the containing software systems or of the use cases justifying their
+immediate development.
 
 This approach is not problematic in itself and has led to effective
 implementations that serve many million jobs a year on diverse computing
-platforms~\cite{maeno2014evolution,katz2012}. However, the lack of an conceptual
-clarity and an explicit appreciation of the computing paradigm underlying
-\pilotjobs has undermined the development of dedicated designs and
-implementations. This limitation is illustrated not only by the duplication of
-effort, but also by an overall immaturity of the available systems in terms of
-functionalities, flexibility, portability, interoperability, and, most often,
-robustness.
+platforms~\cite{maeno2014evolution,katz2012}. However, the lack of conceptual
+clarity and an explicit enunciation of the \pilotjob computing paradigm has
+undermined the development of specific implementations as well as resulting in
+an unsustainable software ecosystem. This limitation is illustrated not only by
+the duplication of effort, but also by an overall immaturity of the available
+systems in terms of functionalities, flexibility, portability, interoperability,
+and, most often, robustness. Ultimately, these also contribute to a high-cost of
+development and low software sustainability.
 
 This survey is motivated by the fact that, in spite of the demonstrated
 potential and proliferation of \pilotjob systems, there remains significant lack
-of clarity and understanding about the \pilotjob abstraction. We believe this
-results in unfulfilled and lost potential as well as significant overhead and
-repetition of effort. Ultimately, these also contribute to a high-cost of
-development and low software sustainability.
+of clarity and understanding about the \pilotjob abstraction. As alluded to,
+this has resulted in significant overhead and repetition of effort. Looking
+forward, with the growing importance and need for scalable task-level
+parallelism, the lack of conceptual clarity might have similar and potentially
+profound consequences in high-performance computing.
 
 This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
