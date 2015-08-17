@@ -2594,12 +2594,12 @@ task once it is available and has free resources.
 
 % Who did it and for what scientific domains.
 DIRAC (Distributed Infrastructure with Remote Agent Control) is a software
-product developed by the CERN LHCb project\cite{diracgrid2004}. DIRAC implements
-a Workload Management System (WMS) to manage the processing of detector data,
-Monte Carlo simulations, and end-user analyses. DIRAC primarily serves as the
-LHCb workload management interface to the worldwide LHC Computing Grid (WLCG)
-and, as such, it can execute workloads on DCRs deploying Grid, Cloud, and HPC
-middleware.
+product developed by the CERN LHCb project\cite{tsaregorodtsev2004dirac}. DIRAC
+implements a Workload Management System (WMS) to manage the processing of
+detector data, Monte Carlo simulations, and end-user analyses. DIRAC primarily
+serves as the LHCb workload management interface to the worldwide LHC Computing
+Grid (WLCG) and, as such, it can execute workloads on DCRs deploying Grid,
+Cloud, and HPC middleware.
 
 % Architecture.
 DIRAC has four main logical components: a set of TaskQeues, a set of
@@ -2613,11 +2613,12 @@ tasks' requests from JobWrappers to suitable tasks into TaskQeues.
 
 % Why it is a pilot system.
 DIRAC was the first pilot-based WMS designed, developed, and deployed to serve
-one of the LHC main experiments~\cite{}. Figure~\ref{fig:dirac_comparison} shows
-how the DIRAC WMS implements a Workload, a Pilot, and a Task Manager as they
-have been described in~\S\ref{sec:understanding}. TaskQueues and the MatchMaker
-implement the Workload Manager and the related Task Dispatching functionality.
-Each TaskQueueDirector implements a Pilot Manager and its Pilot Provisioning
+one of the LHC main experiments~\cite{casajus2010dirac}.
+Figure~\ref{fig:dirac_comparison} shows how the DIRAC WMS implements a Workload,
+a Pilot, and a Task Manager as they have been described
+in~\S\ref{sec:understanding}. TaskQueues and the MatchMaker implement the
+Workload Manager and the related Task Dispatching functionality. Each
+TaskQueueDirector implements a Pilot Manager and its Pilot Provisioning
 functionality, while each JobWrapper implements a Task Manager and Pilot
 Execution.
 
@@ -3086,10 +3087,10 @@ such, to execute mostly single-core tasks with input and output files. Since its
 initial design, the ATLAS analysis and simulation tools have started to
 investigate multi-core task execution with AthenaMP~\cite{crooks2012multi} and
 \panda has been evolving towards a general purpose workload
-manager~\cite{maeno2014evolution}. As a consequence, \panda is starting to offer
-experimental support for multi-core pilots and tasks with or without data
-dependences. Now, \panda also supports applications from a variety of science
-domains.\cite{x,y}.
+manager~\cite{schovancova2014next,schovancova2013panda,borodin2015scaling}. As a
+consequence, \panda is starting to offer experimental support for multi-core
+pilots and tasks with or without data dependences. Now, \panda also supports
+applications from a variety of science domains.\cite{maeno2014evolution}.
 
 % workload binding.
 \panda offers late binding but not early binding capabilities. Workload jobs are
