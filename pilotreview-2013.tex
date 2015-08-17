@@ -3878,13 +3878,29 @@ and use case requirements.  Another rationale against rigid consolidation is the
 diversity in programming languages used, the different deployment models
 required, and its implications for the interaction with existing applications.
 
-For specific applications designed to run on a single type of infrastructure
-with a unique performance objective, a special purpose system might be
-warranted, but otherwise a conservative approach would be more efficient and
-effective. Arguably, it is most important to have well-defined models of \pilot
-functionality, as well as an unambiguous description of properties; collectively
-these should be reflected in external/internal interfaces that both developers
-and users can rely upon.
+
+This work suggests that there is enough commonality across \pilot
+implementations and functionality that a set of \pilot ``building blocks'' that
+help find the balance between specific and general should be possible.  Thus it
+is possible to have well-defined models of \pilot functionality, as well as an
+unambiguous description of properties; collectively these should be reflected in
+external/internal interfaces that both developers and users can rely upon; which
+would help address the aforementioned cardinality issue.  Furthermore the
+critical commonality amongst \pilot systems is arguably unique amongst other
+tools and middleware, which thus allows \pilot systems to serve as an
+interesting case-study in to the underlying reasons for the proliferation of
+functionally similar but otherwise distinct software systems.  A future analysis
+of software decisions and development trajectory of the \pilot implementations
+could also provide insight into how sustainable software ecosystems might
+evolve.
+
+%to as a potential as a
+
+%to serve as an experiment and
+% For specific applications designed to run on a single type of infrastructure
+% with a unique performance objective, a special purpose system might be
+% warranted, but otherwise a conservative approach would be more efficient and
+% effective. 
 
 \mtnote{I think this paragraph should be moved to 5.2 as it is part of an
   analysis and not of a summary of the overall contributions of the paper. This
