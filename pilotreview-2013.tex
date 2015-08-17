@@ -174,15 +174,15 @@ abstractions at the development, deployment, and execution level.
 
 As suggested by the proliferation of \pilotjob systems used on production
 distributed computing, \pilotjobs are arguably one of the few widely-used
-abstraction.  A variety of \pilotjob systems have emerged: HTCondor-G/
-Glide-in~\cite{frey2002condorG}, Swift~\cite{wilde2011swift},
-DIANE~\cite{moscicki2003diane}, DIRAC~\cite{casajus2010dirac},
-\panda~\cite{chiu2010pilot}, GWPilot~\cite{rubio2015gwpilot},
-Nimrod/G~\cite{buyya2000nimrod}, Falkon~\cite{raicu2007} and
-MyCluster~\cite{walker2006creating} to name a few. These systems are for the
-most part functionally equivalent and motivated by similar objectives;
-nonetheless, their implementations often serve specific use cases, target
-specific resources, and lack in interoperability.
+abstraction.  A variety of \pilotjob systems have emerged:
+Glidein/GlideinWMS~\cite{frey2002condorG}, the Coaster
+System~\cite{wilde2011swift}, DIANE~\cite{moscicki2003diane},
+DIRAC~\cite{casajus2010dirac}, \panda~\cite{chiu2010pilot},
+GWPilot~\cite{rubio2015gwpilot}, Nimrod/G~\cite{buyya2000nimrod},
+Falkon~\cite{raicu2007}, MyCluster~\cite{walker2006creating} to name a few.
+These systems are for the most part functionally equivalent and motivated by
+similar objectives; nonetheless, their implementations often serve specific use
+cases, target specific resources, and lack in interoperability.
 
 % as they support the decoupling of workload submission from resource
 % assignment. N
@@ -207,9 +207,10 @@ ways in which \pilotjobs break free of the rigid resource utilization model: (i)
 through a process often referred to as
 late-binding~\cite{moscicki2011,glatard2010,delgado2014}, \pilotjobs make the
 selection of heterogeneous and dynamic resources easier and effective; and (ii)
-\pilotjobs decouple the workload specification from the task management.  The
-former results in the ability to utilize resources ``dynamically'', the latter
-simplifies the placement of workloads on those resources.
+\pilotjobs decouple the workload specification from the task execution
+management.  The former results in the ability to utilize resources
+``dynamically'', the latter simplifies the scheduling of workloads on those
+resources.
 
 % management of improving the efficiency of task assignment while shielding
 % applications from having to manage tasks across such resources.
@@ -235,7 +236,7 @@ simplifies the placement of workloads on those resources.
 % performance of distributed applications.
 
 \pilotjobs have been almost exclusively developed within pre-existing systems
-and middleware dedicated to specific scientific requirements. As a consequence,
+and middleware satisfying specific scientific requirements. As a consequence,
 the development of \pilotjobs have not been grounded on a robust understanding
 of underpinning abstractions, or on a well-understood set of dedicated design
 principles. Furthermore, the terminology used to describe functionally
@@ -276,14 +277,15 @@ systems with pilot-like characteristics.
 
 In~\S\ref{sec:understanding}, the minimal set of capabilities and properties
 characterizing the design of a \pilotjob system are derived. A vocabulary is
-then defined to be consistently used across different designs and
-\pilotjob system implementations.
+then defined to be consistently used across
+\pilotjob system designs and implementations.
 
 In~\S\ref{sec:analysis}, the focus shifts from analyzing the design of a
 \pilotjob system to critically reviewing the characteristics of a representative
 set of its implementations. Core and auxiliary implementation properties are
 introduced and then used alongside the functionalities and terminology defined
-in~\S\ref{sec:understanding} to compare \pilotjob system implementations.
+in~\S\ref{sec:understanding} to describe and compare \pilotjob system
+implementations.
 
 Finally,~\S\ref{sec:discussion} closes the paper by outlining the \pilot
 paradigm, arguing for its generality, and elaborating on how it impacts and
