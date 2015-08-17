@@ -3621,9 +3621,12 @@ As seen in~\S\ref{sec:understanding}, the \pilot paradigm demands resource
 placeholders but does not specify the type of resource that the placeholder
 should expose. In principle, pilots can be placeholders for data or network
 resources, either exclusively or in conjunction with compute resources.  For
-example, in Ref.~\cite{luckow2014pilot,santcroos2012} the concept of \pilotdata
-was conceived to be fundamental to dynamic data placement and scheduling as
-\pilot is to computational tasks.
+example, in Ref.~\cite{luckow2014pilot} the concept of \pilotdata was conceived
+to be fundamental to dynamic data placement and scheduling as \pilot is to
+computational tasks.  With the advent of Software-Defined Networking and
+User-Schedulable Network paths in mind, the concept of ``Pilot networks'' was
+introduced in Ref.~\cite{santcroos2012}.
+
 
 % depending on the capabilities exposed by the middleware of the target
 % infrastructure.
@@ -3936,23 +3939,24 @@ layer. Most workflow engines are developed with proprietary solutions to access
 the resource layer; solutions that cannot be shared with other engines and that
 often serve specific requirements, use cases, and infrastructures.
 
-
-
 % A multi-purpose, functionally encompassing \pilot system is desirable for all
 % those use cases in which applications are heterogeneous in the type of
 % computation, time, or space.
 
-
 As argued in the previous section, \pilot systems should be agnostic towards the
-type of application that is executed. They can be engineered so as to support
-different types of applications and application objectives. \pilots hold
-resources and the properties of such resources should also be left open to
-arbitrarily specification. Thus the type of matching between the requirements of
-tasks and the capabilities offered by the resources held by the pilot should not
-be mandated. For this reason, adopting the \pilot paradigm for the execution of
+type of application, application objective and resource upon which applications
+are executed. The type of matching between the requirements of tasks and the
+capabilities offered by the resources held by the pilot should not be
+mandated. For this reason, adopting the \pilot paradigm for the execution of
 increasingly diverse applications on new infrastructure or different resources
 should be seen as a set of often challenging implementation details more than a
 foundational issue requiring new paradigms.
+
+%They can be engineered so as to support
+% different types of applications and application objectives. \pilots hold
+% resources and the properties of such resources should also be left open to
+% arbitrarily specification. Thus 
+
 
 % allow for tasks to be scheduled but the
 
@@ -4009,11 +4013,11 @@ Kubernetes~\cite{bernstein2014containers} is emerging as an important container
 management approach. Not completely coincidently, Kubernetes is the Greek term
 for the English ``Pilot''.
 
-Currently, no \pilot system exposes networking resources by means of
-placeholders but there is no theoretical limitation to the implementation of
-what may be called ``\pilot networks''. With the advent of Software-Defined
-Networking and User-Schedulable Network paths in mind, the concept was already
-hinted at in \cite{santcroos2012}.
+% Currently, no \pilot system exposes networking resources by means of
+% placeholders but there is no theoretical limitation to the implementation of
+% what may be called ``\pilot networks''. With the advent of Software-Defined
+% Networking and User-Schedulable Network paths in mind, the concept was already
+% hinted at in \cite{santcroos2012}.
 
 
 % -----------------------------------------------------------------------------
@@ -4077,9 +4081,8 @@ software systems. The generality of this paradigm together with the types of
 workload, resource, and performance indicates the fundamental role that it can
 play to support task-level parallelism at higher scales and on possibly multiple
 and diverse DCRs. If appreciated, the contributions of this paper offer an
-analytical base for the improvement of existing \pilot systems implementations,
-improving their interoperability across specific DCR and curtailing the need to
-create unsustainable partial implementations.
+analytical base for the improvement of existing \pilot systems implementations
+and curtailing the need to create unsustainable partial implementations.
 
 % . This paper establishes the \pilot paradigm by providing a conceptual
 % framework in \S3; underscores the importance of the \pilot paradigm, as well
