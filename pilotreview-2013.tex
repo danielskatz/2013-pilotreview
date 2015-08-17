@@ -803,9 +803,16 @@ and the emergence of a \pilot paradigm. Nonetheless, the proliferation of
 \pilotjob systems has been uncoordinated, developing across multiple dimensions
 (see Figure~\ref{fig:pilotjob_clustering}), and making it difficult to
 coherently understand the \pilot components, their functionalities,
-implementations, and usages. This hinders attempts at distinguishing \pilotjob
-system functionalities from those of other middleware and at appreciating the
-distinguishing characteristics of the \pilot paradigm.
+implementations, and usages. % This hinders attempts at distinguishing \pilotjob
+% system functionalities from those of other middleware and at appreciating the
+% distinguishing characteristics of the \pilot paradigm.
+The evolution of \pilots attests to their usefulness across a wide range of
+deployment environments and application scenarios, but the divergence in
+specific functionality and inconsistent terminology calls for a standard
+vocabulary to assist in understanding the varied approaches and their
+commonalities and differences. This is the primary motivation of the next
+section.
+
 
 % Some distinctions in terms of design, usage, and operation modes can be
 % identified. Figure~\ref{fig:pilotjob_clustering} is a graphical representation
@@ -819,12 +826,6 @@ distinguishing characteristics of the \pilot paradigm.
 
 %leading to a blurred definition of \pilot abstraction and how it should be
 
-The evolution of \pilots attests to their usefulness across a wide range of
-deployment environments and application scenarios, but the divergence in
-specific functionality and inconsistent terminology calls for a standard
-vocabulary to assist in understanding the varied approaches and their
-commonalities and differences. This is the primary motivation of the next
-section.
 
 
 %------------------------------------------------------------------------------
@@ -3717,21 +3718,24 @@ application and tooling landscape~\cite{dpa_surveypaper,dpagrid2009}.
 %   P* model/paper. Else we are going to get dinged by reviewer or cause
 %   confusion to the reader. Where this paragraph goes is open for discussion.}
 
-The generality of the pilot paradigm across workload, DCR, and resource types
-was first discussed in Ref.~\cite{luckow2012}, wherein an initial conceptual
-model for \pilot systems was proposed. This paper significantly enhances and
-extends that preliminary analysis.
-
 Appreciating the properties of the \pilot paradigm becomes necessary once
 requirements of DCR interoperability, support for multiple types of workloads,
-or flexibility in the optimization of execution are introduced. Satisfying those
-requirements demands abstracting the specificity of application characteristics,
-of the middleware and architectures of DCRs, and of the types of resources.
+or flexibility in the optimization of execution are introduced.  The generality
+of the pilot paradigm across workload, DCR, and resource types was first
+discussed in Ref.~\cite{luckow2012}, wherein an initial conceptual model for
+\pilot systems was proposed. As evidenced by the introduction of the \pilot
+Architectural Pattern and the discussion in \S3 and 4, this paper significantly
+enhances and extends that preliminary analysis of Ref.~\cite{luckow2012}.
 
-The generality of the \pilot paradigm needs careful interpretation: \pilots are
-not just an alternative implementation of a scheduler, a workload manager, a
-batch system, or any other special-purpose software component. A \pilot system
-represents a type of software system in itself.
+% Satisfying those requirements demands abstracting the specificity of application
+% characteristics, of the middleware and architectures of DCRs, and of the types
+% of resources.
+
+% 
+% The generality of the \pilot paradigm needs careful interpretation: \pilots are
+% not just an alternative implementation of a scheduler, a workload manager, a
+% batch system, or any other special-purpose software component. A \pilot system
+% represents a type of software system in itself.
 
 % and the independence of its
 % implementations from other types of software, clarify also a potential
@@ -3973,14 +3977,15 @@ and infrastructures.
 % those use cases in which applications are heterogeneous in the type of
 % computation, time, or space.
 
-As argued in the previous section, \pilot systems should be agnostic towards the
-type of application, application objective and resource upon which applications
-are executed. The type of matching between the requirements of tasks and the
-capabilities offered by the resources held by the pilot should not be
-mandated. For this reason, adopting the \pilot paradigm for the execution of
-increasingly diverse applications on new infrastructure or different resources
-should be seen as a set of often challenging implementation details more than a
-foundational issue requiring new paradigms.
+As argued in the previous section, \pilot paradigm is agnostic towards the type
+of application, application objective and resource upon which applications are
+executed. % The type of matching between the requirements of tasks and the
+% capabilities offered by the resources held by the pilot should not be
+% mandated. For this reason,
+Thus adopting the \pilot paradigm for the execution of increasingly diverse
+applications on new infrastructure or different resources should be seen as a
+set of often challenging implementation details more than a foundational issue
+requiring new paradigms.
 
 %They can be engineered so as to support
 % different types of applications and application objectives. \pilots hold
