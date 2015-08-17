@@ -179,10 +179,10 @@ Glidein/GlideinWMS~\cite{frey2002condorG}, the Coaster
 System~\cite{wilde2011swift}, DIANE~\cite{moscicki2003diane},
 DIRAC~\cite{casajus2010dirac}, \panda~\cite{chiu2010pilot},
 GWPilot~\cite{rubio2015gwpilot}, Nimrod/G~\cite{buyya2000nimrod},
-Falkon~\cite{raicu2007}, MyCluster~\cite{walker2006creating} to name a few.
-These systems are for the most part functionally equivalent and motivated by
-similar objectives; nonetheless, their implementations often serve specific use
-cases, target specific resources, and lack in interoperability.
+Falkon~\cite{raicu2007falkon}, MyCluster~\cite{walker2006creating} to name a
+few. These systems are for the most part functionally equivalent and motivated
+by similar objectives; nonetheless, their implementations often serve specific
+use cases, target specific resources, and lack in interoperability.
 
 % as they support the decoupling of workload submission from resource
 % assignment. N
@@ -313,9 +313,8 @@ Even if these features taken individually are not unique to the \pilot
 abstraction, the \pilot abstraction brings them together towards an integrated
 and collective capability. This section offers an overview of these five
 features and an analysis of their relationship with the \pilot abstraction. A
-chronological perspective is taken so as to contextualize the %inception and
-evolution of the \pilot abstraction into its multiple and diverse
-implementations.
+chronological perspective is taken so as to contextualize the evolution of the
+\pilot abstraction into its diverse implementations.
 
 % the variation in their scope, semantics, and implementation is one of the
 % defining reasons for the multiplicity of this abstraction implementations.
@@ -336,18 +335,19 @@ between the five features and the \pilot abstraction.}
 \subsection{Functional Underpinnings of the Pilot Abstraction}
 \label{sec:histabstr}
 
-To the best of the authors' knowledge, the term``pilot''was first coined in 2004
-in the context of the Large Hadron Collider (LHC) Computing Grid (WLCG) Data
-Challenge\footnote{Based on private communication.}
+To the best of the authors' knowledge, the term ``pilot'' was first coined in
+2004 in the context of the Large Hadron Collider (LHC) Computing Grid (WLCG)
+Data Challenge\footnote{Based on private communication.}
 \cite{lhc_url,lhc1995large,wlcg_url,bonacorsi2007wlcg}, and then introduced in
-writing as``pilot-agent''in a 2005 LHCb report~\cite{nobrega2005lhcb,lhcb_url}.
-Despite its relatively recent explicit naming, the \pilot abstraction addresses
-a problem already well-known at the beginning of the twentieth century: {\bf
-task-level} distribution and parallelism on multiple resources.
+writing as ``pilot-agent'' in a 2005 LHCb
+report~\cite{nobrega2005lhcb,lhcb_url}. Despite its relatively recent explicit
+naming, the \pilot abstraction addresses a problem already well-known at the
+beginning of the twentieth century: {\bf task-level} distribution and
+parallelism on multiple resources.
 
 In 1922 Lewis Fry Richardson devised a Forecast
-Factory~\cite{lynch1999richardson} (Figure~\ref{fig:figures_forecast-factory})
-to solve systems of differential equations for weather
+Factory~\cite{lynch1999richardson} (Figure~\ref{fig:forecast_factory}) to solve
+systems of differential equations for weather
 forecasting~\cite{richardson1922weather}. This factory required 64,000 ``human
 computers'' supervised by a senior clerk. The clerk would distribute portions of
 the differential equations to the computers so that they could forecast the
@@ -362,28 +362,28 @@ pattern for distributed and parallel computation called ``\MW''.
     \includegraphics[width=.45\textwidth]{figures/forecast-factory.jpg}
   \caption{\textit{Forecast Factory} as envisioned by Lewis Fry Richardson.
     Drawing by Fran{\c c}ois Schuiten.}
-  \label{fig:figures_forecast-factory}
+  \label{fig:forecast_factory}
 \end{figure}
 
-The clerk of the Forecast Factory is the``master''while the human computers are
-her ``workers''. Requests and responses go back and forth between the master and
-all her workers. Each worker has no information about the overall computation
-nor about the states of any other worker.  The master has an exclusive global
-view both of the overall problem and of its progress towards a solution. As
-such, the {\bf \MW} is a coordination pattern allowing for the structured
-distribution of tasks so as to orchestrate their parallel and concurrent
-execution.  This invariably translates into a reduced time to completion of the
-overall computation when compared to a coordination pattern in which each
-equation is sequentially solved by a single worker.
+The clerk of the Forecast Factory is the ``master'' while the human computers
+are her ``workers''. Requests and responses go back and forth between the master
+and all her workers. Each worker has no information about the overall
+computation nor about the states of any other worker. The master has an
+exclusive global view both of the overall problem and of its progress towards a
+solution. As such, the {\bf \MW} is a coordination pattern allowing for the
+structured distribution of tasks so as to orchestrate their parallel and
+concurrent execution. This invariably translates into a reduced time to
+completion of the overall computation when compared to a coordination pattern in
+which each equation is sequentially solved by a single worker.
 
 Modern silicon-based, high-performance machines introduced at least three key
 differences compared to the carbon-based Forecast Factory devised by
 Richardson. Most modern high-performance machines are meant to be used by
 multiple users, i.e. they support multi-tenancy. Furthermore, diverse
-high-performance machines were made available to the scientific community, each
+high-performance machines are made available to the scientific community, each
 with both distinctive and homogeneous properties in terms of architecture,
 capacity, capabilities, and interfaces. Furthermore, high-performance machines
-supported different types of applications, depending on the applications'
+support different types of applications, depending on the applications'
 communication and coordination models.
 
 {\bf Multi-tenancy} has defined the way in which high-performance computing
@@ -411,9 +411,9 @@ definition, the resources accessible and available at any given time can be less
 than those demanded by all the active users. Furthermore, the resource usage
 patterns are not stable over time and alternating phases of resource
 availability and starvation are common~\cite{Furlani2013,Lu2013}. This landscape
-led not only to a continuous optimization of the management of each resource but
-also to the development of alternative strategies to expose and serve resources
-to the users.
+has led not only to a continuous optimization of the management of each resource
+but also to the development of alternative strategies to expose and serve
+resources to the users.
 
 % \jhanote{I do not think the two are equivalent. At least not in common usage.
 %   i.e., you can definitely do meta scheduling without multilevel scheduling.
@@ -422,7 +422,7 @@ to the users.
 {\bf Multi-level scheduling} is one of the strategies devised to improve
 resource access across multiple high-performance and distributed machines. The
 idea is to hide the scheduling point of each high-performance machine behind a
-single scheduler.  The users or the applications submit their tasks to a
+single scheduler. The users or the applications submit their tasks to a
 scheduler that negotiates and orchestrates the distribution of the tasks via the
 scheduler of each available high-performance machine. While this approach
 promises an increase in both scale and usability of applications, it also
@@ -434,38 +434,39 @@ introduces complexities across resources, middleware, and applications.
 %   latter.}
 
 Several approaches have been devised to manage the complexities associated with
-multi-level scheduling. For example, some approaches
-target the resource layer ~\cite{raicu2007,singh2005,ramakrishnan2006toward,foster2008,juve2008,villegas2012,song2009};
-%the approaches developed under the umbrellas of grid computing
-%~\cite{raicu2007,singh2005,ramakrishnan2006toward} or
-%cloud computing~\cite{foster2008,juve2008,villegas2012,song2009},
+multi-level scheduling. For example, some approaches target the resource
+layer~\cite{raicu2007falkon,singh2005,ramakrishnan2006toward,foster2008,juve2008,villegas2012,song2009};
 others the application layer as, for example, with workflow
 systems~\cite{taylor2014,curcin2008scientific,juve2008,balderrama2012scalable}.
 All these approaches offered and still offer some degree of success for specific
 applications and use cases but a general solution based on well-defined and
 robust abstractions has still to be devised and implemented.
 
+% the approaches developed under the umbrellas of grid computing
+% ~\cite{raicu2007,singh2005,ramakrishnan2006toward} or cloud
+% computing~\cite{foster2008,juve2008,villegas2012,song2009},
+
 One of the persistent issues besetting resource management across multiple
 high-performance machines is the increase of the implementation complexity
-imposed on the application layer. Even with solutions like grid computing aiming
-at effectively and, to some extent, transparently integrating diverse resources,
-most of the requirements involving the coordination of task execution still
-resides with the application layer~\cite{legrand2003,krauter2002,darema2005}.
-This translates into single-point solutions, extensive redesign and
-redevelopment of existing applications when they need to be adapted to new use
-cases or new high-performance machines, and lack of portability and
-interoperability.
+imposed on the application layer. Even with solutions like grid
+computing~\cite{berman2003grid,foster2003grid} aiming at effectively and, to
+some extent, transparently integrating diverse resources, most of the
+requirements involving the coordination of task execution still resides with the
+application layer~\cite{legrand2003,krauter2002,darema2005}. This translates
+into single-point solutions, extensive redesign and redevelopment of existing
+applications when they need to be adapted to new use cases or new
+high-performance machines, and lack of portability and interoperability.
 
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
 capability of concurrently submitting tasks to the queue of the scheduler of the
-high-performance machine, and retrieve and aggregate their outputs. When
+high-performance machine, retrieve their outputs, and aggregate them. When
 multiple high-performance machines are available, the application requires
-directly managing submissions to several queues or the capability to leverage a
-third-party scheduler and its specific execution model. In both scenarios, the
-application requires a large amount of development and capabilities that are not
-specific to the given scientific problem but pertain instead to the coordination
-and management of its computation.
+directly managing submissions to several queues or using a third-party scheduler
+and its specific execution model. In both scenarios, the application requires a
+large amount of development and capabilities that are not specific to the given
+scientific problem but pertain instead to the coordination and management of its
+computation.
 
 The notion of resource placeholder was devised as a pragmatic solution to better
 manage the complexity of executing distributed applications. A resource
@@ -783,11 +784,11 @@ between application tasks. Swift uses a \pilot implementation called
 requirements by supporting various types of infrastructure, including clouds and
 grids.
 
-Swift has also been used in conjunction with Falkon~\cite{raicu2007}. Falkon was
-engineered for executing many small tasks on High Performance Computing (HPC)
-systems and shows high performance compared to the native queuing systems.
-Falkon is a paradigmatic example of how the \pilot abstraction has been
-implemented to support specific workloads alongside investigating their
+Swift has also been used in conjunction with Falkon~\cite{raicu2007falkon}.
+Falkon was engineered for executing many small tasks on High Performance
+Computing (HPC) systems and shows high performance compared to the native
+queuing systems. Falkon is a paradigmatic example of how the \pilot abstraction
+has been implemented to support specific workloads alongside investigating their
 performance. Even if Falkon is now unmaintained, the insight gained by its
 development has been used to improve the Coaster System.
 
