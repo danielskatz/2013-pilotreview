@@ -842,9 +842,10 @@ inconsistently, often with the same terms referring to multiple concepts or the
 same concept named in different ways.
 
 This section offers a description of the logical components and functionalities
-shared by every \pilotjob system. The goal is to offer a paradigmatic
-description of a \pilotjob system and a well-defined vocabulary to reason about
-such a description and, eventually, about its multiple implementations.
+shared by every \pilotjob system and the definition of a consistent terminology.
+The goal is to offer a paradigmatic description of a \pilotjob system and a
+well-defined vocabulary to reason about such a description and, eventually,
+about its multiple implementations.
 
 % \jhanote{would ``description'' be better than ``analysis'' in the first
 %   sentence?} \mtnote{Done.}
@@ -856,21 +857,21 @@ such a description and, eventually, about its multiple implementations.
 
 All \pilotjob systems introduced in~\S\ref{sec:history} are engineered to allow
 for the execution of multiple types of workloads on machines with diverse
-middleware, e.g., grid, cloud, or HPC. This is achieved in different ways,
-depending on use cases, design and implementation choices, but also on the
-constraints imposed by the middleware and policies of the targeted machines. The
-common denominators among \pilotjob systems are defined along three dimensions:
-purpose, logical components, and functionalities.
+middleware, e.g., grid, cloud, or HPC. This is achieved in many ways, depending
+on use cases, design and implementation choices, and on the constraints imposed
+by the middleware and policies of the targeted machines. The common denominators
+among \pilotjob systems are defined along three dimensions: purpose, logical
+components, and functionalities.
 
 The purpose shared by every \pilotjob system is to improve workload execution
 when compared to executing the same workload directly on one or more machines.
 Performance of workload execution is usually measured by throughput and time to
-completion, but other metrics could also be considered: data transfer
-minimization, scale of the workload executed, or a mix of them. Metrics that are
-not performance related include reliability, ease of application deployment, and
-generality of workload. In order to achieve the required metrics under given
-constraints, each \pilotjob system exhibits characteristics that are either
-common or specific to one or more implementations. Discerning these
+completion, but other metrics could also be considered: data transfer time,
+scale of the workload executed, power consumption, or a mix of them. Metrics
+that are not related to performance include reliability, ease of application
+deployment, and generality of workload. In order to achieve the required metrics
+under given constraints, each \pilotjob system exhibits characteristics that are
+either common or specific to one or more implementations. Discerning these
 characteristics requires isolating the minimal set of logical components that
 characterize every \pilotjob system.
 
@@ -887,7 +888,7 @@ The implementation details of these three logical components vary significantly
 across \pilotjob systems (see~\S\ref{sec:analysis}). For example, two or more
 logical components may be implemented by a single software module or additional
 functionalities may be integrated into the three management components.
-Nevertheless, the \pilot, Workload, and Task Managers can always be
+Nevertheless, the Pilot, Workload, and Task Managers can always be
 distinguished across different \pilotjob systems.
 
 % One or more logical components may be responsible for specific
@@ -910,11 +911,12 @@ Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
 resource placeholders on the target machines, schedule tasks on the available
 placeholders, and then use these placeholders to execute the tasks of the given
 workload. More functionalities might be needed to implement a production-grade
-\pilotjob system: authentication, authorization, accounting, data management,
-fault-tolerance, or load-balancing. While these functionalities may be critical
-implementation details, they depend on the specific characteristics of the given
-use cases, workloads, or targeted resources. As such, these functionalities
-should not be considered necessary characteristics of a \pilotjob system.
+\pilotjob system. For example, authentication, authorization, accounting, data
+management, fault-tolerance, or load-balancing. While these functionalities may
+be critical implementation details, they depend on the specific characteristics
+of the given use cases, workloads, or targeted resources. As such, these
+functionalities should not be considered necessary characteristics of a
+\pilotjob system.
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
@@ -971,11 +973,10 @@ decouples the execution of a workload from the need to submit its tasks via the
 machine's scheduler. For example, the execution of individual tasks of a
 workload will not depend upon the specifics of the targeted machine's state or
 availability, but rather on those of the placeholder. More elaborate execution
-patterns involving task and data interdependence can thus be implemented
-independent of the target machine's middleware capabilities and
-constraints. Ultimately, this is how \pilotjob systems allow for the direct
-control of workload execution and the optimization, for example, of execution
-throughput.
+patterns involving task and data dependences can thus be implemented independent
+of the capabilities and constraints of the target machine's middleware.
+Ultimately, this is how \pilotjob systems allow for the direct control of
+workload execution and the optimization, for example, of execution throughput.
 
 % For example, the tasks of a workload will not individually have to wait on the
 % targeted machine's queues, but rather on the availability of the placeholder
@@ -996,16 +997,14 @@ throughput.
 
 Communication and coordination are two distinguishing characteristics of
 distributed systems, and \pilotjob systems are no exception. The three logical
-components -- Workload Manager, Pilot Manager, and the Task Manager -- need to
-communicate in order to coordinate the execution of the given workload on the
-instantiated resource placeholders.  Nonetheless, \pilotjob systems are not
-defined by any specific communication and coordination pattern. The logical
-components of a \pilotjob system may communicate or coordinate using any
-suitable pattern, e.g., one-to-one, many-to-one, or
-one-to-many~\ref{comm_patterns} patterns with a push or pull model, or
-blackboard, meeting, or \MW patterns~\ref{omicini2013coordination,}. The same
-applies to network architectures and protocols: different network architectures
-and protocols may be used to achieve effective communication and coordination.
+components -- Workload Manager, Pilot Manager, and Task Manager -- need to
+communicate in order to coordinate the execution of the given workload.
+Nonetheless, \pilotjob systems are not defined by any specific communication and
+coordination pattern as the logical components of a \pilotjob system may
+communicate or coordinate using any suitable
+pattern~\ref{comm_patterns,omicini2013coordination}. The same applies to network
+architectures and protocols: different network architectures and protocols may
+be used to achieve effective communication and coordination.
 
 % \jhanote{is this a reference to coordination or communication? unclear}
 % \mtnote{`communication and coordination' so I would say to both.}
@@ -1032,19 +1031,18 @@ example, functionalities can be provided to support the local or remote staging
 of data required to execute the tasks of a workload, or data might be managed
 according to the specific capabilities offered by the targeted machine's
 middleware. How these requirements are implemented does not define a core
-functionality of the \pilot system.
+functionality of the \pilot system. Being able to read and write files to a
+local filesystem should then be considered the minimal capability related to
+data required by a \pilotjob system. More advanced and specific data
+capabilities like, for example, data replication, (concurrent) data transfers,
+data abstractions other than files and directories, or data placeholders should
+be considered special-purpose capabilities, not characteristic of every
+\pilotjob system.
 
 % For example, \pilotjob systems can be devised in which tasks do not require
 % any data management because they: (i) do not necessitate input files; (ii) do
 % not produce output files; (iii) data is already locally available; or (iv)
 % data management is outsourced to third-party systems.
-
-Being able to read and write files to a local filesystem should then be
-considered the minimal capability related to data required by a \pilotjob
-system. More advanced and specific data capabilities like, for example, data
-replication, (concurrent) data transfers, data abstractions other than files and
-directories, or data placeholders should be considered special-purpose
-capabilities, not characteristic of every \pilotjob system.
 
 % \jhanote{Please check my edit/deletion. I did not think the statement and
 %   listing of ``tasks not requiring data management helped in anyway''}
@@ -3896,7 +3894,7 @@ evolve.
 % For specific applications designed to run on a single type of infrastructure
 % with a unique performance objective, a special purpose system might be
 % warranted, but otherwise a conservative approach would be more efficient and
-% effective. 
+% effective.
 
 \mtnote{I think this paragraph should be moved to 5.2 as it is part of an
   analysis and not of a summary of the overall contributions of the paper. This
