@@ -3265,11 +3265,9 @@ The descriptions offered in the previous subsection show how diverse \pilot
 system implementations conform to the set of components and functionalities
 defined in~\S\ref{sec:understanding}.  The descriptions of the seven \pilot jobs
 also highlight implementation differences, especially concerning the auxiliary
-properties of these \pilot systems. For example, based on the description of the
-auxiliary properties offered in~\S\ref{sec:auxprops}, the described \pilot
-systems show not only evident variations in their architectures and data
-management capabilities, but also in their DCR interaction model, their
-interfaces, and interoperability.
+properties of these \pilot systems. For example, the described \pilot systems
+show variations in their architectures and data management capabilities, DCR
+interaction model, interfaces, and interoperability.
 
 % The goal is not only to highlight the differences among Pilot systems but also
 % to show their implementation chal- lenges. In this way, the following analysis
@@ -3282,7 +3280,7 @@ Clarifying the differences among \pilot systems implementations can offer
 insight into how and when a specific implementation should be adopted, or
 possibly adapted. Understanding the differences will also help appreciate the
 challenges in implementing them.  Here these differences are described, widening
-the scope of the analysis to other relevant auxiliary properties.
+the scope of the analysis to relevant auxiliary properties.
 
 % and to thereby highlight the challenges in implementing them.
 
@@ -3308,7 +3306,7 @@ monolithic design (Figures~\ref{fig:diane_comparison},
 a single middleware component, designed as a service, with a more or less
 modular implementation. For DIRAC and PANDA a dedicated hardware infrastructure
 is assumed for a production-grade environment. Consistently with a
-Globus-oriented design, the Coaster Service is assumed to be running on the DCR
+Globus-oriented design, the Coaster Service is assumed to be run on the DCR
 resources and act as a proxy for both the pilot and workload-related
 functionalities.
 
@@ -3340,14 +3338,14 @@ isolate under-performing or failing DCR compute nodes.
 
 % Interoperability
 The \pilot systems described in the previous subsection offer a varying degree
-of interoperability across diverse DCRs.  For example, GlideinWMS was designed
-to execute tasks on the HTCondor based DCRs; DIANE, DIRAC, and PANDA were
-initially designed to support DCRs used by the LHC experiments but not bound to
-HTCondor; and MyCluster was designed specifically for TeraGrid resources. With
-the progressive development of \pilot systems and DCR middleware, many types of
-DCR are now supported: the Coaster System, Glidein, PANDA, DIRAC and
-RADICAL-Pilot support diverse DCR middleware including typical HPC, grid, and
-cloud batch systems.
+of interoperability across diverse DCRs. For example, GlideinWMS was designed to
+execute tasks on the HTCondor based DCRs; DIANE, DIRAC, and PANDA were initially
+designed to support DCRs used by the LHC experiments but not bound to HTCondor;
+and MyCluster was designed specifically for TeraGrid resources. With the
+progressive development of \pilot systems and DCR middleware, many types of DCR
+are now supported: the Coaster System, Glidein, PANDA, DIRAC and RADICAL-Pilot
+all support diverse DCR middleware including typical HPC, grid, and cloud batch
+systems.
 
 % For example, DIANE and PANDA were initially designed to support mostly
 % grid-based DCRs used by the LHC experiments, while Glidein to execute tasks on
@@ -3387,16 +3385,17 @@ implementation of a placeholder is more appropriate.
   GlideinWMS, but I would make a mention of Glidein and associated tools once
   somewhere, and then keep it simple and readable by using only Glidein}
 
-Each \pilot system described in the previous subsection exposes a different
-interface to the user. \jhanote{to what? for what?}\mtnote{Better?} DIANE,
-DIRAC, GlideinWMS, MyCluster, and PANDA offer command line tools tailored to
-specific use cases, applications, and DCRs. The Coaster System and RADICAL-Pilot
-exposes an API; DIANE, DIRAC, and PANDA command line tools are built on API that
+The \pilot system described in the previous subsection expose diverse interfaces
+to the user. \jhanote{to what? for what?}\mtnote{Better?} DIANE, DIRAC,
+GlideinWMS, MyCluster, and PANDA offer command line tools tailored to specific
+use cases, applications, and DCRs. The Coaster System and RADICAL-Pilot exposes
+an API, and command line tools of DIANE, DIRAC, and PANDA are built on APIs that
 users may directly access and use to develop distributed applications. Specific
 types of user interfaces may be better suited for some projects with distinctive
 requirements but for general-purpose \pilot systems they may lead to
-fragmentation and duplication of effort. Open APIs specifically designed for
-general-purpose \pilot systems may be used to avoid these shortcomings.
+fragmentation and duplication of effort. The adoption of Open APIs specifically
+designed for general-purpose \pilot systems may be a viable solution to these
+shortcomings.
 
 \jhanote{I'm not sure I see the point of the last sentence} \mtnote{Better?}
 
@@ -3417,9 +3416,9 @@ It should be noted that leveraging this opportunity would also have direct
 implications on the type of architectures best suited to general-purpose \pilot
 systems. \pilot systems with a monolithic design could hinder the separation of
 concerns among application logic, workload execution, and resource provisioning.
-These three functional domains should be not only exposed via open APIs but also
-kept separated at architectural level. In this way components developed within
-diverse projects and domains could share functional domains and interoperate,
+These three functional domains should not only be exposed via open APIs but also
+kept separated at architectural level. In this way, components developed within
+diverse projects and domains could share functionalities and interoperate,
 therefore minimizing duplication and fragmentation.
 
 \jhanote{The issue covered in this paragraph is (a) more than just an issue of
@@ -3436,8 +3435,8 @@ tenancy. With single tenancy, the pilot can be accessed only by the user that
 submitted it. As such, AAA can be based on inherited privileges. With
 multitenancy, the \pilot system has to evaluate whether a user requesting access
 to a pilot is part of the group of allowed users. This requires advanced
-abstractions like those of VO and federated certificate
-authority~\cite{horwitz2002} used by GlideinWMS and the Coaster Systems.
+abstractions like VO and federated certificate authority~\cite{horwitz2002},
+implemented by GlideinWMS and the Coaster Systems.
 
 The credential used for pilot deployment depends on the target DCR. The AAA
 requirements of DCRs are a diverse and often inconsistent array of mechanisms
@@ -3930,7 +3929,7 @@ should be possible.  It is also possible to have an unambiguous description of
 properties yielding in well-defined models of \pilot functionality. Collectively
 these should be reflected in external/internal interfaces that both developers
 and users can rely upon, which would help
-%address the aforementioned issue of  that help 
+%address the aforementioned issue of  that help
 find the balance between specific and general implementations and thus the
 number of active \pilot systems. The commonality amongst \pilot systems is
 arguably unique among other tools and middleware, which thus allows \pilot
@@ -3978,7 +3977,7 @@ foundational issue requiring new paradigms.
 %They can be engineered so as to support
 % different types of applications and application objectives. \pilots hold
 % resources and the properties of such resources should also be left open to
-% arbitrarily specification. Thus 
+% arbitrarily specification. Thus
 
 
 % allow for tasks to be scheduled but the
