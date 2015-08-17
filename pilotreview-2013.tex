@@ -1068,13 +1068,13 @@ components and capabilities described so far is defined.
 % clear indication of the primary role played by the concepts of ``pilot'' and
 % ``job'' in this type of system.
 
-The terms ``pilot'' and ``job'' are arguably among the most relevant when referring
-to \pilotjob systems. The definition of both concepts is context-dependent and
-several other terms need to be clarified in order to offer a coherent
-terminology. Both ``job'' and ``pilot'' need to be understood in the context of
-machines and middleware used by \pilotjob systems. These machines offer compute,
-storage, and network resources and \pilots allow for the utilization of those
-resources to execute the tasks of one or more workloads.
+The terms ``pilot'' and ``job'' are arguably among the most relevant when
+referring to \pilotjob systems. The definition of both concepts is
+context-dependent and several other terms need to be clarified in order to offer
+a coherent terminology. Both ``pilot'' and ``job'' need to be understood in the
+context of machines and middleware used by \pilotjob systems. These machines
+offer compute, storage, and network resources and \pilots allow for the
+utilization of those resources to execute the tasks of one or more workloads.
 
 \begin{description}
 
@@ -1084,7 +1084,8 @@ and indications on how they should be executed and satisfied. Implementations of
 a task may include wrappers, scripts, or applications.
 
 \item[Workload.] A set of tasks, possibly related by a set of arbitrarily
-complex relations.
+complex relations. For example, relations may involve tasks, data, or runtime
+communication requirements.
 
 \item[Resource.] Finite, typed, and physical quantity utilized when executing
 the tasks of a workload. Compute cores, data storage space, or network bandwidth
@@ -1092,8 +1093,8 @@ between a source and a destination are all examples of resources commonly
 utilized when executing workloads.
 
 \item[Distributed Computing Resource (DCR).] A machine characterized by a tuple:
-\{a set of possibly heterogeneous resources, a middleware, and an
-administrative domain\}.
+\{a set of possibly heterogeneous resources, a middleware, and an administrative
+domain\}.
 
 % \mtnote{I used ``set of machines'' because from now on we use DCR instead of
 % machine and I think we need to link explicitly the two.  Would you agree?}
@@ -1104,9 +1105,9 @@ administrative domain\}.
 \mtnote{Here we can add the description of workloads across the three axes. This
   would support the workload semantic core property in \S4.}
 
-Workloads are characterized by multiple tasks. The tasks can be homogeneous,
+Workloads are characterized by multiple tasks. These can be homogeneous,
 heterogeneous, or one-of-a-kind but an established and encompassing taxonomy for
-workload description is not available. We propose taxonomy based upon the
+workload description is not available. We propose a taxonomy based upon the
 orthogonal properties of coupling, dependency, and similarity of tasks.
 
 Workloads comprised of tasks that are independent and effectively
@@ -1129,9 +1130,8 @@ between the tasks (e.g., frequency or volume of exchange)~\cite{taylor2014}.
 
 A cluster is a typical example of a DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
-Globus grid middleware, or the OpenStack platform; and enforces policies of an
-administrative domain like, for example, XSEDE, OSG, CERN, NERSC, or a
-University.
+Globus grid middleware, or the OpenStack cloud platform; and enforces policies
+of an administrative domain like XSEDE, OSG, CERN, NERSC, or a University.
 
 As seen in~\S\ref{sec:history}, most of the DCRs used by \pilotjob systems
 utilize ``queues'', ``batch systems'', and ``schedulers''. In such DCRs, jobs
@@ -1227,9 +1227,10 @@ across \pilotjob systems. Depending upon context, in addition to the term
 ``placeholder'', a pilot may also be named ``agent'' or
 ``\pilotjob''~\cite{moscicki2011,pinchak2002}. All these terms are, in practice,
 used as synonyms without properly distinguishing between the type of container
-and the type of executable that compose a pilot. This is a clear indication of
-the necessity of a consistent vocabulary when
-reasoning analytically about multiple \pilotjob system implementations.
+and the type of executable that compose a pilot.
+
+% This is a clear indication of the necessity of a consistent vocabulary when
+% reasoning analytically about multiple \pilotjob system implementations.
 
 % indication of how necessary the minimal and consistent vocabulary offered here
 % is when reasoning analytically about multiple \pilotjob system
@@ -1237,7 +1238,7 @@ reasoning analytically about multiple \pilotjob system implementations.
 
 Until now, the term \pilotjob system has been used to indicate those systems
 capable of executing workloads on pilots. From now on, the term ``\pilot
-system'' will be used instead, as the term ``job'' in ``pilot-job'' identifies
+system'' will be used instead, as the term ``job'' in ``\pilotjob'' identifies
 just the way in which a pilot is provisioned on a DCR exposing specific
 middleware. The use of the term ``\pilotjob system'' should therefore be
 regarded as a historical artifact, viz., the targeting of a specific class of
@@ -1280,7 +1281,7 @@ potentially be distributed over multiple and diverse DCRs.
 \end{description}
 
 As seen in~\S\ref{sec:histabstr}, three more terms associated with \pilot
-systems need to be explicitly defined: `Multi-level scheduling', ``early
+systems need to be explicitly defined: ``Multi-level scheduling'', ``early
 binding'', and ``late binding''.
 
 % \jhanote{should we use lower case for second instance of ``pilots'' ? This
@@ -1303,16 +1304,16 @@ Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: pilots and
 tasks~\cite{rubio2015gwpilot,de2014panda,balderrama2012scalable}. This
 definition of ``multi-level scheduling'' is problematic because the term
-``level'' is left undefined. It is not clear what constitutes a level or how its
-boundaries should be assessed. ``Multi-entity'' and ``multi-stage'' are better
-terms to describe the scheduling properties of \pilot systems, as these terms
-specifically indicate that (at least) two entities are scheduled and that such
-scheduling happens at separate moments in time.
+``level'' is left unspecified. It is not clear what constitutes a level or how
+its boundaries should be assessed. ``Multi-entity'' and ``multi-stage'' are
+better terms to describe the scheduling properties of \pilot systems, as these
+terms specifically indicate that (at least) two entities are scheduled and that
+such scheduling happens at separate moments in time.
 
 In the \pilot systems, a portion of the resources of a DCR is allocated to one
 or more pilots, and the tasks of a workload are dispatched for execution to
 those pilots. As alluded to in the previous subsection, this is a fundamental
-feature of \pilot systems. It leads to the following: (i) more flexible and
+feature of \pilot systems as it leads to the following: (i) more flexible and
 potentially reduced times to completion of workloads as a consequence of
 avoiding a centralized job management system multiple times; and (ii) the tasks
 of a workload can be bound to a set of pilots before or after it becomes
@@ -1479,11 +1480,22 @@ components of \pilot systems (green) alongside their functionalities (blue) and
 the defined vocabulary (red). The figure is composed by three main blocks: the
 one on the top-left corner represents the workload originator. The one starting
 at the top-right and shaded in gray represents the \pilot system, while the four
-boxes one inside the other on the middle-left represent a DCR. Of the four
-boxes, the outmost denotes the DCR boundaries, e.g., a cluster. The second box
-the container used to schedule a pilot on the DCR, e.g., a job or a virtual
-machine. The third box represents the pilot once it has been instantiated on the
-DCR, and the fourth box represent the resources held by the pilot.
+boxes one inside the other on the middle-left portion of the figure represent a
+DCR. Of the four boxes, the outmost denotes the DCR boundaries, e.g., a cluster.
+The second box the container used to schedule a pilot on the DCR, e.g., a job or
+a virtual machine. The third box represents the pilot once it has been
+instantiated on the DCR, and the fourth box represents the resources held by the
+pilot.
+
+\begin{figure}[t]
+    \centering
+        \includegraphics[width=.48\textwidth]{figures/core_vocabulary.pdf}
+    \caption{Diagrammatic representation of the logical components,
+    functionalities, and core vocabulary of a \pilot system. The terms of the
+    core vocabulary are highlighted in red, those of the logical components of a
+    \pilot system in green, and those of their functionalities in blue.}
+    \label{fig:core_vocabulary}
+\end{figure}
 
 Together, Figure~\ref{fig:core_vocabulary} can be interpreted as follow: an
 application submits a workload composed of tasks to the \pilot system via an
@@ -1509,13 +1521,13 @@ component exposes capabilities.
 %   reader.}
 
 Note how in Figure~\ref{fig:core_vocabulary} scheduling happens at the DCR
-level (tag~b), for example by means of a cluster scheduler, and then at the
-pilot level (tag~c). This illustrates what has been called here a multi-entity
-and multi-stage scheduling, a couple of terms replacing the more common but less
+(tag~b), for example by means of a cluster scheduler, and then at the pilot
+(tag~c). This illustrates what has been called here a multi-entity and
+multi-stage scheduling, a couple of terms replacing the more common but less
 precise ``multi-level scheduling''.  Figure~\ref{fig:core_vocabulary} depicts
-the separation between scheduling at pilot level and scheduling at workload
-manager level, highlighting the four entities involved: jobs on DCR middleware,
-and tasks on pilots.
+the separation between scheduling at the pilot and scheduling at the workload
+manager, highlighting the four entities involved: jobs on DCR middleware, and
+tasks on pilots.
 
 % \jhanote{are we also trying to say that multi-level scheduling is for
 %   different ``entities'' at the different levels? either way, we may consider
@@ -1538,6 +1550,14 @@ communication and coordination protocols should be adopted among such
 components. This is why no distinction is made diagrammatically between, for
 example, early and late binding.
 
+Figure~\ref{fig:core_vocabulary} represents instead the architectural pattern
+for \pilot systems~\cite{buschmann2007pattern}. The defining features of this
+type of system are delineated in terms of components and functionalities that
+can be implemented by multiple architectures leading to diverse \pilot systems
+implementations. The wide spectrum of available implementations of the logical
+components and functionalities of a \pilot system is explored in the next
+section.
+
 % \jhanote{this is not needed here. we have discussed the difference between
 %   early versus later before. by having it here we are losing the opportunity
 %   to close out section 3 with the main lessons learnt} Their difference is
@@ -1548,25 +1568,12 @@ example, early and late binding.
 %   case, the binding will happen once the pilot has been instantiated and holds
 %   already its resources.
 
-\begin{figure}[t]
-    \centering
-        \includegraphics[width=.48\textwidth]{figures/core_vocabulary.pdf}
-    \caption{Diagrammatic representation of the logical components,
-    functionalities, and core vocabulary of a \pilot system. The terms of the
-    core vocabulary are highlighted in red, those of the logical components of a
-    \pilot system in green, and those of their functionalities in blue.}
-    \label{fig:core_vocabulary}
-\end{figure}
-
 % \mtnote{Lessons learned to be discussed before writing them down here.}
 %   \jhanote{do you mean ``here''?} \mtnote{As in: at this point of the
 %   subsection. Reading the whole Section in a go I am wondering whether we
 %   need to add more. The paragraph describing Figure~\ref{fig:core_vocabulary}
 %   seems to offer a summary of the main contributions and we have discussed
 %   contentious points along the way. }
-
-The wide spectrum of available implementations of the logical components of a
-\pilot system is explored in the next section.
 
 % \mtnote{For S3, the TODO list is: 1. Argue explicitly that the offered `model'
 % is sufficient and necessary in order to discriminate between \pilot and
