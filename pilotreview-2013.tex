@@ -73,31 +73,35 @@
 
 \begin{abstract}
 
-This paper offers a comprehensive analysis of the \pilotjob abstraction
-assessing its evolution, properties, and implementation into multiple
-\pilotjob software systems.  \pilotjob systems play an important role in
-supporting distributed scientific computing by providing, for example, more than
-700 million CPU hours a year to the Open Science Grid communities, and by
-processing up to 5 million jobs a week for the ATLAS experiment. \pilotjob
-systems are also witnessing an adoption beyond traditional domains with the
-increasing importance of task-level parallelism in high-performance computing.
-Notwithstanding the growing impact on scientific research, there is no agreement
-upon a definition of \pilotjob system and no clear understanding of the
-underlying \pilot abstraction and paradigm. This lack of foundational
-understanding has lead to a proliferation of unsustainable \pilotjob
-implementations with no shared best practices or interoperability, ultimately
-hindering a realization of the full impact of \pilotjobs.  This paper offers the
-conceptual tools to promote this fundamental understanding while critically
-reviewing the state of the art of \pilotjob implementations. Five main
-contributions are provided: (i) an analysis of the motivations and evolution of
-the \pilotjob abstraction; (ii) an outline of the minimal set of distinguishing
-functionalities; (iii) the definition of a core vocabulary to reason
-consistently about \pilotjobs; (iv) the description of core and auxiliary
-properties of \pilotjob systems; and (v) a critical review of the current state
-of the art of their implementations. These contributions are brought together to
-illustrate the defining characteristics of the \pilotjob paradigm, its
-generality, and the main opportunities and challenges posed by its support of
-distributed computing.
+  This paper offers a comprehensive analysis of the \pilotjob abstraction
+  assessing its evolution, properties, and implementation as multiple \pilotjob
+  software systems.  \pilotjob systems play an important role in supporting
+  distributed scientific computing by providing, for example. They are used to
+  consume more than 700 million CPU hours a year by the Open Science Grid
+  communities, and by processing up to 5 million jobs a week for the ATLAS
+  experiment on the Worldwide LHC Computing Grid. With the increasing importance
+  of task-level parallelism in high-performance computing, \pilotjob systems are
+  also witnessing an adoption beyond traditional domains. Notwithstanding the
+  growing impact on scientific research, there is no agreement upon a definition
+  of \pilotjob system and no clear understanding of the underlying \pilot
+  abstraction and paradigm. This lack of foundational understanding has lead to
+  a proliferation of unsustainable \pilotjob implementations with no shared best
+  practices or interoperability, ultimately hindering a realization of the full
+  impact of \pilotjobs.  This paper offers the conceptual tools to promote this
+  fundamental understanding while critically reviewing the state of the art of
+  \pilotjob implementations. The five main contributions of this paper are: (i)
+  an analysis of the motivations and evolution of the \pilotjob abstraction;
+  (ii) an outline of the minimal set of distinguishing functionalities; (iii)
+  the definition of a core vocabulary to reason consistently about \pilotjobs;
+  (iv) the description of core and auxiliary properties of \pilotjob systems;
+  and (v) a critical review of the current state of the art of their
+  implementations. These contributions are brought together to illustrate the
+  generality of the \pilotjob paradigm, to discuss some challenges in
+  distributed computing that it addresses and future opportunities.
+
+  % These contributions are brought together to illustrate the defining
+  % characteristics of the \pilotjob paradigm, its generality, and the main
+  % opportunities and challenges posed by its support of distributed computing.
 
 %  dispersing the available resources across a fragmented development landscape
 
@@ -1550,10 +1554,10 @@ communication and coordination protocols should be adopted among such
 components. This is why no distinction is made diagrammatically between, for
 example, early and late binding.
 
-Figure~\ref{fig:core_vocabulary} represents instead the architectural pattern
-for \pilot systems~\cite{buschmann2007pattern}. The defining features of this
-type of system are delineated in terms of components and functionalities that
-can be implemented by multiple architectures leading to diverse \pilot systems
+Figure~\ref{fig:core_vocabulary} represents the architectural pattern for \pilot
+systems~\cite{buschmann2007pattern}. The defining features of this type of
+system are delineated in terms of components and functionalities that can be
+implemented by multiple architectures leading to diverse \pilot systems
 implementations. The wide spectrum of available implementations of the logical
 components and functionalities of a \pilot system is explored in the next
 section.
@@ -2019,8 +2023,8 @@ strategies and abstractions for data management; security including
 authentication, authorization, and accounting; or robustness in terms of
 fault-tolerance and high-availability.
 
-Note that also the following list of auxiliary properties refers to \pilot
-systems and not to individual pilot instances deployed on DCRs.
+The following list of auxiliary properties refers to \pilot systems and not to
+individual pilot instances deployed on DCRs.
 
 % Auxiliary properties
 \begin{table*}
