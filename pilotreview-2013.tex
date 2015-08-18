@@ -73,7 +73,7 @@
 
 \begin{abstract}
 
-This paper offers a comprehensive analysis of the \pilotjob abstraction
+\note{move first sentence down} This paper offers a comprehensive analysis of the \pilotjob abstraction
 assessing its evolution, properties, and implementation as multiple \pilotjob
 software systems.  \pilotjob systems play an important role in supporting
 distributed scientific computing. They are used to consume more than 700
@@ -84,10 +84,10 @@ parallelism in high-performance computing, \pilotjob systems are also
 witnessing an adoption beyond traditional domains. Notwithstanding the growing
 impact on scientific research, there is no agreement upon a definition of
 \pilotjob system and no clear understanding of the underlying \pilot
-abstraction and paradigm. This lack of foundational understanding has lead to
+abstraction and paradigm. \note{not even clear there is a \pilotjob abstraction} This lack of foundational understanding has lead to
 a proliferation of unsustainable \pilotjob implementations with no shared best
 practices or interoperability, ultimately hindering a realization of the full
-impact of \pilotjobs.  This paper offers the conceptual tools to promote this
+impact of \pilotjobs.  \note{prev sentence is not justified} This paper offers the conceptual tools to promote this
 fundamental understanding while critically reviewing the state of the art of
 \pilotjob implementations. The five main contributions of this paper are: (i)
 an analysis of the motivations and evolution of the \pilotjob abstraction;
@@ -97,7 +97,7 @@ the definition of a core vocabulary to reason consistently about \pilotjobs;
 and (v) a critical review of the current state of the art of their
 implementations. These contributions are brought together to illustrate the
 generality of the \pilotjob paradigm, to discuss some challenges in
-distributed computing that it addresses and future opportunities.
+distributed computing that it addresses and future opportunities. \note{odd grammar in last sentence}
 
   % These contributions are brought together to illustrate the defining
   % characteristics of the \pilotjob paradigm, its generality, and the main
@@ -174,11 +174,11 @@ distributed computing that it addresses and future opportunities.
 
 The seamless uptake of distributed computing infrastructures by scientific
 applications has been limited by the lack of pervasive and simple-to-use
-abstractions at the development, deployment, and execution level.
+abstractions at the development, deployment, and execution level. \note{big claim, no justification or citation.}
 
 As suggested by the proliferation of \pilotjob systems used on production
 distributed computing, \pilotjobs are arguably one of the few widely-used
-abstraction.  A variety of \pilotjob systems have emerged:
+abstraction.  \note{not sure there is an \pilotjob abstraction yet - you need to show this before you claim it} A variety of \pilotjob systems have emerged:
 Glidein/GlideinWMS~\cite{frey2002condorG}, the Coaster
 System~\cite{wilde2011swift}, DIANE~\cite{moscicki2003diane},
 DIRAC~\cite{casajus2010dirac}, \panda~\cite{chiu2010pilot},
@@ -186,7 +186,7 @@ GWPilot~\cite{rubio2015gwpilot}, Nimrod/G~\cite{buyya2000nimrod},
 Falkon~\cite{raicu2007falkon}, MyCluster~\cite{walker2006creating} to name a
 few. These systems are for the most part functionally equivalent and motivated
 by similar objectives; nonetheless, their implementations often serve specific
-use cases, target specific resources, and lack in interoperability.
+use cases, target specific resources, and lack in interoperability. \note{why is this a problem?}
 
 % as they support the decoupling of workload submission from resource
 % assignment. N
@@ -246,7 +246,7 @@ of underpinning abstractions, or on a well-understood set of dedicated design
 principles. Furthermore, the terminology used to describe functionally
 equivalent systems is inconsistent; the proliferation and specificity are a
 manifestation of a lack of common understanding and vocabulary, as well as a
-compounding factor.  Not surprisingly, the functionalities and properties of
+compounding factor. \note{compounding factor to what?} Not surprisingly, the functionalities and properties of
 \pilotjobs have been understood mostly, if not exclusively, in relation to the
 needs of the containing software systems or of the use cases justifying their
 immediate development.
@@ -256,25 +256,27 @@ implementations that serve many million jobs a year on diverse computing
 platforms~\cite{maeno2014evolution,katz2012}. However, the lack of conceptual
 clarity and an explicit enunciation of the \pilotjob computing paradigm has
 undermined the development of specific implementations as well as resulting in
-an unsustainable software ecosystem. This limitation is illustrated not only by
+an unsustainable software ecosystem. \note{prove this?} This limitation is illustrated not only by
 the duplication of effort, but also by an overall immaturity of the available
 systems in terms of functionalities, flexibility, portability, interoperability,
 and, most often, robustness. Ultimately, these also contribute to a high-cost of
-development and low software sustainability.
+development and low software sustainability. \note{it seems like the symptom is that
+multiple such systems are developed, but does this show that the cause is lack of conceptual understanding?  An alternate explanation is 'not invented here' or getting funding to write
+something new is easier than getting funding to use something old}
 
-This survey is motivated by the fact that, in spite of the demonstrated
+This survey \note{what survey?  this is a perspective article by title} is motivated by the fact that, in spite of the demonstrated
 potential and proliferation of \pilotjob systems, there remains significant lack
 of clarity and understanding about the \pilotjob abstraction. As alluded to,
-this has resulted in significant overhead and repetition of effort. Looking
+this has resulted in significant overhead and repetition of effort. \note{again, not clear that cause and effect are what you think they are} Looking
 forward, with the growing importance and need for scalable task-level
 parallelism and dynamic resource management in high-performance computing, the
 lack of conceptual clarity might have similar and potentially profound
-consequences for the next generation of supercomputing.
+consequences for the next generation of supercomputing. \note{or it might not} 
 
 This paper offers a critical analysis of the current state of the art providing
 the conceptual tooling required to appreciate the properties of the \pilot
 paradigm, i.e. the abstraction and the methodology underlying \pilotjobs
-systems. The remainder of this paper is divided into four sections.
+systems. \note{prev is confusing and awkward} The remainder of this paper is divided into four sections.
 \S\ref{sec:history} offers a critical review of the functional underpinnings of
 the \pilot abstraction and how it has been evolving into \pilotjob systems and
 systems with pilot-like characteristics.
