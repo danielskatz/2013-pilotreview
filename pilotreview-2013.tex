@@ -315,7 +315,7 @@ paradigm.
 At least five features need elucidation to understand the technical origins and
 motivations of the \pilot abstraction: task-level distribution and parallelism,
 \MW pattern, multi-tenancy, multi-level scheduling, and resource placeholding.
-Even if these features taken individually are not unique to the \pilot
+Even if \note{they aren't - why say even if} these features taken individually are not unique to the \pilot
 abstraction, the \pilot abstraction brings them together towards an integrated
 and collective capability. This section offers an overview of these five
 features and an analysis of their relationship with the \pilot abstraction. A
@@ -338,7 +338,7 @@ between the five features and the \pilot abstraction.}
 
 % ------------------------------------------------------------------------------
 % 2.1
-\subsection{Functional Underpinnings of the Pilot Abstraction}
+\subsection{Functional Underpinnings of the Pilot Abstraction} \note{why doesn't this subsection title match the description/text of the five features in the section intro?}
 \label{sec:histabstr}
 
 To the best of the authors' knowledge, the term ``pilot'' was first coined in
@@ -351,7 +351,7 @@ naming, the \pilot abstraction addresses a problem already well-known at the
 beginning of the twentieth century: {\bf task-level} distribution and
 parallelism on multiple resources.
 
-In 1922 Lewis Fry Richardson devised a Forecast
+\note{this story adds no real value, but a fair amount of space, including the figure} In 1922 Lewis Fry Richardson devised a Forecast
 Factory~\cite{lynch1999richardson} (Figure~\ref{fig:forecast_factory}) to solve
 systems of differential equations for weather
 forecasting~\cite{richardson1922weather}. This factory required 64,000 ``human
@@ -427,7 +427,7 @@ resources to the users.
 
 {\bf Multi-level scheduling} is one of the strategies devised to improve
 resource access across multiple high-performance and distributed machines. The
-idea is to hide the scheduling point of each high-performance machine behind a
+idea is to hide the scheduling point of each high-performance machine \note{not sure what a machine is here} behind a
 single scheduler. The users or the applications submit their tasks to a
 scheduler that negotiates and orchestrates the distribution of the tasks via the
 scheduler of each available high-performance machine. While this approach
@@ -446,7 +446,7 @@ others the application layer as, for example, with workflow
 systems~\cite{taylor2014,curcin2008scientific,juve2008,balderrama2012scalable}.
 All these approaches offered and still offer some degree of success for specific
 applications and use cases but a general solution based on well-defined and
-robust abstractions has still to be devised and implemented.
+robust abstractions has still to be devised and implemented. \note{why does this have to be done?}
 
 % the approaches developed under the umbrellas of grid computing
 % ~\cite{raicu2007,singh2005,ramakrishnan2006toward} or cloud
@@ -457,7 +457,7 @@ high-performance machines is the increase of the implementation complexity
 imposed on the application layer. Even with solutions like grid
 computing~\cite{berman2003grid,foster2003grid} aiming at effectively and, to
 some extent, transparently integrating diverse resources, most of the
-requirements involving the coordination of task execution still resides with the
+requirements involving the coordination of task execution still reside with the
 application layer~\cite{legrand2003,krauter2002,darema2005}. This translates
 into single-point solutions, extensive redesign and redevelopment of existing
 applications when they need to be adapted to new use cases or new
@@ -466,8 +466,8 @@ high-performance machines, and lack of portability and interoperability.
 Consider for example a simple distributed application implementing the \MW
 pattern. With a single high-performance machine, the application requires the
 capability of concurrently submitting tasks to the queue of the scheduler of the
-high-performance machine, retrieve their outputs, and aggregate them. When
-multiple high-performance machines are available, the application requires
+high-performance machine, retrieve their outputs, and aggregate them. \note{awk} When
+multiple high-performance machines are available, the application requires \note{the application requires?}
 directly managing submissions to several queues or using a third-party scheduler
 and its specific execution model. In both scenarios, the application requires a
 large amount of development and capabilities that are not specific to the given
@@ -505,6 +505,11 @@ system of the remote high-performance machine, but, once executed, the user --
 or the master process of the distributed application -- may hold total control
 over its resources. In this way, tasks are directly scheduled on the placeholder
 without competing with other users for the high-performance machine scheduler.
+
+\note{it was fairly common in the 80s and 90s for a user of a batch supercomputer who
+wanted interactive access, such as for debugging, to submit a batch job containing an
+xterm. When the job started, the xterm window would appear and the user could then
+use the system interactively.  This is a an example of resource placeholding.}
 
 % \msnote{I would like to either replace 'supercomputer' with i.e. 'cluster', or
 %   make it explicit in the beginning of 2.1 that we talk about multiple types
@@ -571,7 +576,7 @@ workload and data management.
     \caption{A partial clustering of pilots along functionality. \mtnote{The
         clustering is incomplete. Should we list all the \pilot systems we
         mention?} \jhanote{We should for now just mention that its partial. More
-        importantly,  should we revisit the axis labels?}}
+        importantly,  should we revisit the axis labels?} \note{this is confusing, since Pegasus uses Glide-In - Pegasus is not the pilot system, Gilde-In is, and it should only show up in one oval, ideally}}
   \label{fig:pilotjob_clustering}
 \end{figure}
 
@@ -579,7 +584,7 @@ AppLeS~\cite{berman1996application} is a framework for application-level
 scheduling and offers an example of an early implementation of resource
 placeholders. AppLeS provides an agent that can be embedded into an application
 thus enabling the application to acquire resources and to schedule tasks onto
-these. Besides \MW, AppLeS also provides application templates, e.g., for
+these. Besides \note{in addition to} \MW, AppLeS also provides application templates, e.g., for
 parameter sweep and moldable parallel applications~\cite{berman2003adaptive}.
 
 AppLeS offered user-level control of scheduling but did not isolate the
@@ -594,7 +599,7 @@ started using the \MW coordination pattern to achieve high-throughput
 calculations for a wide range of scientific problems. The workers of these
 systems could be downloaded and installed on the users workstation.
 With an installation base distributed across the globe, workers pulled and
-executed computation tasks when CPU cycles were available.
+executed computation tasks when CPU cycles were available. \note{may also want to mention the Condor MW work here?}
 
 The volunteer workers were essentially heterogeneous and dynamic as opposed to
 the homogeneous and static AppLeS workers. Farming out tasks in a dynamic
@@ -609,10 +614,10 @@ distributed.net~\cite{lawton2000distributed} in 1997 to compete in the
 RC5-56 secret-key challenge, and the SETI@Home project, which set out to
 analyze radio telescope data. The generic BOINC distributed master-worker
 framework grew out of SETI@Home, becoming the {\it de facto} standard framework
-for voluntary computing~\cite{anderson2004boinc}.
+for voluntary computing~\cite{anderson2004boinc}. \note{aren't there a number of other systems that are in common use too?}
 
 It should be noted that the process of resource acquisition is different in
-AppLes and voluntary computing. The former has prior knowledge of the available
+AppLes and volunteer computing. The former has prior knowledge of the available
 resources while the latter has none. As a consequence, AppLes can request and
 orchestrate a set of resources, allocate tasks in advance to specific workers
 (i.e., resources placeholders), and implement load balancing among resources. In
@@ -620,7 +625,7 @@ voluntary computing tasks are pulled by the clients when they become active so
 specific resource availability is unknown in advance. This is a potential
 drawback but it is mitigated by the redundancy offered by the large scale that
 voluntary computing can reach thanks to its simpler model of worker distribution
-and installation.
+and installation. \note{is this just push vs pull?  if so, why not say so?}
 
 % The opportunistic use of geographically distributed resources championed by
 % voluntary computing offers several advantages. The resource landscape
@@ -644,7 +649,7 @@ resources~\cite{thain2005}. Originally, HTCondor was created for systems within
 one administrative domain but Flocking~\cite{epema1996worldwide} made it
 possible to group multiple machines into aggregated resource pools. However,
 resource management required system level software configurations that had to be
-made by the administrator of each individual machine of each resource pool.
+made \note{not sure configurations are 'made'} by the administrator of each individual machine of each resource pool.
 
 % \jhanote{resource management could not be done on application level'' does not
 %   make sense to me.  Are we referring to aggregation?}\mtnote{Better?}
@@ -704,7 +709,7 @@ computing resources.
 
 \pilotjob systems were developed alongside those tailored to the LHC
 experiments to serve other research purposes, to target diverse types of
-resources and middleware, or as special-purpose subsystems and frameworks.
+resources and middleware, or as special-purpose subsystems and frameworks. \note{awk}
 
 The BigJob \pilotjob system~\cite{luckow2010} was designed to support task-level
 parallelism on distributed HPC resources, to broaden the type of applications
@@ -782,7 +787,7 @@ Swift~\cite{wilde2011swift} is a scripting language designed for expressing
 abstract workflows and computations. The language also provides capabilities for
 executing external application as well as the implicit management of data flows
 between application tasks. Swift uses a \pilot implementation called ``Coaster
-System''~\cite{coasters_url} that supports various types of infrastructure,
+System''~\cite{coasters_url} \note{should cite hategan UCC 2011 paper elsewhere cited, rather than the URL I think} that supports various types of infrastructure,
 including clouds and grids.
 
 Swift has also been used in conjunction with Falkon~\cite{raicu2007falkon}.
