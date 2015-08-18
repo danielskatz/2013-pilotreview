@@ -1,0 +1,315 @@
+\subsection{candidates for removal in current draft-version}
+
+
+%-----from section 1-----
+\jhanote{Need consistency between PanDA (two paras from now) and PanDa}
+
+\mtnote{I would consider to cut the following 5 paragraphs. They are largely a
+  repetition of what we have in 4.2 and historically they offer details that
+  have been already summarized (or can be summarized) in the preceding,
+  encompassing paragraph.}  \jhanote{I think this is a fair suggestion. But we
+  need to ensure that those that are not discussed in 4.2 are in the paragraph
+  ``for all other pilot systems'' --- so as to avoid possibly being dinged by a
+  reviewer from that system..}
+
+GlideinWMS~\cite{sfiligoi2008glideinwms} is a workload management system that is
+based on the pilot capabilities of HTCondor GlideIn. The system can, based on
+the current and expected number of jobs in a pool, automatically increase or
+decrease the number of active Glide-ins (i.e. pilots) available to that pool.
+GlideinWMS is a multi-user \pilotjob system commonly deployed as a hosted
+service.
+% GlideinWMS attempts to hide the pilot capabilities rather than exposing
+% them to the user.
+GlideinWMS is currently deployed in production on the Open Science Grid
+(OSG)~\cite{osg_url} and is the recommended mode for new users wanting to access
+OSG resources. \mtnote{I commented out the sentence as I think it would need
+further explanation, a level of depth/analysis that I believe does not belong to
+this section. Would you agree?}
+
+\panda (Production and Distributed Analysis)~\cite{zhao2011panda} is
+the workload management system of the ATLAS experiment~\cite{aad2008atlas}, used
+to run managed production and user analysis jobs on the grid. The ATLAS
+Computing Facility~\cite{acf_url} operates the pilot submission systems. This is
+done using the \panda `AutoPilot' scheduler component which submits pilot jobs
+via HTCondor-G. \panda also provides the ability to manage data associated the
+jobs managed by the \panda workload manager.
+
+AliEn~\cite{saiz2003alien} provides the ability to tightly integrate storage and
+compute resources and is also able to manage file replicas. While all data can
+be accessed from anywhere, the scheduler is aware of data localities and
+attempts to schedule compute close to the data. AliEn deploys a pull-based
+model~\cite{saiz2003alienpr} assuming that the resource pool is dynamic
+% , and that a pull model doesn't require the broker to keep detailed track of
+% all resources, which leads to a more simple implementation.
+% \jhanote{what is the broker here?} \mtnote{Mark?} \mtnote{I have eliminated the
+% sentence because it seems too detailed compared to the other descriptions.}
+
+DIRAC~\cite{casajus2010dirac} used by the LHCb experiment~\cite{lhcb_url} is
+another comprehensive pilot-based workload management system. It supports the
+management of data, which can be placed in different types of storage elements
+(e.\,g.\ based on SRM).
+
+Another \pilotjob system that is used in the LHC context is
+Co-Pilot~\cite{buncicco2011co}. Co-Pilot serves as an integration point among
+grid-based \pilotjob systems (such as AliEn and \panda), clouds, and volunteer
+computing resources. Co-Pilot provides components for building a framework for
+seamless and transparent integration of these resources into existing grid and
+batch computing infrastructures exploited by the High Energy Physics (HEP)
+community.
+
+\mtnote{End of the suggested paragraph removal.}
+% ---- end of section 1 ----
+
+
+\jhanote{these last two are not reasons for the success of pilot-jobs. they
+arise as a consequence of the success} The \pilotjob abstraction is also a
+promising route to address specific requirements of distributed scientific
+applications, such as coupled-execution and application-level
+scheduling~\cite{ko2010efficient,kim2010exploring}. Another concern often
+addressed by \pilotjobs is fault tolerance which commonly refers to the ability
+of the \pilotjob system to verify the execution environment before executing
+jobs.
+
+\mtnote{We need to verify if all this is described in 4.2. For example, what
+  \pilot systems offer fault-tolerance? Runs on heterogeneous resources?
+  Dynamic?} \jhanote{I'll be rewriting the Introduction, so please consider
+  introduction locked.}
+
+
+% As with the HPC environment, the support for different application workloads
+% and job types as long-lived vs. short-lived applications, or homogeneous vs.
+% heterogeneous tasks is challenging.
+
+% \jhanote{We should briefly discuss cluster management and container advances
+%   (e.g. Docker) and their relation to pilots} \mtnote{Is this still valid?
+%   Apologies but I am not sure what comments are old and what are new. If so, I
+%   will have a go at it with a paragraph but I am by no means an expert of
+%   these technologies.}  \jhanote{I'll write up a bit about Google's
+%   Kubernetes, which not completely coincidently is Greek for Pilot}
+
+% Files and Data
+
+The relevance of both compute and data resources is shown by the implementation
+of dedicated capabilities in all the \pilot systems described in the previous
+subsection. Along with the use of pilots to expose compute resources, \pilot
+systems utilize dedicated subsystems to manage data staging. Data staging is
+coordinated with task executions and implemented by utilizing the file-transfer
+capabilities exposed by the DCR middleware.
+
+The data abstraction utilized by all the reviewed \pilot systems is
+file-centric. Data are expected to be aggregated into input/output files that
+need to be transferred between workstations, data repository, or DCR filesystems
+across the networking infrastructure. This assumptions may be limiting,
+especially when considering data-intensive applications.
+
+Support for diverse technologies and higher-level abstractions is likely to
+become a requirement for the development of general purpose \pilot systems. For
+example, transparent support for distributed filesystems like
+HDFS~\cite{borthakur2008}, opportunistic creations of data clusters like those
+utilized by YARN~\cite{vavilapalli2013}, transparent integration of databases or
+storage services are likely to play a relevant role in the efficient execution
+of data-oriented, distributed
+applications~\cite{rey2015open,sboner2015primer,zhang2010}.
+
+\mtnote{Consider whether to add a paragraph about interoperability among \pilot
+  systems. I would probably not do it as it does not seem of primary relevance
+  to me.}\jhanote{I might add: we are not advocating interoperability of
+  pilot. if there is a compelling reason for the community, then they will
+  self-organize. What we're saying is that any attempt at interoperability will
+  be successful/should be taken only after adequate advances in conceptual
+  understanding exists. This paper is arguably the most comprehensive paper
+  towards that end goal.}
+
+% \paragraph*{Sociotechnical} \jhanote{What is the future of PJ?};
+% \jhanote{\pilotjobs have potential, but it is not being realized due to ad hoc
+% nature of theory and practise,}; Fragmentation/balkanization of the pilot
+% landscape. While in this paper we also talk about HTC and HPC and their
+% differences and commonalities, we have referred to an existing and growing
+% demand for convergence between the two from an application perspective. [ref
+% MTC?] HPC users are no longer exclusively interested in running one large job,
+% but applications become more versatile and dynamic and are conflicting with
+% the conventional thougths and operational realities on how to ``use'' HPC
+% resources. [ref cray, cram, etc.] If the HPC world is going to accept this
+% mode of operation, then recognizing, embracing and investing in the
+% \pilot Paradigm is inevatable.
+
+% \paragraph*{Engineering} \jhanote{Why should we do to enhance the usability?};
+% \aznote{I would argue that our work is important to
+% \pilotjobs because by expressing a common model, we enable researchers to 1)
+% understand the commonalities between existing \pilotjob approaches in order to
+% 2) motivate innovation + construction of ``next-gen''
+% \pilotjob systems. E.G., implement the basics (or work from an existing
+% system) + understand where the boundaries/unexplored territory is without
+% having to first completely understand all 15+ existing \pilotjob systems and
+% their unique vocabulary.}
+
+% While we are in no way to argue for a one-size-fits-all \pilot we do believe
+% that our work has shown that there is enough common ground that establishing a
+% new recognized layer in the stack would not only help conceptually, but would
+% also pay-off from a practical engineering standpoint. There are many intricate
+% details for example in the runtime environment, that sharing efforts on that
+% layer would allow the various systems to focus their attention where there is
+% less overlap and more tailored to their own communities. [ref Open RunTime
+% Environment] Standardisation?
+
+\jhanote{highlighting the relevance of task execution localization} \jhanote{the
+  concept of task execution localization is insufficiently
+  developed. ``localization'' occurs only once in the context of pilot
+  deployment. I too am not sure what is being said, ``relevance of task
+  execution localization''.}\jhanote{Also reading through the next two
+  paragraphs, I struggle to distinguish task execution localization and task
+  deployment?}\jhanote{Also what is unique about task localization as
+  encountered by pilots vis-a-vis task localization encountered by general
+  distributed applications? I would say deployment remains a major challenge of
+  distributed applications and computing; this is trivially (???) reflected in
+  the challenges faced by pilot systems. Glad to discuss further if I am missing
+  something?}
+
+
+% \jhanote{one possibility is to move text from here... till the end of ... play
+%   a relevant role in the efficient execution of data-oriented, distributed
+%   applications.. into section 5. This would focus 4.3 on a discussion of
+%   4.1/4.2 and leave more general issues for 5. Thoughts?}
+
+The notion of task as defined in~\S\ref{sec:understanding} and then utilized
+in~\S\ref{sec:implementations} shapes both the design and implementation of
+\pilot systems. From the perspective of design, adding a wrapper to the
+executables of a distributed or parallel application means creating a
+well-defined space for their localization. This may involve not only the
+specification of program switches, data locations, or library dependences but
+also loading modules, downloading supporting code, or on-the-fly compilations
+and execution of supporting applications. Implementation-wise, localization
+requires tight coupling with the target DCR, its capabilities, policies, and
+specific configurations.
+
+The implementation of the localization process becomes more challenging in the
+presence of heterogeneous DCRs. The same executable may require different
+localization procedures depending on where it will be executed. More
+importantly, different types of localizations may or may not be available or
+allowed on all the target DCRs.
+
+% This imposes decision capabilities on the task scheduler and the development
+% of a robust interoperability layer between the
+% \pilot system and heterogeneous target DCRs. \jhanote{The last sentence is
+%   what is important}
+
+% Resource Overlay
+
+Interoperability across DCRs is a necessary precondition to utilize multiple
+pilots across diverse DCRs (i.e. a resource overlay as defined
+in~\S\ref{sec:termsdefs}). In a multi-pilot, multi-DCR scenario, the relations
+among resources and task requirements increase in number and complexity. Data
+not only needs to be replicated and made available across different locations
+but the applications and protocols used to move data may change across target
+DCRs. DCR with specialized data capabilities may have to be prioritized
+depending on the data requirements of the tasks or, analogously, DCR supporting
+specific types of compute resources may have to be chosen when, for example,
+applications require GPUs.
+
+In this context, \pilot systems need to support higher level abstractions such
+as resource affinity~\cite{luckow2014pilot,neumeyer2010s4} or multidimensional
+scheduling~\cite{zhu2008multi}. The correlation among data, compute, and network
+resources needs to be assessed for every execution and carefully leveraged to
+optimize not only time to completion but also resource utilization. These
+optimizations may be the determining factor to enable the execution of
+applications with stringent data, compute, or networking requirements.
+
+Given advances, it is not surprising that GlideinWMS and PANDA have begun to
+support multi-pilot, multi-DCRs execution. These \pilot systems implement
+articulated workload management components with well-isolated scheduling
+elements and robust communication and coordination infrastructures.  Without
+such an architecture, a robust implementation of the higher-level capabilities
+required by multi-pilot, multi-DCR task executions would be very challenging.
+
+\jhanote{I'm not sure I see the connection between these paragraphs. Also maybe
+  we could structure this subsection into ``discuss differences'' and leave
+  observations for section 5. If so observations about architectural importance
+  etc. would be nicely put into 5. Thoughts?}
+
+% -----------------------------------------------------------------------------
+% \item \textbf{Pilot abstraction} as a well-defined, independent distributed
+% system abstraction. \jhanote{state clearly how section 3 and 4 help us define
+% what a pilot is, the necessary and sufficient conditions (if possible),
+% discuss the classifiers and apply/discuss them to the set of pilot systems
+% here.} ``pilot-abstractions works!'' , p* as a model ok. Our initial
+% investigation~\cite{Luckow:2008la} into \pilot- Abstractions was motivated by
+% the desire to provide a single conceptual framework --- referred to as the P*
+% Model, that would be used to understand and reason the plethora and myriad
+% \pilotjob implementations that exist.
+
+% \item \textbf{Generality of the pilot abstraction} when compared to different
+% types of resources. Is pilot useful only for compute resources? What about
+% pilot data? Pilot network? Other types but compute, data, network?
+
+% \item \textbf{Revisit the myths about pilot abstraction}: how they evolve from
+% being a simple hack to get around queuing/scheduling policies to become a
+% first class citizen of the abstractions for distrubuted systems. What are the
+% characteristics/properties that make the pilot abstract a first class citizen?
+% Do we notice a progressive evolution in the multiple implementations we
+% introduced and described in Section 4?
+
+% \item \textbf{Relationship between pilot abstraction and different types of
+% middleware}: grids, cloud, HPC.
+
+% \item \textbf{Pilot abstraction and `lessons for the workflow systems'}.
+
+% \mtnote{Do we want to put this at the end of S4, in the analysis that we will
+% have to write in 4.3?}
+
+% \section*{Notes - to be commented out by their authors}
+
+% \jhanote{The question is what are the fundamental ``concepts''. It is not
+%   necessary that the concepts have a specific implementation or map to a
+%   component in \pilotjob system. As we know there are different ways in which
+%   tasks get committed to the \pilotjob system. One possible primary concept is
+%   that of logical grouping; all tasks are committed to a logical grouping --
+%   where the grouping is such that all entities in this group will be executed
+%   (disregrarding details of how this grouping will happen, or who will perform
+%   the execution).  It appears that the concept of logical grouping of tasks is
+%   a fundamental one, and avoids a requirement of any further specification of
+%   of details of who/where/when; if so, then the notion of a pool can be
+%   dispensed with, which will have the advantage of liberating us from the
+%   requirement of imposing on the the manager the need to push/pulling tasks
+%   from a pool.}
+
+% \mtnote{The paragraph relative to this comment is gone --- no more pool
+% concept. I do like the idea of grouping though so I would suggest to wait for
+% the entire Section to stabilize further and then see whether we can add/extend
+% a paragraph by introducing the concept of grouping.}
+
+% \jhanote{AppLeS is not strictly \pilotjob based?  but \pilotjob like
+%   capabilities?} \alnote{The question is: when is a \pilot a \pilot? When the
+%   use the term \pilot and when \pilot-like? Apples has a component -- the
+%   Actuator (Quote from paper: "... handles task launching, polling, and
+%   cancellation ..."), which is quite similar to a \pilot. But maybe AppLeS is
+%   something for the history section or a separate category for Master/Worker
+%   frameworks...  PJ evolved from the need to map master/worker style
+%   computations to heterogeneous, dynamic distributed grid environments. Added
+%   a pre-\pilot category to the history subsection.}
+
+% \jhanote{I think all the functionality of PJs is predicated on the following
+%   core capability: enable the decoupling between assigning a workload from the
+%   spatial/temporal execution properties of its execution. In condor, this is
+%   mentioned as ``separating between job scheduling and resource''. This get
+%   mentioned somewhere in core functionality?}
+
+% \jhanote{deployment and provisioning are not the same in my opinion:
+%   provisioning is about resources, i.e., provisioning is not the same as
+%   scheduling, it is more like arranging. Deployment is about ``setting up T=0
+%   requirements, which could be software environment, input/data dependencies,
+%   as well as resources.''}
+
+% \aznote{Some additional thoughts for this section... 1) The early history of
+% \pilotjobs seems to have a few ``independent'' \pilotjob approaches, where
+% systems (eg MyCluster/AppLeS) incorporate \pilotjob techniques with sometimes
+% wildly differing implementations/vocabulary but when boiled down, offering the
+% same attempts at base/minimal functionality.  This helps push the value of the
+% approach (multiple groups working on it independently helps imply its value),
+% with increasingly complex \pilotjob systems coming out as time pushes on. Our
+% review aids both in the construction of these increasingly complex systems by
+% exposing their core functionality + allowing researchers/etc to push the field
+% forward by reducing the apparent complexity to a set of common
+% terms/comparisons/classifiers/etc.  I don't know if this is too
+% prescriptive/hand-wavey -- feel free to ignore if so, but I feel that the
+% essence of this is one potential contribution of our work.}
+
