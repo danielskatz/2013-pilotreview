@@ -2443,7 +2443,7 @@ systems are ordered alphabetically in the table \& text.}.
 
 % Who did it and for what scientific domains.
 The Coaster System (also referred to in literature as Coasters) is developed and
-maintained by the Distributed Systems Laboratory at the University of Chicago.
+maintained by the Distributed Systems Laboratory at the University of Chicago. \note{really by the Swift project, not the whole DSL, and the Swift project is more than just U of Chicago}
 The primary goal of the Coaster System is to provide \pilot abstraction
 functionalities to Swift system~\cite{wilde2011swift,zhao2007swift}. The Coaster
 System can be used stand-alone but, in practice, it should be regarded as a
@@ -3287,7 +3287,7 @@ them is needed.}
 
 The descriptions offered in the previous subsection show how diverse \pilot
 system implementations conform to the set of components and functionalities
-defined in~\S\ref{sec:understanding}.  The descriptions of the seven \pilot jobs
+defined in~\S\ref{sec:understanding}.  The descriptions of the seven \pilot jobs \note{these were really pilot systems, not pilot jobs}
 also highlight implementation differences, especially concerning the auxiliary
 properties of these \pilot systems. For example, the described \pilot systems
 show variations in their architectures and data management capabilities, DCR
@@ -3335,7 +3335,7 @@ resources and act as a proxy for both the pilot and workload-related
 functionalities.
 
 RADICAL-Pilot also adopts a monolithic architecture
-(Figure~\ref{fig:rp_comparison}) but one implemented in user space and with a
+(Figure~\ref{fig:rp_comparison}) but one implemented in user space \note{aren't most of the others also in user space?} and with a
 library-oriented design. Both the pilot and workload functionalities are
 implemented into a single python module that users load within their
 applications. Users are free to decide where to deploy these applications,
@@ -3367,7 +3367,7 @@ execute tasks on the HTCondor based DCRs; DIANE, DIRAC, and PANDA were initially
 designed to support DCRs used by the LHC experiments but not bound to HTCondor;
 and MyCluster was designed specifically for TeraGrid resources. With the
 progressive development of \pilot systems and DCR middleware, many types of DCR
-are now supported: the Coaster System, Glidein, PANDA, DIRAC and RADICAL-Pilot
+are now supported: \note{by what?} the Coaster System, Glidein, PANDA, DIRAC and RADICAL-Pilot
 all support diverse DCR middleware including typical HPC, grid, and cloud batch
 systems.
 
@@ -3375,14 +3375,14 @@ systems.
 % grid-based DCRs used by the LHC experiments, while Glidein to execute tasks on
 % the HTCondor-based DCRs.
 
-The need for interoperability reinforces the importance of well-defined
+The need for interoperability \note{why is there a need for interoperability?} reinforces the importance of well-defined
 separation between the \pilot system and heterogeneous DCRs, which in turn
 supports the generality of the notion of resource placeholder and its
 independence from the specificities of the target infrastructures and their
 middleware. Placeholders abstract the notions of resources, scheduling, and task
 execution creating a well-defined and isolated logical space for the management
 of task execution. This isolated space is well represented in
-Figures~\ref{fig:diane_comparison} to~\ref{fig:rp_comparison} by the positioning
+Figures~\ref{fig:diane_comparison}--\ref{fig:rp_comparison} by the positioning
 of each Task Manager implementation within the DCRs' compute nodes. It remains
 to be understood under what conditions and for what type of application each
 implementation of a placeholder is more appropriate.
@@ -3409,10 +3409,10 @@ implementation of a placeholder is more appropriate.
   GlideinWMS, but I would make a mention of Glidein and associated tools once
   somewhere, and then keep it simple and readable by using only Glidein}
 
-The \pilot system described in the previous subsection expose diverse interfaces
+The \pilot system \note{systems?} described in the previous subsection expose diverse interfaces
 to the user. \jhanote{to what? for what?}\mtnote{Better?} DIANE, DIRAC,
 GlideinWMS, MyCluster, and PANDA offer command line tools tailored to specific
-use cases, applications, and DCRs. The Coaster System and RADICAL-Pilot exposes
+use cases, applications, and DCRs. The Coaster System and RADICAL-Pilot expose
 an API, and command line tools of DIANE, DIRAC, and PANDA are built on APIs that
 users may directly access and use to develop distributed applications. Specific
 types of user interfaces may be better suited for some projects with distinctive
@@ -3423,12 +3423,14 @@ shortcomings.
 
 \jhanote{I'm not sure I see the point of the last sentence} \mtnote{Better?}
 
+\note{perhaps the last sentence and the next 2 paragraph should move to an advocacy section?}
+
 % DIANE, HTCondor Glidein, GlideinWMS, and PANDA offer command line tools
 % tailored
 
 Open APIs like the one specified in~\cite{luckow2012towards} and implemented by
-RADICAL-Pilot offer also the missing layer on which distributed applications
-could be built upon. \pilot systems can offer a well-defined and isolated layer
+RADICAL-Pilot offer also the missing layer upon which distributed applications
+could be built. \pilot systems can offer a well-defined and isolated layer
 between applications and resources. This can foster extensibility,
 interoperability, and modularity by separating the application logic from the
 management of its execution, and from the provisioning and aggregation of
@@ -3807,8 +3809,8 @@ importance of the \pilot paradigm; and (ii) the development model fostered
 within academic institutions.
 
 As seen in~\S\ref{sec:history} and~\S\ref{sec:analysis}, \pilot systems were
-developed to serve a specific use case, e.g., they emerged as a pragmatic
-solution for improving the throughput of distributed applications, and designed
+each developed to serve a specific use case, e.g., they emerged as a pragmatic
+solution for improving the throughput of distributed applications, and were designed
 as local and point solutions. \pilot systems were not thought from their
 inception as an independent and well-defined system, but, at best, as a module
 within a specific framework. \pilot systems also inherited the development model
@@ -3825,7 +3827,7 @@ support task parallel applications (and the many incarnations of task
 parallelism such as many-task computing, ensemble-based computing,
 compute-intensive map-reduce applications etc.) on current and future generation
 of high-performance computers. The need for intervention to support the
-concurrent execution of multiple tasks that comprise a single workload, arises
+concurrent execution of multiple tasks that comprise a single workload arises
 due to the job-centric resource allocation and management viewpoint that is
 still pervasive on high-performance computers. \pilots via placeholders provide
 {\it application-level} control of the resources, where {\it application-level}
@@ -3939,7 +3941,7 @@ be elected as the only implementation worthy of development effort or adoption.
 As with other software systems and middleware~\cite{bernstein1996} the problem
 is not to eliminate special purpose systems in favor of a single encompassing
 solution but it is, instead, having both of them, depending on the application
-and use case requirements.  Another rationale against rigid consolidation is the
+and use case requirements.  \note{awk} Another rationale \note{reason? argument?} against rigid consolidation is the
 diversity in programming languages used, the different deployment models
 required, and its implications for the interaction with existing applications.
 
@@ -3988,7 +3990,7 @@ and infrastructures.
 % those use cases in which applications are heterogeneous in the type of
 % computation, time, or space.
 
-As argued in the previous section, \pilot paradigm is agnostic towards the type
+As argued in the previous section, the \pilot paradigm is agnostic towards the type
 of application, application objective and resource upon which applications are
 executed. % The type of matching between the requirements of tasks and the
 % capabilities offered by the resources held by the pilot should not be
@@ -4043,8 +4045,8 @@ requiring new paradigms.
 % is emerging as an important container management approach, which not
 % completely coincidently is Greek for the English term `Pilot'.
 
-This can be evidenced by the emergence of frameworks that encapsulate the \pilot
-paradigm. Hadoop~2~\cite{hadoop_url}, the second version of the affirmed
+This can be evidenced \note{evidenced is a very big word for shown or seen} by the emergence of frameworks that encapsulate the \pilot
+paradigm. Hadoop~2~\cite{hadoop_url}, the second version of the affirmed \note{affirmed?}
 infrastructure for data-intensive computing, introduced the
 YARN~\cite{vavilapalli2013apache} resource manager for heterogeneous workloads.
 YARN supports multi-stage scheduling: Applications need to initialize their
@@ -4072,6 +4074,8 @@ for the English ``Pilot''.
 \subsection{Contributions}
 \label{sec:contributions}
 
+\note{this is a very strange place to put a contributions section - perhaps this should be called summary?}
+
 \jhanote{(i) we provide comprehensive historical and technical analysis of
   pilots, (ii) set the stage for a common conceptual model and implementation
   framework, (iii) provide insight and lessons for other tools and higher-level
@@ -4097,19 +4101,19 @@ The analysis provided in \S\ref{sec:history} also showed the heterogeneity of
 the \pilot landscape and the need for a clarification of the basic components
 and functionalities that distinguish a \pilot system. These were described in
 \S\ref{sec:understanding} offering an architectural pattern to identify \pilot
-systems and discriminate them from other systems. \S\ref{sec:understanding} also
+systems and discriminate them from other systems. \note{awk} \S\ref{sec:understanding} also
 contributed a well-defined vocabulary that can be used to reason consistently
 about different implementation of the \pilot abstraction.
 
 %type of middleware
 
-Both contributions offered in \S\ref{sec:understanding} were then leveraged in
+Both \note{what are both?} contributions offered in \S\ref{sec:understanding} were then leveraged in
 \S\ref{sec:analysis} to analyze a set of paradigmatic \pilot system
 implementations. The shift from understanding the minimal set of components and
 functionalities characterizing the \pilot abstraction to the comparison of
 actual \pilot implementations required that core and auxiliary implementation
 properties be delineated. Tables~\ref{table:core_properties}
-and~\ref{table:aux_properties} summarize these contributions and can be used to
+and~\ref{table:aux_properties} summarize \note{present tense or past tense?} these contributions and can be used to
 analyze a software system design, decide whether it is a \pilot system, and
 assess the richness of its functionalities.
 
@@ -4126,7 +4130,7 @@ structured approach is needed to the conceptualization and design of its
 software systems. The generality of this paradigm together with the types of
 workload, resource, and performance indicates the fundamental role that it can
 play to support task level parallelism at higher scales and on possibly multiple
-and diverse DCRs. If appreciated, the contributions of this paper offer an
+and diverse DCRs. If appreciated, \note{appreciated?} the contributions of this paper offer an
 analytical base for the improvement of existing \pilot systems implementations
 and curtailing the need to create unsustainable partial implementations.
 
