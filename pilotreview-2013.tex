@@ -2442,12 +2442,15 @@ systems are ordered alphabetically in the table \& text.}.
 \subsubsection{Coaster System}\label{sec:coaster}
 
 % Who did it and for what scientific domains.
-The Coaster System (also referred to in literature as Coasters) is developed and
-maintained by the Distributed Systems Laboratory at the University of Chicago. \note{really by the Swift project, not the whole DSL, and the Swift project is more than just U of Chicago}
+The Coaster System (also referred to in literature as Coasters) was developed by the Distributed Systems Laboratory at the University of Chicago is maintained by the Swift project.
 The primary goal of the Coaster System is to provide \pilot abstraction
 functionalities to Swift system~\cite{wilde2011swift,zhao2007swift}. The Coaster
 System can be used stand-alone but, in practice, it should be regarded as a
 system specifically tailored for the Swift System requirements and design.
+
+\note{from Mihael: That last statement provides nothing to back it up. For a very long time the coasters code was part of the CoG project and maintained in a separate, standalone repository, separated from swift by a very well defined task interface, very similar to SAGA and actually pre-dating SAGA.\\
+\\
+So no. The Swift system instead is tailored for an abstract task interface. Low coupling of software components is what any sizeable project should strive for. Saying that this isn't the case is like saying that the project is badly engineered.}
 
 % Architecture.
 The Coaster System is composed of three main
@@ -2521,6 +2524,8 @@ Workers holding multiple cores~\cite{swift_guide_url}. It should also be
 possible to execute MPI tasks by having Workers to span multiple compute nodes
 of a DCR.
 
+\note{from Mihael: The Python CoG Kit, Keith's project, was a different thing. There's some bad naming. The initial Java CoG (or jglobus) and the Python CoG, were clients to GT2. Java CoG 4 and above (started around 2004) are the ones implementing a job abstraction layer.}
+
 % workload binding
 The Coaster Service uses providers from the Java CoG Kit Abstraction Library to
 submit Workers to DCR with grid, HPC, and cloud middleware. Workers pull the
@@ -2528,6 +2533,8 @@ tasks to execute, The late binding of tasks to pilots is implemented by Workers
 pulling tasks to be executed as soon as free resources are available. It should
 be noted that tasks are early bound to the DCR that is specified as part of the
 task description.
+
+\note{from Mihael: That's just the way it's mostly used. We experimented with a mode in which tasks are bound only when actual workers become available. But I guess that's not documented.}
 
 % ------------------------------------------------------------------------------
 % DIANE
