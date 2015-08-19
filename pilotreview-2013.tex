@@ -873,14 +873,14 @@ about its multiple implementations.
 
 All \pilotjob systems introduced in~\S\ref{sec:history} are engineered to allow
 for the execution of multiple types of workloads on machines with diverse
-middleware, e.g., grid, cloud, or HPC. This is achieved in many ways, depending
+middleware, e.g., grid, cloud, or HPC. \note{maybe make the point that different \pilotjob systems are optimized for different things - you seem to hint at it, but don't quite say it} This is achieved in many ways, depending
 on use cases, design and implementation choices, and on the constraints imposed
 by the middleware and policies of the targeted machines. The common denominators
 among \pilotjob systems are defined along three dimensions: purpose, logical
 components, and functionalities.
 
 The purpose shared by every \pilotjob system is to improve workload execution
-when compared to executing the same workload directly on one or more machines.
+when compared to executing the same workload directly on one or more machines. \note{still unhappy with `machines'}
 Performance of workload execution is usually measured by throughput and time to
 completion, but other metrics could also be considered: data transfer time,
 scale of the workload executed, power consumption, or a mix of them. Metrics
@@ -892,7 +892,7 @@ characteristics requires isolating the minimal set of logical components that
 characterize every \pilotjob system.
 
 At some level, all \pilotjob systems employ three separate but coordinated
-logical components: a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
+logical components: \note{maybe say that they have these functions, rather than these components?} a \vocab{Pilot Manager}, a \vocab{Workload Manager}, and a
 \vocab{Task Manager}. The Pilot Manager handles the description, instantiation,
 and use of one or more resource placeholders (i.e., pilots) on single or
 multiple machines. The Workload Manager handles the scheduling of one or more
@@ -902,7 +902,7 @@ placeholders.
 
 The implementation details of these three logical components vary significantly
 across \pilotjob systems (see~\S\ref{sec:analysis}). For example, two or more
-logical components may be implemented by a single software module or additional
+logical components \note{again, functions would be better here} may be implemented by a single software module or additional
 functionalities may be integrated into the three management components.
 Nevertheless, the Pilot, Workload, and Task Managers can always be
 distinguished across different \pilotjob systems.
@@ -921,11 +921,11 @@ distinguished across different \pilotjob systems.
 %   handles the scheduling of one or more workloads'', ``The Task Manager takes
 %   care of executing the tasks of each workload''}
 
-Each \pilotjob system supports a minimal set of functionalities that allow for
+Each \pilotjob system supports a minimal set of functionalities \note{probably functionality - be careful with functionalities, as it's usually wrong} that allow for
 the execution of workloads: \vocab{Pilot Provisioning}, \vocab{Task
 Dispatching}, and \vocab{Task Execution}. \pilotjob systems need to schedule
 resource placeholders on the target machines, schedule tasks on the available
-placeholders, and then use these placeholders to execute the tasks of the given
+placeholders, and then \note{then might not be correct - in fact, many times this happens before the tasks are scheduled to the placeholders} \note{and why do you use placeholders rather than saying pilot jobs?}  use these placeholders to execute the tasks of the given
 workload. More functionalities might be needed to implement a production-grade
 \pilotjob system. For example, authentication, authorization, accounting, data
 management, fault-tolerance, or load-balancing. While these functionalities may
@@ -936,7 +936,7 @@ functionalities should not be considered necessary characteristics of a
 
 Among the core functionalities that characterize every \pilotjob system, Pilot
 Provisioning is essential because it allows for the creation of resource
-placeholders. As seen in~\S\ref{sec:history}, this type of placeholder enables
+placeholders. \note{for coasters, this is very ad hoc compared with other functions} As seen in~\S\ref{sec:history}, this type of placeholder enables
 tasks to utilize resources without directly depending on the capabilities
 exposed by the target machines. Resource placeholders are scheduled onto target
 machines by means of dedicated capabilities, but once scheduled and then
@@ -966,7 +966,7 @@ execution of the tasks of a workload.
 
 The provisioning of resource placeholders depends on the capabilities exposed by
 the middleware of the targeted machine and on the implementation of each \pilot
-system. Typically, on middleware for resources adopting queues, batch systems,
+system. Typically, on middleware for resources adopting queues, \note{adopting is a funny word here - either the resources has queues or it doesn't} batch systems,
 and schedulers, provisioning a placeholder involves it being submitted as a
 job. For such middleware, a job is a type of logical container that includes
 configuration and execution parameters alongside information on the application
@@ -1012,7 +1012,7 @@ workload execution and the optimization, for example, of execution throughput.
 %   instance of the general paradigm.} \mtnote{OK.}
 
 Communication and coordination are two distinguishing characteristics of
-distributed systems, and \pilotjob systems are no exception. The three logical
+distributed systems, and \pilotjob systems are no exception. \note{but pilot job systems don't have to be used on distributed systems} The three logical
 components -- Workload Manager, Pilot Manager, and Task Manager -- need to
 communicate in order to coordinate the execution of the given workload.
 Nonetheless, \pilotjob systems are not defined by any specific communication and
@@ -1071,7 +1071,7 @@ be considered special-purpose capabilities, not characteristic of every
 %   in the next iteration}
 
 In the following subsection, a minimal set of terms related to the logical
-components and capabilities described so far is defined.
+components and capabilities described so far is defined. \note{again, I don't understand why you talk about the next section in this section - why not just say this in the next section?}
 
 %------------------------------------------------------------------------------
 % 3.2
@@ -1094,7 +1094,7 @@ utilization of those resources to execute the tasks of one or more workloads.
 
 \begin{description}
 
-\item[Task.] A container for operations to be performed on a computing platform,
+\item[Task.] A container \note{using container here is sure to confuse} for operations to be performed on a computing platform,
 alongside a description of the properties and dependences of those operations,
 and indications on how they should be executed and satisfied. Implementations of
 a task may include wrappers, scripts, or applications.
@@ -1103,7 +1103,7 @@ a task may include wrappers, scripts, or applications.
 complex relations. For example, relations may involve tasks, data, or runtime
 communication requirements.
 
-\item[Resource.] Finite, typed, and physical quantity utilized when executing
+\item[Resource.] Finite, typed, and physical quantity \note{i don't really think a resource is a quantity - it may be a description of a type of system plus a quantity} utilized when executing
 the tasks of a workload. Compute cores, data storage space, or network bandwidth
 between a source and a destination are all examples of resources commonly
 utilized when executing workloads.
@@ -1128,7 +1128,7 @@ orthogonal properties of coupling, dependency, and similarity of tasks.
 
 Workloads comprised of tasks that are independent and effectively
 indistinguishable from other tasks are commonly referred to as a Bag-of-Tasks
-(BoT)~\cite{da2003trading,cirne2003running}. Ensembles (ENS) represent workloads
+(BoT)~\cite{da2003trading,cirne2003running}. Ensembles (ENS) \note{here come the acronyms that aren't needed...  I suggest removing ENS, C-ENS, and WF - maybe DCR too} represent workloads
 when the collective outcome of the tasks is relevant (e.g., computing the
 average property)~\cite{raicu2008many}. The tasks that comprise the workload in
 turn can have varying degrees and types of coupling; coupled tasks might have
@@ -1144,10 +1144,10 @@ between the tasks (e.g., frequency or volume of exchange)~\cite{taylor2014}.
 % have global (synchronous) or local exchanges (asynchronous), regular or
 % irregular communication.
 
-A cluster is a typical example of a DCR: it offers sets of compute and data
+\note{maybe move the resource and DCR definitions here?} A cluster is a typical example of a DCR: it offers sets of compute and data
 resources; it deploys a middleware as, for example, the Torque batch system, the
 Globus grid middleware, or the OpenStack cloud platform; and enforces policies
-of an administrative domain like XSEDE, OSG, CERN, NERSC, or a University.
+of an administrative domain like XSEDE, OSG, CERN, NERSC, or a University.\note{why is a cluster a DCR and not just a resource?}
 
 As seen in~\S\ref{sec:history}, most of the DCRs used by \pilotjob systems
 utilize ``queues'', ``batch systems'', and ``schedulers''. In such DCRs, jobs
@@ -1157,13 +1157,13 @@ are scheduled and then executed by a batch system.
 
 \item[Job.] Functionally defined as a ``task'' from the perspective of the DCR,
 but in the case of a \pilotjob system indicative of the type of container
-required to acquire resources on a specific infrastructure.
+required to acquire resources on a specific infrastructure. \note{very unclear}
 
 \end{description}
 
 When considering \pilotjob systems, jobs and tasks are functionally analogous
 but qualitatively different. Functionally, both jobs and tasks are containers --
-i.e. metadata wrappers around one or more executables often called ``kernel'',
+i.e. metadata wrappers around one or more executables often called ``kernel'', \note{kernel probably isn't a good choice here - app and script are fine, maybe function or component too?}
 ``application'', or ``script''. Qualitatively, the term ``task'' is used when
 reasoning about workloads, while ``job'' is used in relation to a specific type
 of DCR middleware where such a container is submitted. Accordingly, tasks are
@@ -1172,7 +1172,7 @@ schedule one or more tasks on a DCR with a specific middleware. It should be
 noted that, given their functional equivalence, the two terms can be adopted
 interchangeably when considered outside the context of \pilotjob systems.
 Indeed, workloads are encoded into jobs when they have to be directly executed
-on DCRs that support or require that type of container.
+on DCRs that support or require that type of container. \note{not sure this is any more clear than in the definition by itself}
 
 % \jhanote{minor nitpic: are we assuming 1 task per job? I don't think we
 %   should..} \mtnote{I do not think we are assuming a 1:1 relation as we use
@@ -1194,7 +1194,7 @@ on DCRs that support or require that type of container.
 
 As described in~\S\ref{sec:compsandfuncs}, a resource placeholder needs to be
 submitted to a DCR wrapped in the type of container supported by the middleware
-of that specific DCR. For this reason, the capabilities exposed by the job
+of that specific DCR. \note{unclear} For this reason, the capabilities exposed by the job
 submission system of the target DCR determine the submission process of resource
 placeholders and its specifics. For example, when wrapped within a ``job'',
 placeholders are provisioned by submitting a job to the DCR queuing system, and
@@ -1212,7 +1212,7 @@ of the job lifetime.
 % placeholder will need to be wrapped within a different type of container as,
 % for example, a VM or a Docker Engine.
 
-A \pilot is a resource placeholder. As such, a pilot holds portion of a DCR's
+\note{why is this before the definition that comes next?} A \pilot is a resource placeholder. As such, a pilot holds portion of a DCR's
 resources for a user or a group of users, depending on implementation details. A
 \pilotjob system is a software capable of creating pilots so as to gain
 exclusive control over a set of resources on one or more DCRs and then to
@@ -1257,7 +1257,7 @@ capable of executing workloads on pilots. From now on, the term ``\pilot
 system'' will be used instead, as the term ``job'' in ``\pilotjob'' identifies
 just the way in which a pilot is provisioned on a DCR exposing specific
 middleware. The use of the term ``\pilotjob system'' should therefore be
-regarded as a historical artifact, viz., the targeting of a specific class of
+regarded as a historical artifact, viz., \note{viz is not standard in American scientific writing} the targeting of a specific class of
 DCRs in which the term ``job'' was, and still is, meaningful. With the
 development of DCR middleware based on new abstractions as, for example, that of
 virtual machine, the term ``job'' has become too restrictive, a situation that
@@ -1320,7 +1320,7 @@ Pilot systems are said to implement multi-level scheduling because they require
 the scheduling of two types of entities: pilots and
 tasks~\cite{rubio2015gwpilot,de2014panda,balderrama2012scalable}. This
 definition of ``multi-level scheduling'' is problematic because the term
-``level'' is left unspecified. It is not clear what constitutes a level or how
+``level'' is left unspecified.\note{but so is stage or entity}  It is not clear what constitutes a level or how
 its boundaries should be assessed. ``Multi-entity'' and ``multi-stage'' are
 better terms to describe the scheduling properties of \pilot systems, as these
 terms specifically indicate that (at least) two entities are scheduled and that
@@ -1513,7 +1513,7 @@ pilot.
     \label{fig:core_vocabulary}
 \end{figure}
 
-Together, Figure~\ref{fig:core_vocabulary} can be interpreted as follow: an
+Together, Figure~\ref{fig:core_vocabulary} can be interpreted as follows: an
 application submits a workload composed of tasks to the \pilot system via an
 interface (\ref{fig:core_vocabulary}, tag~a). The Pilot Manager is responsible
 for pilot provisioning (\ref{fig:core_vocabulary}, tag~b), the Workload Manager
@@ -1572,7 +1572,7 @@ system are delineated in terms of components and functionalities that can be
 implemented by multiple architectures leading to diverse \pilot systems
 implementations. The wide spectrum of available implementations of the logical
 components and functionalities of a \pilot system is explored in the next
-section.
+section. \note{same problem - move intro of section into section, not before it}
 
 % \jhanote{this is not needed here. we have discussed the difference between
 %   early versus later before. by having it here we are losing the opportunity
